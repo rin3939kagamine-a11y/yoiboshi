@@ -1,0 +1,34 @@
+{
+  "base": "Ver.0.34.57.0 (current GitHub code plus current chapter4 source)",
+  "version": "0.34.58.0",
+  "counts": {
+    "storiesModified": 6,
+    "questsReworded": 6,
+    "addedLines": 32,
+    "q24Boss": 3
+  },
+  "battle": {
+    "healNoHit": 11,
+    "healOnHit": 3,
+    "bossDefeatDispelsShadows": true,
+    "normalWaveUnchanged": true,
+    "q12Unchanged": true
+  },
+  "investigationAnswersPreserved": true,
+  "storyEntriesPreserved": true,
+  "qa": "Node VM simulation (not Chromium full gameplay)",
+  "cloneArt": {
+    "path": "assets/enemies/haruka_shadow.webp",
+    "source": "user-provided mask image",
+    "includedInDiff": true,
+    "sizeBytes": 228436,
+    "format": "RGBA transparent WebP",
+    "baseHarukaAssetsOverwritten": false,
+    "qa": "transparent subject cutout checked by preview"
+  },
+  "limits": [
+    "GitHub v0.34.57.0 full natural chapter play-through not yet performed",
+    "Save resume from mid-scene not tested",
+    "Final boss manually cleared under full game UI not tested"
+  ]
+}
