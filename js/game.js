@@ -1006,7 +1006,7 @@ function skipPrologue(){if(view==='prologue'&&storySession)finishPrologue()}
 function prologueTap(event){if(!storySession||PROLOGUE[storySession.step]?.choices||event.target.closest('button,a,input,select,textarea,[role="button"]'))return;nextPrologue()}
 function nextPrologue(){if(!storySession)return;storySession.step++;if(storySession.step>=PROLOGUE.length)return finishPrologue();render()}
 function choosePrologue(choice){if(!storySession||!['people','place'].includes(choice)||!PROLOGUE[storySession.step]?.choices)return;storySession.choice=choice;nextPrologue()}
-function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyFlags.prologue;S.storyFlags.prologue=true;if(first)S.gems+=150;if(S.onboarding?.enabled&&S.onboarding.stage==='prologue'){S.onboarding.stage='q1';S.questGuideSeen=true;}persist();storySession=null;view='city';citySheetQuest='';render();toast(first?'序章クリア：星晶石150（初回のみ）':'序章を再読しました');window.scrollTo(0,0)}
+function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyFlags.prologue;S.storyFlags.prologue=true;if(first)S.gems+=150;if(S.onboarding?.enabled&&S.onboarding.stage==='prologue'){S.onboarding.stage='q1';S.questGuideSeen=true;}persist();storySession=null;view='story';citySheetQuest='';render();toast(first?'序章クリア：星晶石150（初回のみ）':'序章を再読しました');window.scrollTo(0,0)}
 // Narrative-only portrait cast; not a recruitable heroine and never serialized.
 const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'売人イブキ',haruka:'霧島 ハルカ'}); // v0.34.56.0: 朔夜・イブキにも会話用の立ち絵
 const CHAPTER3_ONLY_VOICE=Object.freeze({ibuki:'売人イブキ'});
@@ -1016,7 +1016,7 @@ function prologuePage(){
  const who=PEOPLE[sp]?.name||(sp==='you'?playerDisplayName():STORY_ONLY_CAST[sp]||'ナレーション');
  let line=sc.text;
  if(line==='branch')line=storySession.choice==='people'?'商店街のお店に電話すると、「夕方になると、昔の時計が七回鳴る」と教えてくれた。時計自体は何年も前に撤去されているという。':'相談室に届いた商店街の録音を確かめた。時計はもうないはずなのに、音声の最後に古いベルの音が一瞬だけ混じっていた。';
- const choices=sc.choices?`<div class="story-choices">${sc.choices.map(([id,label])=>`<button class="btn outline" onclick="choosePrologue('${id}')">${esc(label)}　↗</button>`).join('')}</div>`:`<button class="btn primary" onclick="nextPrologue()">${i===PROLOGUE.length-1?'序章を終えて、調査へ':'続きを読む　→'}</button>`;
+ const choices=sc.choices?`<div class="story-choices">${sc.choices.map(([id,label])=>`<button class="btn outline" onclick="choosePrologue('${id}')">${esc(label)}　↗</button>`).join('')}</div>`:`<button class="btn primary" onclick="nextPrologue()">${i===PROLOGUE.length-1?'序章を終える':'続きを読む　→'}</button>`;
  // Only characters speaking on this line are visible; narrative / player lines are cast-free.
  const currentPortrait=PEOPLE[sp]||STORY_ONLY_CAST[sp]?sp:null;
  const prologueFaces=authoredStoryFaceState('prologue',PROLOGUE,i).faces;

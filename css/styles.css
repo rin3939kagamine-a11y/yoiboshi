@@ -2978,3 +2978,6 @@ body:has(.vn-story.onb-prologue .story-scene.has-bg) .page {padding:0!important}
 
 /* v0.34.47.0 編成・育成・募集の小さなカードで、SSR・URの一枚絵を枠いっぱいに表示（顔が上寄りに来るよう切り取り） */
 img.unit-card-scene{width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 12%!important}
+
+/* Ver.0.34.59.0: 7 independent navigation tabs on compact mobile screens. */
+@media(max-width:850px){.bottomnav button{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;padding-inline:1px}.bottomnav .nav-label{font-size:clamp(8px,2.2vw,10px)}}
