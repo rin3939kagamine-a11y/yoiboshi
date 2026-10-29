@@ -2952,3 +2952,8 @@ html.reader-size-xl .vn-log-row p{font-size:1.25em}
 .vn-story.onb-prologue .story-scene.has-bg>.vn-toolbar,.vn-story.onb-prologue .story-scene.has-bg>.story-dialogue {z-index:3}
 .vn-story.onb-prologue .story-scene.has-bg>.story-bg {position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;pointer-events:none}
 body:has(.vn-story.onb-prologue .story-scene.has-bg) .page {padding:0!important}
+
+/* v0.34.40.0 ターン制戦闘：キャラがステージの上にはみ出さないよう、ステージの高さに合わせて大きさを決める */
+.tb-root .yc-turn-stage{container-type:size}
+@media (min-width:900px){.tb-root:not(.tb-wide) .yc-turn-stage{height:clamp(168px,34dvh,320px)}}
+.tb-root .yc-turn-stage .yc-slot{width:min(25cqw,50cqh)!important}
