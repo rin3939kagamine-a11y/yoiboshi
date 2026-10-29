@@ -2,7 +2,7 @@
 // SFX: Kenney Interface Sounds / Impact Sounds (CC0); not Sound Effect Lab or synthetic placeholders.
 // Empty/missing files are intentionally silent. Do not change ART or save keys.
 const AUDIO_ASSETS = {
-  bgm: {home:'assets/audio/home.mp3', daily:'assets/audio/daily.mp3', story:'assets/audio/story.mp3', sad:'assets/audio/sad.mp3', battle:'assets/audio/battle.mp3', boss:'assets/audio/boss.mp3', sakuya_boss:'assets/audio/sakuya_boss.mp3', ibuki_boss:'assets/audio/ibuki_boss.mp3', map:'assets/audio/map.mp3'},
+  bgm: {home:'assets/audio/home.mp3', daily:'assets/audio/daily.mp3', story:'assets/audio/story.mp3', sad:'assets/audio/sad.mp3', battle:'assets/audio/battle.mp3', boss:'assets/audio/boss.mp3', sakuya_boss:'assets/audio/sakuya_boss.mp3', ibuki_boss:'assets/audio/ibuki_boss.mp3', haruka_boss:'assets/audio/haruka_boss.mp3', map:'assets/audio/map.mp3'},
   sfx: {tap:'assets/audio/sfx/tap.mp3', confirm:'assets/audio/sfx/confirm.mp3', cancel:'assets/audio/sfx/cancel.mp3', page:'assets/audio/sfx/page.mp3', affection:'assets/audio/sfx/affection.mp3', gacha:'assets/audio/sfx/gacha.mp3', victory:'assets/audio/sfx/victory.mp3', defeat:'assets/audio/sfx/defeat.mp3', hit:'assets/audio/sfx/hit.mp3'}
 };
 const AUDIO_SCENE_CUES = Object.freeze({
@@ -85,6 +85,7 @@ const AudioDirector=(()=>{
    // All other waves and battles keep their previous tracks.
    if(view==='combat')key=bossEncounter&&questId==='q12'?'sakuya_boss':
      bossEncounter&&questId==='q17'?'ibuki_boss':
+     bossEncounter&&questId==='q24'?'haruka_boss':
      (questId==='q6'||questId==='q12')?'boss':'battle';
    else if(view==='city'||view==='investigation')key='map';
    else if(view==='talk'||view==='date'||view==='notebook')key='daily';
