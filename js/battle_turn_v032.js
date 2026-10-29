@@ -13,11 +13,11 @@ const TB_BALANCE = Object.freeze({
 });
 // Ver.0.34.64.0: All story quests use the turn engine; legacy remains for replay/farm only.
 const TB_SPECIAL = Object.freeze(new Set());
-// Ver.0.34.65.0: Turn combat is default; the legacy engine remains selectable in Settings.
+// Ver.0.34.66.0: Turn combat is default; the legacy engine remains selectable in Settings.
 // Turn practice always uses the turn engine. q12 preview follows the saved selection.
 function tbSelected(){return S.battleMode!=='legacy';}
 function tbEligible(qid,grind,preview){
-  if(preview==='turn-training')return true;
+  if(preview==='turn-training'||preview==='boss-trial')return true;
   return tbSelected()&&(!preview||(preview===true&&qid==='q12'))&&!TB_SPECIAL.has(qid)&&!Q12HD.active?.(battle)&&!Q12C.active?.(battle);
 }
 let tbAutoTimer=0, tbLongTimer=0, tbSuppressClick=false;
