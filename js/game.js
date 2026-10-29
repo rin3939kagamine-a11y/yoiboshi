@@ -256,7 +256,57 @@ const QUEST_MAP_META=Object.freeze({
  q25:{"x":20,"y":69,"color":"#a47cae","accent":"#7354a0","icon":"cup","area":"料亭・宵星亭"},q26:{"x":42,"y":70,"color":"#ca99d8","accent":"#7354a0","icon":"cup","area":"前夜祭広場"},q27:{"x":74,"y":52,"color":"#f1b862","accent":"#7354a0","icon":"lighthouse","area":"旧灯台前広場"},q28:{"x":84,"y":18,"color":"#455080","accent":"#7354a0","icon":"lighthouse","area":"灯室・白鷺透子"},q29:{"x":48,"y":25,"color":"#a2aec9","accent":"#7354a0","icon":"lighthouse","area":"崩れゆく灯室"},q30:{"x":24,"y":40,"color":"#839dbc","accent":"#7354a0","icon":"lighthouse","area":"港・相談室"}, home:{x:43,y:20,color:'#d9b97f',accent:'#7d5f31',icon:'home',area:'宵星相談室'}
 });
 const QUEST_STAGE_LABELS=Object.freeze(['聞き込み','星灯解析','安全確保']);
-function questUnlocked(q){return !!q&&q.requires.every(id=>!!S.quests[id]?.complete)&&(q.chapter===0||!!S.storyFlags?.chapter1_open)&&(q.chapter!==2||!!S.storyFlags?.chapter2_open)&&(q.chapter!==3||!!S.storyFlags?.chapter3_open)&&(q.chapter!==4||!!S.storyFlags?.chapter4_open)&&(q.chapter!==5||!!S.storyFlags?.chapter5_open)&&(q.id!=='q7'||!!S.lighthouseMet)&&(q.id!=='q8'||!!S.tsubakiMet)&&(q.id!=='q9'||!!S.erikaMet)&&(q.id!=='q12'||!!S.kanameMet)&&(q.id!=='q15'||!!S.chapter3Met?.saki&&!!S.chapter3Met?.yuzu)&&(q.id!=='q16'||!!S.chapter3Met?.reiko&&!!S.chapter3Met?.anzu)&&(q.id!=='q20'||!!S.chapter4Met?.sena&&!!S.chapter4Met?.towa)&&(q.id!=='q21'||!!S.chapter4Met?.mizuki&&!!S.chapter4Met?.ritsu)&&(q.id!=='q22'||!!S.chapter4Met?.karen&&!!S.chapter4Met?.meru)&&(q.id!=='q23'||!!S.chapter4Met?.chihiro&&!!S.chapter4Met?.sanae)&&(q.id!=='q24'||!!S.chapter4Met?.kagari&&!!S.chapter4Met?.miyabi)}
+
+function questBaseUnlocked(q){return !!q&&q.requires.every(id=>!!S.quests[id]?.complete)&&(q.chapter===0||!!S.storyFlags?.chapter1_open)&&(q.chapter!==2||!!S.storyFlags?.chapter2_open)&&(q.chapter!==3||!!S.storyFlags?.chapter3_open)&&(q.chapter!==4||!!S.storyFlags?.chapter4_open)&&(q.chapter!==5||!!S.storyFlags?.chapter5_open)&&(q.id!=='q7'||!!S.lighthouseMet)&&(q.id!=='q8'||!!S.tsubakiMet)&&(q.id!=='q9'||!!S.erikaMet)&&(q.id!=='q12'||!!S.kanameMet)&&(q.id!=='q15'||!!S.chapter3Met?.saki&&!!S.chapter3Met?.yuzu)&&(q.id!=='q16'||!!S.chapter3Met?.reiko&&!!S.chapter3Met?.anzu)&&(q.id!=='q20'||!!S.chapter4Met?.sena&&!!S.chapter4Met?.towa)&&(q.id!=='q21'||!!S.chapter4Met?.mizuki&&!!S.chapter4Met?.ritsu)&&(q.id!=='q22'||!!S.chapter4Met?.karen&&!!S.chapter4Met?.meru)&&(q.id!=='q23'||!!S.chapter4Met?.chihiro&&!!S.chapter4Met?.sanae)&&(q.id!=='q24'||!!S.chapter4Met?.kagari&&!!S.chapter4Met?.miyabi)}
+function questPreviousStory(q){
+ const id=q?.id,n=Number(id?.slice(1));
+ if(!q||S.quests?.[id]?.complete||S.investigations?.[id])return null; // Old saves already mid-quest are preserved.
+ if(n===1)return S.storyFlags?.prologue?null:'prologue';
+ if(!S.quests?.['q'+(n-1)]?.complete)return null; // Base unlock handles the previous quest.
+ // The following chapter scenes and after-stories must be read explicitly.
+ const extras={
+  2:[['shinonome_meet',!!S.shinonomeMet]],
+  3:[['oldcafe_meet',!!S.oldcafeMet],['chapter1_open',!!S.storyFlags?.chapter1_open]],
+  4:[['station_meet',!!S.stationMet]],
+  5:[['school_meet',!!S.schoolMet],['office_meet',!!S.officeMet]],
+  6:[['seaside_meet',!!S.seasideMet]],
+  7:[['chapter1_end',!!S.storyFlags?.chapter1_end],['lighthouse_meet',!!S.lighthouseMet],['chapter2_open',!!S.storyFlags?.chapter2_open]],
+  8:[['tsubaki_meet',!!S.tsubakiMet]],
+  9:[['erika_meet',!!S.erikaMet]],
+  12:[['kaname_meet',!!S.kanameMet]],
+  13:[['chapter2_end',!!S.storyFlags?.chapter2_end],['chapter3_open',!!S.storyFlags?.chapter3_open]],
+  15:[['saki_yuzu_meet',!!S.chapter3Met?.saki&&!!S.chapter3Met?.yuzu],['chiyo_meet',!!S.chapter3Met?.chiyo]],
+  16:[['reiko_meet',!!S.chapter3Met?.reiko],['anzu_meet',!!S.chapter3Met?.anzu]],
+  17:[['nazuna_meet',!!S.chapter3Met?.nazuna]],
+  19:[['chapter3_end',!!S.storyFlags?.chapter3_end],['chapter4_open',!!S.storyFlags?.chapter4_open]],
+  25:[['chapter4_end',!!S.storyFlags?.chapter4_end],['chapter5_open',!!S.storyFlags?.chapter5_open]]
+ };
+ // Chapters 4,5 also require the two new characters met in the previous quest.
+ if(n>=20&&n<=25){
+   const pair=CHAPTER4_MEET_ORDER['q'+(n-1)]||[];
+   for(const hero of pair)if(!S.chapter4Met?.[hero])return hero+'_meet';
+ }
+ const prev='q'+(n-1);
+ if(n>=4&&!S.storyFlags?.[prev])return prev;
+ for(const [storyId,done] of extras[n]||[])if(!done)return storyId;
+ return null;
+}
+function questIntroStory(q){
+ if(!q)return null;
+ if(typeof FLESHOUT_LEADS!=='undefined'&&FLESHOUT_LEADS[q.id+'_lead'])return q.id+'_lead';
+ if(q.chapter>=3)return q.id+'_intro';
+ return null;
+}
+function questNarrativeReady(q){
+ return questBaseUnlocked(q)&&!questPreviousStory(q);
+}
+function questUnlocked(q){
+ if(!questNarrativeReady(q))return false;
+ if(S.quests?.[q.id]?.complete||S.investigations?.[q.id])return true;
+ const intro=questIntroStory(q);
+ return !intro||!!S.storyFlags?.[intro];
+}
+
 const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_daily:{lv:1,aff:0,lb:0,copies:0},milku_daily:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_daily:{lv:1,aff:0,lb:0,copies:0},aoi_daily:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_daily','milku_daily','akane_daily','aoi_daily'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_daily',currentQuest:'q1',mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_daily',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
 // SaveStore deliberately reads/writes only KEY. OLD_KEY remains strictly read-only for backup.
 const SaveStore=Object.freeze({
@@ -780,57 +830,11 @@ function persist(){
 }
 function clearToast(){clearTimeout(noticeTimer);const old=$('toast');if(old)old.remove()}
 // First user action also unlocks audio through AudioDirector.install().
-function continueGame(){if(!S.gameStarted||SaveStore.read()===null)return;onboardingSuppressed=true;titleConfirm=false;titleSettingsOpen=false;view='home';render();if(!S.love?.pending){if(S.quests.q1?.complete&&!S.shinonomeMet)openStory('shinonome_meet')
-else if(S.quests.q2?.complete&&!S.oldcafeMet)openStory('oldcafe_meet')
-else if(S.quests.q3?.complete&&!S.stationMet)openStory('station_meet')
-else if(S.quests.q4?.complete&&!S.schoolMet)openStory('school_meet')
-else if(S.quests.q4?.complete&&!S.officeMet)openStory('office_meet')
-else if(S.quests.q5?.complete&&!S.seasideMet)openStory('seaside_meet')
-else if(S.quests.q6?.complete&&S.storyFlags.chapter1_end&&!S.lighthouseMet)openStory('lighthouse_meet')
-else if(S.lighthouseMet&&!S.storyFlags.chapter2_open)openStory('chapter2_open')
-else if(S.quests.q7?.complete&&!S.storyFlags.q7)openStory('q7')
-else if(S.quests.q7?.complete&&!S.tsubakiMet)openStory('tsubaki_meet')
-else if(S.quests.q8?.complete&&!S.storyFlags.q8)openStory('q8')
-else if(S.quests.q8?.complete&&!S.erikaMet)openStory('erika_meet')
-else if(S.quests.q9?.complete&&!S.storyFlags.q9)openStory('q9')
-else if(S.quests.q10?.complete&&!S.storyFlags.q10)openStory('q10')
-else if(S.quests.q11?.complete&&!S.storyFlags.q11)openStory('q11')
-else if(S.quests.q11?.complete&&!S.kanameMet)openStory('kaname_meet')
-else if(S.quests.q12?.complete&&!S.storyFlags.q12)openStory('q12')
-else if(S.quests.q12?.complete&&!S.kaedeMet)openStory('kaede_meet')
-else if(S.quests.q12?.complete&&S.kaedeMet&&!S.storyFlags.chapter2_end)openStory('chapter2_end')
-else if(S.storyFlags.chapter2_end&&!S.storyFlags.chapter3_open)openStory('chapter3_open')
-else if(S.quests.q14?.complete&&!S.storyFlags.q14)openStory('q14')
-else if(S.quests.q14?.complete&&!S.chapter3Met?.saki)openStory('saki_yuzu_meet')
-else if(S.quests.q14?.complete&&!S.chapter3Met?.chiyo)openStory('chiyo_meet')
-else if(S.quests.q15?.complete&&!S.storyFlags.q15)openStory('q15')
-else if(S.quests.q15?.complete&&!S.chapter3Met?.reiko)openStory('reiko_meet')
-else if(S.quests.q15?.complete&&!S.chapter3Met?.anzu)openStory('anzu_meet')
-else if(S.quests.q16?.complete&&!S.storyFlags.q16)openStory('q16')
-else if(S.quests.q16?.complete&&!S.chapter3Met?.nazuna)openStory('nazuna_meet')
-else if(S.quests.q17?.complete&&!S.storyFlags.q17)openStory('q17')
-else if(S.quests.q18?.complete&&!S.storyFlags.q18)openStory('q18')
-else if(S.quests.q18?.complete&&!S.storyFlags.chapter3_end)openStory('chapter3_end')
-else if(S.storyFlags.chapter3_end&&!S.storyFlags.chapter4_open)openStory('chapter4_open')
-else if(S.quests.q19?.complete&&!S.storyFlags.q19)openStory('q19')
-else if(S.quests.q20?.complete&&!S.storyFlags.q20)openStory('q20')
-else if(S.quests.q21?.complete&&!S.storyFlags.q21)openStory('q21')
-else if(S.quests.q22?.complete&&!S.storyFlags.q22)openStory('q22')
-else if(S.quests.q23?.complete&&!S.storyFlags.q23)openStory('q23')
-else if(S.quests.q24?.complete&&!S.storyFlags.q24)openStory('q24')
-else if(S.storyFlags.q19&&!S.chapter4Met?.sena)openStory('sena_meet')
-else if(S.storyFlags.q19&&!S.chapter4Met?.towa)openStory('towa_meet')
-else if(S.storyFlags.q20&&!S.chapter4Met?.mizuki)openStory('mizuki_meet')
-else if(S.storyFlags.q20&&!S.chapter4Met?.ritsu)openStory('ritsu_meet')
-else if(S.storyFlags.q21&&!S.chapter4Met?.karen)openStory('karen_meet')
-else if(S.storyFlags.q21&&!S.chapter4Met?.meru)openStory('meru_meet')
-else if(S.storyFlags.q22&&!S.chapter4Met?.chihiro)openStory('chihiro_meet')
-else if(S.storyFlags.q22&&!S.chapter4Met?.sanae)openStory('sanae_meet')
-else if(S.storyFlags.q23&&!S.chapter4Met?.kagari)openStory('kagari_meet')
-else if(S.storyFlags.q23&&!S.chapter4Met?.miyabi)openStory('miyabi_meet')
-else if(S.storyFlags.q24&&!S.chapter4Met?.kurumi)openStory('kurumi_meet')
-else if(S.storyFlags.q24&&!S.chapter4Met?.yuriko)openStory('yuriko_meet')
-else if(S.storyFlags.q24&&S.chapter4Met?.kurumi&&S.chapter4Met?.yuriko&&!S.storyFlags.chapter4_end)openStory('chapter4_end')}}
+function continueGame(){
+ if(!S.gameStarted||SaveStore.read()===null)return;
+ onboardingSuppressed=true;titleConfirm=false;titleSettingsOpen=false;
+ storySession=null;pendingStory=null;view='home';render();
+}
 function requestNewGame(){titleConfirm=!!(S.gameStarted&&SaveStore.read()!==null);if(titleConfirm)render();else startNewGame()}
 function cancelNewGame(){titleConfirm=false;render()}
 function startNewGame(){gachaMode='normal';const audio=validAudioSettings(S.audio);const next=fresh();next.audio=audio;next.gameStarted=true;
@@ -876,7 +880,7 @@ function dismissOnboardGuide(key){const ob=S.onboarding;if(!ob?.enabled||onboard
  if(key==='map')S.questGuideSeen=true;
  if(key==='home_city'){ob.stage='done';ob.enabled=false;}
  persist();render();
- if(key==='home_city'&&pendingStory){const next=pendingStory;pendingStory=null;if(storyAllowed(next))openStory(next);}
+ // Story transitions are always selected from the dedicated Story screen.
 }
 
 function toggleTitleSettings(){titleSettingsOpen=!titleSettingsOpen;titleConfirm=false;render()}
@@ -884,7 +888,7 @@ function titlePage(){
  const hasSave=!!S.gameStarted&&SaveStore.read()!==null;
  const options=titleConfirm?`<div class="title-confirm" role="alertdialog" aria-label="はじめからの確認"><strong>今のデータは消えます</strong><p>現在のセーブが上書きされます。本当にはじめから遊びますか？</p><div><button type="button" onclick="cancelNewGame()">やめる</button><button type="button" class="danger" onclick="startNewGame()">削除してはじめる</button></div></div>`:'';
  const settings=titleSettingsOpen?`<div class="title-settings-panel"><button type="button" class="title-settings-back" onclick="toggleTitleSettings()">← タイトルに戻る</button>${audioSettingsCard()}</div>`:'';
- return `<main class="title-screen title-simple" aria-label="宵星の契約者 タイトル画面"><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><div class="title-subkicker">YOIBOSHI NO KEIYAKUSHA</div><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">Ver.0.34.57.0 · RE:START ALPHA</p></div>${options}${settings}</main>`;
+ return `<main class="title-screen title-simple" aria-label="宵星の契約者 タイトル画面"><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><div class="title-subkicker">YOIBOSHI NO KEIYAKUSHA</div><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">Ver.0.34.59.0 · RE:START ALPHA</p></div>${options}${settings}</main>`;
 }
 
 function isSessionLocked(){return (view==='investigation')||(view==='combat'&&!!battle&&!battle.done)||(view==='prologue'&&!!storySession)||(view==='story'&&!!storySession)||(view==='date'&&!!S.love?.pending)||(view==='city'&&questActionInProgress)||(romanceSelectionInProgress&&!!dialog)}
@@ -939,8 +943,8 @@ const GameState=Object.freeze({
 });
 function change(v){return AppRouter.go(v)}
 function button(v,symbol,label){const locked=isSessionLocked();return `<button type="button" class="navbtn ${view===v?'active':''} ${locked?'nav-locked':''}" aria-label="${label}" ${locked?'disabled aria-disabled="true"':''} ${view===v?'aria-current="page"':''} onclick="change('${v}')"><span class="ico" aria-hidden="true">${symbol}</span><span>${label}</span></button>`}
-const nav=[['home','⌂','ホーム'],['city','✧','クエスト'],['roster','◇','キャラ・編成'],['gacha','✦','ガチャ'],['talk','♡','交流'],['records','☷','記録・設定']];
-function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.57.0 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
+const nav=[['home','⌂','ホーム'],['story','▤','ストーリー'],['city','✧','クエスト'],['roster','◇','キャラ・編成'],['gacha','✦','ガチャ'],['talk','♡','交流'],['records','☷','記録・設定']];
+function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.59.0 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
 function heading(en,title,sub){return `<div class="eyebrow">${en}</div><h1 class="page-title">${title}</h1><p class="desc">${sub}</p>`}
 function chars(cards,buttons=true){
  const units=cards.map(id=>unit(id)).filter(Boolean);
@@ -1297,35 +1301,43 @@ const FLESHOUT_SOLVED_TAILS=Object.freeze({q1:['葵「時計に残された未�
 const FLESHOUT_LEADS=Object.freeze({q1_lead:'q1',q2_lead:'q2',q3_lead:'q3',q4_lead:'q4',q5_lead:'q5',q7_lead:'q7',q8_lead:'q8',q9_lead:'q9',q10_lead:'q10',q11_lead:'q11',q12_lead:'q12'});
 const FLESHOUT_PREBATTLE=Object.freeze({q6_ready:'q6'});
 function storyAllowed(id){
- if(FLESHOUT_LEADS[id])return questUnlocked(QUEST_BY_ID[FLESHOUT_LEADS[id]]);
+ if(FLESHOUT_LEADS[id])return questNarrativeReady(QUEST_BY_ID[FLESHOUT_LEADS[id]]);
  if(FLESHOUT_PREBATTLE[id])return investigationState(FLESHOUT_PREBATTLE[id])?.phase==='ready'||!!S.storyFlags?.[id];
  if(id==='chapter5_open')return !!S.storyFlags?.chapter4_end;
  if(id==='chapter5_end')return !!S.storyFlags?.q30;
  if(CHAPTER5_STORIES[id]){
   const hit=id.match(/^(q(?:2[5-9]|30))_(intro|pre)$/);
-  if(hit){if(!questUnlocked(QUEST_BY_ID[hit[1]]))return false;return hit[2]==='intro'||S.investigations?.[hit[1]]?.phase==='ready';}
+  if(hit)return hit[2]==='intro'?questNarrativeReady(QUEST_BY_ID[hit[1]]):S.investigations?.[hit[1]]?.phase==='ready'||!!S.storyFlags?.[id];
   if(/^q(?:2[5-9]|30)$/.test(id))return !!S.quests?.[id]?.complete;
  }
-
  if(id==='chapter4_open')return !!S.storyFlags?.chapter3_end;
  if(id==='chapter4_end')return !!S.storyFlags?.q24&&!!S.chapter4Met?.kurumi&&!!S.chapter4Met?.yuriko;
  if(CHAPTER4_STORIES[id]){
-  const met=id.match(/^(q(?:19|20|21|22|23|24))_(intro|pre)$/);
-  if(met){if(!questUnlocked(QUEST_BY_ID[met[1]]))return false;return met[2]==='intro'||S.investigations?.[met[1]]?.phase==='ready';}
+  const hit=id.match(/^(q(?:19|20|21|22|23|24))_(intro|pre)$/);
+  if(hit)return hit[2]==='intro'?questNarrativeReady(QUEST_BY_ID[hit[1]]):S.investigations?.[hit[1]]?.phase==='ready'||!!S.storyFlags?.[id];
   const post=id.match(/^q(19|20|21|22|23|24)$/);
   if(post)return !!S.storyFlags?.chapter4_open&&!!S.quests?.[id]?.complete;
   if(id.endsWith('_meet')){const hero=id.slice(0,-5),quest=Object.entries(CHAPTER4_MEET_ORDER).find(([q,pair])=>pair.includes(hero))?.[0];return !!quest&&!!S.storyFlags?.[quest];}
  }
-
  if(id==='chapter3_open'&&!S.storyFlags?.chapter2_end)return false;
- if(['q13_intro','q14_intro','q15_intro','q16_intro','q17_intro','q18_intro',...Object.keys(CHAPTER4_MEET_ORDER).map(q=>q+'_intro')].includes(id)&&!questUnlocked(QUEST_BY_ID[id.slice(0,3)]))return false;
+ if(/^q(?:1[3-8])_intro$/.test(id)&&!questNarrativeReady(QUEST_BY_ID[id.slice(0,3)]))return false;
  if(['q13','q14','q15','q16','q17','q18'].includes(id)&&!S.storyFlags?.chapter3_open)return false;
  if(id==='nazuna_meet'&&!S.quests.q16?.complete)return false;
  if(id==='chapter3_end'&&(!S.quests.q18?.complete||!S.storyFlags.q18))return false;
  if(id==='saki_yuzu_meet'&&!S.quests.q14?.complete)return false;
  if(id==='chiyo_meet'&&!S.quests.q14?.complete)return false;
  if(['reiko_meet','anzu_meet'].includes(id)&&!S.quests.q15?.complete)return false;
- if(id==='chapter2_open'&&!S.lighthouseMet)return false;if(id==='tsubaki_meet'&&!S.quests.q7?.complete)return false;if(id==='erika_meet'&&!S.quests.q8?.complete)return false;if(id==='kaname_meet'&&!S.quests.q11?.complete)return false;if(id==='kaede_meet'&&!S.quests.q12?.complete)return false;if(id==='chapter2_end'&&!S.kaedeMet)return false;if(id==='office_meet'&&!S.schoolMet)return false;if(id==='lighthouse_meet'&&(!S.quests.q6?.complete||!S.storyFlags.chapter1_end))return false;const script=romanceScript(id);return !!script&&(BOND_STORY_CATALOG[id]?bondAvailable(script.person,(script.threshold/20)-1):script.requires.every(q=>S.quests[q]?.complete))}
+ if(id==='chapter2_open'&&!S.lighthouseMet)return false;
+ if(id==='tsubaki_meet'&&!S.quests.q7?.complete)return false;
+ if(id==='erika_meet'&&!S.quests.q8?.complete)return false;
+ if(id==='kaname_meet'&&!S.quests.q11?.complete)return false;
+ if(id==='kaede_meet'&&!S.quests.q12?.complete)return false;
+ if(id==='chapter2_end'&&!S.kaedeMet)return false;
+ if(id==='office_meet'&&!S.schoolMet)return false;
+ if(id==='lighthouse_meet'&&(!S.quests.q6?.complete||!S.storyFlags.chapter1_end))return false;
+ const script=romanceScript(id);
+ return !!script&&(BOND_STORY_CATALOG[id]?bondAvailable(script.person,(script.threshold/20)-1):script.requires.every(q=>S.quests[q]?.complete));
+}
 // v0.34.42.0: 物語を開いた画面を覚えておき、出会いの物語のあとはそこへ戻す（交流へ飛ばさない）
 let storyOrigin='city';
 function meetReturnView(){return ['records','talk'].includes(storyOrigin)?storyOrigin:'city';}
@@ -1374,93 +1386,62 @@ function finishStory(){
  if(!storySession)return;
  const id=storySession.id;
  if(BOND_STORY_CATALOG[id]){
-   const script=BOND_STORY_CATALOG[id],i=(script.threshold/20)-1;
-   const first=!bondSeen(script.person,i);
-   S.bondRead[script.person][i]=true;
-   if(first)S.gems+=50;
-   persist();storySession=null;view='talk';render();
-   if(first)toast(`${PEOPLE[script.person].name}の絆エピソード読了：星晶石50`);
-   return;
+  const script=BOND_STORY_CATALOG[id],i=script.threshold/20-1;
+  const first=!bondSeen(script.person,i);
+  S.bondRead[script.person][i]=true;if(first)S.gems+=50;
+  persist();storySession=null;view='talk';render();
+  if(first)toast(`${PEOPLE[script.person].name}の絆エピソード読了：星晶石50`);
+  return;
  }
  if(CHAPTER4_STORIES[id]&&id.endsWith('_meet')){
   const hero=id.slice(0,-5),first=!S.chapter4Met?.[hero];
   if(!NEW_HERO_IDS_V028.includes(hero))return;
   S.chapter4Met[hero]=true;S.storyFlags[id]=true;
   if(first&&!pickupActive('chapter4_city')&&!Number.isSafeInteger(S.pickupStartDay?.chapter4_city))pickupStarted('chapter4_city');
-  persist();storySession=null;view='city';render();
-  if(first)toast(PEOPLE[hero].name+'と出会いました。募集・交流が解放されます');
-  const quest=Object.keys(CHAPTER4_MEET_ORDER).find(q=>CHAPTER4_MEET_ORDER[q].includes(hero));
-  const pending=CHAPTER4_MEET_ORDER[quest].find(h=>!S.chapter4Met[h]);
-  if(pending){openStory(pending+'_meet');return;}
-  if(quest==='q24'&&!S.storyFlags.chapter4_end){openStory('chapter4_end');return;}
+  persist();storySession=null;view='story';render();
+  if(first)toast(PEOPLE[hero].name+'と出会いました。次の物語は「ストーリー」で選んでください。');
   return;
  }
-  if(id==='saki_yuzu_meet'||id==='chiyo_meet'||id==='reiko_meet'||id==='anzu_meet'||id==='nazuna_meet'){
+ if(['saki_yuzu_meet','chiyo_meet','reiko_meet','anzu_meet','nazuna_meet'].includes(id)){
   const ids=id==='saki_yuzu_meet'?['saki','yuzu']:id==='chiyo_meet'?['chiyo']:id==='reiko_meet'?['reiko']:id==='nazuna_meet'?['nazuna']:['anzu'];
   const first=ids.some(hero=>!S.chapter3Met?.[hero]);
   if(!S.chapter3Met)S.chapter3Met={};
   for(const hero of ids)S.chapter3Met[hero]=true;
-  S.storyFlags[id]=true;
-  if(first&&id==='saki_yuzu_meet')pickupStarted('chapter3_port');
-  persist();storySession=null;view='city';render();
-  if(id==='saki_yuzu_meet'&&!S.chapter3Met.chiyo){openStory('chiyo_meet');return;}
-  if(id==='reiko_meet'&&!S.chapter3Met.anzu){openStory('anzu_meet');return;}
-  if(first)toast(ids.map(h=>PEOPLE[h].name).join('・')+'と出会いました。募集・交流が解放されます');
+  S.storyFlags[id]=true;if(first&&id==='saki_yuzu_meet')pickupStarted('chapter3_port');
+  persist();storySession=null;view='story';render();
+  if(first)toast(ids.map(h=>PEOPLE[h].name).join('・')+'と出会いました。');
   return;
  }
- if(id==='lighthouse_meet'){const first=!S.lighthouseMet;S.lighthouseMet=true;S.storyFlags.lighthouse_meet=true;S.lighthouseMeetingProgress=0;if(first)pickupStarted('lighthouse');persist();storySession=null;view=meetReturnView();render();toast('旧灯台の2人が通常募集に加わり、7日間のピックアップが始まりました');if(!S.storyFlags.chapter2_open)openStory('chapter2_open');return;}
-  if(id==='tsubaki_meet'){const first=!S.tsubakiMet;S.tsubakiMet=true;S.tsubakiMeetingProgress=0;if(first)pickupStarted('tsubaki');persist();storySession=null;view=meetReturnView();render();toast('神楽坂 椿が募集に追加され、7日間のピックアップが始まりました');return;}
-  if(id==='erika_meet'){const first=!S.erikaMet;S.erikaMet=true;S.erikaMeetingProgress=0;if(first)pickupStarted('erika');persist();storySession=null;view=meetReturnView();render();toast('城ヶ崎 エリカが募集に追加され、7日間のピックアップが始まりました');return;}
- if(id==='kaname_meet'){const first=!S.kanameMet;S.kanameMet=true;S.kanameMeetingProgress=0;if(first)pickupStarted('kaname');persist();storySession=null;view=meetReturnView();render();toast('紫藤 カナメが通常募集に追加され、7日間のピックアップが始まりました');return;}
- if(id==='kaede_meet'){const first=!S.kaedeMet;S.kaedeMet=true;S.kaedeMeetingProgress=0;if(first)pickupStarted('kaede');persist();storySession=null;view=meetReturnView();render();if(storyAllowed('chapter2_end')&&!S.storyFlags.chapter2_end){openStory('chapter2_end');return}toast('神楽坂 楓が通常募集に追加され、7日間のピックアップが始まりました');return;}
- if(id==='seaside_meet'){const first=!S.seasideMet;S.seasideMet=true;S.storyFlags.seaside_meet=true;S.seasideMeetingProgress=0;if(first)pickupStarted('seaside');persist();storySession=null;view=meetReturnView();render();toast('臨海公園の4人が通常募集に追加され、7日間のピックアップが始まりました');return;}
- if(id==='school_meet'){S.schoolMet=true;S.storyFlags.school_meet=true;S.schoolMeetingProgress=0;persist();storySession=null;view=meetReturnView();render();if(!S.officeMet){openStory('office_meet');return}toast('旧第二小学校の二人が通常募集に追加されました');return;}
- if(id==='office_meet'){const first=!S.officeMet;S.officeMet=true;S.storyFlags.office_meet=true;S.officeMeetingProgress=0;if(first)pickupStarted('school_new');persist();storySession=null;view=meetReturnView();render();toast('新しい5人の7日間ピックアップが始まりました');return;}
- if(id==='station_meet'){const first=!S.stationMet;S.stationMet=true;S.storyFlags.station_meet=true;S.stationMeetingProgress=0;if(first)pickupStarted('station');persist();storySession=null;view=meetReturnView();render();toast('東雲駅前の6人が募集に追加され、7日間のピックアップが始まりました');return;}
- if(id==='shinonome_meet'){const first=!S.shinonomeMet;S.shinonomeMet=true;S.storyFlags.shinonome_meet=true;if(first)pickupStarted('shinonome');persist();storySession=null;view=(S.onboarding?.enabled&&S.onboarding.stage==='home'&&!onboardingSuppressed)?'home':meetReturnView();render();toast('東雲商店街の4人が募集に追加され、7日間のピックアップが始まりました');return;}
- if(id==='oldcafe_meet'){const first=!S.oldcafeMet;S.oldcafeMet=true;S.storyFlags.oldcafe_meet=true;S.oldcafeMeetingProgress=0;if(first)pickupStarted('oldcafe');persist();storySession=null;view=meetReturnView();render();toast('旧喫茶街の4人が募集に追加され、7日間のピックアップが始まりました');if(S.quests.q2?.complete&&!S.storyFlags.chapter1_open&&storyAllowed('chapter1_open'))openStory('chapter1_open');return;}
+ const meet={
+  lighthouse_meet:['lighthouseMet','lighthouse','lighthouseMeetingProgress'],
+  tsubaki_meet:['tsubakiMet','tsubaki','tsubakiMeetingProgress'],
+  erika_meet:['erikaMet','erika','erikaMeetingProgress'],
+  kaname_meet:['kanameMet','kaname','kanameMeetingProgress'],
+  kaede_meet:['kaedeMet','kaede','kaedeMeetingProgress'],
+  seaside_meet:['seasideMet','seaside','seasideMeetingProgress'],
+  school_meet:['schoolMet',null,'schoolMeetingProgress'],
+  office_meet:['officeMet','school_new','officeMeetingProgress'],
+  station_meet:['stationMet','station','stationMeetingProgress'],
+  shinonome_meet:['shinonomeMet','shinonome',null],
+  oldcafe_meet:['oldcafeMet','oldcafe','oldcafeMeetingProgress']
+ };
+ if(meet[id]){
+  const [flag,pickup,progress]=meet[id],first=!S[flag];
+  S[flag]=true;S.storyFlags[id]=true;
+  if(progress)S[progress]=0;
+  if(first&&pickup)pickupStarted(pickup);
+  persist();storySession=null;view='story';render();
+  if(first)toast('出会いの物語を読了しました。次の依頼はクエスト画面から開始してください。');
+  return;
+ }
  const first=!S.storyFlags[id];
  S.storyFlags[id]=true;
- if(first&&id==='chapter1_end'&&S.quests.q6?.complete){S.gems+=CHAPTER_CLEAR_GEMS}if(first&&id==='chapter2_end'&&S.quests.q12?.complete){S.gems+=CHAPTER_CLEAR_GEMS}
- persist();storySession=null;view='city';render();
- if(first&&FLESHOUT_LEADS[id]){startInvestigation(FLESHOUT_LEADS[id]);return;}
- if(first&&FLESHOUT_PREBATTLE[id]){startBattle(FLESHOUT_PREBATTLE[id]);return;}
- // Final chapter scenes must be chained even if the first one is skipped.
-  if(first&&['q13_intro','q14_intro','q15_intro','q16_intro','q17_intro','q18_intro',...Object.keys(CHAPTER4_MEET_ORDER).map(q=>q+'_intro')].includes(id)){startInvestigation(id.slice(0,3));return;}
-  if(id==='chapter2_end'&&!S.storyFlags.chapter3_open){openStory('chapter3_open');return;}
-  if(id==='q14'&&!S.chapter3Met?.saki){openStory('saki_yuzu_meet');return;}
-  if(id==='q14'&&!S.chapter3Met?.chiyo){openStory('chiyo_meet');return;}
-  if(id==='q15'&&!S.chapter3Met?.reiko){openStory('reiko_meet');return;}
-  if(id==='q15'&&!S.chapter3Met?.anzu){openStory('anzu_meet');return;}
-  if(id==='q16'&&!S.chapter3Met?.nazuna){openStory('nazuna_meet');return;}
-  if(id==='q18'&&!S.storyFlags.chapter3_end){openStory('chapter3_end');return;}
-  if(id==='chapter3_end'&&!S.storyFlags.chapter4_open){openStory('chapter4_open');return;}
-  if(id==='chapter4_open'){selectedQuestMapChapter=4;render();return;}
-  if(id==='chapter4_end'){if(!S.storyFlags?.chapter5_open){openStory('chapter5_open');return;}dialog={title:'第5章へ',message:'第5章「点灯式の夜」へ続く。'};render();return;}
-  if(id==='chapter5_open'){selectedQuestMapChapter=5;render();return;}
-  if(id==='chapter5_end'){dialog={title:'第6章へ続く',message:'海の底の金色の灯を目指して。第6章へ続く。'};render();return;}
-  if(id.match(/^q(?:2[5-9]|30)_intro$/)){startInvestigation(id.slice(0,3));return;}
-  if(id.match(/^q(?:2[5-9]|30)_pre$/)){startBattle(id.slice(0,3));return;}
-  if(id.match(/^q(?:2[5-9]|30)$/)&&id==='q30'&&!S.storyFlags.chapter5_end){openStory('chapter5_end');return;}
-
-  if(id.endsWith('_pre')&&CHAPTER4_STORIES[id]){startBattle(id.slice(0,3));return;}
-  if(id.match(/^q(19|20|21|22|23|24)$/)){
-   const waiting=CHAPTER4_MEET_ORDER[id]?.find(h=>!S.chapter4Met?.[h]);
-   if(waiting){openStory(waiting+'_meet');return;}
-   if(id==='q24'&&!S.storyFlags.chapter4_end){openStory('chapter4_end');return;}
-  }
-  if(id==='q7'&&S.quests.q7?.complete&&!S.tsubakiMet){openStory('tsubaki_meet');return}
-  if(id==='q8'&&S.quests.q8?.complete&&!S.erikaMet){openStory('erika_meet');return}
-   if(id==='q11'&&S.quests.q11?.complete&&!S.kanameMet){openStory('kaname_meet');return}
-   if(id==='q12'&&S.quests.q12?.complete&&!S.kaedeMet){openStory('kaede_meet');return}
-   if(id==='q12'&&S.kaedeMet&&storyAllowed('chapter2_end')&&!S.storyFlags.chapter2_end){openStory('chapter2_end');return}
-  if(id==='q3'&&S.quests.q3?.complete&&!S.stationMet){openStory('station_meet');return}
- if(id==='q4'&&S.quests.q4?.complete&&!S.schoolMet){openStory('school_meet');return}
- if(id==='q5'&&S.quests.q5?.complete&&!S.seasideMet){openStory('seaside_meet');return}
- if(id==='q6'&&storyAllowed('chapter1_end')&&!S.storyFlags.chapter1_end){openStory('chapter1_end');return}
- if(id==='chapter1_end'&&S.quests.q6?.complete&&!S.lighthouseMet){openStory('lighthouse_meet');return;}
- if(first&&id==='chapter1_end')toast('第1章クリア：星晶石1000（初回のみ）');
+ if(first&&id==='chapter1_end'&&S.quests.q6?.complete)S.gems+=CHAPTER_CLEAR_GEMS;
+ if(first&&id==='chapter2_end'&&S.quests.q12?.complete)S.gems+=CHAPTER_CLEAR_GEMS;
+ persist();storySession=null;view='story';render();
+ if(first)toast('物語を読了しました。ストーリーとクエストは別々の画面から進められます。');
 }
+
 function chapterStoryCast(script,index){
  const storyId=storySession?.id||'';
  const current=script.lines[index]?.who;
@@ -1534,11 +1515,13 @@ function chapterStoryPage(){
  <div class="vn-dialogue-actions">${choices}<button type="button" class="vn-next" onclick="nextStory()" ${canAdvance?'':'disabled'}>${index===story.lines.length-1?'読み終える':'次へ　▸'}</button></div></div>${storyLogOpen?storyLogMarkup(story,index):''}</div></div>${scheduleStoryAuto(storySession.id,index,story.lines.length,canAdvance,storyLineText(sc))}`;
 }
 function storyMenu(){
+ const leadButton=id=>{const x=romanceScript(id),ok=storyAllowed(id),unread=ok&&!S.storyFlags?.[id];return x?`<button class="btn ${ok?'primary':'outline'}" ${ok?'':'disabled'} onclick="openStory('${id}')">${esc(x.title)} ${unread?'<span class="story-new">NEW</span>':''} ${ok?'↗':'（未解放）'}</button>`:'';};
  const fifth=['chapter5_open',...['q25','q26','q27','q28','q29','q30'].flatMap(q=>[q+'_intro',q+'_pre',q]),'chapter5_end'];
  const fourth=['chapter4_open',...Object.keys(CHAPTER4_MEET_ORDER).flatMap(q=>[q+'_intro',q+'_pre',q,...CHAPTER4_MEET_ORDER[q].map(h=>h+'_meet')]),'chapter4_end'];
- const ids=['chapter1_open','q3','q4','q5','q6','chapter1_end'];const second=['chapter2_open','q7','q8','q9'];const late=['q10','q11','q12','chapter2_end'];const third=['chapter3_open','q13_intro','q13','q14_intro','q14','q15_intro','q15'];const thirdLate=['q16_intro','q16','q17_intro','q17','q18_intro','q18','chapter3_end'];
- return `${heading('STORY / LIBRARY','物語','開幕・依頼後日談・終幕を再読できます。台詞はすべて仮テキストです。')}
- <div class="card pad"><h2>序章</h2><button class="btn primary" onclick="openPrologue()">第0話 相談室、はじめました。を読む</button>${S.quests.q1?.complete?`<button class="btn outline" onclick="openStory('shinonome_meet')">東雲商店街の出会い ${!S.shinonomeMet?'· NEW':''}</button>`:''}${S.quests.q4?.complete?`<button class="btn outline" onclick="openStory('school_meet')">旧第二小学校の出会い ${!S.schoolMet?'· NEW':''}</button>`:''}${S.quests.q4?.complete&&S.schoolMet?`<button class="btn outline" onclick="openStory('office_meet')">相談室の新しい顔ぶれ ${!S.officeMet?'· NEW':''}</button>`:''}${S.quests.q5?.complete?`<button class="btn outline" onclick="openStory('seaside_meet')">臨海公園の出会い ${!S.seasideMet?'· NEW':''}</button>`:''}${S.quests.q6?.complete&&S.storyFlags.chapter1_end?`<button class="btn outline" onclick="openStory('lighthouse_meet')">旧灯台の目覚め ${!S.lighthouseMet?'· NEW':''}</button>`:''}${S.quests.q3?.complete?`<button class="btn outline" onclick="openStory('station_meet')">東雲駅前の出会い ${!S.stationMet?'· NEW':''}</button>`:''}${S.quests.q2?.complete?`<button class="btn outline" onclick="openStory('oldcafe_meet')">旧喫茶街の出会い ${!S.oldcafeMet?'· NEW':''}</button>`:''}</div>
+ const ids=['chapter1_open','q3_lead','q3','q4_lead','q4','q5_lead','q5','q6_ready','q6','chapter1_end'];const second=['chapter2_open','q7_lead','q7','q8_lead','q8','q9_lead','q9'];const late=['q10_lead','q10','q11_lead','q11','q12_lead','q12','chapter2_end'];const third=['chapter3_open','q13_intro','q13','q14_intro','q14','q15_intro','q15'];const thirdLate=['q16_intro','q16','q17_intro','q17','q18_intro','q18','chapter3_end'];
+ return `${heading('STORY / LIBRARY','ストーリー','物語を読了すると次のクエストが解放されます。戦闘と調査はクエスト画面から開始します。')}
+ <div class="card pad"><strong>ストーリーとクエストは別々に進みます</strong><p>ストーリー読了 → クエスト解放 → クエストクリア → 続きのストーリー解放。自動で画面は切り替わりません。</p><button type="button" class="btn outline" onclick="change('city')">クエスト画面を開く</button></div>
+ <div class="card pad"><h2>序章</h2><button class="btn primary" onclick="openPrologue()">第0話 相談室、はじめました。を読む</button>${leadButton('q1_lead')}${leadButton('q2_lead')}${S.quests.q1?.complete?`<button class="btn outline" onclick="openStory('shinonome_meet')">東雲商店街の出会い ${!S.shinonomeMet?'· NEW':''}</button>`:''}${S.quests.q4?.complete?`<button class="btn outline" onclick="openStory('school_meet')">旧第二小学校の出会い ${!S.schoolMet?'· NEW':''}</button>`:''}${S.quests.q4?.complete&&S.schoolMet?`<button class="btn outline" onclick="openStory('office_meet')">相談室の新しい顔ぶれ ${!S.officeMet?'· NEW':''}</button>`:''}${S.quests.q5?.complete?`<button class="btn outline" onclick="openStory('seaside_meet')">臨海公園の出会い ${!S.seasideMet?'· NEW':''}</button>`:''}${S.quests.q6?.complete&&S.storyFlags.chapter1_end?`<button class="btn outline" onclick="openStory('lighthouse_meet')">旧灯台の目覚め ${!S.lighthouseMet?'· NEW':''}</button>`:''}${S.quests.q3?.complete?`<button class="btn outline" onclick="openStory('station_meet')">東雲駅前の出会い ${!S.stationMet?'· NEW':''}</button>`:''}${S.quests.q2?.complete?`<button class="btn outline" onclick="openStory('oldcafe_meet')">旧喫茶街の出会い ${!S.oldcafeMet?'· NEW':''}</button>`:''}</div>
  <div class="card pad" style="margin-top:12px"><h2>第1章　増幅する残響</h2><div class="chapter-story-list">${ids.map(id=>{
   const x=CHAPTER_STORIES[id],ok=storyAllowed(id),unread=ok&&!S.storyFlags[id];
   return `<button class="btn ${ok?'primary':'outline'}" ${ok?'':'disabled'} onclick="openStory('${id}')">${esc(x.title)} ${unread?'<span class="story-new" aria-label="未読">NEW</span>':''}　${ok?'↗':'（未解放）'}</button>`;
@@ -1686,6 +1669,8 @@ function questUnlockReason(q){
   if(q.id==='q8'&&S.quests.q7?.complete&&!S.tsubakiMet)return '椿の出会いイベントを読むと解放されます。';
   if(q.id==='q9'&&S.quests.q8?.complete&&!S.erikaMet)return 'エリカの出会いイベントを読むと解放されます。';
   if(q.id==='q12'&&S.quests.q11?.complete&&!S.kanameMet)return 'カナメの出会いイベントを読むと解放されます。';
+ const missing=questPreviousStory(q)||(!S.storyFlags?.[questIntroStory(q)]?questIntroStory(q):null);
+ if(missing)return missing==='prologue'?'序章を「ストーリー」画面で読んでください。':`「ストーリー」画面で${esc(romanceScript(missing)?.title||missing)}を読了すると解放されます。`;
  if(q.requires.length){
   const prev=QUEST_BY_ID[q.requires[q.requires.length-1]];
   return `${prev?.name||'前の依頼'}をクリアすると解放されます。`;
@@ -1719,22 +1704,13 @@ function questMapIcon(name){
 function questSheetAction(q){
  const st=S.quests[q.id]||{clues:0,complete:false};
  if(st.complete)return {label:'もう一度出撃する',click:`startBattle('${q.id}')`,disabled:false,kind:'done'};
- if(!questUnlocked(q)){
-   if(q.id==='q25'&&S.storyFlags?.chapter4_end&&!S.storyFlags?.chapter5_open)return {label:'第5章の開幕を読む',click:"openStory('chapter5_open')",disabled:false,kind:'story'};
-   if(q.id==='q19'&&S.storyFlags?.chapter3_end&&!S.storyFlags?.chapter4_open)return {label:'第4章の開幕を読む',click:"openStory('chapter4_open')",disabled:false,kind:'story'};
-   if(q.id==='q13'&&S.storyFlags?.chapter2_end&&!S.storyFlags?.chapter3_open)return {label:'第3章の開幕を読む',click:"openStory('chapter3_open')",disabled:false,kind:'story'};
-  if(q.id==='q15'&&S.quests.q14?.complete&&(!S.chapter3Met?.saki||!S.chapter3Met?.yuzu))return {label:'姉妹との出会いを読む',click:"openStory('saki_yuzu_meet')",disabled:false,kind:'story'};
-  if(q.id==='q7'&&S.lighthouseMet&&!S.storyFlags?.chapter2_open)return {label:'第2章の開幕を読む',click:"openStory('chapter2_open')",disabled:false,kind:'story'};
-  if(q.id==='q8'&&S.quests.q7?.complete&&!S.tsubakiMet)return {label:'椿との出会いを読む',click:"openStory('tsubaki_meet')",disabled:false,kind:'story'};
-  if(q.id==='q9'&&S.quests.q8?.complete&&!S.erikaMet)return {label:'エリカとの出会いを読む',click:"openStory('erika_meet')",disabled:false,kind:'story'};
-  if(q.id==='q12'&&S.quests.q11?.complete&&!S.kanameMet)return {label:'カナメとの出会いを読む',click:"openStory('kaname_meet')",disabled:false,kind:'story'};
-  if(q.id==='q3'&&S.quests.q2?.complete&&!S.storyFlags?.chapter1_open)return {label:'第1章の開幕を読む',click:`openStory('chapter1_open')`,disabled:false,kind:'story'};
-  return {label:'解放条件を確認',click:'',disabled:true,kind:'locked'};
- }
- if((q.chapter===3||q.chapter===4||q.chapter===5)&&!S.storyFlags?.[q.id+'_intro'])return {label:'依頼の導入を読む',click:`openStory('${q.id}_intro')`,disabled:false,kind:'story'};
+ if(!questUnlocked(q))return {label:'ストーリー画面で解放条件を読む',click:"change('story')",disabled:false,kind:'story'};
  const state=S.investigations?.[q.id];
- if((q.chapter===4||q.chapter===5)&&state?.phase==='ready'&&!S.storyFlags?.[q.id+'_pre'])return {label:'戦闘前の物語を読む',click:`openStory('${q.id}_pre')`,disabled:false,kind:'story'};
- if(state?.phase==='ready')return {label:'弱点を見抜いて出撃する'.replace('弱点を見抜いて',state.solved?'弱点を見抜いて':'現場へ'),click:`startBattle('${q.id}')`,disabled:false,kind:'phase2'};
+ if((q.chapter===4||q.chapter===5)&&state?.phase==='ready'&&!S.storyFlags?.[q.id+'_pre'])
+  return {label:'ストーリー画面で戦闘前の物語を読む',click:"change('story')",disabled:false,kind:'story'};
+ if(FLESHOUT_PREBATTLE[q.id+'_ready']&&state?.phase==='ready'&&!S.storyFlags?.[q.id+'_ready'])
+  return {label:'ストーリー画面で出撃前の物語を読む',click:"change('story')",disabled:false,kind:'story'};
+ if(state?.phase==='ready')return {label:state.solved?'弱点を見抜いて出撃する':'現場へ出撃する',click:`startBattle('${q.id}')`,disabled:false,kind:'phase2'};
  return {label:state?'調査の続きを始める':'同行者を選んで調査する',click:`startInvestigation('${q.id}')`,disabled:false,kind:'phase0'};
 }
 function openQuestSheet(id,event){
@@ -1762,7 +1738,7 @@ function mapIntroGuide(){
  return `<button type="button" class="qmap-guide" onclick="dismissQuestGuide(event)" aria-label="初回ガイドを閉じる"><strong>初回案内</strong><span>光っているピンをタップして依頼を確認しよう</span><span class="qmap-guide-arrow" aria-hidden="true">↓</span></button>`;
 }
 
-// Ver.0.34.57.0: One battle system for all normal quests; no player-facing battle-mode selector.
+// Ver.0.34.59.0: One battle system for all normal quests; no player-facing battle-mode selector.
 function battleModeChoiceMarkup(qid){
  const fixed=typeof TB_SPECIAL!=='undefined'&&TB_SPECIAL.has(qid);
  return fixed?'<p class="qmap-card-note">この依頼は専用演出のある特殊戦闘です。ターン制への移行まで従来方式で進行します。</p>':'';
@@ -1789,7 +1765,7 @@ function cityBottomSheet(q){
 function city(){
  const chapter=currentChapterStatus();
  const current=citySheetQuest?QUEST_BY_ID[citySheetQuest]:null;
- return `<section class="qmap-view"><div class="qmap-topline"><div><span class="qmap-top-kicker">QUEST MAP</span><h1>宵星市マップ</h1></div><div class="qmap-chapter-box"><small>現在の章</small><strong>${esc(chapter.title)}</strong><span>${chapter.done} / ${chapter.total}</span></div></div><nav class="qmap-chapter-switch" aria-label="章の切り替え">${Object.entries(CHAPTERS).map(([n,title])=>`<button type="button" class="btn mini ${chapter.chapter===Number(n)?'primary':'outline'}" ${Number(n)>chapter.maxChapter?'disabled':''} onclick="selectQuestMapChapter(${n})">${n==='0'?'序章':'第'+n+'章'}</button>`).join('')}</nav><div class="qmap-stage" onclick="closeQuestSheet()" aria-label="宵星市のクエストマップ"><div class="qmap-map"><svg class="qmap-svg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true"><rect width="1000" height="700" rx="34" fill="#f5f9ff"/><path d="M716 0h284v700H628c20-74 17-127-7-186-27-64-22-136 9-204 34-74 58-130 86-310Z" fill="#d7effd"/><path d="M654 0h28c-18 118-49 183-73 235-25 56-22 95-2 148 23 62 27 121 11 196l-31-4c14-64 12-114-9-171-23-62-22-113 5-173 28-62 54-120 71-231Z" fill="#91cbe9" opacity=".8"/><path d="M42 99c155-45 300-54 436-26 117 24 209 21 280 1v91c-78 19-159 21-267-3C364 133 214 144 42 199Z" fill="#fff7d6" opacity=".9"/><path d="M0 250c125-36 224-21 300 42 58 48 95 60 172 58 55-2 95 9 128 47 38 43 89 59 138 51 88-14 164 9 262 76v176H0Z" fill="#e9f3df"/><path d="M0 447c124-28 224-5 299 48 67 47 137 51 218 13 64-30 122-31 183 5 61 35 132 42 300 16v171H0Z" fill="#fdf0e6" opacity=".9"/><path d="M94 182 420 224" stroke="#cfdae7" stroke-width="26" stroke-linecap="round" fill="none"/><path d="M309 116 261 586" stroke="#d6e1ee" stroke-width="20" stroke-linecap="round" fill="none"/><path d="M412 332 749 289" stroke="#cad8e6" stroke-width="24" stroke-linecap="round" fill="none"/><path d="M502 292 870 606" stroke="#ceddeb" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 28" fill="none"/><path d="M118 523 563 527" stroke="#d3dfeb" stroke-width="22" stroke-linecap="round" fill="none"/><path d="M740 451 910 452" stroke="#d3dfeb" stroke-width="18" stroke-linecap="round" fill="none"/><circle cx="321" cy="140" r="34" fill="#fff" opacity=".9"/><circle cx="638" cy="493" r="44" fill="#fff" opacity=".65"/><path d="M807 552c34-23 78-64 98-119" stroke="#74afd0" stroke-width="6" stroke-dasharray="2 12" stroke-linecap="round" fill="none"/></svg><button type="button" class="qmap-home-pin" style="left:${QUEST_MAP_META.home.x}%;top:${QUEST_MAP_META.home.y}%" onclick="openMapHome(event)" aria-label="宵星相談室へ戻る"><span class="qmap-home-core">${questMapIcon('home')}</span><span class="qmap-home-label">相談室</span></button>${QUESTS.filter(q=>q.chapter===chapter.chapter).map(questPinMarkup).join('')}${mapIntroGuide()}</div>${current?cityBottomSheet(current):''}</div><p class="qmap-caption">光るピンから依頼を確認し、カード下部の大きなボタンで次の行動へ進みます。</p></section>`
+ return `<section class="qmap-view"><div class="card pad"><strong>クエストはストーリーの読了で解放されます</strong><p>物語を読む場合は「ストーリー」を選んでください。クエストクリア後も続きは自動再生されません。</p><button class="btn outline" onclick="change('story')">ストーリーへ</button></div><div class="qmap-topline"><div><span class="qmap-top-kicker">QUEST MAP</span><h1>宵星市マップ</h1></div><div class="qmap-chapter-box"><small>現在の章</small><strong>${esc(chapter.title)}</strong><span>${chapter.done} / ${chapter.total}</span></div></div><nav class="qmap-chapter-switch" aria-label="章の切り替え">${Object.entries(CHAPTERS).map(([n,title])=>`<button type="button" class="btn mini ${chapter.chapter===Number(n)?'primary':'outline'}" ${Number(n)>chapter.maxChapter?'disabled':''} onclick="selectQuestMapChapter(${n})">${n==='0'?'序章':'第'+n+'章'}</button>`).join('')}</nav><div class="qmap-stage" onclick="closeQuestSheet()" aria-label="宵星市のクエストマップ"><div class="qmap-map"><svg class="qmap-svg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true"><rect width="1000" height="700" rx="34" fill="#f5f9ff"/><path d="M716 0h284v700H628c20-74 17-127-7-186-27-64-22-136 9-204 34-74 58-130 86-310Z" fill="#d7effd"/><path d="M654 0h28c-18 118-49 183-73 235-25 56-22 95-2 148 23 62 27 121 11 196l-31-4c14-64 12-114-9-171-23-62-22-113 5-173 28-62 54-120 71-231Z" fill="#91cbe9" opacity=".8"/><path d="M42 99c155-45 300-54 436-26 117 24 209 21 280 1v91c-78 19-159 21-267-3C364 133 214 144 42 199Z" fill="#fff7d6" opacity=".9"/><path d="M0 250c125-36 224-21 300 42 58 48 95 60 172 58 55-2 95 9 128 47 38 43 89 59 138 51 88-14 164 9 262 76v176H0Z" fill="#e9f3df"/><path d="M0 447c124-28 224-5 299 48 67 47 137 51 218 13 64-30 122-31 183 5 61 35 132 42 300 16v171H0Z" fill="#fdf0e6" opacity=".9"/><path d="M94 182 420 224" stroke="#cfdae7" stroke-width="26" stroke-linecap="round" fill="none"/><path d="M309 116 261 586" stroke="#d6e1ee" stroke-width="20" stroke-linecap="round" fill="none"/><path d="M412 332 749 289" stroke="#cad8e6" stroke-width="24" stroke-linecap="round" fill="none"/><path d="M502 292 870 606" stroke="#ceddeb" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 28" fill="none"/><path d="M118 523 563 527" stroke="#d3dfeb" stroke-width="22" stroke-linecap="round" fill="none"/><path d="M740 451 910 452" stroke="#d3dfeb" stroke-width="18" stroke-linecap="round" fill="none"/><circle cx="321" cy="140" r="34" fill="#fff" opacity=".9"/><circle cx="638" cy="493" r="44" fill="#fff" opacity=".65"/><path d="M807 552c34-23 78-64 98-119" stroke="#74afd0" stroke-width="6" stroke-dasharray="2 12" stroke-linecap="round" fill="none"/></svg><button type="button" class="qmap-home-pin" style="left:${QUEST_MAP_META.home.x}%;top:${QUEST_MAP_META.home.y}%" onclick="openMapHome(event)" aria-label="宵星相談室へ戻る"><span class="qmap-home-core">${questMapIcon('home')}</span><span class="qmap-home-label">相談室</span></button>${QUESTS.filter(q=>q.chapter===chapter.chapter).map(questPinMarkup).join('')}${mapIntroGuide()}</div>${current?cityBottomSheet(current):''}</div><p class="qmap-caption">光るピンから依頼を確認し、カード下部の大きなボタンで次の行動へ進みます。</p></section>`
 }
 
 function farmGold(q){return ECONOMY.FARM_GOLD[q.id]??Math.round(q.reward*.15/10)*10}
@@ -2353,7 +2329,7 @@ try{if(navigator.storage&&navigator.storage.persisted)navigator.storage.persiste
 function backup(){const raw=SaveStore.readLegacy();let old=raw;try{if(raw!==null)old=JSON.parse(raw)}catch(e){}download('yoiboshi-save-backup-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({date:new Date().toISOString(),oldKey:OLD_KEY,oldSave:old,newKey:KEY,newSave:S},null,2));toast('バックアップファイルを作成しました')}
 function downloadSpec(){dialog={title:'実装確認',message:'現在は現代都市UI、星灯調査、加入ガチャ、4レアリティ、別版独立育成、重複による7凸、4役割・4枠編成、ターン制の通常戦闘、各キャラの2スキル、弱点・ブレイク・灯火・共鳴を実装しています。\n\n特殊ボス戦と自動周回にはまだ従来戦闘エンジンを使用します。敵の細部やガチャ確率は検証用です。'};render()}
 function dialogMarkup(){const d=dialog;return `<div class="overlay" role="dialog" aria-modal="true"><div class="dialog"><div class="eyebrow">YOIBOSHI CITY</div><h2>${esc(d.title)}</h2><p>${esc(d.message)}</p>${d.html||''}<div style="text-align:right;margin-top:17px"><button class="btn primary" onclick="closeDialog()">閉じる</button>${isSessionLocked()?'<button type="button" class="btn outline" onclick="requestInterrupt()">中断</button>':''}</div></div></div>`}
-function closeDialog(){dialog=null;questActionInProgress=false;romanceSelectionInProgress=false;if(pendingStory){const next=pendingStory;pendingStory=null;if(storyAllowed(next)){openStory(next);return}}if(S.onboarding?.enabled&&S.onboarding.stage==='home'&&!onboardingSuppressed){view='home';render();return}render()}
+function closeDialog(){dialog=null;questActionInProgress=false;romanceSelectionInProgress=false;pendingStory=null;if(S.onboarding?.enabled&&S.onboarding.stage==='home'&&!onboardingSuppressed){view='home';render();return}render()}
 function syncLobbyRail(){requestAnimationFrame(()=>{const rail=document.querySelector('.lobby-people'),current=rail?.querySelector('.lobby-face.active');if(!rail||!current)return;const rr=rail.getBoundingClientRect(),cr=current.getBoundingClientRect();rail.scrollLeft+=cr.left-rr.left-(rr.width-cr.width)/2;})}
 const SCREENS=Object.freeze({opening:openingPage,nameEntry:playerNameEntryPage,nameGreeting:playerNameGreetingPage,home,city,investigation:investigationPage,notebook:romanceNotebook,date:dateScenePage,prologue:prologuePage,story:()=>storySession?chapterStoryPage():storyMenu(),roster,unit:unitDetail,training:trainingPage,gacha,talk,records,archive,achievementsPage});
 function installBreathingArt(root){
@@ -2454,8 +2430,8 @@ function startBattle(id,grind=null,preview=false){
   const q=QUEST_BY_ID[id];if(!q||(!preview&&!questUnlocked(q)))return toast('前の依頼を解決すると解放されます');
   if(grind&&!S.quests[id]?.complete)return toast('未クリアの依頼は自動周回できません');
   if(!grind&&!preview&&!S.quests[id]?.complete&&S.investigations?.[id]?.phase!=='ready'){startInvestigation(id);return;}
-  if((q.chapter===4||q.chapter===5)&&!grind&&!preview&&!S.quests[id]?.complete&&!S.storyFlags?.[id+'_pre']){openStory(id+'_pre');return;}
-  if(FLESHOUT_PREBATTLE[id+'_ready']&&!grind&&!preview&&!S.quests[id]?.complete&&!S.storyFlags?.[id+'_ready']){openStory(id+'_ready');return;}
+  if((q.chapter===4||q.chapter===5)&&!grind&&!preview&&!S.quests[id]?.complete&&!S.storyFlags?.[id+'_pre'])return toast('戦闘前の物語を「ストーリー」画面で読んでください。');
+  if(FLESHOUT_PREBATTLE[id+'_ready']&&!grind&&!preview&&!S.quests[id]?.complete&&!S.storyFlags?.[id+'_ready'])return toast('出撃前の物語を「ストーリー」画面で読んでください。');
   const heroes=S.party.map((v,i)=>{const s=unitPower(v);return {
     id:v,hp:s.hp,max:s.hp,x:18+(i%2)*22,y:30+Math.floor(i/2)*45,
     atk:s.atk,def:s.def,spd:s.rate,attackTimer:.4+i*.19,cooldowns:[0,0],shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1
@@ -2783,12 +2759,7 @@ function finishBattle(won){
   const totalDone=battle.grind?.repeatWon+1||0;
   const questId=battle.qid;
   if(questId==='q28')dialog={title:'灯室の戦い・終了',message:'圧倒的な光に抗った。灯室に異変が起き、物語が続きます。勝利は不要です。'};
-  if(won&&firstClear&&!battle.grind){
-    if(questId==='q1'&&!S.shinonomeMet)pendingStory='shinonome_meet';
-     else if(Number(questId.slice(1))>=3&&!S.storyFlags?.[questId])pendingStory=questId;
-    else if(questId==='q2'&&!S.oldcafeMet)pendingStory='oldcafe_meet';
-    else if(questId==='q2'&&!S.storyFlags?.chapter1_open)pendingStory='chapter1_open';
-  }
+  if(won&&firstClear&&!battle.grind){pendingStory=null;dialog.message+='\n続きは「ストーリー」画面で選んでください。';}
   battle=null;questActionInProgress=false;view='city';lastFrame=0; // v0.34.41.0: 勝利後はホームへ飛ばさず、続きの物語→（初回案内中なら）ホームの順にする
   if(next){dialog=null;startBattle(questId,next);return}
   if(won&&totalDone){const q=QUESTS.find(x=>x.id===questId);
@@ -2823,9 +2794,8 @@ function investigationFresh(qid){return {qid,phase:'companion',hero:null,chosen:
 function investigationState(qid){const state=S.investigations?.[qid];return state&&state.qid===qid?state:null}
 function startInvestigation(qid){
  const leadId=qid+'_lead';
- if(FLESHOUT_LEADS[leadId]&&!S.storyFlags?.[leadId]&&!S.quests?.[qid]?.complete&&!investigationState(qid)){openStory(leadId);return;}
- if(QUEST_BY_ID[qid]?.chapter===3&&!S.storyFlags?.[qid+'_intro']){openStory(qid+'_intro');return;}
- const q=QUEST_BY_ID[qid];if(!q||!questUnlocked(q)||S.quests[qid]?.complete)return;
+ const q=QUEST_BY_ID[qid];if(!q||S.quests[qid]?.complete)return;
+ if(!questUnlocked(q))return toast(questUnlockReason(q));
  if(!S.investigations)S.investigations={};
  if(!investigationState(qid)||investigationState(qid).phase==='ready'){
   S.investigations[qid]=investigationFresh(qid);
