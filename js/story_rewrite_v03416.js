@@ -1,7 +1,7 @@
 /* Ver.0.34.16.0〜0.34.17.0 — 第3章・第4章の書き直し（出会ってすぐ仲間になる場面をなくす）。CHAPTER_STORIES で同じIDを上書きする。 */
 const STORY_REWRITE_V03416=Object.freeze({
 "q14_intro": {
-"title": "q14 夜の波止場・騒動の始まり",
+"title": "夜の波止場・騒動の始まり",
 "place": "港の倉庫街・夜",
 "requires": [
 "q13"
@@ -172,7 +172,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 ]
 },
 "q15_intro": {
-"title": "q15 ドックの女主人・黒い星灯の噂",
+"title": "ドックの女主人・黒い星灯の噂",
 "place": "クラブ「ドック」・夜",
 "requires": [
 "q14"
@@ -464,7 +464,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 ]
 },
 "q16_intro": {
-"title": "q16 薄れていく名前・古い曲",
+"title": "薄れていく名前・古い曲",
 "place": "宵星相談室〜宵星大学の書庫",
 "requires": [
 "q15"
@@ -621,7 +621,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 ]
 },
 "q17_intro": {
-"title": "q17 黒い灯の夜市・イブキを追う",
+"title": "黒い灯の夜市・イブキを追う",
 "place": "埋立地の夜市",
 "requires": [
 "q16"

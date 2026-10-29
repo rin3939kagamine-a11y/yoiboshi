@@ -2,7 +2,7 @@
  * Existing QUESTS, chapter story, reward and battle data remain untouched.
  */
 const INVESTIGATION_HERO_SKILLS=Object.freeze({
- momoka:{name:'商店街の顔なじみ',text:'商店街の人の本音を聞き出す。q1・q2では特に効果を発揮する。'},
+ momoka:{name:'商店街の顔なじみ',text:'商店街の人の本音を聞き出す。商店街まわりの依頼（時計音・カフェの灯り）では特に効果を発揮する。'},
  milku:{name:'心をほどくお茶',text:'証言者を落ち着かせ、もう一つの話を聞き出す。'},
  reina:{name:'現場の違和感',text:'普通なら見逃す痕跡を一つ発見する。'},
  akane:{name:'避難誘導',text:'周囲の安全を確保。次の戦闘で味方全員の被ダメージを30％軽減する。'},
