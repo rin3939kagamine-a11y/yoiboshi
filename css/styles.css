@@ -2981,3 +2981,11 @@ img.unit-card-scene{width:100%!important;height:100%!important;object-fit:cover!
 
 /* Ver.0.34.59.0: 7 independent navigation tabs on compact mobile screens. */
 @media(max-width:850px){.bottomnav button{flex:1 1 0;min-width:0;white-space:nowrap;overflow:hidden;padding-inline:1px}.bottomnav .nav-label{font-size:clamp(8px,2.2vw,10px)}}
+
+/* v0.34.64.0 ボス戦の試遊 */
+.boss-trial-card .boss-trial-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.boss-trial-btn{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:14px;border:1px solid #d9cdf0;background:linear-gradient(135deg,#231a3c,#3b2a5c);color:#f3ecff;cursor:pointer;text-align:left}
+.boss-trial-btn:hover{filter:brightness(1.1)}
+.boss-trial-btn img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:50% 8%;background:#120d22;flex:none}
+.boss-trial-btn b{display:block;font-size:16px}
+.boss-trial-btn small{display:block;font-size:12px;color:#cdb9f0;margin-top:2px}
