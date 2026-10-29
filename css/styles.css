@@ -2971,3 +2971,7 @@ body:has(.vn-story.onb-prologue .story-scene.has-bg) .page {padding:0!important}
  .vn-story .story-dialogue .vn-dialogue-actions button{font-size:clamp(13px,calc(.25vw + 9px),17px)!important}
  .vn-story.chapter-story-v071 .story-character .story-portrait-fit{bottom:calc(var(--vn-dlg-h) + var(--vn-dlg-gap) - var(--vn-overlap))}
 }
+
+/* v0.34.46.0 従来（リアルタイム）戦闘：キャラが重なって大きすぎる問題。フィールドの大きさに合わせて縮める */
+.v024-battle-stage .yc-legacy-stage{container-type:size}
+.v024-battle-stage .yc-legacy-stage .yc-slot{width:min(17cqw,40cqh)!important}
