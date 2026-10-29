@@ -24,7 +24,7 @@ let tbAutoTimer=0, tbLongTimer=0, tbSuppressClick=false;
 function tbClearTimer(){clearTimeout(tbAutoTimer);tbAutoTimer=0;clearTimeout(tbLongTimer);tbLongTimer=0;}
 function tbCurrent(){return view==='combat'&&battle?.turnBattle&&!battle.done?battle:null;}
 // Persist only an explicit choice made on the current Settings screen.
-function tbSetMode(mode){S.battleMode=mode==='legacy'?'legacy':'turn';S.battleModeOptInV03465=true;persist();render();}
+function tbSetMode(mode){S.battleMode=mode==='legacy'?'legacy':'turn';S.battleModeOptInV03466=true;persist();render();}
 function tbNewWave(q){
  const b=battle; b.phase='fight';b.enemies=makeWave(q,b.wave).map(e=>{
   const max=Math.max(1,Math.round(e.max*TB_BALANCE.enemyHp*(TB_BALANCE.chapterHp[q.chapter]||1)));
