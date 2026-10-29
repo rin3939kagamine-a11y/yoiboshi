@@ -2957,3 +2957,17 @@ body:has(.vn-story.onb-prologue .story-scene.has-bg) .page {padding:0!important}
 .tb-root .yc-turn-stage{container-type:size}
 @media (min-width:900px){.tb-root:not(.tb-wide) .yc-turn-stage{height:clamp(168px,34dvh,320px)}}
 .tb-root .yc-turn-stage .yc-slot{width:min(25cqw,50cqh)!important}
+
+/* v0.34.43.0 会話画面（PC幅）：メッセージ欄を大きくし、立ち絵の下を少しメッセージ欄に重ねる */
+@media (min-width:900px){
+ .vn-story{--vn-dlg-h:clamp(190px,19dvh,250px);--vn-dlg-gap:18px;--vn-overlap:clamp(36px,5dvh,70px)}
+ .vn-story .story-dialogue{min-height:var(--vn-dlg-h);bottom:max(var(--vn-dlg-gap),env(safe-area-inset-bottom) + 12px);padding:clamp(18px,2dvh,28px) clamp(24px,2.4vw,48px);gap:clamp(10px,1.2dvh,16px)}
+ .vn-story{--vn-fs:clamp(20px,calc(.55vw + 12px),28px)}
+ html.reader-size-l .vn-story{--vn-fs:calc(clamp(20px,calc(.55vw + 12px),28px) * 1.15)}
+ html.reader-size-xl .vn-story{--vn-fs:calc(clamp(20px,calc(.55vw + 12px),28px) * 1.3)}
+ .vn-story .story-line,.vn-story.chapter-story-v071 .story-line{font-size:var(--vn-fs)!important;line-height:1.75!important;max-height:34dvh}
+ .vn-story .story-dialogue .vn-speaker:not(:empty){font-size:clamp(15px,calc(.45vw + 8px),22px)!important;padding:.35em .9em!important}
+ .vn-story .story-dialogue .vn-dialogue-actions{margin-top:auto}
+ .vn-story .story-dialogue .vn-dialogue-actions button{font-size:clamp(13px,calc(.25vw + 9px),17px)!important}
+ .vn-story.chapter-story-v071 .story-character .story-portrait-fit{bottom:calc(var(--vn-dlg-h) + var(--vn-dlg-gap) - var(--vn-overlap))}
+}
