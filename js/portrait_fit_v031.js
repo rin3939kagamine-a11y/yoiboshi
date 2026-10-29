@@ -18,6 +18,7 @@ const PORTRAIT_FIT = Object.freeze({
   touko_true:{s:1,u:0,x:0},
   sakuya:{s:1,u:0,x:0},
   ibuki:{s:1,u:0,x:0},
+  haruka:{s:1,u:0,x:0}, // v0.34.57.0 トワの姉（第4章で登場予定）
   akane:{s:0.93,u:0.02,x:-0.01},
   anzu:{s:1.2,u:-0.2,x:-0.055},
   aoi:{s:0.85,u:0.02,x:-0.019},
