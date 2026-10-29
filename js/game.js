@@ -390,14 +390,15 @@ function expressionPortraitMarkup(personId,face='normal',sceneKey='default',opts
    (storySession.id==='q28_intro'&&storySession.step>=5)||
    ['q28_pre','q28','q29_intro','q29_pre','q29'].includes(storySession.id));
  // v0.34.55.0: 透子は背景を抜いた会話用の上半身（story_cast/touko_talk.webp）を使う
- const src=trueTouko?'assets/ART_V2/full_body/touko_true.webp':personId==='touko'?'assets/ART_V2/story_cast/touko_talk.webp':expressionArt(personId,actual);
+ const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp':['touko','sakuya','ibuki'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp`:expressionArt(personId,actual);
  const play=rememberExpression(sceneKey,personId,actual,!hasAlt);
  const wrapClass=[opts.wrapperClass||'',`expr-face-${actual}`,!hasAlt&&actual!=='normal'?'expr-uses-fallback':'',play?`expr-animate-${actual}`:'',opts.stateClass||''].filter(Boolean).join(' ');
  const alt=opts.alt||`${PEOPLE[personId]?.name||personId}の立ち絵`;
  const imageMarkup=`<img class="${opts.imageClass||'expr-character-img'}" src="${src}" alt="${esc(alt)}">`;
  // The fit applies only to the chapter-story expression portrait, never to fallback/full-body art.
  // Use a nested layer so speaker transitions and expression animations on the outer stage remain intact.
- const fit=opts.chapterStoryFit&&hasAlt&&!trueTouko&&typeof PORTRAIT_FIT!=='undefined'?PORTRAIT_FIT[personId]:null;
+ const talkCast=['touko','sakuya','ibuki'].includes(personId);
+ const fit=opts.chapterStoryFit&&(hasAlt||talkCast)&&typeof PORTRAIT_FIT!=='undefined'?PORTRAIT_FIT[trueTouko?'touko_true':personId]:null;
  const fittedMarkup=fit?`<div class="story-portrait-fit" style="--pf-s:${fit.s};--pf-u:${fit.u};--pf-x:${fit.x}"><div class="story-portrait-shift${fit.f?' is-top-fade':''}">${imageMarkup}</div></div>`:imageMarkup;
  return `<div class="${wrapClass}" data-person-id="${personId}" data-expression="${actual}" data-expression-source="${hasAlt?'art':'fallback'}">${fittedMarkup}${!hasAlt?expressionFallbackMarkup(actual):''}</div>`;
 }
@@ -883,7 +884,7 @@ function titlePage(){
  const hasSave=!!S.gameStarted&&SaveStore.read()!==null;
  const options=titleConfirm?`<div class="title-confirm" role="alertdialog" aria-label="はじめからの確認"><strong>今のデータは消えます</strong><p>現在のセーブが上書きされます。本当にはじめから遊びますか？</p><div><button type="button" onclick="cancelNewGame()">やめる</button><button type="button" class="danger" onclick="startNewGame()">削除してはじめる</button></div></div>`:'';
  const settings=titleSettingsOpen?`<div class="title-settings-panel"><button type="button" class="title-settings-back" onclick="toggleTitleSettings()">← タイトルに戻る</button>${audioSettingsCard()}</div>`:'';
- return `<main class="title-screen title-simple" aria-label="宵星の契約者 タイトル画面"><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><div class="title-subkicker">YOIBOSHI NO KEIYAKUSHA</div><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">Ver.0.34.55.0 · RE:START ALPHA</p></div>${options}${settings}</main>`;
+ return `<main class="title-screen title-simple" aria-label="宵星の契約者 タイトル画面"><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><div class="title-subkicker">YOIBOSHI NO KEIYAKUSHA</div><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">Ver.0.34.56.0 · RE:START ALPHA</p></div>${options}${settings}</main>`;
 }
 
 function isSessionLocked(){return (view==='investigation')||(view==='combat'&&!!battle&&!battle.done)||(view==='prologue'&&!!storySession)||(view==='story'&&!!storySession)||(view==='date'&&!!S.love?.pending)||(view==='city'&&questActionInProgress)||(romanceSelectionInProgress&&!!dialog)}
@@ -939,7 +940,7 @@ const GameState=Object.freeze({
 function change(v){return AppRouter.go(v)}
 function button(v,symbol,label){const locked=isSessionLocked();return `<button type="button" class="navbtn ${view===v?'active':''} ${locked?'nav-locked':''}" aria-label="${label}" ${locked?'disabled aria-disabled="true"':''} ${view===v?'aria-current="page"':''} onclick="change('${v}')"><span class="ico" aria-hidden="true">${symbol}</span><span>${label}</span></button>`}
 const nav=[['home','⌂','ホーム'],['city','✧','クエスト'],['roster','◇','キャラ・編成'],['gacha','✦','ガチャ'],['talk','♡','交流'],['records','☷','記録・設定']];
-function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.55.0 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
+function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.56.0 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
 function heading(en,title,sub){return `<div class="eyebrow">${en}</div><h1 class="page-title">${title}</h1><p class="desc">${sub}</p>`}
 function chars(cards,buttons=true){
  const units=cards.map(id=>unit(id)).filter(Boolean);
@@ -1003,7 +1004,7 @@ function nextPrologue(){if(!storySession)return;storySession.step++;if(storySess
 function choosePrologue(choice){if(!storySession||!['people','place'].includes(choice)||!PROLOGUE[storySession.step]?.choices)return;storySession.choice=choice;nextPrologue()}
 function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyFlags.prologue;S.storyFlags.prologue=true;if(first)S.gems+=150;if(S.onboarding?.enabled&&S.onboarding.stage==='prologue'){S.onboarding.stage='q1';S.questGuideSeen=true;}persist();storySession=null;view='city';citySheetQuest='';render();toast(first?'序章クリア：星晶石150（初回のみ）':'序章を再読しました');window.scrollTo(0,0)}
 // Narrative-only portrait cast; not a recruitable heroine and never serialized.
-const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子'});
+const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'売人イブキ'}); // v0.34.56.0: 朔夜・イブキにも会話用の立ち絵
 const CHAPTER3_ONLY_VOICE=Object.freeze({ibuki:'売人イブキ'});
 function prologuePage(){
  if(!storySession)storySession={step:0,choice:null};
@@ -1471,7 +1472,7 @@ function chapterStoryCast(script,index){
  // Show Noel with Touko on the narrated embrace, not in unrelated lines.
  const text=script.lines[index]?.text||'';
  if(storyId==='chapter3_end'&&current==='narrator'&&/透子/.test(text)&&/ノエル/.test(text)&&/抱/.test(text))cast=['touko','concept19'];
- return cast.map(who=>expressionPortraitMarkup(who,faces[who]||'normal',`chapter:${storyId}`,{wrapperClass:(who==='touko'&&!(storySession&&((storySession.id==='q28_intro'&&storySession.step>=5)||['q28_pre','q28','q29_intro','q29_pre','q29'].includes(storySession.id))))?'story-character story-npc-touko-talk':(who==='touko'?'story-character story-npc-touko':'story-character'),chapterStoryFit:true,stateClass:'is-speaking',alt:`${PEOPLE[who]?.name||STORY_ONLY_CAST[who]}の立ち絵`})).join('');
+ return cast.map(who=>expressionPortraitMarkup(who,faces[who]||'normal',`chapter:${storyId}`,{wrapperClass:'story-character',chapterStoryFit:true,stateClass:'is-speaking',alt:`${PEOPLE[who]?.name||STORY_ONLY_CAST[who]}の立ち絵`})).join('');
 }
 // v0.34.37.0: 読み返しログ・オート送り・文字の大きさ（読みやすさの設定は端末ごとに保存し、セーブには含めない）
 const READER_KEY='yoiboshi-reader-v1';
@@ -1761,7 +1762,7 @@ function mapIntroGuide(){
  return `<button type="button" class="qmap-guide" onclick="dismissQuestGuide(event)" aria-label="初回ガイドを閉じる"><strong>初回案内</strong><span>光っているピンをタップして依頼を確認しよう</span><span class="qmap-guide-arrow" aria-hidden="true">↓</span></button>`;
 }
 
-// Ver.0.34.55.0: One battle system for all normal quests; no player-facing battle-mode selector.
+// Ver.0.34.56.0: One battle system for all normal quests; no player-facing battle-mode selector.
 function battleModeChoiceMarkup(qid){
  const fixed=typeof TB_SPECIAL!=='undefined'&&TB_SPECIAL.has(qid);
  return fixed?'<p class="qmap-card-note">この依頼は専用演出のある特殊戦闘です。ターン制への移行まで従来方式で進行します。</p>':'';
