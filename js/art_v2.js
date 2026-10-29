@@ -88,10 +88,10 @@ const ART_V2=Object.freeze({
     "concept35": "assets/ART_V2/upper_body/concept35.webp",
     "concept36": "assets/ART_V2/upper_body/concept36.webp",
 
-    "momoka": "assets/ART_V2/upper_body/momoka.webp",
+    "momoka": "assets/ART_V2/upper_body/momoka.webp?v=0.34.60.0",
     "milku": "assets/ART_V2/upper_body/milku.webp",
     "reina": "assets/ART_V2/upper_body/reina.webp",
-    "akane": "assets/ART_V2/upper_body/akane.webp",
+    "akane": "assets/ART_V2/upper_body/akane.webp?v=0.34.60.0",
     "aoi": "assets/ART_V2/upper_body/aoi.webp",
     "chinatsu": "assets/ART_V2/upper_body/chinatsu.webp",
     "nagi": "assets/ART_V2/upper_body/nagi.webp",

@@ -2,12 +2,12 @@
 // 54人全員の normal も背景を消した会話用の通常顔を登録
 (function(){const T={
 "akane": {
-"blush": "assets/ART_V2/expressions/akane_blush.webp",
-"normal": "assets/ART_V2/expressions/akane_normal.webp",
-"pout": "assets/ART_V2/expressions/akane_pout.webp",
-"sad": "assets/ART_V2/expressions/akane_sad.webp",
-"smile": "assets/ART_V2/expressions/akane_smile.webp",
-"surprise": "assets/ART_V2/expressions/akane_surprise.webp"
+"blush": "assets/ART_V2/expressions/akane_blush.webp?v=0.34.60.0",
+"normal": "assets/ART_V2/expressions/akane_normal.webp?v=0.34.60.0",
+"pout": "assets/ART_V2/expressions/akane_pout.webp?v=0.34.60.0",
+"sad": "assets/ART_V2/expressions/akane_sad.webp?v=0.34.60.0",
+"smile": "assets/ART_V2/expressions/akane_smile.webp?v=0.34.60.0",
+"surprise": "assets/ART_V2/expressions/akane_surprise.webp?v=0.34.60.0"
 },
 "anzu": {
 "blush": "assets/ART_V2/expressions/anzu_blush.webp",
@@ -338,12 +338,12 @@
 "surprise": "assets/ART_V2/expressions/mizuki_surprise.webp"
 },
 "momoka": {
-"blush": "assets/ART_V2/expressions/momoka_blush.webp",
-"normal": "assets/ART_V2/expressions/momoka_normal.webp",
-"pout": "assets/ART_V2/expressions/momoka_pout.webp",
-"sad": "assets/ART_V2/expressions/momoka_sad.webp",
-"smile": "assets/ART_V2/expressions/momoka_smile.webp",
-"surprise": "assets/ART_V2/expressions/momoka_surprise.webp"
+"blush": "assets/ART_V2/expressions/momoka_blush.webp?v=0.34.60.0",
+"normal": "assets/ART_V2/expressions/momoka_normal.webp?v=0.34.60.0",
+"pout": "assets/ART_V2/expressions/momoka_pout.webp?v=0.34.60.0",
+"sad": "assets/ART_V2/expressions/momoka_sad.webp?v=0.34.60.0",
+"smile": "assets/ART_V2/expressions/momoka_smile.webp?v=0.34.60.0",
+"surprise": "assets/ART_V2/expressions/momoka_surprise.webp?v=0.34.60.0"
 },
 "nagi": {
 "blush": "assets/ART_V2/expressions/nagi_blush.webp",
