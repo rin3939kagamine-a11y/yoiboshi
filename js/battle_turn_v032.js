@@ -12,14 +12,17 @@ const TB_BALANCE = Object.freeze({
   swiftRate:0.75, autoDelay:280, speedFast:2, logLimit:70
 });
 const TB_SPECIAL = Object.freeze(new Set(['q6','q17','q18','q28','q29'])); // q12 story battle supports turn mode
-function tbSelected(){return S.battleMode==='turn';}
+// Ver.0.34.52.0: all eligible normal sorties use turn combat regardless of saved legacy preference.
+// Preserve the historical battleMode field for save compatibility; special battles and farms still use their legacy engine.
+function tbSelected(){return true;}
 function tbEligible(qid,grind,preview){
-  return tbSelected()&&!grind&&!preview&&!TB_SPECIAL.has(qid)&&!Q12HD.active?.(battle)&&!Q12C.active?.(battle);
+  return !grind&&!preview&&!TB_SPECIAL.has(qid)&&!Q12HD.active?.(battle)&&!Q12C.active?.(battle);
 }
 let tbAutoTimer=0, tbLongTimer=0, tbSuppressClick=false;
 function tbClearTimer(){clearTimeout(tbAutoTimer);tbAutoTimer=0;clearTimeout(tbLongTimer);tbLongTimer=0;}
 function tbCurrent(){return view==='combat'&&battle?.turnBattle&&!battle.done?battle:null;}
-function tbSetMode(mode){S.battleMode=mode==='turn'?'turn':'legacy';persist();render();}
+// Kept for compatibility with older entry points; the legacy choice is no longer offered.
+function tbSetMode(){S.battleMode='turn';persist();render();}
 function tbNewWave(q){
  const b=battle; b.phase='fight';b.enemies=makeWave(q,b.wave).map(e=>{
   const max=Math.max(1,Math.round(e.max*TB_BALANCE.enemyHp*(TB_BALANCE.chapterHp[q.chapter]||1)));
