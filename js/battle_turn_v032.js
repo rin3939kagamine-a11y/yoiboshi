@@ -13,17 +13,18 @@ const TB_BALANCE = Object.freeze({
 });
 // Ver.0.34.64.0: All story quests use the turn engine; legacy remains for replay/farm only.
 const TB_SPECIAL = Object.freeze(new Set());
-// Ver.0.34.52.0: all eligible normal sorties use turn combat regardless of saved legacy preference.
-// Preserve the historical battleMode field for save compatibility; special battles and farms still use their legacy engine.
-function tbSelected(){return true;}
+// Ver.0.34.65.0: Turn combat is default; the legacy engine remains selectable in Settings.
+// Turn practice always uses the turn engine. q12 preview follows the saved selection.
+function tbSelected(){return S.battleMode!=='legacy';}
 function tbEligible(qid,grind,preview){
-  return !grind&&!preview&&!TB_SPECIAL.has(qid)&&!Q12HD.active?.(battle)&&!Q12C.active?.(battle);
+  if(preview==='turn-training')return true;
+  return tbSelected()&&(!preview||(preview===true&&qid==='q12'))&&!TB_SPECIAL.has(qid)&&!Q12HD.active?.(battle)&&!Q12C.active?.(battle);
 }
 let tbAutoTimer=0, tbLongTimer=0, tbSuppressClick=false;
 function tbClearTimer(){clearTimeout(tbAutoTimer);tbAutoTimer=0;clearTimeout(tbLongTimer);tbLongTimer=0;}
 function tbCurrent(){return view==='combat'&&battle?.turnBattle&&!battle.done?battle:null;}
-// Kept for compatibility with older entry points; the legacy choice is no longer offered.
-function tbSetMode(){S.battleMode='turn';persist();render();}
+// Persist only an explicit choice made on the current Settings screen.
+function tbSetMode(mode){S.battleMode=mode==='legacy'?'legacy':'turn';S.battleModeOptInV03465=true;persist();render();}
 function tbNewWave(q){
  const b=battle; b.phase='fight';b.enemies=makeWave(q,b.wave).map(e=>{
   const max=Math.max(1,Math.round(e.max*TB_BALANCE.enemyHp*(TB_BALANCE.chapterHp[q.chapter]||1)));
@@ -44,7 +45,7 @@ function tbNewWave(q){
 function tbInit(){
  if(!battle)return;
  battle.turnBattle=true;
- battle.tb={queue:[],round:0,light:TB_BALANCE.startLight,lit:-1,lightUsed:false,targetEnemy:0,targetAlly:0,auto:false,speed:1,showHelp:-1,turnCount:0,roundsPerWave:[]};
+ battle.tb={queue:[],round:0,light:TB_BALANCE.startLight,lit:-1,lightUsed:false,targetEnemy:0,targetAlly:0,auto:!!battle.grind,speed:1,showHelp:-1,turnCount:0,roundsPerWave:[]};
  battle.phase='fight';battle.auto=false;battle.sim=0;
  battle.allies.forEach(a=>{a.cooldowns=[0,0];a.guarding=false;a.effects={};});
  tbNewWave(QUEST_BY_ID[battle.qid]);
