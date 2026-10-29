@@ -1,0 +1,1 @@
+Base: Ver.0.31.1.1. 11 story background bindings reconstructed from CHANGELOG_BACKGROUND_V03120.md. Apply before v03200 battle diff. Formal Ver.0.31.2.0 original was not available for byte comparison.

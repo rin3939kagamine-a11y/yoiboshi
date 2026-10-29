@@ -1,0 +1,1541 @@
+{
+  "product": "宵星の契約者 RE:START",
+  "version": "0.23.1.0",
+  "basis": "0.23.0.0 full ZIP",
+  "scope": "BGM7曲・Kenney CC0 SE9種類のローカル試聴版への統合と回帰QA",
+  "method": "静的コード検査、MP3メタデータ読取、ChromiumへのJS注入による擬似起動、旧セーブ相当データ読み込み、音声呼出のモック検証",
+  "summary": {
+    "PASS": 248,
+    "FAIL": 0,
+    "NOT_RUN": 6
+  },
+  "checks": [
+    {
+      "id": "B001",
+      "name": "all JS loaded without pageerror",
+      "result": "PASS",
+      "detail": "[]"
+    },
+    {
+      "id": "B002",
+      "name": "game title screen loads",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B003",
+      "name": "36 hero profiles registered",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B004",
+      "name": "12 quests registered",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B005",
+      "name": "q12 boss cue defined",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B006",
+      "name": "q6 boss cue defined",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B007",
+      "name": "q11 normal combat cue defined",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B008",
+      "name": "q12 rescue emotion cue",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B009",
+      "name": "chapter2 final suspense cue",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B010",
+      "name": "7 bundled BGM slots",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B011",
+      "name": "9 bundled SE slots",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B012",
+      "name": "A/B sound trial available",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B013",
+      "name": "home BGM assigned",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B014",
+      "name": "home BGM mock playable",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B015",
+      "name": "q12 boss BGM mock playable",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B016",
+      "name": "settings includes trial UI trigger",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B017",
+      "name": "A/B audio list renders",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B018",
+      "name": "all 16 rows render",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B019",
+      "name": "quest gating q2 blocked initially",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B020",
+      "name": "q10 unlocks after q9",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B021",
+      "name": "q11 locked before q10",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B022",
+      "name": "q11 unlocks after q10",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B023",
+      "name": "q12 waits on Kaname meeting",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B024",
+      "name": "q12 unlocks after meeting",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B025",
+      "name": "no gameplay rendering error",
+      "result": "PASS",
+      "detail": "[]"
+    },
+    {
+      "id": "B026",
+      "name": "old q9 save loads unchanged",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B027",
+      "name": "old gems intact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B028",
+      "name": "old gold intact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B029",
+      "name": "all q1-q9 clear states intact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B030",
+      "name": "level and LB intact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B031",
+      "name": "party intact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B032",
+      "name": "prior meetings intact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B033",
+      "name": "q10 becomes available",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B034",
+      "name": "q11 initially locked",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B035",
+      "name": "old chapter save key unchanged",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B036",
+      "name": "prior old-save value untouched",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B037",
+      "name": "audio volume settings intact",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B038",
+      "name": "new heroine default affinity",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B039",
+      "name": "new heroines locked before meetings",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B040",
+      "name": "q1 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B041",
+      "name": "q2 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B042",
+      "name": "q3 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B043",
+      "name": "q4 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B044",
+      "name": "q5 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B045",
+      "name": "q6 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B046",
+      "name": "q7 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B047",
+      "name": "q8 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B048",
+      "name": "q9 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B049",
+      "name": "q10 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B050",
+      "name": "q11 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B051",
+      "name": "q12 unlock with predecessors finished",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B052",
+      "name": "chapter2 boss highest baseHp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B053",
+      "name": "chapter2 boss highest attack",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B054",
+      "name": "13+ major save fields unaffected",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B055",
+      "name": "audio trial accessible",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B056",
+      "name": "SE details remains open after play",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B057",
+      "name": "Kenney SE actually assigned",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B058",
+      "name": "saved audio not changed by audition",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "B059",
+      "name": "no browser injected runtime errors",
+      "result": "PASS",
+      "detail": "[]"
+    },
+    {
+      "id": "S001",
+      "name": "MP3解析 assets/audio/battle.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S002",
+      "name": "MP3解析 assets/audio/boss.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S003",
+      "name": "MP3解析 assets/audio/daily.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S004",
+      "name": "MP3解析 assets/audio/home.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S005",
+      "name": "MP3解析 assets/audio/map.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S006",
+      "name": "MP3解析 assets/audio/sad.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S007",
+      "name": "MP3解析 assets/audio/sfx/affection.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S008",
+      "name": "MP3解析 assets/audio/sfx/cancel.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S009",
+      "name": "MP3解析 assets/audio/sfx/confirm.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S010",
+      "name": "MP3解析 assets/audio/sfx/defeat.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S011",
+      "name": "MP3解析 assets/audio/sfx/gacha.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S012",
+      "name": "MP3解析 assets/audio/sfx/hit.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S013",
+      "name": "MP3解析 assets/audio/sfx/page.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S014",
+      "name": "MP3解析 assets/audio/sfx/tap.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S015",
+      "name": "MP3解析 assets/audio/sfx/victory.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S016",
+      "name": "MP3解析 assets/audio/story.mp3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S017",
+      "name": "JS構文 art.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S018",
+      "name": "JS構文 art_v2.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S019",
+      "name": "JS構文 audio.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S020",
+      "name": "JS構文 audio_trial.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S021",
+      "name": "JS構文 expression_cues.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S022",
+      "name": "JS構文 game.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S023",
+      "name": "JS構文 investigation.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S024",
+      "name": "JS構文 performance_v016.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S025",
+      "name": "JS構文 romance7.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S026",
+      "name": "JS構文 romance_chapter2.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S027",
+      "name": "JS構文 romance_chapter2_late.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S028",
+      "name": "JS構文 romance_lighthouse.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S029",
+      "name": "JS構文 romance_oldcafe.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S030",
+      "name": "JS構文 romance_school.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S031",
+      "name": "JS構文 romance_seaside.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S032",
+      "name": "JS構文 romance_shinonome.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S033",
+      "name": "JS構文 romance_stage_lines.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S034",
+      "name": "JS構文 romance_station.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S035",
+      "name": "既存内容バイト一致 js/romance_chapter2_late.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S036",
+      "name": "既存内容バイト一致 js/romance_chapter2.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S037",
+      "name": "既存内容バイト一致 js/investigation.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S038",
+      "name": "既存内容バイト一致 js/performance_v016.js",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S039",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/akane.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S040",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/aoi.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S041",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/chinatsu.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S042",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept08.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S043",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept09.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S044",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept10.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S045",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept11.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S046",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept12.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S047",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept13.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S048",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept14.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S049",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept15.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S050",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept16.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S051",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept17.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S052",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept18.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S053",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept19.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S054",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept20.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S055",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept21.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S056",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept22.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S057",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept23.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S058",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept24.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S059",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept25.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S060",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept26.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S061",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept27.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S062",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept28.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S063",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept29.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S064",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept30.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S065",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept31.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S066",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept32.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S067",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept33.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S068",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept34.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S069",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept35.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S070",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/concept36.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S071",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/milku.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S072",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/momoka.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S073",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/nagi.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S074",
+      "name": "元画像バイト一致 assets/ART_V2/face_icons/reina.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S075",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/akane.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S076",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/aoi.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S077",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/chinatsu.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S078",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept08.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S079",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept09.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S080",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept10.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S081",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept11.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S082",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept12.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S083",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept13.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S084",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept14.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S085",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept15.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S086",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept16.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S087",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept17.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S088",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept18.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S089",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept19.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S090",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept20.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S091",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept21.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S092",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept22.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S093",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept23.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S094",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept24.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S095",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept25.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S096",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept26.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S097",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept27.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S098",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept28.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S099",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept29.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S100",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept30.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S101",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept31.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S102",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept32.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S103",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept33.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S104",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept34.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S105",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept35.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S106",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/concept36.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S107",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/milku.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S108",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/momoka.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S109",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/nagi.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S110",
+      "name": "元画像バイト一致 assets/ART_V2/full_body/reina.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S111",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept11.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S112",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept12.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S113",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept13.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S114",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept14.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S115",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept15.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S116",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept16.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S117",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept17.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S118",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept18.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S119",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept19.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S120",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept20.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S121",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept21.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S122",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept22.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S123",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept23.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S124",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept24.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S125",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept25.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S126",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept26.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S127",
+      "name": "元画像バイト一致 assets/ART_V2/full_body_dynamic/concept27.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S128",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept18.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S129",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept19.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S130",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept20.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S131",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept21.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S132",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept22.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S133",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept23.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S134",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept24.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S135",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept25.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S136",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept26.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S137",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept27.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S138",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept28.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S139",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept29.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S140",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept30.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S141",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept31.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S142",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept32.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S143",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept33.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S144",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept34.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S145",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept35.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S146",
+      "name": "元画像バイト一致 assets/ART_V2/reference/concept36.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S147",
+      "name": "元画像バイト一致 assets/ART_V2/reference_mask/concept34.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S148",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/akane.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S149",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/aoi.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S150",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/chinatsu.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S151",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept08.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S152",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept09.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S153",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept10.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S154",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept11.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S155",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept12.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S156",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept13.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S157",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept14.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S158",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept15.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S159",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept16.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S160",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept17.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S161",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept18.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S162",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept19.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S163",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept20.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S164",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept21.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S165",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept22.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S166",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept23.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S167",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept24.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S168",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept25.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S169",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept26.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S170",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept27.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S171",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept28.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S172",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept29.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S173",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept30.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S174",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept31.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S175",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept32.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S176",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept33.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S177",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept34.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S178",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept35.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S179",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/concept36.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S180",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/milku.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S181",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/momoka.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S182",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/nagi.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S183",
+      "name": "元画像バイト一致 assets/ART_V2/upper_body/reina.webp",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S184",
+      "name": "game.jsのゲームロジック保全",
+      "result": "PASS",
+      "detail": "音声設定UI・タイトル以外は元のコードと一致"
+    },
+    {
+      "id": "S185",
+      "name": "セーブキー不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S186",
+      "name": "ゲーム内とHTMLの版表示が一致",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S187",
+      "name": "第2章後半JS読み込み維持",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S188",
+      "name": "音声比較JS読み込みあり",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "S189",
+      "name": "16音声ファイル存在",
+      "result": "PASS",
+      "detail": ""
+    }
+  ],
+  "not_run": [
+    {
+      "id": "U01",
+      "name": "展開版index.htmlをfile://で起動する検証",
+      "result": "NOT_RUN",
+      "reason": "Chromiumのfile://ナビゲーションがERR_BLOCKED_BY_ADMINISTRATORで遮断"
+    },
+    {
+      "id": "U02",
+      "name": "iPhone Safariでの起動・SE/BGM再生",
+      "result": "NOT_RUN",
+      "reason": "iPhone実機環境なし"
+    },
+    {
+      "id": "U03",
+      "name": "BGMとSEの聴感・音量バランス確認",
+      "result": "NOT_RUN",
+      "reason": "音声はファイル形式と呼出処理を検証。実際の聴こえ方は未評価"
+    },
+    {
+      "id": "U04",
+      "name": "12クエスト全ウェーブの手動通しクリア",
+      "result": "NOT_RUN",
+      "reason": "依存条件の順次解放は検証。リアルタイムバトルの操作通しプレイは未実施"
+    },
+    {
+      "id": "U05",
+      "name": "公開環境でのセーブ復元と権利適合",
+      "result": "NOT_RUN",
+      "reason": "公開サーバーへのデプロイは未実施。BGMの公開パッケージ化は別途確認が必要"
+    },
+    {
+      "id": "U06",
+      "name": "ガチャ演出の画面全操作による総合検証",
+      "result": "NOT_RUN",
+      "reason": "ガチャ・キャラのデータと処理コードは不変だが実際の全演出は未実施"
+    }
+  ],
+  "note": "Chromiumでfile://起動できないため実ゲームの動作保証にはならない。旧版のゲームロジックとセーブキーを保持し、音声のみ統合した。"
+}

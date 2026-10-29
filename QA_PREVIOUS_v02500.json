@@ -1,0 +1,339 @@
+{
+  "version": "0.25.0.0",
+  "base": "0.24.1.0",
+  "scope": "q12 exclusive HD-2D-inspired battle prototype",
+  "method": "Chromium simulated browser with original script order, Node.js syntax checks, source ZIP hash comparisons",
+  "items": [
+    {
+      "item": "q12専用スクリプトの読み込み順",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "タイトル画面が表示される",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "ホーム画面は引き続き表示",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "セーブキー不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "36人登録維持",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "q1からq12までのクエスト件数",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "ガチャ抽選率の既存シンボル維持",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "設定にq12体験モード入口",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "q12未解放でも体験モードを開始",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "体験モードで朔夜と檻が出現",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "試遊用一時能力補正は戦闘中のみ",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "体験勝利後は設定に戻る",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "体験勝利でもq12クリアにはならない",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "体験の報酬・セーブデータは変更なし",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "q12解放",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "q12戦闘が開始",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "初回開始時にボスギミック未発動",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "q12のウェーブ数維持",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "最終ウェーブに朔夜と檻が出現",
+      "result": "PASS",
+      "detail": "{'enemy': [{'kind': 'armored', 'hp': 576, 'max': 576}, {'kind': 'boss', 'hp': 913, 'max': 913}, {'kind': 'cage', 'hp': 566, 'max': 566}], 'focus': 'cage', 'stage': 1}"
+    },
+    {
+      "item": "朔夜・檻のHPが正",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "専用HUD表示",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "朔夜と檻のHPバー",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "専用背景",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "朔夜の画像が存在",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "檻の画像が存在",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "画像が実際にロード",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "画像が3ファイルだけ",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "残響の檻を優先する初期指示",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "攻撃優先対象が檻",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "ボタンで朔夜へターゲット変更",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "優先対象が朔夜に変化",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "ボタンで檻へ戻せる",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "檻が残る間のダメージ軽減",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "通常攻撃の狙いも檻へ変化",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "70%以下でフェーズ2",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "35%以下でフェーズ3",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "フェーズ3表示",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "全体攻撃の予告",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "攻撃予告中もタイマーが正",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "予告の後に全体攻撃が発動",
+      "result": "PASS",
+      "detail": "[125, 165, 148, 125]->[22, 64, 47, 22]"
+    },
+    {
+      "item": "全体攻撃後は予告解除",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "朔夜だけを倒してもクリアしない",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "檻が残れば檻を攻撃する",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "檻も破壊すればq12勝利",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "勝利でストーリー遷移フラグ設定",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "旧セーブ用の恋愛状態を壊さない",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "他クエスト戦闘は開始できる",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "通常戦闘には専用ギミックなし",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "PCホーム画面描画",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "Chromium例外なし",
+      "result": "PASS",
+      "detail": "[]"
+    },
+    {
+      "item": "セーブキーの定義が不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "q1〜q12のシナリオファイル不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "既存ヒロイン画像は不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "BGM7曲とSE9種は不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "専用モジュールのみ追加",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "既存クエスト定義は改変なし",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "HTMLバージョン表記",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "全19本のJS構文",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "素材ファイルをデコード",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "iPhone実機操作",
+      "result": "NOT_RUN",
+      "detail": "この環境では未実施。Chromiumへのスクリプト直接注入テストの範囲外。"
+    },
+    {
+      "item": "通常のfile://での起動",
+      "result": "NOT_RUN",
+      "detail": "この環境では未実施。Chromiumへのスクリプト直接注入テストの範囲外。"
+    },
+    {
+      "item": "全12クエストの手動通しプレイ",
+      "result": "NOT_RUN",
+      "detail": "この環境では未実施。Chromiumへのスクリプト直接注入テストの範囲外。"
+    },
+    {
+      "item": "音源を実際に聴く検証",
+      "result": "NOT_RUN",
+      "detail": "この環境では未実施。Chromiumへのスクリプト直接注入テストの範囲外。"
+    },
+    {
+      "item": "全編成・全レベルの難易度検証",
+      "result": "NOT_RUN",
+      "detail": "この環境では未実施。Chromiumへのスクリプト直接注入テストの範囲外。"
+    },
+    {
+      "item": "通常のURL経由でのブラウザ起動",
+      "result": "NOT_RUN",
+      "detail": "ChromiumのPage.gotoがERR_BLOCKED_BY_ADMINISTRATORを返したため未実施。スクリプト直接注入による画面操作は59項目合格。"
+    }
+  ],
+  "summary": {
+    "passed": 59,
+    "failed": 0,
+    "not_run": 6
+  },
+  "limitations": "本検証はChromiumへのスクリプト直接注入と画像HTTPモック（読み込み確認）による。通常のURL遷移、file://起動、iPhone実機、実音出し、全12クエスト手動プレイ、全編成での難易度検証は未実施。"
+}

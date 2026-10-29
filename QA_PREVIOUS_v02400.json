@@ -1,0 +1,332 @@
+{
+  "version": "0.24.0.0",
+  "base": "Yoiboshi_RESTART_v02310_audio_local_FULL.zip",
+  "method": "CSS visual enhancements and browser DOM tests via direct script injection; static unchanged-file comparison",
+  "summary": {
+    "PASS": 59,
+    "FAIL": 0,
+    "NOT_RUN": 5
+  },
+  "checks": [
+    {
+      "test": "JS依存関係の読み込み順がgame.jsで終わる",
+      "status": "PASS",
+      "detail": "['js/investigation.js', 'js/performance_v016.js', 'js/game.js']"
+    },
+    {
+      "test": "初期画面が表示できる",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ホームが表示される",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "星灯エフェクトの6つの星",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "進行状況0/12",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ホーム操作ショートカットが生存",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ガチャ画面",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ガチャの召喚モーダル",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "召喚魔法陣4層",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "カード演出",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "カードのレアリティがセット",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "演出を省略できる",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ガチャモーダルが閉じる",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "抽選1回で従来通り120消費",
+      "status": "PASS",
+      "detail": "({'gem': 10000, 'pulls': 0, 'owned': 4, 'saveKey': 'yoiboshi-reboot-v1'}, {'gem': 9880, 'pulls': 1, 'owned': 5, 'saveKey': 'yoiboshi-reboot-v1'})"
+    },
+    {
+      "test": "戦闘画面",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ウェーブ案内を設置",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "交戦開始ウェーブ案内",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "最終ウェーブでボスが生成される",
+      "status": "PASS",
+      "detail": "{'phase': 'fight', 'wave': 4, 'enemies': [{'name': '装甲の擬似体', 'kind': 'armored', 'hp': 576}, {'name': '黒い星灯の契約者・朔夜', 'kind': 'boss', 'hp': 913}]}"
+    },
+    {
+      "test": "ボス出現演出が適用される",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ボスが操作可能な敵として描画",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "戦闘UIスキル操作を保持",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ウェーブ案内はクリックを妨げない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "動きを抑える設定でボス案内アニメーションなし",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "デスクトップ横幅でも要素が存在",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JavaScript実行エラーなし",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "test": "セーブキー（現行）が維持",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "旧セーブキーが維持",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "新規セーブ初期値定義が変更されていない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "セーブ読み込み処理が変更されていない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ガチャ抽選ロジックが変更されていない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ガチャ募集候補判定が変更されていない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "スキル処理が変更されていない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "戦闘シミュレーションが変更されていない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "変更対象外212項目の完全一致",
+      "status": "PASS",
+      "detail": "differences=[]"
+    },
+    {
+      "test": "全音源が変更前と同一",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "全画像が変更前と同一",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "ベースのセーブ機能は非変更",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "HTMLタイトル更新",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "サイドバー版表示更新",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "追加演出はスクリーンの表示領域だけに限定",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "CSS構文解析でエラーなし",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "test": "JS構文: art.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: art_v2.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: audio.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: audio_trial.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: expression_cues.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: game.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: investigation.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: performance_v016.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance7.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_chapter2.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_chapter2_late.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_lighthouse.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_oldcafe.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_school.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_seaside.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_shinonome.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_stage_lines.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "JS構文: romance_station.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "test": "file://からのChrome/Edge直接起動",
+      "status": "NOT_RUN",
+      "detail": "ブラウザ管理者設定によりローカルHTTPアクセスがnet::ERR_BLOCKED_BY_ADMINISTRATOR。file://実起動は未検証"
+    },
+    {
+      "test": "iPhone Safari実機での操作とフレームレート",
+      "status": "NOT_RUN",
+      "detail": "iPhone実機にアクセスできない"
+    },
+    {
+      "test": "第1〜2章12クエスト全戦闘の手動通しプレイ",
+      "status": "NOT_RUN",
+      "detail": "単独の戦闘画面・ボス生成・UI操作のDOMテストまで実施"
+    },
+    {
+      "test": "実際のBGM/SE音量と音質の聞き比べ",
+      "status": "NOT_RUN",
+      "detail": "音源ファイルの実聴感チェックなし"
+    },
+    {
+      "test": "公開サーバー環境での保存／復元",
+      "status": "NOT_RUN",
+      "detail": "公開配備は行っていない"
+    }
+  ]
+}

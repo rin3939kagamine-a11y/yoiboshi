@@ -1,0 +1,722 @@
+{
+  "version": "0.23.0.0",
+  "base_zip": "yoiboshi_restart_v02210_full(1).zip",
+  "method": "ChromiumにJavaScriptを直接読み込み、ゲーム関数を実行。Node.jsの全JS構文検証、ZIP内部照合。通常のfile URL読み込みは環境制限あり。",
+  "summary": {
+    "pass": 137,
+    "fail": 0,
+    "not_run": 5
+  },
+  "results": [
+    {
+      "id": "browser_inline_boot",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "title_version",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "36_heroines",
+      "result": "PASS",
+      "details": "36"
+    },
+    {
+      "id": "new_profile",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "new_2_units",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "new_rarities",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "new_skills",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "passive_unique_by_type_name",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "passives_R_scale",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "pre_met_hidden",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "pre_met_no_gacha",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "pre_met_no_ticket",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "pre_met_no_romance",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "pre_met_no_trial_eligible",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "before_q10_locked",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "save_keep_values",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "save_preserve_story",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "new_love_initial",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q10_open_old_save",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q11_locked_pre_q10",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_locked_pre_q11",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "legacy_trial_not_formal",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q10_story_has_matching",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q10_no_meet",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q10_investigation",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q11_investigation",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_investigation",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "map_points",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "post_q10_story_access",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q11_open_q10",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "post_q11_story_access",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_wait_kaname",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_meet_allowed_after_q11",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_starts_from_beginning",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_progress_persisted",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_resume_step",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_not_gacha_during_meet",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_met_after_finish",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_gacha_after",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_ticket_after",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_pickup",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_romance_without_unit_locked",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_open",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_story_forbidden_preclear",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_gacha_locked_before",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "boss_5waves",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "boss_actual_enemy",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_boss_superior_stats",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "progressive_base_stats",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_can_meet_postclear",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_progress_saved",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_resume_4",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_no_ticket_midway",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_met_after_finish",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_pickup",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaede_ticket_after",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "end_automatic_after_meet",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "end_header",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "end_blackmail_not_reveal",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "no_noel_memory_content",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "end_flag_read",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "end_reward_1000",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "end_no_farm_reward_repeat",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "chapter2_titles_q10_q12",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "sister_first",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "sister_once",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "sister_reverse_aff_under_20",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "sister_reverse_after20",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "sister_reverse_only_once",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "no_trial_data_erased",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "never_mutate_key",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "all_profiles_likes",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "passive_text",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "all_36_unique_customized_replies",
+      "result": "PASS",
+      "details": "[]"
+    },
+    {
+      "id": "new_topics_have_substance",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "kaname_yume_sister",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_no_boss_portrait",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q10_nagi_appear",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q11_plant_8years",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "new_quest_map",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_strongest_final_boss",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "combat_new_party_started",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "combat_drain_heals",
+      "result": "PASS",
+      "details": "{'before': 168, 'after': 195, 'enemyBefore': 143, 'enemyAfter': 61}"
+    },
+    {
+      "id": "combat_finisher_damage",
+      "result": "PASS",
+      "details": "[120, 35]"
+    },
+    {
+      "id": "combat_heal_shield",
+      "result": "PASS",
+      "details": "{'hp0': 151, 'hp1': 177, 's0': 0, 's1': 19}"
+    },
+    {
+      "id": "combat_cleanse",
+      "result": "PASS",
+      "details": "{'before': 230, 'after': 250, 'weaken': 0}"
+    },
+    {
+      "id": "no_browser_errors_after_tests",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_js/game.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_js/performance_v016.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_js/investigation.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_js/romance_chapter2_late.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_js/audio.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_index.html",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_assets/ART_V2/face_icons/concept31.webp",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_assets/ART_V2/face_icons/concept36.webp",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "file_present_qa_result.json",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "preserve_character_images",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "preserve_all_unchanged_files",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "untouched_34_dialogue_files",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q7_q9_story_file_unchanged",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "save_key_same",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "rate_unchanged",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q1_q9_quest_definitions_unchanged",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "image_only_crop",
+      "result": "PASS",
+      "details": "既存concept31・concept36の顔アイコン画像をトリミング、再サンプリングした。新規描画や色補正なし"
+    },
+    {
+      "id": "icon_concept31_300x300",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "icon_concept36_300x300",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_art.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_art_v2.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_audio.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_expression_cues.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_game.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_investigation.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_performance_v016.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance7.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_chapter2.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_chapter2_late.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_lighthouse.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_oldcafe.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_school.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_seaside.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_shinonome.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_stage_lines.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "js_syntax_romance_station.js",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "zip_original_crc",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "q12_boss_bgm_and_q6_preserved",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept31_all_moods",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept31_all_6_date_places",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept31_story_2_bonds",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept31_8_topic_links",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept31_custom_reply_6",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept36_all_moods",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept36_all_6_date_places",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept36_story_2_bonds",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept36_8_topic_links",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept36_custom_reply_6",
+      "result": "PASS",
+      "details": ""
+    },
+    {
+      "id": "concept31_catchphrase_under_20_percent",
+      "result": "PASS",
+      "details": "2 / 77"
+    },
+    {
+      "id": "concept36_catchphrase_under_20_percent",
+      "result": "PASS",
+      "details": "2 / 75"
+    },
+    {
+      "id": "manual_native_file_start",
+      "result": "NOT_RUN",
+      "details": "file:// ブラウザ遷移は ERR_BLOCKED_BY_ADMINISTRATOR で遮断。通常起動テストとしては未実施"
+    },
+    {
+      "id": "iphone_real_device",
+      "result": "NOT_RUN",
+      "details": "iPhone実機接続なし"
+    },
+    {
+      "id": "full_manual_battle_playthrough",
+      "result": "NOT_RUN",
+      "details": "全5ウェーブの人手操作テスト未実施。makeWave/スキル実行テストで代替"
+    },
+    {
+      "id": "all_36_semantic_topic_title_review",
+      "result": "NOT_RUN",
+      "details": "新2名の各8話題の内容整合性は制作者側で確認したが、既存34名の全文について個別の意味一致を人手で再判定していない"
+    },
+    {
+      "id": "device_audio_art_qa",
+      "result": "NOT_RUN",
+      "details": "端末による立ち絵・音声描画/聴感の確認未実施（本差分では音源変更なし）"
+    }
+  ]
+}

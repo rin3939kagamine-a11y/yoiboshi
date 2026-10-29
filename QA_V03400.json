@@ -1,0 +1,253 @@
+{
+  "checks": [
+    {
+      "viewport": "667x375",
+      "profiles": {
+        "count": 54,
+        "defined": 54,
+        "thoughts": 51,
+        "provisional": [
+          "nagi",
+          "concept34",
+          "concept31"
+        ],
+        "shared": true
+      },
+      "q2": {
+        "enabled": true,
+        "buttons": 1
+      },
+      "light1": {
+        "initial": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "after": [
+          10,
+          0,
+          0,
+          0
+        ],
+        "remaining": 2,
+        "used": true,
+        "log": [
+          "第1ラウンド｜灯火 3/5",
+          "固有灯火「街を守る橙光」：守り",
+          "藤崎 朱音の想いを灯した！（このラウンド）"
+        ]
+      },
+      "resonance2": {
+        "ok": true,
+        "before": 3,
+        "after": 1,
+        "used": true,
+        "shield": [
+          11,
+          15,
+          0,
+          0
+        ],
+        "action": {
+          "side": "ally",
+          "i": 0
+        },
+        "logs": [
+          "第1ラウンド｜灯火 3/5",
+          "2灯共鳴！ 桜井 ももか・白石 みるくの想いが響く（二人に障壁）"
+        ]
+      },
+      "resonance3": {
+        "ok": true,
+        "before": 3,
+        "after": 0,
+        "used": true,
+        "shield": [
+          9,
+          12,
+          22,
+          14
+        ],
+        "action": {
+          "side": "ally",
+          "i": 0
+        }
+      },
+      "q1": {
+        "enabled": false,
+        "resonanceButtons": 0,
+        "flag": false
+      },
+      "jsErrors": []
+    },
+    {
+      "viewport": "844x390",
+      "profiles": {
+        "count": 54,
+        "defined": 54,
+        "thoughts": 51,
+        "provisional": [
+          "nagi",
+          "concept34",
+          "concept31"
+        ],
+        "shared": true
+      },
+      "q2": {
+        "enabled": true,
+        "buttons": 1
+      },
+      "light1": {
+        "initial": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "after": [
+          10,
+          0,
+          0,
+          0
+        ],
+        "remaining": 2,
+        "used": true,
+        "log": [
+          "第1ラウンド｜灯火 3/5",
+          "固有灯火「街を守る橙光」：守り",
+          "藤崎 朱音の想いを灯した！（このラウンド）"
+        ]
+      },
+      "resonance2": {
+        "ok": true,
+        "before": 3,
+        "after": 1,
+        "used": true,
+        "shield": [
+          11,
+          15,
+          0,
+          0
+        ],
+        "action": {
+          "side": "ally",
+          "i": 0
+        },
+        "logs": [
+          "第1ラウンド｜灯火 3/5",
+          "2灯共鳴！ 桜井 ももか・白石 みるくの想いが響く（二人に障壁）"
+        ]
+      },
+      "resonance3": {
+        "ok": true,
+        "before": 3,
+        "after": 0,
+        "used": true,
+        "shield": [
+          9,
+          12,
+          22,
+          14
+        ],
+        "action": {
+          "side": "ally",
+          "i": 0
+        }
+      },
+      "q1": {
+        "enabled": false,
+        "resonanceButtons": 0,
+        "flag": false
+      },
+      "jsErrors": []
+    },
+    {
+      "viewport": "390x844",
+      "profiles": {
+        "count": 54,
+        "defined": 54,
+        "thoughts": 51,
+        "provisional": [
+          "nagi",
+          "concept34",
+          "concept31"
+        ],
+        "shared": true
+      },
+      "q2": {
+        "enabled": true,
+        "buttons": 1
+      },
+      "light1": {
+        "initial": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "after": [
+          10,
+          0,
+          0,
+          0
+        ],
+        "remaining": 2,
+        "used": true,
+        "log": [
+          "第1ラウンド｜灯火 3/5",
+          "固有灯火「街を守る橙光」：守り",
+          "藤崎 朱音の想いを灯した！（このラウンド）"
+        ]
+      },
+      "resonance2": {
+        "ok": true,
+        "before": 3,
+        "after": 1,
+        "used": true,
+        "shield": [
+          11,
+          15,
+          0,
+          0
+        ],
+        "action": {
+          "side": "ally",
+          "i": 0
+        },
+        "logs": [
+          "第1ラウンド｜灯火 3/5",
+          "2灯共鳴！ 桜井 ももか・白石 みるくの想いが響く（二人に障壁）"
+        ]
+      },
+      "resonance3": {
+        "ok": true,
+        "before": 3,
+        "after": 0,
+        "used": true,
+        "shield": [
+          9,
+          12,
+          22,
+          14
+        ],
+        "action": {
+          "side": "ally",
+          "i": 0
+        }
+      },
+      "q1": {
+        "enabled": false,
+        "resonanceButtons": 0,
+        "flag": false
+      },
+      "jsErrors": []
+    }
+  ],
+  "screens": {
+    "667x375": "/mnt/data/QA_V03400_667x375.png",
+    "844x390": "/mnt/data/QA_V03400_844x390.png",
+    "390x844": "/mnt/data/QA_V03400_390x844.png"
+  },
+  "errors": []
+}

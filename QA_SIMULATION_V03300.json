@@ -1,0 +1,237 @@
+{
+  "simulated": 480,
+  "wins": 480,
+  "meanWinRate": 100,
+  "results": [
+    {
+      "id": "q1",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 6,
+      "avgWaveRounds": 3,
+      "breaks": 4,
+      "weakHits": 57
+    },
+    {
+      "id": "q2",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 15.3,
+      "avgWaveRounds": 3.8,
+      "breaks": 8,
+      "weakHits": 97
+    },
+    {
+      "id": "q3",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 8.8,
+      "avgWaveRounds": 2.9,
+      "breaks": 0,
+      "weakHits": 41
+    },
+    {
+      "id": "q4",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 13.6,
+      "avgWaveRounds": 4.5,
+      "breaks": 0,
+      "weakHits": 52
+    },
+    {
+      "id": "q5",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 16.9,
+      "avgWaveRounds": 4.2,
+      "breaks": 16,
+      "weakHits": 101
+    },
+    {
+      "id": "q7",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 14.1,
+      "avgWaveRounds": 3.5,
+      "breaks": 7,
+      "weakHits": 80
+    },
+    {
+      "id": "q8",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 15.5,
+      "avgWaveRounds": 3.9,
+      "breaks": 7,
+      "weakHits": 64
+    },
+    {
+      "id": "q9",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 15.2,
+      "avgWaveRounds": 3.8,
+      "breaks": 0,
+      "weakHits": 38
+    },
+    {
+      "id": "q10",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 17.3,
+      "avgWaveRounds": 4.3,
+      "breaks": 7,
+      "weakHits": 77
+    },
+    {
+      "id": "q11",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 17.3,
+      "avgWaveRounds": 4.3,
+      "breaks": 0,
+      "weakHits": 57
+    },
+    {
+      "id": "q13",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 16.3,
+      "avgWaveRounds": 4.1,
+      "breaks": 7,
+      "weakHits": 61
+    },
+    {
+      "id": "q14",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 16.4,
+      "avgWaveRounds": 4.1,
+      "breaks": 0,
+      "weakHits": 45
+    },
+    {
+      "id": "q15",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 18.4,
+      "avgWaveRounds": 4.6,
+      "breaks": 0,
+      "weakHits": 24
+    },
+    {
+      "id": "q16",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 17.9,
+      "avgWaveRounds": 4.5,
+      "breaks": 3,
+      "weakHits": 79
+    },
+    {
+      "id": "q19",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 12.6,
+      "avgWaveRounds": 3.1,
+      "breaks": 0,
+      "weakHits": 27
+    },
+    {
+      "id": "q20",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 12.8,
+      "avgWaveRounds": 3.2,
+      "breaks": 0,
+      "weakHits": 45
+    },
+    {
+      "id": "q21",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 13.7,
+      "avgWaveRounds": 3.4,
+      "breaks": 0,
+      "weakHits": 54
+    },
+    {
+      "id": "q22",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 15,
+      "avgWaveRounds": 3.8,
+      "breaks": 0,
+      "weakHits": 73
+    },
+    {
+      "id": "q23",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 20.5,
+      "avgWaveRounds": 4.1,
+      "breaks": 0,
+      "weakHits": 44
+    },
+    {
+      "id": "q24",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 21.6,
+      "avgWaveRounds": 4.3,
+      "breaks": 0,
+      "weakHits": 41
+    },
+    {
+      "id": "q25",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 7.3,
+      "avgWaveRounds": 3.6,
+      "breaks": 0,
+      "weakHits": 57
+    },
+    {
+      "id": "q26",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 6.8,
+      "avgWaveRounds": 3.4,
+      "breaks": 4,
+      "weakHits": 69
+    },
+    {
+      "id": "q27",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 12.8,
+      "avgWaveRounds": 4.3,
+      "breaks": 0,
+      "weakHits": 67
+    },
+    {
+      "id": "q30",
+      "win": 20,
+      "winRate": 100,
+      "avgRounds": 7.8,
+      "avgWaveRounds": 3.9,
+      "breaks": 3,
+      "weakHits": 77
+    }
+  ],
+  "checks": {
+    "hiddenBefore": true,
+    "previewPresent": true,
+    "revealedAfter": true,
+    "lightGain": true,
+    "breakTriggered": true,
+    "oneMore": true,
+    "skipped": true,
+    "preRevealed": true,
+    "specials": true,
+    "oldSaveLegacy": true
+  },
+  "errors": [],
+  "issues": []
+}

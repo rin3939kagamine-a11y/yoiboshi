@@ -1,0 +1,27 @@
+/* 宵星の契約者 ちびキャラ戦闘表示 v1 */
+.yc-stage{position:relative;--yc-speed:1}
+.yc-slot{position:absolute;transform-origin:50% 100%;transition:opacity .4s,filter .4s}
+.yc-actor{position:relative;width:100%;aspect-ratio:1/1}
+.yc-actor img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform-origin:50% 95%;pointer-events:none;user-select:none;animation:yc-breathe 2.6s ease-in-out infinite}
+.yc-actor.yc-fallback img{inset:30% 25% 10%;width:50%;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 8px #0006}
+.yc-ring{position:absolute;left:22%;right:22%;bottom:0;height:7%;border-radius:50%;background:#0006;transform:translateY(40%)}
+.yc-slot.yc-active .yc-ring{background:#f2b552;box-shadow:0 0 12px #f2b552}
+.yc-slot.yc-lit .yc-actor{filter:drop-shadow(0 0 6px var(--yc-c)) drop-shadow(0 0 14px var(--yc-c))}
+.yc-slot.yc-ko{opacity:.45;filter:grayscale(1)}
+.yc-slot.yc-ko .yc-actor img{animation:none}
+.yc-hit{position:absolute;left:25%;right:25%;top:10%;bottom:0;background:none;border:0;padding:0;cursor:pointer;border-radius:12px}
+.yc-hit:focus-visible{outline:2px solid #f2b552}
+.yc-stage.yc-frames .yc-actor{outline:1px dashed #ffffffaa;outline-offset:-1px}
+.yc-attack{animation:yc-attack calc(.55s / var(--yc-speed)) cubic-bezier(.3,.7,.4,1)}
+.yc-hurt{animation:yc-hurt calc(.5s / var(--yc-speed)) linear}
+.yc-glow{animation:yc-glow calc(1.2s / var(--yc-speed)) ease-out}
+.yc-spark{position:absolute;width:5%;aspect-ratio:1;border-radius:50%;background:var(--yc-c);box-shadow:0 0 10px var(--yc-c);pointer-events:none;opacity:0;animation:yc-spark calc(1.1s / var(--yc-speed)) ease-out forwards}
+.yc-num{position:absolute;z-index:50;font-weight:700;font-size:clamp(14px,4vw,26px);color:#fff;-webkit-text-stroke:3px #7a1020;paint-order:stroke;pointer-events:none;animation:yc-num calc(.9s / var(--yc-speed)) ease-out forwards}
+.yc-num.yc-heal{color:#fff3c4;-webkit-text-stroke-color:#7a5a00}
+@keyframes yc-breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.018)}}
+@keyframes yc-attack{0%{transform:none}35%{transform:translate(38%,-10%)}55%{transform:translate(46%,0)}100%{transform:none}}
+@keyframes yc-hurt{0%,100%{transform:none;filter:none}15%{transform:translateX(-7%);filter:brightness(1.3) sepia(1) saturate(6) hue-rotate(-30deg)}35%{transform:translateX(5%)}55%{transform:translateX(-4%);filter:brightness(1.2) sepia(1) saturate(6) hue-rotate(-30deg)}75%{transform:translateX(2%);filter:none}}
+@keyframes yc-glow{0%{filter:none;transform:none}25%{filter:drop-shadow(0 0 6px var(--yc-c)) drop-shadow(0 0 18px var(--yc-c)) brightness(1.15);transform:translateY(-4%)}70%{filter:drop-shadow(0 0 10px var(--yc-c)) drop-shadow(0 0 26px var(--yc-c));transform:translateY(-4%)}100%{filter:none;transform:none}}
+@keyframes yc-spark{0%{opacity:0;transform:translateY(0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translateY(-260%) scale(1)}}
+@keyframes yc-num{0%{opacity:0;transform:translateY(20%)}20%{opacity:1;transform:translateY(-40%)}100%{opacity:0;transform:translateY(-120%)}}
+@media (prefers-reduced-motion:reduce){.yc-actor img{animation:none}}

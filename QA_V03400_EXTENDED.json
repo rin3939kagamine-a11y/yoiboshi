@@ -1,0 +1,44 @@
+{
+  "errors": [],
+  "checks": [
+    {
+      "check": "flame description dialog visible",
+      "visible": true,
+      "bounds": {
+        "x": 108.5,
+        "y": 113.2890625,
+        "width": 450,
+        "height": 148.421875
+      },
+      "text": "笑顔の火種\n閉じる ×\n\n笑顔の火種：自分の攻撃を一時強化。想い：商店街のみんなを笑顔にしたい\n\n物語上の色：ピンク"
+    },
+    {
+      "check": "resonance chooser menu visible",
+      "bounds": {
+        "x": 467.984375,
+        "y": 132.5,
+        "width": 180,
+        "height": 111
+      },
+      "buttons": [
+        "2灯・二人に障壁",
+        "3灯・全員守護"
+      ]
+    },
+    {
+      "check": "54 battle-flame effect dispatch",
+      "total": 54,
+      "failed": []
+    },
+    {
+      "check": "Q1 legacy tutorial survives with AUTO",
+      "outcome": {
+        "view": "city",
+        "complete": true,
+        "phase": null,
+        "wave": null
+      },
+      "ticks": 71
+    }
+  ]
+}

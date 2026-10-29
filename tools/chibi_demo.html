@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ちびキャラ部品の確認</title>
+<link rel="stylesheet" href="../css/chibi_battle.css">
+<style>
+body{margin:0;background:#111a2b;color:#e7eef7;font-family:sans-serif;padding:12px}
+#stage{width:100%;max-width:800px;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#20294a,#4a3f6b 55%,#c9786a 78%,#1b2238 78.5%)}
+button{font:inherit;margin:8px 4px 0 0;padding:8px 14px;border-radius:999px;border:0;background:#f2b552;color:#2a1b00;font-weight:bold}
+</style></head><body>
+<div id="stage"></div>
+<div>
+<button id="a">攻撃</button><button id="h">被ダメ</button><button id="g">灯す</button><button id="l">灯火の状態</button><button id="k">戦闘不能/復帰</button><button id="f">枠</button><button id="s">倍速</button>
+</div>
+<p>※ index.html と同じ場所で開いて確認してください(tools/ から ../assets を読みます)。最後の1人(sena)は、ちびが無いときの代わりの表示の確認用です。</p>
+<script src="../js/chibi_battle.js"></script>
+<script>
+var members=[{id:'reina',color:'#7fb2ff'},{id:'akane',color:'#ff9a3c'},{id:'nagi',color:'#ff4d5e'},{id:'momoka',color:'#ff9ccf'},{id:'sena',color:'#ffe9a8',fallbackSrc:'../assets/ART_V2/chibi/milku_chibi.png'}];
+var cur='reina',lit=false,ko=false,sp=1;
+var c=YoiChibi.mount(document.getElementById('stage'),members,{dir:'../assets/ART_V2/chibi/',onSelect:function(id){cur=id;c.setActive(id)}});
+c.setActive(cur);
+a.onclick=function(){c.attack(cur).then(function(){})};
+h.onclick=function(){c.hurt(cur);c.popNumber(cur,'-'+(60+Math.floor(Math.random()*90)))};
+g.onclick=function(){c.glow(cur);c.popNumber(cur,'+灯','heal')};
+l.onclick=function(){lit=!lit;c.setLit(cur,lit)};
+k.onclick=function(){ko=!ko;ko?c.ko(cur):c.revive(cur)};
+var fr=false;f.onclick=function(){fr=!fr;c.showFrames(fr)};
+s.onclick=function(){sp=sp===1?2:1;c.setSpeed(sp);s.textContent=sp===1?'倍速':'等速'};
+</script></body></html>

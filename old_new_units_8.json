@@ -1,0 +1,130 @@
+[
+  {
+    "id": "hiyori_daily",
+    "person": "concept24",
+    "title": "パティスリー桃瀬の日常",
+    "rarity": "R",
+    "role": "healer",
+    "color": "#e9a4b7",
+    "s": [
+      "焼きたてのひと息",
+      "試作ケーキの差し入れ"
+    ],
+    "effects": [
+      "味方単体HP38回復",
+      "味方単体HP57回復"
+    ]
+  },
+  {
+    "id": "koyori_daily",
+    "person": "concept32",
+    "title": "看板娘の寄り道",
+    "rarity": "R",
+    "role": "attacker",
+    "color": "#e5a1ba",
+    "s": [
+      "シャッターチャンス",
+      "笑顔の連続ショット"
+    ],
+    "effects": [
+      "敵単体に基準威力34の攻撃",
+      "敵単体に基準威力51の攻撃"
+    ]
+  },
+  {
+    "id": "kirari_daily",
+    "person": "concept26",
+    "title": "商店街PR大使",
+    "rarity": "SR",
+    "role": "tank",
+    "color": "#e8c25e",
+    "s": [
+      "全力応援ガード",
+      "最後まで走りきる！"
+    ],
+    "effects": [
+      "味方単体に防護34付与",
+      "敵単体に基準威力51の攻撃"
+    ]
+  },
+  {
+    "id": "maron_daily",
+    "person": "concept27",
+    "title": "花言葉の贈りもの",
+    "rarity": "SR",
+    "role": "healer",
+    "color": "#c28da9",
+    "s": [
+      "朝露の花びら",
+      "やさしい花束"
+    ],
+    "effects": [
+      "味方単体HP38回復",
+      "味方単体HP57回復"
+    ]
+  },
+  {
+    "id": "suiran_daily",
+    "person": "concept10",
+    "title": "翠月の茶房",
+    "rarity": "SR",
+    "role": "support",
+    "color": "#81ada5",
+    "s": [
+      "翠月の茶香",
+      "茶葉の示す隙"
+    ],
+    "effects": [
+      "味方単体に防護34付与",
+      "敵単体に基準威力51の攻撃"
+    ]
+  },
+  {
+    "id": "cocoa_daily",
+    "person": "concept12",
+    "title": "星屑亭の素顔",
+    "rarity": "R",
+    "role": "attacker",
+    "color": "#8da3db",
+    "s": [
+      "営業スマイルの一手",
+      "本気の接客コンボ"
+    ],
+    "effects": [
+      "敵単体に基準威力34の攻撃",
+      "敵単体に基準威力51の攻撃"
+    ]
+  },
+  {
+    "id": "ageha_daily",
+    "person": "concept25",
+    "title": "夜色ネイル",
+    "rarity": "SR",
+    "role": "attacker",
+    "color": "#b07caa",
+    "s": [
+      "見抜く視線",
+      "夜色のフィニッシュ"
+    ],
+    "effects": [
+      "敵単体に基準威力34の攻撃",
+      "敵単体に基準威力51の攻撃"
+    ]
+  },
+  {
+    "id": "lilith_daily",
+    "person": "concept29",
+    "title": "黒薔薇館のリボン",
+    "rarity": "R",
+    "role": "tank",
+    "color": "#71618e",
+    "s": [
+      "黒薔薇の守護",
+      "リボンの結界"
+    ],
+    "effects": [
+      "味方単体に防護34付与",
+      "敵単体に基準威力51の攻撃"
+    ]
+  }
+]

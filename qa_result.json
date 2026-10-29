@@ -1,0 +1,824 @@
+{
+  "version": "0.26.1.0",
+  "base": "Yoiboshi_RESTART_v02600_local_FULL.zip",
+  "scope": "序章35行修正・名前入力追加版への追補",
+  "method": "node --check＋既存コード比較＋Chromium仮想ページで新規/旧セーブ・序章全行のクリック操作を実行",
+  "summary": {
+    "PASS": 157,
+    "FAIL": 0,
+    "NOT_RUN": 5
+  },
+  "checks": [
+    {
+      "name": "序章定義のJavaScript実行可能",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "序章35行",
+      "status": "PASS",
+      "detail": "35"
+    },
+    {
+      "name": "朱音が機材を一度だけ搬入",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "機材到着前に机に機材がない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "第2行：街からの相談手紙へ修正",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "機材到着後に観測器の確認",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "みるくが星灯を所有したような表現がない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "葵が灯火（ともしび）を説明",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "葵が灯す（ともす）を説明",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "非契約者は星灯所持者と同行時だけ戦闘可",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "契約者は単独で戦闘可",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "主人公の星灯がももか・みるくの灯火を初めてともす",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "ももかの灯火は商店街を笑顔にする気持ち",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "みるくの灯火はお茶と安心の気持ち",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "朱音・葵・ももか・みるくの全員が登場",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "出発直前の葵の台詞",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "出発連呼削除",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "序章選択肢は2択のまま",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "序章分岐で出発前に現地に行かない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "オープニングには灯火・灯すを説明しない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "オープニング→名前入力の処理維持",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "新規ゲーム初期4人編成維持",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "序章初回150星晶石とスキップ維持",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "セーブキー定義変更なし",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "セーブ移行処理変更なし",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "既存ロジック変更なし：js/investigation.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "既存ロジック変更なし：js/q12_cinematic.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "既存ロジック変更なし：js/q12_hd2d.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "既存ロジック変更なし：js/new_units_v026.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "既存ロジック変更なし：js/performance_v016.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/art.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/art_v2.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance7.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_shinonome.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_oldcafe.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_stage_lines.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_station.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_school.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_seaside.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_lighthouse.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_chapter2.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/romance_chapter2_late.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/expression_cues.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/audio.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/audio_trial.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/investigation.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/new_units_v026.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/performance_v016.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/q12_hd2d.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/q12_cinematic.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "構文検査：js/game.js",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：新規ゲームは黒いオープニング",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：名前入力へ遷移",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：名前のtrim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章が35行",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章立ち絵4人分の参照",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第01行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第02行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第03行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第04行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第05行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第06行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第07行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第08行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第09行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第10行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第11行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第12行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第13行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第14行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第15行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第16行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第17行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第18行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第19行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第20行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章2択表示",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第21行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第22行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第23行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第24行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第25行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第26行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第27行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第28行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第29行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第30行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第31行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第32行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第33行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第34行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章第35行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：序章全行を読み終えて地図へ",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：初回150石が1回付与",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：2人の灯火場面が表示",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：q1地図案内",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：本文に名前の置換",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：再読では初回報酬増えない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "390px：エラーなし",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "name": "1280px：新規ゲームは黒いオープニング",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：名前入力へ遷移",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：名前のtrim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章が35行",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章立ち絵4人分の参照",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第01行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第02行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第03行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第04行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第05行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第06行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第07行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第08行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第09行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第10行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第11行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第12行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第13行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第14行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第15行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第16行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第17行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第18行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第19行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第20行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章2択表示",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第21行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第22行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第23行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第24行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第25行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第26行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第27行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第28行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第29行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第30行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第31行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第32行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第33行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第34行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章第35行目に進める",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：序章全行を読み終えて地図へ",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：初回150石が1回付与",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：2人の灯火場面が表示",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：q1地図案内",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：本文に名前の置換",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：再読では初回報酬増えない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "1280px：エラーなし",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "name": "空欄名は主人公",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "序章スキップでも150星晶石",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "スキップ直後からq1案内へ",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "序章名前展開でもHTMLタグに変化しない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "HTMLエスケープでJSエラーなし",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "name": "既存セーブは起動時に保存JSON不変更",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "続きから序章・名前入力を勝手に開かない",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "つづきから保存JSON不変更",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "旧セーブの育成データ不変",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "旧セーブ実行エラーなし",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "name": "file:// 通常起動",
+      "status": "NOT_RUN",
+      "detail": "Chromiumの管理設定によるURLアクセス制限"
+    },
+    {
+      "name": "iPhone Safariでの実機確認",
+      "status": "NOT_RUN",
+      "detail": "この環境でiPhone実機を利用不可"
+    },
+    {
+      "name": "実画像のブラウザ相対パス読み込み",
+      "status": "NOT_RUN",
+      "detail": "直接スクリプト読み込み検証では外部画像参照不可"
+    },
+    {
+      "name": "q1敵ウェーブ全通し戦闘",
+      "status": "NOT_RUN",
+      "detail": "序章改修の範囲外。戦闘実機通し未実施"
+    },
+    {
+      "name": "q1〜q12の全手動通しプレイ",
+      "status": "NOT_RUN",
+      "detail": "序章以外の既存クエストは変更なし。通し試験は未実施"
+    }
+  ],
+  "note": "前回QAのうち「旧序章10行を変更せず保持」「31行」は新仕様により無効。今回版を再検証した記録のみを掲載。"
+}

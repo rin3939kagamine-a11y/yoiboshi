@@ -1,0 +1,233 @@
+{
+  "version": "0.24.1.0",
+  "base": "0.24.0.0",
+  "summary": {
+    "passed": 40,
+    "failed": 0,
+    "not_run": 4
+  },
+  "environment": "Chromium headless DOM scripting (scripts injected in original order, not local URL navigation); Node.js syntax check; ZIP comparison",
+  "items": [
+    {
+      "item": "スクリプト読込順",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "タイトル画面描画",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "ホーム初期表示",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "キャラクター画面表示",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "概要4項目",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "編成アンカー",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "一覧アンカー",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "所持状況フィルタ5個",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "ロールフィルタ5個",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "アタッカー絞り込み",
+      "result": "PASS",
+      "detail": "16/61"
+    },
+    {
+      "item": "ロール状態選択UI",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "ヒーラー絞り込み",
+      "result": "PASS",
+      "detail": "12/61"
+    },
+    {
+      "item": "サポーター絞り込み",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "タンク絞り込み",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "全ロールへ戻る",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "所持中絞り込み",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "未所持絞り込み",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "候補絞り込み",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "育成可能絞り込み（対象数一致）",
+      "result": "PASS",
+      "detail": "2/4"
+    },
+    {
+      "item": "フィルタでゲーム状態を変更しない",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "所持中ユニットを選択",
+      "result": "PASS",
+      "detail": "momoka_daily"
+    },
+    {
+      "item": "詳細画面描画",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "育成状況パネル",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "HP攻撃防御3欄",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "スキル欄",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "レベルゲージ",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "費用と所持コインの説明",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "Lv+1消費額は従来どおり",
+      "result": "PASS",
+      "detail": "{'lv': 1, 'gold': 1800, 'expected': 110}->{'lv': 2, 'gold': 1690}"
+    },
+    {
+      "item": "育成ゲージ更新",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "キャラクター詳細から戻れる",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "戻るボタン操作",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "モバイル2列サマリー",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "PCで4列サマリー",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "実行例外なし",
+      "result": "PASS",
+      "detail": "[]"
+    },
+    {
+      "item": "変更がUI関連3ファイルとQA記録だけ",
+      "result": "PASS",
+      "detail": "['css/styles.css', 'index.html', 'js/game.js', 'qa_result.json']"
+    },
+    {
+      "item": "既存画像・音声は不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "JavaScript構文（18ファイル）",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "出会いシナリオの外部ファイル不変",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "0.24.1.0表記",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "差分に旧ファイルの削除なし",
+      "result": "PASS",
+      "detail": ""
+    },
+    {
+      "item": "実際の音声再生・聞き比べは未実施",
+      "result": "NOT_RUN",
+      "detail": "今回の検証環境・検証範囲では実施していません"
+    },
+    {
+      "item": "iPhone実機での操作・レイアウト検証は未実施",
+      "result": "NOT_RUN",
+      "detail": "今回の検証環境・検証範囲では実施していません"
+    },
+    {
+      "item": "全クエストの手動通しプレイは未実施",
+      "result": "NOT_RUN",
+      "detail": "今回の検証環境・検証範囲では実施していません"
+    },
+    {
+      "item": "外部配布・成人向けライセンスの可否確認は今回の対象外",
+      "result": "NOT_RUN",
+      "detail": "今回の検証環境・検証範囲では実施していません"
+    }
+  ],
+  "limitations": "Chromiumで既存スクリプトを直接順次注入したDOM/操作テスト。file://での起動、iPhone実機、実音再生、全クエスト通しプレイは未検証。"
+}

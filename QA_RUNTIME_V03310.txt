@@ -1,0 +1,37 @@
+Q1 {
+  enabled: true,
+  wave: 0,
+  colors: [ 'green', 'red' ],
+  party: [ 'green', 'red', 'yellow', 'green' ],
+  trained: 2
+}
+END {
+  active: false,
+  view: 'home',
+  won: true,
+  breakSeen: undefined,
+  logs: undefined
+}
+TEST RESULTS {
+  'all JS loaded': true,
+  'investigation guide 3 locations': true,
+  'legacy tutorial unaffected': true,
+  'default legacy': true,
+  'special fixed q12': true,
+  'ready shows selector': true,
+  'ready initial legacy': true,
+  'selected turn visible': true,
+  'old save can remain legacy': true,
+  'turn battle starts': true,
+  'two-hit q1 stagger': true,
+  'q1 enemy0 matches starter': true,
+  'q1 enemy1 matches starter': true,
+  'q1 tutorial card visible': true,
+  'Q1 break at least once': true,
+  'Q1 win in manual simulation': true,
+  'legacy battle still selected': true,
+  'q12 demo remains legacy': true,
+  'grind remains legacy': true,
+  'special mode selector is fixed': true,
+  'state setting still persisted': true
+}

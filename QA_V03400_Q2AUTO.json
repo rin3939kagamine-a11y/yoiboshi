@@ -1,0 +1,12 @@
+{
+  "ticks": 50,
+  "done": {
+    "view": "city",
+    "quest": null,
+    "wave": null,
+    "round": null,
+    "log": null,
+    "complete": true
+  },
+  "errors": []
+}

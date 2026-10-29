@@ -1,0 +1,27 @@
+{
+  "checks": {
+    "fiveColors": true,
+    "unknownInitial": true,
+    "predictIntent": true,
+    "allEnemyHasStagger": true,
+    "weakDamageBoost": true,
+    "breakGaugeInitiallyZero": true,
+    "weakRevealed": true,
+    "weakLightReward": true,
+    "breakActivated": true,
+    "breakDamageBoost": true,
+    "breakOneMoreQueued": true,
+    "breakActionSkippedOnce": true,
+    "breakSecondActionAllowed": true,
+    "newWaveResetsBreak": true,
+    "investigatedRevealed": true,
+    "chargeDoesNotHit": true,
+    "chargePredictsHeavy": true,
+    "aoeDamagesMultiple": true,
+    "guardReducesIncoming": true,
+    "oldSaveDefault": true,
+    "specialsLegacy": true,
+    "storyColorHints": true
+  },
+  "errors": []
+}
