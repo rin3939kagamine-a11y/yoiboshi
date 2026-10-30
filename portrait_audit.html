@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宵星の契約者｜会話立ち絵・表情差分 QA（54人）</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,"Yu Gothic",Meiryo,sans-serif;color:#293650;background:#eff3fa}
+*{box-sizing:border-box}body{margin:0}header{background:#18243a;color:#fff;padding:17px 24px}
+header h1{margin:0 0 6px;font-size:21px}header p{margin:0;font-size:12px;color:#d1dcf0}
+main{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr);gap:16px;padding:16px;max-width:1400px;margin:auto}
+aside,section.panel{background:white;border:1px solid #dfe5f0;border-radius:15px;padding:14px}
+aside{position:sticky;top:10px;height:calc(100dvh - 120px);display:flex;flex-direction:column;gap:9px}
+input,button,select{font:inherit;padding:9px;border:1px solid #c9d5e7;border-radius:8px}
+button{cursor:pointer;background:white;color:#293650}
+button.active{background:#284c83;color:white}
+#people{display:grid;gap:5px;overflow:auto}#people button{text-align:left;font-size:12px;padding:8px 10px}
+h2{margin:0 0 9px;font-size:19px}.info{font-size:12px;color:#55627c;line-height:1.7}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.controls button{font-size:12px}
+#gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.face{border:1px solid #d6dcea;border-radius:13px;overflow:hidden;min-width:0}
+.face h3{font-size:13px;margin:0;padding:10px;background:#f4f6fa}
+.pair{display:grid;grid-template-columns:1fr 1fr}
+.sheet{position:relative;aspect-ratio:2/3;background-color:#fff;background-image:linear-gradient(45deg,#d8dde5 25%,transparent 25%),linear-gradient(-45deg,#d8dde5 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d8dde5 75%),linear-gradient(-45deg,transparent 75%,#d8dde5 75%);background-size:22px 22px;background-position:0 0,0 11px,11px -11px,-11px 0}
+.sheet img{height:100%;width:100%;display:block;object-fit:contain;object-position:center bottom;cursor:zoom-in}
+.sheet small{position:absolute;left:5px;top:5px;background:#14213bcc;color:#fff;padding:3px 5px;border-radius:4px;font-size:10px;pointer-events:none}
+.status{font-size:11px;padding:8px;min-height:40px}.error{color:#ac2842}.ok{color:#276b50}.warn{color:#9a5c12}
+#summary{margin:10px 0;padding:10px;border-radius:10px;background:#eff4fc;font-size:12px;line-height:1.6}
+#lightbox{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:1000;padding:24px}
+#lightbox.open{display:flex}#lightbox img{max-height:90vh;max-width:95vw;object-fit:contain}
+@media(max-width:900px){#gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){main{display:block;padding:9px}aside{position:static;height:auto;margin-bottom:10px}#people{display:flex;overflow-x:auto;gap:5px}#people button{white-space:nowrap}#gallery{grid-template-columns:1fr 1fr;gap:7px}.face h3{padding:7px}}
+</style>
+</head><body>
+<header><h1>宵星の契約者｜会話立ち絵の比較・検査</h1>
+<p>ゲーム本体のセーブには一切触れません。54人×6表情と上半身の背景透過・顔・髪・衣装を並べて確認する制作QAページです。</p></header>
+<main><aside><label for="find">人物を検索</label><input id="find" placeholder="momoka / akane / あかね…" autocomplete="off">
+<div id="people"></div></aside>
+<section class="panel"><h2 id="personTitle">読み込み中…</h2><p class="info">左＝現行（背景除去版）／右＝Ver.0.34.67.0（背景除去直前の比較基準）。チェック柄が透過部分です。画像をクリックすると拡大できます。白背景や輪郭の残りを確認してください。</p>
+<div class="controls"><button id="showall" class="active">6表情＋上半身</button><button id="shownormal">通常顔だけ</button><button id="showcast">会話専用キャラ</button><button id="copy">選択中の人物IDをコピー</button></div>
+<div id="summary"></div><div id="gallery"></div></section></main>
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="画像を拡大表示"><img alt=""><button style="position:absolute;right:14px;top:14px" id="exit">閉じる</button></div>
+<script>var ART_EXPRESSIONS={};function normalizeExpressionFace(v){return ['normal','smile','sad','pout','blush','surprise'].includes(v)?v:'normal'}</script>
+<script src="js/expression_art_v029.js?v=0.34.71.1"></script>
+<script src="js/art_v2.js?v=0.34.71.1"></script>
+<script src="js/portrait_fit_v031.js?v=0.34.71.1"></script>
+<script>
+(function(){
+'use strict';
+const older='https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/1cf7bdb582d4c36604260c7afd4802c1cc86eb6f/';
+const names={momoka:'桜井ももか',akane:'藤崎朱音',milku:'白石みるく',aoi:'瀬名葵',nagi:'白峰凪',chinatsu:'篠原千夏',reina:'黒瀬玲奈',concept17:'リコ',concept18:'莉子',concept19:'ノエル',concept20:'ミオ',concept22:'ゆめ',concept24:'ひより',concept25:'夜野あげは',concept27:'まろん'};
+const faces=['normal','smile','sad','pout','blush','surprise'];
+const cast={touko:'白鷺透子',touko_true:'白鷺透子・真の姿',sakuya:'朔夜',ibuki:'売人イブキ',haruka:'霧島ハルカ'};
+const ids=Object.keys(ART_EXPRESSIONS).sort((a,b)=>a.localeCompare(b));
+const source=document.getElementById('gallery'),nav=document.getElementById('people'),title=document.getElementById('personTitle');
+let selected='momoka',mode='all';
+function srcCurrent(id,face){return ART_EXPRESSIONS[id]&&ART_EXPRESSIONS[id][face]||''}
+function mk(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function cornerReport(img,node){
+ try{
+  const c=document.createElement('canvas');c.width=c.height=48;
+  const ctx=c.getContext('2d',{willReadFrequently:true});ctx.clearRect(0,0,48,48);ctx.drawImage(img,0,0,48,48);
+  const pix=ctx.getImageData(0,0,48,48).data;let transparent=0,corners=0,white=0;
+  for(let i=3;i<pix.length;i+=4)if(pix[i]<20)transparent++;
+  for(const [x,y]of [[0,0],[47,0],[0,47],[47,47]]){
+   const j=(y*48+x)*4;
+   if(pix[j+3]>245){corners++;if(pix[j]>240&&pix[j+1]>240&&pix[j+2]>240)white++}
+  }
+  const percent=Math.round(100*transparent/2304);
+  node.className='status '+(white>=2?'warn':'ok');
+  node.textContent=white>=2?'要確認：白い背景の可能性（角 '+white+'か所）': '読込OK／透過ピクセル '+percent+'%';
+ }catch(err){node.className='status warn';node.textContent='読込OK／透明度検査は実行できません'}
+}
+function addImage(p,src,label,analyze){
+ const wrap=mk('div','sheet');const im=mk('img');im.loading='lazy';im.decoding='async';im.alt=label;im.src=src;
+ const tag=mk('small','',label);wrap.append(im,tag);const status=mk('div','status','読み込み中…');p.append(wrap,status);
+ im.addEventListener('error',()=>{status.textContent='画像の読み込みに失敗';status.className='status error'});
+ im.addEventListener('load',()=>analyze?cornerReport(im,status):(status.textContent='読込OK／比較基準'));
+ im.addEventListener('click',()=>{const d=document.getElementById('lightbox');d.querySelector('img').src=im.src;d.classList.add('open')});
+}
+function group(titleText,current,previous){
+ const c=mk('div','face'),h=mk('h3','',titleText),pair=mk('div','pair');
+ const a=mk('div'),b=mk('div');addImage(a,current,'現行',true);addImage(b,previous,'比較',false);
+ pair.append(a,b);c.append(h,pair);source.append(c)
+}
+function render(){
+ source.replaceChildren();
+ let isCast=mode==='cast';
+ document.getElementById('showall').classList.toggle('active',mode==='all');
+ document.getElementById('shownormal').classList.toggle('active',mode==='normal');
+ document.getElementById('showcast').classList.toggle('active',isCast);
+ if(isCast){
+  title.textContent='会話専用キャラ・5種';
+  document.getElementById('summary').textContent='この5種類は表情差分324枚とは別の立ち絵を参照しています。';
+  Object.entries(cast).forEach(([id,label])=>{
+   const url='assets/ART_V2/story_cast/'+id+'_talk.webp';
+   group(label,url+'?v=0.34.71.1',older+url)
+  });
+  return;
+ }
+ const display=names[selected]||selected;title.textContent=display+'（'+selected+'）';
+ document.getElementById('summary').textContent='この人物の全6表情は同じ顔立ち・髪・衣装で揃っているかを比較してください。背景・顔の違いの自動判定はできないため、表示上の最終確認が必要です。';
+ for(const face of mode==='normal'?['normal']:faces){
+  const url=srcCurrent(selected,face);if(url)group(face,url,older+url.split('?')[0]);
+ }
+ const upper=ART_V2.upper_body[selected];
+ if(upper)group('上半身（通常）',upper,older+upper.split('?')[0]);
+}
+function list(){
+ nav.replaceChildren();const filter=document.getElementById('find').value.trim().toLowerCase();
+ ids.filter(id=>id.toLowerCase().includes(filter)||(names[id]||'').includes(filter)).forEach(id=>{
+  const btn=mk('button',id===selected?'active':'',(names[id]?names[id]+' / ':'')+id);
+  btn.addEventListener('click',()=>{selected=id;mode='all';list();render();window.scrollTo({top:0,behavior:'smooth'})});nav.append(btn);
+ });
+}
+document.getElementById('showall').onclick=()=>{mode='all';render()};
+document.getElementById('shownormal').onclick=()=>{mode='normal';render()};
+document.getElementById('showcast').onclick=()=>{mode='cast';render()};
+document.getElementById('copy').onclick=()=>{const msg=selected+'：会話画像の比較を確認';if(navigator.clipboard)navigator.clipboard.writeText(msg)};
+document.getElementById('find').oninput=list;
+document.getElementById('exit').onclick=()=>document.getElementById('lightbox').classList.remove('open');
+document.getElementById('lightbox').onclick=e=>{if(e.target.id==='lightbox')e.currentTarget.classList.remove('open')};
+if(ids.length!==54){title.textContent='画像一覧の読込エラー（'+ids.length+'人）';return;}
+list();render();
+})();
+</script></body></html>
