@@ -10,7 +10,7 @@
  const TALK=id=>`assets/ART_V2/story_cast/${id}_talk.webp`;
  const FACE=id=>`assets/ART_V2/face_icons/${id}.webp`;
  const BOSSES={
-  q12:{id:'sakuya',name:'朔夜',title:'黒い星灯の契約者',art:'assets/enemies/sakuya.webp',hp:2.0,
+  q12:{id:'sakuya',name:'朔夜',title:'黒い星灯の契約者',art:'assets/enemies/sakuya_battle.webp',hp:2.0,
    intro:'「ここまで来たのね、相談室。……いいわ。この檻ごと、あなたたちの灯を閉じ込めてあげる。」',
    hp75:'「その程度の灯で、私の星灯に届くと思った？」',
    hp50:'「……少しは、やるのね。なら、こちらも手加減はしない。」',
@@ -20,7 +20,7 @@
    ult:{name:'黒星の檻',warn:'朔夜の周りに黒い鎖が集まっていく……！',mul:1.8},
    retort:[['concept35','「楓を返して。……あなたの檻なんかに、負けない。」'],['you','「楓は必ず連れて帰る。」']],
    defeat:'「なぜ……私の星灯が、こんなところで……。」'},
-  q17:{id:'ibuki',name:'売人イブキ',title:'夜市の売人',art:'assets/enemies/ibuki.webp',hp:2.6,
+  q17:{id:'ibuki',name:'売人イブキ',title:'夜市の売人',art:'assets/enemies/ibuki_battle.webp',hp:2.6,
    intro:'「あはっ、来た来た。せっかくの夜市なんだから、あたしの小瓶も楽しんでってよ。」',
    hp75:'「やるじゃん。でもさ、本番はここからだよ？」',
    hp50:'「……ちょっと、本気で痛いんだけど。」',
@@ -30,7 +30,7 @@
    ult:{name:'紫煙の大売り出し',warn:'イブキが小瓶を一斉に掲げた……！',mul:1.6},
    retort:[['saki','「その小瓶で、どれだけの人の想いを売ったの。」'],['yuzu','「お姉ちゃんの声、もう奪わせない！」'],['you','「もうやめよう、イブキ。」']],
    defeat:'「……あーあ。割れちゃった。あたしの、全部。」'},
-  q24:{id:'haruka',name:'霧島 ハルカ',title:'仮面の契約者',art:'assets/enemies/haruka.webp',hp:2.5,
+  q24:{id:'haruka',name:'霧島 ハルカ',title:'仮面の契約者',art:'assets/enemies/plague_mask_a_battle.webp',phaseArt:'assets/enemies/plague_mask_b_battle.webp',hp:2.5,
    intro:'「せっかくのお祭りなんだから、もっと楽しもうよ。……ね、誰が本物か、当ててみて？」',
    hp75:'「あはは、見つかっちゃった。でも、まだまだ踊れるよ。」',
    hp50:'「……痛いなあ。そんなに必死になって、何を守ってるの？」',
@@ -73,7 +73,9 @@
  function overlay(cfg,label,line,after){
   closeOverlay();overlayOpen=true;
   const el=document.createElement('div');el.className='bd-overlay';el.setAttribute('role','dialog');
-  el.innerHTML=`<img class="bd-art" src="${TALK(cfg.id)}" alt=""><div class="bd-band"><small>${label}</small><strong>${cfg.name}</strong><p>${line}</p><em>タップで進む</em></div>`;
+  // Show battle art at full size; Haruka switches poses at the second phase.
+  const portrait=label.startsWith('第2形態')&&cfg.phaseArt?cfg.phaseArt:cfg.art;
+  el.innerHTML=`<img class="bd-art" src="${portrait}" alt=""><div class="bd-band"><small>${label}</small><strong>${cfg.name}</strong><p>${line}</p><em>タップで進む</em></div>`;
   const done=()=>{if(!el.isConnected)return;el.remove();overlayOpen=false;clearTimeout(overlayTimer);if(after)after();};
   el.addEventListener('click',done);document.body.appendChild(el);
   overlayTimer=setTimeout(done,4200);

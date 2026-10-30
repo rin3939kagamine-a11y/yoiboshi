@@ -31,7 +31,7 @@ const Q12HD=Object.freeze({
   return Math.max(1,Math.round(n*.78));
  },
  enemyFace(e){
-  if(e.kind==='boss')return '<img class="v025-foe-art" src="assets/enemies/sakuya.webp" alt="">';
+  if(e.kind==='boss')return '<img class="v025-foe-art" src="assets/enemies/sakuya_battle.webp" alt="">';
   if(e.kind==='cage')return '<img class="v025-cage-art" src="assets/enemies/echo_cage.webp" alt="">';
   return e.icon||'✧';
  },
