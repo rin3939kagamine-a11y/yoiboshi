@@ -120,11 +120,34 @@ const UNITS=[
  {id:'tsubaki_daily',person:'concept35',title:'伝承を追う足音',rarity:'R',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
  {id:'erika_daily',person:'concept34',title:'仮面の向こうの素顔',rarity:'R',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
  {id:'kaname_daily',person:'concept31',title:'夜明けに残る約束',rarity:'R',role:'attacker',color:'#80638f',s:['紫電の一閃','八年分の刃']},
- {id:'kaede_daily',person:'concept36',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
+ {id:'kaede_daily',person:'concept36',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']},
+ // v0.35.0.0: R廃止に伴い、第2章の3人にSRユニットを追加（Rの役割・技名を引き継ぐ）
+ {id:'tsubaki_work',person:'concept35',title:'伝承を追う足音',rarity:'SR',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
+ {id:'erika_work',person:'concept34',title:'仮面の向こうの素顔',rarity:'SR',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
+ {id:'kaede_work',person:'concept36',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
 UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028);
 const BYID=Object.fromEntries(UNITS.map(x=>[x.id,x]));
+// v0.35.0.0: Rレアリティを廃止。Rユニットは旧セーブの変換用に定義だけ残し、同じ人物のSRへ置き換える。
+const RETIRED_R_TO_SR=Object.freeze(Object.fromEntries(UNITS.filter(u=>u.rarity==='R'&&!u.id.endsWith('_trial')).map(u=>[u.id,(UNITS.find(v=>v.person===u.person&&v.rarity==='SR'&&!v.id.endsWith('_trial'))||{}).id]).filter(([,v])=>!!v)));
+const R2SR=id=>RETIRED_R_TO_SR[id]||id;
+const RARITIES=Object.freeze(['SR','SSR','UR']);
+function convertRetiredRSave(raw){
+ if(!raw||typeof raw!=='object'||!raw.owned||typeof raw.owned!=='object'||Array.isArray(raw.owned))return raw;
+ const out={...raw},owned={};
+ for(const [id,e] of Object.entries(raw.owned)){ if(!RETIRED_R_TO_SR[id])owned[id]=e; }
+ for(const [id,e] of Object.entries(raw.owned)){
+  const to=RETIRED_R_TO_SR[id]; if(!to||!e||typeof e!=='object')continue;
+  const cur=owned[to],num=(v,d=0)=>Number.isFinite(+v)?+v:d;
+  if(!cur){owned[to]={...e};continue;}
+  owned[to]={...cur,lv:Math.max(num(cur.lv,1),num(e.lv,1)),aff:Math.max(num(cur.aff),num(e.aff)),lb:Math.min(7,Math.max(num(cur.lb),num(e.lb))),copies:num(cur.copies)+num(e.copies)+1};
+ }
+ out.owned=owned;
+ if(Array.isArray(raw.party)){const seen=new Set();out.party=raw.party.map(id=>typeof id==='string'?R2SR(id):id).filter(id=>{if(seen.has(id))return false;seen.add(id);return true;});}
+ for(const k of ['selected','homeUnitId'])if(typeof raw[k]==='string')out[k]=R2SR(raw[k]);
+ return out;
+}
 
 const NEW_VISUAL_LABELS=Object.freeze({concept28:'ベージュボブ・白ドットワンピ',concept29:'黒白ツインテール',concept30:'ピンクショート・青レーシング水着',concept31:'黒髪紫メッシュ・ピンクゴシック',concept32:'ピンクベージュボブ・黒ジャンパースカート',concept33:'金髪・黄色水色ギンガム水着',concept34:'金髪・黒服（マスクなし）',concept35:'黒髪ロング・赤カーデ花柄ワンピ',concept36:'長黒髪・赤カーデ花柄ドレス',concept18:'黒レース長髪',concept19:'ブルーフリルメイド',concept20:'青黒ツートン猫耳',concept21:'ネオングリーン',concept22:'茶髪ウェーブ花柄',concept23:'黒髪ゴシックハーネス',concept24:'ピンクボブ',concept25:'茶髪ブラックゴス',concept26:'黄色アイドル',concept27:'ピンクサイドポニー'});
 const SHINONOME_HERO_IDS=Object.freeze(['concept24','concept32','concept26','concept27']);
@@ -150,7 +173,9 @@ function candidateDisplayArt(id){if(candidatePreviewPose==='mask'&&ART_V2.full_b
 const RARITY_ART_POLICY=Object.freeze({R:'普段の立ち絵・背景なし',SR:'衣装違いの立ち絵・背景なし',SSR:'背景つきの一枚絵',UR:'特別衣装・演出の動的構図一枚絵'});
 // v0.34.47.0: ももかのSR・SSR・UR（2026-10-18合格分）を登録
 const MOMOKA_UNIT_ARTWORK_V03447=Object.freeze({momoka_work:{portrait:'assets/UNIT_ART/momoka_work.webp'},momoka_sky:{scene:'assets/UNIT_ART/momoka_sky.webp'},momoka_star:{scene:'assets/UNIT_ART/momoka_star.webp'}});
-const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...MOMOKA_UNIT_ARTWORK_V03447});
+// v0.35.0.0: 第2章3人のSR
+const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNIT_ART/tsubaki_work.webp'},erika_work:{portrait:'assets/UNIT_ART/erika_work.webp'},kaede_work:{portrait:'assets/UNIT_ART/kaede_work.webp'}});
+const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035});
 function unitArt(u,kind='portrait'){
  const config=UNIT_ARTWORK[u.id]||{};
  return (kind==='scene'&&config.scene)||config.portrait||(kind==='portrait'?characterPortrait(u.person):characterArt(u.person));
@@ -160,35 +185,34 @@ function unitCardArt(u){return unitHasScene(u)?unitArt(u,'scene'):unitArt(u,'por
 function unitHasScene(u){return !!UNIT_ARTWORK[u.id]?.scene&&(u.rarity==='SSR'||u.rarity==='UR')}
 function homeUnit(personId){
  const owned=UNITS.filter(u=>u.person===personId&&visibleUnitV026(u)&&data(u.id));
- return owned.find(u=>u.id===S.homeUnitId)||owned.find(u=>u.id===S.selected)||owned.find(u=>u.rarity==='R')||owned[0]||null;
+ return owned.find(u=>u.id===S.homeUnitId)||owned.find(u=>u.id===S.selected)||owned.find(u=>u.rarity==='SR')||owned[0]||null;
 }
 function setHomeUnit(id){const u=unit(id);if(!u||!visibleUnitV026(u)||!data(id)||u.person!==lobbySelected)return;S.homeUnitId=id;persist();render()}
 
-const RATE={R:50,SR:30,SSR:15,UR:5}; // Trial-only balance; not a final approved drop-rate specification.
+const RATE={SR:80,SSR:15,UR:5}; // v0.35.0.0: R廃止。R分50%は暫定でSRへ。確率はユーザー決定待ち。
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
-const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
+const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!RETIRED_R_TO_SR[u.id]&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
 const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['concept35'],erika:['concept34'],kaname:['concept31'],kaede:['concept36'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}
 function kanameSRUnlocked(save=S){return !!save?.bondRead?.concept31?.[1]}
-function visibleUnitV026(u,save=S){return !!u&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(u.id!=='kaname_work'||kanameSRUnlocked(save))}
+function visibleUnitV026(u,save=S){return !!u&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))}
 function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='concept35'?!!save.tsubakiMet:u.person==='concept34'?!!save.erikaMet:u.person==='concept31'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
 function availableNormalPool(save=S){return NORMAL_GACHA_POOL.filter(u=>recruitEligibleUnit(u,save))}
 function pickupActive(group,save=S){const start=save.pickupStartDay?.[group];return !!(DISTRICT_GACHA_IDS[group]&&Number.isSafeInteger(start)&&start>=1&&save.love?.day>=start&&save.love.day<start+PICKUP_DAYS)}
 function activePickupId(save=S){return ['chapter4_city','chapter3_port','kaede','kaname','erika','tsubaki','lighthouse','seaside','school_new','station','oldcafe','shinonome'].find(group=>pickupActive(group,save))||'normal'}
 function pickupUnitWeight(u,group){return group!=='normal'&&pickupActive(group)&&DISTRICT_GACHA_IDS[group]?.includes(u.person)?PICKUP_WEIGHT:1}
 function setGachaMode(mode){if(mode!=='normal'&&!pickupActive(mode))return;gachaMode=mode;render()}
-function ticketEligibleUnits(save=S){return availableNormalPool(save).filter(u=>u.rarity==='R'&&HERO_IDS.includes(u.person)&&!heroineOwned(u.person,save))}
+function ticketEligibleUnits(save=S){return availableNormalPool(save).filter(u=>u.rarity==='SR'&&HERO_IDS.includes(u.person)&&!heroineOwned(u.person,save))}
 function grantTicketHero(id){if((S.heroSelectTickets||0)<1)return toast('選択チケットがありません');const choices=ticketEligibleUnits(),u=choices.find(x=>x.id===id);if(!u)return toast('現在の募集対象で未所持のヒロインだけを選べます');S.owned[u.id]={lv:1,aff:heroAff(u.person),lb:0,copies:0};S.heroSelectTickets--;S.selected=u.id;persist();render();toast(`${PEOPLE[u.person].name}が仲間になりました。交流が解放されました`)}
 function pickupStarted(group){if(!DISTRICT_GACHA_IDS[group])return;S.pickupStartDay[group]=S.love.day;gachaMode=group}
 
 function rollNormalGachaRarity(rand=Math.random()){
  const nextPity=(S.gachaPity||0)+1,nextSR=(S.gachaSrStreak||0)+1;
- let value=rand*100,rar=value<RATE.R?'R':value<RATE.R+RATE.SR?'SR':value<RATE.R+RATE.SR+RATE.SSR?'SSR':'UR';
+ let value=rand*100,rar=value<RATE.SR?'SR':value<RATE.SR+RATE.SSR?'SSR':'UR';
  if(nextPity>=GACHA_CONFIG.UR_PITY)rar='UR';
- else if(nextSR>=GACHA_CONFIG.SR_GUARANTEE_EVERY&&rar==='R')rar='SR';
  S.gachaPity=rar==='UR'?0:nextPity;
- S.gachaSrStreak=rar==='R'?nextSR:0;
+ S.gachaSrStreak=0;
  return rar;
 }
 function drawNormalGachaUnit(rand=Math.random()){
@@ -307,7 +331,7 @@ function questUnlocked(q){
  return !intro||!!S.storyFlags?.[intro];
 }
 
-const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_daily:{lv:1,aff:0,lb:0,copies:0},milku_daily:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_daily:{lv:1,aff:0,lb:0,copies:0},aoi_daily:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_daily','milku_daily','akane_daily','aoi_daily'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_daily',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_daily',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
+const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
 // SaveStore deliberately reads/writes only KEY. OLD_KEY remains strictly read-only for backup.
 const SaveStore=Object.freeze({
   key:KEY,
@@ -668,6 +692,7 @@ function romanceNotebook(){const l=loveState();return `${heading('MEMORIES / DIA
 
 function romanceHeroAvailableFromSave(id,save){return HERO_IDS.includes(id)&&heroineOwned(id,save)&&heroineStoryRevealed(id,save)}
 function migrateSave(raw){
+  raw=convertRetiredRSave(raw);
   const defaults=fresh();
   if(!isRecord(raw)||!isRecord(raw.owned))return defaults;
   const result={...defaults,...raw}; // Preserve extensions and unknown fields for forward compatibility.
@@ -845,7 +870,7 @@ function requestNewGame(){titleConfirm=!!(S.gameStarted&&SaveStore.read()!==null
 function cancelNewGame(){titleConfirm=false;render()}
 function startNewGame(){gachaMode='normal';const audio=validAudioSettings(S.audio);const next=fresh();next.audio=audio;next.gameStarted=true;
  next.owned.akane_daily={lv:1,aff:0,lb:0,copies:0};next.owned.aoi_daily={lv:1,aff:0,lb:0,copies:0};
- next.party=['momoka_daily','milku_daily','akane_daily','aoi_daily'];
+ next.party=['momoka_work','milku_work','akane_work','aoi_work'];
  next.akaneTrial=true;next.aoiTrial=true;next.storyFlags.__fleshout_v03413=true;next.onboarding={enabled:true,stage:'opening',seen:{}};S=next;onboardingSuppressed=false;openingStep=0;titleConfirm=false;titleSettingsOpen=false;interruptConfirm=false;questActionInProgress=false;romanceSelectionInProgress=false;storySession=null;dialog=null;pendingStory=null;citySheetQuest='';battle=null;persist();view='opening';render()}
 // v0.26.1.0: a fresh save alone enters this opening. Continue never replays it.
 const OPENING_LINES=Object.freeze([
@@ -1568,7 +1593,7 @@ let rosterEditSlot=0, rosterRarityFilter='all', rosterPickerOpen=false, rosterCo
 function selectRosterSlot(index){if(!Number.isInteger(index)||index<0||index>3)return;rosterEditSlot=index;rosterPickerOpen=true;render();}
 function closeRosterPicker(){rosterPickerOpen=false;render();}
 function toggleRosterCollection(){rosterCollectionOpen=!rosterCollectionOpen;render();}
-function changeRosterRarityFilter(value){if(!['all','R','SR','SSR','UR'].includes(value))return;rosterRarityFilter=value;render();}
+function changeRosterRarityFilter(value){if(!['all','SR','SSR','UR'].includes(value))return;rosterRarityFilter=value;render();}
 function assignRosterOwnedUnit(id){if(!data(id)||!unit(id))return toast('未所持のユニットは編成できません');rosterPickerOpen=false;return setSlot(rosterEditSlot,id);}
 
 const isConcept=personId=>personId.startsWith('concept')&&!DISTRICT_HERO_IDS.includes(personId);
@@ -1881,7 +1906,7 @@ function skillRank(id){return Math.max(0,(data(id)?.lb||0)-3)}
 function roster(){
  const owned=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));
  const roleChoices=[['all','すべて'],['attacker','アタッカー'],['tank','タンク'],['healer','ヒーラー'],['support','サポーター']];
- const rarityChoices=['all','R','SR','SSR','UR'];
+ const rarityChoices=['all','SR','SSR','UR'];
  const rarityOrder={UR:0,SSR:1,SR:2,R:3};
  const shown=owned.filter(u=>(rosterRoleFilter==='all'||u.role===rosterRoleFilter)&&(rosterRarityFilter==='all'||u.rarity===rosterRarityFilter))
    .sort((a,b)=>{const ai=S.party.includes(a.id)?0:1,bi=S.party.includes(b.id)?0:1;return ai-bi || (rarityOrder[a.rarity]??9)-(rarityOrder[b.rarity]??9) || (data(b.id)?.lv||1)-(data(a.id)?.lv||1) || person(a).name.localeCompare(person(b).name,'ja');});
@@ -1968,7 +1993,7 @@ function selectTrainingUnit(id){
 }
 function trainingSetFilter(kind,value){
  if(kind==='role'&&['all','attacker','tank','healer','support'].includes(value))trainingRoleFilter=value;
- else if(kind==='rarity'&&['all','R','SR','SSR','UR'].includes(value))trainingRarityFilter=value;
+ else if(kind==='rarity'&&['all','SR','SSR','UR'].includes(value))trainingRarityFilter=value;
  else return;
  render();
 }
@@ -1978,7 +2003,7 @@ function trainingPage(){
  owned.sort((a,b)=>(order[a.rarity]??4)-(order[b.rarity]??4)||((data(b.id)?.lv||0)-(data(a.id)?.lv||0))||person(a).name.localeCompare(person(b).name,'ja'));
  const selected=owned.find(u=>u.id===trainingSelectedUnit)||owned.find(u=>u.id===S.selected)||owned.find(u=>S.party.includes(u.id))||owned[0];
  const roles=[['all','すべて'],['attacker','アタッカー'],['tank','タンク'],['healer','ヒーラー'],['support','サポーター']];
- const rarities=['all','R','SR','SSR','UR'];
+ const rarities=['all','SR','SSR','UR'];
  const filt=(kind,rows,current)=>rows.map(([key,text])=>`<button type="button" class="train-filter ${current===key?'active':''}" aria-pressed="${current===key}" onclick="trainingSetFilter('${kind}','${key}')">${text}</button>`).join('');
  const shown=owned.filter(u=>(trainingRoleFilter==='all'||u.role===trainingRoleFilter)&&(trainingRarityFilter==='all'||u.rarity===trainingRarityFilter));
  const cards=shown.map(u=>{const d=data(u.id);return `<button type="button" class="train-unit ${u.id===selected?.id?'active':''}" aria-pressed="${u.id===selected?.id}" onclick="selectTrainingUnit('${u.id}')"><span class="train-unit-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" loading="lazy" alt=""></span><span class="train-unit-label"><b>${esc(person(u).name)}</b><span><em class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</em> Lv.${d.lv} · ${ROLES[u.role].name}</span><small>${esc(u.title)}</small></span></button>`}).join('');
@@ -2079,16 +2104,16 @@ function pickupMarkup(){
 }
 function recruitmentLineupMarkup(){
  const pool=availableNormalPool();
- const rarities=['UR','SSR','SR','R'];
+ const rarities=['UR','SSR','SR'];
  return `<details class="recruit-directory gacha-v030-directory"><summary>募集可能ユニット <small>${pool.length}体・タップして確認</small></summary><div class="directory-content"><p class="gacha-v030-small-note">現在のストーリー進行で、通常募集から排出されるユニットです。ピックアップ中もこの対象から抽選されます。</p>${rarities.map(rarity=>{const group=pool.filter(u=>u.rarity===rarity);return group.length?`<section class="gacha-v030-rarity-block"><h4>${rarity} <small>${group.length}体</small></h4><div class="gacha-v030-unit-grid">${group.map(u=>`<div class="gacha-v030-unit-item"><img loading="lazy" src="${characterIcon(u.person)}" alt=""><span><b>${esc(person(u).name)}</b><small>${esc(u.title)}</small></span><em>${u.rarity}</em></div>`).join('')}</div></section>`:''}).join('')}</div></details>`;
 }
 function recruitmentDetailsMarkup(){
- return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${['R','SR','SSR','UR'].map(r=>`<div><strong>${r}</strong><b>${RATE[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定、SR以上は${GACHA_CONFIG.SR_GUARANTEE_EVERY}回以内に確定。ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。現在の確率は試遊用の暫定設定です。</p><p class="gacha-v030-small-note">ガチャの確率・天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
+ return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${RARITIES.map(r=>`<div><strong>${r}</strong><b>${RATE[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定。すべてSR以上です。ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。現在の確率は試遊用の暫定設定です。</p><p class="gacha-v030-small-note">ガチャの確率・天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
 }
 
 function nagiTrialBanner(){return S.quests.q6?.complete?`<div class="gachahero nagi-banner"><img src="${characterPortrait('nagi')}" alt="白峰 凪"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>白峰 凪 ／ 紅の境界</h2><p>寡黙な外部協力者が、新たに募集ラインナップへ。<br>初回限定のお試し募集で、すぐに編成・交流を体験できます。</p><button class="btn nagi-trial" ${S.nagiTrial?'disabled':''} onclick="trialNagiRecruit()">${S.nagiTrial?'お試し募集済み':'凪の無料お試し募集（1回限り）'}</button></div></div>`:''}
 function gacha(){
- return `${heading('RECRUITMENT / GACHA','キャラクター募集','募集ボタンと提供内容を分けて、必要な情報だけ開けるようにしました。')}${pickupMarkup()}${summonHero()}${drawResults.length?`<div class="section"><h3>直近の募集結果</h3><small>${drawResults.length}件</small></div><div class="resultgrid">${drawResults.map((r,i)=>{const u=unit(r.id);return `<div class="pullcard" style="animation-delay:${Math.min(8,i)*85}ms"><img src="${unitArt(u,'scene')}" class="${unitHasScene(u)?'unit-scene-art':''}"><b>${u.rarity}　${person(u).name}</b><small>${u.title}<br>${r.isCopy?'重複＋1':'新加入'}<br>${esc(skillDescription(u,0,skillRank(u.id)))}<br>${esc(skillDescription(u,1,skillRank(u.id)))}<br>特性：${esc(passiveDescription(u))}</small></div>`}).join('')}</div>`:''}<div class="gacha-v030-tools" aria-label="募集の詳細メニュー">${recruitmentDetailsMarkup()}${recruitmentLineupMarkup()}<details class="recruit-directory gacha-v030-directory"><summary>初回限定・ヒロイン選択チケット <small>残り ${S.heroSelectTickets||0}枚</small></summary><div class="directory-content">${ticketSelectMarkup()}</div></details>${VISUAL_CANDIDATES.length?`<details class="recruit-directory gacha-v030-directory"><summary>ビジュアル候補のお試し <small>${VISUAL_CANDIDATES.length}人</small></summary><div class="directory-content">${candidateShowcase()}</div></details>`:''}<details class="recruit-directory"><summary>既存キャラクターの個別お試し募集</summary><div class="directory-content"><div class="gachahero reina-banner"><img src="${characterPortrait('reina')}" alt="黒瀬 玲奈のネイビーショートジャケットとグレーカーゴパンツ"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>黒瀬 玲奈 ／ 静かな闘志</h2><p>宵星相談室の現場調査スタッフ。<br>穏やかだが負けず嫌いなアタッカーです。</p><button class="btn reina-trial" ${S.reinaTrial?'disabled':''} onclick="trialReinaRecruit()">${S.reinaTrial?'玲奈のお試し募集済み':'玲奈の無料お試し募集（1回限り）'}</button></div></div><div class="gachahero akane-banner"><img src="${characterPortrait('akane')}" alt="藤崎 朱音のオレンジジャケットと黒カーゴパンツ"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>藤崎 朱音 ／ 街を守るオレンジの盾</h2><p>市役所の防災・避難支援担当。<br>みんなの盾となるタンクです。</p><button class="btn akane-trial" ${S.akaneTrial||!!data('akane_daily')?'disabled':''} onclick="trialAkaneRecruit()">${S.akaneTrial||!!data('akane_daily')?'朱音のお試し募集済み':'朱音の無料お試し募集（1回限り）'}</button></div></div><div class="gachahero aoi-banner"><img src="${characterPortrait('aoi')}" alt="瀬名 葵の白Vネックブラウスとダークパンツ"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>瀬名 葵 ／ 相談室のやすらぎ</h2><p>宵星相談室の正式スタッフ。<br>味方の救護を担うヒーラーです。</p><button class="btn aoi-trial" ${S.aoiTrial||!!data('aoi_daily')?'disabled':''} onclick="trialAoiRecruit()">${S.aoiTrial||!!data('aoi_daily')?'葵のお試し募集済み':'葵の無料お試し募集（1回限り）'}</button></div></div><div class="gachahero chinatsu-banner"><img src="${characterPortrait('chinatsu')}" alt="篠原 千夏の初期衣装"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>篠原 千夏 ／ 街角の頼れる味方</h2><p>街で活躍する気さくな外部協力者。<br>サポーターとして防護・強化・妨害を試せます。</p><button class="btn chinatsu-trial" ${S.chinatsuTrial?'disabled':''} onclick="trialChinatsuRecruit()">${S.chinatsuTrial?'千夏のお試し募集済み':'千夏の無料お試し募集（1回限り）'}</button></div></div>${nagiTrialBanner()}</div></details></div>`;
+ return `${heading('RECRUITMENT / GACHA','キャラクター募集','募集ボタンと提供内容を分けて、必要な情報だけ開けるようにしました。')}${pickupMarkup()}${summonHero()}${drawResults.length?`<div class="section"><h3>直近の募集結果</h3><small>${drawResults.length}件</small></div><div class="resultgrid">${drawResults.map((r,i)=>{const u=unit(r.id);return `<div class="pullcard" style="animation-delay:${Math.min(8,i)*85}ms"><img src="${unitArt(u,'scene')}" class="${unitHasScene(u)?'unit-scene-art':''}"><b>${u.rarity}　${person(u).name}</b><small>${u.title}<br>${r.isCopy?'重複＋1':'新加入'}<br>${esc(skillDescription(u,0,skillRank(u.id)))}<br>${esc(skillDescription(u,1,skillRank(u.id)))}<br>特性：${esc(passiveDescription(u))}</small></div>`}).join('')}</div>`:''}<div class="gacha-v030-tools" aria-label="募集の詳細メニュー">${recruitmentDetailsMarkup()}${recruitmentLineupMarkup()}<details class="recruit-directory gacha-v030-directory"><summary>初回限定・ヒロイン選択チケット <small>残り ${S.heroSelectTickets||0}枚</small></summary><div class="directory-content">${ticketSelectMarkup()}</div></details>${VISUAL_CANDIDATES.length?`<details class="recruit-directory gacha-v030-directory"><summary>ビジュアル候補のお試し <small>${VISUAL_CANDIDATES.length}人</small></summary><div class="directory-content">${candidateShowcase()}</div></details>`:''}<details class="recruit-directory"><summary>既存キャラクターの個別お試し募集</summary><div class="directory-content"><div class="gachahero reina-banner"><img src="${characterPortrait('reina')}" alt="黒瀬 玲奈のネイビーショートジャケットとグレーカーゴパンツ"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>黒瀬 玲奈 ／ 静かな闘志</h2><p>宵星相談室の現場調査スタッフ。<br>穏やかだが負けず嫌いなアタッカーです。</p><button class="btn reina-trial" ${S.reinaTrial?'disabled':''} onclick="trialReinaRecruit()">${S.reinaTrial?'玲奈のお試し募集済み':'玲奈の無料お試し募集（1回限り）'}</button></div></div><div class="gachahero akane-banner"><img src="${characterPortrait('akane')}" alt="藤崎 朱音のオレンジジャケットと黒カーゴパンツ"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>藤崎 朱音 ／ 街を守るオレンジの盾</h2><p>市役所の防災・避難支援担当。<br>みんなの盾となるタンクです。</p><button class="btn akane-trial" ${S.akaneTrial||!!data(R2SR('akane_daily'))?'disabled':''} onclick="trialAkaneRecruit()">${S.akaneTrial||!!data(R2SR('akane_daily'))?'朱音のお試し募集済み':'朱音の無料お試し募集（1回限り）'}</button></div></div><div class="gachahero aoi-banner"><img src="${characterPortrait('aoi')}" alt="瀬名 葵の白Vネックブラウスとダークパンツ"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>瀬名 葵 ／ 相談室のやすらぎ</h2><p>宵星相談室の正式スタッフ。<br>味方の救護を担うヒーラーです。</p><button class="btn aoi-trial" ${S.aoiTrial||!!data(R2SR('aoi_daily'))?'disabled':''} onclick="trialAoiRecruit()">${S.aoiTrial||!!data(R2SR('aoi_daily'))?'葵のお試し募集済み':'葵の無料お試し募集（1回限り）'}</button></div></div><div class="gachahero chinatsu-banner"><img src="${characterPortrait('chinatsu')}" alt="篠原 千夏の初期衣装"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>篠原 千夏 ／ 街角の頼れる味方</h2><p>街で活躍する気さくな外部協力者。<br>サポーターとして防護・強化・妨害を試せます。</p><button class="btn chinatsu-trial" ${S.chinatsuTrial?'disabled':''} onclick="trialChinatsuRecruit()">${S.chinatsuTrial?'千夏のお試し募集済み':'千夏の無料お試し募集（1回限り）'}</button></div></div>${nagiTrialBanner()}</div></details></div>`;
 }
 
 function previewRecruit(id){
@@ -2114,30 +2139,30 @@ function trialNagiRecruit(){
   if(S.nagiTrial)return toast('お試し募集は完了しています');
   // Provisional, non-monetized onboarding gacha only. One new version, no rerolls.
   S.nagiTrial=true;
-  const id='nagi_dusk',d=data(id);
+  const id=R2SR('nagi_dusk'),d=data(id);
   if(d){d.copies++;drawResults=[{id,isCopy:true}]}else{S.owned[id]={lv:1,aff:isHero(unit(id)?.person)?heroAff(unit(id).person):0,lb:0,copies:0};drawResults=[{id,isCopy:false}]}
   S.selected=id;S.pulls++;persist();render();toast('新しい仲間・白峰 凪が加入しました');
 }
 function trialReinaRecruit(){
  if(S.reinaTrial)return toast('玲奈のお試し募集は完了しています');
  S.reinaTrial=true;
- const id='reina_daily',d=data(id);
+ const id=R2SR('reina_daily'),d=data(id);
  if(d){d.copies++;drawResults=[{id,isCopy:true}]}
  else{S.owned[id]={lv:1,aff:isHero(unit(id)?.person)?heroAff(unit(id).person):0,lb:0,copies:0};drawResults=[{id,isCopy:false}]}
  S.selected=id;S.pulls++;persist();render();toast('新しい仲間・黒瀬 玲奈が加入しました');
 }
 function trialAkaneRecruit(){
- if(S.akaneTrial||data('akane_daily'))return toast('朱音は加入済みです。お試し募集はできません');
+ if(S.akaneTrial||data(R2SR('akane_daily')))return toast('朱音は加入済みです。お試し募集はできません');
  S.akaneTrial=true;
- const id='akane_daily',d=data(id);
+ const id=R2SR('akane_daily'),d=data(id);
  if(d){d.copies++;drawResults=[{id,isCopy:true}]}
  else{S.owned[id]={lv:1,aff:isHero(unit(id)?.person)?heroAff(unit(id).person):0,lb:0,copies:0};drawResults=[{id,isCopy:false}]}
  S.selected=id;S.pulls++;persist();render();toast('新しい仲間・藤崎 朱音が加入しました');
 }
 function trialAoiRecruit(){
- if(S.aoiTrial||data('aoi_daily'))return toast('葵は加入済みです。お試し募集はできません');
+ if(S.aoiTrial||data(R2SR('aoi_daily')))return toast('葵は加入済みです。お試し募集はできません');
  S.aoiTrial=true;
- const id='aoi_daily',d=data(id);
+ const id=R2SR('aoi_daily'),d=data(id);
  if(d){d.copies++;drawResults=[{id,isCopy:true}]}
  else{S.owned[id]={lv:1,aff:isHero(unit(id)?.person)?heroAff(unit(id).person):0,lb:0,copies:0};drawResults=[{id,isCopy:false}]}
  S.selected=id;S.pulls++;persist();render();toast('新しい仲間・瀬名 葵が加入しました');
@@ -2145,7 +2170,7 @@ function trialAoiRecruit(){
 function trialChinatsuRecruit(){
  if(S.chinatsuTrial)return toast('千夏のお試し募集は完了しています');
  S.chinatsuTrial=true;
- const id='chinatsu_daily',d=data(id);
+ const id=R2SR('chinatsu_daily'),d=data(id);
  if(d){d.copies++;drawResults=[{id,isCopy:true}]}
  else{S.owned[id]={lv:1,aff:isHero(unit(id)?.person)?heroAff(unit(id).person):0,lb:0,copies:0};drawResults=[{id,isCopy:false}]}
  S.selected=id;S.pulls++;persist();render();toast('新しい仲間・篠原 千夏が加入しました');
@@ -2229,7 +2254,7 @@ function chat(id){const d=data(id);if(!d)return;
  persist();render();toast('親密度が上がりました ♡');}
 function episode(id,i){
  if(isHero(unit(id)?.person))return openBondEpisode(unit(id).person,i);
-  if(id==='reina_daily'){
+  if(id===R2SR('reina_daily')){
     const d=data(id),req=[0,30,60][i];if(!d||i>2||d.aff<req)return;
     const parts=[
       '現場調査の資料を整理していた玲奈が、こちらに目を向ける。\n「気になる記録があります。一緒に見てもらえますか？」\n静かな声の奥に、確かな好奇心が感じられた。',
@@ -2237,7 +2262,7 @@ function episode(id,i){
       '任務が終わった帰り道、玲奈は少しだけ歩調を緩めた。\n「今日はあなたのおかげで頑張れました。でも次は、私ももっと力になります」\nその言葉には静かな決意が宿っていた。'
     ];dialog={title:'黒瀬 玲奈・個別エピソード（試作）',message:parts[i]};render();return;
   }
-  if(id==='akane_daily'){
+  if(id===R2SR('akane_daily')){
     const d=data(id),req=[0,30,60][i];if(!d||i>2||d.aff<req)return;
     const parts=[
       '防災倉庫で、朱音が備品の点検をしていた。\n「困った人がいたら、まず自分が動かなくちゃ！」\nその声に迷いはなかった。',
@@ -2246,7 +2271,7 @@ function episode(id,i){
     ];dialog={title:'藤崎 朱音・個別エピソード（試作）',message:parts[i]};render();return;
   }
 
-  if(id==='aoi_daily'){
+  if(id===R2SR('aoi_daily')){
     const d=data(id),req=[0,30,60][i];if(!d||i>2||d.aff<req)return;
     const parts=[
       '相談室の机に、葵が小さな救護用品を並べている。\n「困ったときは、遠慮せず声をかけてくださいね」\n丁寧な言葉に、肩の力が少し抜けた。',
@@ -2255,7 +2280,7 @@ function episode(id,i){
     ];dialog={title:'瀬名 葵・個別エピソード（試作）',message:parts[i]};render();return;
   }
 
-  if(id==='chinatsu_daily'){
+  if(id===R2SR('chinatsu_daily')){
     const d=data(id),req=[0,30,60][i];if(!d||i>2||d.aff<req)return;
     const parts=[
       '調査の帰り、千夏は相談室に立ち寄った。\n「お疲れ！ 頑張ったね。何かあったら、いつでも声をかけて」\n笑顔につられて、部屋の空気が少しやわらいだ。',
@@ -2263,7 +2288,7 @@ function episode(id,i){
       '調査が長引いた夜。最後まで残っていた千夏が温かい飲み物を差し出す。\n「ほら、ひと休み。明日はみんなで考えよう」\nその明るさに、何度も救われてきた気がする。'
     ];dialog={title:'篠原 千夏・個別エピソード（試作）',message:parts[i]};render();return;
   }
-  if(id==='nagi_dusk'){
+  if(id===R2SR('nagi_dusk')){
     const u=unit(id),d=data(id),req=[0,30,60][i];if(!d||i>2||d.aff<req)return;
     const parts=[
       '星灯の解析端末に、見覚えのない署名が記録されていた。\n「……その波形、消さないで。確認しておきたい」\n彼女は短く告げ、相談室の端で静かに画面を見つめた。',
