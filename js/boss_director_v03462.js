@@ -30,7 +30,7 @@
    ult:{name:'紫煙の大売り出し',warn:'イブキが小瓶を一斉に掲げた……！',mul:1.6},
    retort:[['saki','「その小瓶で、どれだけの人の想いを売ったの。」'],['yuzu','「お姉ちゃんの声、もう奪わせない！」'],['you','「もうやめよう、イブキ。」']],
    defeat:'「……あーあ。割れちゃった。あたしの、全部。」'},
-  q24:{id:'haruka',name:'霧島 ハルカ',title:'仮面の契約者',art:'assets/enemies/plague_mask_a_battle.webp',phaseArt:'assets/enemies/plague_mask_b_battle.webp',hp:2.5,
+  q24:{id:'haruka',name:'霧島 ハルカ',title:'仮面の契約者',art:'assets/enemies/haruka.webp',hp:2.5,
    intro:'「せっかくのお祭りなんだから、もっと楽しもうよ。……ね、誰が本物か、当ててみて？」',
    hp75:'「あはは、見つかっちゃった。でも、まだまだ踊れるよ。」',
    hp50:'「……痛いなあ。そんなに必死になって、何を守ってるの？」',
@@ -74,7 +74,8 @@
   closeOverlay();overlayOpen=true;
   const el=document.createElement('div');el.className='bd-overlay';el.setAttribute('role','dialog');
   // Show battle art at full size; Haruka switches poses at the second phase.
-  const portrait=label.startsWith('第2形態')&&cfg.phaseArt?cfg.phaseArt:cfg.art;
+  // Keep Haruka's original conversation appearance for boss introductions and defeat lines.
+  const portrait=cfg.id==='haruka'?TALK(cfg.id):(label.startsWith('第2形態')&&cfg.phaseArt?cfg.phaseArt:cfg.art);
   el.innerHTML=`<img class="bd-art" src="${portrait}" alt=""><div class="bd-band"><small>${label}</small><strong>${cfg.name}</strong><p>${line}</p><em>タップで進む</em></div>`;
   const done=()=>{if(!el.isConnected)return;el.remove();overlayOpen=false;clearTimeout(overlayTimer);if(after)after();};
   el.addEventListener('click',done);document.body.appendChild(el);

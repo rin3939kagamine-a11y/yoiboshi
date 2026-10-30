@@ -7,17 +7,14 @@
  if(typeof CHAPTER4_STORIES==='undefined'||typeof CHAPTER4_INVESTIGATION_CASES==='undefined'||typeof QUEST_BY_ID==='undefined')return;
  const scene=CHAPTER4_STORIES;
  const shadowArt='assets/enemies/haruka_shadow.webp';
- const bossArt='assets/enemies/plague_mask_a_battle.webp';
- const bossPhaseArt='assets/enemies/plague_mask_b_battle.webp';
+ const bossArt='assets/enemies/haruka.webp';
  let shadowArtMissing=false;
  // 新しい分身画像が未配置なら、既存ハルカ絵を暗く加工して表示。
  function setEnemyArt(img,isShadow){
   if(!img)return;
   img.style.filter=isShadow?'brightness(.86) saturate(.9)':'none';
   img.onerror=isShadow?function(){shadowArtMissing=true;this.onerror=null;this.src=bossArt;this.style.filter='grayscale(1) brightness(.58)';}:null;
-  const real=battle?.enemies?.find(e=>e.harukaRole==='real');
-  const bossPicture=!isShadow&&battle?.turnBattle&&real?.bd?.phase2?bossPhaseArt:bossArt;
-  img.src=isShadow&&!shadowArtMissing?shadowArt:bossPicture;
+  img.src=isShadow&&!shadowArtMissing?shadowArt:bossArt;
   if(isShadow&&shadowArtMissing)img.style.filter='grayscale(1) brightness(.58)';
  }
  const line=(who,title,text)=>({who,title,text});
