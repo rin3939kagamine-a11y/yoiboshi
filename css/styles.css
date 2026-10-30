@@ -2989,3 +2989,20 @@ img.unit-card-scene{width:100%!important;height:100%!important;object-fit:cover!
 .boss-trial-btn img{width:58px;height:58px;border-radius:50%;object-fit:cover;object-position:50% 8%;background:#120d22;flex:none}
 .boss-trial-btn b{display:block;font-size:16px}
 .boss-trial-btn small{display:block;font-size:12px;color:#cdb9f0;margin-top:2px}
+
+/* v0.34.69.1 編成画面：チームだけ表示、交代は一覧を重ねて開く */
+.roster-picker-backdrop{position:fixed;inset:0;z-index:8000;background:rgba(20,18,40,.55);display:flex;align-items:flex-end;justify-content:center;padding:max(12px,env(safe-area-inset-top)) 12px 0}
+.roster-picker{width:min(1100px,100%);max-height:88dvh;overflow:auto;border-radius:22px 22px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));animation:rosterUp .25s ease}
+@media (min-width:900px){.roster-picker-backdrop{align-items:center}.roster-picker{border-radius:22px}}
+@keyframes rosterUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.roster-picker-head{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:-18px;background:inherit;padding:6px 0 10px;z-index:1}
+.roster-picker-head small{color:#7a5fb0;font-weight:900;letter-spacing:.15em}
+.roster-picker-head h3{margin:2px 0 0}
+.roster-collection{padding:0!important}
+.roster-collection-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;background:none;padding:18px 22px;cursor:pointer;text-align:left;color:inherit}
+.roster-collection-toggle small{display:block;color:#7a5fb0;font-weight:900;letter-spacing:.15em;font-size:11px}
+.roster-collection-toggle b{font-size:18px;margin-right:10px}
+.roster-collection-toggle em{font-style:normal;color:#7b7f99;font-size:13px}
+.roster-collection-toggle i{font-style:normal;font-weight:800;color:#6a50a8}
+.roster-collection.is-open{padding:0 0 18px!important}
+.roster-collection.is-open>*:not(.roster-collection-toggle){margin-left:22px;margin-right:22px}

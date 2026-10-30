@@ -440,7 +440,7 @@ function expressionPortraitMarkup(personId,face='normal',sceneKey='default',opts
    (storySession.id==='q28_intro'&&storySession.step>=5)||
    ['q28_pre','q28','q29_intro','q29_pre','q29'].includes(storySession.id));
  // v0.34.55.0: 透子は背景を抜いた会話用の上半身（story_cast/touko_talk.webp）を使う
- const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.68.0':['touko','sakuya','ibuki','haruka'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.34.68.0`:expressionArt(personId,actual);
+ const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.69.0':['touko','sakuya','ibuki','haruka'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.34.69.0`:expressionArt(personId,actual);
  const play=rememberExpression(sceneKey,personId,actual,!hasAlt);
  const wrapClass=[opts.wrapperClass||'',`expr-face-${actual}`,!hasAlt&&actual!=='normal'?'expr-uses-fallback':'',play?`expr-animate-${actual}`:'',opts.stateClass||''].filter(Boolean).join(' ');
  const alt=opts.alt||`${PEOPLE[personId]?.name||personId}の立ち絵`;
@@ -894,7 +894,7 @@ function titlePage(){
  const hasSave=!!S.gameStarted&&SaveStore.read()!==null;
  const options=titleConfirm?`<div class="title-confirm" role="alertdialog" aria-label="はじめからの確認"><strong>今のデータは消えます</strong><p>現在のセーブが上書きされます。本当にはじめから遊びますか？</p><div><button type="button" onclick="cancelNewGame()">やめる</button><button type="button" class="danger" onclick="startNewGame()">削除してはじめる</button></div></div>`:'';
  const settings=titleSettingsOpen?`<div class="title-settings-panel"><button type="button" class="title-settings-back" onclick="toggleTitleSettings()">← タイトルに戻る</button>${audioSettingsCard()}</div>`:'';
- return `<main class="title-screen title-simple" aria-label="宵星の契約者 タイトル画面"><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><div class="title-subkicker">YOIBOSHI NO KEIYAKUSHA</div><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">Ver.0.34.68.0 · RE:START ALPHA</p></div>${options}${settings}</main>`;
+ return `<main class="title-screen title-simple" aria-label="宵星の契約者 タイトル画面"><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><div class="title-subkicker">YOIBOSHI NO KEIYAKUSHA</div><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">Ver.0.34.69.0 · RE:START ALPHA</p></div>${options}${settings}</main>`;
 }
 
 function isSessionLocked(){return (view==='investigation')||(view==='combat'&&!!battle&&!battle.done)||(view==='prologue'&&!!storySession)||(view==='story'&&!!storySession)||(view==='date'&&!!S.love?.pending)||(view==='city'&&questActionInProgress)||(romanceSelectionInProgress&&!!dialog)}
@@ -950,7 +950,7 @@ const GameState=Object.freeze({
 function change(v){return AppRouter.go(v)}
 function button(v,symbol,label){const locked=isSessionLocked();return `<button type="button" class="navbtn ${view===v?'active':''} ${locked?'nav-locked':''}" aria-label="${label}" ${locked?'disabled aria-disabled="true"':''} ${view===v?'aria-current="page"':''} onclick="change('${v}')"><span class="ico" aria-hidden="true">${symbol}</span><span>${label}</span></button>`}
 const nav=[['home','⌂','ホーム'],['story','▤','ストーリー'],['city','✧','クエスト'],['roster','◇','キャラ・編成'],['gacha','✦','ガチャ'],['talk','♡','交流'],['records','☷','記録・設定']];
-function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.68.0 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
+function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.69.0 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
 function heading(en,title,sub){return `<div class="eyebrow">${en}</div><h1 class="page-title">${title}</h1><p class="desc">${sub}</p>`}
 function chars(cards,buttons=true){
  const units=cards.map(id=>unit(id)).filter(Boolean);
@@ -1542,10 +1542,12 @@ let lobbySelected=(typeof S.homeFavorite==='string'&&PEOPLE[S.homeFavorite]&&(HE
 let candidatePreviewPose='standing';
 let rosterFilter='all', rosterRoleFilter='all', rosterHighlight='';
 // 編成画面だけの選択状態。保存データとは分離して管理する。
-let rosterEditSlot=0, rosterRarityFilter='all';
-function selectRosterSlot(index){if(!Number.isInteger(index)||index<0||index>3)return;rosterEditSlot=index;render();}
+let rosterEditSlot=0, rosterRarityFilter='all', rosterPickerOpen=false, rosterCollectionOpen=false; // v0.34.69.x: 交代は押したときだけ一覧を開く
+function selectRosterSlot(index){if(!Number.isInteger(index)||index<0||index>3)return;rosterEditSlot=index;rosterPickerOpen=true;render();}
+function closeRosterPicker(){rosterPickerOpen=false;render();}
+function toggleRosterCollection(){rosterCollectionOpen=!rosterCollectionOpen;render();}
 function changeRosterRarityFilter(value){if(!['all','R','SR','SSR','UR'].includes(value))return;rosterRarityFilter=value;render();}
-function assignRosterOwnedUnit(id){if(!data(id)||!unit(id))return toast('未所持のユニットは編成できません');return setSlot(rosterEditSlot,id);}
+function assignRosterOwnedUnit(id){if(!data(id)||!unit(id))return toast('未所持のユニットは編成できません');rosterPickerOpen=false;return setSlot(rosterEditSlot,id);}
 
 const isConcept=personId=>personId.startsWith('concept')&&!DISTRICT_HERO_IDS.includes(personId);
 const homeMembers=()=>Array.from(new Set([...HERO_IDS.filter(id=>romanceHeroAvailable(id)),...UNITS.filter(u=>data(u.id)).map(u=>u.person)]));
@@ -1868,13 +1870,13 @@ function roster(){
  const slots=[0,1,2,3].map(i=>{
    const id=S.party[i],u=unit(id),d=id?data(id):null;
    const name=u?person(u).name:'空き枠';
-   return `<button type="button" class="roster-vnew-slot ${editing===i?'is-editing':''}" onclick="selectRosterSlot(${i})" aria-pressed="${editing===i}" aria-label="${i+1}枠目 ${esc(name)} ${u?u.rarity:'空き'} を選択">
-       <span class="roster-vnew-slotnum">SLOT ${i+1} ${editing===i?'<b>選択中</b>':''}</span>
+   return `<button type="button" class="roster-vnew-slot ${rosterPickerOpen&&editing===i?'is-editing':''}" onclick="selectRosterSlot(${i})" aria-pressed="${editing===i}" aria-label="${i+1}枠目 ${esc(name)} ${u?u.rarity:'空き'} を選択">
+       <span class="roster-vnew-slotnum">SLOT ${i+1} ${rosterPickerOpen&&editing===i?'<b>交代中</b>':''}</span>
        ${u?`<span class="roster-vnew-portrait"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="${esc(name)}のイラスト" loading="lazy"></span>
        <span class="roster-vnew-name">${esc(name)} <em class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</em></span>
        <span class="roster-vnew-meta">Lv.${d?.lv??'—'} · ${ROLES[u.role].name}</span>`:
        '<span class="roster-vnew-empty">＋<small>仲間を選ぶ</small></span>'}
-       <span class="roster-vnew-slotfoot">${editing===i?'下の一覧から交代':'タップで交代枠を選択'}</span>
+       <span class="roster-vnew-slotfoot">交代する ›</span>
      </button>`;
  }).join('');
  const cards=shown.map(u=>{
@@ -1891,24 +1893,29 @@ function roster(){
      </button><div class="roster-vnew-cardtools"><button type="button" class="roster-vnew-detail" onclick="openUnit('${u.id}')">詳細を見る</button><button type="button" class="roster-vnew-detail" onclick="openTrainingFor('${u.id}')">育成</button></div>
    </article>`;
  }).join('');
- return `${heading('FORMATION / OWNED UNITS','出撃編成','4人の出撃枠を選び、所持しているユニットから交代できます。')}
+ const filters=`<div class="roster-vnew-filters"><div class="roster-vnew-filterrow" role="group" aria-label="ロールで絞り込み">${roleChoices.map(([id,label])=>`<button type="button" class="roster-vnew-filter ${rosterRoleFilter===id?'active':''}" aria-pressed="${rosterRoleFilter===id}" onclick="changeRosterRoleFilter('${id}')">${label}</button>`).join('')}</div>
+     <div class="roster-vnew-filterrow" role="group" aria-label="レアリティで絞り込み">${rarityChoices.map(id=>`<button type="button" class="roster-vnew-filter ${rosterRarityFilter===id?'active':''}" aria-pressed="${rosterRarityFilter===id}" onclick="changeRosterRarityFilter('${id}')">${id==='all'?'全レア':id}</button>`).join('')}</div></div>`;
+ const browse=shown.map(u=>{const d=data(u.id);return `<article class="roster-vnew-unit roster-browse-unit"><button type="button" class="roster-vnew-pick" onclick="openUnit('${u.id}')" aria-label="${esc(person(u).name)} ${u.rarity} の詳細"><span class="roster-vnew-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="" loading="lazy"></span><span class="roster-vnew-cardbody"><strong class="roster-vnew-cardname">${esc(person(u).name)}</strong><span class="roster-vnew-subtitle">${esc(u.title)}</span><span class="roster-vnew-info"><b class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</b><span>Lv.${d.lv}</span><span>${ROLES[u.role].name}</span></span>${S.party.includes(u.id)?'<span class="roster-vnew-action">出撃チームに編成中</span>':''}</span></button><div class="roster-vnew-cardtools"><button type="button" class="roster-vnew-detail" onclick="openUnit('${u.id}')">詳細を見る</button><button type="button" class="roster-vnew-detail" onclick="openTrainingFor('${u.id}')">育成</button></div></article>`;}).join('');
+ const picker=rosterPickerOpen?`<div class="roster-picker-backdrop" onclick="if(event.target===this)closeRosterPicker()"><section class="roster-picker card" role="dialog" aria-modal="true" aria-label="SLOT ${editing+1}に入れる仲間を選ぶ">
+     <div class="roster-picker-head"><div><small>SLOT ${editing+1}</small><h3>入れる仲間を選ぶ</h3></div><button type="button" class="btn outline roster-picker-close" onclick="closeRosterPicker()">閉じる ✕</button></div>
+     ${filters}
+     <div class="roster-vnew-grid roster-picker-grid">${cards}</div>
+     ${shown.length?'':'<p class="notice">この条件で所持しているユニットはありません。絞り込みを変更してください。</p>'}
+   </section></div>`:'';
+ return `${heading('FORMATION / OWNED UNITS','出撃編成','枠の「交代する」を押すと、入れる仲間を選べます。')}
    <nav class="roster-vnew-links" aria-label="編成の関連メニュー"><button type="button" class="btn primary" onclick="change('training')">✦ 仲間の育成へ ›</button></nav>
    <section class="roster-vnew-team card" id="v0241-team" aria-label="出撃チーム">
      <div class="roster-vnew-head"><div><small>YOUR TEAM</small><h3>出撃チーム <span>${S.party.filter(id=>!!data(id)).length} / 4</span></h3></div><strong>編成戦力 ${teamPower().toLocaleString()}</strong></div>
      <p class="roster-vnew-rules">同じヒロインは1人まで・同じロールは2人まで</p>
      ${roleCount}
-     ${warning?`<p class="v0253-team-warning" role="status">${esc(warning)}<br>下の一覧から編成を変更してください。</p>`:''}
+     ${warning?`<p class="v0253-team-warning" role="status">${esc(warning)}<br>枠の「交代する」から編成を変更してください。</p>`:''}
      <div class="roster-vnew-slots">${slots}</div>
-     <p class="roster-vnew-hint">① 交代する枠をタップ　② 下の所持ユニットを選択</p>
+     <p class="roster-vnew-hint">枠の「交代する」を押すと、所持ユニットから選べます</p>
    </section>
-   <section class="roster-vnew-owned" id="v0241-list" aria-label="所持ユニット一覧">
-     <div class="roster-vnew-head"><div><small>YOUR COLLECTION</small><h3>所持ユニット <span>${owned.length}体 / ${totalPeople}人</span></h3></div><span class="roster-vnew-target">交代先：SLOT ${editing+1}</span></div>
-     <div class="roster-vnew-filters"><div class="roster-vnew-filterrow" role="group" aria-label="ロールで絞り込み">${roleChoices.map(([id,label])=>`<button type="button" class="roster-vnew-filter ${rosterRoleFilter===id?'active':''}" aria-pressed="${rosterRoleFilter===id}" onclick="changeRosterRoleFilter('${id}')">${label}</button>`).join('')}</div>
-     <div class="roster-vnew-filterrow" role="group" aria-label="レアリティで絞り込み">${rarityChoices.map(id=>`<button type="button" class="roster-vnew-filter ${rosterRarityFilter===id?'active':''}" aria-pressed="${rosterRarityFilter===id}" onclick="changeRosterRarityFilter('${id}')">${id==='all'?'全レア':id}</button>`).join('')}</div></div>
-     <p class="roster-vnew-listcount">表示 ${shown.length} / 所持 ${owned.length}体　※未所持ユニットは表示しません</p>
-     <div class="roster-vnew-grid">${cards}</div>
-     ${shown.length?'':'<p class="notice">この条件で所持しているユニットはありません。絞り込みを変更してください。</p>'}
-   </section>`;
+   <section class="roster-vnew-owned roster-collection ${rosterCollectionOpen?'is-open':''}" id="v0241-list" aria-label="所持ユニット一覧">
+     <button type="button" class="roster-collection-toggle" onclick="toggleRosterCollection()" aria-expanded="${rosterCollectionOpen}"><span><small>YOUR COLLECTION</small><b>所持ユニット一覧</b><em>${owned.length}体 / ${totalPeople}人</em></span><i>${rosterCollectionOpen?'閉じる ▲':'開く ▼'}</i></button>
+     ${rosterCollectionOpen?`${filters}<p class="roster-vnew-listcount">表示 ${shown.length} / 所持 ${owned.length}体</p><div class="roster-vnew-grid">${browse}</div>${shown.length?'':'<p class="notice">この条件で所持しているユニットはありません。</p>'}`:''}
+   </section>${picker}`;
 }
 function chooseSlot(i){
  const options=UNITS.filter(u=>visibleUnitV026(u)&&data(u.id));
