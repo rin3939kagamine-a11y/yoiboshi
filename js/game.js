@@ -701,15 +701,31 @@ function authoredReplyFace(id,mood,type,text){
  const i=lines.indexOf(text);return EXPRESSION_CUES.reply_reactions[id]?.[mood]?.[type]?.[Math.max(0,i)]||'normal';
 }
 function stripOuterDailyQuotes(str){return typeof str==='string'&&str.startsWith('「')&&str.endsWith('」')?str.slice(1,-1):str}
+// v0.35.2.0 おでかけの背景。既存の背景画像を行き先と天気・時間帯で割り当てる
+const ROMANCE_PLACE_BG=Object.freeze({
+ taiyaki:{sun:'bg_shotengai_day',cloud:'bg_shotengai_day',rain:'bg_shotengai_dusk'},
+ cafe:{sun:'bg_kissa_day',cloud:'bg_kissa_day',rain:'bg_kissa_dusk'},
+ park:{sun:'bg_kaihin_day',cloud:'bg_kaihin_dusk',rain:'bg_kaihin_dusk'},
+ arcade:{sun:'bg_ekimae_day',cloud:'bg_ekimae_day',rain:'bg_ekimae_dusk'},
+ library:{sun:'bg_toshokan_day',cloud:'bg_toshokan_day',rain:'bg_toshokan_dusk'},
+ horror:{sun:'bg_ekimae_dusk',cloud:'bg_ekimae_dusk',rain:'bg_ekimae_night'}
+});
+function romancePlaceBg(placeId,weather,late){
+ const row=ROMANCE_PLACE_BG[placeId];if(!row)return '';
+ let key=row[weather]||row.sun;
+ if(late){const dusk=key.replace(/_(day|dusk|night)$/,'_dusk');key=dusk;}
+ return `assets/ART_V2/backgrounds/${key}.webp`;
+}
 function dateScenePage(){
  const p=loveState().pending;if(!p)return heroTalkPage(UNITS.find(u=>u.person==='momoka'));
  const id=p.person,idx=Math.min(p.step,p.lines.length-1),sc=p.lines[idx],final=idx===p.lines.length-1;
  const who=sc.who==='you'?playerDisplayName():sc.who==='narrator'?'ナレーション':PEOPLE[id].name;
  const face=outingFaceState(p,idx);
+ const bgPath=romancePlaceBg(p.place,loveState().weather,idx>=Math.max(1,p.lines.length-2));
  const options=final?`<div class="story-choices date-choice-list">${p.choices.map(c=>`<button type="button" class="btn outline" onclick="answerRomanceTalk('${c.type}')">${esc(stripOuterDailyQuotes(c.text))}</button>`).join('')}</div>`:'';
  return `${heading('DAY / MEMORY',`${heroineDisplayName(id)}とのおでかけ`,'今日の小さな思い出。帰り道の返事を選ぼう。')}
  <div class="story-panel card chapter-story chapter-story-v071 date-scene" aria-label="おでかけの物語" onclick="dateSceneTap(event)">
- <div class="story-scene"><div class="story-skyline"></div><div class="story-cast">${expressionPortraitMarkup(id,face,`date:${id}:${p.place}:day${loveState().day}`,{wrapperClass:'story-character',stateClass:'is-speaking',alt:`${PEOPLE[id].name}の立ち絵`})}</div><span class="story-scene-label">${esc(ROMANCE_PLACES.find(x=>x.id===p.place).name)} · ${ROMANCE_WEATHER_LABELS[loveState().weather]}</span></div>
+ <div class="story-scene ${bgPath?'has-bg':''}">${bgPath?`<div class="story-bg" style="background-image:url('${bgPath}')" aria-hidden="true"></div>`:''}<div class="story-skyline"></div><div class="story-cast">${expressionPortraitMarkup(id,face,`date:${id}:${p.place}:day${loveState().day}`,{wrapperClass:'story-character',stateClass:'is-speaking',alt:`${PEOPLE[id].name}の立ち絵`,chapterStoryFit:true})}</div><span class="story-scene-label">${esc(ROMANCE_PLACES.find(x=>x.id===p.place).name)} · ${ROMANCE_WEATHER_LABELS[loveState().weather]}</span></div>
  <div class="story-dialogue"><div class="flex space"><span class="chip pink">${esc(who)}</span></div><p class="story-line">${esc(stripOuterDailyQuotes(sc.text))}</p>
  <div class="story-controls">${options}<button type="button" class="btn outline mini" onclick="previousRomanceLine()" ${idx===0?'disabled':''}>← 戻る</button><button type="button" class="btn primary" onclick="nextRomanceLine()" ${final?'disabled':''}>${final?'返事を選ぼう':'続きを読む →'}</button><button type="button" class="btn outline mini" onclick="skipRomanceScene()">最後へ</button><button type="button" class="btn outline mini" onclick="requestInterrupt()">中断</button></div></div></div>`;
 }
