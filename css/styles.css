@@ -3027,3 +3027,33 @@ img.unit-card-scene{width:100%!important;height:100%!important;object-fit:cover!
 .story-ep.is-read{color:#6f748f}
 .story-ep small{color:#9a9eb5;font-size:12px;flex:none}
 .story-menu-note{font-size:12px;color:#8a8fa8;margin:12px 4px}
+
+/* v0.35.1.0 交流画面 */
+.romance-meet{padding:0!important;margin-bottom:12px;overflow:hidden;background:linear-gradient(135deg,#fff3fb,#eef2ff)!important}
+.romance-meet-head{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;background:none;border:0;padding:14px 20px;cursor:pointer;text-align:left;color:inherit}
+.romance-meet-head b{display:block;font-size:16px;color:#a2447a}
+.romance-meet-head small{display:block;color:#7b7f99;font-size:12.5px;margin-top:2px}
+.romance-meet-head i{font-style:normal;font-weight:800;color:#a2447a;flex:none}
+.romance-meet-list{display:grid;gap:8px;padding:0 20px 16px}
+.romance-meet-item{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border:1px solid #f0dcea;border-radius:12px;padding:10px 14px}
+.romance-meet-item strong{display:block;font-size:14.5px}
+.romance-meet-item small{display:block;color:#8a8fa8;font-size:12px;margin-top:2px}
+.romance-today{margin:0 0 12px;padding:12px 14px;border-radius:14px;background:#f6f3ff;border:1px solid #e4dcf6}
+.romance-today-row{display:flex;flex-wrap:wrap;gap:6px}
+.romance-today .chip{background:#fff;border:1px solid #ddd5ef;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;color:#4b4668}
+.romance-today .chip.is-warn{background:#ffeef2;border-color:#f6c6d2;color:#a2446a}
+.romance-today-invite{margin:8px 0 0;font-size:13px;color:#a2447a}
+.romance-today-done{margin:8px 0 0;font-size:13px;color:#6f748f}
+.romance-today-hint{margin:6px 0 0;font-size:12.5px;color:#7b7f99}
+.v676-companion.romance-pick{position:relative;flex-direction:column;align-items:stretch;padding-bottom:8px}
+.romance-pick-aff{display:block;height:4px;border-radius:999px;background:#e6e1f4;margin:5px 0 3px;overflow:hidden}
+.romance-pick-aff i{display:block;height:100%;background:linear-gradient(90deg,#ff9ec4,#b78bf0)}
+.romance-pick small{display:block;font-size:11px;color:#7b7f99}
+.romance-pick-met,.romance-pick-sulk,.romance-pick-invite{position:absolute;top:4px;right:4px;font-style:normal;font-size:10px;font-weight:800;padding:2px 6px;border-radius:999px}
+.romance-pick-met{background:#e8f2e8;color:#3f7a4f}
+.romance-pick-sulk{background:#ffeef2;color:#a2446a}
+.romance-pick-invite{background:#fff2d9;color:#9a6a12}
+.romance-place{display:flex!important;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px 14px!important}
+.romance-place b{font-size:14.5px}
+.romance-place small{font-size:11.5px;color:#7b7f99}
+.romance-place.is-invite{border-color:#f0c46a;background:#fffaf0}
