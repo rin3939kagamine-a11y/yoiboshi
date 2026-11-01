@@ -3066,3 +3066,22 @@ img.unit-card-scene{width:100%!important;height:100%!important;object-fit:cover!
 .date-scene .story-scene.has-bg:before{z-index:1;background:linear-gradient(0deg,rgba(8,18,35,.62) 0%,rgba(8,18,35,.25) 27%,transparent 55%)}
 .date-scene .story-scene.has-bg>.story-cast{z-index:2}
 .date-scene .story-scene.has-bg>.story-scene-label{z-index:3}
+
+/* v0.35.3.0 調査画面：場所の背景と同行者 */
+.inq-stage{position:relative;border-radius:18px;overflow:hidden;margin:12px 0 14px;height:clamp(200px,32dvh,340px);background:#17233b}
+.inq-stage-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.inq-stage:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(8,18,35,.78) 0%,rgba(8,18,35,.25) 45%,transparent 70%)}
+.inq-stage-cast{position:absolute;right:clamp(12px,5%,70px);bottom:0;top:6%;width:min(34%,320px);display:flex;align-items:flex-end;justify-content:center;z-index:2;pointer-events:none}
+.inq-stage-cast .story-character{position:relative;height:100%;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.inq-stage-cast img{height:100%;width:100%;object-fit:contain;object-position:bottom center}
+.inq-stage-line{max-width:62%}
+@media (max-width:700px){.inq-stage-cast{width:44%;right:4px}.inq-stage-line{max-width:100%;background:linear-gradient(0deg,rgba(8,18,35,.9),rgba(8,18,35,.3))}}
+.inq-stage-label{position:absolute;top:10px;left:12px;z-index:3;background:rgba(10,14,30,.7);color:#eef1ff;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700}
+.inq-stage-line{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:12px 18px 14px;color:#f3f0ff}
+.inq-stage-line b{display:block;font-size:13px;color:#ffc9e3}
+.inq-stage-line p{margin:2px 0 0;font-size:clamp(14px,1.5vw,17px);line-height:1.6}
+.inq-evidence{position:relative}
+.inq-evidence.is-new{border-color:#b9a4ec;box-shadow:0 0 0 2px rgba(185,164,236,.35);animation:inqNew .5s ease}
+.inq-evidence-new{position:absolute;top:-8px;right:8px;background:#b9a4ec;color:#fff;font-size:10px;font-weight:900;border-radius:999px;padding:2px 8px}
+@keyframes inqNew{from{transform:translateY(-6px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.inq-evidence.is-new{animation:none}}

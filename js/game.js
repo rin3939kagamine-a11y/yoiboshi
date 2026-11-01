@@ -3006,7 +3006,9 @@ function investigateAt(index){
  const st=investigationState(S.currentQuest),caseData=st&&INVESTIGATION_CASES[st.qid];
  if(!st||st.phase!=='interview'||st.chosen.length>=investigationInterviewLimit(st)||!caseData.sites[index]||st.chosen.includes(index))return;
  st.chosen.push(index);
- caseData.sites[index].clues.forEach(id=>addInvestigationClue(st,id));
+ const gained=[];caseData.sites[index].clues.forEach(id=>{addInvestigationClue(st,id);gained.push(id)});
+ st.lastClueId=gained[gained.length-1]||null;
+ st.skillMessage=`${caseData.sites[index].name}で、手がかりを${gained.length}件見つけた。`;
  if(st.chosen.length>=investigationInterviewLimit(st))investigationStartDeductions(st);
  AudioDirector.sfx('confirm');persist();render();
 }
@@ -3087,7 +3089,42 @@ function advanceInvestigationEcho(){
 }
 function investigationMemo(st){
  const entries=investigationClues(st);
- return `<section class="inq-memo"><h3>調査メモ <small>${entries.length}件</small></h3>${entries.length?entries.map(c=>`<article class="inq-evidence ${st.markedIrrelevant.includes(c.id)?'irrelevant':''}"><strong>${esc(c.title)}</strong><p>${esc(c.text)}</p>${st.markedIrrelevant.includes(c.id)?'<span>葵の見解：この推理には関係が薄い</span>':''}</article>`).join(''):'<p class="inq-empty">現場で得た手がかりが、ここに記録されます。</p>'}</section>`;
+ return `<section class="inq-memo"><h3>調査メモ <small>${entries.length}件</small></h3>${entries.length?entries.map(c=>`<article class="inq-evidence ${st.markedIrrelevant.includes(c.id)?'irrelevant':''} ${st.lastClueId===c.id?'is-new':''}">${st.lastClueId===c.id?'<span class="inq-evidence-new">NEW</span>':''}<strong>${esc(c.title)}</strong><p>${esc(c.text)}</p>${st.markedIrrelevant.includes(c.id)?'<span>葵の見解：この推理には関係が薄い</span>':''}</article>`).join(''):'<p class="inq-empty">現場で得た手がかりが、ここに記録されます。</p>'}</section>`;
+}
+// v0.35.3.0 調査画面：場所の背景と同行者の立ち絵を出し、手がかりの獲得を分かりやすくする
+const INVESTIGATION_BG=Object.freeze({
+ shotengai:'bg_shotengai_day',kissa:'bg_kissa_day',ekimae:'bg_ekimae_day',kyoushitsu:'bg_kyoushitsu_day',
+ shiyakusho:'bg_shiyakusho_night',kaihin:'bg_kaihin_day',yuenchi:'bg_yuenchi_night',lighthouse:'bg_lighthouse_day',
+ chousa:'bg_chousa_night',soko:'bg_soko_dusk',dock:'bg_dock_pre',yoichi:'bg_yoichi_night',hatsuden:'bg_hatsuden_night',
+ chika:'bg_chika_dawn',matsuri:'bg_matsuri_dusk',toshokan:'bg_toshokan_day',studio:'bg_studio_day',ryotei:'bg_ryotei_day',
+ lumiere:'bg_lumiere_night',ruby:'bg_ruby_dusk',shop:'bg_shop_day',soudan:'bg_soudan_day',tokeiten:'bg_tokeiten_night',
+ toushitsu:'bg_toushitsu',yume:'bg_yume_dawn',kaede:'bg_kaede_dusk'
+});
+function investigationBg(qid){
+ try{
+  const key=qid+'_intro';
+  const b=typeof STORY_BACKGROUNDS!=='undefined'?(STORY_BACKGROUNDS[key]||STORY_BACKGROUNDS[qid]||STORY_BACKGROUNDS[qid+'_pre']):null;
+  if(b&&typeof storyBackgroundFile==='function'){const f=storyBackgroundFile(b.bg,b.time);if(f)return f;}
+  if(b&&INVESTIGATION_BG[b.bg])return `assets/ART_V2/backgrounds/${INVESTIGATION_BG[b.bg]}.webp`;
+ }catch(_){}
+ return 'assets/ART_V2/backgrounds/bg_soudan_day.webp';
+}
+function investigationFace(st){
+ if(st.phase==='echo'||st.phase==='ready'&&st.solved)return 'smile';
+ if(st.phase==='ready'&&!st.solved)return 'sad';
+ if(st.deductionFeedback)return 'surprise';
+ if(st.phase==='deduce')return 'normal';
+ if(st.chosen&&st.chosen.length)return 'smile';
+ return 'normal';
+}
+function investigationStageMarkup(st,q){
+ if(!st.hero)return '';
+ const bg=investigationBg(st.qid),face=investigationFace(st);
+ const line=st.skillMessage||q.companion?.[st.hero]||'一緒に手がかりを整理します。';
+ return `<div class="inq-stage"><div class="inq-stage-bg" style="background-image:url('${bg}')" aria-hidden="true"></div>
+  <div class="inq-stage-cast">${expressionPortraitMarkup(st.hero,face,`inq:${st.qid}:${st.phase}:${(st.chosen||[]).length}`,{wrapperClass:'story-character',stateClass:'is-speaking',alt:`${PEOPLE[st.hero].name}の立ち絵`,chapterStoryFit:true})}</div>
+  <span class="inq-stage-label">${esc(QUEST_BY_ID[st.qid]?.location||'')}</span>
+  <div class="inq-stage-line"><b>${esc(PEOPLE[st.hero].name)}</b><p>${esc(line)}</p></div></div>`;
 }
 function investigationPage(){
  const st=investigationState(S.currentQuest),q=st&&INVESTIGATION_CASES[st.qid],quest=st&&QUEST_BY_ID[st.qid];
@@ -3113,7 +3150,7 @@ function investigationPage(){
  }
  else if(st.phase==='echo')content=`<div class="inq-echo"><div class="inq-echo-light">✧</div><h2>未練の響きがほどけていく</h2><p>${esc(q.release[st.echoIndex])}</p><small>${st.echoIndex+1} / ${q.release.length}</small><button class="btn primary full" onclick="advanceInvestigationEcho()">${st.echoIndex===q.release.length-1?'調査結果へ':'続きを読む　→'}</button></div>`;
  else if(st.phase==='ready')content=`<div class="inq-result ${st.solved?'success':''}"><h2>${st.solved?'弱点を見抜いた！':'手がかりを結びつけられなかった'}</h2><p>${st.solved?(tbSelected()?'未練の弱点色を解明。ターン制では敵の弱点色が戦闘開始時から表示されます。':'現場の未練を読み解いた。戦闘では味方の与ダメージが30%上昇します。'):'推理に必要な証拠が足りないか、仮説が違ったようです。弱点なしで戦闘へ進めます。'}</p>${st.solved&&FLESHOUT_SOLVED_TAILS[st.qid]?`<div class="inq-solved-tail">${FLESHOUT_SOLVED_TAILS[st.qid].map(t=>`<p>${esc(t)}</p>`).join('')}</div>`:''}${st.solved&&st.firstTryBonus?'<p>一発正解：初回クリア時に星晶石＋20</p>':''}${st.hero==='akane'&&st.skillUsed?'<p>朱音の避難誘導：味方の被ダメージ30%減少</p>':''}${battleModeChoiceMarkup(st.qid)}<button class="btn primary full" onclick="startBattle('${st.qid}')">${S.quests?.[st.qid]?.complete?'もう一度出撃する':`弱点${st.solved?'あり':'なし'}で出撃する`}</button></div>`;
- return `<section class="investigation-view">${head}${stepper}<div class="inq-body">${companion}<div class="inq-main">${notice}${content}</div><aside class="inq-side">${skill}${investigationMemo(st)}</aside></div></section>`;
+ return `<section class="investigation-view">${head}${stepper}${investigationStageMarkup(st,q)}<div class="inq-body">${st.hero?'':companion}<div class="inq-main">${notice}${content}</div><aside class="inq-side">${skill}${investigationMemo(st)}</aside></div></section>`;
 }
 
 render();
