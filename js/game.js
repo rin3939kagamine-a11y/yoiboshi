@@ -631,7 +631,7 @@ function romancePlaceHintFor(id){
  if(!known.length)return '行き先の好みはまだ分かりません。出かけると手帳に記録されます。';
  return `${like.length?`好き：${like.join('・')}`:''}${like.length&&dis.length?' ／ ':''}${dis.length?`苦手：${dis.join('・')}`:''}`||'好みはまだはっきりしません。';
 }
-// Choice memory v0.1: only existing first bond episodes of Momoka and Milku.
+// Choice memory v0.2: existing first bond episodes of seven established heroines.
 // This is a deferred personal dialogue, not another daily action or a battle reward.
 const CHOICE_MEMORY_LINES=Object.freeze({
  momoka:Object.freeze({
@@ -645,6 +645,41 @@ const CHOICE_MEMORY_LINES=Object.freeze({
   hint:'みるくが、前に一緒に食べたタルトの話を覚えている。',
   a:'「この前の試作、味見したのをすぐ見抜かれましたね。今日は二人分、ちゃんと用意しましたよ。」',
   b:'「この前、一緒に食べてくださったのが嬉しくて。今日は最初から、お皿を二枚用意していたんです。」'
+ }),
+ reina:Object.freeze({
+  key:'bond_reina_0',
+  hint:'玲奈が、あの日の対戦台の続きを覚えている。',
+  a:'「あのときの再戦、まだ終わっていませんからね。責任者さん、記録を抜かれる覚悟はできていますか？」',
+  b:'「この前、互いの好手を教え合おうって言いましたよね。今日は私の切り返しも、ちゃんと見てください。」',
+  face:'smile'
+ }),
+ akane:Object.freeze({
+  key:'bond_akane_0',
+  hint:'朱音が、海沿いを走った日のことを覚えている。',
+  a:'「前に店まで競争したでしょ？　今日は先に準備運動しておこう！　よーし、行こっか！」',
+  b:'「この前、一緒に息を整えてくれたよね。今日は私もゆっくり歩こうかな。……隣、いい？」',
+  face:'smile'
+ }),
+ aoi:Object.freeze({
+  key:'bond_aoi_0',
+  hint:'葵が、図書館で選んだ過ごし方を覚えている。',
+  a:'「この前と同じ席、空けてあります。比較条件をそろえるため、です。……たぶん。」',
+  b:'「今日は計算をやめて、本の話をしませんか。……あの日の続き、聞きたいです。」',
+  face:'blush'
+ }),
+ chinatsu:Object.freeze({
+  key:'bond_chinatsu_0',
+  hint:'千夏が、喫茶街での寄り道の約束を覚えている。',
+  a:'「前に私の好きな店を選んでくれたでしょう？　今日は秘密のメニューの続きを教えてあげるね、責任者くん。」',
+  b:'「この前、席を取ってくれたの、嬉しかったな。今日は私が飲み物を運ぶ番ね。……少し甘えてもいい？」',
+  face:'smile'
+ }),
+ nagi:Object.freeze({
+  key:'bond_nagi_0',
+  hint:'凪が、夜の海で過ごした時間を覚えている。',
+  a:'「……この前みたいに、波の音だけでもいい？　……隣は、空けてある。」',
+  b:'「……この前、今日のことを話したでしょ。……また少し、聞いてほしい。」',
+  face:'normal'
  })
 });
 function pendingChoiceMemory(id){
@@ -664,7 +699,7 @@ function openChoiceMemory(id){
  dialog={
   title:`${PEOPLE[id].name}が覚えていたこと`,
   message:entry[choice],
-  html:`<div class="romance-result expression-result">${expressionPortraitMarkup(id,id==='momoka'?'smile':'blush',`choice-memory:${id}:${choice}`,{wrapperClass:'expr-character-layer',alt:PEOPLE[id].name})}</div>`
+  html:`<div class="romance-result expression-result">${expressionPortraitMarkup(id,entry.face||(id==='momoka'?'smile':'blush'),`choice-memory:${id}:${choice}`,{wrapperClass:'expr-character-layer',alt:PEOPLE[id].name})}</div>`
  };
  render();
 }
@@ -801,11 +836,11 @@ function migrateSave(raw){
   result.battleMode=raw.battleModeOptInV03466===true&&raw.battleMode==='legacy'?'legacy':'turn';
   result.battleModeOptInV03466=true;
   result.storyFlags=isRecord(raw.storyFlags)?{...defaults.storyFlags,...raw.storyFlags}:defaults.storyFlags;
-  // First-read choices of the initial two heroines; absent/malformed old saves remain neutral.
+  // First-read choices of known heroine episodes; malformed/old saves remain neutral.
   result.choiceMemories={};
   result.choiceMemoryDay={};
   result.choiceMemoryShown={};
-  for(const episode of ['bond_momoka_0','bond_milku_0']){
+  for(const {key:episode} of Object.values(CHOICE_MEMORY_LINES)){
     const choice=raw.choiceMemories?.[episode],day=raw.choiceMemoryDay?.[episode];
     if((choice==='a'||choice==='b')&&Number.isSafeInteger(day)&&day>=1&&day<=1000000){
       result.choiceMemories[episode]=choice;
@@ -1533,7 +1568,7 @@ function finishStory(){
   const first=!bondSeen(script.person,i);
   S.bondRead[script.person][i]=true;if(first)S.gems+=50;
   // Only the first completed read is authoritative; replay never changes memories.
-  if(first&&(id==='bond_momoka_0'||id==='bond_milku_0')&&['a','b'].includes(storySession.choice)){
+  if(first&&CHOICE_MEMORY_LINES[script.person]?.key===id&&['a','b'].includes(storySession.choice)){
     S.choiceMemories[id]=storySession.choice;
     S.choiceMemoryDay[id]=loveState().day;
     S.choiceMemoryShown[id]=false;
