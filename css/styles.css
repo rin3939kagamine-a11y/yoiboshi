@@ -3085,3 +3085,12 @@ img.unit-card-scene{width:100%!important;height:100%!important;object-fit:cover!
 .inq-evidence-new{position:absolute;top:-8px;right:8px;background:#b9a4ec;color:#fff;font-size:10px;font-weight:900;border-radius:999px;padding:2px 8px}
 @keyframes inqNew{from{transform:translateY(-6px);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.inq-evidence.is-new{animation:none}}
+
+/* v0.35.3.1 / QA v0.8 — Full-bleed chapter VN on narrow screens.
+   Later chapter-specific mobile page padding must not frame a fullscreen VN scene.
+   Scoped to .vn-story so lists, investigation, combat and home retain their spacing. */
+body:has(.vn-story) .page {
+  padding: 0 !important;
+  width: 100%;
+  max-width: none;
+}
