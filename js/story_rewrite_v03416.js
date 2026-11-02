@@ -511,6 +511,11 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "「私たちの灯火は、信じ合う想いを借りて灯す力です。カナメさんとエリカさんの星灯との契約とは、仕組みが違うんですね。」"
 },
 {
+"who": "aoi",
+"title": "違いを確かめる",
+"chapterEcho": "chapter3_aoi_flames"
+},
+{
 "who": "you",
 "title": "エリカに尋ねる",
 "text": "「エリカさんも、何か大切な想いを差し出したんですか？」"
@@ -655,6 +660,11 @@ const STORY_REWRITE_V03416=Object.freeze({
 "who": "aoi",
 "title": "二つの仕事",
 "text": "「まず買った方たちを保護し、結晶に残った波形を記録しましょう。売人の居場所を確かめてから追います。」"
+},
+{
+"who": "aoi",
+"title": "確かめ方を決めて",
+"chapterEcho": "chapter3_aoi_market"
 },
 {
 "who": "narrator",
