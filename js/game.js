@@ -823,7 +823,32 @@ function answerRomanceTalk(type){if(loveState().pending&&!romanceHeroAvailable(l
  setHeroAff(id,Math.min(100,old+total));if(romanceStageTier(id,old)!==romanceStageTier(id,heroAff(id)))nextMoodLine(l,id);const sisterMoment=sisterMomentIfNew(id);AudioDirector.sfx('affection');S.talks++;l.pending=null;const stageChange=heroStageNo(heroAff(id))>heroStageNo(old);persist();view='talk';dialog={title:stageChange?`関係が進展：${heroStage(heroAff(id))}`:`${PEOPLE[id].name}との一日`,message:`${reply}\nおでかけ +${p.placeGain}・会話 +${g}（親密度 ${heroAff(id)}/100）${bondNew(id)?'\n読める絆エピソードがあります。':''}`,html:`<div class="romance-result expression-result">${expressionPortraitMarkup(id,authoredReplyFace(id,l.mood[id],type,reply),`date-reply:${id}:${l.day}`,{wrapperClass:'expr-character-layer',alt:PEOPLE[id].name})}<span>${esc(heroStage(heroAff(id)))}</span></div>${sisterMomentMarkup(sisterMoment)}`};render();
 }
 
-function romanceNotebook(){const l=loveState();return `${heading('MEMORIES / DIARY','ヒロイン手帳','一緒に過ごして分かったことを記録しています。好みは訪問後に分かります。')}<div class="romance-notebook"><div class="flex space"><strong>${l.day}日目の記録 · 今日の天気：${ROMANCE_WEATHER_LABELS[l.weather]}</strong><button class="btn outline mini" onclick="change('talk')">交流へ戻る</button></div><section class="card pad"><h3>天気とお誘いの記録</h3><p>${l.weatherHistory.slice(-12).map(h=>esc(h.note||`${h.day}日目：${ROMANCE_WEATHER_LABELS[h.weather]||''}`)).join(' / ')||'まだ記録はありません'}</p><p>${l.inviteHistory.slice(-12).map(h=>`${h.day}日目：${esc(PEOPLE[h.person]?.name||'')} → ${esc(ROMANCE_PLACES.find(p=>p.id===h.place)?.short||'')}（${h.fulfilled?'一緒に行った':'お誘い'}）`).join(' / ')||'まだお誘いはありません'}</p></section>${HERO_IDS.filter(id=>romanceHeroAvailable(id)).map(id=>`<section class="card pad"><h2>${esc(PEOPLE[id].name)}</h2><p>親密度 ${heroAff(id)}/100 · ${esc(heroStage(heroAff(id)))}</p><div class="romance-notebook-list">${ROMANCE_PLACES.map(p=>{const n=l.visits[id][p.id]||0;const hint=l.hints[id][p.id];return `<div class="romance-note"><strong>${esc(p.name)}</strong><small>${n?esc(({like:'すごく喜んでいた',normal:'穏やかに楽しんでいた',dislike:'少し苦手そうだった'})[romancePlaceLike(p,id)])+` · 訪問${n}回`:'まだ一緒に行っていない'}</small>${hint?`<p>${esc(hint)}</p>`:''}</div>`}).join('')}</div></section>`).join('')}</div>`}
+// Choice memory v0.4: summarize only observed relationship events in the existing diary.
+// The texts below are quoted from the currently implemented first-bond choices.
+const CHOICE_DIARY_TOPICS=Object.freeze({
+ momoka:Object.freeze({title:"たい焼き裁判",a:"「しっぽ派だ。判決は無罪」",b:"「頭派だ。異議あり」"}),
+ milku:Object.freeze({title:"閉店後の試作タルト",a:"「おいしい。味見担当も満足そうだな」",b:"「半分こしよう。みるくも座ってくれ」"}),
+ reina:Object.freeze({title:"勝負の採点表",a:"「記録を抜かれる覚悟で、もう一戦だ」",b:"「今日は互いの好手を教え合おう」"}),
+ akane:Object.freeze({title:"海風のペースメーカー",a:"「俺が先に店まで走る」",b:"「息を整えてから一緒に行こう」"}),
+ aoi:Object.freeze({title:"恋心の計算式",a:"「同じ席で、もう一度試そう」",b:"「数字はしまって、本の話をしよう」"}),
+ chinatsu:Object.freeze({title:"お姉さんの放課後",a:"「千夏の好きな店に案内してくれ」",b:"「今日は俺が席を取っておく」"}),
+ nagi:Object.freeze({title:"夜の海が聞いている",a:"「今日は波の音だけでいい」",b:"「少しだけ、今日のことを話そうか」"})
+});
+function choiceDiaryMarkup(id){
+ const entry=CHOICE_MEMORY_LINES[id],topic=CHOICE_DIARY_TOPICS[id];
+ if(!entry||!topic||!romanceHeroAvailable(id)||!bondSeen(id,0))return '';
+ const key=entry.key,choice=S.choiceMemories?.[key],day=S.choiceMemoryDay?.[key];
+ if(!['a','b'].includes(choice)||!Number.isSafeInteger(day)||day<1||day>1000000||day>loveState().day)return '';
+ const talked=S.choiceMemoryShown?.[key]===true;
+ const returned=S.choiceBattleShown?.[key]===true;
+ const sections=[`<div class="romance-note"><strong>思い出：${esc(topic.title)}</strong><small>${day}日目・主人公が選んだ言葉</small><p>${esc(topic[choice])}</p></div>`];
+ // Never spoil a line that has not been shown in its original scene.
+ if(talked)sections.push(`<div class="romance-note"><strong>ふたりで交わした後日の会話</strong><p>${esc(entry[choice])}</p></div>`);
+ if(returned)sections.push(`<div class="romance-note"><strong>共闘から帰った日のひと言</strong><p>${esc(CHOICE_BATTLE_LINES[id][choice])}</p></div>`);
+ return `<div class="romance-diary-memory" aria-label="${esc(PEOPLE[id].name)}との思い出"><h3>ふたりの思い出</h3><div class="romance-notebook-list">${sections.join('')}</div></div>`;
+}
+
+function romanceNotebook(){const l=loveState();return `${heading('MEMORIES / DIARY','ヒロイン手帳','一緒に過ごして分かったことを記録しています。好みは訪問後に分かります。')}<div class="romance-notebook"><div class="flex space"><strong>${l.day}日目の記録 · 今日の天気：${ROMANCE_WEATHER_LABELS[l.weather]}</strong><button class="btn outline mini" onclick="change('talk')">交流へ戻る</button></div><section class="card pad"><h3>天気とお誘いの記録</h3><p>${l.weatherHistory.slice(-12).map(h=>esc(h.note||`${h.day}日目：${ROMANCE_WEATHER_LABELS[h.weather]||''}`)).join(' / ')||'まだ記録はありません'}</p><p>${l.inviteHistory.slice(-12).map(h=>`${h.day}日目：${esc(PEOPLE[h.person]?.name||'')} → ${esc(ROMANCE_PLACES.find(p=>p.id===h.place)?.short||'')}（${h.fulfilled?'一緒に行った':'お誘い'}）`).join(' / ')||'まだお誘いはありません'}</p></section>${HERO_IDS.filter(id=>romanceHeroAvailable(id)).map(id=>`<section class="card pad"><h2>${esc(PEOPLE[id].name)}</h2><p>親密度 ${heroAff(id)}/100 · ${esc(heroStage(heroAff(id)))}</p>${choiceDiaryMarkup(id)}<div class="romance-notebook-list">${ROMANCE_PLACES.map(p=>{const n=l.visits[id][p.id]||0;const hint=l.hints[id][p.id];return `<div class="romance-note"><strong>${esc(p.name)}</strong><small>${n?esc(({like:'すごく喜んでいた',normal:'穏やかに楽しんでいた',dislike:'少し苦手そうだった'})[romancePlaceLike(p,id)])+` · 訪問${n}回`:'まだ一緒に行っていない'}</small>${hint?`<p>${esc(hint)}</p>`:''}</div>`}).join('')}</div></section>`).join('')}</div>`}
 
 function romanceHeroAvailableFromSave(id,save){return HERO_IDS.includes(id)&&heroineOwned(id,save)&&heroineStoryRevealed(id,save)}
 function migrateSave(raw){
