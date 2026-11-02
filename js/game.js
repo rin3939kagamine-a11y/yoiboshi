@@ -331,7 +331,7 @@ function questUnlocked(q){
  return !intro||!!S.storyFlags?.[intro];
 }
 
-const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},choiceMemories:{},choiceMemoryDay:{},choiceMemoryShown:{},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
+const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},choiceMemories:{},choiceMemoryDay:{},choiceMemoryShown:{},choiceBattleShown:{},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
 // SaveStore deliberately reads/writes only KEY. OLD_KEY remains strictly read-only for backup.
 const SaveStore=Object.freeze({
   key:KEY,
@@ -840,12 +840,14 @@ function migrateSave(raw){
   result.choiceMemories={};
   result.choiceMemoryDay={};
   result.choiceMemoryShown={};
+  result.choiceBattleShown={};
   for(const {key:episode} of Object.values(CHOICE_MEMORY_LINES)){
     const choice=raw.choiceMemories?.[episode],day=raw.choiceMemoryDay?.[episode];
     if((choice==='a'||choice==='b')&&Number.isSafeInteger(day)&&day>=1&&day<=1000000){
       result.choiceMemories[episode]=choice;
       result.choiceMemoryDay[episode]=day;
       result.choiceMemoryShown[episode]=raw.choiceMemoryShown?.[episode]===true;
+      result.choiceBattleShown[episode]=raw.choiceBattleShown?.[episode]===true;
     }
   }
   result.owned={...defaults.owned};
@@ -2977,6 +2979,33 @@ function checkBattleDone(){
   if(battle.allies.every(a=>a.hp<=0)){finishBattle(false);return}
   if(battle.enemies.length>0&&battle.enemies.every(e=>e.hp<=0)){if(!Q12C.victory(battle))advanceNextWave();}
 }
+// Choice memory v0.3: only completed, real, non-repeat operation wins can produce
+// a one-time callback. No fictional MVP, damage, kill or combat achievement claims.
+const CHOICE_BATTLE_LINES=Object.freeze({
+ momoka:Object.freeze({a:'「おかえり、責任者さん！ 無事に帰れてよかった！ ……帰りにたい焼き、半分こしよ？」',b:'「やった、無事に帰還！ ごほうびはたい焼きだね。頭派の責任者さん、今日も譲らないんでしょ？」'}),
+ milku:Object.freeze({a:'「無事に帰れて安心しました。お茶と、あの試作タルトを用意しています。今度は味見、見つからないようにしますね。」',b:'「お疲れさまでした。あのとき二人で食べたように、今日は帰還のお祝いを一緒にいただきませんか？」'}),
+ reina:Object.freeze({a:'「帰還しましたね、責任者さん。約束の再戦はまた今度。今日は無事に戻れたことを喜ばせてください。」',b:'「作戦成功ですね。前に話した好手の教え合い、今夜の反省会で続きを聞いてもいいですか？」'}),
+ akane:Object.freeze({a:'「全員、戻れたね！ 前は競争したけど、帰還するまでが勝負だもん。今日は一緒に歩こう！」',b:'「任務完了！ あのとき一緒に息を整えたの、思い出したよ。今日はちょっと休もうか。」'}),
+ aoi:Object.freeze({a:'「任務成功を確認しました。……あのときと同じ席で、帰還記録を一緒にまとめませんか。」',b:'「無事の帰還を確認しました。記録はあとにして、前に話した本の続きを少しだけ聞きたいです。」'}),
+ chinatsu:Object.freeze({a:'「お疲れさま、責任者くん。無事に戻れたご褒美に、前に選んでくれたお店に寄ってみない？」',b:'「帰還、おめでとう。前は席を取ってくれたでしょう？ 今日は私が席を用意しておくね。」'}),
+ nagi:Object.freeze({a:'「……おかえり。無事でよかった。……前みたいに、少しだけ波の音を聞きに行く？」',b:'「……戻ったんだね。……今日のことも、前みたいに少し聞かせて。」'})
+});
+function claimChoiceBattleCallback(allies,won,qid,grind,preview){
+ if(!won||preview||grind||qid==='q28'||!Array.isArray(allies))return null;
+ for(const ally of allies){
+  // Ignore stale/removed unit references; only a currently owned participant counts.
+  if(!data(ally?.id))continue;
+  const id=unit(ally?.id)?.person,entry=CHOICE_MEMORY_LINES[id];
+  if(!entry||!CHOICE_BATTLE_LINES[id]||!romanceHeroAvailable(id)||!bondSeen(id,0))continue;
+  const choice=S.choiceMemories?.[entry.key],day=S.choiceMemoryDay?.[entry.key];
+  if(!['a','b'].includes(choice)||!Number.isSafeInteger(day)||day<1||S.choiceBattleShown?.[entry.key])continue;
+  if(!S.choiceBattleShown)S.choiceBattleShown={};
+  S.choiceBattleShown[entry.key]=true;
+  return {id,choice,text:CHOICE_BATTLE_LINES[id][choice]};
+ }
+ return null;
+}
+
 function finishBattle(won){
   if(!battle||battle.done)return;
   if(battle.turnBattle)tbClearTimer();
@@ -2994,6 +3023,8 @@ function finishBattle(won){
       :{title:won?'朔夜戦・体験完了':'朔夜戦・体験終了',message:won?'ボスと残響の檻の両方を突破しました。体験モードのため報酬・クエストクリア・セーブは変更していません。':'体験モードでは報酬・セーブ・クエスト進行に影響しません。育成・編成を整えると本編の戦闘を攻略しやすくなります。'};
     render();return;
   }
+  // Claim before the existing win-path persist(); preserve callback on reload.
+  const callback=claimChoiceBattleCallback(battle.allies,won,battle.qid,battle.grind,battle.preview);
   const firstClear=won&&!S.quests[battle.qid]?.complete;
   if(won){const q=QUESTS.find(x=>x.id===battle.qid),st=S.quests[q.id]||{clues:2},first=!st.complete;st.complete=true;st.clues=2;S.quests[q.id]=st;
     if(first){if(q.id==='q1'&&S.onboarding?.enabled)S.onboarding.stage='home';S.gems+=q.reward;S.gold+=q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD;const solved=!!S.investigations?.[q.id]?.solved;if(solved&&!S.insightRewards?.[q.id]){S.gems+=100+(S.investigations?.[q.id]?.firstTryBonus?20:0);S.insightRewards[q.id]=true;}const companion=S.investigations?.[q.id]?.hero;if(companion&&INVESTIGATION_HERO_IDS.includes(companion))setHeroAff(companion,Math.min(100,heroAff(companion)+2));for(const a of battle.allies){const d=data(a.id);d.aff=Math.min(100,d.aff+4)}}
@@ -3009,6 +3040,7 @@ function finishBattle(won){
   const totalDone=battle.grind?.repeatWon+1||0;
   const questId=battle.qid;
   if(questId==='q28')dialog={title:'灯室の戦い・終了',message:'圧倒的な光に抗った。灯室に異変が起き、物語が続きます。勝利は不要です。'};
+  if(callback)dialog.message+=`\n\n【${PEOPLE[callback.id].name}／帰還後のひと言】\n${callback.text}`;
   if(won&&firstClear&&!battle.grind){
   const after=questAfterStory(questId);
   pendingStory=after?{type:'post',qid:questId,storyId:after}:null;
