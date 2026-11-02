@@ -331,7 +331,7 @@ function questUnlocked(q){
  return !intro||!!S.storyFlags?.[intro];
 }
 
-const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},choiceMemories:{},choiceMemoryDay:{},choiceMemoryShown:{},choiceBattleShown:{},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
+const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},chapterChoiceMemory:{},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},choiceMemories:{},choiceMemoryDay:{},choiceMemoryShown:{},choiceBattleShown:{},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
 // SaveStore deliberately reads/writes only KEY. OLD_KEY remains strictly read-only for backup.
 const SaveStore=Object.freeze({
   key:KEY,
@@ -861,6 +861,13 @@ function migrateSave(raw){
   result.battleMode=raw.battleModeOptInV03466===true&&raw.battleMode==='legacy'?'legacy':'turn';
   result.battleModeOptInV03466=true;
   result.storyFlags=isRecord(raw.storyFlags)?{...defaults.storyFlags,...raw.storyFlags}:defaults.storyFlags;
+  // A completed episode alone makes its first selection eligible for restoration.
+  // Legacy saves have no evidence of the original selection and remain neutral.
+  result.chapterChoiceMemory={};
+  for(const [episode,options] of Object.entries({prologue:['people','place'],chapter1_open:['field','record']})){
+    const choice=raw.chapterChoiceMemory?.[episode];
+    if(result.storyFlags[episode]===true&&options.includes(choice))result.chapterChoiceMemory[episode]=choice;
+  }
   // First-read choices of known heroine episodes; malformed/old saves remain neutral.
   result.choiceMemories={};
   result.choiceMemoryDay={};
@@ -1211,7 +1218,7 @@ function skipPrologue(){if(view==='prologue'&&storySession)finishPrologue()}
 function prologueTap(event){if(!storySession||PROLOGUE[storySession.step]?.choices||event.target.closest('button,a,input,select,textarea,[role="button"]'))return;nextPrologue()}
 function nextPrologue(){if(!storySession)return;storySession.step++;if(storySession.step>=PROLOGUE.length)return finishPrologue();render()}
 function choosePrologue(choice){if(!storySession||!['people','place'].includes(choice)||!PROLOGUE[storySession.step]?.choices)return;storySession.choice=choice;nextPrologue()}
-function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyFlags.prologue;S.storyFlags.prologue=true;if(first)S.gems+=150;if(S.onboarding?.enabled&&S.onboarding.stage==='prologue'){S.onboarding.stage='q1';S.questGuideSeen=true;}persist();storySession=null;view='story';citySheetQuest='';render();toast(first?'序章クリア：星晶石150（初回のみ）':'序章を再読しました');window.scrollTo(0,0)}
+function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyFlags.prologue;S.storyFlags.prologue=true;if(first&&['people','place'].includes(storySession?.choice))S.chapterChoiceMemory.prologue=storySession.choice;if(first)S.gems+=150;if(S.onboarding?.enabled&&S.onboarding.stage==='prologue'){S.onboarding.stage='q1';S.questGuideSeen=true;}persist();storySession=null;view='story';citySheetQuest='';render();toast(first?'序章クリア：星晶石150（初回のみ）':'序章を再読しました');window.scrollTo(0,0)}
 // Narrative-only portrait cast; not a recruitable heroine and never serialized.
 const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'売人イブキ',haruka:'霧島 ハルカ'}); // v0.34.56.0: 朔夜・イブキにも会話用の立ち絵
 const CHAPTER3_ONLY_VOICE=Object.freeze({ibuki:'売人イブキ'});
@@ -1227,7 +1234,7 @@ function prologuePage(){
  const prologueFaces=authoredStoryFaceState('prologue',PROLOGUE,i).faces;
  const cast=currentPortrait?`<figure class="onb-person speaking">${expressionPortraitMarkup(sp,prologueFaces[sp]||'normal','prologue',{wrapperClass:'onb-expression',alt:`${PEOPLE[sp]?.name||STORY_ONLY_CAST[sp]}の立ち絵`})}</figure>`:'';
  return `<div class="story-panel card onb-prologue vn-story" aria-label="序章の会話画面" onclick="prologueTap(event)">
- <div class="story-scene has-bg"><div class="story-bg" style="background-image:url('assets/ART_V2/backgrounds/bg_soudan_day.webp')" aria-hidden="true"></div><div class="story-skyline"></div><div class="onb-cast">${cast}</div>
+ <div class="story-scene has-bg"><div class="story-bg" style="background-image:url('assets/ART_V2/backgrounds/bg_soudan_day.webp')" aria-hidden="true"></div><div class="story-skyline" style="pointer-events:none"></div><div class="onb-cast">${cast}</div>
  <div class="vn-toolbar"><span class="vn-location">東雲商店街 ／ 宵星相談室 · 午前</span><div class="vn-top-actions"><button type="button" class="vn-tool" onclick="skipPrologue()">スキップ</button><button type="button" class="vn-tool" onclick="requestInterrupt()">閉じる</button></div></div>
  <div class="story-dialogue"><div class="vn-dialogue-head"><span class="vn-speaker">${sc.who==='narrator'?'':esc(who)}</span></div>
  <p class="story-line">${esc(substitutePlayerName(line))}</p>
@@ -1331,6 +1338,7 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {who:'momoka',text:'「えへへ。うん、ちょっとね。……それより、早くみんなのお話を聞こう！」'},
    {who:'milku',text:'「……ももかさん？」'},
    {who:'momoka',text:'「だいじょうぶ！ ほら、行こ！」'},
+   {who:'momoka',chapterEcho:'prologue_momoka'},
    {who:'aoi',text:'「そうですね。先に決めつけず、集まった記録とお話を比べてみましょう。」'},
    {who:'narrator',text:'ももかはいつもの笑顔で先を歩き出す。あなたたちも、最初の聞き込みへ向かった。'}]},
   q4_lead:{title:'誰もいない教室の黒板・導入',place:'旧宵星第二小学校',requires:[],lines:[
@@ -1370,6 +1378,7 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {who:'milku',text:'「……あ、すみません。灯りを見たら、つい。お客さまをお迎えする前の癖なんです。」'},
    {who:'akane',text:'「通りの安全は私が見ておくよ。みんなは調査に集中して！」'},
    {who:'milku',text:'「はい。お話を聞く方が安心できるように、私もお手伝いしますね。」'},
+   {who:'milku',chapterEcho:'prologue_milku'},
    {who:'narrator',text:'みるくはいつもと同じように微笑んだ。だが、笑い終えるまでに、ほんの少し間があった。'}]},
   q3_lead:{title:'消えない踏切の警報・導入',place:'東雲駅前',requires:[],lines:[
    {who:'narrator',text:'東雲駅前。使われていない線路を、閉じた遮断機が横切っている。誰も通らないはずの踏切で、警報だけが繰り返し鳴っていた。'},
@@ -1380,6 +1389,7 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {who:'reina',text:'「原因を特定できなければ、別の場所でも同じことが起きるかもしれません。今の記録を逃したくないんです。」'},
    {who:'akane',text:'「私だって次を防ぎたいよ！ でも、今ここにいる人を危険に近づけるわけにはいかない。」'},
    {who:'narrator',text:'二人が言葉を切った間にも、警報が鳴る。'},
+   {who:'akane',chapterEcho:'chapter1_akane'},
    {who:'aoi',text:'「離れた場所から記録できるものもあります。近づく必要がある場所は、朱音さんの安全確認を待ちましょう。」'},
    {who:'you',text:'「それでいこう。安全を確認できた場所から調べる。状況が変わったら、すぐに知らせ合おう。」'},
    {who:'reina',text:'「……分かりました。現場の記録は、私が確認します。」'},
@@ -1487,6 +1497,10 @@ function romanceScript(id){
  if(id==='kaede_meet')return CHAPTER2_LATE_MEETINGS.kaede;
  if(BOND_STORY_CATALOG[id])return BOND_STORY_CATALOG[id];
  const script=CHAPTER_STORIES[id];
+ if(['q1_lead','q2_lead','q3_lead'].includes(id)&&script){
+  // Old saves do not invent a first-time decision they cannot reconstruct.
+  return {...script,lines:script.lines.filter(line=>!line.chapterEcho||!!chapterChoiceEcho(line))};
+ }
  if(id!=='chapter1_end'||!script)return script;
  const mom=heroAff('momoka'),mil=heroAff('milku');
  if(!mom&&!mil)return script;
@@ -1551,7 +1565,19 @@ function openStory(id){
  if(view!=='story')storyOrigin=view;
  clearToast();storySession={id,step:id==='oldcafe_meet'&&!S.oldcafeMet?Math.min(S.oldcafeMeetingProgress||0,OLDCAFE_MEETING.lines.length-1):id==='station_meet'&&!S.stationMet?Math.min(S.stationMeetingProgress||0,STATION_MEETING.lines.length-1):id==='school_meet'&&!S.schoolMet?Math.min(S.schoolMeetingProgress||0,SCHOOL_MEETING.lines.length-1):id==='office_meet'&&!S.officeMet?Math.min(S.officeMeetingProgress||0,OFFICE_MEETING.lines.length-1):id==='seaside_meet'&&!S.seasideMet?Math.min(S.seasideMeetingProgress||0,SEASIDE_MEETING.lines.length-1):id==='lighthouse_meet'&&!S.lighthouseMet?Math.min(S.lighthouseMeetingProgress||0,LIGHTHOUSE_MEETING.lines.length-1):id==='tsubaki_meet'&&!S.tsubakiMet?Math.min(S.tsubakiMeetingProgress||0,CHAPTER2_MEETINGS.tsubaki.lines.length-1):id==='erika_meet'&&!S.erikaMet?Math.min(S.erikaMeetingProgress||0,CHAPTER2_MEETINGS.erika.lines.length-1):id==='kaname_meet'&&!S.kanameMet?Math.min(S.kanameMeetingProgress||0,CHAPTER2_LATE_MEETINGS.kaname.lines.length-1):id==='kaede_meet'&&!S.kaedeMet?Math.min(S.kaedeMeetingProgress||0,CHAPTER2_LATE_MEETINGS.kaede.lines.length-1):0,choice:null};preloadStoryBackgrounds(id);view='story';render();window.scrollTo(0,0);
 }
+// Three small callbacks to existing Chapter-1 choices; no branching quests or spoiler lines.
+const CHAPTER_CHOICE_ECHO=Object.freeze({
+ prologue_momoka:Object.freeze({episode:'prologue',people:'「責任者さん、最初に商店街のみんなの話を聞こうって言ってくれたよね。……なんだか、うれしかったんだ。」',place:'「最初に時計の音を確かめてくれたでしょ。怖い音でも、きちんと調べれば分かるかもしれないって思えたよ。」'}),
+ prologue_milku:Object.freeze({episode:'prologue',people:'「最初にお店の人の話を聞こうとしたこと、覚えています。ここでも、誰かの気持ちを置いていかずに調べたいですね。」',place:'「最初に時計の音を確かめたこと、覚えています。今度は、この灯りの記録を一緒に調べましょう。」'}),
+ chapter1_akane:Object.freeze({episode:'chapter1_open',field:'「相談室で現場を優先しようって決めてくれたよね。今回も安全な道を確保する。記録を取る場所は、それから一緒に考えよう！」',record:'「相談室で記録を優先しようって決めてくれたよね。玲奈の調査も大切だよ。だから、安全に調べられる場所を私が確保する！」'})
+});
+function chapterChoiceEcho(sc){
+ const entry=CHAPTER_CHOICE_ECHO[sc?.chapterEcho],choice=entry&&S.chapterChoiceMemory?.[entry.episode];
+ return entry&&['people','place','field','record'].includes(choice)?entry[choice]||'':'';
+}
+
 function storyLineText(sc){
+ if(sc.chapterEcho)return substitutePlayerName(chapterChoiceEcho(sc));
  if(storySession?.id==='chapter1_open'){
   if(sc.text==='branch')return CHAPTER_CHOICE_REPLIES[storySession.choice]||CHAPTER_CHOICE_REPLIES.field;
   if(sc.text==='branch_followup')return CHAPTER_CHOICE_FOLLOWUPS[storySession.choice]||CHAPTER_CHOICE_FOLLOWUPS.field;
@@ -1647,6 +1673,7 @@ function finishStory(){
  }
  const first=!S.storyFlags[id];
  S.storyFlags[id]=true;
+ if(first&&id==='chapter1_open'&&['field','record'].includes(storySession.choice))S.chapterChoiceMemory.chapter1_open=storySession.choice;
  if(first&&id==='chapter1_end'&&S.quests.q6?.complete)S.gems+=CHAPTER_CLEAR_GEMS;
  if(first&&id==='chapter2_end'&&S.quests.q12?.complete)S.gems+=CHAPTER_CLEAR_GEMS;
  const flow=questStoryFlow?.storyId===id?questStoryFlow:null;
@@ -1723,7 +1750,7 @@ function chapterStoryPage(){
  const isChapter3Story=!!CHAPTER3_STORIES[storySession.id]||!!CHAPTER3_LATE_STORIES[storySession.id];
  const isChapter2Story=['chapter2_open','q7','q8','q9','q10','q11','q12','chapter2_end','tsubaki_meet','erika_meet','kaname_meet','kaede_meet'].includes(storySession.id)||['concept35','concept34','concept31','concept36'].includes(BOND_STORY_CATALOG[storySession.id]?.person);
  return `<div class="story-panel card chapter-story chapter-story-v071 vn-story" aria-label="物語の再生画面">
- <div class="story-scene ${castMarkup?'':'no-cast'} ${bgPath?'has-bg':''}">${bgMarkup}<div class="story-skyline"></div><div class="story-cast">${castMarkup}</div>
+ <div class="story-scene ${castMarkup?'':'no-cast'} ${bgPath?'has-bg':''}">${bgMarkup}<div class="story-skyline" style="pointer-events:none"></div><div class="story-cast" style="pointer-events:none">${castMarkup}</div>
  <div class="vn-toolbar"><span class="vn-location">${esc(placeTime)}</span><div class="vn-top-actions"><button type="button" class="vn-tool" onclick="toggleStoryLog()">ログ</button><button type="button" class="vn-tool ${readerPrefs().auto?'is-on':''}" aria-pressed="${readerPrefs().auto?'true':'false'}" onclick="toggleStoryAuto()">オート</button><button type="button" class="vn-tool" onclick="previousStory()" ${index===0?'disabled':''}>戻る</button><button type="button" class="vn-tool" onclick="skipChapterStory()">スキップ</button><button type="button" class="vn-tool" onclick="requestInterrupt()">閉じる</button></div></div>
  <div class="story-dialogue"><div class="vn-dialogue-head"><span class="vn-speaker">${sc.who==='narrator'?'':esc(who)}</span></div>
  <p class="story-line">${esc(storyLineText(sc))}</p>
