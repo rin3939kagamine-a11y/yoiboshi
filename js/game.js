@@ -1500,7 +1500,7 @@ function romanceScript(id){
  if(id==='kaede_meet')return CHAPTER2_LATE_MEETINGS.kaede;
  if(BOND_STORY_CATALOG[id])return BOND_STORY_CATALOG[id];
  const script=CHAPTER_STORIES[id];
- if(['q1_lead','q2_lead','q3_lead','q7_lead','q8_lead','q9_lead'].includes(id)&&script){
+ if(['q1_lead','q2_lead','q3_lead','q7_lead','q8_lead','q9_lead','q13_intro','q16_intro','q17_intro'].includes(id)&&script){
   // Old saves do not invent a first-time decision they cannot reconstruct.
   return {...script,lines:script.lines.filter(line=>!line.chapterEcho||!!chapterChoiceEcho(line))};
  }
@@ -1575,7 +1575,10 @@ const CHAPTER_CHOICE_ECHO=Object.freeze({
  chapter1_akane:Object.freeze({episode:'chapter1_open',field:'「相談室で現場を優先しようって決めてくれたよね。今回も安全な道を確保する。記録を取る場所は、それから一緒に考えよう！」',record:'「相談室で記録を優先しようって決めてくれたよね。玲奈の調査も大切だよ。だから、安全に調べられる場所を私が確保する！」'}),
  chapter2_aoi:Object.freeze({episode:'chapter1_open',field:'「前に、まず現場を確かめようと決めましたよね。椿さんのノートの時刻と、この家の反応を現地で照らしてみましょう。」',record:'「前に、記録から確かめようと決めましたよね。椿さんのノートの時刻と星灯の波形を、一つずつ比較しましょう。」'}),
  chapter2_reina:Object.freeze({episode:'chapter1_open',field:'「前に、現場を見て確かめる方針でしたよね。今回も、会場で見たものを記録と照らし合わせたいです。」',record:'「前に、記録を見落とさない方針でしたよね。この封蝋の模様も、椿さんのノートと正確に比べておきます。」'}),
- chapter2_akane:Object.freeze({episode:'chapter1_open',field:'「前にも現場の確認を優先したよね。今回も、危ない場所は私が先に調べて、みんなに知らせる！」',record:'「前には記録を大事にしようって決めたよね。今日は私が見回るから、気づいたことは全部、玲奈たちに伝えるよ！」'})
+ chapter2_akane:Object.freeze({episode:'chapter1_open',field:'「前にも現場の確認を優先したよね。今回も、危ない場所は私が先に調べて、みんなに知らせる！」',record:'「前には記録を大事にしようって決めたよね。今日は私が見回るから、気づいたことは全部、玲奈たちに伝えるよ！」'}),
+ chapter3_aoi_lighthouse:Object.freeze({episode:'chapter1_open',field:'「前に現場を先に確かめると決めましたよね。帳面だけでなく、灯台の海側の反応も見落とさずに調べましょう。」',record:'「前に記録から確かめると決めましたよね。点灯記録の空白と、ノエルさんの夢の波形を先に比べてみます。」'}),
+ chapter3_aoi_flames:Object.freeze({episode:'chapter1_open',field:'「前に現場の反応から確かめたときのように、星灯と灯火の違いも実際の現象から調べたいです。」',record:'「前に記録を照らし合わせたときのように、星灯と灯火の違いも観測値を並べて確かめたいです。」'}),
+ chapter3_aoi_market:Object.freeze({episode:'chapter1_open',field:'「前に現場から確かめると決めましたね。夜市でも、まず被害に遭った人の安全を見て、その場の手がかりを集めましょう。」',record:'「前に記録から確かめると決めましたね。被害に遭った人を守りながら、結晶に残る波形を失わないうちに記録します。」'})
 });
 function chapterChoiceEcho(sc){
  const entry=CHAPTER_CHOICE_ECHO[sc?.chapterEcho],choice=entry&&S.chapterChoiceMemory?.[entry.episode];
