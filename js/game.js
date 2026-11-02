@@ -331,7 +331,7 @@ function questUnlocked(q){
  return !intro||!!S.storyFlags?.[intro];
 }
 
-const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
+const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},choiceMemories:{},choiceMemoryDay:{},choiceMemoryShown:{},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
 // SaveStore deliberately reads/writes only KEY. OLD_KEY remains strictly read-only for backup.
 const SaveStore=Object.freeze({
   key:KEY,
@@ -631,13 +631,52 @@ function romancePlaceHintFor(id){
  if(!known.length)return '行き先の好みはまだ分かりません。出かけると手帳に記録されます。';
  return `${like.length?`好き：${like.join('・')}`:''}${like.length&&dis.length?' ／ ':''}${dis.length?`苦手：${dis.join('・')}`:''}`||'好みはまだはっきりしません。';
 }
+// Choice memory v0.1: only existing first bond episodes of Momoka and Milku.
+// This is a deferred personal dialogue, not another daily action or a battle reward.
+const CHOICE_MEMORY_LINES=Object.freeze({
+ momoka:Object.freeze({
+  key:'bond_momoka_0',
+  hint:'ももかが、たい焼き裁判の続きを話したがっている。',
+  a:'「ねえ、責任者さん！ たい焼き裁判の判決、まだ有効だからね。今日は半分こしよ！」',
+  b:'「あっ、頭派の裁判官！ 今日こそしっぽ派に寝返らせちゃうから、覚悟してね！」'
+ }),
+ milku:Object.freeze({
+  key:'bond_milku_0',
+  hint:'みるくが、前に一緒に食べたタルトの話を覚えている。',
+  a:'「この前の試作、味見したのをすぐ見抜かれましたね。今日は二人分、ちゃんと用意しましたよ。」',
+  b:'「この前、一緒に食べてくださったのが嬉しくて。今日は最初から、お皿を二枚用意していたんです。」'
+ })
+});
+function pendingChoiceMemory(id){
+ const entry=CHOICE_MEMORY_LINES[id];
+ if(!entry||!romanceHeroAvailable(id)||!bondSeen(id,0))return null;
+ const choice=S.choiceMemories?.[entry.key],atDay=S.choiceMemoryDay?.[entry.key];
+ if(!['a','b'].includes(choice)||!Number.isSafeInteger(atDay)||loveState().day<=atDay||S.choiceMemoryShown?.[entry.key])return null;
+ return {entry,choice};
+}
+function openChoiceMemory(id){
+ if(view!=='talk')return;
+ const item=pendingChoiceMemory(id);
+ if(!item)return;
+ const {entry,choice}=item;
+ S.choiceMemoryShown[entry.key]=true;
+ persist();
+ dialog={
+  title:`${PEOPLE[id].name}が覚えていたこと`,
+  message:entry[choice],
+  html:`<div class="romance-result expression-result">${expressionPortraitMarkup(id,id==='momoka'?'smile':'blush',`choice-memory:${id}:${choice}`,{wrapperClass:'expr-character-layer',alt:PEOPLE[id].name})}</div>`
+ };
+ render();
+}
+
 function romanceTodayCard(id){
  const l=loveState(),inv=l.invitation&&l.invitation.person===id&&!l.invitation.used?ROMANCE_PLACES.find(p=>p.id===l.invitation.place):null;
  const done=l.met[id];
  return `<div class="romance-today"><div class="romance-today-row"><span class="chip">${l.day}日目</span><span class="chip">${esc(ROMANCE_WEATHER_LABELS[l.weather])}</span><span class="chip">残り行動 ${l.actions}/${ROMANCE_RULES.ACTIONS_PER_DAY}</span><span class="chip ${l.sulking[id]?'is-warn':''}">${esc(romanceMoodShort(id))}</span></div>
   ${inv?`<p class="romance-today-invite">✦ 今日は<b>${esc(inv.short)}</b>に行きたいみたい。誘いに応えると親密度がよく上がります。</p>`:''}
   ${done?'<p class="romance-today-done">今日はもうお出かけしました。</p>':''}
-  <p class="romance-today-hint">${esc(romancePlaceHintFor(id))}</p></div>`;
+  <p class="romance-today-hint">${esc(romancePlaceHintFor(id))}</p>
+  ${pendingChoiceMemory(id)?`<div class="romance-today-memory"><p>${esc(pendingChoiceMemory(id).entry.hint)}</p><button type="button" class="btn outline" onclick="openChoiceMemory('${id}')">この前の話の続き</button></div>`:''}</div>`;
 }
 function openRomancePlacePicker(id){return startRomanceOuting(id);}
 function startRomanceOuting(id){if(!HERO_IDS.includes(id)||!loveCanAct())return toast('今日はもう行動できません');if(!romanceHeroAvailable(id))return toast('ガチャで迎えると交流できます');if(loveState().pending)return openRomancePending();if(loveState().sulking[id]){romanceSelectionInProgress=true;const r=ROMANCE_SULK_REPAIR[id];dialog={title:`${PEOPLE[id].name}との待ち合わせ`,message:loveMoodDescription(id),html:`<div class="expression-repair">${expressionPortraitMarkup(id,'pout',`repair-entry:${id}:${loveState().day}`,{wrapperClass:'expr-character-layer',alt:PEOPLE[id].name})}</div><div class="romance-options">${r.choices.map((c,i)=>`<button class="btn outline" onclick="answerRomanceRepair('${id}',${i})">${esc(c)}</button>`).join('')}</div>`};return render()}showRomancePlaces(id,false)}
@@ -762,6 +801,18 @@ function migrateSave(raw){
   result.battleMode=raw.battleModeOptInV03466===true&&raw.battleMode==='legacy'?'legacy':'turn';
   result.battleModeOptInV03466=true;
   result.storyFlags=isRecord(raw.storyFlags)?{...defaults.storyFlags,...raw.storyFlags}:defaults.storyFlags;
+  // First-read choices of the initial two heroines; absent/malformed old saves remain neutral.
+  result.choiceMemories={};
+  result.choiceMemoryDay={};
+  result.choiceMemoryShown={};
+  for(const episode of ['bond_momoka_0','bond_milku_0']){
+    const choice=raw.choiceMemories?.[episode],day=raw.choiceMemoryDay?.[episode];
+    if((choice==='a'||choice==='b')&&Number.isSafeInteger(day)&&day>=1&&day<=1000000){
+      result.choiceMemories[episode]=choice;
+      result.choiceMemoryDay[episode]=day;
+      result.choiceMemoryShown[episode]=raw.choiceMemoryShown?.[episode]===true;
+    }
+  }
   result.owned={...defaults.owned};
   for(const [id,entry] of Object.entries(raw.owned)){
     if(!isRecord(entry))continue;
@@ -1481,6 +1532,12 @@ function finishStory(){
   const script=BOND_STORY_CATALOG[id],i=script.threshold/20-1;
   const first=!bondSeen(script.person,i);
   S.bondRead[script.person][i]=true;if(first)S.gems+=50;
+  // Only the first completed read is authoritative; replay never changes memories.
+  if(first&&(id==='bond_momoka_0'||id==='bond_milku_0')&&['a','b'].includes(storySession.choice)){
+    S.choiceMemories[id]=storySession.choice;
+    S.choiceMemoryDay[id]=loveState().day;
+    S.choiceMemoryShown[id]=false;
+  }
   persist();storySession=null;view='talk';render();
   if(first)toast(`${PEOPLE[script.person].name}の絆エピソード読了：星晶石50`);
   return;
