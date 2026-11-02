@@ -1,0 +1,143 @@
+/* 宵星 q6 クラシックサイドビュー試作 0.35.4.0。q6以外は対象外。 */
+.tb-root.q6-classic{
+ --q6-gold:#c7a970;color:#f5ebd7!important;background:linear-gradient(#12213a,#10182b)!important;
+ border:1px solid #9e885a!important;padding:6px!important;gap:5px!important
+}
+.tb-root.q6-classic .tb-layout-grid{display:flex!important;flex-direction:column!important;gap:5px!important}
+.tb-root.q6-classic .tb-field-col,.tb-root.q6-classic .tb-control-col{display:flex;flex-direction:column;gap:4px;min-width:0}
+.tb-root.q6-classic .tb-fighters{display:flex!important;flex-direction:column!important;gap:4px!important}
+.tb-root.q6-classic .tb-topline{margin:0!important;gap:4px!important;flex-wrap:wrap}
+.tb-root.q6-classic .tb-topline strong{color:#ffe7b4!important;font-size:12px!important}
+.tb-root.q6-classic .tb-topline>div{display:flex;flex-wrap:wrap;gap:3px}
+.tb-root.q6-classic .tb-topline .btn{font-size:10px!important;min-height:36px!important;min-width:44px;padding:4px 6px!important}
+.tb-root.q6-classic .tb-layout-toggle{display:none!important}
+.tb-root.q6-classic .q6-classic-hud{
+ display:grid;gap:4px;padding:7px 9px;border:1px solid #877653;border-radius:8px;
+ background:linear-gradient(150deg,#101c30,#1b2c49);color:#fff1d7
+}
+.tb-root.q6-classic .q6-classic-hud-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tb-root.q6-classic .q6-classic-hud-top strong{font-size:14px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb-root.q6-classic .q6-classic-percent{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;color:#ffda98}
+.tb-root.q6-classic .q6-classic-hp{height:11px;border-radius:9px;background:#251c29;border:1px solid #b6a08a;overflow:hidden}
+.tb-root.q6-classic .q6-classic-hp i{display:block;height:100%;background:linear-gradient(#ed8080,#b62f49);box-shadow:0 0 8px #ef637099;transition:width .25s}
+.tb-root.q6-classic .q6-classic-status{display:flex;gap:4px;flex-wrap:wrap;min-height:18px;align-items:center}
+.tb-root.q6-classic .q6-classic-state{border:1px solid #ab9e77;padding:1px 6px;border-radius:4px;font-size:10px;line-height:1.4;background:#4f4953;color:#fff}
+.tb-root.q6-classic .q6-classic-state.red{background:#77313b;border-color:#d78286}
+.tb-root.q6-classic .q6-classic-state.blue{background:#275071;border-color:#7abbe4}
+.tb-root.q6-classic .q6-classic-state.green{background:#285c4b;border-color:#64ca9c}
+.tb-root.q6-classic .q6-classic-state.neutral{opacity:.75}
+.tb-root.q6-classic .q6-classic-targets{display:flex;gap:4px;flex-wrap:wrap}
+.tb-root.q6-classic .q6-classic-target{
+ min-height:33px;padding:3px 9px;color:#e8e4d7;background:#2c3e56;
+ border:1px solid #8393aa;border-radius:5px;font-size:11px;touch-action:manipulation
+}
+.tb-root.q6-classic .q6-classic-target.chosen{color:#fff5d3;background:#58452e;border-color:#ffd085;box-shadow:inset 0 0 0 1px #ffd085}
+.tb-root.q6-classic .yc-turn-stage.q6-classic-stage{
+ height:clamp(255px,42dvh,410px)!important;min-height:255px!important;width:100%;
+ position:relative;border:1px solid #928464!important;border-radius:7px!important;
+ overflow:hidden!important;isolation:isolate;
+ background:linear-gradient(180deg,rgba(6,13,27,.20),rgba(9,17,30,.08) 47%,rgba(6,12,22,.84) 100%),
+ url('../assets/ART_V2/backgrounds/bg_lighthouse_night.webp') center 52%/cover no-repeat,#17263b!important
+}
+.tb-root.q6-classic .yc-turn-stage.q6-classic-stage:before{
+ content:'';position:absolute;inset:auto 0 0;height:19%;z-index:0;
+ pointer-events:none;background:linear-gradient(0deg,#091420a9,transparent)
+}
+.tb-root.q6-classic .yc-turn-stage.q6-classic-stage:after{
+ content:'旧灯台・残響域';position:absolute;top:7px;left:8px;z-index:7;
+ width:auto;background:#101b30d9;border:1px solid #72819a99;border-radius:5px;
+ color:#ebdfc6;padding:3px 7px;font-size:10px;pointer-events:none
+}
+.tb-root.q6-classic .yc-turn-stage .yc-slot{
+ width:min(18cqw,32cqh)!important;min-width:0!important;max-width:none!important;z-index:10!important
+}
+.tb-root.q6-classic .yc-turn-stage .yc-slot .yc-actor img{filter:drop-shadow(1px 4px 3px #060a13c9)}
+/* 味方は右に位置するので攻撃は左向き。 */
+.tb-root.q6-classic .yc-turn-stage .yc-slot .yc-actor.yc-attack{animation-name:q6-strike-left}
+@keyframes q6-strike-left{0%{transform:none}35%{transform:translate(-38%,-10%)}55%{transform:translate(-46%,0)}100%{transform:none}}
+.tb-root.q6-classic .yc-enemy-slot{
+ width:22%!important;height:54%!important;max-width:none!important;min-width:0!important;
+ z-index:4!important;touch-action:manipulation
+}
+.tb-root.q6-classic .yc-enemy-slot.q6-giant{width:49%!important;height:94%!important;z-index:3!important}
+.tb-root.q6-classic .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
+ inset:12% -7% 6%!important;background:transparent!important;
+ filter:drop-shadow(0 4px 6px #080b17b3)
+}
+.tb-root.q6-classic .yc-enemy-slot.q6-giant .yc-enemy-shell.yc-enemy-art-shell{
+ inset:3% -4% 0!important;
+ filter:drop-shadow(0 5px 9px #1e123c) drop-shadow(0 0 10px #7357b9)
+}
+.tb-root.q6-classic .yc-enemy-art{width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.tb-root.q6-classic .yc-enemy-slot .yc-enemy-hud{top:0;opacity:.85}
+.tb-root.q6-classic .yc-enemy-slot.q6-giant .yc-enemy-hud{display:none}
+.tb-root.q6-classic .yc-enemy-slot.q6-aura-red .yc-enemy-shell{filter:drop-shadow(0 0 10px #f06b73)!important}
+.tb-root.q6-classic .yc-enemy-slot.q6-aura-blue:not(.q6-aura-red) .yc-enemy-shell{filter:drop-shadow(0 0 10px #60b9ff)!important}
+.tb-root.q6-classic .yc-enemy-slot.q6-aura-green:not(.q6-aura-red):not(.q6-aura-blue) .yc-enemy-shell{filter:drop-shadow(0 0 10px #6cdea2)!important}
+.tb-root.q6-classic .yc-enemy-slot.q6-giant.yc-enemy-broken .yc-enemy-shell{filter:drop-shadow(0 0 15px #fff1a8)!important}
+.tb-root.q6-classic .yc-turn-stage .yc-intent-overview{
+ position:absolute;top:auto!important;bottom:4px;left:5px;right:5px;z-index:12;
+ max-height:45px;overflow:auto;background:#0d182aca;border:1px solid #6a7e9e;
+ color:#eef2fc
+}
+.tb-root.q6-classic .yc-turn-stage .yc-intent-chip{font-size:10px!important}
+.tb-root.q6-classic .tb-enemies.q6-detail-targets{
+ display:flex!important;flex-wrap:wrap!important;gap:4px!important;
+ padding:0!important;background:transparent!important;min-height:0!important
+}
+.tb-root.q6-classic .tb-enemies.q6-detail-targets .tb-enemy{
+ flex:1 1 120px;min-height:36px!important;background:#253750!important;
+ border:1px solid #7187a6!important;border-radius:6px!important;color:#f2f2fa!important
+}
+.tb-root.q6-classic .tb-enemies.q6-detail-targets .tb-enemy.selected{border:2px solid #ecc383!important}
+.tb-root.q6-classic .tb-enemies.q6-detail-targets .tb-enemy b,
+.tb-root.q6-classic .tb-enemies.q6-detail-targets .tb-enemy small{color:#f3f0e8!important}
+.tb-root.q6-classic .tb-order,.tb-root.q6-classic .tb-live-log{
+ background:#1b2c45!important;color:#f0edf0!important;border-color:#647a92!important
+}
+.tb-root.q6-classic .tb-control-col{
+ padding:4px!important;background:linear-gradient(#283950,#1b2a40);
+ border:1px solid #837251;border-radius:7px
+}
+.tb-root.q6-classic .tb-party-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:3px!important}
+.tb-root.q6-classic .tb-party{
+ min-width:0!important;min-height:75px!important;display:flex!important;flex-direction:column!important;
+ align-items:center!important;gap:3px!important;padding:4px 2px!important;
+ background:#f3eadb!important;color:#23324a!important;border:1px solid #b9a784!important;border-radius:6px!important
+}
+.tb-root.q6-classic .tb-party.active{box-shadow:inset 0 0 0 2px #d69e40;border-color:#d69e40!important}
+.tb-root.q6-classic .tb-party img{display:block!important;flex:none;width:36px!important;height:36px!important;object-fit:cover}
+.tb-root.q6-classic .tb-party>div{display:flex!important;flex-direction:column;gap:3px;width:100%;min-width:0;text-align:center}
+.tb-root.q6-classic .tb-party b{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px!important;line-height:1.1}
+.tb-root.q6-classic .tb-party small{font-size:9px!important;line-height:1.15!important;white-space:normal;overflow-wrap:anywhere}
+.tb-root.q6-classic .tb-party .tb-hp{height:7px!important;background:#394358!important}
+.tb-root.q6-classic .tb-party .tb-hp i{background:#67ce93!important}
+.tb-root.q6-classic .tb-commands{
+ background:#1b2a41!important;border:1px solid #526887!important;color:#f6e8ca!important;gap:5px!important
+}
+.tb-root.q6-classic .tb-commands>b{color:#f7e7c8;font-size:11px}
+.tb-root.q6-classic .tb-command-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:5px!important}
+.tb-root.q6-classic .tb-command-row .btn{min-height:44px!important;font-size:12px!important;font-weight:800;padding:5px 8px!important}
+.tb-root.q6-classic .tb-command-row .q6-attack-btn{
+ background:linear-gradient(#e8a75f,#a95b34)!important;color:#2a190a!important;
+ border:1px solid #f9cd83!important;box-shadow:0 2px 0 #6d341d!important;font-size:16px!important;letter-spacing:.05em
+}
+.tb-root.q6-classic .tb-skill-wrapper{min-width:0}
+.tb-root.q6-classic .tb-skill-wrapper .tb-action{width:100%;padding-right:44px!important}
+.tb-root.q6-classic .tb-flame-ui,.tb-root.q6-classic .tb-flame-ui .tb-light{color:#29354c!important}
+.tb-root.q6-classic .tb-rotate-hint,.tb-root.q6-classic .tb-weak-note{display:none!important}
+.tb-root.q6-classic .tb-help{color:#1d2c42}
+@media(max-width:430px){
+ .tb-root.q6-classic .yc-turn-stage.q6-classic-stage{height:clamp(260px,37dvh,340px)!important}
+ .tb-root.q6-classic .tb-topline .btn{font-size:9px!important}
+ .tb-root.q6-classic .tb-party img{width:29px!important;height:29px!important}
+ .tb-root.q6-classic .tb-party{min-height:73px!important}
+ .tb-root.q6-classic .tb-party b{font-size:10px!important}
+ .tb-root.q6-classic .tb-party small{font-size:8px!important}
+}
+@media(orientation:landscape) and (max-height:500px){
+ .tb-root.q6-classic .yc-turn-stage.q6-classic-stage{height:260px!important;min-height:260px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .tb-root.q6-classic .yc-turn-stage .yc-slot .yc-actor.yc-attack{animation:none}
+}
