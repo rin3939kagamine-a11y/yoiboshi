@@ -1250,6 +1250,7 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {"who":"you","text":"「お姉さんのことで相談があると聞いています。」"},
    {"who":"concept35","text":"「楓。双子の姉よ。三か月前、自分の部屋からいなくなった。届けも出したけど、手がかりはひとつも出てこなかった。」"},
    {"who":"aoi","text":"「この家の周辺で、個人の星灯に近い波形が観測されています。だから私たちが来ました。」"},
+   {who:'aoi',chapterEcho:'chapter2_aoi'},
    {"who":"concept35","text":"「……星灯。やっぱり、普通の失踪じゃないのね。」"},
    {"who":"narrator","text":"椿は門を開け、二階を見上げた。一番奥の部屋だけ、カーテンが閉じたままだ。"},
    {"who":"concept35","text":"「夜になると、姉の部屋から声がするの。楓の声に、そっくりな。」"},
@@ -1261,6 +1262,7 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
   q8_lead:{title:"仮面の夜会・導入",place:"宵星市・夜会場",requires:[],lines:[
    {"who":"narrator","text":"港通りの外れ、看板のないビル。差出人のない招待状に書かれた住所は、ここを指していた。"},
    {"who":"reina","text":"「招待状の封蝋、椿さんのノートにあった紋様と似ています。偶然とは思えません。」"},
+   {who:'reina',chapterEcho:'chapter2_reina'},
    {"who":"aoi","text":"「会場の中から、複数の星灯の反応があります。……契約者が何人も集まっているのかもしれません。」"},
    {"who":"you","text":"「全員が敵とは限らない。まずは様子を見よう。」"},
    {"who":"narrator","text":"受付で手渡された仮面をつけてホールに入ると、同じように顔を隠した人々が、グラスを手に談笑していた。"},
@@ -1277,6 +1279,7 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {"who":"narrator","text":"夜会で拾った紙片には、数字と記号が並んでいた。玲奈が一晩かけて読み解いた先は、宵星港の倉庫街だった。"},
    {"who":"reina","text":"「倉庫の番号と、満潮の時刻です。今夜、ここで何かが起きます。」"},
    {"who":"akane","text":"「この辺りは夜になると誰もいなくなるの。見回りは私がするね。倉庫の扉には勝手に触らないで！」"},
+   {who:'akane',chapterEcho:'chapter2_akane'},
    {"who":"aoi","text":"「星灯の反応……擬似体とは違います。細くて、まっすぐな波形。契約者本人の反応に近いです。」"},
    {"who":"you","text":"「夜会にいた誰かか？」"},
    {"who":"aoi","text":"「分かりません。ただ、その人は、私たちより先にここへ来ています。」"},
@@ -1497,7 +1500,7 @@ function romanceScript(id){
  if(id==='kaede_meet')return CHAPTER2_LATE_MEETINGS.kaede;
  if(BOND_STORY_CATALOG[id])return BOND_STORY_CATALOG[id];
  const script=CHAPTER_STORIES[id];
- if(['q1_lead','q2_lead','q3_lead'].includes(id)&&script){
+ if(['q1_lead','q2_lead','q3_lead','q7_lead','q8_lead','q9_lead'].includes(id)&&script){
   // Old saves do not invent a first-time decision they cannot reconstruct.
   return {...script,lines:script.lines.filter(line=>!line.chapterEcho||!!chapterChoiceEcho(line))};
  }
@@ -1569,7 +1572,10 @@ function openStory(id){
 const CHAPTER_CHOICE_ECHO=Object.freeze({
  prologue_momoka:Object.freeze({episode:'prologue',people:'「責任者さん、最初に商店街のみんなの話を聞こうって言ってくれたよね。……なんだか、うれしかったんだ。」',place:'「最初に時計の音を確かめてくれたでしょ。怖い音でも、きちんと調べれば分かるかもしれないって思えたよ。」'}),
  prologue_milku:Object.freeze({episode:'prologue',people:'「最初にお店の人の話を聞こうとしたこと、覚えています。ここでも、誰かの気持ちを置いていかずに調べたいですね。」',place:'「最初に時計の音を確かめたこと、覚えています。今度は、この灯りの記録を一緒に調べましょう。」'}),
- chapter1_akane:Object.freeze({episode:'chapter1_open',field:'「相談室で現場を優先しようって決めてくれたよね。今回も安全な道を確保する。記録を取る場所は、それから一緒に考えよう！」',record:'「相談室で記録を優先しようって決めてくれたよね。玲奈の調査も大切だよ。だから、安全に調べられる場所を私が確保する！」'})
+ chapter1_akane:Object.freeze({episode:'chapter1_open',field:'「相談室で現場を優先しようって決めてくれたよね。今回も安全な道を確保する。記録を取る場所は、それから一緒に考えよう！」',record:'「相談室で記録を優先しようって決めてくれたよね。玲奈の調査も大切だよ。だから、安全に調べられる場所を私が確保する！」'}),
+ chapter2_aoi:Object.freeze({episode:'chapter1_open',field:'「前に、まず現場を確かめようと決めましたよね。椿さんのノートの時刻と、この家の反応を現地で照らしてみましょう。」',record:'「前に、記録から確かめようと決めましたよね。椿さんのノートの時刻と星灯の波形を、一つずつ比較しましょう。」'}),
+ chapter2_reina:Object.freeze({episode:'chapter1_open',field:'「前に、現場を見て確かめる方針でしたよね。今回も、会場で見たものを記録と照らし合わせたいです。」',record:'「前に、記録を見落とさない方針でしたよね。この封蝋の模様も、椿さんのノートと正確に比べておきます。」'}),
+ chapter2_akane:Object.freeze({episode:'chapter1_open',field:'「前にも現場の確認を優先したよね。今回も、危ない場所は私が先に調べて、みんなに知らせる！」',record:'「前には記録を大事にしようって決めたよね。今日は私が見回るから、気づいたことは全部、玲奈たちに伝えるよ！」'})
 });
 function chapterChoiceEcho(sc){
  const entry=CHAPTER_CHOICE_ECHO[sc?.chapterEcho],choice=entry&&S.chapterChoiceMemory?.[entry.episode];
