@@ -1,0 +1,5 @@
+/* Ver.0.35.6.0 小さい枠の立ち絵を顔の位置に合わせる（js/portrait_face_frame_v03560.js） */
+.pf-box{position:relative!important;overflow:hidden!important}
+img.pf-frame{position:absolute!important;left:var(--pf-x)!important;top:var(--pf-y)!important;right:auto!important;bottom:auto!important;
+ width:var(--pf-w)!important;height:var(--pf-h)!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;
+ object-fit:fill!important;object-position:0 0!important;transform:none!important;margin:0!important;inset:auto;}

@@ -1,0 +1,7 @@
+/* Ver.0.35.5.0 ホームのお気に入り立ち絵：全員同じ大きさ・位置にそろえる（js/home_portrait_fit_v03550.js） */
+.home-mock-v301 .mock-hero:not(.mock-hero-scene) .mock-character.hp-pending{opacity:0}
+.home-mock-v301 .mock-hero:not(.mock-hero-scene) .mock-character.hp-fit{
+ top:var(--hp-top)!important;left:var(--hp-left)!important;height:var(--hp-h)!important;width:auto!important;max-width:none!important;
+ object-fit:contain!important;object-position:center top!important;
+ transform:translateX(var(--hp-shift))!important;transform-origin:center top!important;
+ opacity:1;transition:opacity .18s ease}
