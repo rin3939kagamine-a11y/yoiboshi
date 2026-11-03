@@ -82,4 +82,7 @@
     min-height:0;flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;
   }
   .page.quest-v676 .qmap-sheet-footer { flex:0 0 auto; }
+  .page.quest-v676 .qmap-main-action {
+    min-height:44px!important;
+  }
 }
