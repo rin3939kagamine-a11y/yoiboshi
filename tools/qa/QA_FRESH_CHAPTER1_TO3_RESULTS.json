@@ -1,0 +1,186 @@
+{
+  "project": "宵星の契約者 RE:START",
+  "qa_version": "fresh-chapters-1-to-3-v1.0",
+  "date": "2026-11-03",
+  "baseline_main": "6f761dffb1524519cf55f14092b2fbbe50f91200",
+  "summary": {
+    "q1_to_q9": {
+      "checks": 71,
+      "completed": 9,
+      "errors": []
+    },
+    "q10_to_q12": {
+      "checks": 20,
+      "completed": 3,
+      "errors": []
+    },
+    "q13_to_q18": {
+      "checks": 69,
+      "completed": 6,
+      "errors": []
+    }
+  },
+  "total_checks": 174,
+  "route_persistence_checks": 14,
+  "quests_cleared": 18,
+  "investigations_solved": 18,
+  "all_four_party_lv1": true,
+  "gold_final": 13850,
+  "gems_final": 51810,
+  "checkpoints": [
+    {
+      "qid": "q1",
+      "complete": 1,
+      "solved": 1,
+      "gems": 10820,
+      "gold": 2450,
+      "sha256": "a79ce4de6fc8aaae7b7b022ddd6287acce6589d0dae8a4557c7dca8d45e9ba47"
+    },
+    {
+      "qid": "q2",
+      "complete": 2,
+      "solved": 2,
+      "gems": 11740,
+      "gold": 3100,
+      "sha256": "af0592a421d9bc69760eff72439dd528544fea9bf716bbafc19002b4511d998c"
+    },
+    {
+      "qid": "q3",
+      "complete": 3,
+      "solved": 3,
+      "gems": 12810,
+      "gold": 3750,
+      "sha256": "16d4b16becbf0d07b4d5cdd6e55f5061c0b6e0de739e6454cc5be4b25fe12476"
+    },
+    {
+      "qid": "q4",
+      "complete": 4,
+      "solved": 4,
+      "gems": 13930,
+      "gold": 4400,
+      "sha256": "eb3b3ffa3065afafd02883af17ecc544cf63b1d06bd3d562e17904eec07e22b5"
+    },
+    {
+      "qid": "q5",
+      "complete": 5,
+      "solved": 5,
+      "gems": 15150,
+      "gold": 5050,
+      "sha256": "d0db5d17c02a22e03f6f12445b205144b844f3e3362fdcb4daf050224d2c7e96"
+    },
+    {
+      "qid": "q6",
+      "complete": 6,
+      "solved": 6,
+      "gems": 16770,
+      "gold": 6050,
+      "sha256": "9e2dab543d13058b07c1067689fc90827e674ee1f5af67f7a251c7db7da54c34"
+    },
+    {
+      "qid": "q7",
+      "complete": 7,
+      "solved": 7,
+      "gems": 19540,
+      "gold": 6700,
+      "sha256": "007d7b4ef751a43e27047f7f0cdb8d5c555f21a5e5f564dab3c1a172f9860e02"
+    },
+    {
+      "qid": "q8",
+      "complete": 8,
+      "solved": 8,
+      "gems": 21460,
+      "gold": 7350,
+      "sha256": "0e0ab73eb1f10b7037dd4cc0535ee47a59c613ed23765e8f291d8d168ac63bad"
+    },
+    {
+      "qid": "q9",
+      "complete": 9,
+      "solved": 9,
+      "gems": 23530,
+      "gold": 8000,
+      "sha256": "a2729047cb31c3de9ea4a0bde023ef8cd6451d6a937564269c032e0c34e29f41"
+    },
+    {
+      "qid": "q10",
+      "complete": 10,
+      "solved": 10,
+      "gems": 25750,
+      "gold": 8650,
+      "sha256": "1008d159d08b2f14608976d1b66d2fbccc4dbb3dd1c88a6a853c3fed2c9c8dc5"
+    },
+    {
+      "qid": "q11",
+      "complete": 11,
+      "solved": 11,
+      "gems": 28120,
+      "gold": 9300,
+      "sha256": "055570ea273b397318cc61c68091e499e8fd2e11ab1a0f40293ca893fb9be4ba"
+    },
+    {
+      "qid": "q12",
+      "complete": 12,
+      "solved": 12,
+      "gems": 30840,
+      "gold": 9950,
+      "sha256": "4de25d2642df0c06918990f7fa8fd51326d9a81df1e1648dafc11d64a5798102"
+    },
+    {
+      "qid": "q13",
+      "complete": 13,
+      "solved": 13,
+      "gems": 34710,
+      "gold": 10600,
+      "sha256": "5928d2ef5c87875704032d533900282058d1125cb1b70e746619d4bb635dd9a7"
+    },
+    {
+      "qid": "q14",
+      "complete": 14,
+      "solved": 14,
+      "gems": 37730,
+      "gold": 11250,
+      "sha256": "de8fd62c9b1820da5abcefcf2a55158c044a1f2f6265d475952afe868b4b455d"
+    },
+    {
+      "qid": "q15",
+      "complete": 15,
+      "solved": 15,
+      "gems": 40950,
+      "gold": 11900,
+      "sha256": "af2a74d1472c1c5768e0939b253ebb6c28e69e282deca74d9381c77b620ebe3c"
+    },
+    {
+      "qid": "q16",
+      "complete": 16,
+      "solved": 16,
+      "gems": 44320,
+      "gold": 12550,
+      "sha256": "84da5a40ee14c8fe16229ab1e6cfa14aeb959ffaa1820e2534ba86f63baa5c76"
+    },
+    {
+      "qid": "q17",
+      "complete": 17,
+      "solved": 17,
+      "gems": 48090,
+      "gold": 13200,
+      "sha256": "57aeb4a83b003cee369f9e21ad341460a27e71adbd7ff82db697e3469dee614c"
+    },
+    {
+      "qid": "q18",
+      "complete": 18,
+      "solved": 18,
+      "gems": 51810,
+      "gold": 13850,
+      "sha256": "e7a892a335170a01413cbb49cf697a4dad653f3e52fb27a92b7f11e2cd60767f"
+    }
+  ],
+  "game_patch": [
+    "js/game.js q13 requires kaede_meet before chapter2_end",
+    "index.html JS cache key bump"
+  ],
+  "limitations": [
+    "Headless Chromium tests; narrative stepped via real functions",
+    "Investigation options were UI-clicked; battle AUTO actions executed by engine with timers accelerated",
+    "No physical iPhone Safari, full remote assets, or manual continuous UX test",
+    "Difficulty balance unverified: initial Lv1 party won all quests"
+  ]
+}
