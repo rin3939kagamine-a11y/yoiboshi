@@ -85,6 +85,7 @@ try:
                 }""")
                 records[-1]["quest"]=q
                 ck(f"{w}x{h} quest sheet renders",q["sheetHeight"]>50,q)
+                ck(f"{w}x{h} quest touch target at least 44px",q["actionHeight"]>=43.5,q)
                 if w<=1024:
                     ck(f"{w}x{h} quest action visible above nav",q["actionBottom"]<=q["navTop"]+2,q)
                 page.screenshot(path=str(OUT/f"quest_{w}x{h}.png"),full_page=True)
