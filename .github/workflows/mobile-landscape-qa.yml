@@ -1,0 +1,42 @@
+name: QA - Mobile landscape real game
+on:
+  pull_request:
+    paths:
+      - 'tools/qa/mobile_landscape_real_smoke.py'
+      - 'css/mobile_landscape_v03560_patch.css'
+      - 'index.html'
+      - '.github/workflows/mobile-landscape-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tools/qa/mobile_landscape_real_smoke.py'
+      - 'css/mobile_landscape_v03560_patch.css'
+      - 'index.html'
+      - '.github/workflows/mobile-landscape-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright browser
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run real-game mobile landscape QA
+        run: python tools/qa/mobile_landscape_real_smoke.py
+      - name: Save screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-landscape-qa
+          path: qa_artifacts/mobile_landscape/
+          if-no-files-found: warn
