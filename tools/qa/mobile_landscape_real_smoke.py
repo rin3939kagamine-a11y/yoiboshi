@@ -39,7 +39,7 @@ try:
           view="home";storySession=null;dialog=null;battle=null;render();
         }""")
         page.wait_for_selector(".home-mock-v301 .mock-hero")
-        before=page.evaluate("""()=>[S.gems,S.gold,S.party.join(","),!!S.quests.q1.complete]""")
+        before=page.evaluate("""()=>[S.gems,S.gold,S.party.join(","),!!S.quests.q1?.complete]""")
         for w,h in SIZES:
             page.set_viewport_size({"width":w,"height":h})
             page.evaluate("""()=>{view="home";dialog=null;render()}""")
@@ -91,7 +91,7 @@ try:
                 page.locator(".qmap-close").click(timeout=10000)
                 page.locator('.bottomnav button[aria-label="ホーム"]').click(timeout=10000)
                 ck(f"{w}x{h} real navigation back to home",page.evaluate('view==="home"'))
-        after=page.evaluate("""()=>[S.gems,S.gold,S.party.join(","),!!S.quests.q1.complete]""")
+        after=page.evaluate("""()=>[S.gems,S.gold,S.party.join(","),!!S.quests.q1?.complete]""")
         ck("navigation preserves player state",before==after,dict(before=before,after=after))
         ck("no uncaught JS exceptions",not errors,errors)
         browser.close()
