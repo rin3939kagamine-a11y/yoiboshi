@@ -1,0 +1,226 @@
+{
+  "source": "Locally reproduced Chromium using current main and candidate v1.1 balance",
+  "baseline_commit": "4ba76ac2e0d9639baec2efd8fcbc8e85a2796ca4",
+  "method": "The saved q18 game record is loaded in isolated test; only tested unit levels and the target quest-complete bit are reset. The original startBattle / tbAutoMove / tbAdvance / original success/fail dialog are used; DOM frame rendering is suppressed to accelerate tests; first-clear investigation weakness is enabled; 12 deterministic seeds per quest/level. This is combat statistical simulation, not a full narrative or live-user win rate.",
+  "adjustments": {
+    "chapter1": {
+      "hp_before": 1.2,
+      "hp_after": 1.28,
+      "atk_before": 1.0,
+      "atk_after": 1.08
+    },
+    "chapter2": {
+      "hp_before": 0.88,
+      "hp_after": 0.95,
+      "atk_before": 1.0,
+      "atk_after": 1.13
+    },
+    "chapter3": {
+      "hp_before": 0.65,
+      "hp_after": 0.86,
+      "atk_before": 0.96,
+      "atk_after": 1.28
+    }
+  },
+  "series": [
+    {
+      "quest": "q6",
+      "level": 1,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 225.1
+    },
+    {
+      "quest": "q6",
+      "level": 4,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 161.3
+    },
+    {
+      "quest": "q6",
+      "level": 7,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 125
+    },
+    {
+      "quest": "q6",
+      "level": 10,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 99.6
+    },
+    {
+      "quest": "q9",
+      "level": 1,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 191.8
+    },
+    {
+      "quest": "q9",
+      "level": 4,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 134.8
+    },
+    {
+      "quest": "q9",
+      "level": 7,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 105.6
+    },
+    {
+      "quest": "q9",
+      "level": 10,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 83.5
+    },
+    {
+      "quest": "q12",
+      "level": 1,
+      "wins": 4,
+      "runs": 12,
+      "success_rate_sample_percent": 33.3,
+      "mean_ally_actions": 314.1
+    },
+    {
+      "quest": "q12",
+      "level": 4,
+      "wins": 8,
+      "runs": 12,
+      "success_rate_sample_percent": 66.7,
+      "mean_ally_actions": 279.2
+    },
+    {
+      "quest": "q12",
+      "level": 7,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 209
+    },
+    {
+      "quest": "q12",
+      "level": 10,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 169.8
+    },
+    {
+      "quest": "q15",
+      "level": 1,
+      "wins": 2,
+      "runs": 12,
+      "success_rate_sample_percent": 16.7,
+      "mean_ally_actions": 206.2
+    },
+    {
+      "quest": "q15",
+      "level": 4,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 164.7
+    },
+    {
+      "quest": "q15",
+      "level": 7,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 113.8
+    },
+    {
+      "quest": "q15",
+      "level": 10,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 95.6
+    },
+    {
+      "quest": "q17",
+      "level": 1,
+      "wins": 5,
+      "runs": 12,
+      "success_rate_sample_percent": 41.7,
+      "mean_ally_actions": 366.7
+    },
+    {
+      "quest": "q17",
+      "level": 4,
+      "wins": 8,
+      "runs": 12,
+      "success_rate_sample_percent": 66.7,
+      "mean_ally_actions": 232.2
+    },
+    {
+      "quest": "q17",
+      "level": 7,
+      "wins": 11,
+      "runs": 12,
+      "success_rate_sample_percent": 91.7,
+      "mean_ally_actions": 195.3
+    },
+    {
+      "quest": "q17",
+      "level": 10,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 162.9
+    },
+    {
+      "quest": "q18",
+      "level": 1,
+      "wins": 1,
+      "runs": 12,
+      "success_rate_sample_percent": 8.3,
+      "mean_ally_actions": 264.2
+    },
+    {
+      "quest": "q18",
+      "level": 4,
+      "wins": 9,
+      "runs": 12,
+      "success_rate_sample_percent": 75.0,
+      "mean_ally_actions": 222
+    },
+    {
+      "quest": "q18",
+      "level": 7,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 148.5
+    },
+    {
+      "quest": "q18",
+      "level": 10,
+      "wins": 12,
+      "runs": 12,
+      "success_rate_sample_percent": 100.0,
+      "mean_ally_actions": 129.2
+    }
+  ],
+  "total_battles": 288,
+  "limitations": [
+    "12 seeds per cell is too small to claim a true win-rate or a target of 85-95%.",
+    "All outcomes use the same initial 4 heroines and AUTO; no manual selection or varied teams.",
+    "The statistical sampling resets only the active target quest to first-clear and does not test the entire story progression.",
+    "v1.1 full story smoke uses legitimate levelUp and earned coin, no direct unit-level injection."
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "title": "RE:START 戦闘難度校正 v1.1",
+  "baseline_sha": "4ba76ac2e0d9639baec2efd8fcbc8e85a2796ca4",
+  "build": "first-clear original party after changing ONLY chapter1-3 enemy multipliers",
+  "segments": [
+    {
+      "segment": "1_TO_9",
+      "checks": 100,
+      "all_quests": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9"
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "10_TO_12",
+      "checks": 32,
+      "all_quests": [
+        "q10",
+        "q11",
+        "q12"
+      ],
+      "status": "PASS"
+    },
+    {
+      "segment": "13_TO_18",
+      "checks": 69,
+      "all_quests": [
+        "q13",
+        "q14",
+        "q15",
+        "q16",
+        "q17",
+        "q18"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "route_restore": 14,
+  "checks_total": 215,
+  "first_clear_completed": 18,
+  "final_party_levels": {
+    "momoka_work": 7,
+    "milku_work": 7,
+    "akane_work": 7,
+    "aoi_work": 7
+  },
+  "remaining_gold": 4610,
+  "chapter3_end_saved": true,
+  "save_unchanged_schema": true,
+  "combat_sampling_trials": 288,
+  "sampling_warning": "12 RNG seeds per quest-level group. Not a population win-rate; tests same party using AUTO only."
+}
