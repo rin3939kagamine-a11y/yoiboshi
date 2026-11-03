@@ -52,6 +52,12 @@ with sync_playwright() as pw:
   # discover unlock for q1 and actual map action
   for q in range(START,STOP+1):
    qid='q'+str(q)
+   # Spend only legitimately earned coins through the existing training function.
+   target_level={7:3,10:4,12:7}.get(q)
+   if target_level:
+    raised=p.evaluate('''target=>{const start=S.gold;let n=0;for(const id of S.party){while(data(id).lv<target){const lv=data(id).lv;levelUp(id);if(data(id).lv===lv)throw Error('insufficient earned gold');n++;}}return {n,spent:start-S.gold,remaining:S.gold,lvs:S.party.map(id=>data(id).lv)}}''',target_level)
+    ck(qid+' training used earned gold',raised['n']>0 and raised['spent']>0 and min(raised['lvs'])==target_level)
+    print('TRAIN',qid,raised,flush=True)
    before=state(p)
    gate=p.evaluate('''qid=>{const q=QUEST_BY_ID[qid];return {previous:questPreviousStory(q),narrative:questNarrativeReady(q),intro:questIntroStory(q),unlocked:questUnlocked(q),base:questBaseUnlocked(q),phase:S.investigations[qid]?.phase,view,story:storySession?.id}}''',qid)
    print('GATE',qid,json.dumps(gate,ensure_ascii=False),'owned lv',[x['lv'] for x in before['owned'].values()],flush=True)
@@ -102,7 +108,7 @@ with sync_playwright() as pw:
    if p.evaluate('''qid=>storyAllowed(qid)''',qid) and q>=3:finish(p,qid)
    cp=p.evaluate('''()=>JSON.stringify(S)''');(CP/f'{qid}_save.json').write_text(cp,encoding='utf-8')
    ck(qid+' persisted record saved',json.loads(cp)['quests'][qid]['complete'])
-   ck(qid+' no stat injection',all(j['lv']==1 for j in state(p)['owned'].values()))
+   ck(qid+' legal training progression',all(1<=j['lv']<=7 for j in state(p)['owned'].values()))
    print('POST',qid,'flags',','.join(state(p)['flags'][-8:]),'checkpoint',len(cp),flush=True)
   if STOP==18:
    ck('all 18 quests complete from fresh game',len(state(p)['complete'])==18)

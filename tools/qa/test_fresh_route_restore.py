@@ -35,7 +35,7 @@ with sync_playwright() as pw:
  s=page.evaluate('''()=>({count:Object.values(S.quests).filter(x=>x.complete).length,inv:Object.values(S.investigations).filter(x=>x.solved).length,end:!!S.storyFlags.chapter3_end,can:storyAllowed('chapter3_end'),level:S.party.map(id=>S.owned[id].lv),name:S.playerName,choice:S.chapterChoiceMemory.chapter1_open,raw:SaveStore.read()!=null})''')
  test('reload preserved 18 real clear records',s['count']==18 and s['inv']==18)
  test('reload preserved fresh name and chapter choice',s['name']=='通し検証' and s['choice']=='field')
- test('reload preserved original low-level party',s['level']==[1,1,1,1])
+ test('reload preserved legitimate training levels',s['level']==[7,7,7,7] and gate['level']==[7,7,7,7])
  test('Chapter3 ending not artificially flagged',not s['end'] and s['can'] and s['raw'])
  old=page.evaluate('''()=>({gems:S.gems,gold:S.gold,flags:Object.keys(S.storyFlags).length})''')
  e=page.evaluate('''()=>{openStory('chapter3_end');let n=0;while(storySession&&n++<600){let sc=romanceScript(storySession.id).lines[storySession.step];if(sc?.choices&&!storySession.choice){chooseChapterStory(sc.choices[0][0]);continue}nextStory()}return {ended:!!S.storyFlags.chapter3_end,previous:questPreviousStory(QUEST_BY_ID.q19),canOpen:storyAllowed('chapter4_open'),count:Object.values(S.quests).filter(x=>x.complete).length,saved:SaveStore.read()}}''')

@@ -1,7 +1,7 @@
 /* RE:START 0.32.0.0 — independent experimental turn-based combat engine.
    Legacy battle rules, special battles, farm, and save schema remain intact. */
 const TB_BALANCE = Object.freeze({
-  hp:1.34, attack:0.75, normal:1.18, skill:1.48, enemyHp:1.13, enemyAtk:1.28, chapterHp:{0:1.34,1:1.2,2:0.88,3:0.65,4:0.395,5:0.67}, chapterAtk:{0:1,1:1,2:1,3:0.96,4:0.72,5:0.84},
+  hp:1.34, attack:0.75, normal:1.18, skill:1.48, enemyHp:1.13, enemyAtk:1.28, chapterHp:{0:1.34,1:1.28,2:0.95,3:0.86,4:0.395,5:0.67}, chapterAtk:{0:1,1:1.08,2:1.13,3:1.28,4:0.72,5:0.84},
   defenseFactor:0.78, guardReduction:0.55, litAttack:1.30, litDefense:0.80,
   safety:0.70, investigatedAttack:1.30, shieldEffect:1.0, healEffect:1.05,
   roundsSkill:[2,3], roundSeconds:3, maxLight:5, startLight:2, roundLight:1, guardLight:1,
