@@ -9,10 +9,21 @@
     min-width:0!important;
   }
 }
-@media (orientation:landscape) and (min-width:568px) and (max-width:850px) and (max-height:500px) {
+@media (orientation:landscape) and (min-width:568px) and (max-width:1024px) and (max-height:500px) {
   :root { --mobile-nav-height:56px; }
+  /* Recent iPhones are 852-956px wide in landscape; bypass the desktop sidebar. */
+  body:not(:has(.combat-page)):not(:has(.qcin-active)):not(:has(.vn-story)) .sidebar {
+    display:none!important;
+  }
+  body:not(:has(.combat-page)):not(:has(.qcin-active)):not(:has(.vn-story)) .main {
+    width:100%!important;max-width:none!important;
+  }
   /* Keep all seven touch targets usable without consuming 20% of a short screen. */
   body:not(:has(.combat-page)):not(:has(.qcin-active)):not(:has(.vn-story)) .bottomnav {
+    display:grid!important;position:fixed!important;
+    left:0!important;right:0!important;bottom:0!important;
+    width:100%!important;transform:none!important;
+    grid-template-columns:repeat(7,minmax(0,1fr))!important;
     height:calc(56px + env(safe-area-inset-bottom))!important;
     max-height:none!important;
     padding:4px max(7px,env(safe-area-inset-left))
@@ -43,7 +54,7 @@
   .home-mock-v301 .mock-header { padding:calc(6px + env(safe-area-inset-top)) 10px 0; }
   .home-mock-v301 .mock-profile { margin-top:5px;max-width:45%;padding:3px 8px 3px 3px;gap:5px; }
   .home-mock-v301 .mock-profile img { width:42px;height:42px; }
-  .home-mock-v301 .mock-character-copy { top:23%;right:10px;width:32%; }
+  .home-mock-v301 .mock-character-copy { top:19%;right:10px;width:32%; }
   .home-mock-v301 .mock-character-copy h1 { font-size:clamp(23px,3.4vw,32px); }
   .home-mock-v301 .mock-character-copy em { font-size:13px; }
   /* In short landscape the lower banner otherwise covers the two character buttons. */
