@@ -298,7 +298,7 @@ function questPreviousStory(q){
   8:[['tsubaki_meet',!!S.tsubakiMet]],
   9:[['erika_meet',!!S.erikaMet]],
   12:[['kaname_meet',!!S.kanameMet]],
-  13:[['chapter2_end',!!S.storyFlags?.chapter2_end],['chapter3_open',!!S.storyFlags?.chapter3_open]],
+  13:[['kaede_meet',!!S.kaedeMet],['chapter2_end',!!S.storyFlags?.chapter2_end],['chapter3_open',!!S.storyFlags?.chapter3_open]],
   15:[['saki_yuzu_meet',!!S.chapter3Met?.saki&&!!S.chapter3Met?.yuzu],['chiyo_meet',!!S.chapter3Met?.chiyo]],
   16:[['reiko_meet',!!S.chapter3Met?.reiko],['anzu_meet',!!S.chapter3Met?.anzu]],
   17:[['nazuna_meet',!!S.chapter3Met?.nazuna]],
