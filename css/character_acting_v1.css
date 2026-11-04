@@ -33,3 +33,26 @@
 @media (prefers-reduced-motion:reduce){
  :is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id] > img{animation:none!important;transform:none!important;will-change:auto!important}
 }
+/* Acting v2: original illustrations retained, no artificial limb/pose replacements. */
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="momoka"]{--ya-actor-idle:ya-actor-momoka;--ya-actor-time:4s;--ya-actor-x:1.8px;--ya-actor-y:-4.2px;--ya-actor-angle:-0.8deg;--ya-actor-shy:0.8deg}
+@keyframes ya-actor-momoka{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(1.8px,-4.2px) rotate(-0.8deg)}}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="milku"]{--ya-actor-idle:ya-actor-milku;--ya-actor-time:5.4s;--ya-actor-x:0.4px;--ya-actor-y:-1.4px;--ya-actor-angle:0.2deg;--ya-actor-shy:-0.65deg}
+@keyframes ya-actor-milku{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(0.4px,-1.4px) rotate(0.2deg)}}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="reina"]{--ya-actor-idle:ya-actor-reina;--ya-actor-time:4.8s;--ya-actor-x:-1.3px;--ya-actor-y:-1.1px;--ya-actor-angle:-0.45deg;--ya-actor-shy:-0.35deg}
+@keyframes ya-actor-reina{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-1.3px,-1.1px) rotate(-0.45deg)}}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="nagi"]{--ya-actor-idle:ya-actor-nagi;--ya-actor-time:6.2s;--ya-actor-x:-2.2px;--ya-actor-y:0.4px;--ya-actor-angle:0.8deg;--ya-actor-shy:1deg}
+@keyframes ya-actor-nagi{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-2.2px,0.4px) rotate(0.8deg)}}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="concept15"]{--ya-actor-idle:ya-actor-concept15;--ya-actor-time:5.7s;--ya-actor-x:0.5px;--ya-actor-y:-1.6px;--ya-actor-angle:0.28deg;--ya-actor-shy:0.4deg}
+@keyframes ya-actor-concept15{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(0.5px,-1.6px) rotate(0.28deg)}}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"]) > img{animation:var(--ya-actor-idle) var(--ya-actor-time) ease-in-out infinite both!important;will-change:transform;transform-origin:center 74%}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="smile"] > img{animation:ya-actor-smile 4.4s ease-in-out infinite both!important}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="pout"] > img{animation:ya-actor-pout 4s ease-in-out infinite both!important}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="sad"] > img{animation:ya-actor-sad 5.4s ease-in-out infinite both!important}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="blush"] > img{animation:ya-actor-blush 4.7s ease-in-out infinite both!important}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="surprise"] > img{animation:ya-actor-surprise .54s ease-in-out 1 both!important}
+@keyframes ya-actor-smile{0%,100%{transform:translate(0,0) rotate(0)}48%{transform:translate(var(--ya-actor-x),calc(var(--ya-actor-y) * 1.1)) rotate(var(--ya-actor-angle))}}
+@keyframes ya-actor-pout{0%,100%{transform:translateX(0) rotate(0)}45%{transform:translateX(var(--ya-actor-x)) rotate(calc(var(--ya-actor-angle) * -1.3))}}
+@keyframes ya-actor-sad{0%,100%{transform:translateY(2px) rotate(0)}50%{transform:translateY(5px) rotate(var(--ya-actor-shy))}}
+@keyframes ya-actor-blush{0%,100%{transform:translateY(1px) rotate(0)}45%{transform:translateY(3px) rotate(var(--ya-actor-shy))}}
+@keyframes ya-actor-surprise{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(5px) scale(.985)}}
+@media(prefers-reduced-motion:reduce){:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression] > img{animation:none!important;transform:none!important;will-change:auto!important}}
