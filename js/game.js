@@ -178,7 +178,11 @@ const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNI
 const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035});
 function unitArt(u,kind='portrait'){
  const config=UNIT_ARTWORK[u.id]||{};
- return (kind==='scene'&&config.scene)||config.portrait||(kind==='portrait'?characterPortrait(u.person):characterArt(u.person));
+ // Makoto's accepted portrait takes priority over outdated generic UNIT_ART portraits.
+ // Preserve actual story/rarity scene CGs, but use one consistent base image everywhere else.
+ if(kind==='scene'&&config.scene)return config.scene;
+ if(u.person==='concept15')return kind==='portrait'?characterPortrait(u.person):characterArt(u.person);
+ return config.portrait||(kind==='portrait'?characterPortrait(u.person):characterArt(u.person));
 }
 // v0.34.47.0: 編成・育成・募集の小さなカード用。SSR・URは一枚絵、SR・Rは立ち絵
 function unitCardArt(u){return unitHasScene(u)?unitArt(u,'scene'):unitArt(u,'portrait');}

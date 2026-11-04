@@ -3,6 +3,7 @@ Serves the actual repository over HTTP, not a mock HTML fixture.
 Uses an isolated fresh test save. Physical iPhone Safari remains untested.
 """
 import json
+import re
 from pathlib import Path
 from functools import partial
 from threading import Thread
@@ -31,7 +32,7 @@ try:
         page.on("pageerror",lambda e:errors.append(str(e)))
         page.goto(f"http://127.0.0.1:{srv.server_port}/index.html",wait_until="load",timeout=120000)
         page.wait_for_function('typeof render==="function" && typeof fresh==="function"',timeout=30000)
-        ck("version title", "Ver.0.35.6.0" in page.title(),page.title())
+        ck("version title", bool(re.search(r"RE:START Ver\.\d+\.\d+\.\d+\.\d+",page.title())),page.title())
         ck("actual landscape stylesheet loaded",page.evaluate("""()=>
           [...document.styleSheets].some(s=>(s.href||"").includes("mobile_landscape_v03560_patch.css"))"""))
         page.evaluate("""()=>{
@@ -39,6 +40,53 @@ try:
           view="home";storySession=null;dialog=null;battle=null;render();
         }""")
         page.wait_for_selector(".home-mock-v301 .mock-hero")
+        # Real served assets, not mock data: validate the newly adopted Makoto artwork.
+        portrait=page.evaluate("""async()=>{
+          const id='concept15',faces=['normal','smile','pout','sad','surprise','blush'];
+          const full=characterArt(id),upper=characterPortrait(id),icon=characterIcon(id);
+          const dialogue=faces.map(face=>{
+            const markup=expressionPortraitMarkup(id,face,'qa_makoto');
+            const holder=document.createElement('div');holder.innerHTML=markup;
+            return {face,src:holder.querySelector('img')?.getAttribute('src'),
+              fallback:holder.firstElementChild?.dataset.expressionSource==='fallback',
+              emotionOverlay:face==='normal'||!!holder.querySelector('.expr-fallback-wrap')};
+          });
+          const loaded=await Promise.all([full,upper,icon].map(async src=>{
+            const img=new Image();img.src=src;
+            try{await img.decode();}catch(e){return {src,loaded:false,error:String(e)};}
+            const canvas=document.createElement('canvas');canvas.width=1;canvas.height=1;
+            const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);
+            const alpha=ctx.getImageData(0,0,1,1).data[3];
+            return {src,loaded:true,width:img.naturalWidth,height:img.naturalHeight,cornerAlpha:alpha};
+          }));
+          return {full,upper,icon,dialogue,loaded};
+        }""")
+        records.append(dict(makoto_portrait=portrait))
+        ck("Makoto original approved full body selected","style_candidates/makoto_v1_full.webp" in portrait["full"],portrait["full"])
+        ck("Makoto approved upper body selected","style_candidates/makoto_v1_upper.webp" in portrait["upper"],portrait["upper"])
+        ck("Makoto portrait icon uses matching upper image",portrait["icon"]==portrait["upper"],portrait["icon"])
+        ck("Makoto all six dialogue moods use the same approved portrait",
+           all(d["src"]==portrait["upper"] for d in portrait["dialogue"]),portrait["dialogue"])
+        ck("Makoto old expression artwork suppressed",
+           all(d["fallback"] and d["emotionOverlay"] for d in portrait["dialogue"]),portrait["dialogue"])
+        ck("Makoto images load with transparent edges",
+           all(x["loaded"] and x["width"]>100 and x["height"]>100 and x["cornerAlpha"]==0 for x in portrait["loaded"]),
+           portrait["loaded"])
+        page.evaluate("""()=>{
+          // Synthetic QA-only progression: Makoto must be recruited/unlocked to appear in home.
+          S.owned.makoto_daily={lv:1,aff:0,lb:0,copies:0};
+          S.chapter4Met=S.chapter4Met||{};S.chapter4Met.concept15=true;
+          S.homeFavorite='concept15';S.homeUnitId='makoto_daily';
+          lobbySelected='concept15';view='home';render();
+        }""")
+        page.locator(".home-mock-v301 .mock-hero .mock-character").wait_for(timeout=10000)
+        home_image=page.locator(".home-mock-v301 .mock-hero .mock-character").evaluate(
+            "(el)=>({src:el.getAttribute('src'),width:el.naturalWidth,height:el.naturalHeight})")
+        records.append(dict(makoto_home=home_image))
+        ck("Makoto renders on actual home screen",
+           ("makoto_v1_full.webp" in home_image["src"] or "makoto_v1_upper.webp" in home_image["src"]) and home_image["width"]>0,home_image)
+        page.screenshot(path=str(OUT/"makoto_home_390x844.png"),full_page=True)
+        page.evaluate("""()=>{lobbySelected='momoka';view='home';render()}""")
         before=page.evaluate("""()=>[S.gems,S.gold,S.party.join(","),!!S.quests.q1?.complete]""")
         for w,h in SIZES:
             page.set_viewport_size({"width":w,"height":h})
