@@ -425,7 +425,7 @@ function moodToFace(value){return EXPRESSION_BY_MOOD[value]||'normal'}
 function inferExpressionFace(personId,text='',fallback='normal'){return normalizeExpressionFace(fallback)}
 function lineFace(line,personId){return line&&line.face&&PEOPLE[personId]?normalizeExpressionFace(line.face):'normal'}
 function authoredStoryCue(storyId,index){
- if(storyId==='chapter1_end'&&index===CHAPTER_STORIES.chapter1_end.lines.length){
+ if(storyId==='chapter1_end'&&(heroAff('momoka')||heroAff('milku'))&&index===CHAPTER_STORIES.chapter1_end.lines.findIndex(line=>line.ch1EndHook)){
   const target=heroAff('momoka')>=heroAff('milku')?'momoka':'milku';
   return {target,face:'blush'};
  }
@@ -434,7 +434,7 @@ function authoredStoryCue(storyId,index){
 function authoredStoryFaceState(storyId,lines,index){
  const state={};let lastTarget=null;
  for(let i=0;i<=index;i++){
-  const cue=authoredStoryCue(storyId,i);
+  const cue=lines?.[i]?.cue||authoredStoryCue(storyId,i);
   if(cue&&PEOPLE[cue.target]){state[cue.target]=cue.face;lastTarget=cue.target}
  }
  return {faces:state,lastTarget};
@@ -1370,6 +1370,7 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {who:'reina',text:'「調査記録は私が保持します。朱音さん、通れる場所が変わったら、すぐに共有してください。」'},
    {who:'akane',text:'「うん！ 玲奈も、危ないと思ったら無理しないでね。」'},
    {who:'aoi',text:'「反応が強すぎます。今までと同じようには抑えられないかもしれません。」'},
+   {who:'aoi',text:'「{name}さん。もし強く灯す必要があるときは……私からにしてください。解析のために、一番近くで灯火を見ておきたいので。」'},
    {who:'you',text:'「分かった。戻る道は確保したまま、みんなで食い止めよう。」'}]},
   q2_lead:{title:'閉店したカフェの灯り・導入',place:'西通り・旧喫茶街',requires:[],lines:[
    {who:'narrator',text:'西通り・旧喫茶街。夕暮れが近づくにつれ、営業中の店々に明かりがともり始めた。'},
@@ -1413,13 +1414,19 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {who:'akane',title:'残された記録',text:'「私には原因までは分からなかった。玲奈が記録を残してくれて、よかったよ。」'},
    {who:'reina',title:'続く調査',text:'「……ええ。まだ、調べるべきことがあります。」'},
   {who:'reina',title:'同じ波形',text:'「旧喫茶街の記録と一致しました。残響の場所は違うのに、増幅のしかただけ同じです。」'},
-  {who:'aoi',title:'手がかり',text:'「増幅される前の記録も探しましょう。次は閉校舎です。」'}]},
+  {who:'aoi',title:'手がかり',text:'「増幅される前の記録も探しましょう。次は閉校舎です。」'},
+  {who:'reina',title:'混ざった音',text:'「……待ってください。波形を音に戻すと、最後に何か入っています。」'},
+  {who:'narrator',title:'小さな鼻歌',text:'雑音の奥で、子どもの鼻歌のような音が、ほんの数秒だけ鳴って消えた。'},
+  {who:'akane',title:'誰の声',text:'「今の、子どもの声……？ 踏切のまわりに、子どもなんていなかったよ。」',cue:{target:'akane',face:'sad'}},
+  {who:'narrator',title:'答えのない声',text:'誰の声なのか、答えられる者はいなかった。'}]},
  q4:{title:'誰もいない教室の黒板・後日談',place:'旧宵星第二小学校',requires:['q4'],lines:[
   {who:'chinatsu',title:'小さな思い出',text:'「教室の黒板、昔は落書きでいっぱいだったな。……誰かの思い出が、ここに残ってたのかもね。」'},
   {who:'reina',title:'一瞬の影',text:'「監視記録に、人影がありました。白峰凪に似ていますが、確証はありません。」'},
-  {who:'narrator',title:'文字が示す場所',text:'黒板に残された時刻を照合すると、臨海公園の観覧車が示された。'}]},
+  {who:'narrator',title:'文字が示す場所',text:'黒板に残された時刻を照合すると、臨海公園の観覧車が示された。'},
+  {who:'chinatsu',title:'もう一行',text:'「ねえ、黒板の隅……時刻の下に、もう一行あるよ。」',cue:{target:'chinatsu',face:'normal'}},
+  {who:'narrator',title:'子どもの字',text:'消えかけたチョークの跡。子どもの丸い字で、「まだ ここにいるよ」とだけ書かれていた。'}]},
  q5:{title:'止まった観覧車・後日談',place:'宵星臨海公園',requires:['q5'],lines:[
-  {who:'nagi',title:'残された警告',text:'「……近づくほど、引き返しにくくなる。それだけは覚えておいて。」'},
+  {who:'nagi',title:'残された警告',text:'「……その星灯で、灯しすぎないで。忘れる側より、覚えている側のほうが、ずっとつらいから。」'},
    {who:'narrator',title:'視線の先',text:'凪の視線は、止まった観覧車ではなく、港の暗い方角へ向いていた。'},
   {who:'you',title:'責任者の返答',text:'「忠告は受け取っておく。でも、この街で起きてることを見過ごすわけにはいかない。」'},
   {who:'aoi',title:'星灯の道筋',text:'「観覧車から港へ、波形が集まっています。旧灯台で何かが起きているのかもしれません。」'},
@@ -1429,14 +1436,21 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
   {who:'nagi',title:'追う者',text:'「……増幅させている者は別にいる。私は、それを追っている。」'},
   {who:'you',title:'答えの先へ',text:'「待ってくれ、凪。君は何を追ってるんだ？」'},
   {who:'reina',title:'残る疑問',text:'「あの言い方……凪さんは、別の誰かを追っているのでしょうか。」'},
-  {who:'narrator',title:'名のない黒幕',text:'問いに答えることなく、凪は港の暗がりに消えた。黒幕の名前も姿も、まだ分からない。'}]},
+  {who:'narrator',title:'名のない黒幕',text:'問いに答えることなく、凪は港の暗がりに消えた。黒幕の名前も姿も、まだ分からない。'},
+  {who:'aoi',title:'落とし物',text:'「{name}さん、灯室の床に……これが。」',cue:{target:'aoi',face:'normal'}},
+  {who:'narrator',title:'星形の髪留め',text:'葵の手のひらには、子ども用の小さな星形の髪留めがのっていた。古いもののはずなのに、錆ひとつない。'},
+  {who:'aoi',title:'預かりもの',text:'「……解析に回します。今は、私が預かっておきますね。」'}]},
  chapter1_end:{title:'第1章 終幕　帰る場所',place:'宵星相談室・夜',requires:['q6'],lines:[
   {who:'narrator',title:'帰還',text:'夜の相談室。報告を終えたメンバーの前に、温かな飲み物が並んだ。'},
   {who:'momoka',title:'おつかれさま！',text:'「みんな、おかえり！ 大変だったよね。今日はゆっくり休もう！」'},
   {who:'milku',title:'温かな一杯',text:'「お疲れさまです。温かい飲み物をどうぞ。少しだけ、ひと息つきませんか？」'},
   {who:'akane',title:'守れた日常',text:'「街のみんなも無事だったよ！ 相談室のみんなと一緒に動けてよかった！」'},
   {who:'aoi',title:'次の手がかり',text:'「波形はまだ保管してあります。無理せず、次に備えましょう。」'},
-  {who:'narrator',title:'第一章・完',text:'街の灯りはいつも通りだった。その裏で何者かが残響を増幅させている――新たな謎を残し、相談室の夜は更けていく。'}]}
+  {who:'narrator',title:'閉じたノート',ch1EndHook:true,text:'葵だけは、少し離れた席でノートに何かを書き込んでいた。目が合うと、葵は静かにノートを閉じた。'},
+  {who:'momoka',title:'おやすみ',text:'「じゃあ、今日はおつかれさま！ また明日ね、えっと……」',cue:{target:'momoka',face:'smile'}},
+  {who:'momoka',title:'一瞬の空白',text:'「……{name}さん、だよね？ あはは、ごめん。なんか、ど忘れしちゃった。疲れてるのかな。」',cue:{target:'momoka',face:'sad'}},
+  {who:'narrator',title:'葵の視線',text:'ももかは笑ってごまかした。葵はペンを止めたまま、ももかとあなたを、黙って見つめていた。',cue:{target:'aoi',face:'sad'}},
+  {who:'narrator',title:'第一章・完',text:'街の灯りはいつも通りだった。その裏で何者かが残響を増幅させている。そして、灯した想いの奥でも、何かが少しずつ欠け始めていた――。'}]}
 });
 const CHAPTER_CLEAR_GEMS=1000;
 const CHAPTER_SCENE_TIMES=Object.freeze({chapter4_open:'午前',chapter4_end:'夜',q19_intro:'昼',q19_pre:'夕方',q19:'夕方',q20_intro:'昼',q20_pre:'夕方',q20:'夕方',q21_intro:'昼',q21_pre:'夕方',q21:'夕方',q22_intro:'昼',q22_pre:'夕方',q22:'夕方',q23_intro:'昼',q23_pre:'夕方',q23:'夕方',q24_intro:'昼',q24_pre:'夕方',q24:'夕方',chapter2_open:'朝',q7:'夜',q8:'深夜',q9:'夜明け',q10:'午後',q11:'深夜',q12:'夜明け',kaname_meet:'朝',kaede_meet:'午後',chapter2_end:'夜',chapter3_open:'夜',q16_intro:'昼',q16:'夕方',nazuna_meet:'午後',q17_intro:'夜',q17:'深夜',q18_intro:'夜',q18:'夜明け',chapter3_end:'午後',q13:'夕暮れ',q14:'夜',q15:'翌日',saki_yuzu_meet:'夜',chiyo_meet:'夕方',reiko_meet:'午後',anzu_meet:'午後',chapter1_open:'夕方',q1_lead:'夕暮れ',q2_lead:'夕暮れ',q3_lead:'夕方',q4_lead:'夜',q5_lead:'夜',q6_ready:'夜',q7_lead:'夕方',q8_lead:'夜',q9_lead:'夜',q10_lead:'昼',q11_lead:'夜',q12_lead:'夜',q3:'夕暮れ',q4:'夜',q5:'夜',q6:'深夜',chapter1_end:'夜'});
@@ -1511,7 +1525,9 @@ function romanceScript(id){
  const text=who==='momoka'
    ?'「ねえ、責任者さん。帰り道、少しだけ二人で歩かない？　……今日のこと、ちゃんと覚えていたいんだ。」'
    :'「責任者さん、今日は少し休んでくださいね。……よかったら、帰り道もご一緒させてください。」';
- return {...script,lines:[...script.lines,{who,text}]};
+ const hook=script.lines.findIndex(line=>line.ch1EndHook);
+ const at=hook<0?script.lines.length:hook;
+ return {...script,lines:[...script.lines.slice(0,at),{who,text,ch1WalkHome:true},...script.lines.slice(at)]};
 }
 function openBondEpisode(id,i){
  if(!bondAvailable(id,i))return toast('親密度が足りません');
