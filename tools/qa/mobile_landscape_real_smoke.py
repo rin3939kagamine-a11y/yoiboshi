@@ -86,6 +86,48 @@ try:
         ck("Makoto renders on actual home screen",
            ("makoto_v1_full.webp" in home_image["src"] or "makoto_v1_upper.webp" in home_image["src"]) and home_image["width"]>0,home_image)
         page.screenshot(path=str(OUT/"makoto_home_390x844.png"),full_page=True)
+        # Genuine daily-life conversation on an owned Makoto, rather than the default core heroine.
+        page.evaluate("""()=>{S.selected='makoto_daily';S.love.activeHero='momoka';view='talk';render()}""")
+        target='.v676-talk-portrait.expression-stage .expr-character-layer[data-person-id="concept15"]'
+        page.locator(target+' img').wait_for(timeout=15000)
+        stage_before=page.locator(target).evaluate("""el=>({
+          face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
+          anim:getComputedStyle(el.querySelector('img')).animationName
+        })""")
+        ck("Makoto actual daily-life scene loads the accepted portrait",
+           "makoto_v1_upper.webp" in stage_before["src"],stage_before)
+        ck("Makoto actual daily-life scene starts neutral",stage_before["face"]=="normal",stage_before)
+        ck("Makoto idle animation is character-specific",stage_before["anim"]=="ya-actor-concept15",stage_before)
+        page.screenshot(path=str(OUT/"makoto_daily_real_390x844.png"),full_page=True)
+        page.locator('.v676-talk-main .v676-chat-button').click(timeout=10000)
+        stage_after=page.locator(target).evaluate("""el=>({
+          face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
+          anim:getComputedStyle(el.querySelector('img')).animationName
+        })""")
+        ck("Makoto chat reacts with smile but never swaps character art",
+           stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
+        ck("Makoto smile plays expression motion",stage_after["anim"]=="ya-actor-smile",stage_after)
+        page.screenshot(path=str(OUT/"makoto_daily_reaction_390x844.png"),full_page=True)
+        # Five actors must have distinctly authored timing/motion, not identical shaking.
+        pilot=page.evaluate("""()=>['momoka','milku','reina','nagi','concept15'].map(id=>{
+          const stage=document.createElement('div');
+          stage.className='acting-demo-stage';stage.style.cssText='position:fixed;top:-10000px;width:230px;height:300px';
+          stage.innerHTML=expressionPortraitMarkup(id,'normal','pilot-test:'+id,{wrapperClass:'expr-character-layer'});
+          document.body.appendChild(stage);
+          const box=stage.querySelector('.expr-character-layer');
+          const img=box.querySelector('img');
+          const item={id,animation:getComputedStyle(img).animationName,
+            duration:getComputedStyle(img).animationDuration};
+          stage.remove();return item;
+        })""")
+        records.append(dict(character_acting_pilot=pilot))
+        ck("Five cast have unique actor animations",
+           len({entry["animation"] for entry in pilot})==5,pilot)
+        page.emulate_media(reduced_motion="reduce")
+        reduced=page.locator(target+' img').evaluate('el=>getComputedStyle(el).animationName')
+        ck("Reduced motion disables cast acting",reduced=="none",reduced)
+        page.emulate_media(reduced_motion="no-preference")
+        page.evaluate("""()=>{S.selected='momoka_work';S.love.activeHero='momoka';view='home';render()}""")
         page.evaluate("""()=>{lobbySelected='momoka';view='home';render()}""")
         before=page.evaluate("""()=>[S.gems,S.gold,S.party.join(","),!!S.quests.q1?.complete]""")
         for w,h in SIZES:
