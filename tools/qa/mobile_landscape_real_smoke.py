@@ -74,9 +74,9 @@ try:
            portrait["loaded"])
         page.evaluate("""()=>{
           // Synthetic QA-only progression: Makoto must be recruited/unlocked to appear in home.
-          S.owned.makoto_daily={lv:1,aff:0,lb:0,copies:0};
+          S.owned[R2SR('makoto_daily')]={lv:1,aff:0,lb:0,copies:0};
           S.chapter4Met=S.chapter4Met||{};S.chapter4Met.concept15=true;
-          S.homeFavorite='concept15';S.homeUnitId='makoto_daily';
+          S.homeFavorite='concept15';S.homeUnitId=R2SR('makoto_daily');
           lobbySelected='concept15';view='home';render();
         }""")
         page.locator(".home-mock-v301 .mock-hero .mock-character").wait_for(timeout=10000)
@@ -87,7 +87,7 @@ try:
            ("makoto_v1_full.webp" in home_image["src"] or "makoto_v1_upper.webp" in home_image["src"]) and home_image["width"]>0,home_image)
         page.screenshot(path=str(OUT/"makoto_home_390x844.png"),full_page=True)
         # Genuine daily-life conversation on an owned Makoto, rather than the default core heroine.
-        page.evaluate("""()=>{S.selected='makoto_daily';S.love.activeHero='momoka';view='talk';render()}""")
+        page.evaluate("""()=>{S.selected=R2SR('makoto_daily');S.love.activeHero='momoka';view='talk';render()}""")
         target='.v676-talk-portrait.expression-stage .expr-character-layer[data-person-id="concept15"]'
         page.locator(target+' img').wait_for(timeout=15000)
         stage_before=page.locator(target).evaluate("""el=>({
