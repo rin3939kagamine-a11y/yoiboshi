@@ -2504,20 +2504,14 @@ function startHeroChat(id){const u=unit(id);if(u&&isHero(u.person))return startR
 
 function chooseHeroChat(){return toast('おでかけの帰り道で返事を選んでください')}
 
-let makotoTalkReaction='normal'; // Session-only conversation reaction; not part of the save.
 function talk(){
- const selectedHero=unit(S.selected);
- // An owned, selected non-hero should open their own conversation, not the core romance default.
- if(!(selectedHero&&data(selectedHero.id)&&!isHero(selectedHero.person))){
-   if(loveState()?.activeHero&&isHero(loveState().activeHero))return heroTalkPage({person:loveState().activeHero});
-   if(selectedHero&&isHero(selectedHero.person)&&data(selectedHero.id))return heroTalkPage(selectedHero);
- }
- const units=UNITS.filter(u=>data(u.id));const u=unit(S.selected)&&data(S.selected)?unit(S.selected):units[0],d=data(u.id),p=person(u),temp=isConcept(u.person);const people=onePortraitPerPerson(units), variants=units.filter(x=>x.person===u.person),id=u.person;
+ const selectedHero=unit(S.selected);if(loveState()?.activeHero&&isHero(loveState().activeHero))return heroTalkPage({person:loveState().activeHero});if(selectedHero&&isHero(selectedHero.person)&&data(selectedHero.id))return heroTalkPage(selectedHero);
+ const units=UNITS.filter(u=>data(u.id));const u=unit(S.selected)&&data(S.selected)?unit(S.selected):units[0],d=data(u.id),p=person(u),temp=isConcept(u.person);const people=onePortraitPerPerson(units), variants=units.filter(x=>x.person===u.person);
  const stories=['出会いの日','少しだけ近い距離','相談室の帰り道','ふたりの大切な約束'];
  return `${heading('BONDS / DAILY LIFE','交流・日常','お気に入りの仲間と会話して、親密度を深めましょう。')}
  <div class="v676-talk-shell">
  <section class="v676-talk-main" aria-label="${esc(heroineDisplayName(id))}と交流">
-   <div class="v676-talk-portrait${u.person==='concept15'?' expression-stage':''}">${u.person==='concept15'?expressionPortraitMarkup(u.person,makotoTalkReaction,'makoto-talk:'+S.talks,{wrapperClass:'expr-character-layer',imageClass:'portrait',alt:p.name+'の立ち絵'}):'<img src="'+characterPortrait(u.person)+'" alt="'+esc(p.name)+'の立ち絵">'}<span class="v676-portrait-caption">YOIBOSHI · DAILY LIFE</span></div>
+   <div class="v676-talk-portrait"><img src="${characterPortrait(u.person)}" alt="${esc(p.name)}の立ち絵"><span class="v676-portrait-caption">YOIBOSHI · DAILY LIFE</span></div>
    <div class="v676-talk-dialog"><div class="v676-talk-nameplate"><span>♡ ${esc(heroineDisplayName(id))}</span><small>${temp?'設定暫定':esc(p.note)}</small></div><p>${esc(p.lines[Math.min(2,Math.floor(d.aff/35))])}</p></div>
    <div class="v676-talk-summary"><div><span class="v676-eyebrow">BOND LEVEL</span><h3>親密度 <b>${d.aff}</b> <small>/ 100</small></h3><div class="v676-affinity-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${d.aff}"><i style="width:${d.aff}%"></i></div></div><button class="v676-chat-button" ${chatCountToday(u.id)>=ECONOMY.DAILY_CHAT_MAX?'disabled':''} onclick="chat('${u.id}')">♡ 会話する <small>${chatCountToday(u.id)}/${ECONOMY.DAILY_CHAT_MAX}回 · ${chatCountToday(u.id)>=ECONOMY.DAILY_CHAT_MAX?'本日上限':'+8'}</small></button></div>
  </section>
@@ -2535,7 +2529,6 @@ function chat(id){const d=data(id);if(!d)return;
  if(isHero(unit(id)?.person))return startHeroChat(id);
  if(chatCountToday(id)>=ECONOMY.DAILY_CHAT_MAX)return toast('このキャラは本日の会話上限（3回）です');
  d.aff=Math.min(100,d.aff+8);S.talks++;
- if(unit(id)?.person==='concept15')makotoTalkReaction=d.aff>=55?'blush':'smile';
  S.dailyChats[unit(id)?.person||id]={date:todayLocal(),count:chatCountToday(id)+1};
  persist();render();toast('親密度が上がりました ♡');}
 function episode(id,i){
