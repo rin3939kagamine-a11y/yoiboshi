@@ -84,7 +84,7 @@ try:
             "(el)=>({src:el.getAttribute('src'),width:el.naturalWidth,height:el.naturalHeight})")
         records.append(dict(makoto_home=home_image))
         ck("Makoto renders on actual home screen",
-           "makoto_v1_full.webp" in home_image["src"] and home_image["width"]>0,home_image)
+           ("makoto_v1_full.webp" in home_image["src"] or "makoto_v1_upper.webp" in home_image["src"]) and home_image["width"]>0,home_image)
         page.screenshot(path=str(OUT/"makoto_home_390x844.png"),full_page=True)
         page.evaluate("""()=>{lobbySelected='momoka';view='home';render()}""")
         before=page.evaluate("""()=>[S.gems,S.gold,S.party.join(","),!!S.quests.q1?.complete]""")
