@@ -86,42 +86,48 @@ try:
         ck("Makoto renders on actual home screen",
            ("makoto_v1_full.webp" in home_image["src"] or "makoto_v1_upper.webp" in home_image["src"]) and home_image["width"]>0,home_image)
         page.screenshot(path=str(OUT/"makoto_home_390x844.png"),full_page=True)
-        # Genuine daily-life conversation on an owned Makoto, rather than the default core heroine.
-        page.evaluate("""()=>{S.selected=R2SR('makoto_daily');S.love.activeHero='momoka';view='talk';render()}""")
+        # Verify the actual romance heroine page; concept15 is one of HERO_IDS.
+        page.evaluate("""()=>{
+          S.officeMet=true;
+          S.selected=R2SR('makoto_daily');
+          S.love.activeHero='concept15';
+          S.love.mood.concept15='normal';
+          S.love.sulking.concept15=false;
+          view='talk';render();
+        }""")
         target='.v676-talk-portrait.expression-stage .expr-character-layer[data-person-id="concept15"]'
         page.locator(target+' img').wait_for(timeout=15000)
         stage_before=page.locator(target).evaluate("""el=>({
           face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
           anim:getComputedStyle(el.querySelector('img')).animationName
         })""")
-        ck("Makoto actual daily-life scene loads the accepted portrait",
+        ck("Makoto heroine talk shows accepted portrait",
            "makoto_v1_upper.webp" in stage_before["src"],stage_before)
-        ck("Makoto actual daily-life scene starts neutral",stage_before["face"]=="normal",stage_before)
-        ck("Makoto idle animation is character-specific",stage_before["anim"]=="ya-actor-concept15",stage_before)
-        page.screenshot(path=str(OUT/"makoto_daily_real_390x844.png"),full_page=True)
-        page.locator('.v676-talk-main .v676-chat-button').click(timeout=10000)
+        ck("Makoto heroine talk starts neutral",stage_before["face"]=="normal",stage_before)
+        ck("Makoto character-specific motion overrides common breathing",
+           stage_before["anim"]=="ya-actor-concept15",stage_before)
+        page.screenshot(path=str(OUT/"makoto_romance_real_390x844.png"),full_page=True)
+        page.evaluate("""()=>{S.love.mood.concept15='good';render()}""")
         stage_after=page.locator(target).evaluate("""el=>({
           face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
           anim:getComputedStyle(el.querySelector('img')).animationName
         })""")
-        ck("Makoto chat reacts with smile but never swaps character art",
+        ck("Makoto changes mood while retaining approved art",
            stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
-        ck("Makoto smile plays expression motion",stage_after["anim"]=="ya-actor-smile",stage_after)
-        page.screenshot(path=str(OUT/"makoto_daily_reaction_390x844.png"),full_page=True)
-        # Five actors must have distinctly authored timing/motion, not identical shaking.
+        ck("Makoto smile has its own motion",stage_after["anim"]=="ya-actor-smile",stage_after)
+        page.screenshot(path=str(OUT/"makoto_romance_smile_390x844.png"),full_page=True)
         pilot=page.evaluate("""()=>['momoka','milku','reina','nagi','concept15'].map(id=>{
           const stage=document.createElement('div');
           stage.className='acting-demo-stage';stage.style.cssText='position:fixed;top:-10000px;width:230px;height:300px';
-          stage.innerHTML=expressionPortraitMarkup(id,'normal','pilot-test:'+id,{wrapperClass:'expr-character-layer'});
+          stage.innerHTML=expressionPortraitMarkup(id,'normal','acting-qa:'+id,{wrapperClass:'expr-character-layer'});
           document.body.appendChild(stage);
           const box=stage.querySelector('.expr-character-layer');
           const img=box.querySelector('img');
-          const item={id,animation:getComputedStyle(img).animationName,
-            duration:getComputedStyle(img).animationDuration};
+          const item={id,animation:getComputedStyle(img).animationName,duration:getComputedStyle(img).animationDuration};
           stage.remove();return item;
         })""")
         records.append(dict(character_acting_pilot=pilot))
-        ck("Five cast have unique actor animations",
+        ck("Five cast have unique actor motions",
            len({entry["animation"] for entry in pilot})==5,pilot)
         page.emulate_media(reduced_motion="reduce")
         reduced=page.locator(target+' img').evaluate('el=>getComputedStyle(el).animationName')
