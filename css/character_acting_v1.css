@@ -1,0 +1,35 @@
+/* 宵星の契約者 RE:START / Character Acting Pilot v1.0
+   Five-character pilot on existing conversation portraits. No image regeneration.
+   No story/full-body/home or face-registration behavior is changed. */
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="momoka"]{--ya-lift:5px;--ya-lean:-1.0deg;--ya-idle:4.1s}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="milku"]{--ya-lift:2px;--ya-lean:.35deg;--ya-idle:5.0s}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="reina"]{--ya-lift:1.4px;--ya-lean:-.35deg;--ya-idle:4.9s}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="nagi"]{--ya-lift:1.1px;--ya-lean:.25deg;--ya-idle:6.1s}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id="concept15"]{--ya-lift:1.9px;--ya-lean:.3deg;--ya-idle:5.3s}
+
+/* Motion on the inner image avoids conflicting with the existing one-shot 
+   expr-animate-* animation on the outer .expr-character-layer. */
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"]) > img {
+  transform-origin:50% 67%;
+  will-change:transform;
+  animation:ya-breathe var(--ya-idle,4.8s) ease-in-out infinite;
+}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="smile"] > img {animation-name:ya-smile;animation-duration:calc(var(--ya-idle,4.8s) * .8)}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="sad"] > img {animation-name:ya-sad;animation-duration:5.5s}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="pout"] > img {animation-name:ya-pout;animation-duration:3.8s}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="blush"] > img {animation-name:ya-blush;animation-duration:4.4s}
+:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression="surprise"] > img {animation:ya-recoil .56s cubic-bezier(.18,.7,.25,1) 1 both}
+
+@keyframes ya-breathe{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(calc(var(--ya-lift,2px) * -.5)) rotate(calc(var(--ya-lean,.3deg) * .25)) scale(1.004)}}
+@keyframes ya-smile{0%,100%{transform:translateY(0) rotate(0deg)}45%{transform:translateY(calc(var(--ya-lift,2px) * -1)) rotate(var(--ya-lean,.3deg))}}
+@keyframes ya-sad{0%,100%{transform:translateY(3px) rotate(.5deg) scale(.994)}50%{transform:translateY(5px) rotate(.7deg) scale(.993)}}
+@keyframes ya-pout{0%,100%{transform:translateX(0) rotate(0deg)}45%{transform:translateX(-3px) rotate(-.7deg)}}
+@keyframes ya-blush{0%,100%{transform:translateY(2px) rotate(-.4deg) scale(.993)}50%{transform:translateY(3px) rotate(-.8deg) scale(.992)}}
+@keyframes ya-recoil{0%{transform:translateY(2px) scale(1)}36%{transform:translateY(8px) scale(.971)}100%{transform:translateY(0) scale(1)}}
+
+/* The built-in expression images still provide the actual faces. This layer
+   only makes the existing art breathe, lean, or recoil; it does not claim P1
+   arms/hands were redrawn. */
+@media (prefers-reduced-motion:reduce){
+ :is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer[data-person-id] > img{animation:none!important;transform:none!important;will-change:auto!important}
+}
