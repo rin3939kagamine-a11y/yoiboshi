@@ -44,7 +44,7 @@ const ART_V2=Object.freeze({
     "concept12": "assets/ART_V2/full_body/concept12.webp?v=0.35.0.0",
     "concept13": "assets/ART_V2/full_body/concept13.webp?v=0.35.0.0",
     "concept14": "assets/ART_V2/full_body/concept14.webp?v=0.35.0.0",
-    "concept15": "assets/ART_V2/full_body/concept15.webp?v=0.35.0.0",
+    "concept15": "assets/ART_V2/style_candidates/makoto_v1_full.webp?v=20261104-live1",
     "concept16": "assets/ART_V2/full_body/concept16.webp?v=0.35.0.0",
     "concept17": "assets/ART_V2/full_body/concept17.webp?v=0.35.0.0",
     "concept18": "assets/ART_V2/full_body/concept18.webp?v=0.35.0.0",
@@ -102,7 +102,7 @@ const ART_V2=Object.freeze({
     "concept12": "assets/ART_V2/upper_body/concept12.webp?v=0.35.0.0",
     "concept13": "assets/ART_V2/upper_body/concept13.webp?v=0.35.0.0",
     "concept14": "assets/ART_V2/upper_body/concept14.webp?v=0.35.0.0",
-    "concept15": "assets/ART_V2/upper_body/concept15.webp?v=0.35.0.0",
+    "concept15": "assets/ART_V2/style_candidates/makoto_v1_upper.webp?v=20261104-live1",
     "concept16": "assets/ART_V2/upper_body/concept16.webp?v=0.35.0.0",
     "concept17": "assets/ART_V2/upper_body/concept17.webp?v=0.35.0.0",
     "concept18": "assets/ART_V2/upper_body/concept18.webp?v=0.35.0.0",
@@ -160,7 +160,7 @@ const ART_V2=Object.freeze({
     "concept12": "assets/ART_V2/face_icons/concept12.webp",
     "concept13": "assets/ART_V2/face_icons/concept13.webp",
     "concept14": "assets/ART_V2/face_icons/concept14.webp",
-    "concept15": "assets/ART_V2/face_icons/concept15.webp",
+    "concept15": "assets/ART_V2/style_candidates/makoto_v1_upper.webp?v=20261104-live1",
     "concept16": "assets/ART_V2/face_icons/concept16.webp",
     "concept17": "assets/ART_V2/face_icons/concept17.webp",
     "concept18": "assets/ART_V2/face_icons/concept18.webp",
@@ -265,10 +265,14 @@ function characterIcon(personId){return ART_V2.face_icons[personId]||characterAr
 // Keep the helper for older integrations, but the optional dynamic pose UI is retired.
 function hasDrivePose(personId){return false;}
 function expressionArt(personId,face='normal'){
+ // Keep Makoto's accepted face/outfit throughout dialogue until matching expressions exist.
+ if(personId==='concept15')return characterPortrait(personId);
  const key=normalizeExpressionFace(face),table=ART_EXPRESSIONS[personId]||{};
  return table[key]||table.normal||characterPortrait(personId);
 }
 function hasExpressionArt(personId,face='normal'){
+ // Other faces use the built-in fallback emotion icon/animation, not incompatible old sprites.
+ if(personId==='concept15')return false;
  const key=normalizeExpressionFace(face),table=ART_EXPRESSIONS[personId]||{};
  const src=table[key]||table.normal||'';
  return !!src&&src!==characterPortrait(personId);
