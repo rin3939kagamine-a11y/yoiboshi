@@ -55,4 +55,4 @@
 @keyframes ya-actor-sad{0%,100%{transform:translateY(2px) rotate(0)}50%{transform:translateY(5px) rotate(var(--ya-actor-shy))}}
 @keyframes ya-actor-blush{0%,100%{transform:translateY(1px) rotate(0)}45%{transform:translateY(3px) rotate(var(--ya-actor-shy))}}
 @keyframes ya-actor-surprise{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(5px) scale(.985)}}
-@media(prefers-reduced-motion:reduce){:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"]) > img{animation:none!important;transform:none!important;will-change:auto!important}}
+@media(prefers-reduced-motion:reduce){:is(.v676-talk-portrait.expression-stage,.acting-demo-stage) .expr-character-layer:is([data-person-id="momoka"],[data-person-id="milku"],[data-person-id="reina"],[data-person-id="nagi"],[data-person-id="concept15"])[data-expression] > img{animation:none!important;transform:none!important;will-change:auto!important}}
