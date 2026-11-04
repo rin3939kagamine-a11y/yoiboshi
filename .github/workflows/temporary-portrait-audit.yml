@@ -1,0 +1,67 @@
+name: Temporary audit - all current character portraits
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/temporary-portrait-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install image tools
+        run: python -m pip install Pillow
+      - name: Build original-asset audit package and 56 portrait contact sheets
+        run: |
+          mkdir -p qa_portraits/current
+          cp assets/ART_V2/full_body/*.webp qa_portraits/current/
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageStat
+          from pathlib import Path
+          import json, statistics
+          root=Path('qa_portraits')
+          fs=sorted((root/'current').glob('*.webp'))
+          font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',18)
+          rows=[]
+          def sheet(kind):
+              for page in range((len(fs)+19)//20):
+                  subset=fs[page*20:(page+1)*20]
+                  w,h=275,400 if kind=='full' else 255
+                  tile=Image.new('RGB',(w*5,h*4),(230,230,230))
+                  d=ImageDraw.Draw(tile)
+                  for n,p in enumerate(subset):
+                      im=Image.open(p).convert('RGBA')
+                      if kind=='faces':
+                          # Consistent top ~45% crop, not face detection
+                          im=im.crop((0,0,im.width,int(im.height*.45)))
+                      bg=Image.new('RGBA',im.size,(245,245,245,255))
+                      bg.alpha_composite(im)
+                      thumb=ImageOps.contain(bg.convert('RGB'),(w-12,h-40))
+                      x=(n%5)*w+(w-thumb.width)//2
+                      y=(n//5)*h+(h-40-thumb.height)//2+20
+                      tile.paste(thumb,(x,y))
+                      d.text(((n%5)*w+9,(n//5)*h+2),p.stem,fill=(0,0,0),font=font)
+                  tile.save(root/f'{kind}_{page+1}.jpg',quality=90)
+          for p in fs:
+              im=Image.open(p)
+              rgba=im.convert('RGBA')
+              rgba.thumbnail((190,300))
+              rgb=Image.new('RGB',rgba.size,(245,245,245))
+              rgb.paste(rgba,mask=rgba.getchannel('A'))
+              stat=ImageStat.Stat(rgb)
+              rows.append(dict(id=p.stem,original_width=im.width,original_height=im.height,
+                               mode=im.mode,bytes=p.stat().st_size,
+                               mean_rgb=[round(x,1) for x in stat.mean[:3]]))
+          sheet('full');sheet('faces')
+          (root/'manifest.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
+          print('PORTRAIT_COUNT',len(fs))
+          print('SHEETS',sorted(p.name for p in root.glob('*.jpg')))
+          PY
+      - name: Upload contact sheets and all verified current full-body images
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-body-character-visual-audit
+          path: qa_portraits/
+          retention-days: 3
