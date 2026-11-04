@@ -4,6 +4,7 @@ on:
     paths:
       - 'tools/qa/mobile_landscape_real_smoke.py'
       - 'css/mobile_landscape_v03560_patch.css'
+      - 'css/character_acting_v1.css'
       - 'index.html'
       - 'js/art_v2.js'
       - 'js/game.js'
@@ -13,6 +14,7 @@ on:
     paths:
       - 'tools/qa/mobile_landscape_real_smoke.py'
       - 'css/mobile_landscape_v03560_patch.css'
+      - 'css/character_acting_v1.css'
       - 'index.html'
       - 'js/art_v2.js'
       - 'js/game.js'
