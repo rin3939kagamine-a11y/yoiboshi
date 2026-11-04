@@ -17,7 +17,7 @@
    if(!e)return null;
    const kind=Object.prototype.hasOwnProperty.call(pools,e.kind)?e.kind:'normal';
    // Special bosses are fought in a different visual engine: never override them.
-   if(e.kind==='boss'&&['q6','q12','q17','q18','q28','q29','q34','q35'].includes(String(ctx.qid||'')))return null;
+   if(e.kind==='boss'&&['q6','q12','q17','q18','q28','q29','q34','q35','q40'].includes(String(ctx.qid||'')))return null;
    const pool=pools[kind];
    const quest=parseInt(String(ctx.qid||'').replace(/^q/,''),10)||0;
    const wave=Math.max(0,parseInt(ctx.wave,10)||0);
