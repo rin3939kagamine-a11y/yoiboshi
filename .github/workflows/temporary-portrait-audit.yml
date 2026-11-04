@@ -59,7 +59,40 @@ jobs:
           print('PORTRAIT_COUNT',len(fs))
           print('SHEETS',sorted(p.name for p in root.glob('*.jpg')))
           PY
-      - name: Upload contact sheets and all verified current full-body images
+      - name: Also audit actual dialogue expression sprites and portrait upper-bodies
+        run: |
+          mkdir -p qa_portraits/expression_normal qa_portraits/upper_body qa_portraits/story_cast
+          cp assets/ART_V2/expressions/*_normal.webp qa_portraits/expression_normal/
+          cp assets/ART_V2/upper_body/*.webp qa_portraits/upper_body/
+          cp assets/ART_V2/story_cast/*_talk.webp qa_portraits/story_cast/
+          python - <<'PY'
+          from PIL import Image,ImageOps,ImageDraw,ImageFont
+          from pathlib import Path
+          import json
+          root=Path('qa_portraits')
+          font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',18)
+          results={}
+          for cat in ['expression_normal','upper_body','story_cast']:
+            files=sorted((root/cat).glob('*.webp'))
+            results[cat]=[{'name':p.name,'dims':Image.open(p).size,'mode':Image.open(p).mode} for p in files]
+            for page in range((len(files)+19)//20):
+              subset=files[page*20:(page+1)*20]
+              w,h=270,320
+              sheet=Image.new('RGB',(w*5,h*4),'#dedede')
+              d=ImageDraw.Draw(sheet)
+              for i,p in enumerate(subset):
+                im=Image.open(p).convert('RGBA')
+                bg=Image.new('RGBA',im.size,(245,245,245,255));bg.alpha_composite(im)
+                th=ImageOps.contain(bg.convert('RGB'),(w-14,h-37))
+                x=(i%5)*w+(w-th.width)//2
+                y=(i//5)*h+(h-37-th.height)//2+23
+                sheet.paste(th,(x,y))
+                d.text(((i%5)*w+7,(i//5)*h+3),p.stem.replace('_normal',''),fill='black',font=font)
+              sheet.save(root/f'{cat}_{page+1}.jpg',quality=90)
+          (root/'sprite_manifest.json').write_text(json.dumps(results,indent=2))
+          print({k:len(v) for k,v in results.items()})
+          PY
+      - name: Upload comparison sheets and latest original sprites
         uses: actions/upload-artifact@v4
         with:
           name: full-body-character-visual-audit
