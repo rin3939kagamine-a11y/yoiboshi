@@ -249,7 +249,7 @@ const QUESTS=[
 {id:"q22",name:"商店街のおかわり",location:"東雲商店街",lead:"商店街のおかわりの異変を調査し、住民を守りながら灯台の再点灯の安全性を確かめる。",clues:["調査と推理から残響の反応を確かめる。","街の人々が抱える想いに、主人公の星灯が応える。"],report:"原因の分からない反応は断定せず、街と準備関係者の安全を守る。",reward:3950,enemy:"不安を映す擬似体",waves:4,chapter:4,requires:["q21"],baseHp:282,baseAtk:30},
 {id:"q23",name:"灯台守の手紙",location:"旧灯台・宵星亭",lead:"灯台守の手紙の異変を調査し、住民を守りながら灯台の再点灯の安全性を確かめる。",clues:["調査と推理から残響の反応を確かめる。","街の人々が抱える想いに、主人公の星灯が応える。"],report:"原因の分からない反応は断定せず、街と準備関係者の安全を守る。",reward:4100,enemy:"灯台記録の擬似体",waves:5,chapter:4,requires:["q22"],baseHp:290,baseAtk:31},
 {id:"q24",name:"灯をつなぐ日",location:"旧灯台・点灯式準備会場",lead:"灯をつなぐ日の異変を調査し、住民を守りながら灯台の再点灯の安全性を確かめる。",clues:["調査と推理から残響の反応を確かめる。","街の人々が抱える想いに、主人公の星灯が応える。"],report:"原因の分からない反応は断定せず、街と準備関係者の安全を守る。",reward:4250,enemy:"点灯試験の擬似体",waves:5,chapter:4,requires:["q23"],baseHp:298,baseAtk:32}
-,{"id":"q25","name":"お変わりない方","location":"料亭・宵星亭","lead":"料亭の古い点灯記録を調べ、八年前の秘密の光を追う。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":2300,"enemy":"古記録の擬似体","waves":2,"chapter":5,"requires":["q24"],"baseHp":318,"baseAtk":34},{"id":"q26","name":"前夜祭","location":"宵星市・前夜祭広場","lead":"点灯式前夜の避難経路を守りながら異変を調査する。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":2550,"enemy":"舞台袖の小さな擬似体","waves":2,"chapter":5,"requires":["q25"],"baseHp":326,"baseAtk":35},{"id":"q27","name":"点灯式","location":"旧灯台前の広場","lead":"正式点灯に伴い現れた鳥かごと残響から、市民を守る。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":2800,"enemy":"灯台から降りる擬似体","waves":3,"chapter":5,"requires":["q26"],"baseHp":348,"baseAtk":37},{"id":"q28","name":"預けられた灯","location":"旧灯台・灯室","lead":"光の中にいた透子の正体と、灯台の仕組みを確認する。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":3050,"enemy":"白鷺透子","waves":1,"chapter":5,"requires":["q27"],"baseHp":999999,"baseAtk":28},{"id":"q29","name":"ノエルの選択","location":"崩れゆく灯室","lead":"ノエルを守り、崩落する灯室から退避する。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":3300,"enemy":"崩落の残響障壁","waves":1,"chapter":5,"requires":["q28"],"baseHp":168,"baseAtk":19},{"id":"q30","name":"灯の消えた夜","location":"宵星相談室・港","lead":"イブキの破片を調べ、海へ向かう残響の経路を確かめる。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":3550,"enemy":"港に残った擬似体","waves":2,"chapter":5,"requires":["q29"],"baseHp":369,"baseAtk":38}];
+,{"id":"q25","name":"お変わりない方","location":"料亭・宵星亭","lead":"料亭の古い点灯記録を調べ、八年前の秘密の光を追う。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":2300,"enemy":"古記録の擬似体","waves":2,"chapter":5,"requires":["q24"],"baseHp":318,"baseAtk":34},{"id":"q26","name":"前夜祭","location":"宵星市・前夜祭広場","lead":"点灯式前夜の避難経路を守りながら異変を調査する。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":2550,"enemy":"舞台袖の小さな擬似体","waves":2,"chapter":5,"requires":["q25"],"baseHp":326,"baseAtk":35},{"id":"q27","name":"試験点灯","location":"旧灯台前の広場","lead":"公開試験点灯で現れた鳥かごと残響から、市民を守る。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":2800,"enemy":"灯台から降りる擬似体","waves":3,"chapter":5,"requires":["q26"],"baseHp":348,"baseAtk":37},{"id":"q28","name":"灯室の副会長","location":"旧灯台・灯室","lead":"灯室で装置を壊していた保存会副会長・氷室沙耶を止め、吸収の流れを断つ。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":3050,"enemy":"氷室沙耶","waves":2,"chapter":5,"requires":["q27"],"baseHp":495,"baseAtk":50},{"id":"q29","name":"葵の選択","location":"暴走する灯室","lead":"暴走する光の壁を越え、葵を灯芯の前まで届ける。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":3300,"enemy":"暴走する灯の壁","waves":1,"chapter":5,"requires":["q28"],"baseHp":168,"baseAtk":19},{"id":"q30","name":"灯の消えた夜","location":"宵星相談室・港","lead":"イブキの破片を調べ、葵を連れ去った黒い光の行き先を確かめる。","clues":["関係者に聞き込み、異常の発生時刻と安全を確認する。","星灯と記録を照合し、確かな手がかりを集める。"],"report":"相談室に記録を持ち帰り、残響の鎮静と関係者の保護を進める。","reward":3550,"enemy":"港に残った擬似体","waves":2,"chapter":5,"requires":["q29"],"baseHp":369,"baseAtk":38}];
 const CHAPTERS=Object.freeze({0:'序章・相談室の始まり',1:'第1章　増幅する残響',2:'第2章　契約者たち',3:'第3章　白い星の行方',4:'第4章　消えた灯の約束',5:'第5章　点灯式の夜'});
 const QUEST_BY_ID=Object.freeze(Object.fromEntries(QUESTS.map(q=>[q.id,q])));
 const QUEST_MAP_META=Object.freeze({
@@ -460,18 +460,16 @@ function expressionFallbackMarkup(face){
 }
 function expressionPortraitMarkup(personId,face='normal',sceneKey='default',opts={}){
  const actual=normalizeExpressionFace(face), hasAlt=hasExpressionArt(personId,actual);
- const trueTouko=personId==='touko'&&storySession&&(
-   (storySession.id==='q28_intro'&&storySession.step>=5)||
-   ['q28_pre','q28','q29_intro','q29_pre','q29'].includes(storySession.id));
+ const trueTouko=personId==='touko'&&storySession&&TRUE_TOUKO_STORY_IDS.includes(storySession.id); // v0.36.0.0: 正体の姿は第9章まで使わない
  // v0.34.55.0: 透子は背景を抜いた会話用の上半身（story_cast/touko_talk.webp）を使う
- const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.71.0':['touko','sakuya','ibuki','haruka'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.34.71.0`:expressionArt(personId,actual);
+ const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.71.0':['touko','sakuya','ibuki','haruka','saya'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.36.0.0`:expressionArt(personId,actual);
  const play=rememberExpression(sceneKey,personId,actual,!hasAlt);
  const wrapClass=[opts.wrapperClass||'',`expr-face-${actual}`,!hasAlt&&actual!=='normal'?'expr-uses-fallback':'',play?`expr-animate-${actual}`:'',opts.stateClass||''].filter(Boolean).join(' ');
  const alt=opts.alt||`${PEOPLE[personId]?.name||personId}の立ち絵`;
  const imageMarkup=`<img class="${opts.imageClass||'expr-character-img'}" src="${src}" alt="${esc(alt)}">`;
  // The fit applies only to the chapter-story expression portrait, never to fallback/full-body art.
  // Use a nested layer so speaker transitions and expression animations on the outer stage remain intact.
- const talkCast=['touko','sakuya','ibuki','haruka'].includes(personId);
+ const talkCast=['touko','sakuya','ibuki','haruka','saya'].includes(personId);
  const fit=opts.chapterStoryFit&&(hasAlt||talkCast)&&typeof PORTRAIT_FIT!=='undefined'?PORTRAIT_FIT[trueTouko?'touko_true':personId]:null;
  const fittedMarkup=fit?`<div class="story-portrait-fit" style="--pf-s:${fit.s};--pf-u:${fit.u};--pf-x:${fit.x}"><div class="story-portrait-shift${fit.f?' is-top-fade':''}">${imageMarkup}</div></div>`:imageMarkup;
  return `<div class="${wrapClass}" data-person-id="${personId}" data-expression="${actual}" data-expression-source="${hasAlt?'art':'fallback'}">${fittedMarkup}${!hasAlt?expressionFallbackMarkup(actual):''}</div>`;
@@ -1220,7 +1218,8 @@ function nextPrologue(){if(!storySession)return;storySession.step++;if(storySess
 function choosePrologue(choice){if(!storySession||!['people','place'].includes(choice)||!PROLOGUE[storySession.step]?.choices)return;storySession.choice=choice;nextPrologue()}
 function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyFlags.prologue;S.storyFlags.prologue=true;if(first&&['people','place'].includes(storySession?.choice))S.chapterChoiceMemory.prologue=storySession.choice;if(first)S.gems+=150;if(S.onboarding?.enabled&&S.onboarding.stage==='prologue'){S.onboarding.stage='q1';S.questGuideSeen=true;}persist();storySession=null;view='story';citySheetQuest='';render();toast(first?'序章クリア：星晶石150（初回のみ）':'序章を再読しました');window.scrollTo(0,0)}
 // Narrative-only portrait cast; not a recruitable heroine and never serialized.
-const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'売人イブキ',haruka:'霧島 ハルカ'}); // v0.34.56.0: 朔夜・イブキにも会話用の立ち絵
+const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'売人イブキ',haruka:'霧島 ハルカ',saya:'氷室 沙耶'});
+const TRUE_TOUKO_STORY_IDS=Object.freeze([]); // v0.34.56.0: 朔夜・イブキにも会話用の立ち絵
 const CHAPTER3_ONLY_VOICE=Object.freeze({ibuki:'売人イブキ'});
 function prologuePage(){
  if(!storySession)storySession={step:0,choice:null};
@@ -1242,7 +1241,7 @@ function prologuePage(){
 }
 
 // Chapter 1 script is provisional and independent from owned units.
-const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIES,...CHAPTER3_STORIES,...CHAPTER3_LATE_STORIES,...CHAPTER4_STORIES,...CHAPTER5_STORIES,...STORY_REWRITE_V03416,
+const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIES,...CHAPTER3_STORIES,...CHAPTER3_LATE_STORIES,...CHAPTER4_STORIES,...CHAPTER5_STORIES,...STORY_REWRITE_V03416,...(typeof CHAPTER5_REWRITE_V0360!=='undefined'?CHAPTER5_REWRITE_V0360:{}),
   q7_lead:{title:"消えた姉の部屋・導入",place:"神楽坂家・旧住宅区",requires:[],lines:[
    {"who":"narrator","text":"旧住宅区の坂道。古い家並みのあいだに、神楽坂家の門がある。"},
    {"who":"narrator","text":"門の前で、一人の女性が待っていた。分厚いノートを二冊、胸に抱えている。"},
@@ -1805,7 +1804,7 @@ function storyMenu(){
     ...[['saki_yuzu_meet','宵波の姉妹との出会い'],['chiyo_meet','恋塚ちよとの出会い'],['reiko_meet','鷹宮玲子との出会い'],['anzu_meet','七瀬あんずとの出会い']].map(([id,l])=>item(id,()=>storyAllowed(id),l)),
     ...['q16_intro','q16'].map(auto),item('nazuna_meet',()=>q(16),'月岡なずなとの出会い'),...['q17_intro','q17','q18_intro','q18','chapter3_end'].map(auto)]},
   {title:'第4章　消えた灯の約束',items:['chapter4_open',...Object.keys(CHAPTER4_MEET_ORDER).flatMap(k=>[k+'_intro',k+'_pre',k,...CHAPTER4_MEET_ORDER[k].map(h=>h+'_meet')]),'chapter4_end'].map(auto)},
-  {title:'第5章　点灯式の夜',items:['chapter5_open',...['q25','q26','q27','q28','q29','q30'].flatMap(k=>[k+'_intro',k+'_pre',k]),'chapter5_end'].filter(id=>st(id)).map(auto)}
+  {title:'第5章　試験点灯の夜',items:['chapter5_open',...['q25','q26','q27','q28','q29','q30'].flatMap(k=>[k+'_intro',k+'_pre',k]),'chapter5_end'].filter(id=>st(id)).map(auto)}
  ];
  for(const c of chapters){c.items=c.items.filter(x=>x&&(x.id==='__prologue'||st(x.id)));c.open=c.items.filter(x=>x.ok);c.unread=c.open.filter(x=>!x.read).length;c.locked=c.items.length-c.open.length;}
  const visible=chapters.map((c,i)=>({...c,i})).filter(c=>c.open.length);
@@ -2057,7 +2056,7 @@ function cityBottomSheet(q){
  const {value:recommended,text:recommendedText}=questPowerRecommendation(q.id);
  const powerOkay=recommended===null||power>=recommended,phase=st.complete?3:Math.min(st.clues||0,2),action=questSheetAction(q);
  const chapterLabel=q.chapter===0?'序章':`第${q.chapter}章`;
- const powerContext=q.id==='q28'?'（勝利不要のイベント戦・参考値）':q.id==='q29'?'（脱出戦・参考値）':'';
+ const powerContext='';
  const status=state==='done'?'解決済み':state==='locked'?'未解放':questStage(q);
  const stageRow=QUEST_STAGE_LABELS.map((name,i)=>{const kind=st.complete||phase>i?'done':phase===i&&state!=='locked'?'current':'wait';return `<div class="qmap-step ${kind}"><span class="qmap-step-dot">${st.complete||phase>i?'✓':i+1}</span><small>${esc(name)}</small></div>${i<QUEST_STAGE_LABELS.length-1?'<i class="qmap-step-line"></i>':''}`}).join('');
  const lead=state==='locked'?questUnlockReason(q):q.lead;
@@ -2694,7 +2693,6 @@ function enemyType(q,idx,i,elite){
  return (idx+i)%2===0?'swift':'normal';
 }
 function makeWave(q,idx){
- if(q.id==='q28')return [{id:'touko-boss',name:'白鷺透子',max:999999999,hp:999999999,x:83,y:49,atk:24,attackTimer:2,elite:true,kind:'boss',icon:'◈',interval:2.1,damageReduction:.995,shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1}];
 
  const last=idx===q.waves-1,count=last?2:(idx%2===0?2:3),factor=ENEMY_BALANCE[q.id]||{hp:1,atk:1};
  return Array.from({length:count},(_,i)=>{
@@ -2734,7 +2732,7 @@ function startQ12Demo(){
 }
 // v03430: repeatable, reward-free turn training. No progression or save writes.
 // v0.34.64.0: 設定画面の「ボス戦の試遊」。最終ウェーブ（ボス）から始め、報酬・進行・セーブは変えない
-function bossTrials(){return [{qid:'q12',name:'朔夜',sub:'第2章・旧灯台地下「残響の檻」',img:'assets/ART_V2/story_cast/sakuya_talk.webp'},{qid:'q17',name:'売人イブキ',sub:'第3章・埋立地の夜市',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q24',name:'霧島ハルカ',sub:'第4章・点灯式の準備会場',img:'assets/ART_V2/story_cast/haruka_talk.webp'}];}
+function bossTrials(){return [{qid:'q12',name:'朔夜',sub:'第2章・旧灯台地下「残響の檻」',img:'assets/ART_V2/story_cast/sakuya_talk.webp'},{qid:'q17',name:'売人イブキ',sub:'第3章・埋立地の夜市',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q24',name:'霧島ハルカ',sub:'第4章・点灯式の準備会場',img:'assets/ART_V2/story_cast/haruka_talk.webp'},{qid:'q28',name:'氷室沙耶',sub:'第5章・旧灯台の灯室',img:'assets/ART_V2/story_cast/saya_talk.webp'}];}
 function startBossTrial(qid){
   if(view!=='records'||!S.gameStarted)return;
   if(!bossTrials().some(t=>t.qid===qid))return;
@@ -2811,7 +2809,7 @@ function battlePage(){
     <div id="battle-brief" class="hint">進行中は自動移動。敵を発見すると停止して戦闘します。</div>
     
    </div><div class="card battlehud"><div class="flex space" style="margin-bottom:8px"><b>スキル指示</b><span class="tiny">2個 × 4人</span></div>
-    ${battle.qid==='q28'?'<div class="ibuki-boss-panel" id="ibuki-boss-panel" hidden><img src="assets/enemies/touko_true.webp" alt="白鷺透子・正体の姿"><div><strong>白鷺透子</strong><small>灯室の戦い・耐えるか全滅で進行</small></div></div>':battle.qid==='q17'?'<div class="ibuki-boss-panel" id="ibuki-boss-panel" hidden><img src="assets/enemies/ibuki_battle.webp" alt="売人イブキ"><div><strong>売人イブキ</strong><small>夜市の最終ウェーブ</small></div></div>':''}
+    ${battle.qid==='q28'?'<div class="ibuki-boss-panel" id="ibuki-boss-panel" hidden><img src="assets/enemies/saya.webp" alt="氷室沙耶"><div><strong>氷室 沙耶</strong><small>灯室の副会長・銀の星灯</small></div></div>':battle.qid==='q17'?'<div class="ibuki-boss-panel" id="ibuki-boss-panel" hidden><img src="assets/enemies/ibuki_battle.webp" alt="売人イブキ"><div><strong>売人イブキ</strong><small>夜市の最終ウェーブ</small></div></div>':''}
     <div class="toggle"><button onclick="toggleTarget('auto')" class="${battle.auto?'selected':''}">対象自動</button><button onclick="toggleTarget('manual')" class="${!battle.auto?'selected':''}">対象指定</button></div>
     <div id="ally-skills" class="v688-ally-skills"></div><div id="v016-skill-help" class="v016-skill-help" role="status" aria-live="polite"></div><div class="v688-combat-actions"><button class="btn outline mini" onclick="requestInterrupt()">作戦中断</button><button id="target-cancel" class="btn outline mini" hidden onclick="cancellation()">ターゲット選択をキャンセル</button></div><details class="v688-combat-log" id="combat-log-details" ${battle.logOpen?'open':''} ontoggle="rememberBattleLog(this.open)"><summary>行動ログ <span class="tiny">開いて確認</span></summary><div id="battle-log" class="battlelog"></div></details>
    </div></div>`;
@@ -3011,7 +3009,7 @@ function tick(t){
   if(!battle||battle.done||view!=='combat')return;
   const frameBattle=battle;
   if(!lastFrame)lastFrame=t;const dt=Math.min(.07,(t-lastFrame)/1000);lastFrame=t;
-  if(Q12C.paused(battle)){activeTimer=requestAnimationFrame(tick);return}const d=dt*(battle.slow?.15:1)*Q12C.speed(battle);battle.sim+=d;if(battle.qid==='q28'&&battle.sim>=75){finishBattle(true);return;}tickTimedEffects();
+  if(Q12C.paused(battle)){activeTimer=requestAnimationFrame(tick);return}const d=dt*(battle.slow?.15:1)*Q12C.speed(battle);battle.sim+=d;tickTimedEffects();
   if(battle.phase==='advance'){
     battle.travel+=d;
     battle.allies.forEach((a,i)=>{if(a.hp>0){a.x=Math.min(36+(i%2)*18,18+(i%2)*22+14*(battle.travel/STAGE_TRAVEL_TIME));a.y=30+Math.floor(i/2)*45;}});
@@ -3072,7 +3070,7 @@ const CHOICE_BATTLE_LINES=Object.freeze({
  nagi:Object.freeze({a:'「……おかえり。無事でよかった。……前みたいに、少しだけ波の音を聞きに行く？」',b:'「……戻ったんだね。……今日のことも、前みたいに少し聞かせて。」'})
 });
 function claimChoiceBattleCallback(allies,won,qid,grind,preview){
- if(!won||preview||grind||qid==='q28'||!Array.isArray(allies))return null;
+ if(!won||preview||grind||!Array.isArray(allies))return null;
  for(const ally of allies){
   // Ignore stale/removed unit references; only a currently owned participant counts.
   if(!data(ally?.id))continue;
@@ -3091,7 +3089,6 @@ function finishBattle(won){
   if(!battle||battle.done)return;
   if(battle.turnBattle)tbClearTimer();
   if(typeof ycBattleReset==='function')ycBattleReset();
-  if(battle.qid==='q28')won=true; // Event battle: survival, wipe, or defeat of the boss all advance.
   AudioDirector.sfx(won?'victory':'defeat');
   battle.done=true;cancelAnimationFrame(activeTimer);
   if(battle.preview){
@@ -3120,7 +3117,6 @@ function finishBattle(won){
     repeatLeft:battle.grind.repeatLeft-1,repeatWon:battle.grind.repeatWon+1}:null;
   const totalDone=battle.grind?.repeatWon+1||0;
   const questId=battle.qid;
-  if(questId==='q28')dialog={title:'灯室の戦い・終了',message:'圧倒的な光に抗った。灯室に異変が起き、物語が続きます。勝利は不要です。'};
   if(callback)dialog.message+=`\n\n【${PEOPLE[callback.id].name}／帰還後のひと言】\n${callback.text}`;
   if(won&&firstClear&&!battle.grind){
   const after=questAfterStory(questId);
@@ -3188,7 +3184,7 @@ const INVESTIGATION_SCENE_PARTY=Object.freeze({
  q23:['aoi','chinatsu','akane'],q24:['akane','aoi','momoka'],
  q25:['aoi','chinatsu','milku'],q26:['akane','aoi','momoka'],
  q27:['akane','aoi','chinatsu'],q28:['aoi','akane','reina'],
- q29:['aoi','akane','chinatsu'],q30:['aoi','chinatsu','momoka']
+ q29:['aoi','akane','chinatsu'],q30:['reina','chinatsu','momoka']
 });
 function investigationSelectableHeroes(qid){
  const group=INVESTIGATION_SCENE_PARTY[qid]||['aoi','akane','momoka','milku'];

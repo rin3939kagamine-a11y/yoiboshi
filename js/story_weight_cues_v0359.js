@@ -20,3 +20,18 @@ if(typeof EXPRESSION_CUES!=='undefined'&&EXPRESSION_CUES.stories){
   {who:'narrator',title:'震える指先',text:'葵はノートを胸に抱え、いつものように微笑んだ。その指先が、かすかに震えていた。'}
  );
 })();
+
+/* Ver.0.36.0.0 — 第5章の作り直し：丸ごと書き直した場面は行番号の表情指定を外し（各行の cue を使う）、
+   行を差し込んだ場面は、元の行番号を新しい行番号へ読み替える。 */
+(function(){
+ if(typeof EXPRESSION_CUES==='undefined'||!EXPRESSION_CUES.stories||typeof CHAPTER5_REWRITE_V0360==='undefined')return;
+ for(const [id,sc] of Object.entries(CHAPTER5_REWRITE_V0360)){
+  const old=EXPRESSION_CUES.stories[id];if(!old)continue;
+  if(sc.rewritten){delete EXPRESSION_CUES.stories[id];continue}
+  if(!sc.lines.some(l=>l.ins))continue;
+  const map={};let orig=0;
+  sc.lines.forEach((l,i)=>{if(!l.ins){orig++;map[orig]=i+1}});
+  const out={};for(const [k,v] of Object.entries(old)){const n=map[Number(k)];if(n)out[String(n)]=v}
+  EXPRESSION_CUES.stories[id]=out;
+ }
+})();
