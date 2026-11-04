@@ -1,0 +1,9 @@
+/* RE:START character depth supplemental card, using the existing talk-card layout */
+.character-depth{border:1px solid rgba(155,125,194,.22)}
+.character-depth-list{display:grid;gap:10px;margin:12px 0 0}
+.character-depth-list>div{padding:10px 12px;border-radius:12px;background:rgba(140,122,180,.08)}
+.character-depth-list dt{font-weight:700;font-size:.85rem;letter-spacing:.02em;margin:0 0 5px}
+.character-depth-list dd{margin:0}
+.character-depth-list p{margin:0;line-height:1.7;font-size:.9rem;overflow-wrap:anywhere}
+.character-depth-locked{opacity:.6}
+@media(max-width:850px){.character-depth-list{gap:8px}.character-depth-list>div{padding:9px 10px}}
