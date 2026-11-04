@@ -1,0 +1,46 @@
+name: QA - Character depth (54 heroes)
+on:
+  pull_request:
+    paths:
+      - 'js/character_depth_v1.js'
+      - 'css/character_depth_v1.css'
+      - 'js/game.js'
+      - 'index.html'
+      - 'tools/qa/character_depth_real_smoke.py'
+      - '.github/workflows/character-depth-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/character_depth_v1.js'
+      - 'css/character_depth_v1.css'
+      - 'js/game.js'
+      - 'index.html'
+      - 'tools/qa/character_depth_real_smoke.py'
+      - '.github/workflows/character-depth-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium for Playwright
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run real-game character depth test
+        run: python tools/qa/character_depth_real_smoke.py
+      - name: Upload UI screenshots and assertions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: character-depth-qa
+          path: qa_artifacts/character_depth/
+          if-no-files-found: warn
