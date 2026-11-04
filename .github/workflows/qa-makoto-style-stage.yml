@@ -1,0 +1,34 @@
+name: QA Makoto portrait assets
+on:
+  pull_request:
+    paths:
+      - 'assets/ART_V2/style_candidates/**'
+      - 'preview_makoto_stage_v1.html'
+      - '.github/workflows/qa-makoto-style-stage.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pillow
+      - name: Validate transparent assets
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import hashlib
+          tests={'full':((1024,1536),'ad6e4f1b5e983270a2226432b20d2d7c64f1f5ed71fd9010b2cbacde6a1c3f83'),'upper':((665,820),'f0dffeaf7f2c4f370e017408e070d1a0d558cf9432fb2ab5552455ab1e9959dd')}
+          for key,(size,sha) in tests.items():
+            p=Path(f'assets/ART_V2/style_candidates/makoto_v1_{key}.webp')
+            im=Image.open(p)
+            assert im.size==size and im.mode=='RGBA'
+            assert im.getchannel('A').getextrema()==(0,255)
+            assert hashlib.sha256(p.read_bytes()).hexdigest()==sha
+          print('PASS: two transparent candidates verified')
+          PY
