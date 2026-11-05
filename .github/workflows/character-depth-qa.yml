@@ -1,4 +1,4 @@
-name: QA - Character depth (54 heroes)
+name: QA - Character depth (60 heroes)
 on:
   pull_request:
     paths:

@@ -1,4 +1,4 @@
-"""Browser QA for the real game with all 54 character-depth cards.
+"""Browser QA for the real game with all 60 character-depth cards.
 No gameplay progression or persistent saves are changed.
 """
 from pathlib import Path
@@ -47,8 +47,8 @@ try:
              extras:ids.filter(x=>!expected.includes(x)),errors,
              unregistered:characterDepthCard("fake_test_id",100)};
         }""")
-        check("54 distinct character records",d["count"]==54,d)
-        check("all live game heroine IDs covered",d["expected"]==54 and not d["missing"] and not d["extras"],d)
+        check("60 distinct character records",d["count"]==60,d)
+        check("all live game heroine IDs covered",d["expected"]==60 and not d["missing"] and not d["extras"],d)
         check("all records complete, no spoilers, correct affinity gates",not d["errors"],d["errors"])
         check("unknown character returns no panel",d["unregistered"]=="",d["unregistered"])
         for w,h in [(390,844),(568,320),(844,390),(926,428),(1280,800)]:
@@ -75,4 +75,4 @@ try:
 finally:
     srv.shutdown()
     (OUT/"results.json").write_text(json.dumps({"checks":checks,"errors":errors,"screens":screens},ensure_ascii=False,indent=2),encoding="utf-8")
-print(f"PASS: {len(checks)} browser assertions; 54 characters x five affinity gates; {len(screens)} screen sizes")
+print(f"PASS: {len(checks)} browser assertions; 60 characters x five affinity gates; {len(screens)} screen sizes")
