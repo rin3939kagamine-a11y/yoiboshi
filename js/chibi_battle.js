@@ -14,7 +14,7 @@
                    'concept09','concept23','concept15','concept11','concept16',  // しずく・シノ・真琴・響子・文香
                    'concept17','concept13','concept30','concept33','concept19','concept22',  // リコ・舞・汐・マリン・ノエル・ゆめ
                    'concept35','concept36','concept34','concept31',  // 椿・楓・エリカ・カナメ
-                   'saki','yuzu','reiko','chiyo','sena','mizuki','meru','kagari','nazuna','anzu','natsume','hotaru','minori','ichika','saeko']; // クラブ組・追加ヒロイン
+                   'saki','yuzu','reiko','chiyo','sena','mizuki','meru','kagari','nazuna','anzu','natsume','hotaru','minori','ichika','saeko','juri']; // クラブ組・追加ヒロイン
   // ユニットIDで呼ばれても、キャラIDの画像を使う
   var ALIASES = { hiyori:'concept24', koyori:'concept32', kirari:'concept26', maron:'concept27',
                   suiran:'concept10', cocoa:'concept12', ageha:'concept25', lilith:'concept29',
