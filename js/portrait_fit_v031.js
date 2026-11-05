@@ -17,7 +17,7 @@ const PORTRAIT_FIT = Object.freeze({
   touko:{s:1,u:0,x:0}, // v0.34.56.0 会話用の立ち絵（背景抜き）
   touko_true:{s:1,u:0,x:0},
   saya:{s:1,u:0,x:0},
-  natsume:{s:1,u:0,x:0},hotaru:{s:1,u:0,x:0},aoi_dark:{s:1,u:0,x:0},ruri:{s:1,u:0,x:0},ichika:{s:1,u:0,x:0},minori:{s:1,u:0,x:0},juri:{s:1,u:0,x:0},saeko:{s:1,u:0,x:0}, // v0.36.0.0 仮のシルエット（本番の絵ができたら差し替え）
+  natsume:{s:1,u:0,x:0},hotaru:{s:1,u:0,x:0},aoi_dark:{s:1,u:0,x:0},ruri:{s:1,u:0,x:0},ichika:{s:1,u:0,x:0},minori:{s:1,u:0,x:0},juri:{s:1,u:0,x:0},saeko:{s:1,u:0,x:0},sumire:{s:1,u:0,x:0}, // v0.36.0.0 仮のシルエット（本番の絵ができたら差し替え）
   sakuya:{s:1,u:0,x:0},
   ibuki:{s:1,u:0,x:0},
   haruka:{s:1,u:0,x:0}, // v0.34.57.0 トワの姉（第4章で登場予定）
