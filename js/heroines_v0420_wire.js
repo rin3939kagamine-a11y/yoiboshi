@@ -1,6 +1,6 @@
 /* Ver.0.42.0.0 — 新ヒロイン6人の絵（全身・上半身・表情）を絵の対応表に登録する。 */
 (function(){
- const V='?v=0.42.4.0';const ids=['natsume','hotaru','minori','ichika','juri','saeko'];
+ const V='?v=0.42.5.0';const ids=['natsume','hotaru','minori','ichika','juri','saeko'];
  if(typeof ART_V2!=='undefined'){for(const id of ids){
   if(ART_V2.full_body)ART_V2.full_body[id]=`assets/ART_V2/full_body/${id}.webp${V}`;
   if(ART_V2.upper_body)ART_V2.upper_body[id]=`assets/ART_V2/upper_body/${id}.webp${V}`;
