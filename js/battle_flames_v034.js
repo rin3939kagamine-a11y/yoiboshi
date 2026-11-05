@@ -68,6 +68,12 @@ const TB_FLAME_LIBRARY=Object.freeze({
  "ritsu":Object.freeze({kind:"rally",name:"夜を繋ぐ音"}),
  "towa":Object.freeze({kind:"quick",name:"物語の橋渡し"}),
  "yuriko":Object.freeze({kind:"ward",name:"街へのラベンダー"}),
+ "natsume":Object.freeze({kind:"ward",name:"水底の青灯"}),
+ "hotaru":Object.freeze({kind:"pulse",name:"冬の星明かり"}),
+ "minori":Object.freeze({kind:"quick",name:"シャッターの閃光"}),
+ "ichika":Object.freeze({kind:"mend",name:"いちご色の灯"}),
+ "juri":Object.freeze({kind:"focus",name:"宝石の閃き"}),
+ "saeko":Object.freeze({kind:"rally",name:"磨かれた宝石灯"}),
 });
 function tbFlamePerson(id){return unit(id)?.person||String(id);}
 function tbFlameData(id){

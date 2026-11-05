@@ -18,7 +18,8 @@ const UNIT_DESIGN=Object.freeze({
  kaede_daily:{skills:['heal_shield','cleanse'],passive:['heal_shield_focus','ひと針の安心']},
  ...NEW_UNIT_DESIGN_V026,
  ...NEW_UNIT_DESIGN_V027,
- ...NEW_UNIT_DESIGN_V028
+ ...NEW_UNIT_DESIGN_V028,
+ ...(typeof NEW_UNIT_DESIGN_V0420!=='undefined'?NEW_UNIT_DESIGN_V0420:{})
 });
 const SKILL_TARGET=Object.freeze({single:'enemy',aoe:'enemy',combo:'enemy',def_down:'enemy',heal_one:'ally',heal_all:'ally',regen:'ally',shield_one:'ally',shield_all:'ally',taunt:'enemy',attack_up:'ally',ct:'ally',attack_down:'enemy',stun:'enemy',drain:'enemy',pierce:'enemy',finisher:'enemy',cleanse:'ally',heal_boost:'ally',heal_shield:'ally',counter:'ally',damage_reduce:'ally',cover:'ally',defense_up:'ally',enemy_ct:'enemy',reset_one:'ally'});
 const SKILL_LABEL=Object.freeze({single:'単体強攻撃',aoe:'全体攻撃',combo:'3連撃',def_down:'防御ダウン',heal_one:'単体大回復',heal_all:'全体回復',regen:'継続回復',shield_one:'単体防護',shield_all:'全体防護',taunt:'挑発',attack_up:'攻撃アップ',ct:'CT短縮',attack_down:'敵の攻撃ダウン',stun:'足止め',drain:'吸収攻撃',pierce:'貫通攻撃',finisher:'とどめ',cleanse:'弱体解除＋小回復',heal_boost:'回復量アップ',heal_shield:'癒しの盾',counter:'反撃',damage_reduce:'被ダメージ軽減',cover:'身代わり',defense_up:'防御アップ',enemy_ct:'敵のCT延長',reset_one:'スキル再使用'});
