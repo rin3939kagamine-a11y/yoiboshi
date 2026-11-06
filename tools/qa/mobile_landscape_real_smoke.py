@@ -49,7 +49,8 @@ try:
             const holder=document.createElement('div');holder.innerHTML=markup;
             return {face,src:holder.querySelector('img')?.getAttribute('src'),
               fallback:holder.firstElementChild?.dataset.expressionSource==='fallback',
-              emotionOverlay:face==='normal'||!!holder.querySelector('.expr-fallback-wrap')};
+              symbolMode:holder.firstElementChild?.dataset.expressionSource==='symbol',
+              emotionOverlay:face==='normal'||!!holder.querySelector('.symbol-reaction-head')};
           });
           const loaded=await Promise.all([full,upper,icon].map(async src=>{
             const img=new Image();img.src=src;
@@ -65,10 +66,10 @@ try:
         ck("Makoto original approved full body selected","style_candidates/makoto_v1_full.webp" in portrait["full"],portrait["full"])
         ck("Makoto approved upper body selected","style_candidates/makoto_v1_upper.webp" in portrait["upper"],portrait["upper"])
         ck("Makoto portrait icon uses matching upper image",portrait["icon"]==portrait["upper"],portrait["icon"])
-        ck("Makoto all six dialogue moods use the same approved portrait",
-           all(d["src"]==portrait["upper"] for d in portrait["dialogue"]),portrait["dialogue"])
-        ck("Makoto old expression artwork suppressed",
-           all(d["fallback"] and d["emotionOverlay"] for d in portrait["dialogue"]),portrait["dialogue"])
+        ck("Makoto dialogue uses the same user-approved versioned crop",
+           all("upper_body_crops_v0500/makoto.webp" in d["src"] for d in portrait["dialogue"]),portrait["dialogue"])
+        ck("Makoto single-crop symbol mode replaces all six face-image references",
+           all(d["symbolMode"] and not d["fallback"] and d["emotionOverlay"] for d in portrait["dialogue"]),portrait["dialogue"])
         ck("Makoto images load with transparent edges",
            all(x["loaded"] and x["width"]>100 and x["height"]>100 and x["cornerAlpha"]==0 for x in portrait["loaded"]),
            portrait["loaded"])
@@ -101,11 +102,11 @@ try:
           face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
           anim:getComputedStyle(el.querySelector('img')).animationName
         })""")
-        ck("Makoto heroine talk shows accepted portrait",
-           "makoto_v1_upper.webp" in stage_before["src"],stage_before)
+        ck("Makoto heroine talk uses approved new crop",
+           "upper_body_crops_v0500/makoto.webp" in stage_before["src"],stage_before)
         ck("Makoto heroine talk starts neutral",stage_before["face"]=="normal",stage_before)
-        ck("Makoto character-specific motion overrides common breathing",
-           stage_before["anim"]=="ya-actor-makoto",stage_before)
+        ck("Makoto neutral crop is stationary by design",
+           stage_before["anim"]=="none",stage_before)
         page.screenshot(path=str(OUT/"makoto_romance_real_390x844.png"),full_page=True)
         page.evaluate("""()=>{S.love.mood.makoto='good';render()}""")
         stage_after=page.locator(target).evaluate("""el=>({
@@ -114,7 +115,7 @@ try:
         })""")
         ck("Makoto changes mood while retaining approved art",
            stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
-        ck("Makoto smile has its own motion",stage_after["anim"]=="ya-actor-smile",stage_after)
+        ck("Makoto smile hops in the new symbol mode",stage_after["anim"]=="symbolV0500Hop",stage_after)
         page.screenshot(path=str(OUT/"makoto_romance_smile_390x844.png"),full_page=True)
         pilot=page.evaluate("""()=>['momoka','milku','reina','nagi','makoto'].map(id=>{
           const stage=document.createElement('div');
@@ -127,8 +128,8 @@ try:
           stage.remove();return item;
         })""")
         records.append(dict(character_acting_pilot=pilot))
-        ck("Five cast have unique actor motions",
-           len({entry["animation"] for entry in pilot})==5,pilot)
+        ck("Five legacy pilot cast now share the stationary single-crop baseline",
+           all(entry["animation"]=="none" for entry in pilot),pilot)
         page.emulate_media(reduced_motion="reduce")
         reduced=page.locator(target+' img').evaluate('el=>getComputedStyle(el).animationName')
         ck("Reduced motion disables cast acting",reduced=="none",reduced)
