@@ -31,7 +31,7 @@
 | 1280×800 PC新ターン制 | 4人描画・通常攻撃成功、幅あふれなし | Chromium実ブラウザ |
 | 旧リアルタイム戦闘（844×390） | ちび4人描画・頭切れ補正確認 | Chromium実ブラウザ |
 | 7キャラのPNG | 7/7読込、自然幅512 | Chromium実ブラウザ |
-| 未実装キャラ顔代替 | concept28で丸型fallback | Chromium実ブラウザ |
+| 未実装キャラ顔代替 | koharuで丸型fallback | Chromium実ブラウザ |
 | 被ダメ・回復・灯す・KO・復帰 | 各エフェクトのCSS/DOM発火を確認 | Chromium実ブラウザ |
 | スキル／通常攻撃の見た目 | 着弾遅延のある攻撃アニメと敵数値を確認 | Chromium実ブラウザ |
 | ×2倍速 | CSS --yc-speed=2 | Chromium実ブラウザ |
