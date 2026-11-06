@@ -277,3 +277,13 @@ function hasExpressionArt(personId,face='normal'){
  const src=table[key]||table.normal||'';
  return !!src&&src!==characterPortrait(personId);
 }
+
+// Ver.0.50.0.1 — additive, reversible conversation-only crop registry.
+// Original ART_V2.upper_body, ART_EXPRESSIONS and their files remain untouched.
+// ichika: approved dynamic crop; juri: current design provisional until Aries is complete.
+function artV2TalkCropV0500(id){
+ if(typeof SYMBOL_REACTION_EXISTING_V0500==='undefined'||typeof SYMBOL_REACTION_NEW_V0500==='undefined')return '';
+ if(SYMBOL_REACTION_NEW_V0500.includes(id))return 'assets/ART_V2/upper_body/'+id+'.webp?v=0.50.0.1';
+ if(SYMBOL_REACTION_EXISTING_V0500.includes(id))return 'assets/ART_V2/upper_body_crops_v0500/'+id+'.webp?v=0.50.0.1';
+ return '';
+}
