@@ -41,3 +41,16 @@
 
 /* Stronger than the legacy .expression-stage .expr-character-layer img rule. */
 :is(.v676-talk-portrait,.story-cast,.expression-stage,.expression-repair,.expression-result,.onb-person) .symbol-reaction-v0500>.symbol-reaction-image{object-fit:contain!important;object-position:center bottom!important}
+
+/* Defeat the historic five-actor !important idle animations without modifying them.
+   Scoped only to opted-in symbol actors, so rollback is one CSS/JS include change. */
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression]>img.symbol-reaction-image{animation:none!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-hop>img.symbol-reaction-image{animation:symbolV0500Hop .52s cubic-bezier(.19,.8,.25,1) 1 both!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-sway>img.symbol-reaction-image{animation:symbolV0500Sway 1.14s ease-in-out 1 both!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-jump>img.symbol-reaction-image{animation:symbolV0500Jump .5s cubic-bezier(.19,.8,.25,1) 1 both!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-tilt>img.symbol-reaction-image{animation:symbolV0500Tilt 1.1s ease-in-out 1 both!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-recoil>img.symbol-reaction-image{animation:symbolV0500Recoil .7s ease-out 1 both!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-shake>img.symbol-reaction-image{animation:symbolV0500Shake .54s linear 1 both!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-sink>img.symbol-reaction-image{animation:symbolV0500Sink 1.2s ease-in-out 1 both!important}
+html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play.symbol-motion-kiss>img.symbol-reaction-image{animation:symbolV0500Kiss 1.2s cubic-bezier(.2,.5,.3,1) 1 both!important}
+@media(prefers-reduced-motion:reduce){html body .symbol-reaction-v0500[data-expression-source="symbol"][data-person-id][data-expression].symbol-reaction-play>img.symbol-reaction-image{animation:none!important;transform:none!important}}
