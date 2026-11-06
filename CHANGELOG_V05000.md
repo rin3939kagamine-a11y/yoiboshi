@@ -50,9 +50,9 @@
 | full_body/upper_body/face icon | **一部完了** | 19× each in ZIP; 3 authoritative PNGs preserved byte-identically |
 | expressions ×6 | **一部完了** | 6 file slots x19 prepared, neutral-face placeholder ONLY; distinct expressions NOT generated |
 | sr_gallery.html 79人 | **実装済み** | original 60 entries in order, appended 19 |
-| QA workflow and browser test | **テスト未実施** | workflow and count updated to 79; CI/browser results pending |
-| Save compatibility | **未検証** | no KEY, save migration, data schema, battle, or RATE edits in this branch |
-| mobile view QA | **未検証** | 5 viewport assertions in workflow; screenshots pending |
+| QA workflow and browser test | **実行済み：PASS** | GitHub Actions: 19人×95話×57ユニット、character-depth 79人・25 assertions・親密度5段階 |
+| Save compatibility | **実行済み：PASS（既存回帰）** | Concept/エナ移行CI、旧セーブ原本不変・冪等変換・既存ユニット保持PASS。利用者の実セーブでの端末検証は未実施 |
+| mobile view QA | **実行済み：PASS（自動試験）** | 5幅の新募集ビュー＋character-depth、追加で既存モバイル107 checks／9 viewports PASS。実機iPhone操作は未実施 |
 | concept ID rename | **依存** | based on draft PR #24 head, not merged into main |
 
 ### マージ停止条件
@@ -61,3 +61,11 @@
 2. `*_smile/blush/sad/pout/surprise` の本当の表情差分とSSR/UR専用構図を作画し、仮画像から差し替える。
 3. PR #24の確定後、そのmain状態との競合・セーブ移行を再検証する。
 4. Playwrightの全項目、ブラウザコンソール、HTTP画像読み込み、iPhone縦横・Windows表示、既存セーブ再読込の確認を実行し、このログに結果を追記する。
+
+## CI検証結果（2026-11-06）
+
+- [PASS] [Character depth and new 19 smoke](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42176742085): JS構文検査 PASS、新19人・旧60人で合計79人、95絆話、57ユニット、旧通常募集pool=172件を維持、27種の情報比較／エラーなし。既存character-depth：25 browser assertions、79人×親密度5階層、5画面サイズ合格。
+- [PASS] [Concept ID / Ena save migration](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42176742008): 29 ID変換、移行冪等性、旧セーブ原本不変、既存メンバー保持、SR gallery79件を確認。
+- [PASS] [Mobile landscape](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42176742113): 9ビューポートで107チェック合格。スクリーンショットはAction artifactに保存。
+
+**合格対象はコードとブラウザ内データのみ**。現時点では新規画像バイナリがGitHubに存在せず、素材のHTTP200・ユーザー端末の実機見た目・真の表情描き分けは未検証／未完成。Draft PRをmainへマージしない。
