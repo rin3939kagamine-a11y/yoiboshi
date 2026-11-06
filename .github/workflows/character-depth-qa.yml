@@ -7,6 +7,10 @@ on:
       - 'js/game.js'
       - 'js/heroines_v0500.js'
       - 'js/heroines_v0500_wire.js'
+      - 'js/symbol_reactions_v0500.js'
+      - 'js/art_v2.js'
+      - 'css/symbol_reactions_v0500.css'
+      - 'tools/qa/symbol_reactions_v0500_smoke.py'
       - 'js/performance_v016.js'
       - 'sr_gallery.html'
       - 'tools/qa/heroines_v0500_smoke.py'
@@ -44,10 +48,14 @@ jobs:
         run: |
           node --check js/heroines_v0500.js
           node --check js/heroines_v0500_wire.js
+          node --check js/symbol_reactions_v0500.js
+          node --check js/art_v2.js
           node --check js/game.js
           node --check js/performance_v016.js
       - name: Run new 19-heroine real-game smoke
         run: python tools/qa/heroines_v0500_smoke.py
+      - name: Verify 81 unified symbol-reaction character routes
+        run: python tools/qa/symbol_reactions_v0500_smoke.py
       - name: Run real-game character depth test
         run: python tools/qa/character_depth_real_smoke.py
       - name: Upload UI screenshots and assertions
@@ -58,4 +66,5 @@ jobs:
           path: |
             qa_artifacts/character_depth/
             qa_artifacts/new19_v0500/
+            qa_artifacts/symbols_v0500/
           if-no-files-found: warn
