@@ -6,6 +6,10 @@ on:
       - 'css/character_depth_v1.css'
       - 'js/game.js'
       - 'js/heroines_v0500.js'
+      - 'js/heroines_v0500_wire.js'
+      - 'js/performance_v016.js'
+      - 'sr_gallery.html'
+      - 'tools/qa/heroines_v0500_smoke.py'
       - 'index.html'
       - 'tools/qa/character_depth_real_smoke.py'
       - '.github/workflows/character-depth-qa.yml'
@@ -36,6 +40,14 @@ jobs:
         run: |
           python -m pip install playwright==1.56.0
           python -m playwright install --with-deps chromium
+      - name: Verify JavaScript grammar
+        run: |
+          node --check js/heroines_v0500.js
+          node --check js/heroines_v0500_wire.js
+          node --check js/game.js
+          node --check js/performance_v016.js
+      - name: Run new 19-heroine real-game smoke
+        run: python tools/qa/heroines_v0500_smoke.py
       - name: Run real-game character depth test
         run: python tools/qa/character_depth_real_smoke.py
       - name: Upload UI screenshots and assertions
@@ -43,5 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: character-depth-qa
-          path: qa_artifacts/character_depth/
+          path: |
+            qa_artifacts/character_depth/
+            qa_artifacts/new19_v0500/
           if-no-files-found: warn
