@@ -8,20 +8,20 @@
   'use strict';
   // ちびキャラ画像があるキャラ(追加したらここに足すだけ)
   var CHIBI_IDS = ['reina','akane','aoi','chinatsu','nagi','momoka','milku',
-                   'concept24','concept32','concept26','concept27',  // ひより・こより・きらり・まろん
-                   'concept10','concept12','concept25','concept29',  // 翠蘭・ここあ・あげは・リリス
-                   'concept08','concept18','concept28','concept14','concept20','concept21',  // 結衣・莉子・小春・ルナ・ミオ・ジュン
-                   'concept09','concept23','concept15','concept11','concept16',  // しずく・シノ・真琴・響子・文香
-                   'concept17','concept13','concept30','concept33','concept19','concept22',  // リコ・舞・汐・マリン・ノエル・ゆめ
-                   'concept35','concept36','concept34','concept31',  // 椿・楓・エリカ・カナメ
+                   'hiyori','koyori','kirari','maron',  // ひより・こより・きらり・まろん
+                   'suiran','cocoa','ageha','lilith',  // 翠蘭・ここあ・あげは・リリス
+                   'yui','riko','koharu','luna','mio','jun',  // 結衣・莉子・小春・ルナ・ミオ・ジュン
+                   'shizuku','shino','makoto','kyoko','fumika',  // しずく・シノ・真琴・響子・文香
+                   'ena','mai','shio','marin','noel','yume',  // エナ・舞・汐・マリン・ノエル・ゆめ
+                   'tsubaki','kaede','erika','kaname',  // 椿・楓・エリカ・カナメ
                    'saki','yuzu','reiko','chiyo','sena','mizuki','meru','kagari','nazuna','anzu','natsume','hotaru','minori','ichika','saeko','juri']; // クラブ組・追加ヒロイン
   // ユニットIDで呼ばれても、キャラIDの画像を使う
-  var ALIASES = { hiyori:'concept24', koyori:'concept32', kirari:'concept26', maron:'concept27',
-                  suiran:'concept10', cocoa:'concept12', ageha:'concept25', lilith:'concept29',
-                  yui:'concept08', riko:'concept18', koharu:'concept28', luna:'concept14', mio:'concept20', jun:'concept21',
-                  shizuku:'concept09', shino:'concept23', makoto:'concept15', kyoko:'concept11', fumika:'concept16',
-                  rico:'concept17', mai:'concept13', shio:'concept30', marine:'concept33', noel:'concept19', yume:'concept22',
-                  tsubaki:'concept35', kaede:'concept36', erika:'concept34', kaname:'concept31' };
+  var ALIASES = { hiyori:'hiyori', koyori:'koyori', kirari:'kirari', maron:'maron',
+                  suiran:'suiran', cocoa:'cocoa', ageha:'ageha', lilith:'lilith',
+                  yui:'yui', riko:'riko', koharu:'koharu', luna:'luna', mio:'mio', jun:'jun',
+                  shizuku:'shizuku', shino:'shino', makoto:'makoto', kyoko:'kyoko', fumika:'fumika',
+                  rico:'ena', mai:'mai', shio:'shio', marine:'marin', noel:'noel', yume:'yume',
+                  tsubaki:'tsubaki', kaede:'kaede', erika:'erika', kaname:'kaname' };
   function key(id){ return ALIASES[id] || id; }
   var CHIBI_DIR = 'assets/ART_V2/chibi/';
   // 並び位置(left%, bottom%)。後列3・前列2。前列ほど手前(z-indexが上)
