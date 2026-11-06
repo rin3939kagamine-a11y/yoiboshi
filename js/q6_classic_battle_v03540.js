@@ -58,14 +58,8 @@
   var stage=field.querySelector('#ycTurnStage');
   if(!stage)return;
   stage.classList.add('q6-classic-stage');
-  stage.setAttribute('aria-label','旧灯台の戦場。左側が敵、右側が味方。敵を押すと対象を選択');
-  var partyPositions=[[63,45],[80,44],[61,6],[79,8]];
-  stage.querySelectorAll(':scope > .yc-slot').forEach(function(node,i){
-   var pos=partyPositions[i]||[65+(i%2)*14,8];
-   node.style.setProperty('left',pos[0]+'%','important');
-   node.style.setProperty('bottom',pos[1]+'%','important');
-   node.style.setProperty('z-index',pos[1]<20?'11':'10','important');
-  });
+  stage.setAttribute('aria-label','旧灯台の戦場。左側が味方、右側が敵。敵を押すと対象を選択');
+  // Ally slots keep YoiChibi.FORMATION (left-hand formation), including damage popup anchors.
   var last=b.wave===b.totalWaves-1;
   stage.querySelectorAll(':scope > .yc-enemy-slot').forEach(function(node,i){
    var e=b.enemies[i];if(!e)return;
@@ -74,7 +68,7 @@
    node.classList.toggle('q6-minion',!giant);
    var aura=statuses(e,b.tb.round).map(function(st){return st[0];});
    ['red','blue','green'].forEach(function(c){node.classList.toggle('q6-aura-'+c,aura.indexOf(c)>=0);});
-   node.style.setProperty('left',(giant?2:(last?37:4+i*18))+'%','important');
+   node.style.setProperty('left',(giant?51:(last?72+(i%2)*9:54+i*14))+'%','important');
    node.style.setProperty('bottom',(giant?1:(last?6:(i%2===0?9:5)))+'%','important');
    if(giant){
     var shell=node.querySelector('.yc-enemy-shell');
