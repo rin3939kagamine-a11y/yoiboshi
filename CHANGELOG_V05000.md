@@ -111,3 +111,10 @@
 - キュー `pout` の「怒り」解釈は仮置き。無言の拗ね・不機嫌も同じ「💢」になるため、必要なら別の感情カテゴリとして再調整する。
 
 **PR #25はDraftのまま。main未マージ。**
+
+### 画像import ZIP統合版 / 実施結果（2026-11-06）
+
+- 新19upper_body+既存62upper_body cropsの**81画像**に、前回からのfull_body/face_icons/UNIT_ART等を同梱した`yoiboshi_v05001_all_character_assets_import.zip` を作成：**184件のバイナリアセット**。実使用しない6表情ファイルは同梱しないが、既存GitHub画像は一切削除しない。
+- このアーカイブはモデルの作業コンテナ内で作成済み。**GitHubにバイナリを直接アップロードする手段がなく、PR #25へは未登録。** そのため実画面での画像HTTP読み込み成功と表示完了は未実施。
+- 実行済CI：[character-depth QA 42200549193](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42200549193) **PASS**（81人の記号変換、9キュー、3章、シリアス／キス、既存59＋等）／[旧セーブ回帰 42200549215](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42200549215) **PASS**。
+- [モバイル回帰 42200931557](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42200931557) **FAIL**。真琴の正式クロップが未アップロードのためHTTP画像読込に失敗し、実ゲームの画像エラーハンドラが代替文に置換した。表示ロジックではなく**画像ファイル未投入が直接原因**。ZIPをアップロードしてから再実行するまで合格扱いにしない。
