@@ -49,12 +49,10 @@
  color:#ebdfc6;padding:3px 7px;font-size:10px;pointer-events:none
 }
 .tb-root.q6-classic .yc-turn-stage .yc-slot{
- width:min(18cqw,32cqh)!important;min-width:0!important;max-width:none!important;z-index:10!important
+ width:min(18%,120px)!important;min-width:0!important;max-width:none!important;z-index:10!important
 }
 .tb-root.q6-classic .yc-turn-stage .yc-slot .yc-actor img{filter:drop-shadow(1px 4px 3px #060a13c9)}
-/* 味方は右に位置するので攻撃は左向き。 */
-.tb-root.q6-classic .yc-turn-stage .yc-slot .yc-actor.yc-attack{animation-name:q6-strike-left}
-@keyframes q6-strike-left{0%{transform:none}35%{transform:translate(-38%,-10%)}55%{transform:translate(-46%,0)}100%{transform:none}}
+/* Allies are on the left: use the shared yc-attack animation toward the right. */
 .tb-root.q6-classic .yc-enemy-slot{
  width:22%!important;height:54%!important;max-width:none!important;min-width:0!important;
  z-index:4!important;touch-action:manipulation
