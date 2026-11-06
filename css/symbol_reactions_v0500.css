@@ -38,3 +38,6 @@
  .symbol-reaction-v0500.symbol-reaction-play>.symbol-reaction-image{animation:none!important;transform:none!important}
  .symbol-reaction-v0500.symbol-reaction-play>.symbol-reaction-head{animation:none!important;opacity:1;transform:none!important}
 }
+
+/* Stronger than the legacy .expression-stage .expr-character-layer img rule. */
+:is(.v676-talk-portrait,.story-cast,.expression-stage,.expression-repair,.expression-result,.onb-person) .symbol-reaction-v0500>.symbol-reaction-image{object-fit:contain!important;object-position:center bottom!important}
