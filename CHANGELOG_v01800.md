@@ -12,7 +12,7 @@
 - 元の駅前6人データのプロフィール・絆・段階別会話は維持。
 
 ## 新ヒロイン5人の正式化
-- concept16→柚木 文香(27)、concept11→朝比奈 響子(29)、concept15→早瀬 真琴(30)、concept23→灰原 シノ(25)、concept09→相馬 しずく(21)。
+- fumika→柚木 文香(27)、kyoko→朝比奈 響子(29)、makoto→早瀬 真琴(30)、shino→灰原 シノ(25)、shizuku→相馬 しずく(21)。
 - moods 4種類、6デート場所のセリフ各2、clues、replyChoices各6、replyResults計18、repair、topics8、invite、outing、絆2話（親密度20/40）を5人分追加。
 - q4クリア後に『旧第二小学校の出会い』→『相談室の新しい顔ぶれ』を順番に追加。どちらも進行位置を保存し、中断後に交流画面から再開可能。
 - 第1イベント終了後は文香・響子のみ通常ガチャに追加、第2イベント終了後は残り3人を追加し、5人ピックアップをゲーム内7日間・対象R内選択重み3倍で開始。通常R/SR/SSR/UR排出率は不変。選択チケットも同じ出会い条件。
@@ -25,7 +25,7 @@
 - `js/performance_v016.js` — 新ユニット定義、スキル効果、特性表示・数値
 - `js/romance_station.js` — 項目0の駅前6人修正（前回パッチ）
 - `js/romance_school.js` — 5人のセリフ・イベント（新規）
-- `assets/ART_V2/face_icons/concept16.webp`, `concept11.webp`, `concept15.webp`, `concept23.webp`, `concept09.webp`
+- `assets/ART_V2/face_icons/fumika.webp`, `kyoko.webp`, `makoto.webp`, `shino.webp`, `shizuku.webp`
 
 ## 既存の仕様の保護
 - セーブキー `yoiboshi-reboot-v1`、基本ロールステータス、ガチャレアリティ確率、既存ピックアップ、過去出会いのフラグ、旧セーブの所持・レベル・凸・重複・好感度、q1～q6本文・戦闘数値、既存21人の恋愛データ（項目0を除く）を維持。
