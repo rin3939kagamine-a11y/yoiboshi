@@ -8,7 +8,7 @@
 
 ## 追加・変更（指示範囲）
 
-1. 東雲駅前6人を正式ヒロインに追加：小野寺結衣（concept08）、宮下莉子（concept18）、水瀬小春（concept28）、黒羽ルナ（concept14）、藍沢ミオ（concept20）、鳴海ジュン（concept21）。プロフィール、デート嗜好、moods/placeLines/clues/replyChoices/replyResults/repair/8話題/invite/outing/絆エピソード2話を追加。
+1. 東雲駅前6人を正式ヒロインに追加：小野寺結衣（yui）、宮下莉子（riko）、水瀬小春（koharu）、黒羽ルナ（luna）、藍沢ミオ（mio）、鳴海ジュン（jun）。プロフィール、デート嗜好、moods/placeLines/clues/replyChoices/replyResults/repair/8話題/invite/outing/絆エピソード2話を追加。
 2. ミオの親密度別日常会話（0〜19、20〜39、40以上）を追加。各段階のmoods/placeLines/topics/inviteを独立定義。既存リリス・ここあ用会話は非変更。
 3. q3クリア後に駅前出会いイベントを設置。q3本文・推理・戦闘・クエスト数値は変更なし。q3既クリアのセーブで続きから起動し、進捗を保存して交流画面の「続きを読む」で再開できます。
 4. 出会い前は6人を交流一覧・ガチャ・選択チケットから除外。出会い後は所持条件を適用し、通常ガチャへRユニット各1体を追加。対象6人の新規試遊加入は除外します（旧セーブ内の試遊所持・育成データは維持）。
@@ -33,7 +33,7 @@
 - `js/game.js`（ヒロイン・ユニット6人、出会いイベント、募集条件、ピックアップ、セーブ移行）
 - `js/performance_v016.js`（ユニットごとの2スキル・R特性定義6体を追記）
 - `js/romance_station.js`（駅前6人の恋愛データ・絆・出会い・ミオ段階別セリフ）
-- `assets/ART_V2/face_icons/{concept08,concept18,concept28,concept14,concept20,concept21}.webp`（顔アイコン切り抜き範囲のみ）
+- `assets/ART_V2/face_icons/{yui,riko,koharu,luna,mio,jun}.webp`（顔アイコン切り抜き範囲のみ）
 
 ## 検証
 

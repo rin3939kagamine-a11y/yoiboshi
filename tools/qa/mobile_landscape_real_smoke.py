@@ -42,7 +42,7 @@ try:
         page.wait_for_selector(".home-mock-v301 .mock-hero")
         # Real served assets, not mock data: validate the newly adopted Makoto artwork.
         portrait=page.evaluate("""async()=>{
-          const id='concept15',faces=['normal','smile','pout','sad','surprise','blush'];
+          const id='makoto',faces=['normal','smile','pout','sad','surprise','blush'];
           const full=characterArt(id),upper=characterPortrait(id),icon=characterIcon(id);
           const dialogue=faces.map(face=>{
             const markup=expressionPortraitMarkup(id,face,'qa_makoto');
@@ -75,9 +75,9 @@ try:
         page.evaluate("""()=>{
           // Synthetic QA-only progression: Makoto must be recruited/unlocked to appear in home.
           S.owned[R2SR('makoto_daily')]={lv:1,aff:0,lb:0,copies:0};
-          S.chapter4Met=S.chapter4Met||{};S.chapter4Met.concept15=true;
-          S.homeFavorite='concept15';S.homeUnitId=R2SR('makoto_daily');
-          lobbySelected='concept15';view='home';render();
+          S.chapter4Met=S.chapter4Met||{};S.chapter4Met.makoto=true;
+          S.homeFavorite='makoto';S.homeUnitId=R2SR('makoto_daily');
+          lobbySelected='makoto';view='home';render();
         }""")
         page.locator(".home-mock-v301 .mock-hero .mock-character").wait_for(timeout=10000)
         home_image=page.locator(".home-mock-v301 .mock-hero .mock-character").evaluate(
@@ -86,16 +86,16 @@ try:
         ck("Makoto renders on actual home screen",
            ("makoto_v1_full.webp" in home_image["src"] or "makoto_v1_upper.webp" in home_image["src"]) and home_image["width"]>0,home_image)
         page.screenshot(path=str(OUT/"makoto_home_390x844.png"),full_page=True)
-        # Verify the actual romance heroine page; concept15 is one of HERO_IDS.
+        # Verify the actual romance heroine page; makoto is one of HERO_IDS.
         page.evaluate("""()=>{
           S.officeMet=true;
           S.selected=R2SR('makoto_daily');
-          S.love.activeHero='concept15';
-          S.love.mood.concept15='normal';
-          S.love.sulking.concept15=false;
+          S.love.activeHero='makoto';
+          S.love.mood.makoto='normal';
+          S.love.sulking.makoto=false;
           view='talk';render();
         }""")
-        target='.v676-talk-portrait.expression-stage .expr-character-layer[data-person-id="concept15"]'
+        target='.v676-talk-portrait.expression-stage .expr-character-layer[data-person-id="makoto"]'
         page.locator(target+' img').wait_for(timeout=15000)
         stage_before=page.locator(target).evaluate("""el=>({
           face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
@@ -105,9 +105,9 @@ try:
            "makoto_v1_upper.webp" in stage_before["src"],stage_before)
         ck("Makoto heroine talk starts neutral",stage_before["face"]=="normal",stage_before)
         ck("Makoto character-specific motion overrides common breathing",
-           stage_before["anim"]=="ya-actor-concept15",stage_before)
+           stage_before["anim"]=="ya-actor-makoto",stage_before)
         page.screenshot(path=str(OUT/"makoto_romance_real_390x844.png"),full_page=True)
-        page.evaluate("""()=>{S.love.mood.concept15='good';render()}""")
+        page.evaluate("""()=>{S.love.mood.makoto='good';render()}""")
         stage_after=page.locator(target).evaluate("""el=>({
           face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
           anim:getComputedStyle(el.querySelector('img')).animationName
@@ -116,7 +116,7 @@ try:
            stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
         ck("Makoto smile has its own motion",stage_after["anim"]=="ya-actor-smile",stage_after)
         page.screenshot(path=str(OUT/"makoto_romance_smile_390x844.png"),full_page=True)
-        pilot=page.evaluate("""()=>['momoka','milku','reina','nagi','concept15'].map(id=>{
+        pilot=page.evaluate("""()=>['momoka','milku','reina','nagi','makoto'].map(id=>{
           const stage=document.createElement('div');
           stage.className='acting-demo-stage';stage.style.cssText='position:fixed;top:-10000px;width:230px;height:300px';
           stage.innerHTML=expressionPortraitMarkup(id,'normal','acting-qa:'+id,{wrapperClass:'expr-character-layer'});

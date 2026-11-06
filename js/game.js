@@ -1,44 +1,44 @@
 const KEY='yoiboshi-reboot-v1',OLD_KEY='yoiboshi-contract-v01';
-const PEOPLE={concept28:{name:'ビジュアル候補28',note:'ベージュボブ・白ドットワンピ／設定未確定',intro:'採用立ち絵（ベージュボブ・白ドットワンピ）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept29:{name:'ビジュアル候補29',note:'黒白ツインテール／設定未確定',intro:'採用立ち絵（黒白ツインテール）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept30:{name:'ビジュアル候補30',note:'ピンクショート・青レーシング水着／設定未確定',intro:'採用立ち絵（ピンクショート・青レーシング水着）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept31:{name:'ビジュアル候補31',note:'黒髪紫メッシュ・ピンクゴシック／設定未確定',intro:'採用立ち絵（黒髪紫メッシュ・ピンクゴシック）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept32:{name:'ビジュアル候補32',note:'ピンクベージュボブ・黒ジャンパースカート／設定未確定',intro:'採用立ち絵（ピンクベージュボブ・黒ジャンパースカート）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept33:{name:'ビジュアル候補33',note:'金髪・黄色水色ギンガム水着／設定未確定',intro:'採用立ち絵（金髪・黄色水色ギンガム水着）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept34:{name:'ビジュアル候補34',note:'金髪・黒服（マスクなし）／設定未確定',intro:'採用立ち絵（金髪・黒服（マスクなし））。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept35:{name:'ビジュアル候補35',note:'黒髪ロング・赤カーデ花柄ワンピ／設定未確定',intro:'採用立ち絵（黒髪ロング・赤カーデ花柄ワンピ）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept36:{name:'ビジュアル候補36',note:'長黒髪・赤カーデ花柄ドレス／設定未確定',intro:'採用立ち絵（長黒髪・赤カーデ花柄ドレス）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},concept18:{name:'ビジュアル候補18',note:'黒レース長髪／人物設定未確定',intro:'黒レース長髪の新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept19:{name:'ビジュアル候補19',note:'ブルーフリルメイド／人物設定未確定',intro:'ブルーフリルメイドの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept20:{name:'ビジュアル候補20',note:'青黒ツートン猫耳／人物設定未確定',intro:'青黒ツートン猫耳の新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept21:{name:'ビジュアル候補21',note:'ネオングリーン／人物設定未確定',intro:'ネオングリーンの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept22:{name:'ビジュアル候補22',note:'茶髪ウェーブ花柄／人物設定未確定',intro:'茶髪ウェーブ花柄の新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept23:{name:'ビジュアル候補23',note:'黒髪ゴシックハーネス／人物設定未確定',intro:'黒髪ゴシックハーネスの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept24:{name:'ビジュアル候補24',note:'ピンクボブ／人物設定未確定',intro:'ピンクボブの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept25:{name:'ビジュアル候補25',note:'茶髪ブラックゴス／人物設定未確定',intro:'茶髪ブラックゴスの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept26:{name:'ビジュアル候補26',note:'黄色アイドル／人物設定未確定',intro:'黄色アイドルの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept27:{name:'ビジュアル候補27',note:'ピンクサイドポニー／人物設定未確定',intro:'ピンクサイドポニーの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},concept08:{name:"ビジュアル候補08",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept09:{name:"ビジュアル候補09",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept10:{name:"ビジュアル候補10",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept11:{name:"ビジュアル候補11",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept12:{name:"ビジュアル候補12",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept13:{name:"ビジュアル候補13",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept14:{name:"ビジュアル候補14",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept15:{name:"ビジュアル候補15",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept16:{name:"ビジュアル候補16",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},concept17:{name:"ビジュアル候補17",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},akane:{name:'藤崎 朱音',note:'市役所・防災／避難支援担当',intro:'困っている人がいたら、私が守るよ！',lines:['お疲れさま！ 今日も一緒に頑張ろう！','いざというときこそ笑顔だよ。私がついてる！','みんなが安心できる街にしたいんだ。']},reina:{name:'黒瀬 玲奈',note:'宵星相談室・現場調査スタッフ',intro:'静かに見えても、負けるつもりはありません。現場は私が切り開きます。',lines:['現場の違和感、ちゃんと拾っていきます。','大丈夫です。まだ、ここから巻き返せます。','一歩ずつでも、結果で見せます。']},aoi:{name:'瀬名 葵',note:'宵星相談室・正式スタッフ',intro:'小さな変化にも、きちんと気づいていたいんです。',lines:['疲れていませんか？　少し休憩しましょう。','無理はしないでくださいね。私も一緒に考えます。','できることから、一つずつ進めましょう。']},chinatsu:{name:'篠原 千夏',note:'街の外部協力者',intro:'困ったときは頼って。ひとりで抱え込まなくていいからね。',lines:['お疲れ！ 今日も一日、よく頑張ったね。','気になることがあったら話してよ。力になるから。','大丈夫。みんなで力を合わせれば、きっと何とかなるよ！']},nagi:{name:'白峰 凪',note:'謎の外部協力者',intro:'……必要なら、力を貸す。理由は聞かないで。',lines:['……何か用？　必要なら話して。','異変の痕跡は……まだ消えていない。','あなたがいると、少しだけ静かになれる。']},momoka:{name:'桜井 ももか',note:'商店街の協力者',intro:'街のお困りごとは、いっしょに頑張ろう！',lines:['ねえ、今日の予定は？ 私も手伝うよ。','この街、楽しいことがいっぱいあるよね。','いつか一緒に、のんびりお散歩しようね。']},milku:{name:'白石 みるく',note:'カフェ勤務・外部協力者',intro:'お疲れさまです。温かい飲み物はいかがですか？',lines:['おかえりなさい。今日はどんな一日でしたか？','力になれることがあったら、言ってくださいね。','少しだけ、ふたりで休憩しませんか？']}};
+const PEOPLE={koharu:{name:'ビジュアル候補28',note:'ベージュボブ・白ドットワンピ／設定未確定',intro:'採用立ち絵（ベージュボブ・白ドットワンピ）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},lilith:{name:'ビジュアル候補29',note:'黒白ツインテール／設定未確定',intro:'採用立ち絵（黒白ツインテール）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},shio:{name:'ビジュアル候補30',note:'ピンクショート・青レーシング水着／設定未確定',intro:'採用立ち絵（ピンクショート・青レーシング水着）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},kaname:{name:'ビジュアル候補31',note:'黒髪紫メッシュ・ピンクゴシック／設定未確定',intro:'採用立ち絵（黒髪紫メッシュ・ピンクゴシック）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},koyori:{name:'ビジュアル候補32',note:'ピンクベージュボブ・黒ジャンパースカート／設定未確定',intro:'採用立ち絵（ピンクベージュボブ・黒ジャンパースカート）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},marin:{name:'ビジュアル候補33',note:'金髪・黄色水色ギンガム水着／設定未確定',intro:'採用立ち絵（金髪・黄色水色ギンガム水着）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},erika:{name:'ビジュアル候補34',note:'金髪・黒服（マスクなし）／設定未確定',intro:'採用立ち絵（金髪・黒服（マスクなし））。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},tsubaki:{name:'ビジュアル候補35',note:'黒髪ロング・赤カーデ花柄ワンピ／設定未確定',intro:'採用立ち絵（黒髪ロング・赤カーデ花柄ワンピ）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},kaede:{name:'ビジュアル候補36',note:'長黒髪・赤カーデ花柄ドレス／設定未確定',intro:'採用立ち絵（長黒髪・赤カーデ花柄ドレス）。名前・性格・恋愛設定・所属は未確定です。',lines:['採用済みの立ち絵をゲーム内で確認できます。','正式なプロフィールは今後決定します。']},riko:{name:'ビジュアル候補18',note:'黒レース長髪／人物設定未確定',intro:'黒レース長髪の新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},noel:{name:'ビジュアル候補19',note:'ブルーフリルメイド／人物設定未確定',intro:'ブルーフリルメイドの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},mio:{name:'ビジュアル候補20',note:'青黒ツートン猫耳／人物設定未確定',intro:'青黒ツートン猫耳の新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},jun:{name:'ビジュアル候補21',note:'ネオングリーン／人物設定未確定',intro:'ネオングリーンの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},yume:{name:'ビジュアル候補22',note:'茶髪ウェーブ花柄／人物設定未確定',intro:'茶髪ウェーブ花柄の新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},shino:{name:'ビジュアル候補23',note:'黒髪ゴシックハーネス／人物設定未確定',intro:'黒髪ゴシックハーネスの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},hiyori:{name:'ビジュアル候補24',note:'ピンクボブ／人物設定未確定',intro:'ピンクボブの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},ageha:{name:'ビジュアル候補25',note:'茶髪ブラックゴス／人物設定未確定',intro:'茶髪ブラックゴスの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},kirari:{name:'ビジュアル候補26',note:'黄色アイドル／人物設定未確定',intro:'黄色アイドルの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},maron:{name:'ビジュアル候補27',note:'ピンクサイドポニー／人物設定未確定',intro:'ピンクサイドポニーの新規イラスト候補。名前・職業・性格・恋愛設定は未確定です。',lines:['新しい立ち絵を確認できます。','正式なプロフィールは今後決定します。']},yui:{name:"ビジュアル候補08",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},shizuku:{name:"ビジュアル候補09",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},suiran:{name:"ビジュアル候補10",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},kyoko:{name:"ビジュアル候補11",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},cocoa:{name:"ビジュアル候補12",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},mai:{name:"ビジュアル候補13",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},luna:{name:"ビジュアル候補14",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},makoto:{name:"ビジュアル候補15",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},fumika:{name:"ビジュアル候補16",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},ena:{name:"ビジュアル候補17",note:'外見のみ採用／設定未決定',intro:'採用イラストを使った試遊用キャラクターです。名前・役割・所属・性格・衣装設定は未決定です。',lines:['仮の会話です。キャラクター設定はこれから決めます。','この衣装と雰囲気を、今はゲームで確認できます。','一緒に試遊してみましょう。']},akane:{name:'藤崎 朱音',note:'市役所・防災／避難支援担当',intro:'困っている人がいたら、私が守るよ！',lines:['お疲れさま！ 今日も一緒に頑張ろう！','いざというときこそ笑顔だよ。私がついてる！','みんなが安心できる街にしたいんだ。']},reina:{name:'黒瀬 玲奈',note:'宵星相談室・現場調査スタッフ',intro:'静かに見えても、負けるつもりはありません。現場は私が切り開きます。',lines:['現場の違和感、ちゃんと拾っていきます。','大丈夫です。まだ、ここから巻き返せます。','一歩ずつでも、結果で見せます。']},aoi:{name:'瀬名 葵',note:'宵星相談室・正式スタッフ',intro:'小さな変化にも、きちんと気づいていたいんです。',lines:['疲れていませんか？　少し休憩しましょう。','無理はしないでくださいね。私も一緒に考えます。','できることから、一つずつ進めましょう。']},chinatsu:{name:'篠原 千夏',note:'街の外部協力者',intro:'困ったときは頼って。ひとりで抱え込まなくていいからね。',lines:['お疲れ！ 今日も一日、よく頑張ったね。','気になることがあったら話してよ。力になるから。','大丈夫。みんなで力を合わせれば、きっと何とかなるよ！']},nagi:{name:'白峰 凪',note:'謎の外部協力者',intro:'……必要なら、力を貸す。理由は聞かないで。',lines:['……何か用？　必要なら話して。','異変の痕跡は……まだ消えていない。','あなたがいると、少しだけ静かになれる。']},momoka:{name:'桜井 ももか',note:'商店街の協力者',intro:'街のお困りごとは、いっしょに頑張ろう！',lines:['ねえ、今日の予定は？ 私も手伝うよ。','この街、楽しいことがいっぱいあるよね。','いつか一緒に、のんびりお散歩しようね。']},milku:{name:'白石 みるく',note:'カフェ勤務・外部協力者',intro:'お疲れさまです。温かい飲み物はいかがですか？',lines:['おかえりなさい。今日はどんな一日でしたか？','力になれることがあったら、言ってくださいね。','少しだけ、ふたりで休憩しませんか？']}};
 // Ver.0.13.0.0 — only these four previously provisional identities become named heroines.
-for(const id of ['concept24','concept32','concept26','concept27']){
+for(const id of ['hiyori','koyori','kirari','maron']){
  const p=ROMANCE_SHINONOME[id].profile;
  PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／恋愛対象（正式登録）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:ROMANCE_SHINONOME[id].moods.normal.slice(0,3)};
 }
 // Ver.0.14.0.0 — only these four older visual candidates become named heroines.
-for(const id of ['concept10','concept12','concept25','concept29']){
+for(const id of ['suiran','cocoa','ageha','lilith']){
  const p=ROMANCE_OLDCAFE[id].profile;
  PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／恋愛対象（正式登録）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:ROMANCE_OLDCAFE[id].moods.normal.slice(0,3)};
 }
 // Ver.0.17.0.0 — six station-front candidates become named heroines; preserve their canonical art.
-for(const id of ['concept08','concept18','concept28','concept14','concept20','concept21']){
+for(const id of ['yui','riko','koharu','luna','mio','jun']){
  const p=ROMANCE_STATION[id].profile;
  PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／恋愛対象（正式登録）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:ROMANCE_STATION[id].moods.normal.slice(0,3)};
 }
 // Ver.0.18.0.0 five newly named heroines, original candidate portrait files untouched.
-for(const id of ['concept16','concept11','concept15','concept23','concept09']){
+for(const id of ['fumika','kyoko','makoto','shino','shizuku']){
  const p=ROMANCE_SCHOOL[id].profile;
  PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／正式ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}`,lines:ROMANCE_SCHOOL[id].moods.normal.slice(0,3)};
 }
 // v0.19 seaside cast, original images and existing character records remain unchanged.
-for(const id of ['concept17','concept13','concept30','concept33']){
+for(const id of ['ena','mai','shio','marin']){
  const p=ROMANCE_SEASIDE[id].profile;
  PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／正式ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}`,lines:ROMANCE_SEASIDE[id].moods.normal.slice(0,3)};
 }
 // Ver.0.20.0.0 — the last two Chapter 1 heroines retain their source portraits.
-for(const id of ['concept19','concept22']){
+for(const id of ['noel','yume']){
  const p=ROMANCE_LIGHTHOUSE[id].profile;
  PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／正式ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}`,lines:ROMANCE_LIGHTHOUSE[id].moods.normal.slice(0,3)};
 }
 // All four rarities share role-based base stat tables; rarity never modifies combat power.
 const ROLES={attacker:{name:'アタッカー',hp:125,atk:19,def:3,rate:1.25},tank:{name:'タンク',hp:225,atk:9,def:8,rate:1.45},healer:{name:'ヒーラー',hp:148,atk:9,def:5,rate:1.65},support:{name:'サポーター',hp:165,atk:11,def:5,rate:1.45}};
 // Chapter 2 first-half heroines. Never overwrite trial IDs, which are preserved for existing saves.
-for(const id of ['concept35','concept34']){
+for(const id of ['tsubaki','erika']){
  const p=ROMANCE_CHAPTER2[id].profile;
  PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／恋愛対象（正式登録）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:ROMANCE_CHAPTER2[id].moods.normal.slice(0,3)};
 }
 // The first-half heroine registry remains unchanged; new heroines have separate identities from preserved trial units.
-for(const id of ['concept31','concept36']){const p=ROMANCE_CHAPTER2_LATE[id].profile;PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／正式ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:ROMANCE_CHAPTER2_LATE[id].moods.normal.slice(0,3)}}
+for(const id of ['kaname','kaede']){const p=ROMANCE_CHAPTER2_LATE[id].profile;PEOPLE[id]={...PEOPLE[id],name:p.name,note:`${p.occupation}／正式ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:ROMANCE_CHAPTER2_LATE[id].moods.normal.slice(0,3)}}
 // v0.27: preregistered, unrevealed Chapter 3 heroines (no encounter event in this version).
 let v027GameReady=false;
 for(const id of NEW_HERO_IDS_V027){const h=ROMANCE_V027[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／正式ヒロイン（第3章で出会い）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V027[id]};}
@@ -51,35 +51,35 @@ for(const id of NEW_HERO_IDS_V0420){const h=ROMANCE_V0420[id],p=h.profile;PEOPLE
 function isV027HeroRevealed(id,save=S){return !!save?.chapter3Met?.[id];}
 function isV028HeroRevealed(id,save=S){return save?.chapter4Met?.[id]===true;}
 const UNITS=[
-{id:'concept28_trial',person:'concept28',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept29_trial',person:'concept29',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept30_trial',person:'concept30',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept31_trial',person:'concept31',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept32_trial',person:'concept32',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept33_trial',person:'concept33',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept34_trial',person:'concept34',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept35_trial',person:'concept35',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept36_trial',person:'concept36',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept08_trial',person:'concept08',title:'イラスト先行登録',rarity:'R',role:'healer',color:'#b48c7e',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept09_trial',person:'concept09',title:'イラスト先行登録',rarity:'SR',role:'attacker',color:'#a973bb',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept10_trial',person:'concept10',title:'イラスト先行登録',rarity:'R',role:'support',color:'#bbc3d7',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept11_trial',person:'concept11',title:'イラスト先行登録',rarity:'SR',role:'tank',color:'#c9a269',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept12_trial',person:'concept12',title:'イラスト先行登録',rarity:'SR',role:'healer',color:'#8ca3db',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept13_trial',person:'concept13',title:'イラスト先行登録',rarity:'SSR',role:'attacker',color:'#a48bd1',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept14_trial',person:'concept14',title:'イラスト先行登録',rarity:'SR',role:'support',color:'#ae7cd0',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept15_trial',person:'concept15',title:'イラスト先行登録',rarity:'R',role:'tank',color:'#7c9db0',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept16_trial',person:'concept16',title:'イラスト先行登録',rarity:'SSR',role:'support',color:'#dfb482',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept17_trial',person:'concept17',title:'イラスト先行登録',rarity:'UR',role:'attacker',color:'#65b9a3',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept18_trial',person:'concept18',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept19_trial',person:'concept19',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept20_trial',person:'concept20',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept21_trial',person:'concept21',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept22_trial',person:'concept22',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept23_trial',person:'concept23',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept24_trial',person:'concept24',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept25_trial',person:'concept25',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept26_trial',person:'concept26',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
-{id:'concept27_trial',person:'concept27',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'koharu_trial',person:'koharu',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'lilith_trial',person:'lilith',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'shio_trial',person:'shio',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'kaname_trial',person:'kaname',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'koyori_trial',person:'koyori',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'marin_trial',person:'marin',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'erika_trial',person:'erika',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'tsubaki_trial',person:'tsubaki',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'kaede_trial',person:'kaede',title:'採用画像試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'yui_trial',person:'yui',title:'イラスト先行登録',rarity:'R',role:'healer',color:'#b48c7e',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'shizuku_trial',person:'shizuku',title:'イラスト先行登録',rarity:'SR',role:'attacker',color:'#a973bb',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'suiran_trial',person:'suiran',title:'イラスト先行登録',rarity:'R',role:'support',color:'#bbc3d7',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'kyoko_trial',person:'kyoko',title:'イラスト先行登録',rarity:'SR',role:'tank',color:'#c9a269',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'cocoa_trial',person:'cocoa',title:'イラスト先行登録',rarity:'SR',role:'healer',color:'#8ca3db',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'mai_trial',person:'mai',title:'イラスト先行登録',rarity:'SSR',role:'attacker',color:'#a48bd1',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'luna_trial',person:'luna',title:'イラスト先行登録',rarity:'SR',role:'support',color:'#ae7cd0',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'makoto_trial',person:'makoto',title:'イラスト先行登録',rarity:'R',role:'tank',color:'#7c9db0',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'fumika_trial',person:'fumika',title:'イラスト先行登録',rarity:'SSR',role:'support',color:'#dfb482',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'ena_trial',person:'ena',title:'イラスト先行登録',rarity:'UR',role:'attacker',color:'#65b9a3',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'riko_trial',person:'riko',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'noel_trial',person:'noel',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'mio_trial',person:'mio',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'jun_trial',person:'jun',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'yume_trial',person:'yume',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'shino_trial',person:'shino',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'hiyori_trial',person:'hiyori',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'ageha_trial',person:'ageha',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'kirari_trial',person:'kirari',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
+{id:'maron_trial',person:'maron',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
 
 {id:'momoka_daily',person:'momoka',title:'いつもの一日',rarity:'R',role:'attacker',color:'#fbabc6',s:['元気な一撃','みんな、がんばろ！']},
 {id:'momoka_work',person:'momoka',title:'相談室のお手伝い',rarity:'SR',role:'support',color:'#d1a7f9',s:['元気をお届け','ちょっと待って！']},
@@ -94,39 +94,39 @@ const UNITS=[
  {id:'aoi_daily',person:'aoi',title:'相談室のやすらぎ',rarity:'R',role:'healer',color:'#78c9b5',s:['やすらぎの灯','みんなの手当て']},
  {id:'akane_daily',person:'akane',title:'街を守るオレンジの盾',rarity:'R',role:'tank',color:'#ff964a',s:['守りのフィールド','みんなの前へ！']},
  {id:'reina_daily',person:'reina',title:'静かな闘志',rarity:'R',role:'attacker',color:'#7f93d8',s:['影踏みの一閃','現場制圧ライン']},
- {id:"hiyori_daily",person:"concept24",title:"パティスリー桃瀬の日常",rarity:"R",role:"healer",color:"#e9a4b7",s:["焼きたてのひと息", "試作ケーキの差し入れ"]},
- {id:"koyori_daily",person:"concept32",title:"看板娘の寄り道",rarity:"R",role:"attacker",color:"#e5a1ba",s:["シャッターチャンス", "笑顔の連続ショット"]},
- {id:"kirari_daily",person:"concept26",title:"商店街PR大使",rarity:"R",role:"tank",color:"#e8c25e",s:["全力応援ガード", "最後まで走りきる！"]},
- {id:"maron_daily",person:"concept27",title:"花言葉の贈りもの",rarity:"R",role:"healer",color:"#c28da9",s:["朝露の花びら", "やさしい花束"]},
- {id:"suiran_daily",person:"concept10",title:"翠月の茶房",rarity:"R",role:"support",color:"#81ada5",s:["翠月の茶香", "茶葉の示す隙"]},
- {id:"cocoa_daily",person:"concept12",title:"星屑亭の素顔",rarity:"R",role:"attacker",color:"#8da3db",s:["営業スマイルの一手", "本気の接客コンボ"]},
- {id:"ageha_daily",person:"concept25",title:"夜色ネイル",rarity:"R",role:"attacker",color:"#b07caa",s:["見抜く視線", "夜色のフィニッシュ"]},
- {id:"lilith_daily",person:"concept29",title:"黒薔薇館のリボン",rarity:"R",role:"tank",color:"#71618e",s:["黒薔薇の守護", "リボンの結界"]},
- {id:"yui_daily",person:"concept08",title:"書店員のしおり",rarity:"R",role:"support",color:"#b19b8b",s:["しおりを挟んで","ちゃんと聞いてます?"]},
- {id:"riko_daily",person:"concept18",title:"恋バナ相談室",rarity:"R",role:"support",color:"#bc8da9",s:["それ、似合ってる!","恋バナタイム"]},
- {id:"koharu_daily",person:"concept28",title:"朝のフロント",rarity:"R",role:"healer",color:"#95a7b8",s:["おもてなしの心","お部屋のご用意"]},
- {id:"luna_daily",person:"concept14",title:"地下から届く歌",rarity:"R",role:"attacker",color:"#8c71b6",s:["夜明けのシャウト","アンコール"]},
- {id:"mio_daily",person:"concept20",title:"画面の向こうから",rarity:"R",role:"attacker",color:"#659fb4",s:["配信開始!","コメント弾幕"]},
- {id:"jun_daily",person:"concept21",title:"夜明けの配達便",rarity:"R",role:"tank",color:"#78ae96",s:["割り込みブロック","エンジン全開"]},
- {id:"shizuku_daily",person:"concept09",title:"レンズを下ろす日",rarity:"R",role:"support",color:"#8bafd0",s:["フラッシュ撮影","ベストショット"]},
- {id:"shino_daily",person:"concept23",title:"借りは必ず返す",rarity:"R",role:"attacker",color:"#6f6a87",s:["脆弱性スキャン","総当たり"]},
- {id:"makoto_daily",person:"concept15",title:"数字の向こうの守り",rarity:"R",role:"tank",color:"#7f9aa8",s:["書類の壁","窓口はこちら"]},
- {id:"kyoko_daily",person:"concept11",title:"取材の向こう側",rarity:"R",role:"attacker",color:"#bf8666",s:["スクープ激写","号外だ!"]},
- {id:"fumika_daily",person:"concept16",title:"記録の余白",rarity:"R",role:"healer",color:"#c6a17e",s:["やさしい読み聞かせ","物語の続き"]},
- {id:"rico_show",person:"concept17",title:"一人の観客へ",rarity:"R",role:"attacker",color:"#eaa770",s:["ショータイム","フィナーレの花火"]},
- {id:"mai_wind",person:"concept13",title:"旅の風の行方",rarity:"R",role:"support",color:"#a887c8",s:["風の舞","幻惑のステップ"]},
- {id:"shio_pool",person:"concept30",title:"新しいスタート",rarity:"R",role:"tank",color:"#65a7db",s:["水しぶきガード","プールサイドの盾"]},
- {id:"marine_cafe",person:"concept33",title:"海辺の本音",rarity:"R",role:"healer",color:"#e8af65",s:["特製トロピカルドリンク","ひと休みしてきな"]},
- {id:'noel_star',person:'concept19',title:'今を選ぶ白い星',rarity:'R',role:'support',color:'#adc7df',s:['白い星の祈り','流れ星']},
- {id:'yume_tomorrow',person:'concept22',title:'今を歩く灯',rarity:'R',role:'healer',color:'#c8a7bb',s:['眠りの灯','夢の続き']},
- {id:'tsubaki_daily',person:'concept35',title:'伝承を追う足音',rarity:'R',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
- {id:'erika_daily',person:'concept34',title:'仮面の向こうの素顔',rarity:'R',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
- {id:'kaname_daily',person:'concept31',title:'夜明けに残る約束',rarity:'R',role:'attacker',color:'#80638f',s:['紫電の一閃','八年分の刃']},
- {id:'kaede_daily',person:'concept36',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']},
+ {id:"hiyori_daily",person:"hiyori",title:"パティスリー桃瀬の日常",rarity:"R",role:"healer",color:"#e9a4b7",s:["焼きたてのひと息", "試作ケーキの差し入れ"]},
+ {id:"koyori_daily",person:"koyori",title:"看板娘の寄り道",rarity:"R",role:"attacker",color:"#e5a1ba",s:["シャッターチャンス", "笑顔の連続ショット"]},
+ {id:"kirari_daily",person:"kirari",title:"商店街PR大使",rarity:"R",role:"tank",color:"#e8c25e",s:["全力応援ガード", "最後まで走りきる！"]},
+ {id:"maron_daily",person:"maron",title:"花言葉の贈りもの",rarity:"R",role:"healer",color:"#c28da9",s:["朝露の花びら", "やさしい花束"]},
+ {id:"suiran_daily",person:"suiran",title:"翠月の茶房",rarity:"R",role:"support",color:"#81ada5",s:["翠月の茶香", "茶葉の示す隙"]},
+ {id:"cocoa_daily",person:"cocoa",title:"星屑亭の素顔",rarity:"R",role:"attacker",color:"#8da3db",s:["営業スマイルの一手", "本気の接客コンボ"]},
+ {id:"ageha_daily",person:"ageha",title:"夜色ネイル",rarity:"R",role:"attacker",color:"#b07caa",s:["見抜く視線", "夜色のフィニッシュ"]},
+ {id:"lilith_daily",person:"lilith",title:"黒薔薇館のリボン",rarity:"R",role:"tank",color:"#71618e",s:["黒薔薇の守護", "リボンの結界"]},
+ {id:"yui_daily",person:"yui",title:"書店員のしおり",rarity:"R",role:"support",color:"#b19b8b",s:["しおりを挟んで","ちゃんと聞いてます?"]},
+ {id:"riko_daily",person:"riko",title:"恋バナ相談室",rarity:"R",role:"support",color:"#bc8da9",s:["それ、似合ってる!","恋バナタイム"]},
+ {id:"koharu_daily",person:"koharu",title:"朝のフロント",rarity:"R",role:"healer",color:"#95a7b8",s:["おもてなしの心","お部屋のご用意"]},
+ {id:"luna_daily",person:"luna",title:"地下から届く歌",rarity:"R",role:"attacker",color:"#8c71b6",s:["夜明けのシャウト","アンコール"]},
+ {id:"mio_daily",person:"mio",title:"画面の向こうから",rarity:"R",role:"attacker",color:"#659fb4",s:["配信開始!","コメント弾幕"]},
+ {id:"jun_daily",person:"jun",title:"夜明けの配達便",rarity:"R",role:"tank",color:"#78ae96",s:["割り込みブロック","エンジン全開"]},
+ {id:"shizuku_daily",person:"shizuku",title:"レンズを下ろす日",rarity:"R",role:"support",color:"#8bafd0",s:["フラッシュ撮影","ベストショット"]},
+ {id:"shino_daily",person:"shino",title:"借りは必ず返す",rarity:"R",role:"attacker",color:"#6f6a87",s:["脆弱性スキャン","総当たり"]},
+ {id:"makoto_daily",person:"makoto",title:"数字の向こうの守り",rarity:"R",role:"tank",color:"#7f9aa8",s:["書類の壁","窓口はこちら"]},
+ {id:"kyoko_daily",person:"kyoko",title:"取材の向こう側",rarity:"R",role:"attacker",color:"#bf8666",s:["スクープ激写","号外だ!"]},
+ {id:"fumika_daily",person:"fumika",title:"記録の余白",rarity:"R",role:"healer",color:"#c6a17e",s:["やさしい読み聞かせ","物語の続き"]},
+ {id:"rico_show",person:"ena",title:"一人の観客へ",rarity:"R",role:"attacker",color:"#eaa770",s:["ショータイム","フィナーレの花火"]},
+ {id:"mai_wind",person:"mai",title:"旅の風の行方",rarity:"R",role:"support",color:"#a887c8",s:["風の舞","幻惑のステップ"]},
+ {id:"shio_pool",person:"shio",title:"新しいスタート",rarity:"R",role:"tank",color:"#65a7db",s:["水しぶきガード","プールサイドの盾"]},
+ {id:"marine_cafe",person:"marin",title:"海辺の本音",rarity:"R",role:"healer",color:"#e8af65",s:["特製トロピカルドリンク","ひと休みしてきな"]},
+ {id:'noel_star',person:'noel',title:'今を選ぶ白い星',rarity:'R',role:'support',color:'#adc7df',s:['白い星の祈り','流れ星']},
+ {id:'yume_tomorrow',person:'yume',title:'今を歩く灯',rarity:'R',role:'healer',color:'#c8a7bb',s:['眠りの灯','夢の続き']},
+ {id:'tsubaki_daily',person:'tsubaki',title:'伝承を追う足音',rarity:'R',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
+ {id:'erika_daily',person:'erika',title:'仮面の向こうの素顔',rarity:'R',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
+ {id:'kaname_daily',person:'kaname',title:'夜明けに残る約束',rarity:'R',role:'attacker',color:'#80638f',s:['紫電の一閃','八年分の刃']},
+ {id:'kaede_daily',person:'kaede',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']},
  // v0.35.0.0: R廃止に伴い、第2章の3人にSRユニットを追加（Rの役割・技名を引き継ぐ）
- {id:'tsubaki_work',person:'concept35',title:'伝承を追う足音',rarity:'SR',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
- {id:'erika_work',person:'concept34',title:'仮面の向こうの素顔',rarity:'SR',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
- {id:'kaede_work',person:'concept36',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
+ {id:'tsubaki_work',person:'tsubaki',title:'伝承を追う足音',rarity:'SR',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
+ {id:'erika_work',person:'erika',title:'仮面の向こうの素顔',rarity:'SR',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
+ {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
 UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420);
@@ -134,6 +134,41 @@ const BYID=Object.fromEntries(UNITS.map(x=>[x.id,x]));
 // v0.35.0.0: Rレアリティを廃止。Rユニットは旧セーブの変換用に定義だけ残し、同じ人物のSRへ置き換える。
 const RETIRED_R_TO_SR=Object.freeze(Object.fromEntries(UNITS.filter(u=>u.rarity==='R'&&!u.id.endsWith('_trial')).map(u=>[u.id,(UNITS.find(v=>v.person===u.person&&v.rarity==='SR'&&!v.id.endsWith('_trial'))||{}).id]).filter(([,v])=>!!v)));
 const R2SR=id=>RETIRED_R_TO_SR[id]||id;
+// Ver.0.49.2.0: legacy save migration ONLY. These old concept IDs are deliberately retained
+// here for backward compatibility; all live registries must use canonical IDs.
+const LEGACY_CONCEPT_IDS=Object.freeze({"concept08":"yui","concept09":"shizuku","concept10":"suiran","concept11":"kyoko","concept12":"cocoa","concept13":"mai","concept14":"luna","concept15":"makoto","concept16":"fumika","concept17":"ena","concept18":"riko","concept19":"noel","concept20":"mio","concept21":"jun","concept22":"yume","concept23":"shino","concept24":"hiyori","concept25":"ageha","concept26":"kirari","concept27":"maron","concept28":"koharu","concept29":"lilith","concept30":"shio","concept31":"kaname","concept32":"koyori","concept33":"marin","concept34":"erika","concept35":"tsubaki","concept36":"kaede"});
+const canonicalSaveId=s=>s.replace(/concept(?:0[8-9]|[12]\d|3[0-6])/g,id=>LEGACY_CONCEPT_IDS[id]||id);
+function mergeLegacyCanonicalSaveValue(current,legacy){
+  if(current===undefined||current===null)return legacy;
+  if(Array.isArray(current)&&Array.isArray(legacy)){
+    return Array.from({length:Math.max(current.length,legacy.length)},(_,i)=>mergeLegacyCanonicalSaveValue(current[i],legacy[i]));
+  }
+  if(current&&legacy&&typeof current==='object'&&typeof legacy==='object'&&!Array.isArray(current)&&!Array.isArray(legacy)){
+    const merged={...legacy,...current};
+    for(const k of Object.keys(legacy))if(k in current)merged[k]=mergeLegacyCanonicalSaveValue(current[k],legacy[k]);
+    return merged;
+  }
+  if(typeof current==='boolean'&&typeof legacy==='boolean')return current||legacy;
+  if(typeof current==='number'&&typeof legacy==='number')return Math.max(current,legacy);
+  return current===''?legacy:current;
+}
+function migrateLegacyConceptSave(raw){
+  const convert=value=>{
+    if(typeof value==='string')return canonicalSaveId(value);
+    if(Array.isArray(value))return value.map(convert);
+    if(value===null||typeof value!=='object')return value;
+    const result={},pairs=Object.entries(value);
+    // Canonical keys take precedence. Legacy keys fill gaps, combine progress,
+    // and never overwrite an existing nonempty canonical string.
+    for(const [oldKey,v] of [...pairs.filter(([key])=>canonicalSaveId(key)===key),...pairs.filter(([key])=>canonicalSaveId(key)!==key)]){
+      const key=canonicalSaveId(oldKey),next=convert(v);
+      result[key]=Object.prototype.hasOwnProperty.call(result,key)?mergeLegacyCanonicalSaveValue(result[key],next):next;
+    }
+    return result;
+  };
+  return convert(raw);
+}
+
 const RARITIES=Object.freeze(['SR','SSR','UR']);
 function convertRetiredRSave(raw){
  if(!raw||typeof raw!=='object'||!raw.owned||typeof raw.owned!=='object'||Array.isArray(raw.owned))return raw;
@@ -151,21 +186,21 @@ function convertRetiredRSave(raw){
  return out;
 }
 
-const NEW_VISUAL_LABELS=Object.freeze({concept28:'ベージュボブ・白ドットワンピ',concept29:'黒白ツインテール',concept30:'ピンクショート・青レーシング水着',concept31:'黒髪紫メッシュ・ピンクゴシック',concept32:'ピンクベージュボブ・黒ジャンパースカート',concept33:'金髪・黄色水色ギンガム水着',concept34:'金髪・黒服（マスクなし）',concept35:'黒髪ロング・赤カーデ花柄ワンピ',concept36:'長黒髪・赤カーデ花柄ドレス',concept18:'黒レース長髪',concept19:'ブルーフリルメイド',concept20:'青黒ツートン猫耳',concept21:'ネオングリーン',concept22:'茶髪ウェーブ花柄',concept23:'黒髪ゴシックハーネス',concept24:'ピンクボブ',concept25:'茶髪ブラックゴス',concept26:'黄色アイドル',concept27:'ピンクサイドポニー'});
-const SHINONOME_HERO_IDS=Object.freeze(['concept24','concept32','concept26','concept27']);
-const OLDCAFE_HERO_IDS=Object.freeze(['concept10','concept12','concept25','concept29']);
-const STATION_HERO_IDS=Object.freeze(['concept08','concept18','concept28','concept14','concept20','concept21']);
-const SCHOOL_HERO_IDS=Object.freeze(['concept16','concept11']);
-const OFFICE_HERO_IDS=Object.freeze(['concept15','concept23','concept09']);
+const NEW_VISUAL_LABELS=Object.freeze({koharu:'ベージュボブ・白ドットワンピ',lilith:'黒白ツインテール',shio:'ピンクショート・青レーシング水着',kaname:'黒髪紫メッシュ・ピンクゴシック',koyori:'ピンクベージュボブ・黒ジャンパースカート',marin:'金髪・黄色水色ギンガム水着',erika:'金髪・黒服（マスクなし）',tsubaki:'黒髪ロング・赤カーデ花柄ワンピ',kaede:'長黒髪・赤カーデ花柄ドレス',riko:'黒レース長髪',noel:'ブルーフリルメイド',mio:'青黒ツートン猫耳',jun:'ネオングリーン',yume:'茶髪ウェーブ花柄',shino:'黒髪ゴシックハーネス',hiyori:'ピンクボブ',ageha:'茶髪ブラックゴス',kirari:'黄色アイドル',maron:'ピンクサイドポニー'});
+const SHINONOME_HERO_IDS=Object.freeze(['hiyori','koyori','kirari','maron']);
+const OLDCAFE_HERO_IDS=Object.freeze(['suiran','cocoa','ageha','lilith']);
+const STATION_HERO_IDS=Object.freeze(['yui','riko','koharu','luna','mio','jun']);
+const SCHOOL_HERO_IDS=Object.freeze(['fumika','kyoko']);
+const OFFICE_HERO_IDS=Object.freeze(['makoto','shino','shizuku']);
 const NEW_Q4_HERO_IDS=Object.freeze([...SCHOOL_HERO_IDS,...OFFICE_HERO_IDS]);
-const SEASIDE_HERO_IDS=Object.freeze(['concept17','concept13','concept30','concept33']);
-const LIGHTHOUSE_HERO_IDS=Object.freeze(['concept19','concept22']);
-const CHAPTER2_FIRST_HERO_IDS=Object.freeze(['concept35','concept34']);
-const CHAPTER2_LATE_HERO_IDS=Object.freeze(['concept31','concept36']);
+const SEASIDE_HERO_IDS=Object.freeze(['ena','mai','shio','marin']);
+const LIGHTHOUSE_HERO_IDS=Object.freeze(['noel','yume']);
+const CHAPTER2_FIRST_HERO_IDS=Object.freeze(['tsubaki','erika']);
+const CHAPTER2_LATE_HERO_IDS=Object.freeze(['kaname','kaede']);
 const CHAPTER2_ALL_HERO_IDS=Object.freeze([...CHAPTER2_FIRST_HERO_IDS,...CHAPTER2_LATE_HERO_IDS]);
 const DISTRICT_HERO_IDS=Object.freeze([...SHINONOME_HERO_IDS,...OLDCAFE_HERO_IDS,...STATION_HERO_IDS,...NEW_Q4_HERO_IDS,...SEASIDE_HERO_IDS,...LIGHTHOUSE_HERO_IDS,...CHAPTER2_ALL_HERO_IDS]);
 // 第2章の未解放人物。旧セーブの所持・編成を保持するためUNITS/BYIDからは削除しない。
-const CHAPTER2_RESERVED_CONCEPTS=Object.freeze(['concept35','concept34','concept31','concept36']);
+const CHAPTER2_RESERVED_CONCEPTS=Object.freeze(['tsubaki','erika','kaname','kaede']);
 const isChapter2ReservedTrial=u=>!!u&&CHAPTER2_RESERVED_CONCEPTS.includes(u.person)&&u.id.endsWith('_trial');
 const VISUAL_CANDIDATES=UNITS.filter(u=>/^concept\d+_trial$/.test(u.id)&&!DISTRICT_HERO_IDS.includes(u.person)&&!isChapter2ReservedTrial(u));
 function candidateDisplayArt(id){if(candidatePreviewPose==='mask'&&ART_V2.full_body_mask?.[id])return ART_V2.full_body_mask[id];if(candidatePreviewPose==='dynamic'&&ART_V2.full_body_dynamic?.[id])return ART_V2.full_body_dynamic[id];return characterArt(id)}
@@ -183,7 +218,7 @@ function unitArt(u,kind='portrait'){
  // Makoto's accepted portrait takes priority over outdated generic UNIT_ART portraits.
  // Preserve actual story/rarity scene CGs, but use one consistent base image everywhere else.
  if(kind==='scene'&&config.scene)return config.scene;
- if(u.person==='concept15')return kind==='portrait'?characterPortrait(u.person):characterArt(u.person);
+ if(u.person==='makoto')return kind==='portrait'?characterPortrait(u.person):characterArt(u.person);
  return config.portrait||(kind==='portrait'?characterPortrait(u.person):characterArt(u.person));
 }
 // v0.34.47.0: 編成・育成・募集の小さなカード用。SSR・URは一枚絵、SR・Rは立ち絵
@@ -198,12 +233,12 @@ function setHomeUnit(id){const u=unit(id);if(!u||!visibleUnitV026(u)||!data(id)|
 const RATE={SR:80,SSR:15,UR:5}; // v0.35.0.0: R廃止。R分50%は暫定でSRへ。確率はユーザー決定待ち。
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!RETIRED_R_TO_SR[u.id]&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
-const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['concept35'],erika:['concept34'],kaname:['concept31'],kaede:['concept36'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
+const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['tsubaki'],erika:['erika'],kaname:['kaname'],kaede:['kaede'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}
-function kanameSRUnlocked(save=S){return !!save?.bondRead?.concept31?.[1]}
+function kanameSRUnlocked(save=S){return !!save?.bondRead?.kaname?.[1]}
 function visibleUnitV026(u,save=S){return !!u&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)}
-function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='concept35'?!!save.tsubakiMet:u.person==='concept34'?!!save.erikaMet:u.person==='concept31'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
+function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
 function availableNormalPool(save=S){return NORMAL_GACHA_POOL.filter(u=>recruitEligibleUnit(u,save))}
 function pickupActive(group,save=S){const start=save.pickupStartDay?.[group];return !!(DISTRICT_GACHA_IDS[group]&&Number.isSafeInteger(start)&&start>=1&&save.love?.day>=start&&save.love.day<start+PICKUP_DAYS)}
 function activePickupId(save=S){return ['chapter4_city','chapter3_port','kaede','kaname','erika','tsubaki','lighthouse','seaside','school_new','station','oldcafe','shinonome'].find(group=>pickupActive(group,save))||'normal'}
@@ -401,27 +436,27 @@ function heroineStoryRevealed(id,save=S){
  if(OFFICE_HERO_IDS.includes(id))return !!save.officeMet;
  if(SEASIDE_HERO_IDS.includes(id))return !!save.seasideMet;
  if(LIGHTHOUSE_HERO_IDS.includes(id))return !!save.lighthouseMet;
- if(id==='concept35')return !!save.tsubakiMet;
- if(id==='concept34')return !!save.erikaMet;
- if(id==='concept31')return !!save.kanameMet;
- if(id==='concept36')return !!save.kaedeMet;
+ if(id==='tsubaki')return !!save.tsubakiMet;
+ if(id==='erika')return !!save.erikaMet;
+ if(id==='kaname')return !!save.kanameMet;
+ if(id==='kaede')return !!save.kaedeMet;
  return true;
 }
 function heroineVisibleInTalk(id,save=S){return heroineStoryRevealed(id,save)||(id==='nagi'&&heroineOwned(id,save))}
 function romanceHeroAvailable(id){return HERO_IDS.includes(id)&&heroineOwned(id)&&heroineStoryRevealed(id)}
 // Daily speech is selected from existing affection. No new save field is required.
-function romanceStageTier(id,aff){return (id==='concept29'||id==='concept12'||id==='concept20'||id==='concept22')?(aff<20?'early':aff<40&&id!=='concept12'?'mid':'late'):'late'}
+function romanceStageTier(id,aff){return (id==='lilith'||id==='cocoa'||id==='mio'||id==='yume')?(aff<20?'early':aff<40&&id!=='cocoa'?'mid':'late'):'late'}
 function romanceStagePack(l,id){return (ROMANCE_STATION_STAGE_LINES[id]||ROMANCE_LIGHTHOUSE_STAGE_LINES[id]||ROMANCE_STAGE_LINES[id])?.[romanceStageTier(id,l.affection?.[id]||0)]||null}
 function romanceMoodOptions(l,id,state){
  const base=romanceStagePack(l,id)?.moods?.[state]||ROMANCE_MOOD_VARIANTS[id][state];
  // Two small, conditional conversations; neither becomes visible before the related heroines are met.
- if(v027GameReady&&id==='concept14'&&state==='normal'&&isV027HeroRevealed('saki')&&isV027HeroRevealed('yuzu'))return [...base,'いとこのサキとユズ、二人で宵波を始めたんだ。黒羽家の音楽は、離れていてもつながってる。'];
-  if(v027GameReady&&id==='concept25'&&state==='normal'&&isV027HeroRevealed('anzu'))return [...base,'元弟子のあんず、あの子は人の指先を見るのが上手いの。私の手まで見抜くから、油断できないわ。'];
+ if(v027GameReady&&id==='luna'&&state==='normal'&&isV027HeroRevealed('saki')&&isV027HeroRevealed('yuzu'))return [...base,'いとこのサキとユズ、二人で宵波を始めたんだ。黒羽家の音楽は、離れていてもつながってる。'];
+  if(v027GameReady&&id==='ageha'&&state==='normal'&&isV027HeroRevealed('anzu'))return [...base,'元弟子のあんず、あの子は人の指先を見るのが上手いの。私の手まで見抜くから、油断できないわ。'];
   // Chapter 4 links appear only once their new heroine has been met.
- if(id==='concept27'&&state==='normal'&&v027GameReady&&isV028HeroRevealed('chihiro'))return [...base,'花村店長、今朝は蕾を一つずつ眺めていたの。私もあんなふうに、花を大事にしたいな。'];
- if(id==='concept33'&&state==='normal'&&v027GameReady&&isV028HeroRevealed('karen'))return [...base,'隣のサーフショップのカレンさん、今日も波の話してくれたよ! 海って元気出るよね。'];
+ if(id==='maron'&&state==='normal'&&v027GameReady&&isV028HeroRevealed('chihiro'))return [...base,'花村店長、今朝は蕾を一つずつ眺めていたの。私もあんなふうに、花を大事にしたいな。'];
+ if(id==='marin'&&state==='normal'&&v027GameReady&&isV028HeroRevealed('karen'))return [...base,'隣のサーフショップのカレンさん、今日も波の話してくれたよ! 海って元気出るよね。'];
  if(id==='akane'&&state==='normal'&&v027GameReady&&isV028HeroRevealed('yuriko'))return [...base,'観光課の百合子先輩、祭りの準備で忙しいのにみんなを見てくれるんだ。私も頑張ろう!'];
- if(id==='concept14'&&state==='normal'&&v027GameReady&&isV028HeroRevealed('ritsu'))return [...base,'リツの夜のラジオ、私もときどき聴くんだ。あの人、歌の前の静けさまで分かってくれる。'];
+ if(id==='luna'&&state==='normal'&&v027GameReady&&isV028HeroRevealed('ritsu'))return [...base,'リツの夜のラジオ、私もときどき聴くんだ。あの人、歌の前の静けさまで分かってくれる。'];
  return base;
 }
 function romancePlaceLinesFor(l,id,place){return romanceStagePack(l,id)?.placeLines?.[place]||ROMANCE_PLACE_LINES[id][place]}
@@ -869,6 +904,7 @@ function romanceNotebook(){const l=loveState();return `${heading('MEMORIES / DIA
 
 function romanceHeroAvailableFromSave(id,save){return HERO_IDS.includes(id)&&heroineOwned(id,save)&&heroineStoryRevealed(id,save)}
 function migrateSave(raw){
+  raw=migrateLegacyConceptSave(raw);
   raw=convertRetiredRSave(raw);
   const defaults=fresh();
   if(!isRecord(raw)||!isRecord(raw.owned))return defaults;
@@ -1264,18 +1300,18 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
   q7_lead:{title:"消えた姉の部屋・導入",place:"神楽坂家・旧住宅区",requires:[],lines:[
    {"who":"narrator","text":"旧住宅区の坂道。古い家並みのあいだに、神楽坂家の門がある。"},
    {"who":"narrator","text":"門の前で、一人の女性が待っていた。分厚いノートを二冊、胸に抱えている。"},
-   {"who":"concept35","text":"「宵星相談室の方ね。神楽坂椿です。連絡したのは私。」"},
+   {"who":"tsubaki","text":"「宵星相談室の方ね。神楽坂椿です。連絡したのは私。」"},
    {"who":"you","text":"「お姉さんのことで相談があると聞いています。」"},
-   {"who":"concept35","text":"「楓。双子の姉よ。三か月前、自分の部屋からいなくなった。届けも出したけど、手がかりはひとつも出てこなかった。」"},
+   {"who":"tsubaki","text":"「楓。双子の姉よ。三か月前、自分の部屋からいなくなった。届けも出したけど、手がかりはひとつも出てこなかった。」"},
    {"who":"aoi","text":"「この家の周辺で、個人の星灯に近い波形が観測されています。だから私たちが来ました。」"},
    {who:'aoi',chapterEcho:'chapter2_aoi'},
-   {"who":"concept35","text":"「……星灯。やっぱり、普通の失踪じゃないのね。」"},
+   {"who":"tsubaki","text":"「……星灯。やっぱり、普通の失踪じゃないのね。」"},
    {"who":"narrator","text":"椿は門を開け、二階を見上げた。一番奥の部屋だけ、カーテンが閉じたままだ。"},
-   {"who":"concept35","text":"「夜になると、姉の部屋から声がするの。楓の声に、そっくりな。」"},
+   {"who":"tsubaki","text":"「夜になると、姉の部屋から声がするの。楓の声に、そっくりな。」"},
    {"who":"reina","text":"「その声を聞いたのは、椿さんだけですか？」"},
-   {"who":"concept35","text":"「ええ。だから、私がおかしくなったのかと思った。でも、ノートに書いた時刻と星灯の記録が同じなら――」"},
+   {"who":"tsubaki","text":"「ええ。だから、私がおかしくなったのかと思った。でも、ノートに書いた時刻と星灯の記録が同じなら――」"},
    {"who":"you","text":"「確かめよう。椿の記録も、部屋も、一緒に。」"},
-   {"who":"concept35","text":"「お願い。部屋は私が案内する。……何も片づけてないの。三か月、ずっと。」"},
+   {"who":"tsubaki","text":"「お願い。部屋は私が案内する。……何も片づけてないの。三か月、ずっと。」"},
    {"who":"narrator","text":"階段を上がるたび、古い床板が鳴った。楓の部屋の扉の前で、椿は一度だけ深く息を吸った。"}]},
   q8_lead:{title:"仮面の夜会・導入",place:"宵星市・夜会場",requires:[],lines:[
    {"who":"narrator","text":"港通りの外れ、看板のないビル。差出人のない招待状に書かれた住所は、ここを指していた。"},
@@ -1286,11 +1322,11 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {"who":"narrator","text":"受付で手渡された仮面をつけてホールに入ると、同じように顔を隠した人々が、グラスを手に談笑していた。"},
    {"who":"momoka","text":"「なんか、映画みたい。……みんな顔が見えないって、ちょっと怖いね。」"},
    {"who":"narrator","text":"人波の向こうで、一人の女性がこちらを見て、ゆっくりとグラスを掲げた。黒いドレスに、銀縁の仮面。"},
-   {"who":"concept34","text":"「ようこそ、宵星相談室の皆さん。招待状、ちゃんと届いたみたいね。城ヶ崎エリカよ。ルミエールという店をやっているわ。」"},
+   {"who":"erika","text":"「ようこそ、宵星相談室の皆さん。招待状、ちゃんと届いたみたいね。城ヶ崎エリカよ。ルミエールという店をやっているわ。」"},
    {"who":"you","text":"「あなたが差出人か。」"},
-   {"who":"concept34","text":"「さあ、どうかしら。私はこの夜会に、いくらか貸しがあるだけよ。」"},
+   {"who":"erika","text":"「さあ、どうかしら。私はこの夜会に、いくらか貸しがあるだけよ。」"},
    {"who":"reina","text":"「なぜ私たちを呼んだんですか。」"},
-   {"who":"concept34","text":"「今夜ここで『黒い星灯』の話が出るかもしれないから。それを聞いて、あなたたちがどう動くのか、見てみたかったの。」"},
+   {"who":"erika","text":"「今夜ここで『黒い星灯』の話が出るかもしれないから。それを聞いて、あなたたちがどう動くのか、見てみたかったの。」"},
    {"who":"narrator","text":"エリカは仮面の奥で笑い、人波の中へ消えた。直後、ホールの照明が一瞬だけ揺らいだ。"},
    {"who":"aoi","text":"「監視装置の反応が……今、止まりました。」"}]},
   q9_lead:{title:"二人目の契約者・導入",place:"宵星港・倉庫街",requires:[],lines:[
@@ -1310,49 +1346,49 @@ const CHAPTER_STORIES=Object.freeze({...CHAPTER2_STORIES,...CHAPTER2_LATE_STORIE
    {"who":"aoi","text":"「擬似体です！ ……でも、この人を狙っているんじゃない。この場所そのものに、何かが仕掛けられています。」"}]},
   q10_lead:{title:"八年前の記録・導入",place:"市役所・地下書庫",requires:[],lines:[
    {"who":"narrator","text":"市役所の地下。古い紙の匂いがする階段の先に、ふだんは鍵のかかった書庫がある。"},
-   {"who":"concept16","text":"「八年前の旧灯台事件の記録は、ここに保管してあります。……私がこの仕事に就いて、最初に担当した事件でした。」"},
+   {"who":"fumika","text":"「八年前の旧灯台事件の記録は、ここに保管してあります。……私がこの仕事に就いて、最初に担当した事件でした。」"},
    {"who":"you","text":"「文香さんが？」"},
-   {"who":"concept16","text":"「ええ。当時は、ただの行方不明として処理されました。でも、どうしても納得できなくて。記録だけは、捨てずに残してきたんです。」"},
+   {"who":"fumika","text":"「ええ。当時は、ただの行方不明として処理されました。でも、どうしても納得できなくて。記録だけは、捨てずに残してきたんです。」"},
    {"who":"narrator","text":"文香の後ろで、ゆめが階段の途中に立ち止まっていた。"},
-   {"who":"concept22","text":"「……ここに、私のことが書いてあるんですよね。」"},
+   {"who":"yume","text":"「……ここに、私のことが書いてあるんですよね。」"},
    {"who":"you","text":"「無理に来なくてもよかったんだ。」"},
-   {"who":"concept22","text":"「いいえ。私が覚えていることと、記録に残っていることを比べたら、楓さんの手がかりになるかもしれないから。」"},
-   {"who":"concept22","text":"「それに……この八年に何があったのか、私も知りたいんです。」"},
+   {"who":"yume","text":"「いいえ。私が覚えていることと、記録に残っていることを比べたら、楓さんの手がかりになるかもしれないから。」"},
+   {"who":"yume","text":"「それに……この八年に何があったのか、私も知りたいんです。」"},
    {"who":"aoi","text":"「書庫の奥から、擬似体の反応があります。資料を守りながら進みましょう。」"},
-   {"who":"concept16","text":"「書類に触れる前に、私に声をかけてください。順番を崩すと、元に戻すのが大変なので。」"},
+   {"who":"fumika","text":"「書類に触れる前に、私に声をかけてください。順番を崩すと、元に戻すのが大変なので。」"},
    {"who":"narrator","text":"文香は鍵束から一本を選び、重い扉を押し開けた。冷えた空気の奥で、何かが紙をめくる音がした。"}]},
   q11_lead:{title:"黒い星灯・導入",place:"埋立地・旧発電所",requires:[],lines:[
    {"who":"narrator","text":"埋立地の外れ。止まったままの煙突の下に、旧発電所の建物が黒く沈んでいる。"},
-   {"who":"concept16","text":"「地下書庫の記録にあった紋様と同じものが、ここの稼働記録にも残っていました。」"},
+   {"who":"fumika","text":"「地下書庫の記録にあった紋様と同じものが、ここの稼働記録にも残っていました。」"},
    {"who":"aoi","text":"「黒い星灯の反応です。強さは、夜会のときとは比べものになりません。」"},
    {"who":"akane","text":"「中は床が抜けてるところもあるみたい。入れる場所は私が先に確かめるね！」"},
    {"who":"narrator","text":"正門の錠は、すでに壊されていた。真新しい傷だった。"},
    {"who":"reina","text":"「誰かが先に入っています。」"},
    {"who":"narrator","text":"制御室へ続く通路で、黒いコートの背中が振り返った。港で会ったマスクの契約者――紫藤カナメだった。"},
-   {"who":"concept31","text":"「……また、あなたたち。どうしてここが分かったの。」"},
+   {"who":"kaname","text":"「……また、あなたたち。どうしてここが分かったの。」"},
    {"who":"you","text":"「同じものを追っているからだ。黒い星灯を。」"},
-   {"who":"concept31","text":"「私は八年、一人で追ってきた。今さら誰かと組むつもりはないわ。」"},
+   {"who":"kaname","text":"「私は八年、一人で追ってきた。今さら誰かと組むつもりはないわ。」"},
    {"who":"aoi","text":"「でも、この先の擬似体は黒い星灯に直接操られています。一人では危険です。」"},
    {"who":"narrator","text":"カナメは何か言いかけて、口を閉じた。通路の奥で、計器の針が一斉に振り切れる。"},
-   {"who":"concept31","text":"「……今夜だけよ。終わったら、それぞれの道に戻る。それでいいわね。」"},
+   {"who":"kaname","text":"「……今夜だけよ。終わったら、それぞれの道に戻る。それでいいわね。」"},
    {"who":"you","text":"「ああ。今夜だけでいい。」"}]},
   q12_lead:{title:"残響の檻・導入",place:"旧灯台・地下",requires:[],lines:[
    {"who":"narrator","text":"旧灯台の地下へ続く階段は、思っていたよりずっと深かった。壁の明かりが、数段先で闇に吸い込まれていく。"},
-   {"who":"concept35","text":"「この下に、お姉ちゃんがいるのね。」"},
+   {"who":"tsubaki","text":"「この下に、お姉ちゃんがいるのね。」"},
    {"who":"you","text":"「椿、本当についてくるのか。」"},
-   {"who":"concept35","text":"「姉の声が分かるのは、私だけよ。……ずっと待っていたけど、今日だけは待っていられない。」"},
+   {"who":"tsubaki","text":"「姉の声が分かるのは、私だけよ。……ずっと待っていたけど、今日だけは待っていられない。」"},
    {"who":"aoi","text":"「楓さんの反応は微弱ですが、確かにあります。椿さんの声が届けば、檻の内側から道が見つかるかもしれません。」"},
    {"who":"aoi","text":"「{name}さん。今夜も、強く灯すときは私からにしてください。」"},
    {"who":"you","text":"「灯台のときも、そう言ってたな。」"},
    {"who":"aoi","text":"「解析は、一番近くで見るのがいちばん正確なので。……それだけです。」"},
    {"who":"reina","text":"「戦いになったら、椿さんは必ず後ろに。それだけは約束してください。」"},
-   {"who":"concept35","text":"「約束する。」"},
+   {"who":"tsubaki","text":"「約束する。」"},
    {"who":"narrator","text":"階段を下りきった先に、黒い光の膜が揺れていた。その前に、一人の女性が立っている。"},
    {"who":"sakuya","text":"「ここまで来たのね、相談室。でも、この檻は私の星灯でしか開かないわ。」"},
    {"who":"you","text":"「朔夜。楓を返してもらう。」"},
    {"who":"sakuya","text":"「返す？ この子は自分から、昔の記録に手を伸ばしたのよ。触れてはいけないものに。」"},
    {"who":"narrator","text":"背後の階段を、駆け下りてくる足音がした。息を切らしたカナメが、闇の中で黒い刃を抜く。"},
-   {"who":"concept31","text":"「……やっと会えたわね、朔夜。八年分、返してもらうわよ。」"}]},
+   {"who":"kaname","text":"「……やっと会えたわね、朔夜。八年分、返してもらうわよ。」"}]},
   q1_lead:{title:'商店街の時計音・導入',place:'東雲商店街',requires:[],lines:[
    {who:'narrator',text:'夕暮れの東雲商店街。いつもなら買い物客が立ち話をする時間だが、鐘の音を警戒して足早に帰る人が増えていた。'},
    {who:'akane',text:'「人通りが少なくなってるね。私は通りの安全を確認するよ！」'},
@@ -1493,7 +1529,7 @@ function topicCue(hero,topicIndex,replyIndex=-1){return EXPRESSION_CUES.conversa
 // Manual cues live in EXPRESSION_CUES. Existing authored story objects are not mutated.
 // Display-only metadata. Contract holders do not have a tomoshibi, and Nagi's remains concealed.
 function tomoshibiLine(id){
- if(id==='concept31'||id==='concept34')return '星灯の契約者';
+ if(id==='kaname'||id==='erika')return '星灯の契約者';
  if(id==='nagi')return '灯火:???';
  const flame=PEOPLE[id]?.tomoshibi;
  return flame?`灯火:${flame.color} ― ${flame.thought}`:'';
@@ -1503,7 +1539,7 @@ const HEROINE_PROFILES_ALL=Object.freeze(Object.fromEntries(Object.entries(HEROI
 const BOND_STORY_CATALOG=Object.freeze({...BOND_STORIES,...Object.fromEntries(NEW_HERO_IDS.flatMap(id=>Object.entries(extraHero(id).stories)))});
 
 // The name reveal is unlocked by actually reading Shino's second bond story.
-function heroineDisplayName(id,save=S){return id==='concept23'&&save.bondRead?.concept23?.[1]?'シノ(灯)':PEOPLE[id]?.name||id}
+function heroineDisplayName(id,save=S){return id==='shino'&&save.bondRead?.shino?.[1]?'シノ(灯)':PEOPLE[id]?.name||id}
 function isHero(id){return HERO_IDS.includes(id)}
 function heroAff(id){return Math.max(loveState()?.affection?.[id]||0,...UNITS.filter(u=>u.person===id&&data(u.id)&&(!CHAPTER2_LATE_HERO_IDS.includes(id)||!isChapter2ReservedTrial(u))).map(u=>data(u.id).aff))}
 function setHeroAff(id,value){const n=Math.max(0,Math.min(100,value));if(extraHero(id))loveState().affection[id]=n;for(const u of UNITS.filter(u=>u.person===id&&data(u.id)&&(!CHAPTER2_LATE_HERO_IDS.includes(id)||!isChapter2ReservedTrial(u))))data(u.id).aff=n}
@@ -1824,7 +1860,7 @@ function chapterStoryCast(script,index){
  // The chapter-three embrace is an explicit two-person scene.
  // Show Noel with Touko on the narrated embrace, not in unrelated lines.
  const text=script.lines[index]?.text||'';
- if(storyId==='chapter3_end'&&current==='narrator'&&/透子/.test(text)&&/ノエル/.test(text)&&/抱/.test(text))cast=['touko','concept19'];
+ if(storyId==='chapter3_end'&&current==='narrator'&&/透子/.test(text)&&/ノエル/.test(text)&&/抱/.test(text))cast=['touko','noel'];
  return cast.map(who=>expressionPortraitMarkup(who,faces[who]||'normal',`chapter:${storyId}`,{wrapperClass:'story-character',chapterStoryFit:true,stateClass:'is-speaking',alt:`${PEOPLE[who]?.name||STORY_ONLY_CAST[who]}の立ち絵`})).join('');
 }
 // v0.34.37.0: 読み返しログ・オート送り・文字の大きさ（読みやすさの設定は端末ごとに保存し、セーブには含めない）
@@ -1878,7 +1914,7 @@ function chapterStoryPage(){
  const isChapter5Story=!!CHAPTER5_STORIES[storySession.id];
  const isChapter4Story=!!CHAPTER4_STORIES[storySession.id];
  const isChapter3Story=!!CHAPTER3_STORIES[storySession.id]||!!CHAPTER3_LATE_STORIES[storySession.id];
- const isChapter2Story=['chapter2_open','q7','q8','q9','q10','q11','q12','chapter2_end','tsubaki_meet','erika_meet','kaname_meet','kaede_meet'].includes(storySession.id)||['concept35','concept34','concept31','concept36'].includes(BOND_STORY_CATALOG[storySession.id]?.person);
+ const isChapter2Story=['chapter2_open','q7','q8','q9','q10','q11','q12','chapter2_end','tsubaki_meet','erika_meet','kaname_meet','kaede_meet'].includes(storySession.id)||['tsubaki','erika','kaname','kaede'].includes(BOND_STORY_CATALOG[storySession.id]?.person);
  return `<div class="story-panel card chapter-story chapter-story-v071 vn-story" aria-label="物語の再生画面">
  <div class="story-scene ${castMarkup?'':'no-cast'} ${bgPath?'has-bg':''}">${bgMarkup}<div class="story-skyline" style="pointer-events:none"></div><div class="story-cast" style="pointer-events:none">${castMarkup}</div>
  <div class="vn-toolbar"><span class="vn-location">${esc(placeTime)}</span><div class="vn-top-actions"><button type="button" class="vn-tool" onclick="toggleStoryLog()">ログ</button><button type="button" class="vn-tool ${readerPrefs().auto?'is-on':''}" aria-pressed="${readerPrefs().auto?'true':'false'}" onclick="toggleStoryAuto()">オート</button><button type="button" class="vn-tool" onclick="previousStory()" ${index===0?'disabled':''}>戻る</button><button type="button" class="vn-tool" onclick="skipChapterStory()">スキップ</button><button type="button" class="vn-tool" onclick="requestInterrupt()">閉じる</button></div></div>

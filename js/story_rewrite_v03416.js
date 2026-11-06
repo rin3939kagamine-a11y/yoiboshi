@@ -476,17 +476,17 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "相談室の机で、春野ゆめが小さなオルゴールを鳴らした。八年前、ゆめがカナメに贈ったものだという。"
 },
 {
-"who": "concept22",
+"who": "yume",
 "title": "懐かしい音",
 "text": "「カナメちゃん。この曲、覚えてる？ あの頃よく一緒に聴いたよね。」"
 },
 {
-"who": "concept31",
+"who": "kaname",
 "title": "消えた題名",
 "text": "「……ゆめ姉。その曲、昔は何度も口ずさんでたのに。題名が出てこない。」"
 },
 {
-"who": "concept22",
+"who": "yume",
 "title": "変わらぬ笑顔",
 "text": "「大丈夫だよ。古い曲だもん。思い出したら、また教えてね。」"
 },
@@ -496,12 +496,12 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "ゆめは気づかなかったふりをして微笑んだ。カナメはオルゴールを見つめたまま、手を動かせない。"
 },
 {
-"who": "concept31",
+"who": "kaname",
 "title": "確かにあったはず",
 "text": "「……覚えていたはずなのに。ゆめ姉が好きだったものを、また一つ忘れた。」"
 },
 {
-"who": "concept34",
+"who": "erika",
 "title": "契約の代償",
 "text": "「契約者は、一番強い想いを星灯に差し出して力を得るの。戦うたび、その想いに結びついた記憶が少しずつ薄れていく。強さには、代償があるのよ。」"
 },
@@ -526,12 +526,12 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "「エリカさんも、何か大切な想いを差し出したんですか？」"
 },
 {
-"who": "concept34",
+"who": "erika",
 "title": "語らない想い",
 "text": "「ふふ。仮面の下は、内緒よ。……でも、忘れていいことばかりじゃないの。」"
 },
 {
-"who": "concept31",
+"who": "kaname",
 "title": "残すために",
 "text": "「記憶が薄れても、ゆめ姉を助けたかったことは本当だ。今のうちに、思い出せるものを書いておく。」"
 },
@@ -541,7 +541,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "「椿さんから連絡です。大学の書庫で、最初の星灯に関する伝承を見つけたそうです。現地で照合しましょう。」"
 },
 {
-"who": "concept35",
+"who": "tsubaki",
 "title": "資料が見つかった",
 "text": "「やっと見つけた！ ゼミのなずなが古い箱の目録を読めたの。こっちに来て！」"
 },
@@ -556,7 +556,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "「昔、宵星の海で帰らなかった人を待ち続けた人々の想いが、旧灯台の灯に集まって……結晶になったのが、最初の星灯だと書かれています。」"
 },
 {
-"who": "concept35",
+"who": "tsubaki",
 "title": "破れた次頁",
 "text": "「続きの頁は傷んで読めない。でも、昔から想いと灯台が結びついていたことは分かるわ。」"
 },
@@ -570,7 +570,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "「奥の閲覧室に、まだ学生さんが二人います！ ……私、案内します。この書庫の通路なら、目をつぶっても分かるので。」"
 },
 {
-"who": "concept35",
+"who": "tsubaki",
 "text": "「なずな、危ないってば！」"
 },
 {
@@ -600,7 +600,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "「学生さん、二人とも無事でした。……足、まだ震えてますけど。誰かに合わせるんじゃなく、自分で決めて動けました。」"
 },
 {
-"who": "concept35",
+"who": "tsubaki",
 "title": "ゼミの後輩",
 "text": "「なずな、よく頑張った！ 椿先輩としては、資料を守れたことも嬉しいけど、なずなが自分で決めたことがもっと嬉しい。」"
 },
@@ -614,12 +614,12 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "「海で待ち続けた人々の想いが灯台に集まった、というのは伝承です。確かな史実かどうかは、ほかの記録でも調べてみましょう。」"
 },
 {
-"who": "concept31",
+"who": "kaname",
 "title": "忘れないために",
 "text": "「ゆめ姉、オルゴールの曲名を紙に書いてくれないか。忘れても、もう一度知りたい。」"
 },
 {
-"who": "concept22",
+"who": "yume",
 "title": "一緒に覚える",
 "text": "「うん。一緒に聴こう。曲名だけじゃなくて、これからの思い出も作ろうね。」"
 },
@@ -1201,4 +1201,4 @@ const STORY_REWRITE_V03416=Object.freeze({
 }
 });
 // 行を足した・書き直した場面の表情指定を、新しい行番号に合わせて置き換える（v0.34.13.0〜v0.34.16.0の変更分）。
-if(typeof EXPRESSION_CUES!=='undefined'&&EXPRESSION_CUES.stories)Object.assign(EXPRESSION_CUES.stories,{"q3": {"4": {"target": "akane", "face": "smile"}, "5": {"target": "reina", "face": "normal"}}, "q5": {"2": {"target": "nagi", "face": "sad"}, "3": {"target": "nagi", "face": "normal"}, "4": {"target": "aoi", "face": "sad"}}, "shinonome_meet": {"2": {"target": "momoka", "face": "smile"}, "7": {"target": "milku", "face": "smile"}, "11": {"target": "momoka", "face": "blush"}, "12": {"target": "concept32", "face": "blush"}}, "oldcafe_meet": {"5": {"target": "milku", "face": "surprise"}, "10": {"target": "momoka", "face": "smile"}, "13": {"target": "concept29", "face": "smile"}, "16": {"target": "concept29", "face": "normal"}, "17": {"target": "milku", "face": "blush"}}, "lighthouse_meet": {"2": {"target": "chinatsu", "face": "normal"}, "6": {"target": "nagi", "face": "surprise"}, "8": {"target": "concept19", "face": "blush"}, "15": {"target": "nagi", "face": "sad"}, "18": {"target": "concept19", "face": "normal"}, "21": {"target": "nagi", "face": "normal"}}, "tsubaki_meet": {"2": {"target": "concept35", "face": "normal"}, "3": {"target": "concept35", "face": "surprise"}, "7": {"target": "concept35", "face": "pout"}}, "erika_meet": {"2": {"target": "concept34", "face": "normal"}, "4": {"target": "concept34", "face": "smile"}, "9": {"target": "concept34", "face": "smile"}}, "q11": {"2": {"target": "concept31", "face": "sad"}, "4": {"target": "concept31", "face": "normal"}, "5": {"target": "concept19", "face": "sad"}, "8": {"target": "concept31", "face": "sad"}, "12": {"target": "concept34", "face": "normal"}}, "kaname_meet": {"2": {"target": "concept31", "face": "normal"}, "4": {"target": "concept31", "face": "normal"}, "9": {"target": "concept31", "face": "sad"}}, "q12": {"5": {"target": "concept35", "face": "surprise"}, "6": {"target": "concept36", "face": "surprise"}, "7": {"target": "concept35", "face": "sad"}, "14": {"target": "concept31", "face": "normal"}}, "q14": {"2": {"target": "saki", "face": "sad"}, "4": {"target": "yuzu", "face": "surprise"}}, "saki_yuzu_meet": {"1": {"target": "yuzu", "face": "smile"}, "4": {"target": "saki", "face": "blush"}, "9": {"target": "saki", "face": "pout"}, "11": {"target": "yuzu", "face": "smile"}, "14": {"target": "yuzu", "face": "smile"}, "15": {"target": "saki", "face": "pout"}}, "reiko_meet": {"2": {"target": "reiko", "face": "surprise"}, "4": {"target": "reiko", "face": "smile"}, "8": {"target": "reiko", "face": "sad"}, "12": {"target": "reiko", "face": "blush"}, "17": {"target": "reiko", "face": "smile"}}, "anzu_meet": {"2": {"target": "anzu", "face": "smile"}, "1": {"target": "anzu", "face": "smile"}, "6": {"target": "anzu", "face": "smile"}}, "q16": {"2": {"target": "nazuna", "face": "normal"}, "6": {"target": "concept31", "face": "sad"}}, "nazuna_meet": {"1": {"target": "nazuna", "face": "smile"}, "3": {"target": "nazuna", "face": "blush"}, "6": {"target": "nazuna", "face": "smile"}}, "q15_intro": {"4": {"target": "reiko", "face": "smile"}, "7": {"target": "reiko", "face": "normal"}, "13": {"target": "saki", "face": "blush"}, "17": {"target": "reiko", "face": "surprise"}, "21": {"target": "anzu", "face": "smile"}, "24": {"target": "anzu", "face": "surprise"}, "28": {"target": "reiko", "face": "normal"}}, "q14_intro": {"3": {"target": "yuzu", "face": "surprise"}, "8": {"target": "yuzu", "face": "surprise"}}});
+if(typeof EXPRESSION_CUES!=='undefined'&&EXPRESSION_CUES.stories)Object.assign(EXPRESSION_CUES.stories,{"q3": {"4": {"target": "akane", "face": "smile"}, "5": {"target": "reina", "face": "normal"}}, "q5": {"2": {"target": "nagi", "face": "sad"}, "3": {"target": "nagi", "face": "normal"}, "4": {"target": "aoi", "face": "sad"}}, "shinonome_meet": {"2": {"target": "momoka", "face": "smile"}, "7": {"target": "milku", "face": "smile"}, "11": {"target": "momoka", "face": "blush"}, "12": {"target": "koyori", "face": "blush"}}, "oldcafe_meet": {"5": {"target": "milku", "face": "surprise"}, "10": {"target": "momoka", "face": "smile"}, "13": {"target": "lilith", "face": "smile"}, "16": {"target": "lilith", "face": "normal"}, "17": {"target": "milku", "face": "blush"}}, "lighthouse_meet": {"2": {"target": "chinatsu", "face": "normal"}, "6": {"target": "nagi", "face": "surprise"}, "8": {"target": "noel", "face": "blush"}, "15": {"target": "nagi", "face": "sad"}, "18": {"target": "noel", "face": "normal"}, "21": {"target": "nagi", "face": "normal"}}, "tsubaki_meet": {"2": {"target": "tsubaki", "face": "normal"}, "3": {"target": "tsubaki", "face": "surprise"}, "7": {"target": "tsubaki", "face": "pout"}}, "erika_meet": {"2": {"target": "erika", "face": "normal"}, "4": {"target": "erika", "face": "smile"}, "9": {"target": "erika", "face": "smile"}}, "q11": {"2": {"target": "kaname", "face": "sad"}, "4": {"target": "kaname", "face": "normal"}, "5": {"target": "noel", "face": "sad"}, "8": {"target": "kaname", "face": "sad"}, "12": {"target": "erika", "face": "normal"}}, "kaname_meet": {"2": {"target": "kaname", "face": "normal"}, "4": {"target": "kaname", "face": "normal"}, "9": {"target": "kaname", "face": "sad"}}, "q12": {"5": {"target": "tsubaki", "face": "surprise"}, "6": {"target": "kaede", "face": "surprise"}, "7": {"target": "tsubaki", "face": "sad"}, "14": {"target": "kaname", "face": "normal"}}, "q14": {"2": {"target": "saki", "face": "sad"}, "4": {"target": "yuzu", "face": "surprise"}}, "saki_yuzu_meet": {"1": {"target": "yuzu", "face": "smile"}, "4": {"target": "saki", "face": "blush"}, "9": {"target": "saki", "face": "pout"}, "11": {"target": "yuzu", "face": "smile"}, "14": {"target": "yuzu", "face": "smile"}, "15": {"target": "saki", "face": "pout"}}, "reiko_meet": {"2": {"target": "reiko", "face": "surprise"}, "4": {"target": "reiko", "face": "smile"}, "8": {"target": "reiko", "face": "sad"}, "12": {"target": "reiko", "face": "blush"}, "17": {"target": "reiko", "face": "smile"}}, "anzu_meet": {"2": {"target": "anzu", "face": "smile"}, "1": {"target": "anzu", "face": "smile"}, "6": {"target": "anzu", "face": "smile"}}, "q16": {"2": {"target": "nazuna", "face": "normal"}, "6": {"target": "kaname", "face": "sad"}}, "nazuna_meet": {"1": {"target": "nazuna", "face": "smile"}, "3": {"target": "nazuna", "face": "blush"}, "6": {"target": "nazuna", "face": "smile"}}, "q15_intro": {"4": {"target": "reiko", "face": "smile"}, "7": {"target": "reiko", "face": "normal"}, "13": {"target": "saki", "face": "blush"}, "17": {"target": "reiko", "face": "surprise"}, "21": {"target": "anzu", "face": "smile"}, "24": {"target": "anzu", "face": "surprise"}, "28": {"target": "reiko", "face": "normal"}}, "q14_intro": {"3": {"target": "yuzu", "face": "surprise"}, "8": {"target": "yuzu", "face": "surprise"}}});

@@ -1,4 +1,4 @@
-# 早瀬真琴（concept15）｜立ち絵統一候補 V1
+# 早瀬真琴（makoto）｜立ち絵統一候補 V1
 
 ## 状態
 - **候補画像を保存済み／ゲームには未適用**
@@ -15,9 +15,9 @@
 
 **現行ゲームが使用する画像はまだ置き換えない。**
 
-- `assets/ART_V2/full_body/concept15.webp`
-- `assets/ART_V2/upper_body/concept15.webp`
-- `assets/ART_V2/expressions/concept15_{normal,blush,pout,sad,smile,surprise}.webp`
+- `assets/ART_V2/full_body/makoto.webp`
+- `assets/ART_V2/upper_body/makoto.webp`
+- `assets/ART_V2/expressions/makoto_{normal,blush,pout,sad,smile,surprise}.webp`
 
 ## 理由
 会話画面は `expressionArt(personId,face)` を使っており、旧デザインの6表情が生きている。全身と上半身だけを交換すると、会話中に別人の顔や服装へ切り替わる。

@@ -1,7 +1,7 @@
 [
   {
     "id": "hiyori_daily",
-    "person": "concept24",
+    "person": "hiyori",
     "title": "パティスリー桃瀬の日常",
     "rarity": "R",
     "role": "healer",
@@ -17,7 +17,7 @@
   },
   {
     "id": "koyori_daily",
-    "person": "concept32",
+    "person": "koyori",
     "title": "看板娘の寄り道",
     "rarity": "R",
     "role": "attacker",
@@ -33,7 +33,7 @@
   },
   {
     "id": "kirari_daily",
-    "person": "concept26",
+    "person": "kirari",
     "title": "商店街PR大使",
     "rarity": "SR",
     "role": "tank",
@@ -49,7 +49,7 @@
   },
   {
     "id": "maron_daily",
-    "person": "concept27",
+    "person": "maron",
     "title": "花言葉の贈りもの",
     "rarity": "SR",
     "role": "healer",
@@ -65,7 +65,7 @@
   },
   {
     "id": "suiran_daily",
-    "person": "concept10",
+    "person": "suiran",
     "title": "翠月の茶房",
     "rarity": "SR",
     "role": "support",
@@ -81,7 +81,7 @@
   },
   {
     "id": "cocoa_daily",
-    "person": "concept12",
+    "person": "cocoa",
     "title": "星屑亭の素顔",
     "rarity": "R",
     "role": "attacker",
@@ -97,7 +97,7 @@
   },
   {
     "id": "ageha_daily",
-    "person": "concept25",
+    "person": "ageha",
     "title": "夜色ネイル",
     "rarity": "SR",
     "role": "attacker",
@@ -113,7 +113,7 @@
   },
   {
     "id": "lilith_daily",
-    "person": "concept29",
+    "person": "lilith",
     "title": "黒薔薇館のリボン",
     "rarity": "R",
     "role": "tank",

@@ -1,4 +1,4 @@
-# 『宵星の契約者 RE:START』Ver.0.34.7.0｜莉子（concept18）立ち絵6表情差し替え
+# 『宵星の契約者 RE:START』Ver.0.34.7.0｜莉子（riko）立ち絵6表情差し替え
 
 - 作成日：2026年10月27日
 - 適用元：正式開発基準 **Ver.0.34.6.0**
@@ -8,8 +8,8 @@
 
 ## 変更内容
 
-1. 添付 `concept18_莉子_立ち絵6表情.zip` のWebP 6ファイルを**バイト単位でそのまま収録**（再生成・再圧縮・リサイズなし）。対象：`assets/ART_V2/expressions/concept18_{normal,smile,blush,pout,sad,surprise}.webp`。
-2. `js/portrait_fit_v031.js`：莉子のみ `concept18:{s:0.9,u:0.02,x:0} /* 莉子 */,` へ変更。頭切れ補正 `f:1` を削除。
+1. 添付 `riko_莉子_立ち絵6表情.zip` のWebP 6ファイルを**バイト単位でそのまま収録**（再生成・再圧縮・リサイズなし）。対象：`assets/ART_V2/expressions/riko_{normal,smile,blush,pout,sad,surprise}.webp`。
+2. `js/portrait_fit_v031.js`：莉子のみ `riko:{s:0.9,u:0.02,x:0} /* 莉子 */,` へ変更。頭切れ補正 `f:1` を削除。
 3. 同ファイルの冒頭説明から「画像の作り直し待ち」の莉子を削除し、残る人数を6人から5人へ修正。ほかの人物の設定は変更なし。
 4. `index.html`：ブラウザタイトルの版表記を `Ver.0.34.7.0` に変更。
 5. `js/game.js`：タイトル画面・サイドバー・模擬戦入口の版表記3か所を `Ver.0.34.7.0` に変更。
@@ -19,12 +19,12 @@
 - `index.html`
 - `js/game.js`
 - `js/portrait_fit_v031.js`
-- `assets/ART_V2/expressions/concept18_normal.webp`
-- `assets/ART_V2/expressions/concept18_smile.webp`
-- `assets/ART_V2/expressions/concept18_blush.webp`
-- `assets/ART_V2/expressions/concept18_pout.webp`
-- `assets/ART_V2/expressions/concept18_sad.webp`
-- `assets/ART_V2/expressions/concept18_surprise.webp`
+- `assets/ART_V2/expressions/riko_normal.webp`
+- `assets/ART_V2/expressions/riko_smile.webp`
+- `assets/ART_V2/expressions/riko_blush.webp`
+- `assets/ART_V2/expressions/riko_pout.webp`
+- `assets/ART_V2/expressions/riko_sad.webp`
+- `assets/ART_V2/expressions/riko_surprise.webp`
 
 ## 内部検証
 
@@ -35,4 +35,4 @@
 
 ## 補足
 
-添付ZIPには別途の説明書ファイルは含まれていませんでした。補正値 `concept18:{s:0.9,u:0.02,x:0}` は、ご依頼本文に明示された値を採用しています。
+添付ZIPには別途の説明書ファイルは含まれていませんでした。補正値 `riko:{s:0.9,u:0.02,x:0}` は、ご依頼本文に明示された値を採用しています。

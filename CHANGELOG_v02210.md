@@ -21,8 +21,8 @@
 - 2人の内部ID、ユニットタイトル、レアリティ、色、セーブキーは維持。
 
 ## 4. 顔アイコン
-- `assets/ART_V2/face_icons/concept35.webp`：元の `upper_body/concept35.webp` の切り抜き領域 `(208,0)-(462,254)` を採用。
-- `assets/ART_V2/face_icons/concept34.webp`：元の `upper_body/concept34.webp` の切り抜き領域 `(245,0)-(485,240)` を採用。
+- `assets/ART_V2/face_icons/tsubaki.webp`：元の `upper_body/tsubaki.webp` の切り抜き領域 `(208,0)-(462,254)` を採用。
+- `assets/ART_V2/face_icons/erika.webp`：元の `upper_body/erika.webp` の切り抜き領域 `(245,0)-(485,240)` を採用。
 - 両方とも元絵の描き直し・色変更なし。画面互換のため300×300px WebPにリサイズ。
 
 ## 5. 画面上部の章見出し

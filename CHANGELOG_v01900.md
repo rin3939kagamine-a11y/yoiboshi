@@ -11,10 +11,10 @@
 - プロフィール中の本名未決定記述を更新。その他シノ本人のセリフは保持。
 
 ## 臨海公園の4人
-- concept17：天音 リコ／Rアタッカー
-- concept13：舞／Rサポーター（名字非公開）
-- concept30：波多野 汐／Rタンク
-- concept33：金城 マリン／Rヒーラー
+- ena：天音 エナ／Rアタッカー
+- mai：舞／Rサポーター（名字非公開）
+- shio：波多野 汐／Rタンク
+- marin：金城 マリン／Rヒーラー
 - 4人それぞれの恋愛プロフィール・日常話題8・絆エピソード2話・選択肢6・対応返答18・気分・場所・外出・機嫌直しを追加。
 - q5後日談終了後またはq5クリア済み旧セーブを再開した時、臨海公園の出会いイベントが開始。中断進捗を別フラグで保存し、交流画面から再開可能。
 - イベント読了後、4人のRユニットが通常ガチャ対象となり、7ゲーム日間×選択重み3倍のピックアップを開始。抽選のレアリティ確率は変更なし。
@@ -27,10 +27,10 @@
 - 他の候補6人のうち対象4人を正式化し、残り2人は従来どおり候補。
 
 ## 変更ファイル
-- `assets/ART_V2/face_icons/concept13.webp`
-- `assets/ART_V2/face_icons/concept17.webp`
-- `assets/ART_V2/face_icons/concept30.webp`
-- `assets/ART_V2/face_icons/concept33.webp`
+- `assets/ART_V2/face_icons/mai.webp`
+- `assets/ART_V2/face_icons/ena.webp`
+- `assets/ART_V2/face_icons/shio.webp`
+- `assets/ART_V2/face_icons/marin.webp`
 - `index.html`
 - `js/game.js`
 - `js/performance_v016.js`

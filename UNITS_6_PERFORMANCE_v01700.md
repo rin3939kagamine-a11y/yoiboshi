@@ -22,9 +22,9 @@
 
 | ヒロイン | 元デザイン | Rユニット | 顔アイコン |
 |---|---|---|---|
-| 小野寺 結衣 | `concept08` | `yui_daily` | `assets/ART_V2/face_icons/concept08.webp` |
-| 宮下 莉子 | `concept18` | `riko_daily` | `assets/ART_V2/face_icons/concept18.webp` |
-| 水瀬 小春 | `concept28` | `koharu_daily` | `assets/ART_V2/face_icons/concept28.webp` |
-| 黒羽 ルナ | `concept14` | `luna_daily` | `assets/ART_V2/face_icons/concept14.webp` |
-| 藍沢 ミオ | `concept20` | `mio_daily` | `assets/ART_V2/face_icons/concept20.webp` |
-| 鳴海 ジュン | `concept21` | `jun_daily` | `assets/ART_V2/face_icons/concept21.webp` |
+| 小野寺 結衣 | `yui` | `yui_daily` | `assets/ART_V2/face_icons/yui.webp` |
+| 宮下 莉子 | `riko` | `riko_daily` | `assets/ART_V2/face_icons/riko.webp` |
+| 水瀬 小春 | `koharu` | `koharu_daily` | `assets/ART_V2/face_icons/koharu.webp` |
+| 黒羽 ルナ | `luna` | `luna_daily` | `assets/ART_V2/face_icons/luna.webp` |
+| 藍沢 ミオ | `mio` | `mio_daily` | `assets/ART_V2/face_icons/mio.webp` |
+| 鳴海 ジュン | `jun` | `jun_daily` | `assets/ART_V2/face_icons/jun.webp` |
