@@ -102,10 +102,11 @@ try:
           const el=document.querySelector('.v676-talk-portrait.expression-stage .symbol-reaction-v0500[data-person-id="makoto"]');
           const img=el?.querySelector('img');
           return {face:el?.dataset.expression,src:img?.getAttribute('src'),
-            anim:img?getComputedStyle(img).animationName:'NO_IMAGE'}
+            anim:img?getComputedStyle(img).animationName:'NO_IMAGE',
+            body:!el?document.querySelector('.v676-talk-portrait')?.outerHTML.slice(0,1000):''}
         }""")
         ck("Makoto heroine talk uses approved new crop",
-           "upper_body_crops_v0500/makoto.webp" in stage_before["src"],stage_before)
+           "upper_body_crops_v0500/makoto.webp" in (stage_before["src"] or ""),stage_before)
         ck("Makoto heroine talk starts neutral",stage_before["face"]=="normal",stage_before)
         ck("Makoto neutral crop is stationary by design",
            stage_before["anim"]=="none",stage_before)
@@ -115,7 +116,8 @@ try:
           const el=document.querySelector('.v676-talk-portrait.expression-stage .symbol-reaction-v0500[data-person-id="makoto"]');
           const img=el?.querySelector('img');
           return {face:el?.dataset.expression,src:img?.getAttribute('src'),
-            anim:img?getComputedStyle(img).animationName:'NO_IMAGE'}
+            anim:img?getComputedStyle(img).animationName:'NO_IMAGE',
+            body:!el?document.querySelector('.v676-talk-portrait')?.outerHTML.slice(0,1000):''}
         }""")
         ck("Makoto changes mood while retaining approved art",
            stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
