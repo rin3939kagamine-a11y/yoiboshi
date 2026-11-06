@@ -48,7 +48,7 @@
 | character_depth 79人 | **実装済み** | affinity 40/80 gates preserved |
 | UNIT_ART work/sky/star | **一部完了** | 57 image files in companion ZIP, not uploaded to git. Sky/star provisional same full-body art |
 | full_body/upper_body/face icon | **一部完了** | 19× each in ZIP; 3 authoritative PNGs preserved byte-identically |
-| expressions ×6 | **一部完了** | 6 file slots x19 prepared, neutral-face placeholder ONLY; distinct expressions NOT generated |
+| expressions ×6 | **正式に不採用** | 表情画像は全81人ぶんの記号・動作方式に統一。既存の表情画像は削除せず保存。 |
 | sr_gallery.html 79人 | **実装済み** | original 60 entries in order, appended 19 |
 | QA workflow and browser test | **実行済み：PASS** | GitHub Actions: 19人×95話×57ユニット、character-depth 79人・25 assertions・親密度5段階 |
 | Save compatibility | **実行済み：PASS（既存回帰）** | Concept/エナ移行CI、旧セーブ原本不変・冪等変換・既存ユニット保持PASS。利用者の実セーブでの端末検証は未実施 |
@@ -58,7 +58,7 @@
 ### マージ停止条件
 
 1. 同梱ZIPの `assets/` 238ファイルをGitHubブランチに取り込む（ツール制約でこのチャットからバイナリ直接投入できていない）。
-2. `*_smile/blush/sad/pout/surprise` の本当の表情差分とSSR/UR専用構図を作画し、仮画像から差し替える。
+2. 6表情差分は新仕様で不要。別途、SSR/UR専用構図は前回保留のまま（今回の会話アート仕様と無関係）。
 3. PR #24の確定後、そのmain状態との競合・セーブ移行を再検証する。
 4. Playwrightの全項目、ブラウザコンソール、HTTP画像読み込み、iPhone縦横・Windows表示、既存セーブ再読込の確認を実行し、このログに結果を追記する。
 
@@ -68,8 +68,46 @@
 - [PASS] [Concept ID / Ena save migration](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42176742008): 29 ID変換、移行冪等性、旧セーブ原本不変、既存メンバー保持、SR gallery79件を確認。
 - [PASS] [Mobile landscape](https://github.com/rin3939kagamine-a11y/yoiboshi/actions/runs/42176742113): 9ビューポートで107チェック合格。スクリーンショットはAction artifactに保存。
 
-**合格対象はコードとブラウザ内データのみ**。現時点では新規画像バイナリがGitHubに存在せず、素材のHTTP200・ユーザー端末の実機見た目・真の表情描き分けは未検証／未完成。Draft PRをmainへマージしない。
+**合格対象はコードとブラウザ内データのみ**。現時点では新規画像バイナリがGitHubに存在せず、素材のHTTP200・ユーザー端末の実機見た目は未検証。全員の6表情画像は正式仕様として不要。Draft PRをmainへマージしない。
 
 ### 素材ZIP修正版（2026-11-06）
 
 新ヒロイン画像素材は計238ファイル。 るい・歌織・すずねの実ゲーム用フルボディはオリジナルRGBA PNGをSHA-256一致で保持し、他16人とWork/Sky/Starの派生画像はWebP。 現時点では成果物のZIPのみ作成済みで、リポジトリ内のバイナリは未登録。
+
+## Ver.0.50.0.1 追加指示：全81会話ベース絵・記号リアクション（2026-11-06）
+
+### 新規19人への変更
+- 指定の19枚のupper_body WebPを正式採用。パス `assets/ART_V2/upper_body/<id>.webp`。
+- Ver.0.50以前の6表情プレースホルダのコード登録を削除（画像そのものの削除は行わない）。単一の正本切り取り画像を全感情の会話で使う。
+
+### 既存60人＋透子2枚への変更
+- 同梱 `yoiboshi-crops-existing62.zip` の `upper_body/<id>.webp` 全62枚を**バイト変更なし**で別ディレクトリ `assets/ART_V2/upper_body_crops_v0500/<id>.webp` に登録する方式。旧 `ART_V2.upper_body`、既存6表情画像、セーブはそのまま残す。切り替えは画像参照・表示層のみ。
+- `ichika` はユーザー承認のdynamic全身由来。`juri` は現行ジュリ由来の暫定絵で、アリエス化時に差し替え前提。
+- `touko` と `touko_true` はユーザー提供ファイルを採用。ただし**RGB・不透明背景**であり、他60人のRGBA透過とは異なる。原本を勝手に加工しない。
+- `haruka` IDに旧ストーリーNPC「霧島ハルカ」と追加ヒロイン「芹沢はるか」の共存問題がある。旧章場面は専用 `story_cast/haruka_talk.webp` を優先する分岐を設け、台詞は変更しない。
+- `sakuya`、`enju` 等、配布ZIPに含まれないストーリー専用NPCは旧描画のまま。
+
+### 記号変換層
+| キュー | 記号 | アニメーション |
+|---|---|---|
+| smile | ♪ | 小さな跳躍 |
+| blush | ♡ | 左右の揺れ |
+| surprise | ！ | 一度跳躍 |
+| question | ？ | 傾く |
+| confused | 💦 | 後ろに引く |
+| angry/pout | 💢 | 震える |
+| sad | … | 沈む |
+| kiss | 💋＋小さな♡ | ゆっくり1.075倍に接近 |
+
+- ポップアップは約1.2秒で消滅。シリアス場面は `opts.sceneTag='serious'`、`opts.suppressSymbols=true` で記号だけ抑制（動作は残る）。ただし明示 `kiss` キューは表示可能。
+- 表示範囲を `SYMBOL_REACTION_ACTORS_V0500` に限定し、既存の `EXPRESSION_CUES` とストーリー本文は無変更。追加切り替えは `expressionPortraitMarkup` 冒頭の判定で行い、後続の従来表情描画は保存。
+- 旧5名に指定されていた `!important` の個別キャラクター演出より新記号アニメを優先。prefers-reduced-motion を尊重。
+- 現時点で外部取込ZIP **81枚** を生成済み：新19＋既存62。**画像バイナリはまだPR #25ブランチにアップロードできておらず、描画のHTTP200/実機での完成画像検証は保留。**
+
+### 検証
+- ブラウザ上の81名の参照パス、9キュー（kiss含む）、3世代の章ルート、シリアス抑制とキス例外をPlaywrightで試験。
+- 既存のセーブ移行・79人depth・9画面サイズのモバイルテストも回帰検証対象。
+- QAは画像実体なしでロジックを検証できる構造。画像がGitHubへ入った後にHTTP画像読み込み成功、透過表示・実機UI確認が必要。
+- キュー `pout` の「怒り」解釈は仮置き。無言の拗ね・不機嫌も同じ「💢」になるため、必要なら別の感情カテゴリとして再調整する。
+
+**PR #25はDraftのまま。main未マージ。**
