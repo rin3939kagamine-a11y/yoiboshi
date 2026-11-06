@@ -1,0 +1,43 @@
+/* Quest-specific battle scenery. The original blue-gray stage remains the fallback. */
+.tb-root .yc-turn-stage.yb-location-bg:not(.q6-classic-stage){
+ background-image:
+  linear-gradient(180deg,rgba(7,16,31,.27) 0%,rgba(10,18,32,.23) 43%,rgba(7,14,28,.76) 100%),
+  var(--yb-battle-image)!important;
+ background-size:cover!important;
+ background-position:center 52%!important;
+ background-repeat:no-repeat!important;
+ background-color:#17263b!important;
+}
+.tb-root .yc-turn-stage.yb-location-bg:not(.q6-classic-stage)::after{
+ background:#0c1b30cc;border:1px solid #a3b4c077;
+ border-radius:5px;padding:2px 6px;text-shadow:0 1px 3px #050d19;
+ z-index:7;
+}
+.tb-root .yc-turn-stage.yb-location-bg .yc-slot .yc-actor img{
+ filter:drop-shadow(0 3px 4px #050c19cc);
+}
+.tb-root .yc-turn-stage.yb-location-bg .yc-enemy-shell{
+ filter:drop-shadow(0 4px 5px #030916aa);
+}
+/* Legacy top-down battle uses the same resolved scenery beneath its tokens. */
+.v024-battle-stage .arena.overhead.yb-location-bg{
+ background-image:
+  linear-gradient(180deg,rgba(8,18,34,.30),rgba(11,23,41,.47) 66%,rgba(8,16,30,.65)),
+  var(--yb-battle-image)!important;
+ background-size:cover!important;
+ background-position:center 52%!important;
+ background-repeat:no-repeat!important;
+ background-color:#182940!important;
+}
+.v024-battle-stage .arena.overhead.yb-location-bg::before{
+ content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:linear-gradient(0deg,rgba(7,15,28,.30),transparent 60%);
+}
+.v024-battle-stage .arena.overhead.yb-location-bg .token{
+ filter:drop-shadow(0 2px 3px #061022b3);
+}
+@media (max-width:600px){
+ .tb-root .yc-turn-stage.yb-location-bg:not(.q6-classic-stage){
+  background-position:center center!important;
+ }
+}
