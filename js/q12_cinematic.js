@@ -3,7 +3,7 @@
  * Controls and visual state never enter the persisted save object. */
 const Q12C={
  victoryTimer:0,
- cleaned:new Set(["akane", "aoi", "chinatsu", "concept08", "concept09", "concept10", "concept11", "concept12", "concept13", "concept14", "concept15", "concept16", "concept17", "concept18", "concept19", "concept20", "concept21", "concept22", "concept23", "concept24", "concept25", "concept26", "concept27", "milku", "momoka", "nagi", "reina"]),
+ cleaned:new Set(["akane", "aoi", "chinatsu", "yui", "shizuku", "suiran", "kyoko", "cocoa", "mai", "luna", "makoto", "fumika", "ena", "riko", "noel", "mio", "jun", "yume", "shino", "hiyori", "ageha", "kirari", "maron", "milku", "momoka", "nagi", "reina"]),
  scene(b){return !!(b&&b.qid==='q12'&&b.wave===b.totalWaves-1&&b.q12hd?.cage&&['fight','cinematicVictory'].includes(b.phase))},
  init(b){if(!b||b.qid!=='q12')return;b.q12visual={paused:false,speed:1,flash:null,attack:null,introAt:0};if(this.victoryTimer){clearTimeout(this.victoryTimer);this.victoryTimer=0}},
  state(b){if(!b.q12visual)this.init(b);return b.q12visual},

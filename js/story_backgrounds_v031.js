@@ -426,11 +426,11 @@ const STORY_BACKGROUNDS = Object.freeze({
   bond_momoka_1: Object.freeze({bg:'shotengai',time:'dusk'}),
   bond_momoka_4: Object.freeze({bg:'shotengai',time:'day'}),
   bond_milku_2: Object.freeze({bg:'soudan',time:'night'}),
-  bond_concept26_0: Object.freeze({bg:'shotengai',time:'day'}),
-  bond_concept27_0: Object.freeze({bg:'shotengai',time:'day'}),
+  bond_kirari_0: Object.freeze({bg:'shotengai',time:'day'}),
+  bond_maron_0: Object.freeze({bg:'shotengai',time:'day'}),
   bond_chihiro_0: Object.freeze({bg:'shotengai',time:'day'}),
-  bond_concept08_1: Object.freeze({bg:'ekimae',time:'day'}),
-  bond_concept21_1: Object.freeze({bg:'ekimae',time:'day'})
+  bond_yui_1: Object.freeze({bg:'ekimae',time:'day'}),
+  bond_jun_1: Object.freeze({bg:'ekimae',time:'day'})
 });
 
 function storyBackgroundFile(bg, time){
