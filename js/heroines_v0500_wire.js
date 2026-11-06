@@ -7,9 +7,7 @@
    if(ART_V2.upper_body)ART_V2.upper_body[id]=`assets/ART_V2/upper_body/${id}.webp${V}`;
    if(ART_V2.face_icons)ART_V2.face_icons[id]=`assets/ART_V2/face_icons/${id}.webp${V}`;
   }
-  if(typeof ART_EXPRESSIONS!=='undefined'){
-   const e={};for(const face of ['normal','smile','blush','sad','pout','surprise'])e[face]=`assets/ART_V2/expressions/${id}_${face}.webp${V}`;
-   ART_EXPRESSIONS[id]=Object.assign({},ART_EXPRESSIONS[id]||{},e);
-  }
+  // No six-expression files for the 19 additions. Symbol reactions are the permanent specification.
+  // Old 60 expression registrations remain intact for reversible rollback.
  }
 })();
