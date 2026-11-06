@@ -100,7 +100,7 @@ try:
         page.locator(target+' img').wait_for(timeout=15000)
         stage_before=page.locator(target).evaluate("""el=>({
           face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
-          anim:getComputedStyle(el.querySelector('img')).animationName
+          anim:el.querySelector('img')?getComputedStyle(el.querySelector('img')).animationName:'NO_IMAGE'
         })""")
         ck("Makoto heroine talk uses approved new crop",
            "upper_body_crops_v0500/makoto.webp" in stage_before["src"],stage_before)
@@ -111,7 +111,7 @@ try:
         page.evaluate("""()=>{S.love.mood.makoto='good';render()}""")
         stage_after=page.locator(target).evaluate("""el=>({
           face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
-          anim:getComputedStyle(el.querySelector('img')).animationName
+          anim:el.querySelector('img')?getComputedStyle(el.querySelector('img')).animationName:'NO_IMAGE'
         })""")
         ck("Makoto changes mood while retaining approved art",
            stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
