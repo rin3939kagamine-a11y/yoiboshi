@@ -1,0 +1,337 @@
+# 宵星の契約者 RE:START｜concept ID 正式名化・天音エナ改名
+Ver.0.49.2.0 / 2026-11-06
+
+## 対象・根拠
+- ベース: main `ba2106e80d3ad846886943f1317d6bbb3317af20`（2026-11-06 時点）
+- 対象: 旧ID 29件（タイプA 23、タイプB 6）、天音リコ → 天音エナ。
+- 不変更: 戦闘計算、スキル、確率、パラメータ、ガチャの抽選方式、ゲームの物語本文（人物名を除く）。
+- バージョン: `index.html` の JavaScript クエリを `0.49.2.0` に更新（キャッシュを避ける目的のみ）。
+
+## 変更ファイル（画像以外）
+- `.github/workflows/concept-id-migration-qa.yml`
+- `ALL_UNITS_PERFORMANCE_v02100.md`
+- `CATCHPHRASE_COUNTS_v01900.md`
+- `CHANGELOG_CHIBI_BATTLE.md`
+- `CHANGELOG_V034680.md`
+- `CHANGELOG_V03470.md`
+- `CHANGELOG_V034710.md`
+- `CHANGELOG_V03480.md`
+- `CHANGELOG_v01700.md`
+- `CHANGELOG_v01800.md`
+- `CHANGELOG_v01900.md`
+- `CHANGELOG_v02000.md`
+- `CHANGELOG_v02100.md`
+- `CHANGELOG_v02200.md`
+- `CHANGELOG_v02200_step0.md`
+- `CHANGELOG_v02210.md`
+- `CHANGELOG_v02540.md`
+- `CHANGELOG_v02600.md`
+- `CHANGELOG_v02900.md`
+- `CHARACTER_DEPTH_BIBLE_V1.md`
+- `DELIVERY_NOTES_v02300.md`
+- `EXPRESSION_CUES_LIST_v02900.md`
+- `FLAMES_54_V03400.md`
+- `IMPLEMENTED_UNITS_91_FROM_GAME.md`
+- `NEW_AND_REVISED_DIALOGUES_FULL_v01800.md`
+- `NEW_AND_REVISED_DIALOGUES_FULL_v01900.md`
+- `NEW_DIALOGUES_FULL_v01700.md`
+- `NEW_DIALOGUES_FULL_v02000.md`
+- `NEW_DIALOGUES_STORIES_FULL_v02200.md`
+- `QA_PREVIOUS_v02300.json`
+- `QA_PREVIOUS_v02310.json`
+- `QA_V03400.json`
+- `UNITS_2_PERFORMANCE_v02000.md`
+- `UNITS_4_PERFORMANCE_v01900.md`
+- `UNITS_6_PERFORMANCE_v01700.md`
+- `css/character_acting_v1.css`
+- `docs/CHARACTER_POSE_DESIGN_54_V1.md`
+- `docs/CHARACTER_POSE_PLAN_54_V1.csv`
+- `docs/CHARACTER_POSE_PLAN_54_V1.json`
+- `docs/MAKOTO_PORTRAIT_STAGE_V1.md`
+- `index.html`
+- `js/art.js`
+- `js/art_v2.js`
+- `js/battle_flames_v034.js`
+- `js/boss_director_v03462.js`
+- `js/chapter10_v0410.js`
+- `js/chapter11_v0430.js`
+- `js/chapter12_v0440.js`
+- `js/chapter13_v0450.js`
+- `js/chapter14_v0460.js`
+- `js/chapter15_v0470.js`
+- `js/chapter17_v0490.js`
+- `js/chapter5_rewrite_v0360.js`
+- `js/chapter6_v0370.js`
+- `js/chapter7_v0380.js`
+- `js/chapter8_v0390.js`
+- `js/chapter9_v0400.js`
+- `js/character_depth_v1.js`
+- `js/chibi_battle.js`
+- `js/expression_art_v029.js`
+- `js/expression_cues_v029.js`
+- `js/game.js`
+- `js/heroines_v027.js`
+- `js/new_units_v026.js`
+- `js/portrait_faces_v03560.js`
+- `js/portrait_fit_v031.js`
+- `js/q12_cinematic.js`
+- `js/romance_chapter2.js`
+- `js/romance_chapter2_late.js`
+- `js/romance_chapter3.js`
+- `js/romance_chapter3_late.js`
+- `js/romance_chapter4.js`
+- `js/romance_chapter5.js`
+- `js/romance_lighthouse.js`
+- `js/romance_oldcafe.js`
+- `js/romance_school.js`
+- `js/romance_seaside.js`
+- `js/romance_shinonome.js`
+- `js/romance_stage_lines.js`
+- `js/romance_station.js`
+- `js/story_backgrounds_v031.js`
+- `js/story_rewrite_v03416.js`
+- `old_new_units_8.json`
+- `portrait_audit.html`
+- `preview_character_acting_v1.html`
+- `sr_gallery.html`
+- `tools/qa/concept_id_migration_smoke.py`
+- `tools/qa/mobile_landscape_real_smoke.py`
+- `CHANGELOG_CONCEPT_ID_ENA_V04920.md`（本書を追加）
+
+## セーブデータ移行
+- `js/game.js`: `LEGACY_CONCEPT_IDS` を移行用の唯一の29件対応表として保持。旧名を含めてよいのはこの移行用テーブルと本書の対応表のみ。
+- 読込時 `migrateSave` の先頭で `migrateLegacyConceptSave` を呼び、その後で既存の `convertRetiredRSave` を従来通り呼ぶ。
+- `owned`、`party`、`selected`、`homeFavorite`、`homeUnitId`、`love` の各種キーと文字列、`bondRead`、`bondLastTopic`、`storyFlags`、`chapter4Met`、その他拡張フィールドを再帰的に正式IDへ変換する。人物IDの接尾辞（work、sky、star、trial 等）も保持する。
+- 正式IDと旧IDが同時に保存されていた場合、既存の正式IDを基準にしつつ、真偽値は OR、数値は max、配列はインデックス単位、オブジェクトは再帰マージする。新名への変換後は再適用しても変化しない（冪等）。
+- セーブキー `yoiboshi-reboot-v1` は変更しない。旧キー `yoiboshi-contract-v01` は引き続き参照専用。
+- `sr_gallery.html` 独立キー `yoiboshi-sr-gallery-favs` に記録された旧SRユニットID（タイプBの6件）も、読み込み時に変換してお気に入りを維持する。
+
+## QA
+- 既存 `character_depth_real_smoke.py`：60人のキー数・ゲーム上のID一致・UIの動作をGitHub Actionsで検証。
+- 既存 `mobile_landscape_real_smoke.py`：旧IDを参照していたテスト自身を正式名に変更。画像・各種画面をGitHub Actionsで再検証。
+- 新規 `concept_id_migration_smoke.py`：旧形式の所持ユニット／選択／ホーム／絆／恋愛進行／追加フィールドの移行、二重実行、60人ギャラリー、改名と莉子の区別、旧お気に入りの移行、JS例外を実ブラウザで検証。
+- 新規 CI workflow: 全JS `node --check`、全レポジトリを対象に旧IDの残存文字列・パスを検査（明示した移行テーブルのみ許可）。
+- 実機 iPhone / Safari 操作テストはCIでは対象外。
+
+## 対応表・画像ファイル名の移行テーブル
+下の旧ID・旧パスは**監査とセーブ互換の記録専用**です。ゲーム本体の有効なID・参照には使用しません。
+<!-- BEGIN LEGACY_ID_MIGRATION_TABLE -->
+### タイプA（23件・既存正式IDへ統一）
+- `concept08` → `yui`
+- `concept09` → `shizuku`
+- `concept10` → `suiran`
+- `concept11` → `kyoko`
+- `concept12` → `cocoa`
+- `concept14` → `luna`
+- `concept15` → `makoto`
+- `concept16` → `fumika`
+- `concept18` → `riko`
+- `concept20` → `mio`
+- `concept21` → `jun`
+- `concept23` → `shino`
+- `concept24` → `hiyori`
+- `concept25` → `ageha`
+- `concept26` → `kirari`
+- `concept27` → `maron`
+- `concept28` → `koharu`
+- `concept29` → `lilith`
+- `concept31` → `kaname`
+- `concept32` → `koyori`
+- `concept34` → `erika`
+- `concept35` → `tsubaki`
+- `concept36` → `kaede`
+### タイプB（6件・新ID）
+- `concept13` → `mai`
+- `concept17` → `ena`
+- `concept19` → `noel`
+- `concept22` → `yume`
+- `concept30` → `shio`
+- `concept33` → `marin`
+### ファイル名変更一覧（365件・画像データは同一 SHA）
+- `assets/ART_V2/chibi/concept08_chibi.png` → `assets/ART_V2/chibi/yui_chibi.png`
+- `assets/ART_V2/chibi/concept10_chibi.png` → `assets/ART_V2/chibi/suiran_chibi.png`
+- `assets/ART_V2/chibi/concept12_chibi.png` → `assets/ART_V2/chibi/cocoa_chibi.png`
+- `assets/ART_V2/chibi/concept14_chibi.png` → `assets/ART_V2/chibi/luna_chibi.png`
+- `assets/ART_V2/chibi/concept16_chibi.png` → `assets/ART_V2/chibi/fumika_chibi.png`
+- `assets/ART_V2/chibi/concept18_chibi.png` → `assets/ART_V2/chibi/riko_chibi.png`
+- `assets/ART_V2/chibi/concept20_chibi.png` → `assets/ART_V2/chibi/mio_chibi.png`
+- `assets/ART_V2/chibi/concept22_chibi.png` → `assets/ART_V2/chibi/yume_chibi.png`
+- `assets/ART_V2/chibi/concept24_chibi.png` → `assets/ART_V2/chibi/hiyori_chibi.png`
+- `assets/ART_V2/chibi/concept26_chibi.png` → `assets/ART_V2/chibi/kirari_chibi.png`
+- `assets/ART_V2/chibi/concept28_chibi.png` → `assets/ART_V2/chibi/koharu_chibi.png`
+- `assets/ART_V2/chibi/concept30_chibi.png` → `assets/ART_V2/chibi/shio_chibi.png`
+- `assets/ART_V2/chibi/concept32_chibi.png` → `assets/ART_V2/chibi/koyori_chibi.png`
+- `assets/ART_V2/chibi/concept34_chibi.png` → `assets/ART_V2/chibi/erika_chibi.png`
+- `assets/ART_V2/chibi/concept36_chibi.png` → `assets/ART_V2/chibi/kaede_chibi.png`
+- `assets/ART_V2/expressions/concept08_blush.webp` → `assets/ART_V2/expressions/yui_blush.webp`
+- `assets/ART_V2/expressions/concept08_pout.webp` → `assets/ART_V2/expressions/yui_pout.webp`
+- `assets/ART_V2/expressions/concept08_smile.webp` → `assets/ART_V2/expressions/yui_smile.webp`
+- `assets/ART_V2/expressions/concept09_blush.webp` → `assets/ART_V2/expressions/shizuku_blush.webp`
+- `assets/ART_V2/expressions/concept09_pout.webp` → `assets/ART_V2/expressions/shizuku_pout.webp`
+- `assets/ART_V2/expressions/concept09_smile.webp` → `assets/ART_V2/expressions/shizuku_smile.webp`
+- `assets/ART_V2/expressions/concept10_blush.webp` → `assets/ART_V2/expressions/suiran_blush.webp`
+- `assets/ART_V2/expressions/concept10_pout.webp` → `assets/ART_V2/expressions/suiran_pout.webp`
+- `assets/ART_V2/expressions/concept10_smile.webp` → `assets/ART_V2/expressions/suiran_smile.webp`
+- `assets/ART_V2/expressions/concept11_blush.webp` → `assets/ART_V2/expressions/kyoko_blush.webp`
+- `assets/ART_V2/expressions/concept11_pout.webp` → `assets/ART_V2/expressions/kyoko_pout.webp`
+- `assets/ART_V2/expressions/concept11_smile.webp` → `assets/ART_V2/expressions/kyoko_smile.webp`
+- `assets/ART_V2/expressions/concept12_blush.webp` → `assets/ART_V2/expressions/cocoa_blush.webp`
+- `assets/ART_V2/expressions/concept12_pout.webp` → `assets/ART_V2/expressions/cocoa_pout.webp`
+- `assets/ART_V2/expressions/concept12_smile.webp` → `assets/ART_V2/expressions/cocoa_smile.webp`
+- `assets/ART_V2/expressions/concept13_blush.webp` → `assets/ART_V2/expressions/mai_blush.webp`
+- `assets/ART_V2/expressions/concept13_pout.webp` → `assets/ART_V2/expressions/mai_pout.webp`
+- `assets/ART_V2/expressions/concept13_smile.webp` → `assets/ART_V2/expressions/mai_smile.webp`
+- `assets/ART_V2/expressions/concept14_blush.webp` → `assets/ART_V2/expressions/luna_blush.webp`
+- `assets/ART_V2/expressions/concept14_pout.webp` → `assets/ART_V2/expressions/luna_pout.webp`
+- `assets/ART_V2/expressions/concept14_smile.webp` → `assets/ART_V2/expressions/luna_smile.webp`
+- `assets/ART_V2/expressions/concept15_blush.webp` → `assets/ART_V2/expressions/makoto_blush.webp`
+- `assets/ART_V2/expressions/concept15_pout.webp` → `assets/ART_V2/expressions/makoto_pout.webp`
+- `assets/ART_V2/expressions/concept15_smile.webp` → `assets/ART_V2/expressions/makoto_smile.webp`
+- `assets/ART_V2/expressions/concept16_blush.webp` → `assets/ART_V2/expressions/fumika_blush.webp`
+- `assets/ART_V2/expressions/concept16_pout.webp` → `assets/ART_V2/expressions/fumika_pout.webp`
+- `assets/ART_V2/expressions/concept16_smile.webp` → `assets/ART_V2/expressions/fumika_smile.webp`
+- `assets/ART_V2/expressions/concept17_blush.webp` → `assets/ART_V2/expressions/ena_blush.webp`
+- `assets/ART_V2/expressions/concept17_pout.webp` → `assets/ART_V2/expressions/ena_pout.webp`
+- `assets/ART_V2/expressions/concept17_smile.webp` → `assets/ART_V2/expressions/ena_smile.webp`
+- `assets/ART_V2/expressions/concept18_blush.webp` → `assets/ART_V2/expressions/riko_blush.webp`
+- `assets/ART_V2/expressions/concept18_pout.webp` → `assets/ART_V2/expressions/riko_pout.webp`
+- `assets/ART_V2/expressions/concept18_smile.webp` → `assets/ART_V2/expressions/riko_smile.webp`
+- `assets/ART_V2/expressions/concept19_blush.webp` → `assets/ART_V2/expressions/noel_blush.webp`
+- `assets/ART_V2/expressions/concept19_pout.webp` → `assets/ART_V2/expressions/noel_pout.webp`
+- `assets/ART_V2/expressions/concept19_smile.webp` → `assets/ART_V2/expressions/noel_smile.webp`
+- `assets/ART_V2/expressions/concept20_blush.webp` → `assets/ART_V2/expressions/mio_blush.webp`
+- `assets/ART_V2/expressions/concept20_pout.webp` → `assets/ART_V2/expressions/mio_pout.webp`
+- `assets/ART_V2/expressions/concept20_smile.webp` → `assets/ART_V2/expressions/mio_smile.webp`
+- `assets/ART_V2/expressions/concept21_blush.webp` → `assets/ART_V2/expressions/jun_blush.webp`
+- `assets/ART_V2/expressions/concept21_pout.webp` → `assets/ART_V2/expressions/jun_pout.webp`
+- `assets/ART_V2/expressions/concept21_smile.webp` → `assets/ART_V2/expressions/jun_smile.webp`
+- `assets/ART_V2/expressions/concept22_blush.webp` → `assets/ART_V2/expressions/yume_blush.webp`
+- `assets/ART_V2/expressions/concept22_pout.webp` → `assets/ART_V2/expressions/yume_pout.webp`
+- `assets/ART_V2/expressions/concept22_smile.webp` → `assets/ART_V2/expressions/yume_smile.webp`
+- `assets/ART_V2/expressions/concept23_blush.webp` → `assets/ART_V2/expressions/shino_blush.webp`
+- `assets/ART_V2/expressions/concept23_pout.webp` → `assets/ART_V2/expressions/shino_pout.webp`
+- `assets/ART_V2/expressions/concept23_smile.webp` → `assets/ART_V2/expressions/shino_smile.webp`
+- `assets/ART_V2/expressions/concept24_blush.webp` → `assets/ART_V2/expressions/hiyori_blush.webp`
+- `assets/ART_V2/expressions/concept24_pout.webp` → `assets/ART_V2/expressions/hiyori_pout.webp`
+- `assets/ART_V2/expressions/concept24_smile.webp` → `assets/ART_V2/expressions/hiyori_smile.webp`
+- `assets/ART_V2/expressions/concept25_blush.webp` → `assets/ART_V2/expressions/ageha_blush.webp`
+- `assets/ART_V2/expressions/concept25_pout.webp` → `assets/ART_V2/expressions/ageha_pout.webp`
+- `assets/ART_V2/expressions/concept25_smile.webp` → `assets/ART_V2/expressions/ageha_smile.webp`
+- `assets/ART_V2/expressions/concept26_blush.webp` → `assets/ART_V2/expressions/kirari_blush.webp`
+- `assets/ART_V2/expressions/concept26_pout.webp` → `assets/ART_V2/expressions/kirari_pout.webp`
+- `assets/ART_V2/expressions/concept26_smile.webp` → `assets/ART_V2/expressions/kirari_smile.webp`
+- `assets/ART_V2/expressions/concept27_blush.webp` → `assets/ART_V2/expressions/maron_blush.webp`
+- `assets/ART_V2/expressions/concept27_pout.webp` → `assets/ART_V2/expressions/maron_pout.webp`
+- `assets/ART_V2/expressions/concept27_smile.webp` → `assets/ART_V2/expressions/maron_smile.webp`
+- `assets/ART_V2/expressions/concept28_blush.webp` → `assets/ART_V2/expressions/koharu_blush.webp`
+- `assets/ART_V2/expressions/concept28_pout.webp` → `assets/ART_V2/expressions/koharu_pout.webp`
+- `assets/ART_V2/expressions/concept28_smile.webp` → `assets/ART_V2/expressions/koharu_smile.webp`
+- `assets/ART_V2/expressions/concept29_blush.webp` → `assets/ART_V2/expressions/lilith_blush.webp`
+- `assets/ART_V2/expressions/concept29_pout.webp` → `assets/ART_V2/expressions/lilith_pout.webp`
+- `assets/ART_V2/expressions/concept29_smile.webp` → `assets/ART_V2/expressions/lilith_smile.webp`
+- `assets/ART_V2/expressions/concept30_blush.webp` → `assets/ART_V2/expressions/shio_blush.webp`
+- `assets/ART_V2/expressions/concept30_pout.webp` → `assets/ART_V2/expressions/shio_pout.webp`
+- `assets/ART_V2/expressions/concept30_smile.webp` → `assets/ART_V2/expressions/shio_smile.webp`
+- `assets/ART_V2/expressions/concept31_blush.webp` → `assets/ART_V2/expressions/kaname_blush.webp`
+- `assets/ART_V2/expressions/concept31_pout.webp` → `assets/ART_V2/expressions/kaname_pout.webp`
+- `assets/ART_V2/expressions/concept31_smile.webp` → `assets/ART_V2/expressions/kaname_smile.webp`
+- `assets/ART_V2/expressions/concept32_blush.webp` → `assets/ART_V2/expressions/koyori_blush.webp`
+- `assets/ART_V2/expressions/concept32_pout.webp` → `assets/ART_V2/expressions/koyori_pout.webp`
+- `assets/ART_V2/expressions/concept32_smile.webp` → `assets/ART_V2/expressions/koyori_smile.webp`
+- `assets/ART_V2/expressions/concept33_blush.webp` → `assets/ART_V2/expressions/marin_blush.webp`
+- `assets/ART_V2/expressions/concept33_pout.webp` → `assets/ART_V2/expressions/marin_pout.webp`
+- `assets/ART_V2/expressions/concept33_smile.webp` → `assets/ART_V2/expressions/marin_smile.webp`
+- `assets/ART_V2/expressions/concept34_blush.webp` → `assets/ART_V2/expressions/erika_blush.webp`
+- `assets/ART_V2/expressions/concept34_pout.webp` → `assets/ART_V2/expressions/erika_pout.webp`
+- `assets/ART_V2/expressions/concept34_smile.webp` → `assets/ART_V2/expressions/erika_smile.webp`
+- `assets/ART_V2/expressions/concept35_blush.webp` → `assets/ART_V2/expressions/tsubaki_blush.webp`
+- `assets/ART_V2/expressions/concept35_pout.webp` → `assets/ART_V2/expressions/tsubaki_pout.webp`
+- `assets/ART_V2/expressions/concept35_smile.webp` → `assets/ART_V2/expressions/tsubaki_smile.webp`
+- `assets/ART_V2/expressions/concept36_blush.webp` → `assets/ART_V2/expressions/kaede_blush.webp`
+- `assets/ART_V2/expressions/concept36_pout.webp` → `assets/ART_V2/expressions/kaede_pout.webp`
+- `assets/ART_V2/expressions/concept36_smile.webp` → `assets/ART_V2/expressions/kaede_smile.webp`
+- `assets/ART_V2/face_icons/concept08.webp` → `assets/ART_V2/face_icons/yui.webp`
+- `assets/ART_V2/face_icons/concept10.webp` → `assets/ART_V2/face_icons/suiran.webp`
+- `assets/ART_V2/face_icons/concept12.webp` → `assets/ART_V2/face_icons/cocoa.webp`
+- `assets/ART_V2/face_icons/concept14.webp` → `assets/ART_V2/face_icons/luna.webp`
+- `assets/ART_V2/face_icons/concept16.webp` → `assets/ART_V2/face_icons/fumika.webp`
+- `assets/ART_V2/face_icons/concept18.webp` → `assets/ART_V2/face_icons/riko.webp`
+- `assets/ART_V2/face_icons/concept20.webp` → `assets/ART_V2/face_icons/mio.webp`
+- `assets/ART_V2/face_icons/concept22.webp` → `assets/ART_V2/face_icons/yume.webp`
+- `assets/ART_V2/face_icons/concept24.webp` → `assets/ART_V2/face_icons/hiyori.webp`
+- `assets/ART_V2/face_icons/concept26.webp` → `assets/ART_V2/face_icons/kirari.webp`
+- `assets/ART_V2/face_icons/concept28.webp` → `assets/ART_V2/face_icons/koharu.webp`
+- `assets/ART_V2/face_icons/concept30.webp` → `assets/ART_V2/face_icons/shio.webp`
+- `assets/ART_V2/face_icons/concept32.webp` → `assets/ART_V2/face_icons/koyori.webp`
+- `assets/ART_V2/face_icons/concept34.webp` → `assets/ART_V2/face_icons/erika.webp`
+- `assets/ART_V2/face_icons/concept36.webp` → `assets/ART_V2/face_icons/kaede.webp`
+- `assets/ART_V2/full_body/concept08.webp` → `assets/ART_V2/full_body/yui.webp`
+- `assets/ART_V2/full_body/concept10.webp` → `assets/ART_V2/full_body/suiran.webp`
+- `assets/ART_V2/full_body/concept12.webp` → `assets/ART_V2/full_body/cocoa.webp`
+- `assets/ART_V2/full_body/concept14.webp` → `assets/ART_V2/full_body/luna.webp`
+- `assets/ART_V2/full_body/concept16.webp` → `assets/ART_V2/full_body/fumika.webp`
+- `assets/ART_V2/full_body/concept18.webp` → `assets/ART_V2/full_body/riko.webp`
+- `assets/ART_V2/full_body/concept20.webp` → `assets/ART_V2/full_body/mio.webp`
+- `assets/ART_V2/full_body/concept22.webp` → `assets/ART_V2/full_body/yume.webp`
+- `assets/ART_V2/full_body/concept24.webp` → `assets/ART_V2/full_body/hiyori.webp`
+- `assets/ART_V2/full_body/concept26.webp` → `assets/ART_V2/full_body/kirari.webp`
+- `assets/ART_V2/full_body/concept28.webp` → `assets/ART_V2/full_body/koharu.webp`
+- `assets/ART_V2/full_body/concept30.webp` → `assets/ART_V2/full_body/shio.webp`
+- `assets/ART_V2/full_body/concept32.webp` → `assets/ART_V2/full_body/koyori.webp`
+- `assets/ART_V2/full_body/concept34.webp` → `assets/ART_V2/full_body/erika.webp`
+- `assets/ART_V2/full_body/concept36.webp` → `assets/ART_V2/full_body/kaede.webp`
+- `assets/ART_V2/full_body_dynamic/concept11.webp` → `assets/ART_V2/full_body_dynamic/kyoko.webp`
+- `assets/ART_V2/full_body_dynamic/concept13.webp` → `assets/ART_V2/full_body_dynamic/mai.webp`
+- `assets/ART_V2/full_body_dynamic/concept15.webp` → `assets/ART_V2/full_body_dynamic/makoto.webp`
+- `assets/ART_V2/full_body_dynamic/concept17.webp` → `assets/ART_V2/full_body_dynamic/ena.webp`
+- `assets/ART_V2/full_body_dynamic/concept19.webp` → `assets/ART_V2/full_body_dynamic/noel.webp`
+- `assets/ART_V2/full_body_dynamic/concept21.webp` → `assets/ART_V2/full_body_dynamic/jun.webp`
+- `assets/ART_V2/full_body_dynamic/concept23.webp` → `assets/ART_V2/full_body_dynamic/shino.webp`
+- `assets/ART_V2/full_body_dynamic/concept25.webp` → `assets/ART_V2/full_body_dynamic/ageha.webp`
+- `assets/ART_V2/full_body_dynamic/concept27.webp` → `assets/ART_V2/full_body_dynamic/maron.webp`
+- `assets/ART_V2/reference/concept18.webp` → `assets/ART_V2/reference/riko.webp`
+- `assets/ART_V2/reference/concept20.webp` → `assets/ART_V2/reference/mio.webp`
+- `assets/ART_V2/reference/concept22.webp` → `assets/ART_V2/reference/yume.webp`
+- `assets/ART_V2/reference/concept24.webp` → `assets/ART_V2/reference/hiyori.webp`
+- `assets/ART_V2/reference/concept26.webp` → `assets/ART_V2/reference/kirari.webp`
+- `assets/ART_V2/reference/concept28.webp` → `assets/ART_V2/reference/koharu.webp`
+- `assets/ART_V2/reference/concept30.webp` → `assets/ART_V2/reference/shio.webp`
+- `assets/ART_V2/reference/concept32.webp` → `assets/ART_V2/reference/koyori.webp`
+- `assets/ART_V2/reference/concept34.webp` → `assets/ART_V2/reference/erika.webp`
+- `assets/ART_V2/reference/concept36.webp` → `assets/ART_V2/reference/kaede.webp`
+- `assets/ART_V2/reference_mask/concept34.webp` → `assets/ART_V2/reference_mask/erika.webp`
+- `assets/ART_V2/upper_body/concept08.webp` → `assets/ART_V2/upper_body/yui.webp`
+- `assets/ART_V2/upper_body/concept10.webp` → `assets/ART_V2/upper_body/suiran.webp`
+- `assets/ART_V2/upper_body/concept12.webp` → `assets/ART_V2/upper_body/cocoa.webp`
+- `assets/ART_V2/upper_body/concept14.webp` → `assets/ART_V2/upper_body/luna.webp`
+- `assets/ART_V2/upper_body/concept16.webp` → `assets/ART_V2/upper_body/fumika.webp`
+- `assets/ART_V2/upper_body/concept18.webp` → `assets/ART_V2/upper_body/riko.webp`
+- `assets/ART_V2/upper_body/concept20.webp` → `assets/ART_V2/upper_body/mio.webp`
+- `assets/ART_V2/upper_body/concept22.webp` → `assets/ART_V2/upper_body/yume.webp`
+- `assets/ART_V2/upper_body/concept24.webp` → `assets/ART_V2/upper_body/hiyori.webp`
+- `assets/ART_V2/upper_body/concept26.webp` → `assets/ART_V2/upper_body/kirari.webp`
+- `assets/ART_V2/upper_body/concept28.webp` → `assets/ART_V2/upper_body/koharu.webp`
+- `assets/ART_V2/upper_body/concept30.webp` → `assets/ART_V2/upper_body/shio.webp`
+- `assets/ART_V2/upper_body/concept32.webp` → `assets/ART_V2/upper_body/koyori.webp`
+- `assets/ART_V2/upper_body/concept34.webp` → `assets/ART_V2/upper_body/erika.webp`
+- `assets/ART_V2/upper_body/concept36.webp` → `assets/ART_V2/upper_body/kaede.webp`
+- `assets/UNIT_ART/concept13_sky.webp` → `assets/UNIT_ART/mai_sky.webp`
+- `assets/UNIT_ART/concept13_work.webp` → `assets/UNIT_ART/mai_work.webp`
+- `assets/UNIT_ART/concept17_star.webp` → `assets/UNIT_ART/ena_star.webp`
+- `assets/UNIT_ART/concept19_sky.webp` → `assets/UNIT_ART/noel_sky.webp`
+- `assets/UNIT_ART/concept19_work.webp` → `assets/UNIT_ART/noel_work.webp`
+- `assets/UNIT_ART/concept22_star.webp` → `assets/UNIT_ART/yume_star.webp`
+- `assets/UNIT_ART/concept30_sky.webp` → `assets/UNIT_ART/shio_sky.webp`
+- `assets/UNIT_ART/concept30_work.webp` → `assets/UNIT_ART/shio_work.webp`
+- `assets/UNIT_ART/concept33_star.webp` → `assets/UNIT_ART/marin_star.webp`
+- `assets/battle_sprites/concept08.webp` → `assets/battle_sprites/yui.webp`
+- `assets/battle_sprites/concept10.webp` → `assets/battle_sprites/suiran.webp`
+- `assets/battle_sprites/concept12.webp` → `assets/battle_sprites/cocoa.webp`
+- `assets/battle_sprites/concept14.webp` → `assets/battle_sprites/luna.webp`
+- `assets/battle_sprites/concept16.webp` → `assets/battle_sprites/fumika.webp`
+- `assets/battle_sprites/concept18.webp` → `assets/battle_sprites/riko.webp`
+- `assets/battle_sprites/concept20.webp` → `assets/battle_sprites/mio.webp`
+- `assets/battle_sprites/concept22.webp` → `assets/battle_sprites/yume.webp`
+- `assets/battle_sprites/concept24.webp` → `assets/battle_sprites/hiyori.webp`
+- `assets/battle_sprites/concept26.webp` → `assets/battle_sprites/kirari.webp`
+<!-- END LEGACY_ID_MIGRATION_TABLE -->
