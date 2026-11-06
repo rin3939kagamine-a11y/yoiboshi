@@ -45,8 +45,14 @@ jobs:
                   bad.append('legacy filename: '+str(p))
               if p.suffix not in {'.js','.html','.md','.txt','.json','.yml','.yaml','.css','.csv','.py'}:
                   continue
+              inside_migration_table = False
               for i,line in enumerate(p.read_text(encoding='utf-8').splitlines(),1):
+                  if str(p)=='CHANGELOG_CONCEPT_ID_ENA_V04920.md' and '<!-- BEGIN LEGACY_ID_MIGRATION_TABLE -->' in line:
+                      inside_migration_table=True
+                  if str(p)=='CHANGELOG_CONCEPT_ID_ENA_V04920.md' and '<!-- END LEGACY_ID_MIGRATION_TABLE -->' in line:
+                      inside_migration_table=False
                   if not rx.search(line):continue
+                  if str(p)=='CHANGELOG_CONCEPT_ID_ENA_V04920.md' and inside_migration_table:continue
                   if str(p)=='js/game.js' and 'const LEGACY_CONCEPT_IDS=Object.freeze(' in line:continue
                   if str(p)=='sr_gallery.html' and 'const GALLERY_LEGACY_UNIT_IDS=Object.freeze(' in line:continue
                   bad.append(f'{p}:{i}')
