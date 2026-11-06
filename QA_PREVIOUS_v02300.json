@@ -474,12 +474,12 @@
       "details": ""
     },
     {
-      "id": "file_present_assets/ART_V2/face_icons/concept31.webp",
+      "id": "file_present_assets/ART_V2/face_icons/kaname.webp",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "file_present_assets/ART_V2/face_icons/concept36.webp",
+      "id": "file_present_assets/ART_V2/face_icons/kaede.webp",
       "result": "PASS",
       "details": ""
     },
@@ -526,15 +526,15 @@
     {
       "id": "image_only_crop",
       "result": "PASS",
-      "details": "既存concept31・concept36の顔アイコン画像をトリミング、再サンプリングした。新規描画や色補正なし"
+      "details": "既存kaname・kaedeの顔アイコン画像をトリミング、再サンプリングした。新規描画や色補正なし"
     },
     {
-      "id": "icon_concept31_300x300",
+      "id": "icon_kaname_300x300",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "icon_concept36_300x300",
+      "id": "icon_kaede_300x300",
       "result": "PASS",
       "details": ""
     },
@@ -634,62 +634,62 @@
       "details": ""
     },
     {
-      "id": "concept31_all_moods",
+      "id": "kaname_all_moods",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept31_all_6_date_places",
+      "id": "kaname_all_6_date_places",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept31_story_2_bonds",
+      "id": "kaname_story_2_bonds",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept31_8_topic_links",
+      "id": "kaname_8_topic_links",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept31_custom_reply_6",
+      "id": "kaname_custom_reply_6",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept36_all_moods",
+      "id": "kaede_all_moods",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept36_all_6_date_places",
+      "id": "kaede_all_6_date_places",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept36_story_2_bonds",
+      "id": "kaede_story_2_bonds",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept36_8_topic_links",
+      "id": "kaede_8_topic_links",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept36_custom_reply_6",
+      "id": "kaede_custom_reply_6",
       "result": "PASS",
       "details": ""
     },
     {
-      "id": "concept31_catchphrase_under_20_percent",
+      "id": "kaname_catchphrase_under_20_percent",
       "result": "PASS",
       "details": "2 / 77"
     },
     {
-      "id": "concept36_catchphrase_under_20_percent",
+      "id": "kaede_catchphrase_under_20_percent",
       "result": "PASS",
       "details": "2 / 75"
     },
