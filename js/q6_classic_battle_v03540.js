@@ -68,7 +68,7 @@
    node.classList.toggle('q6-minion',!giant);
    var aura=statuses(e,b.tb.round).map(function(st){return st[0];});
    ['red','blue','green'].forEach(function(c){node.classList.toggle('q6-aura-'+c,aura.indexOf(c)>=0);});
-   node.style.setProperty('left',(giant?51:(last?72+(i%2)*9:54+i*14))+'%','important');
+   node.style.setProperty('left',(giant?51:(last?70+(i%2)*8:52+i*13))+'%','important');
    node.style.setProperty('bottom',(giant?1:(last?6:(i%2===0?9:5)))+'%','important');
    if(giant){
     var shell=node.querySelector('.yc-enemy-shell');
