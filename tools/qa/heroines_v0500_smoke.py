@@ -39,7 +39,8 @@ try:
             if(all.some(u=>!UNIT_DESIGN[u.id]||!UNIT_ARTWORK[u.id]))errors.push(id+': unit metadata');
             if(!CHARACTER_DEPTH_V1[id])errors.push(id+': depth missing');
             if(!ART_V2.full_body[id]||!ART_V2.upper_body[id])errors.push(id+': art path missing');
-            if(Object.keys(ART_EXPRESSIONS[id]||{}).length<6)errors.push(id+': expression slots missing');
+            if(!symbolReactionEnabledV0500(id)||!artV2TalkCropV0500(id))errors.push(id+': symbol crop registration missing');
+            if(Object.keys(ART_EXPRESSIONS[id]||{}).length>0)errors.push(id+': should not have six expression files');
             const k=NEW_HERO_REVEAL_V0500[id][1],save=fresh();
             if(isV0500Revealed(id,save))errors.push(id+': unlocked before story');
             save.quests[k]={...(save.quests[k]||{}),complete:true};
