@@ -234,18 +234,21 @@ function setHomeUnit(id){const u=unit(id);if(!u||!visibleUnitV026(u)||!data(id)|
 
 const RATE={SR:80,SSR:15,UR:5}; // v0.35.0.0: R廃止。R分50%は暫定でSRへ。確率はユーザー決定待ち。
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
-const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!RETIRED_R_TO_SR[u.id]&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
+// Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
+// New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
+const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
+const NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)));
 const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['tsubaki'],erika:['erika'],kaname:['kaname'],kaede:['kaede'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}
 function kanameSRUnlocked(save=S){return !!save?.bondRead?.kaname?.[1]}
 function visibleUnitV026(u,save=S){return !!u&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)&&(!NEW_HERO_IDS_V0500.includes(u.person)||isV0500Revealed(u.person,save))}
 function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
-function availableNormalPool(save=S){return NORMAL_GACHA_POOL.filter(u=>recruitEligibleUnit(u,save))}
+function availableNormalPool(save=S){return (gachaMode==='new19'?NEW19_GACHA_POOL:NORMAL_GACHA_POOL).filter(u=>recruitEligibleUnit(u,save))}
 function pickupActive(group,save=S){const start=save.pickupStartDay?.[group];return !!(DISTRICT_GACHA_IDS[group]&&Number.isSafeInteger(start)&&start>=1&&save.love?.day>=start&&save.love.day<start+PICKUP_DAYS)}
 function activePickupId(save=S){return ['chapter4_city','chapter3_port','kaede','kaname','erika','tsubaki','lighthouse','seaside','school_new','station','oldcafe','shinonome'].find(group=>pickupActive(group,save))||'normal'}
 function pickupUnitWeight(u,group){return group!=='normal'&&pickupActive(group)&&DISTRICT_GACHA_IDS[group]?.includes(u.person)?PICKUP_WEIGHT:1}
-function setGachaMode(mode){if(mode!=='normal'&&!pickupActive(mode))return;gachaMode=mode;render()}
+function setGachaMode(mode){if(mode==='new19'&&!NEW_HERO_IDS_V0500.some(id=>isV0500Revealed(id)))return;if(mode!=='normal'&&mode!=='new19'&&!pickupActive(mode))return;gachaMode=mode;render()}
 function ticketEligibleUnits(save=S){return availableNormalPool(save).filter(u=>u.rarity==='SR'&&HERO_IDS.includes(u.person)&&!heroineOwned(u.person,save))}
 function grantTicketHero(id){if((S.heroSelectTickets||0)<1)return toast('選択チケットがありません');const choices=ticketEligibleUnits(),u=choices.find(x=>x.id===id);if(!u)return toast('現在の募集対象で未所持のヒロインだけを選べます');S.owned[u.id]={lv:1,aff:heroAff(u.person),lb:0,copies:0};S.heroSelectTickets--;S.selected=u.id;persist();render();toast(`${PEOPLE[u.person].name}が仲間になりました。交流が解放されました`)}
 function pickupStarted(group){if(!DISTRICT_GACHA_IDS[group])return;S.pickupStartDay[group]=S.love.day;gachaMode=group}
@@ -2498,9 +2501,9 @@ function ticketSelectMarkup(){
 }
 function pickupMarkup(){
  const active=['shinonome','oldcafe','station','school_new','seaside','lighthouse','tsubaki','erika','kaname','kaede','chapter3_port','chapter4_city'].filter(group=>pickupActive(group));
- const chosen=gachaMode!=='normal'&&pickupActive(gachaMode)?gachaMode:'normal';
- const labels={shinonome:'東雲商店街',oldcafe:'旧喫茶街',station:'東雲駅前',school_new:'旧校舎・相談室',seaside:'臨海公園',lighthouse:'旧灯台',tsubaki:'神楽坂 椿',erika:'城ヶ崎 エリカ',kaname:'紫藤 カナメ',kaede:'神楽坂 楓',chapter3_port:'第3章・港',chapter4_city:'第4章・点灯式'};
- return `<section class="gacha-v030-mode-picker" aria-label="募集バナーの選択"><div class="gacha-v030-picker-heading"><b>募集バナー</b><small>出会い済みの対象のみ表示</small></div><div class="gacha-v030-mode-scroll"><button class="gacha-v030-choice ${chosen==='normal'?'selected':''}" aria-pressed="${chosen==='normal'}" onclick="setGachaMode('normal')">通常募集</button>${active.map(group=>`<button class="gacha-v030-choice ${chosen===group?'selected':''}" aria-pressed="${chosen===group}" onclick="setGachaMode('${group}')">${labels[group]} <small>残り${PICKUP_DAYS-(S.love.day-S.pickupStartDay[group])}日</small></button>`).join('')}</div>${chosen==='normal'?'':`<p class="gacha-v030-pickup-info">${labels[chosen]}の対象キャラは同じレアリティ内で選択重み3倍。レアリティ別確率は変わりません。</p>`}</section>`;
+ const chosen=gachaMode==='new19'?'new19':gachaMode!=='normal'&&pickupActive(gachaMode)?gachaMode:'normal';
+ const labels={shinonome:'東雲商店街',oldcafe:'旧喫茶街',station:'東雲駅前',school_new:'旧校舎・相談室',seaside:'臨海公園',lighthouse:'旧灯台',tsubaki:'神楽坂 椿',erika:'城ヶ崎 エリカ',kaname:'紫藤 カナメ',kaede:'神楽坂 楓',chapter3_port:'第3章・港',chapter4_city:'第4章・点灯式',new19:'新ヒロイン19人（仮）'};
+ return `<section class="gacha-v030-mode-picker" aria-label="募集バナーの選択"><div class="gacha-v030-picker-heading"><b>募集バナー</b><small>出会い済みの対象のみ表示</small></div><div class="gacha-v030-mode-scroll"><button class="gacha-v030-choice ${chosen==='normal'?'selected':''}" aria-pressed="${chosen==='normal'}" onclick="setGachaMode('normal')">通常募集</button>${NEW_HERO_IDS_V0500.some(id=>isV0500Revealed(id))?`<button class="gacha-v030-choice ${chosen==='new19'?'selected':''}" aria-pressed="${chosen==='new19'}" onclick="setGachaMode('new19')">新ヒロイン19人 <small>仮配分</small></button>`:''}${active.map(group=>`<button class="gacha-v030-choice ${chosen===group?'selected':''}" aria-pressed="${chosen===group}" onclick="setGachaMode('${group}')">${labels[group]} <small>残り${PICKUP_DAYS-(S.love.day-S.pickupStartDay[group])}日</small></button>`).join('')}</div>${chosen==='normal'?'':`<p class="gacha-v030-pickup-info">${chosen==='new19'?'新ヒロイン専用の仮募集枠。従来の通常募集は変更せず、レアリティ別確率も据え置きです。':labels[chosen]+'の対象キャラは同じレアリティ内で選択重み3倍。レアリティ別確率は変わりません。'}</p>`}</section>`;
 }
 function recruitmentLineupMarkup(){
  const pool=availableNormalPool();
