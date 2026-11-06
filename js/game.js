@@ -519,6 +519,10 @@ function expressionFallbackMarkup(face){
  return `<div class="expr-fallback-wrap">${expressionIconSvg(face)}</div>`;
 }
 function expressionPortraitMarkup(personId,face='normal',sceneKey='default',opts={}){
+ // Ver.0.50.0.1: reversible symbol mode; all legacy face art remains registered and untouched.
+ if(typeof symbolReactionEnabledV0500==='function'&&symbolReactionEnabledV0500(personId)){
+  return symbolReactionRenderV0500({personId,face,sceneKey,opts,esc,motionReduced});
+ }
  const actual=normalizeExpressionFace(face), hasAlt=hasExpressionArt(personId,actual);
  const trueTouko=personId==='touko'&&storySession&&(TRUE_TOUKO_STORY_IDS.includes(storySession.id)||(storySession.id==='q52_intro'&&storySession.step>=(CHAPTER_STORIES.q52_intro?.lines?.findIndex(l=>l.toukoReveal)??99))); // v0.36.0.0: 正体の姿は第9章まで使わない
  // v0.34.55.0: 透子は背景を抜いた会話用の上半身（story_cast/touko_talk.webp）を使う
@@ -857,7 +861,7 @@ function dateScenePage(){
  const options=final?`<div class="story-choices date-choice-list">${p.choices.map(c=>`<button type="button" class="btn outline" onclick="answerRomanceTalk('${c.type}')">${esc(stripOuterDailyQuotes(c.text))}</button>`).join('')}</div>`:'';
  return `${heading('DAY / MEMORY',`${heroineDisplayName(id)}とのおでかけ`,'今日の小さな思い出。帰り道の返事を選ぼう。')}
  <div class="story-panel card chapter-story chapter-story-v071 date-scene" aria-label="おでかけの物語" onclick="dateSceneTap(event)">
- <div class="story-scene ${bgPath?'has-bg':''}">${bgPath?`<div class="story-bg" style="background-image:url('${bgPath}')" aria-hidden="true"></div>`:''}<div class="story-skyline"></div><div class="story-cast">${expressionPortraitMarkup(id,face,`date:${id}:${p.place}:day${loveState().day}`,{wrapperClass:'story-character',stateClass:'is-speaking',alt:`${PEOPLE[id].name}の立ち絵`,chapterStoryFit:true})}</div><span class="story-scene-label">${esc(ROMANCE_PLACES.find(x=>x.id===p.place).name)} · ${ROMANCE_WEATHER_LABELS[loveState().weather]}</span></div>
+ <div class="story-scene ${bgPath?'has-bg':''}">${bgPath?`<div class="story-bg" style="background-image:url('${bgPath}')" aria-hidden="true"></div>`:''}<div class="story-skyline"></div><div class="story-cast">${expressionPortraitMarkup(id,face,`date:${id}:${p.place}:day${loveState().day}`,{wrapperClass:'story-character',stateClass:'is-speaking',alt:`${PEOPLE[id].name}の立ち絵`,chapterStoryFit:true,eventKey:idx,sceneTag:sc.sceneTag||sc.tone||'',suppressSymbols:sc.suppressSymbols===true})}</div><span class="story-scene-label">${esc(ROMANCE_PLACES.find(x=>x.id===p.place).name)} · ${ROMANCE_WEATHER_LABELS[loveState().weather]}</span></div>
  <div class="story-dialogue"><div class="flex space"><span class="chip pink">${esc(who)}</span></div><p class="story-line">${esc(stripOuterDailyQuotes(sc.text))}</p>
  <div class="story-controls">${options}<button type="button" class="btn outline mini" onclick="previousRomanceLine()" ${idx===0?'disabled':''}>← 戻る</button><button type="button" class="btn primary" onclick="nextRomanceLine()" ${final?'disabled':''}>${final?'返事を選ぼう':'続きを読む →'}</button><button type="button" class="btn outline mini" onclick="skipRomanceScene()">最後へ</button><button type="button" class="btn outline mini" onclick="requestInterrupt()">中断</button></div></div></div>`;
 }
@@ -1867,7 +1871,11 @@ function chapterStoryCast(script,index){
  // Show Noel with Touko on the narrated embrace, not in unrelated lines.
  const text=script.lines[index]?.text||'';
  if(storyId==='chapter3_end'&&current==='narrator'&&/透子/.test(text)&&/ノエル/.test(text)&&/抱/.test(text))cast=['touko','noel'];
- return cast.map(who=>expressionPortraitMarkup(who,faces[who]||'normal',`chapter:${storyId}`,{wrapperClass:'story-character',chapterStoryFit:true,stateClass:'is-speaking',alt:`${PEOPLE[who]?.name||STORY_ONLY_CAST[who]}の立ち絵`})).join('');
+ const cueLine=script.lines[index]||{};
+ const sceneTag=cueLine.sceneTag||cueLine.tone||script.sceneTag||script.tone||'';
+ // Historical 霧島ハルカ is a separate story NPC sharing 'haruka' with the new heroine.
+ const legacyNpcHaruka=storyId.startsWith('chapter4')||storyId.startsWith('q2')&&current==='haruka';
+ return cast.map(who=>expressionPortraitMarkup(who,faces[who]||'normal',`chapter:${storyId}`,{wrapperClass:'story-character',chapterStoryFit:true,stateClass:'is-speaking',alt:`${PEOPLE[who]?.name||STORY_ONLY_CAST[who]}の立ち絵`,eventKey:index,sceneTag,suppressSymbols:cueLine.suppressSymbols===true,legacyNpcHaruka:who==='haruka'&&legacyNpcHaruka})).join('');
 }
 // v0.34.37.0: 読み返しログ・オート送り・文字の大きさ（読みやすさの設定は端末ごとに保存し、セーブには含めない）
 const READER_KEY='yoiboshi-reader-v1';
@@ -2623,7 +2631,7 @@ function heroTalkPage(u){
 function showRomanceTopic(id,index){
  if(!isHero(id)||!romanceHeroAvailable(id))return;
  const topic=romanceTopicLines(id)[index];if(!topic)return;
- dialog={title:`${heroineDisplayName(id)}：${topic.title}`,message:topic.text,html:`<div class="expression-repair">${expressionPortraitMarkup(id,romanceStagePack(loveState(),id)?.topicFaces?.[index]||EXPRESSION_CUES.conversation[id]?.[index]?.[0]||'normal',`topic:${id}:${index}`,{wrapperClass:'expr-character-layer',alt:PEOPLE[id].name})}</div><button type="button" class="btn primary" onclick="dialog=null;render()">交流に戻る</button>`};render();
+ dialog={title:`${heroineDisplayName(id)}：${topic.title}`,message:topic.text,html:`<div class="expression-repair">${expressionPortraitMarkup(id,romanceStagePack(loveState(),id)?.topicFaces?.[index]||EXPRESSION_CUES.conversation[id]?.[index]?.[0]||(symbolReactionEnabledV0500(id)?moodFaceForHero(id):'normal'),`topic:${id}:${index}`,{wrapperClass:'expr-character-layer',alt:PEOPLE[id].name})}</div><button type="button" class="btn primary" onclick="dialog=null;render()">交流に戻る</button>`};render();
 }
 function startHeroChat(id){const u=unit(id);if(u&&isHero(u.person))return startRomanceOuting(u.person)}
 
