@@ -1,10 +1,11 @@
-name: QA - Character depth (60 heroes)
+name: QA - Character depth (79 heroes)
 on:
   pull_request:
     paths:
       - 'js/character_depth_v1.js'
       - 'css/character_depth_v1.css'
       - 'js/game.js'
+      - 'js/heroines_v0500.js'
       - 'index.html'
       - 'tools/qa/character_depth_real_smoke.py'
       - '.github/workflows/character-depth-qa.yml'
