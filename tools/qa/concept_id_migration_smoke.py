@@ -24,6 +24,7 @@ try:
             const legacy = n => 'con'+'cept'+n;
             const raw = fresh();
             raw.owned[legacy('13')+'_work'] = {lv:7,aff:26,lb:2,copies:1};
+            raw.owned[legacy('08')+'_work'] = {lv:5,aff:9,lb:1,copies:1};
             raw.owned[legacy('17')+'_work'] = {lv:12,aff:42,lb:3,copies:2};
             raw.owned[legacy('22')+'_sky'] = {lv:4,aff:11,lb:0,copies:0};
             raw.party = [legacy('17')+'_work'];
@@ -49,18 +50,19 @@ try:
             const raw = JSON.parse(localStorage.getItem('yoiboshi-reboot-v1'));
             const once = migrateLegacyConceptSave(raw);
             const twice = migrateLegacyConceptSave(once);
+            const before = localStorage.getItem('yoiboshi-reboot-v1');
             const m = load();
             const hero = HERO_IDS;
             const gallery = {heroes:hero.length,unique:new Set(hero).size,depth:Object.keys(CHARACTER_DEPTH_V1).length};
-            const before = localStorage.getItem('yoiboshi-reboot-v1');
             const after = localStorage.getItem('yoiboshi-reboot-v1');
             return {
                 gallery,
                 idempotent:JSON.stringify(once)===JSON.stringify(twice),
+                canonicalMapCount:Object.keys(LEGACY_CONCEPT_IDS).length,
                 oldSaveUnmodified:before===after,
                 oldSaveHasLegacy:Object.keys(raw.owned).includes(legacy('17')+'_work'),
                 units:{
-                    ena:m.owned.ena_work,mai:m.owned.mai_work,yume:m.owned.yume_sky,
+                    ena:m.owned.ena_work,mai:m.owned.mai_work,yume:m.owned.yume_sky,yui:m.owned.yui_work,
                     old:!!m.owned[legacy('17')+'_work']
                 },
                 party:m.party,selected:m.selected,homeFavorite:m.homeFavorite,homeUnitId:m.homeUnitId,
@@ -74,8 +76,10 @@ try:
         }""")
         assert check["gallery"] == {"heroes":60,"unique":60,"depth":60}, check
         assert check["idempotent"] and check["oldSaveHasLegacy"] and check["oldSaveUnmodified"],check
+        assert check["canonicalMapCount"] == 29,check
         assert check["units"]["ena"]["lv"] == 12 and check["units"]["ena"]["aff"] == 42,check
         assert check["units"]["mai"]["lv"] == 7 and check["units"]["yume"]["lv"] == 4,check
+        assert check["units"]["yui"]["lv"] == 5,check
         assert check["units"]["old"] is False and check["hasNewRegistry"],check
         assert check["party"] == ["ena_work"] and check["selected"] == "ena_work",check
         assert check["homeFavorite"] == "ena" and check["homeUnitId"] == "ena_work",check
