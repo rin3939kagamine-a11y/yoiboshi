@@ -98,10 +98,12 @@ try:
         }""")
         target='.v676-talk-portrait.expression-stage .expr-character-layer[data-person-id="makoto"]'
         page.locator(target+' img').wait_for(timeout=15000)
-        stage_before=page.locator(target).evaluate("""el=>({
-          face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
-          anim:el.querySelector('img')?getComputedStyle(el.querySelector('img')).animationName:'NO_IMAGE'
-        })""")
+        stage_before=page.evaluate("""()=>{
+          const el=document.querySelector('.v676-talk-portrait.expression-stage .symbol-reaction-v0500[data-person-id="makoto"]');
+          const img=el?.querySelector('img');
+          return {face:el?.dataset.expression,src:img?.getAttribute('src'),
+            anim:img?getComputedStyle(img).animationName:'NO_IMAGE'}
+        }""")
         ck("Makoto heroine talk uses approved new crop",
            "upper_body_crops_v0500/makoto.webp" in stage_before["src"],stage_before)
         ck("Makoto heroine talk starts neutral",stage_before["face"]=="normal",stage_before)
@@ -109,10 +111,12 @@ try:
            stage_before["anim"]=="none",stage_before)
         page.screenshot(path=str(OUT/"makoto_romance_real_390x844.png"),full_page=True)
         page.evaluate("""()=>{S.love.mood.makoto='good';render()}""")
-        stage_after=page.locator(target).evaluate("""el=>({
-          face:el.dataset.expression,src:el.querySelector('img')?.getAttribute('src'),
-          anim:el.querySelector('img')?getComputedStyle(el.querySelector('img')).animationName:'NO_IMAGE'
-        })""")
+        stage_after=page.evaluate("""()=>{
+          const el=document.querySelector('.v676-talk-portrait.expression-stage .symbol-reaction-v0500[data-person-id="makoto"]');
+          const img=el?.querySelector('img');
+          return {face:el?.dataset.expression,src:img?.getAttribute('src'),
+            anim:img?getComputedStyle(img).animationName:'NO_IMAGE'}
+        }""")
         ck("Makoto changes mood while retaining approved art",
            stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
         ck("Makoto smile hops in the new symbol mode",stage_after["anim"]=="symbolV0500Hop",stage_after)
