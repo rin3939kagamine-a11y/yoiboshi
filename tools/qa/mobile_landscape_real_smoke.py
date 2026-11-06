@@ -103,7 +103,7 @@ try:
           const img=el?.querySelector('img');
           return {face:el?.dataset.expression,src:img?.getAttribute('src'),
             anim:img?getComputedStyle(img).animationName:'NO_IMAGE',
-            body:!el?document.querySelector('.v676-talk-portrait')?.outerHTML.slice(0,1000):''}
+            body:el?.outerHTML.slice(0,1300)||document.querySelector('.v676-talk-portrait')?.outerHTML.slice(0,1300)||''}
         }""")
         ck("Makoto heroine talk uses approved new crop",
            "upper_body_crops_v0500/makoto.webp" in (stage_before["src"] or ""),stage_before)
@@ -117,7 +117,7 @@ try:
           const img=el?.querySelector('img');
           return {face:el?.dataset.expression,src:img?.getAttribute('src'),
             anim:img?getComputedStyle(img).animationName:'NO_IMAGE',
-            body:!el?document.querySelector('.v676-talk-portrait')?.outerHTML.slice(0,1000):''}
+            body:el?.outerHTML.slice(0,1300)||document.querySelector('.v676-talk-portrait')?.outerHTML.slice(0,1300)||''}
         }""")
         ck("Makoto changes mood while retaining approved art",
            stage_after["face"]=="smile" and stage_after["src"]==stage_before["src"],stage_after)
