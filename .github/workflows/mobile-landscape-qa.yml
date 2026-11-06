@@ -8,6 +8,11 @@ on:
       - 'index.html'
       - 'js/art_v2.js'
       - 'js/game.js'
+      - 'js/q6_classic_battle_v03540.js'
+      - 'css/q6_classic_battle_v03540.css'
+      - 'js/battle_backgrounds_v1.js'
+      - 'css/battle_backgrounds_v1.css'
+      - 'tools/qa/battle_visual_real_smoke.py'
       - '.github/workflows/mobile-landscape-qa.yml'
   push:
     branches: [main]
@@ -39,10 +44,14 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Run real-game mobile landscape QA
         run: python tools/qa/mobile_landscape_real_smoke.py
+      - name: Run battle background and q6 layout QA
+        run: python tools/qa/battle_visual_real_smoke.py
       - name: Save screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mobile-landscape-qa
-          path: qa_artifacts/mobile_landscape/
+          path: |
+            qa_artifacts/mobile_landscape/
+            qa_artifacts/battle_visual/
           if-no-files-found: warn
