@@ -47,6 +47,8 @@ for(const [id,flame] of Object.entries(TOMOSHIBI_V027)){if(PEOPLE[id])PEOPLE[id]
 for(const id of NEW_HERO_IDS_V028){const h=ROMANCE_V028[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／正式ヒロイン（第4章で出会い）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V028[id]};}
 // v0.42.0.0: 第6〜7章・第1部クリア後のヒロイン
 for(const id of NEW_HERO_IDS_V0420){const h=ROMANCE_V0420[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／正式ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0420[id]};}
+// v0.50: additional roster only. Existing PEOPLE entries remain intact.
+for(const id of NEW_HERO_IDS_V0500){const h=ROMANCE_V0500[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／正式ヒロイン（仮レアリティ）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0500[id]};}
 // Unrevealed identities are not available for recruitment or interaction until a future chapter explicitly marks chapter3Met[id].
 function isV027HeroRevealed(id,save=S){return !!save?.chapter3Met?.[id];}
 function isV028HeroRevealed(id,save=S){return save?.chapter4Met?.[id]===true;}
@@ -129,7 +131,7 @@ const UNITS=[
  {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
-UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420);
+UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500);
 const BYID=Object.fromEntries(UNITS.map(x=>[x.id,x]));
 // v0.35.0.0: Rレアリティを廃止。Rユニットは旧セーブの変換用に定義だけ残し、同じ人物のSRへ置き換える。
 const RETIRED_R_TO_SR=Object.freeze(Object.fromEntries(UNITS.filter(u=>u.rarity==='R'&&!u.id.endsWith('_trial')).map(u=>[u.id,(UNITS.find(v=>v.person===u.person&&v.rarity==='SR'&&!v.id.endsWith('_trial'))||{}).id]).filter(([,v])=>!!v)));
@@ -212,7 +214,7 @@ const RARITY_ART_POLICY=Object.freeze({R:'普段の立ち絵・背景なし',SR:
 const MOMOKA_UNIT_ARTWORK_V03447=Object.freeze({momoka_work:{portrait:'assets/UNIT_ART/momoka_work.webp'},momoka_sky:{scene:'assets/UNIT_ART/momoka_sky.webp'},momoka_star:{scene:'assets/UNIT_ART/momoka_star.webp'}});
 // v0.35.0.0: 第2章3人のSR
 const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNIT_ART/tsubaki_work.webp'},erika_work:{portrait:'assets/UNIT_ART/erika_work.webp'},kaede_work:{portrait:'assets/UNIT_ART/kaede_work.webp'}});
-const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035});
+const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035});
 function unitArt(u,kind='portrait'){
  const config=UNIT_ARTWORK[u.id]||{};
  // Makoto's accepted portrait takes priority over outdated generic UNIT_ART portraits.
@@ -237,7 +239,7 @@ const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLD
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}
 function kanameSRUnlocked(save=S){return !!save?.bondRead?.kaname?.[1]}
-function visibleUnitV026(u,save=S){return !!u&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)}
+function visibleUnitV026(u,save=S){return !!u&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)&&(!NEW_HERO_IDS_V0500.includes(u.person)||isV0500Revealed(u.person,save))}
 function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
 function availableNormalPool(save=S){return NORMAL_GACHA_POOL.filter(u=>recruitEligibleUnit(u,save))}
 function pickupActive(group,save=S){const start=save.pickupStartDay?.[group];return !!(DISTRICT_GACHA_IDS[group]&&Number.isSafeInteger(start)&&start>=1&&save.love?.day>=start&&save.love.day<start+PICKUP_DAYS)}
@@ -421,13 +423,14 @@ const ORIGINAL_HERO_IDS=Object.freeze(['momoka','milku','reina','akane','aoi','c
 const NEW_HERO_IDS=Object.freeze(['reina','akane','aoi','chinatsu','nagi',...SHINONOME_HERO_IDS,...OLDCAFE_HERO_IDS,...STATION_HERO_IDS,...NEW_Q4_HERO_IDS,...SEASIDE_HERO_IDS,...LIGHTHOUSE_HERO_IDS,...CHAPTER2_ALL_HERO_IDS,...NEW_HERO_IDS_V027,...NEW_HERO_IDS_V028,...NEW_HERO_IDS_V0420]);
 const HERO_IDS=Object.freeze([...ORIGINAL_HERO_IDS,...SHINONOME_HERO_IDS,...OLDCAFE_HERO_IDS,...STATION_HERO_IDS,...NEW_Q4_HERO_IDS,...SEASIDE_HERO_IDS,...LIGHTHOUSE_HERO_IDS,...CHAPTER2_ALL_HERO_IDS,...NEW_HERO_IDS_V027,...NEW_HERO_IDS_V028,...NEW_HERO_IDS_V0420]);
 const INVESTIGATION_HERO_IDS=ORIGINAL_HERO_IDS;
-function extraHero(id){return ROMANCE7[id]||ROMANCE_SHINONOME[id]||ROMANCE_OLDCAFE[id]||ROMANCE_STATION[id]||ROMANCE_SCHOOL[id]||ROMANCE_SEASIDE[id]||ROMANCE_LIGHTHOUSE[id]||ROMANCE_CHAPTER2[id]||ROMANCE_CHAPTER2_LATE[id]||ROMANCE_V027[id]||ROMANCE_V028[id]||ROMANCE_V0420[id]||null}
+function extraHero(id){return ROMANCE7[id]||ROMANCE_SHINONOME[id]||ROMANCE_OLDCAFE[id]||ROMANCE_STATION[id]||ROMANCE_SCHOOL[id]||ROMANCE_SEASIDE[id]||ROMANCE_LIGHTHOUSE[id]||ROMANCE_CHAPTER2[id]||ROMANCE_CHAPTER2_LATE[id]||ROMANCE_V027[id]||ROMANCE_V028[id]||ROMANCE_V0420[id]||ROMANCE_V0500[id]||null}
 function romancePlaceLike(place,id){return place.likes[id]??extraHero(id)?.likes[place.id]??'normal'}
 // Story reveal comes before romance access. Owned legacy Nagi stays in the save but is locked until q6.
 function heroineStoryRevealed(id,save=S){
  if(NEW_HERO_IDS_V027.includes(id))return isV027HeroRevealed(id,save);
  if(NEW_HERO_IDS_V028.includes(id))return isV028HeroRevealed(id,save);
   if(NEW_HERO_IDS_V0420.includes(id))return isV0420Revealed(id,save);
+ if(NEW_HERO_IDS_V0500.includes(id))return isV0500Revealed(id,save);
  if(id==='nagi')return !!save.quests?.q6?.complete;
  if(SHINONOME_HERO_IDS.includes(id))return !!save.shinonomeMet;
  if(OLDCAFE_HERO_IDS.includes(id))return !!save.oldcafeMet;
