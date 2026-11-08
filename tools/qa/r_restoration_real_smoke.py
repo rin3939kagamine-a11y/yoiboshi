@@ -88,12 +88,12 @@ try:
         }""")
         a = page.evaluate("""() => ({
           a:S.owned.akane_daily,shio:S.owned.shio_pool,
-          accidentallyUpgraded:!!S.owned.akane_work,party:S.party,selected:S.selected,
+          originalSR:S.owned.akane_work,party:S.party,selected:S.selected,
           favorite:S.homeFavorite,home:S.homeUnitId
         })""")
         check("A: original save bytes unchanged on load", before == after)
         check("A: R level/affinity/break/copies preserved", a["a"] == raw["owned"]["akane_daily"] and a["shio"] == raw["owned"]["shio_pool"], a)
-        check("A: R party/selection/home preserved", a["party"] == ['akane_daily','shio_pool'] and a["selected"] == a["home"] == 'akane_daily' and a["favorite"] == 'akane' and not a["accidentallyUpgraded"], a)
+        check("A: R party/selection/home preserved without modifying existing SR", a["party"] == ['akane_daily','shio_pool'] and a["selected"] == a["home"] == 'akane_daily' and a["favorite"] == 'akane' and a["originalSR"] == raw["owned"].get("akane_work"), a)
 
         # B: already-upgraded save is not downgraded, duplicated, or remigrated.
         raw, before, after = load_case("""() => {
