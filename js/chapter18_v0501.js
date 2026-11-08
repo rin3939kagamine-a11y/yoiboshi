@@ -213,3 +213,154 @@ q108: String.raw`沙耶「槐が一本だけ、瓶を懐に入れた。包みじ
 主人公（収穫の道は、まだ残ってる。槐を止めないと、終わらない）`,
 chapter18_end: String.raw`夕陽が沈み、町に一つずつ灯りがともりはじめる。どこかの家で、子どもが『よぞらのパンやさん』を開いている気がした。その最後のページでは、今もパン屋さんが、そっと灯りを消している。`
 
+});
+
+// Only authorized, existing speaker portraits are used. Unrevealed speakers and extras
+// stay in narrator mode with the complete original label 「...」, concealing identity.
+const CHAPTER18_SPEAKER_IDS=Object.freeze({
+ '主人公':'you','冴子':'saeko','ジュリ':'juri','沙耶':'saya','わかば':'wakaba',
+ 'うらら':'urara','ノエル':'noel','こむぎ':'komugi','槐':'enju'
+});
+const CHAPTER18_SCENE_BG=Object.freeze({
+ chapter18_open:'shop:day',
+ q103_intro:'shop:day',q103_pre:'shop:day',q103:'shop:day',
+ q104_intro:'ryotei:night',q104_pre:'shotengai:dusk',q104:'shotengai:dusk',
+ q105_intro:'kissa:night',q105_pre:'kissa:night',q105:'kissa:night',
+ q106_intro:'ryotei:night',q106_pre:'soko:night',q106:'soko:night',
+ q107_intro:'ryotei:day',q107_pre:'ryotei:day',q107:'ryotei:day',
+ q108_intro:'ryotei:day',q108_pre:'shotengai:day',q108:'shop:dusk',
+ chapter18_end:'shotengai:dusk'
+});
+const CHAPTER18_SCENE_PLACE=Object.freeze({
+ chapter18_open:'冴子の工房／朝',
+ q103_intro:'冴子の工房／朝',q103_pre:'冴子の工房／朝',q103:'冴子の工房／朝',
+ q104_intro:'商店街の奥・夜灯ギャラリー／夕方',q104_pre:'ギャラリー裏の路地／夕方',q104:'ギャラリー裏の路地／夕方',
+ q105_intro:'商店街の古い喫茶店／夜',q105_pre:'商店街の古い喫茶店／夜',q105:'商店街の古い喫茶店／夜',
+ q106_intro:'夜灯ギャラリー・閉館後／保管室',q106_pre:'ギャラリー奥・保管室',q106:'ギャラリー奥・保管室',
+ q107_intro:'夜灯ギャラリー・読み聞かせ会場／朝',q107_pre:'夜灯ギャラリー・読み聞かせ会場／朝',q107:'最後のページの前／朝',
+ q108_intro:'夜灯ギャラリー／昼',q108_pre:'ギャラリー裏の路地／同時刻',q108:'冴子の工房／夕方',
+ chapter18_end:'冴子の工房／夕方'
+});
+const CHAPTER18_STORY_LABELS=Object.freeze({
+ chapter18_open:'第2部 第8章 開幕　よぞらのパンやさん',
+ q103_intro:'断たれた道のあとで・導入',q103_pre:'断たれた道のあとで・戦闘直前',q103:'断たれた道のあとで・後日談',
+ q104_intro:'願いの原画展・導入',q104_pre:'願いの原画展・戦闘直前',q104:'願いの原画展・後日談',
+ q105_intro:'パン屋の作者・導入',q105_pre:'パン屋の作者・戦闘直前',q105:'パン屋の作者・後日談',
+ q106_intro:'額縁の下・導入',q106_pre:'額縁の下・戦闘直前',q106:'額縁の下・後日談',
+ q107_intro:'おやすみの読み聞かせ・導入',q107_pre:'おやすみの読み聞かせ・戦闘直前',q107:'おやすみの読み聞かせ・後日談',
+ q108_intro:'灯りを消すページ・導入',q108_pre:'灯りを消すページ・戦闘直前',q108:'灯りを消すページ・後日談',
+ chapter18_end:'第2部 第8章 終幕　灯りを消すページ'
+});
+function chapter18Line(source,bg,index,sceneId){
+ const m=/^(主人公|冴子|ジュリ|沙耶|わかば|うらら|ノエル|こむぎ|槐)「/.exec(source);
+ const monologue=source.startsWith('主人公（');
+ // 「？？？」 is deliberately not resolved to Komugi/Enju until the reveal.
+ const who=monologue?'you':m?CHAPTER18_SPEAKER_IDS[m[1]]:'narrator';
+ const text=m?source.slice(m[1].length):monologue?source.slice(3):source;
+ // Existing art, with only factual location transitions inside a segment.
+ let location=bg;
+ if(sceneId==='q104_intro'&&index<6)location='shotengai:dusk';
+ if(sceneId==='q106_intro'&&source.startsWith('扉の先は、'))location='soko:night';
+ if(sceneId==='q106_intro'&&index>=13)location='soko:night';
+ if(sceneId==='q108_intro'&&index>=3&&index<=4)location='soko:night';
+ const line={who,title:'',text,bg:location};
+ if((sceneId==='q105_intro'&&source.startsWith('ノエル「この本、'))||(sceneId==='q107_pre'&&source.startsWith('ノエル「……引っぱらないで')))line.cue={target:'noel',face:'sad'};
+ return line;
+}
+const CHAPTER18_STORIES=Object.freeze(Object.fromEntries(Object.entries(CHAPTER18_STORY_RAW).map(([id,raw])=>{
+ const n=Number(/^q(\d+)/.exec(id)?.[1]),requires=n?['q'+(n-1)]:id==='chapter18_open'?['q102']:['q108'];
+ const lines=raw.split('\n').map((line,i)=>chapter18Line(line,CHAPTER18_SCENE_BG[id],i,id));
+ return [id,Object.freeze({title:CHAPTER18_STORY_LABELS[id],place:CHAPTER18_SCENE_PLACE[id],requires,lines})];
+})));
+
+const CHAPTER18_QUESTS=Object.freeze([
+ {id:'q103',name:'断たれた道のあとで',location:'冴子の工房',lead:'親石を失った槐が、別の錨を使う可能性を調べる。',clues:['親石の代わりになる錨の条件を確かめる。','夜灯ギャラリーの額縁と来場者の灯を調べる。'],report:'夜灯ギャラリーの原画展に、冴子の台座と同じ刻みがあると確認した。',reward:20600,enemy:'工房に残る額縁の残響',waves:2,chapter:18,requires:['q102'],baseHp:765,baseAtk:77},
+ {id:'q104',name:'願いの原画展',location:'ギャラリー裏の路地',lead:'来場者の灯が曇る原画展を調査し、追われる女性を守る。',clues:['額縁の刻みと願う人の灯の糸を観測する。','原画の作者だという女性から話を聞く。'],report:'路地の額縁の残響を退け、絵本作家こむぎと出会った。',reward:20800,enemy:'額縁の残響',waves:2,chapter:18,requires:['q103'],baseHp:770,baseAtk:78},
+ {id:'q105',name:'パン屋の作者',location:'商店街の古い喫茶店',lead:'こむぎの話とひかりの手紙から、絵本本来の内容を確かめる。',clues:['本来の結末は「おやすみ」であり願いの本ではない。','こむぎの持つ手紙をノエルと確かめる。'],report:'こむぎ、ノエルとともに原画展を止める方針を確認した。',reward:21000,enemy:'展示の気配を追う残響',waves:2,chapter:18,requires:['q104'],baseHp:775,baseAtk:78},
+ {id:'q106',name:'額縁の下',location:'夜灯ギャラリー・保管室',lead:'閉館後の原画展で光の糸を追い、保管室の瓶を守る残響を退ける。',clues:['最後のページの額に刻みが多いことを観測する。','保管室の瓶の列と、糸の行き先を確かめる。'],report:'額縁が残る限り糸は再び流れると判断し、作者による読み聞かせを計画した。',reward:21200,enemy:'額縁の残響／瓶番の残響',waves:3,chapter:18,requires:['q105'],baseHp:780,baseAtk:79},
+ {id:'q107',name:'おやすみの読み聞かせ',location:'夜灯ギャラリー・読み聞かせ会場',lead:'作者の朗読を守り、最後のページの額縁への道を切り開く。',clues:['本来の結末を朗読している間の額縁の反応を確かめる。','槐が最後のページへ糸を集めた事実を追う。'],report:'最後の額縁への道を開き、こむぎの決断によって原画展の錨を外した。',reward:21800,enemy:'宵宮槐の残響／額縁の残響（大）',waves:3,chapter:18,requires:['q106'],baseHp:790,baseAtk:80},
+ {id:'q108',name:'灯りを消すページ',location:'夜灯ギャラリー／冴子の工房',lead:'原画展の残響を確認し、槐が持ち去った瓶についての目撃情報を整理する。',clues:['来場者の灯の曇りはまだ残っている。','沙耶の目撃した瓶の動きと保管室の様子を確かめる。'],report:'槐が一本だけ別に懐へ入れた事実を共有し、理由は分からないまま継続調査とする。',reward:22000,enemy:'原画展の残り影',waves:2,chapter:18,requires:['q107'],baseHp:785,baseAtk:80}
+]);
+
+const CHAPTER18_INVESTIGATION_CASES=(function(){
+ const cl=(id,real,title,text)=>({id,real,title,text});
+ const an=(a,b,c)=>[{id:'a',text:a},{id:'b',text:b},{id:'c',text:c}];
+ const C=(prompt,clues,answers,release,companion,reactions)=>({
+  theme:'',prompt,clues,sites:clues.map(c=>({name:c.title,line:'',clues:[c.id]})),
+  answers,correct:'b',release:[release],companion,answerReactions:reactions});
+ const out={
+ q103:C('原画展のチラシと灯守りの石から、確かに言えることは？',[
+  cl('q103a',true,'軽くなったペンダント','うららは、祖母のペンダントが軽くなった気がすると言った。'),
+  cl('q103b',true,'原画展の来場者','沙耶は、会場を出た人たちの灯が曇っていると確認した。'),
+  cl('q103c',true,'額縁の刻み','冴子は展示写真に、自分の台座と同じ刻みを認めた。'),
+  cl('q103x',false,'工具袋','冴子の作業台には工具がある。'),
+  cl('q103y',false,'チラシの紙','沙耶が駅前で配られたチラシを持ってきた。')
+ ],an('展示には問題がないと考える。','額縁と来場者の灯を調べる。','ペンダントの鎖だけを調べる。'),
+ '「……私の台座の、組み方だ」',{aoi:'「額縁の刻みを確かめましょう。」',reina:'「来場者の様子も観測します。」',akane:'「見に行こう！」'},
+ {a:'沙耶さんは、灯が曇っていると確認しました。',b:'はい。会場を確かめましょう。',c:'展示の異変も確かめるべきです。'}),
+ q104:C('夜灯ギャラリーで観測した異常は？',[
+  cl('q104a',true,'四隅が脈打つ額','願いをすると額縁の四隅の刻みが脈打つ。'),
+  cl('q104b',true,'細い光の糸','願った人の灯から、光の糸が額縁へ吸い込まれた。'),
+  cl('q104c',true,'女性を追う影','スタッフの影が顔のない額縁の残響に変わった。'),
+  cl('q104x',false,'行列の看板','入口には願いごとを促す看板がある。'),
+  cl('q104y',false,'画板ケース','女性は大きな画板ケースを抱えている。')
+ ],an('看板だけを撤去する。','女性を守り、額縁の残響を鎮める。','子どもたちに願いごとを続けさせる。'),
+ '「人間じゃない。下がって。この人には、指一本触れさせない」',{aoi:'「光の糸が額へ向かっています。」',reina:'「影が動きました。」',akane:'「女性を守ろう！」'},
+ {a:'残響が出ています。',b:'はい。女性を守りましょう。',c:'灯が曇る異常を続けてはいけません。'}),
+ q105:C('こむぎとノエルが語った絵本の本来の内容は？',[
+  cl('q105a',true,'本来の結末','最後のページは、パン屋さんが「おやすみ」と言って灯りを消す。'),
+  cl('q105b',true,'読者の手紙','ひかりが星のパンを作りたいと書いた手紙を、こむぎは持っていた。'),
+  cl('q105c',true,'ノエルの記憶','ノエルには、ひかりがこの絵本を好きだった気持ちが残っている。'),
+  cl('q105x',false,'冷めた紅茶','こむぎは紅茶のカップを両手で包んでいた。'),
+  cl('q105y',false,'画板ケース','ケースには描き直しのラフと色見本がある。')
+ ],an('「願い」の原画展を正しいと認める。','絵本本来の「おやすみ」を守るため、作者と行動する。','読者の手紙を置いていく。'),
+ '「あの子たちの好きだった本で、誰かから何かを取るのは、やめさせて。」',{aoi:'「本に願いは出てきません。」',reina:'「作者の話を確かめました。」',momoka:'「こむぎさんと一緒に行こう。」'},
+ {a:'原画展の説明は、作者の話と違います。',b:'はい。作者と一緒に止めましょう。',c:'手紙も大切な手がかりです。'}),
+ q106:C('ギャラリーの保管室で観測したことは？',[
+  cl('q106a',true,'刻みの多い額','最後のページの額だけ、縁全体に刻みがある。'),
+  cl('q106b',true,'床を走る糸','額からの光の糸は奥の立入禁止の扉へ消えた。'),
+  cl('q106c',true,'棚の硝子瓶','棚の瓶は多くが空で、光の糸の先の数本だけが薄く濁っている。'),
+  cl('q106x',false,'裏口の鍵','冴子が閉館後の裏口を開けた。'),
+  cl('q106y',false,'工具袋','冴子は工具袋を肩にかけている。')
+ ],an('瓶のすべてに意味があると決めつける。','額縁と糸の行き先を確かめ、守る残響を退ける。','保管室を調べず引き返す。'),
+ '「来る。構えて」',{aoi:'「糸の先を観測しました。」',reina:'「瓶の列を確認しました。」',akane:'「残響が近い！」'},
+ {a:'観測できたのは瓶の状態までです。',b:'はい。残響を退けましょう。',c:'額縁から糸が続いています。'}),
+ q107:C('読み聞かせ会で実際に起きたことは？',[
+  cl('q107a',true,'作者の朗読','こむぎの朗読で、額縁はひとつずつ脈打つのをやめた。'),
+  cl('q107b',true,'最後の額縁','槐が最後のページの額に手を添えると、光の糸が集まった。'),
+  cl('q107c',true,'書き換わった絵','最後のページの「おやすみ」が「ねがいを、どうぞ」に変わった。'),
+  cl('q107x',false,'座布団','子どもたちはステージ前の座布団に座っている。'),
+  cl('q107y',false,'初版本','こむぎは擦り切れた表紙の初版本を持っている。')
+ ],an('そのまま願いごとを続けてもらう。','最後のページの額縁へ進み、糸の集中を止める。','読み聞かせ会を記録するだけにする。'),
+ '「あの額を落とす。行く」',{aoi:'「糸が最後のページへ集まっています。」',reina:'「額縁への道を開きましょう。」',akane:'「子どもたちを守るよ！」'},
+ {a:'光の糸は止まっていません。',b:'はい。最後の額縁へ。',c:'子どもたちから糸が伸びています。'}),
+ q108:C('原画展が終わったあと、確かに観測されたことは？',[
+  cl('q108a',true,'残った曇り','帰る人たちの灯には、まだ曇りが残っている。'),
+  cl('q108b',true,'保管室の棚','光が入った数本の瓶が消え、空の瓶は並んだままだった。'),
+  cl('q108c',true,'沙耶が見た瓶','槐は最後の一本だけ、風呂敷でなく着物の胸元に入れた。'),
+  cl('q108x',false,'原画のケース','こむぎは原画を画板ケースに収めていた。'),
+  cl('q108y',false,'夕陽','工房の窓の外に、夕陽が沈んでいく。')
+ ],an('瓶の理由を分かったものとして説明する。','見たことだけを記録し、瓶の理由は未確定とする。','灯の曇りは全員回復したと記録する。'),
+ '「槐が一本だけ、瓶を懐に入れた。包みじゃなく、着物の内側。見間違いじゃない」',
+ {aoi:'「瓶の行き先はまだ分かりません。」',reina:'「確かな目撃情報だけを記録します。」',akane:'「次も確かめよう。」'},
+ {a:'理由を決めつける根拠はありません。',b:'はい。観測事実を残しましょう。',c:'灯の曇りはまだ残っています。'})
+ };
+ for(const [id,item] of Object.entries(out))item.theme=id;
+ return Object.freeze(out);
+})();
+const CHAPTER18_SITE_LINES=Object.freeze({
+ q103:['祖母のペンダントについて聞く。','沙耶の目撃情報を確認する。','展示写真の額縁の四隅を確かめる。','冴子の工具袋を見る。','チラシの紙を見る。'],
+ q104:['四隅の刻みの動きを観測する。','願う人の灯から伸びる糸を見る。','路地のスタッフの影を追う。','入口の看板を見る。','画板ケースを確かめる。'],
+ q105:['本来の最後のページを聞く。','ひかりの手紙を見る。','ノエルの言葉を聞く。','紅茶のカップを見る。','画板ケースのラフを見る。'],
+ q106:['最後のページの額縁を観察する。','床の糸の行き先を追う。','保管室の瓶の状態を確認する。','裏口の鍵を見る。','冴子の工具袋を見る。'],
+ q107:['こむぎの朗読と額縁の反応を観測する。','槐が触れた最後の額縁を見る。','変わった最後のページを確認する。','座布団を見る。','こむぎの初版本を見る。'],
+ q108:['帰る人たちの灯を観測する。','保管室の棚と瓶を確認する。','沙耶から瓶の目撃情報を聞く。','原画のケースを見る。','工房の夕陽を見る。']
+});
+const CHAPTER18_BATTLE_MARKERS=Object.freeze({
+ q104:[{when:'after q104_pre',place:'ギャラリー裏の路地',enemy:'額縁の残響'}],
+ q106:[{when:'after q106_pre',place:'保管室',enemy:'額縁の残響／瓶番の残響'}],
+ q107:[
+  {when:'between q107_intro and q107_pre',place:'読み聞かせ会場',enemy:'額縁の残響',representation:'q107_pre narrates stage-one conflict'},
+  {when:'after q107_pre',place:'最後のページの前',enemy:'宵宮槐の残響／額縁の残響（大）',victory:'最後の額縁に到達する',representation:'single quest battle; 3 waves, final enemy secures last frame'}
+ ]
+});
