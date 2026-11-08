@@ -169,6 +169,11 @@ try:
               return started;
             }""",qid)
             ck(qid+" real turn combat started",combat.get("qid")==qid and combat["waves"]==pre["totalWaves"],combat)
+            if qid=="q107":
+                ck("q107 first wave shows canonical frame echoes",combat["firstWave"]==["額縁の残響","額縁の残響"],combat)
+                ck("q107 final wave protects big frame",combat["lastEnemy"]=="額縁の残響（大）",combat)
+            if qid=="q106":
+                ck("q106 final wave includes bottle guard",combat["lastEnemy"]=="瓶番の残響",combat)
             # The authentic turn engine resolves each enemy hit and successive waves.
             page.wait_for_function("""id=>!battle&&S.quests[id]?.complete===true""",arg=qid,timeout=120000)
             outcome=page.evaluate("""id=>({
