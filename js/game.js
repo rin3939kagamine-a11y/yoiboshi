@@ -118,8 +118,9 @@ const UNITS=[
  {id:"rico_show",person:"ena",title:"一人の観客へ",rarity:"R",role:"attacker",color:"#eaa770",s:["ショータイム","フィナーレの花火"]},
  {id:"mai_wind",person:"mai",title:"旅の風の行方",rarity:"R",role:"support",color:"#a887c8",s:["風の舞","幻惑のステップ"]},
  {id:"shio_pool",person:"shio",title:"新しいスタート",rarity:"R",role:"tank",color:"#65a7db",s:["水しぶきガード","プールサイドの盾"]},
+ {id:"shio_daily",person:"shio",title:"いつもの汐",rarity:"R",role:"tank",color:"#65a7db",s:["水しぶきガード","プールサイドの盾"]},
  {id:"marine_cafe",person:"marin",title:"海辺の本音",rarity:"R",role:"healer",color:"#e8af65",s:["特製トロピカルドリンク","ひと休みしてきな"]},
- {id:'noel_star',person:'noel',title:'今を選ぶ白い星',rarity:'R',role:'support',color:'#adc7df',s:['白い星の祈り','流れ星']},
+ {id:'noel_daily',person:'noel',title:'今を選ぶ白い星',rarity:'R',role:'support',color:'#adc7df',s:['白い星の祈り','流れ星']},
  {id:'yume_tomorrow',person:'yume',title:'今を歩く灯',rarity:'R',role:'healer',color:'#c8a7bb',s:['眠りの灯','夢の続き']},
  {id:'tsubaki_daily',person:'tsubaki',title:'伝承を追う足音',rarity:'R',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
  {id:'erika_daily',person:'erika',title:'仮面の向こうの素顔',rarity:'R',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
@@ -132,9 +133,12 @@ const UNITS=[
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
 UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500);
+// Approved R portraits are provided separately; retain preexisting restored R IDs in saves.
+const APPROVED_R_UNIT_IDS=Object.freeze(["ageha_daily","akane_daily","anzu_daily","aoi_daily","chihiro_daily","chinatsu_daily","chiyo_daily","cocoa_daily","rico_show","erika_daily","fumika_daily","hiyori_daily","hotaru_daily","ichika_daily","jun_daily","kaede_daily","kagari_daily","kaname_daily","karen_daily","kirari_daily","koharu_daily","koyori_daily","kurumi_daily","kyoko_daily","lilith_daily","luna_daily","mai_wind","makoto_daily","marine_cafe","maron_daily","meru_daily","milku_daily","minori_daily","mio_daily","miyabi_daily","mizuki_daily","momoka_daily","nagi_dusk","natsume_daily","nazuna_daily","noel_daily","reiko_daily","reina_daily","riko_daily","ritsu_daily","saeko_daily","saki_daily","sanae_daily","sena_daily","shino_daily","shio_daily","shizuku_daily","suiran_daily","towa_daily","tsubaki_daily","yui_daily","yume_tomorrow","yuriko_daily","yuzu_daily"]);
+const RESTORED_R_UNIT_IDS=new Set([...APPROVED_R_UNIT_IDS,'shio_pool']); // Keep the previous pool outfit without newly assigned portrait.
 const BYID=Object.fromEntries(UNITS.map(x=>[x.id,x]));
-// v0.35.0.0: Rレアリティを廃止。Rユニットは旧セーブの変換用に定義だけ残し、同じ人物のSRへ置き換える。
-const RETIRED_R_TO_SR=Object.freeze(Object.fromEntries(UNITS.filter(u=>u.rarity==='R'&&!u.id.endsWith('_trial')).map(u=>[u.id,(UNITS.find(v=>v.person===u.person&&v.rarity==='SR'&&!v.id.endsWith('_trial'))||{}).id]).filter(([,v])=>!!v)));
+// Conversion remains only for excluded legacy characters, preserving their existing behavior.
+const RETIRED_R_TO_SR=Object.freeze(Object.fromEntries(UNITS.filter(u=>u.rarity==='R'&&!u.id.endsWith('_trial')&&!RESTORED_R_UNIT_IDS.has(u.id)).map(u=>[u.id,(UNITS.find(v=>v.person===u.person&&v.rarity==='SR'&&!v.id.endsWith('_trial'))||{}).id]).filter(([,v])=>!!v)));
 const R2SR=id=>RETIRED_R_TO_SR[id]||id;
 // Ver.0.49.2.0: legacy save migration ONLY. These old concept IDs are deliberately retained
 // here for backward compatibility; all live registries must use canonical IDs.
@@ -171,7 +175,7 @@ function migrateLegacyConceptSave(raw){
   return convert(raw);
 }
 
-const RARITIES=Object.freeze(['SR','SSR','UR']);
+const RARITIES=Object.freeze(['R','SR','SSR','UR']);
 function convertRetiredRSave(raw){
  if(!raw||typeof raw!=='object'||!raw.owned||typeof raw.owned!=='object'||Array.isArray(raw.owned))return raw;
  const out={...raw},owned={};
@@ -214,12 +218,15 @@ const RARITY_ART_POLICY=Object.freeze({R:'普段の立ち絵・背景なし',SR:
 const MOMOKA_UNIT_ARTWORK_V03447=Object.freeze({momoka_work:{portrait:'assets/UNIT_ART/momoka_work.webp'},momoka_sky:{scene:'assets/UNIT_ART/momoka_sky.webp'},momoka_star:{scene:'assets/UNIT_ART/momoka_star.webp'}});
 // v0.35.0.0: 第2章3人のSR
 const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNIT_ART/tsubaki_work.webp'},erika_work:{portrait:'assets/UNIT_ART/erika_work.webp'},kaede_work:{portrait:'assets/UNIT_ART/kaede_work.webp'}});
-const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035});
+// User-approved ordinary outfits: portrait only. Binary images are added separately.
+const APPROVED_R_ARTWORK=Object.freeze(Object.fromEntries(APPROVED_R_UNIT_IDS.map(id=>[id,{portrait:'assets/UNIT_ART/'+id+'.webp'}])));
+const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
 function unitArt(u,kind='portrait'){
  const config=UNIT_ARTWORK[u.id]||{};
  // Makoto's accepted portrait takes priority over outdated generic UNIT_ART portraits.
  // Preserve actual story/rarity scene CGs, but use one consistent base image everywhere else.
  if(kind==='scene'&&config.scene)return config.scene;
+ if(u.rarity==='R'&&config.portrait)return config.portrait;
  if(u.person==='makoto')return kind==='portrait'?characterPortrait(u.person):characterArt(u.person);
  return config.portrait||(kind==='portrait'?characterPortrait(u.person):characterArt(u.person));
 }
@@ -232,11 +239,12 @@ function homeUnit(personId){
 }
 function setHomeUnit(id){const u=unit(id);if(!u||!visibleUnitV026(u)||!data(id)||u.person!==lobbySelected)return;S.homeUnitId=id;persist();render()}
 
-const RATE={SR:80,SSR:15,UR:5}; // v0.35.0.0: R廃止。R分50%は暫定でSRへ。確率はユーザー決定待ち。
+const RATE=Object.freeze({R:60,SR:25,SSR:10,UR:5}); // Confirmed normal recruitment odds.
+const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5}); // Existing 19-heroine-only odds; no R units.
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
-const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
+const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
 const NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)));
 const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['tsubaki'],erika:['erika'],kaname:['kaname'],kaede:['kaede'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
@@ -255,7 +263,9 @@ function pickupStarted(group){if(!DISTRICT_GACHA_IDS[group])return;S.pickupStart
 
 function rollNormalGachaRarity(rand=Math.random()){
  const nextPity=(S.gachaPity||0)+1,nextSR=(S.gachaSrStreak||0)+1;
- let value=rand*100,rar=value<RATE.SR?'SR':value<RATE.SR+RATE.SSR?'SSR':'UR';
+ const rates=gachaMode==='new19'?NEW19_RATE:RATE;
+ const chanceR=rates.R||0,value=rand*100;
+ let rar=value<chanceR?'R':value<chanceR+rates.SR?'SR':value<chanceR+rates.SR+rates.SSR?'SSR':'UR';
  if(nextPity>=GACHA_CONFIG.UR_PITY)rar='UR';
  S.gachaPity=rar==='UR'?0:nextPity;
  S.gachaSrStreak=0;
@@ -2498,9 +2508,10 @@ function levelMax(id){
 }
 function limitBreak(id){const d=data(id);if(!d||d.lb>=7||d.copies<=0)return;d.copies--;d.lb++;persist();render();toast(`${d.lb}回目の限界突破！${d.lb>=4?' スキル強化解放！':''}`)}
 function summonHero(){
- const mode=gachaMode!=='normal'&&pickupActive(gachaMode)?gachaMode:'normal';
- const label=mode==='normal'?'通常募集':'期間限定ピックアップ';
- return `<section class="recruit-stage gacha-v030-stage" aria-label="星灯募集ステージ"><div class="gacha-v030-stage-top"><span class="mini-overline">YOIBOSHI · STELLAR RECRUIT</span><span class="gacha-v030-mode">${label}</span></div><div class="recruit-sigil" aria-hidden="true">✦</div><h2>星々の導き、仲間との出会い</h2><p>星灯の光で新しい仲間と出会おう。</p><div class="recruit-balance">所持 星晶石 ✧ <b>${S.gems.toLocaleString()}</b></div><div class="recruit-actions"><button class="btn summon-one" onclick="pull(1)">✧ 1回募集<small>星晶石 ${GACHA_CONFIG.ONE_COST.toLocaleString()}</small></button><button class="btn summon-ten" onclick="pull(10)">✦ 10回募集<small>星晶石 ${GACHA_CONFIG.TEN_COST.toLocaleString()}</small></button></div><p class="recruit-rate">SR ${RATE.SR}% · SSR ${RATE.SSR}% · UR ${RATE.UR}%</p></section>`;
+ const mode=gachaMode==='new19'?'new19':gachaMode!=='normal'&&pickupActive(gachaMode)?gachaMode:'normal';
+ const label=mode==='normal'?'通常募集':mode==='new19'?'新ヒロイン19人募集':'期間限定ピックアップ';
+ const rates=mode==='new19'?NEW19_RATE:RATE;
+ return `<section class="recruit-stage gacha-v030-stage" aria-label="星灯募集ステージ"><div class="gacha-v030-stage-top"><span class="mini-overline">YOIBOSHI · STELLAR RECRUIT</span><span class="gacha-v030-mode">${label}</span></div><div class="recruit-sigil" aria-hidden="true">✦</div><h2>星々の導き、仲間との出会い</h2><p>星灯の光で新しい仲間と出会おう。</p><div class="recruit-balance">所持 星晶石 ✧ <b>${S.gems.toLocaleString()}</b></div><div class="recruit-actions"><button class="btn summon-one" onclick="pull(1)">✧ 1回募集<small>星晶石 ${GACHA_CONFIG.ONE_COST.toLocaleString()}</small></button><button class="btn summon-ten" onclick="pull(10)">✦ 10回募集<small>星晶石 ${GACHA_CONFIG.TEN_COST.toLocaleString()}</small></button></div><p class="recruit-rate">${mode==='new19'?'':`R ${rates.R}% · `}SR ${rates.SR}% · SSR ${rates.SSR}% · UR ${rates.UR}%</p></section>`;
 }
 
 function ticketSelectMarkup(){
@@ -2515,11 +2526,13 @@ function pickupMarkup(){
 }
 function recruitmentLineupMarkup(){
  const pool=availableNormalPool();
- const rarities=['UR','SSR','SR'];
- return `<details class="recruit-directory gacha-v030-directory"><summary>募集可能ユニット <small>${pool.length}体・タップして確認</small></summary><div class="directory-content"><p class="gacha-v030-small-note">現在のストーリー進行で、通常募集から排出されるユニットです。ピックアップ中もこの対象から抽選されます。</p>${rarities.map(rarity=>{const group=pool.filter(u=>u.rarity===rarity);return group.length?`<section class="gacha-v030-rarity-block"><h4>${rarity} <small>${group.length}体</small></h4><div class="gacha-v030-unit-grid">${group.map(u=>`<div class="gacha-v030-unit-item"><img loading="lazy" src="${characterIcon(u.person)}" alt=""><span><b>${esc(person(u).name)}</b><small>${esc(u.title)}</small></span><em>${u.rarity}</em></div>`).join('')}</div></section>`:''}).join('')}</div></details>`;
+ const rarities=['UR','SSR','SR',...(gachaMode==='new19'?[]:['R'])];
+ return `<details class="recruit-directory gacha-v030-directory"><summary>募集可能ユニット <small>${pool.length}体・タップして確認</small></summary><div class="directory-content"><p class="gacha-v030-small-note">現在のストーリー進行で、通常募集から排出されるユニットです。ピックアップ中もこの対象から抽選されます。</p>${rarities.map(rarity=>{const group=pool.filter(u=>u.rarity===rarity);return group.length?`<section class="gacha-v030-rarity-block"><h4>${rarity} <small>${group.length}体</small></h4><div class="gacha-v030-unit-grid">${group.map(u=>`<div class="gacha-v030-unit-item"><img loading="lazy" src="${u.rarity==='R'?unitCardArt(u):characterIcon(u.person)}" alt=""><span><b>${esc(person(u).name)}</b><small>${esc(u.title)}</small></span><em>${u.rarity}</em></div>`).join('')}</div></section>`:''}).join('')}</div></details>`;
 }
 function recruitmentDetailsMarkup(){
- return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${RARITIES.map(r=>`<div><strong>${r}</strong><b>${RATE[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定。すべてSR以上です。ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。現在の確率は試遊用の暫定設定です。</p><p class="gacha-v030-small-note">ガチャの確率・天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
+ const rates=gachaMode==='new19'?NEW19_RATE:RATE;
+ const rarities=gachaMode==='new19'?RARITIES.filter(r=>r!=='R'):RARITIES;
+ return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${rarities.map(r=>`<div><strong>${r}</strong><b>${rates[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定。${gachaMode==='new19'?'新ヒロイン募集はSR以上です。':'通常募集にはRも含まれます。'}ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。</p><p class="gacha-v030-small-note">UR天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
 }
 
 function nagiTrialBanner(){return S.quests.q6?.complete?`<div class="gachahero nagi-banner"><img src="${characterPortrait('nagi')}" alt="白峰 凪"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>白峰 凪 ／ 紅の境界</h2><p>寡黙な外部協力者が、新たに募集ラインナップへ。<br>初回限定のお試し募集で、すぐに編成・交流を体験できます。</p><button class="btn nagi-trial" ${S.nagiTrial?'disabled':''} onclick="trialNagiRecruit()">${S.nagiTrial?'お試し募集済み':'凪の無料お試し募集（1回限り）'}</button></div></div>`:''}
