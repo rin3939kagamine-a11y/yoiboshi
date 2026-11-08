@@ -40,6 +40,7 @@ try:
           view="home";storySession=null;dialog=null;battle=null;render();
         }""")
         page.wait_for_selector(".home-mock-v301 .mock-hero")
+        # This test checks the unchanged SR Makoto art; approved R portraits are tested separately.
         # Real served assets, not mock data: validate the newly adopted Makoto artwork.
         portrait=page.evaluate("""async()=>{
           const id='makoto',faces=['normal','smile','pout','sad','surprise','blush'];
@@ -75,9 +76,9 @@ try:
            portrait["loaded"])
         page.evaluate("""()=>{
           // Synthetic QA-only progression: Makoto must be recruited/unlocked to appear in home.
-          S.owned[R2SR('makoto_daily')]={lv:1,aff:0,lb:0,copies:0};
+          S.owned['makoto_work']={lv:1,aff:0,lb:0,copies:0};
           S.chapter4Met=S.chapter4Met||{};S.chapter4Met.makoto=true;
-          S.homeFavorite='makoto';S.homeUnitId=R2SR('makoto_daily');
+          S.homeFavorite='makoto';S.homeUnitId='makoto_work';
           lobbySelected='makoto';view='home';render();
         }""")
         page.locator(".home-mock-v301 .mock-hero .mock-character").wait_for(timeout=10000)
@@ -90,7 +91,7 @@ try:
         # Verify the actual romance heroine page; makoto is one of HERO_IDS.
         page.evaluate("""()=>{
           S.officeMet=true;
-          S.selected=R2SR('makoto_daily');
+          S.selected='makoto_work';
           S.love.activeHero='makoto';
           S.love.mood.makoto='normal';
           S.love.sulking.makoto=false;
