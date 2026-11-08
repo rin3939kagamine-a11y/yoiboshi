@@ -128,7 +128,7 @@ try:
           return {id,rarity:u.rarity,owned:S.owned[id],party:S.party,selected:S.selected,
             home:S.homeUnitId,art:unitCardArt(u),resultMarkup:recruitCardMarkup(drawResults[0])};
         }""")
-        check("C: actual draw returns R", fresh_pull.get("rarity") == "R" and fresh_pull["id"] in registry.get("approved", []) if False else fresh_pull.get("rarity") == "R" and fresh_pull.get("art", "").endswith(".webp"), fresh_pull)
+        check("C: actual draw returns R", fresh_pull.get("rarity") == "R" and fresh_pull.get("art") == "assets/UNIT_ART/" + fresh_pull.get("id", "") + ".webp", fresh_pull)
         check("C: R appears correctly on result card", ">R</span>" in fresh_pull["resultMarkup"], fresh_pull)
         page.reload(wait_until="load", timeout=120000)
         page.wait_for_function("typeof load==='function'")
