@@ -2327,7 +2327,7 @@ function skillRank(id){return Math.max(0,(data(id)?.lb||0)-3)}
 function roster(){
  const owned=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));
  const roleChoices=[['all','すべて'],['attacker','アタッカー'],['tank','タンク'],['healer','ヒーラー'],['support','サポーター']];
- const rarityChoices=['all','SR','SSR','UR'];
+ const rarityChoices=['all','R','SR','SSR','UR'];
  const rarityOrder={UR:0,SSR:1,SR:2,R:3};
  const shown=owned.filter(u=>(rosterRoleFilter==='all'||u.role===rosterRoleFilter)&&(rosterRarityFilter==='all'||u.rarity===rosterRarityFilter))
    .sort((a,b)=>{const ai=S.party.includes(a.id)?0:1,bi=S.party.includes(b.id)?0:1;return ai-bi || (rarityOrder[a.rarity]??9)-(rarityOrder[b.rarity]??9) || (data(b.id)?.lv||1)-(data(a.id)?.lv||1) || person(a).name.localeCompare(person(b).name,'ja');});
@@ -2414,7 +2414,7 @@ function selectTrainingUnit(id){
 }
 function trainingSetFilter(kind,value){
  if(kind==='role'&&['all','attacker','tank','healer','support'].includes(value))trainingRoleFilter=value;
- else if(kind==='rarity'&&['all','SR','SSR','UR'].includes(value))trainingRarityFilter=value;
+ else if(kind==='rarity'&&['all','R','SR','SSR','UR'].includes(value))trainingRarityFilter=value;
  else return;
  render();
 }
@@ -2424,7 +2424,7 @@ function trainingPage(){
  owned.sort((a,b)=>(order[a.rarity]??4)-(order[b.rarity]??4)||((data(b.id)?.lv||0)-(data(a.id)?.lv||0))||person(a).name.localeCompare(person(b).name,'ja'));
  const selected=owned.find(u=>u.id===trainingSelectedUnit)||owned.find(u=>u.id===S.selected)||owned.find(u=>S.party.includes(u.id))||owned[0];
  const roles=[['all','すべて'],['attacker','アタッカー'],['tank','タンク'],['healer','ヒーラー'],['support','サポーター']];
- const rarities=['all','SR','SSR','UR'];
+ const rarities=['all','R','SR','SSR','UR'];
  const filt=(kind,rows,current)=>rows.map(([key,text])=>`<button type="button" class="train-filter ${current===key?'active':''}" aria-pressed="${current===key}" onclick="trainingSetFilter('${kind}','${key}')">${text}</button>`).join('');
  const shown=owned.filter(u=>(trainingRoleFilter==='all'||u.role===trainingRoleFilter)&&(trainingRarityFilter==='all'||u.rarity===trainingRarityFilter));
  const cards=shown.map(u=>{const d=data(u.id);return `<button type="button" class="train-unit ${u.id===selected?.id?'active':''}" aria-pressed="${u.id===selected?.id}" onclick="selectTrainingUnit('${u.id}')"><span class="train-unit-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" loading="lazy" alt=""></span><span class="train-unit-label"><b>${esc(person(u).name)}</b><span><em class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</em> Lv.${d.lv} · ${ROLES[u.role].name}</span><small>${esc(u.title)}</small></span></button>`}).join('');
