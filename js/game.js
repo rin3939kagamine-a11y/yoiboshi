@@ -118,7 +118,7 @@ const UNITS=[
  {id:"rico_show",person:"ena",title:"一人の観客へ",rarity:"R",role:"attacker",color:"#eaa770",s:["ショータイム","フィナーレの花火"]},
  {id:"mai_wind",person:"mai",title:"旅の風の行方",rarity:"R",role:"support",color:"#a887c8",s:["風の舞","幻惑のステップ"]},
  {id:"shio_pool",person:"shio",title:"新しいスタート",rarity:"R",role:"tank",color:"#65a7db",s:["水しぶきガード","プールサイドの盾"]},
- {id:"shio_daily",person:"shio",title:"いつもの汐",rarity:"R",role:"tank",color:"#65a7db",s:["水しぶきガード","プールサイドの盾"]},
+ {id:"shio_daily",person:"shio",title:"いつもの汐",rarity:"R",role:"tank",color:"#65a7db",s:["先輩、任せてください！","みんなの前に立ちます！"]},
  {id:"marine_cafe",person:"marin",title:"海辺の本音",rarity:"R",role:"healer",color:"#e8af65",s:["特製トロピカルドリンク","ひと休みしてきな"]},
  {id:'noel_daily',person:'noel',title:'今を選ぶ白い星',rarity:'R',role:'support',color:'#adc7df',s:['白い星の祈り','流れ星']},
  {id:'yume_tomorrow',person:'yume',title:'今を歩く灯',rarity:'R',role:'healer',color:'#c8a7bb',s:['眠りの灯','夢の続き']},
