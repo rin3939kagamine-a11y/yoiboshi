@@ -78,6 +78,7 @@ try:
         before=page.evaluate("""() => {
           S=fresh();S.gameStarted=true;S.onboarding.enabled=false;S.questGuideSeen=true;
           S.quests.q102={clues:2,complete:true};
+          S.storyFlags.chapter1_open=true; // An actual q102-completed save has cleared the first chapter's gate.
           S.storyFlags.q102=true;S.storyFlags.chapter17_end=true;
           S.storyFlags.chapter18_open=false;
           S.gems=44000;S.gold=99999;
