@@ -2903,7 +2903,8 @@ function makeWave(q,idx){
   const max=Math.round(hpBase*factor.hp*type.hp);
   const atk=(q.baseAtk+idx*2+(elite?3:0))*factor.atk*type.atk;
   const name=kind==='boss'?q.enemy:kind==='swift'?'疾走する残響':kind==='armored'?'装甲の擬似体':elite?q.enemy:i===0?'残響の影':'小さな擬似体';
-  return {id:`w${idx}e${i}`,name,max,hp:max,x:74+(i%2)*15,y:26+(i/Math.max(1,count-1))*49,
+  const chapter18Name=typeof CHAPTER18_WAVE_ENEMY_NAMES!=='undefined'?CHAPTER18_WAVE_ENEMY_NAMES[q.id]?.[idx]?.[i]:null;
+  return {id:`w${idx}e${i}`,name:chapter18Name||name,max,hp:max,x:74+(i%2)*15,y:26+(i/Math.max(1,count-1))*49,
     atk,attackTimer:1.1+i*.34,elite,kind,icon:type.icon,interval:type.interval,damageReduction:type.damageReduction,enraged:false};
  });
 }
