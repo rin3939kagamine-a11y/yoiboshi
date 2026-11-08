@@ -31,6 +31,25 @@ jobs:
         run: |
           python -m pip install playwright==1.56.0
           python -m playwright install --with-deps chromium
+      - name: Verify approved Makoto assets against existing checksum QA
+        run: |
+          python -m pip install Pillow
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import hashlib
+          tests={
+            'full':((1024,1536),'ad6e4f1b5e983270a2226432b20d2d7c64f1f5ed71fd9010b2cbacde6a1c3f83'),
+            'upper':((665,820),'f0dffeaf7f2c4f370e017408e070d1a0d558cf9432fb2ab5552455ab1e9959dd')
+          }
+          for kind,(size,digest) in tests.items():
+              path=Path(f'assets/ART_V2/style_candidates/makoto_v1_{kind}.webp')
+              image=Image.open(path)
+              assert image.size==size and image.mode=='RGBA'
+              assert image.getchannel('A').getextrema()==(0,255)
+              assert hashlib.sha256(path.read_bytes()).hexdigest()==digest
+          print('PASS: existing Makoto style assets unchanged')
+          PY
       - name: Play q103 through q108 in the actual browser
         run: python tools/qa/chapter18_real_smoke.py
       - name: Preserve browser result and mobile screenshots
