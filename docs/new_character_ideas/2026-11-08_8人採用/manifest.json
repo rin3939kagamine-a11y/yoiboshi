@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-08",
+  "project": "yoiboshi",
+  "status": "approved_design_pending_binary_upload",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "image_format": "RGBA PNG",
+  "game_implementation": "not_requested",
+  "github_png_files_uploaded": false,
+  "destination_dir": "assets/ART_V2/full_body/2026-11-08_approved_8",
+  "assets": [
+    {
+      "reference_photo_number": 1,
+      "file": "01_mint_black_idol.png",
+      "approved": true,
+      "github_uploaded": false
+    },
+    {
+      "reference_photo_number": 2,
+      "file": "02_white_shirt_suspenders.png",
+      "approved": true,
+      "github_uploaded": false
+    },
+    {
+      "reference_photo_number": 3,
+      "file": "03_short_bob_mustard.png",
+      "approved": true,
+      "github_uploaded": false
+    },
+    {
+      "reference_photo_number": 4,
+      "file": "04_navy_business_suit.png",
+      "approved": true,
+      "github_uploaded": false
+    },
+    {
+      "reference_photo_number": 5,
+      "file": "05_light_blue_workwear.png",
+      "approved": true,
+      "github_uploaded": false
+    },
+    {
+      "reference_photo_number": 6,
+      "file": "06_caramel_knit.png",
+      "approved": true,
+      "github_uploaded": false
+    },
+    {
+      "reference_photo_number": 7,
+      "file": "07_black_knit_plaid.png",
+      "approved": true,
+      "github_uploaded": false
+    },
+    {
+      "reference_photo_number": 8,
+      "file": "08_mustard_plaid_street.png",
+      "approved": true,
+      "github_uploaded": false
+    }
+  ]
+}
