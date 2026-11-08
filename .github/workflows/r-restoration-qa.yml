@@ -1,0 +1,41 @@
+name: QA - R restoration and recruitment
+on:
+  pull_request:
+    paths:
+      - 'js/game.js'
+      - 'tools/qa/r_restoration_real_smoke.py'
+      - '.github/workflows/r-restoration-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check JavaScript and Python syntax
+        run: |
+          find js -name '*.js' -print0 | xargs -0 -n1 node --check
+          python -m py_compile tools/qa/r_restoration_real_smoke.py
+      - name: Install Playwright and Chromium
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Verify R save migration, gacha distributions, and real mobile layouts
+        run: python tools/qa/r_restoration_real_smoke.py
+      - name: Upload QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r-restoration-regression
+          path: qa_artifacts/r_restoration/
+          if-no-files-found: warn
