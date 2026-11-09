@@ -40,7 +40,7 @@ def refine(label,stem):
         # Precisely identified background components, not skin, nails or highlights.
         mask=(minimum>220)&(chroma<35)&(alpha>140)
         count,comp,stats,_=cv2.connectedComponentsWithStats(mask.astype(np.uint8),8)
-        specs=[(335,215,392,268,500),(389,203,406,253,125),(308,258,349,292,130)]
+        specs=[(349,244,397,295,450),(394,237,411,281,110),(385,260,397,290,50)]
         white=np.zeros(alpha.shape,dtype=bool)
         for x1,y1,x2,y2,min_size in specs:
             matches=[]
@@ -50,7 +50,7 @@ def refine(label,stem):
                     matches.append(i)
             print(f"background island {x1},{y1}: components={matches}",flush=True)
             for i in matches:white|=(comp==i)
-        assert white.sum()>650, "Background island mismatch: avoid unintended modifications"
+        assert white.sum()>700, "Background island mismatch: avoid unintended modifications"
         out[white]=0
         distance=distance_transform_edt(~white)
         boundary=(distance>0)&(distance<=2.1)&hair&(alpha>0)
