@@ -52,9 +52,13 @@
      return {src:'assets/enemies/sakuya_battle.webp',catalogueId:'sakuya_battle'};
    if((b.qid==='q17'||b.qid==='q34')&&e.kind==='boss')
      return {src:'assets/enemies/ibuki_battle.webp',catalogueId:'ibuki_battle'};
+   // Approved chibi identity: genuine Haruka and the separate impostor
+   // are different characters. q24's mask shadows are NOT the impostor.
+   if(e.harukaRole==='impostor')
+     return {src:'assets/ART_V2/chibi/haruka_npc_fake.png',catalogueId:'haruka_npc_fake'};
    if(b.qid==='q24'){
      if(e.harukaRole==='real')
-       return {src:'assets/enemies/haruka.webp',catalogueId:'haruka'};
+       return {src:'assets/ART_V2/chibi/haruka_npc_real.png',catalogueId:'haruka_npc_real'};
      if(e.harukaRole==='shadow')
        return {src:'assets/enemies/haruka_shadow.webp',catalogueId:'haruka_shadow'};
    }
