@@ -199,3 +199,91 @@
  .tb-root.yb-battle-dashboard .yb-tactical-header{position:relative;top:auto}
  .tb-root.yb-battle-dashboard .tb-party{min-height:48px!important}
 }
+
+
+/* 2026-11-09: viewport-contained turn battle.
+   Keep the real, default turn engine's field, targets, party and commands in one screen.
+   Only layout CSS; no battle rules, scene content or save-data changes. */
+body:has(.combat-page .tb-root.yb-battle-dashboard){overflow:hidden;background:#101b33}
+body:has(.combat-page .tb-root.yb-battle-dashboard) .sidebar,
+body:has(.combat-page .tb-root.yb-battle-dashboard) .topbar,
+body:has(.combat-page .tb-root.yb-battle-dashboard) .bottomnav,
+body:has(.combat-page .tb-root.yb-battle-dashboard) .copyright{display:none!important}
+body:has(.combat-page .tb-root.yb-battle-dashboard) .main{width:100%!important;min-width:0!important}
+body:has(.combat-page .tb-root.yb-battle-dashboard) .page.combat-page{
+ width:100%;max-width:none!important;height:100dvh;min-height:0;
+ overflow:hidden;display:flex;flex-direction:column;
+ padding:max(4px,env(safe-area-inset-top)) max(6px,env(safe-area-inset-right))
+         max(4px,env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left))!important;
+}
+.combat-page:has(.tb-root.yb-battle-dashboard) > .eyebrow,
+.combat-page:has(.tb-root.yb-battle-dashboard) > .page-title,
+.combat-page:has(.tb-root.yb-battle-dashboard) > .desc{display:none!important}
+.combat-page .tb-root.yb-battle-dashboard{
+ flex:1 1 auto;min-height:0;height:100%;max-width:none!important;
+ padding:5px!important;gap:5px!important;overflow:hidden;
+ border-radius:10px!important;
+}
+.combat-page .tb-root.yb-battle-dashboard .tb-topline{flex:none;min-height:0;margin:0!important}
+.combat-page .tb-root.yb-battle-dashboard .tb-rotate-hint{display:none!important}
+.combat-page .tb-root.yb-battle-dashboard .tb-q12-hint{flex:none;margin:0!important;max-height:9dvh;overflow-y:auto}
+.combat-page .tb-root.yb-battle-dashboard .yb-tactical-header{
+ flex:0 0 auto;position:relative;top:auto;max-height:31dvh;
+ overflow-y:auto;padding:5px!important;gap:4px!important;box-shadow:none;
+}
+.combat-page .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy{padding:4px 6px!important}
+.combat-page .tb-root.yb-battle-dashboard .yb-tactical-header .yb-timeline{min-height:31px!important}
+.combat-page .tb-root.yb-battle-dashboard .tb-layout-grid{
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(285px,34%)!important;
+ grid-template-rows:minmax(0,1fr)!important;flex:1 1 auto;
+ min-width:0;min-height:0;overflow:hidden;gap:7px!important;
+}
+.combat-page .tb-root.yb-battle-dashboard .tb-field-col,
+.combat-page .tb-root.yb-battle-dashboard .tb-control-col{
+ display:flex!important;flex-direction:column!important;
+ min-width:0;min-height:0;width:100%;gap:4px!important;
+}
+.combat-page .tb-root.yb-battle-dashboard .tb-field-col{overflow:hidden}
+.combat-page .tb-root.yb-battle-dashboard .tb-fighters{flex:1 1 auto;display:flex!important;min-height:0}
+.combat-page .tb-root.yb-battle-dashboard .tb-fighters .yc-turn-stage,
+.combat-page .tb-root.yb-battle-dashboard.q6-classic .yc-turn-stage.q6-classic-stage{
+ flex:1 1 auto;width:100%;height:100%!important;
+ min-height:120px!important;max-height:none!important;
+}
+.combat-page .tb-root.yb-battle-dashboard .tb-field-col .tb-live-log{
+ flex:none;max-height:38px;overflow:hidden;
+}
+.combat-page .tb-root.yb-battle-dashboard .tb-field-col .tb-log{flex:none;max-height:20dvh;overflow:auto}
+.combat-page .tb-root.yb-battle-dashboard .tb-control-col{
+ overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
+}
+.combat-page .tb-root.yb-battle-dashboard .tb-party-grid{flex:none}
+.combat-page .tb-root.yb-battle-dashboard .yb-resource-dashboard,
+.combat-page .tb-root.yb-battle-dashboard .tb-commands{flex:none}
+.combat-page .tb-root.yb-battle-dashboard .tb-commands{padding:5px!important}
+.combat-page .tb-root.yb-battle-dashboard .tb-command-row .tb-action{min-height:42px!important}
+@media(max-width:850px) and (orientation:portrait){
+ .combat-page .tb-root.yb-battle-dashboard .tb-layout-grid{
+  display:flex!important;flex-direction:column!important;gap:4px!important;
+ }
+ .combat-page .tb-root.yb-battle-dashboard .tb-field-col{
+  flex:1 1 auto;min-height:100px;
+ }
+ .combat-page .tb-root.yb-battle-dashboard .tb-control-col{
+  flex:0 1 auto;max-height:48dvh;min-height:0;
+ }
+ .combat-page .tb-root.yb-battle-dashboard .tb-party{min-height:48px!important;padding:3px!important}
+ .combat-page .tb-root.yb-battle-dashboard.q6-classic .tb-party img{display:none!important}
+ .combat-page .tb-root.yb-battle-dashboard .yb-tactical-header{max-height:29dvh}
+ .combat-page .tb-root.yb-battle-dashboard .tb-command-row .tb-action{min-height:38px!important}
+}
+@media(orientation:landscape) and (max-height:500px){
+ .combat-page .tb-root.yb-battle-dashboard .yb-tactical-header{max-height:28dvh}
+ .combat-page .tb-root.yb-battle-dashboard .tb-layout-grid{
+  display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)!important;
+ }
+ .combat-page .tb-root.yb-battle-dashboard.q6-classic .yc-turn-stage.q6-classic-stage{
+  min-height:100px!important;
+ }
+ .combat-page .tb-root.yb-battle-dashboard .tb-party{min-height:46px!important}
+}
