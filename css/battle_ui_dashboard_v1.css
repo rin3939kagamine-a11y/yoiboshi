@@ -1,0 +1,201 @@
+/* RE:START battle dashboard redesign (presentation only, 2026-11-09).
+ * Readable enemy data -> next-action timeline -> battlefield ->
+ * four-character party status -> light dashboard -> actions.
+ * Rules, targeting, combat effects, and saves are unchanged.
+ */
+.tb-root.yb-battle-dashboard{
+ --yb-panel:#14243e;--yb-border:#8298b8;--yb-text:#f3f6ff;
+ display:flex;flex-direction:column;gap:8px;min-width:0;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header{
+ position:sticky;top:0;z-index:65;
+ display:flex;flex-direction:column;gap:7px;
+ background:rgba(14,29,52,.97);color:var(--yb-text);
+ border:1px solid var(--yb-border);border-radius:13px;
+ padding:10px;box-shadow:0 8px 20px rgba(0,0,0,.22);
+}
+.tb-root.yb-battle-dashboard .yb-header-caption{
+ display:flex;gap:10px;align-items:baseline;justify-content:space-between;
+ font-weight:900;font-size:11px;letter-spacing:.06em;color:#f8e5b8;
+}
+.tb-root.yb-battle-dashboard .yb-header-caption span{
+ font-size:10px;font-weight:500;letter-spacing:0;color:#c9d8f0;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemies{
+ width:100%;min-width:0;display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:7px;padding:0;margin:0;min-height:0!important;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemies:has(>.tb-enemy:only-child){
+ grid-template-columns:minmax(0,1fr)!important;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemies:has(>.tb-enemy:nth-child(2):last-child){
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy{
+ display:flex!important;flex-direction:column;align-items:stretch;
+ gap:3px;min-width:0;min-height:0!important;
+ padding:8px 10px!important;border-radius:9px;box-sizing:border-box;
+ background:#213652;color:#f7f9ff;border:1px solid #657d9e;
+ text-align:left;overflow:hidden;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy.selected{
+ border-color:#ffd779;box-shadow:inset 0 0 0 1px #ffcf71,0 0 0 2px #f4b95855;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy b{
+ display:block;font-size:clamp(11px,1.05vw,14px);line-height:1.3;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy .tb-hp{
+ height:7px!important;min-height:7px;margin:2px 0 0;
+ background:#09182a;border:1px solid #6b86a0;border-radius:5px;overflow:hidden;
+}
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy small{
+ font-size:10px;line-height:1.25;color:#dce9f6;min-height:0;
+}
+.tb-root.yb-battle-dashboard .yb-enemy-forecast{
+ order:4;display:block;max-width:100%;box-sizing:border-box;
+ background:#304a6d;border-radius:5px;color:#ffebad;
+ font-size:11px;font-weight:800;line-height:1.25;
+ padding:3px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.tb-root.yb-battle-dashboard .yb-timeline{
+ display:flex!important;align-items:center;justify-content:flex-start;
+ gap:6px;flex-wrap:nowrap!important;min-width:0;width:100%;
+ box-sizing:border-box;min-height:39px!important;margin:0;padding:5px 7px;
+ background:rgba(7,17,34,.88);border:1px solid #435d83;border-radius:8px;
+ overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;
+}
+.tb-root.yb-battle-dashboard .yb-timeline>span:first-child{
+ flex:none;white-space:nowrap;color:#fff1bb;font-weight:800;font-size:11px;
+}
+.tb-root.yb-battle-dashboard .yb-turn-now{
+ flex:none;font-size:12px;color:#ffe19c;white-space:nowrap;
+ padding-right:6px;border-right:1px solid #627a9b;
+}
+.tb-root.yb-battle-dashboard .yb-timeline .tb-turn-token{
+ flex:none;width:32px;height:32px;min-width:32px;min-height:32px;
+}
+.tb-root.yb-battle-dashboard .yb-timeline .tb-turn-token:first-of-type{
+ border-color:#ffe18a;box-shadow:0 0 0 2px #ffe18a88;
+}
+.tb-root.yb-battle-dashboard .tb-layout-grid{
+ display:flex!important;flex-direction:column!important;
+ gap:8px;min-width:0;width:100%;
+}
+.tb-root.yb-battle-dashboard .tb-field-col,
+.tb-root.yb-battle-dashboard .tb-control-col{
+ display:flex!important;flex-direction:column!important;
+ min-width:0;width:100%;gap:7px;
+}
+.tb-root.yb-battle-dashboard .tb-fighters{
+ display:block!important;min-width:0;width:100%;
+}
+.tb-root.yb-battle-dashboard .yc-turn-stage{
+ width:100%;height:clamp(180px,34dvh,380px)!important;
+ min-height:180px!important;overflow:hidden;isolation:isolate;
+}
+.tb-root.yb-battle-dashboard .yc-turn-stage .yc-intent-overview{
+ display:none!important; /* Action forecasts are visible in the sticky enemy header. */
+}
+.tb-root.yb-battle-dashboard .tb-party-grid{
+ display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:6px!important;margin:0;min-width:0;width:100%;
+}
+.tb-root.yb-battle-dashboard .tb-party{
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ gap:6px!important;min-width:0;min-height:62px!important;height:auto!important;
+ padding:6px 7px!important;border-radius:9px;box-sizing:border-box;
+}
+.tb-root.yb-battle-dashboard .tb-party>img{
+ flex:0 0 34px;width:34px!important;height:38px!important;object-fit:cover;
+}
+.tb-root.yb-battle-dashboard .tb-party>div{
+ flex:1 1 auto;min-width:0;max-width:100%;
+}
+.tb-root.yb-battle-dashboard .tb-party b{
+ display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ font-size:11px;line-height:1.25;
+}
+.tb-root.yb-battle-dashboard .tb-party small{
+ display:block;font-size:10px;white-space:normal;overflow-wrap:anywhere;line-height:1.25;
+}
+.tb-root.yb-battle-dashboard .tb-party .tb-hp{height:6px;margin:3px 0}
+.tb-root.yb-battle-dashboard .yb-resource-dashboard{
+ display:block;min-width:0;width:100%;box-sizing:border-box;
+ padding:8px;background:#e7f0fb;border:1px solid #92a8c7;border-radius:11px;
+}
+.tb-root.yb-battle-dashboard .yb-resource-dashboard .tb-flame-ui{
+ min-width:0;margin:0;
+}
+.tb-root.yb-battle-dashboard .yb-resource-dashboard .tb-light{
+ min-width:0;box-sizing:border-box;
+}
+.tb-root.yb-battle-dashboard .yb-resource-dashboard .tb-light strong{
+ white-space:nowrap;flex:none;
+}
+.tb-root.yb-battle-dashboard .tb-commands{
+ background:#eff4fc;border:1px solid #98afca;border-radius:11px;
+ padding:9px!important;box-sizing:border-box;min-width:0;
+}
+.tb-root.yb-battle-dashboard .tb-commands>b{
+ display:block;margin-bottom:7px;font-size:13px;
+}
+.tb-root.yb-battle-dashboard .tb-command-row{
+ display:grid!important;grid-template-columns:1.25fr 1fr 1fr .9fr;
+ align-items:stretch;gap:7px!important;min-width:0;
+}
+.tb-root.yb-battle-dashboard .tb-command-row>.tb-action-attack{
+ min-height:58px!important;background:#c94448!important;color:#fff!important;
+ font-weight:900;font-size:15px;border-color:#ae303e!important;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.tb-root.yb-battle-dashboard .tb-action-attack small{
+ font-size:10px;line-height:1.2;color:inherit;opacity:.9;
+}
+.tb-root.yb-battle-dashboard .tb-command-row .tb-skill-wrapper{
+ min-width:0;display:flex;flex-wrap:nowrap;
+}
+.tb-root.yb-battle-dashboard .tb-command-row .tb-action-skill{
+ min-width:0;flex:1 1 auto;min-height:58px!important;
+ padding:7px!important;font-weight:800;font-size:12px;
+ background:#f7e7b8;color:#332e24;border-color:#b89958;
+ white-space:normal;overflow-wrap:anywhere;
+}
+.tb-root.yb-battle-dashboard .tb-command-row .tb-action-guard{
+ min-height:58px!important;font-weight:800;font-size:12px;
+ background:#dce8f4;color:#283e5c;border-color:#879db9;
+}
+.tb-root.yb-battle-dashboard .tb-command-row .tb-action:focus-visible,
+.tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy:focus-visible{
+ outline:3px solid #f7c854!important;outline-offset:2px;
+}
+@media(max-width:600px){
+ .tb-root.yb-battle-dashboard{gap:5px}
+ .tb-root.yb-battle-dashboard .yb-tactical-header{padding:6px;gap:4px}
+ .tb-root.yb-battle-dashboard .yb-header-caption{font-size:10px}
+ .tb-root.yb-battle-dashboard .yb-header-caption span{font-size:9px}
+ .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemies{gap:3px}
+ .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy{padding:5px!important;gap:2px}
+ .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy b{font-size:10px}
+ .tb-root.yb-battle-dashboard .yb-enemy-forecast{font-size:9px;padding:2px 3px}
+ .tb-root.yb-battle-dashboard .yb-timeline{gap:4px;padding:4px}
+ .tb-root.yb-battle-dashboard .yb-timeline .tb-turn-token{width:26px;height:26px;min-width:26px;min-height:26px}
+ .tb-root.yb-battle-dashboard .yb-turn-now{font-size:10px;max-width:110px;overflow:hidden;text-overflow:ellipsis}
+ .tb-root.yb-battle-dashboard .yc-turn-stage{height:clamp(175px,30dvh,250px)!important}
+ .tb-root.yb-battle-dashboard .tb-party-grid{gap:3px!important}
+ .tb-root.yb-battle-dashboard .tb-party{min-height:68px!important;padding:4px!important}
+ .tb-root.yb-battle-dashboard .tb-party>img{display:none!important}
+ .tb-root.yb-battle-dashboard .tb-party b{font-size:10px}
+ .tb-root.yb-battle-dashboard .tb-party small{font-size:9px}
+ .tb-root.yb-battle-dashboard .yb-resource-dashboard{padding:5px}
+ .tb-root.yb-battle-dashboard .tb-command-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px!important}
+ .tb-root.yb-battle-dashboard .tb-command-row>.tb-action-attack,
+ .tb-root.yb-battle-dashboard .tb-command-row .tb-action-skill,
+ .tb-root.yb-battle-dashboard .tb-command-row .tb-action-guard{min-height:46px!important}
+}
+@media(orientation:landscape) and (max-height:440px){
+ .tb-root.yb-battle-dashboard .yc-turn-stage{height:170px!important;min-height:170px!important}
+ .tb-root.yb-battle-dashboard .yb-tactical-header{position:relative;top:auto}
+ .tb-root.yb-battle-dashboard .tb-party{min-height:48px!important}
+}
