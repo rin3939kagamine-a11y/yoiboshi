@@ -1,7 +1,7 @@
 {
-  "version": 1,
+  "version": 2,
   "approved_at": "2026-11-09",
-  "scope": "historical_haruka_npc_chibi_pair",
+  "scope": "q24_genuine_haruka_and_fake_haruka_mask_shadows",
   "variants": [
     {
       "id": "haruka_npc_real",
@@ -17,13 +17,13 @@
       "alpha": "RGBA",
       "bytes": 1872505,
       "sha256": "f4cdf690d5c24799097105c0b9e1535ab704cadb4ad2cf7d5eda5a1d0541c99e",
-      "live_use": "q24 final-wave genuine Haruka enemy sprite"
+      "live_use": "q24 final-wave genuine Haruka / harukaRole=real"
     },
     {
       "id": "haruka_npc_fake",
       "character_name": "偽ハルカ",
-      "identity": "impostor",
-      "display_name": "偽ハルカ（別キャラクター）",
+      "identity": "mask_shadow",
+      "display_name": "偽ハルカ（仮面の影）",
       "asset": "assets/ART_V2/chibi/haruka_npc_fake.png",
       "original_attachment": "ゴシックな疫病医師ちび少女(2).png",
       "original_order": 2,
@@ -33,11 +33,11 @@
       "alpha": "RGBA",
       "bytes": 1736392,
       "sha256": "5afbbee5c018a811d4f0f999a33094e66fc27347fffb69f728a9dcb61303baed",
-      "live_use": "registered only; future role harukaRole=impostor; no encounter created"
+      "live_use": "q24 final-wave two mask shadows / harukaRole=shadow",
+      "battle_role": "shadow"
     }
   ],
   "distinct_from": [
-    "既存q24の仮面の影（harukaRole=shadow）",
     "新規ガチャ用ヒロインの内部ID haruka"
   ],
   "unchanged": [
@@ -47,5 +47,9 @@
     "gacha",
     "save_format",
     "other_character_art"
-  ]
+  ],
+  "mapping": {
+    "q24_real": "haruka_npc_real",
+    "q24_shadow": "haruka_npc_fake"
+  }
 }
