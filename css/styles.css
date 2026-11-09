@@ -3094,3 +3094,76 @@ body:has(.vn-story) .page {
   width: 100%;
   max-width: none;
 }
+
+
+/* Full-screen combat UI (2026-11-09).
+   Layout-only: no changes to combat simulation, target selection or save data. */
+body:has(.combat-page .wave-battle:not(.qcin-active)) {overflow:hidden;}
+body:has(.combat-page .wave-battle:not(.qcin-active)) .sidebar,
+body:has(.combat-page .wave-battle:not(.qcin-active)) .topbar,
+body:has(.combat-page .wave-battle:not(.qcin-active)) .bottomnav {display:none!important;}
+body:has(.combat-page .wave-battle:not(.qcin-active)) .main {width:100%!important;max-width:none!important;}
+body:has(.combat-page .wave-battle:not(.qcin-active)) .combat-page {
+  width:100%;max-width:none;height:100dvh;min-height:0;
+  padding:max(5px,env(safe-area-inset-top)) max(7px,env(safe-area-inset-right))
+    max(5px,env(safe-area-inset-bottom)) max(7px,env(safe-area-inset-left))!important;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.combat-page:has(.wave-battle:not(.qcin-active)) > .eyebrow,
+.combat-page:has(.wave-battle:not(.qcin-active)) > .page-title,
+.combat-page:has(.wave-battle:not(.qcin-active)) > .desc,
+.combat-page:has(.wave-battle:not(.qcin-active)) > .copyright {display:none!important;}
+.combat-page .wave-battle:not(.qcin-active) {
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(260px,330px)!important;
+  grid-template-rows:minmax(0,1fr);flex:1;min-height:0;width:100%;gap:7px!important;
+}
+.combat-page .wave-battle:not(.qcin-active) > .card {min-width:0;min-height:0;box-shadow:none;}
+.combat-page .wave-battle:not(.qcin-active) > .card.pad {
+  display:flex;flex-direction:column;padding:7px!important;overflow:hidden;
+}
+.combat-page .wave-battle:not(.qcin-active) .v024-battle-stage {
+  display:flex;flex:1 1 auto;min-height:0;position:relative;
+}
+.combat-page .wave-battle:not(.qcin-active) .arena.overhead {
+  width:100%;height:100%!important;flex:1;min-height:0;max-height:none!important;
+}
+.combat-page .wave-battle:not(.qcin-active) .wave-header,
+.combat-page .wave-battle:not(.qcin-active) .wave-steps,
+.combat-page .wave-battle:not(.qcin-active) .travel-bar {flex:none;}
+.combat-page .wave-battle:not(.qcin-active) #battle-brief {display:none!important;}
+.combat-page .wave-battle:not(.qcin-active) .battlehud {
+  padding:7px!important;display:flex;flex-direction:column;overflow-y:auto;
+  overscroll-behavior:contain;scrollbar-width:thin;
+}
+.combat-page .wave-battle:not(.qcin-active) .v688-ally-skills {flex:none;gap:4px;}
+.combat-page .wave-battle:not(.qcin-active) .v688-unitline {padding:3px!important;}
+.combat-page .wave-battle:not(.qcin-active) .v688-skillbtn {min-height:35px!important;}
+.combat-page .wave-battle:not(.qcin-active) .v688-combat-actions {flex:none;flex-wrap:wrap;}
+.combat-page .wave-battle:not(.qcin-active) .v688-combat-log {flex:none;}
+.combat-page .wave-battle:not(.qcin-active) .v688-combat-log:not([open]) .battlelog {display:none;}
+@media(max-width:850px) {
+  .combat-page .wave-battle:not(.qcin-active) {
+    display:flex!important;flex-direction:column!important;gap:4px!important;
+  }
+  .combat-page .wave-battle:not(.qcin-active) > .card.pad {
+    flex:1 1 auto;min-height:110px;padding:4px!important;
+  }
+  .combat-page .wave-battle:not(.qcin-active) > .battlehud {
+    flex:0 1 auto;max-height:57dvh;min-height:0;padding:4px!important;
+  }
+  .combat-page .wave-battle:not(.qcin-active) .v688-unitline {
+    grid-template-columns:minmax(0,41%) minmax(0,59%);padding:2px!important;
+  }
+  .combat-page .wave-battle:not(.qcin-active) .v688-unit-face {width:26px;height:29px;}
+  .combat-page .wave-battle:not(.qcin-active) .v688-skillbtn {
+    min-height:31px!important;max-height:39px!important;
+  }
+  .combat-page .wave-battle:not(.qcin-active) .wave-steps {margin-bottom:1px;}
+  .combat-page .wave-battle:not(.qcin-active) .wave-header {margin-bottom:1px;}
+  .combat-page .wave-battle:not(.qcin-active) .v688-combat-actions .btn {min-height:30px;}
+}
+@media(max-width:850px) and (max-height:660px) {
+  .combat-page .wave-battle:not(.qcin-active) > .battlehud {max-height:63dvh;}
+  .combat-page .wave-battle:not(.qcin-active) .v688-unit-face {height:25px;}
+  .combat-page .wave-battle:not(.qcin-active) .v688-skillbtn {min-height:28px!important;}
+}
