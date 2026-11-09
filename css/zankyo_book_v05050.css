@@ -1,0 +1,23 @@
+/* 宵星の契約者 RE:START Ver.0.50.5.0 — 残響図鑑 */
+.zk-detail{display:grid;grid-template-columns:minmax(150px,240px) 1fr;gap:clamp(12px,2.4vw,28px);align-items:center;padding:clamp(14px,2vw,24px);margin:6px 0 18px;
+ background:radial-gradient(ellipse at 18% 40%,#3b2a5c 0%,#1b2440 58%,#141a2e 100%)!important;border:1px solid #6f5d96!important;color:#efe9ff}
+.zk-detail-art{display:grid;place-items:center;min-height:200px;padding:10px;border-radius:16px;background:radial-gradient(ellipse at 50% 45%,#ffffff 0%,#efeaf9 70%,#e2dbf3 100%);box-shadow:inset 0 0 0 1px #ffffff55}
+.zk-detail-art img{max-height:clamp(200px,34vh,340px);width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 10px #4b2d8a40)}
+.zk-detail-copy small{display:block;color:#b9a8e6;letter-spacing:.06em;font-size:12px}
+.zk-detail-copy h2{margin:4px 0 10px;font-size:clamp(22px,3vw,32px);font-family:Georgia,'Yu Mincho','Hiragino Mincho ProN',serif;color:#fff}
+.zk-detail-copy p{margin:0 0 14px;line-height:1.95;font-size:14px;color:#e2dcf5;max-width:36em}
+.zk-detail-copy dl{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0}
+.zk-detail-copy dt{font-size:11px;color:#a99bd0}
+.zk-detail-copy dd{margin:2px 0 0;font-weight:800;font-size:13px}
+.zk-empty{display:block;color:#e2dcf5}
+.zk-group-title{margin:18px 0 10px;font-size:16px}
+.zk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.zk-card{display:grid;gap:6px;justify-items:center;padding:8px 6px 10px;border-radius:14px;border:1px solid #d6dff0;background:#fff;color:#2c3d5c;font-weight:800;font-size:12px;line-height:1.35;min-height:44px}
+.zk-card.active{border-color:#8a6ad8;box-shadow:0 0 0 3px #e7defc}
+.zk-card:focus-visible{outline:3px solid #e969aa;outline-offset:2px}
+.zk-thumb{display:grid;place-items:center;width:100%;aspect-ratio:1/1;border-radius:10px;background:linear-gradient(160deg,#f4f1fb,#e7eaf7);overflow:hidden}
+.zk-thumb img{max-width:92%;max-height:92%;object-fit:contain}
+.zk-card.unknown{background:#f2f4f9;color:#93a0b8;cursor:default}
+.zk-card.unknown .zk-thumb img{filter:brightness(0) opacity(.18)}
+.zk-name{text-align:center;word-break:keep-all;overflow-wrap:anywhere}
+@media(max-width:560px){.zk-detail{grid-template-columns:1fr;text-align:left}.zk-detail-art{min-height:160px}.zk-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
