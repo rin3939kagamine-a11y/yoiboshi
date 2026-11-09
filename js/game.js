@@ -1086,7 +1086,7 @@ function currentAudioContext(){
  // A boss theme starts at its appearance, not during preceding travel or waves.
  // Continue it through the short q12 victory cutscene until the battle closes.
  const bossEncounter=!!(view==='combat'&&battle&&!battle.done&&
-   (battle.qid==='q12'||battle.qid==='q17'||battle.qid==='q24'||battle.qid==='q28')&&
+   (battle.qid==='q12'||battle.qid==='q17'||battle.qid==='q24'||battle.qid==='q28'||['q35','q40','q45'].includes(battle.qid))&&
    battle.wave===battle.totalWaves-1&&
    (battle.phase==='fight'||battle.phase==='cinematicVictory')&&
    battle.enemies.some(e=>e.kind==='boss'));
