@@ -6,13 +6,13 @@
  'use strict';
  if(typeof CHAPTER4_STORIES==='undefined'||typeof CHAPTER4_INVESTIGATION_CASES==='undefined'||typeof QUEST_BY_ID==='undefined')return;
  const scene=CHAPTER4_STORIES;
- const shadowArt='assets/enemies/haruka_shadow.webp';
+ const shadowArt='assets/ART_V2/chibi/haruka_npc_fake.png';
  const bossArt='assets/enemies/haruka.webp';
  let shadowArtMissing=false;
- // 新しい分身画像が未配置なら、既存ハルカ絵を暗く加工して表示。
+ // 偽ハルカ＝仮面の影。指定された②のちびキャラを表示し、読込失敗時のみ従来の代替画像を使う。
  function setEnemyArt(img,isShadow){
   if(!img)return;
-  img.style.filter=isShadow?'brightness(.86) saturate(.9)':'none';
+  img.style.filter='none';
   img.onerror=isShadow?function(){shadowArtMissing=true;this.onerror=null;this.src=bossArt;this.style.filter='grayscale(1) brightness(.58)';}:null;
   img.src=isShadow&&!shadowArtMissing?shadowArt:bossArt;
   if(isShadow&&shadowArtMissing)img.style.filter='grayscale(1) brightness(.58)';
