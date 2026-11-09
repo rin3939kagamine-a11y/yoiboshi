@@ -193,9 +193,9 @@
 @media (orientation:portrait) and (max-width:700px) {
   .combat-page .tb-root.yb-immersive {
     --yb-read-top: 100px;
-    --yb-read-bottom: 192px;
+    --yb-read-bottom: 201px;
     --yb-read-field-top: calc(max(3px, env(safe-area-inset-top)) + 145px);
-    --yb-read-field-bottom: 200px;
+    --yb-read-field-bottom: 209px;
   }
   .combat-page .tb-root.yb-immersive .tb-topline strong{font-size:12px!important}
   .combat-page .tb-root.yb-immersive .tb-topline .btn {
@@ -238,13 +238,13 @@
   }
   .combat-page .tb-root.yb-immersive > .tb-control-col,
   .combat-page .tb-root.yb-immersive.q6-classic > .tb-control-col {
-    grid-template-rows:45px 33px 102px!important;gap:2px!important;padding:3px!important;
+    grid-template-rows:54px 33px 102px!important;gap:2px!important;padding:3px!important;
   }
   .combat-page .tb-root.yb-immersive .tb-party-grid,
   .combat-page .tb-root.yb-immersive .tb-party,
   .combat-page .tb-root.yb-immersive.q6-classic .tb-party-grid,
   .combat-page .tb-root.yb-immersive.q6-classic .tb-party {
-    height:45px!important;min-height:45px!important;max-height:45px!important;
+    height:54px!important;min-height:54px!important;max-height:54px!important;
     padding:2px 3px!important;
   }
   .combat-page .tb-root.yb-immersive .tb-party b{font-size:11px!important;line-height:14px!important;max-height:14px!important}
@@ -385,5 +385,26 @@
   }
   .combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline{
     margin:0!important;padding:0 4px!important;
+  }
+}
+
+
+/* The selected-actor label inherited pale gold from the dark classic HUD.
+   The current command panel is light, so use strong readable contrast. */
+.combat-page .tb-root.yb-immersive .tb-commands>b{
+  color:#1b324c!important;
+  font-weight:800!important;
+  text-shadow:none!important;
+}
+@media(orientation:portrait) and (max-width:700px){
+  /* Preserve BOTH HP and CT values; do not truncate the combined label. */
+  .combat-page .tb-root.yb-immersive .tb-party small{
+    display:block!important;white-space:normal!important;
+    overflow:visible!important;text-overflow:clip!important;
+    max-height:25px!important;height:auto!important;
+    line-height:12px!important;word-break:normal!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-party>div{
+    overflow:hidden!important;max-height:50px!important;
   }
 }
