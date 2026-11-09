@@ -53,6 +53,22 @@ const { chromium } = require('playwright');
           shellCSS:{h:getComputedStyle(shell).height,flex:getComputedStyle(shell).flex,position:getComputedStyle(shell).position,aspect:getComputedStyle(shell).aspectRatio},
           imgCSS:img?{height:getComputedStyle(img).height,opacity:getComputedStyle(img).opacity,visibility:getComputedStyle(img).visibility,position:getComputedStyle(img).position}:null};}));
         console.log('SPRITES '+name+' '+JSON.stringify(debugSprites));
+        const pixels=await page.evaluate(()=>{
+          const img=document.querySelector('#ycTurnStage .yc-enemy-slot.q6-giant img');
+          if(!img)return null;
+          const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;
+          const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0);
+          const d=ctx.getImageData(0,0,c.width,c.height).data;
+          let bbox=[c.width,c.height,0,0],opaque=0,visible=0;
+          for(let y=0;y<c.height;y+=2)for(let x=0;x<c.width;x+=2){
+            const p=(y*c.width+x)*4,a=d[p+3];
+            if(a>32){visible++;bbox=[Math.min(bbox[0],x),Math.min(bbox[1],y),Math.max(bbox[2],x),Math.max(bbox[3],y)]}
+            if(a>220)opaque++;
+          }
+          return {visible,opaque,bbox,natural:[c.width,c.height]};
+        });
+        console.log('BOSSPIXELS '+name+' '+JSON.stringify(pixels));
+
       }
       await page.screenshot({path:'qa-'+name+'-start.png'});
       assert(a.scene&&a.scene.w>=w-5&&a.scene.h>=h-5,name+' scene is not full screen '+JSON.stringify(a.scene));
