@@ -455,3 +455,22 @@ body:has(.combat-page .tb-root.yb-battle-dashboard.yb-immersive) .page.combat-pa
   width:100%!important;height:100%!important;max-height:none!important;
   object-fit:contain!important;object-position:center bottom!important;
 }
+
+
+/* Fully separate the sprite arena from the lower overlay at every aspect
+   ratio. The original .q6-classic selector was more specific than the
+   first responsive override and left a strip of sprites behind controls. */
+@media(orientation:portrait){
+ .combat-page .tb-root.yb-immersive.q6-classic > .tb-layout-grid,
+ .combat-page .tb-root.yb-immersive > .tb-layout-grid{
+   top:calc(max(3px,env(safe-area-inset-top)) + 126px)!important;
+   bottom:190px!important;
+ }
+}
+@media(orientation:landscape) and (max-height:520px){
+ .combat-page .tb-root.yb-immersive.q6-classic > .tb-layout-grid,
+ .combat-page .tb-root.yb-immersive > .tb-layout-grid{
+   top:calc(max(3px,env(safe-area-inset-top)) + 104px)!important;
+   bottom:112px!important;
+ }
+}
