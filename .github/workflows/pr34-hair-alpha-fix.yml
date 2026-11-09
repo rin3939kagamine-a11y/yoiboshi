@@ -1,4 +1,4 @@
-name: PR34 - Source v2 diagnostics
+name: PR34 - Hair gap transparency v3
 on:
   push:
     branches:
@@ -27,13 +27,14 @@ jobs:
       - name: Install image-processing libraries
         run: python -m pip install pillow numpy scipy opencv-python-headless
       - name: Refine white holes without changing any RGB values
-        run: python tools/qa/pr34_source_diagnostic.py
+        run: python tools/qa/pr34_hair_transparency_refine_v3.py
       - name: Commit corrected v3 and dark-background verification to PR branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          git add assets/character_candidates/2026-11-08_animal_ear_trio/qa_dark/*_source_v2_*.jpg
+          git add assets/character_candidates/2026-11-08_animal_ear_trio/*_v3.png
+          git add assets/character_candidates/2026-11-08_animal_ear_trio/qa_dark/*_v3_*.jpg
           git diff --cached --check
-          git commit -m "qa: add actual v2 dark-background inspection images"
+          git commit -m "assets: clean verified hair-gap components in v3 standees"
           git push origin HEAD:assets/animal-ear-trio-standees-20261108
