@@ -45,6 +45,21 @@
    });
  }
 
+ // Boss cards and field sprites are separate; map field art by quest and role.
+ function bossFieldArt(b,e){
+   if(b.wave!==b.totalWaves-1)return null;
+   if(b.qid==='q12'&&e.kind==='boss')
+     return {src:'assets/enemies/sakuya_battle.webp',catalogueId:'sakuya_battle'};
+   if((b.qid==='q17'||b.qid==='q34')&&e.kind==='boss')
+     return {src:'assets/enemies/ibuki_battle.webp',catalogueId:'ibuki_battle'};
+   if(b.qid==='q24'){
+     if(e.harukaRole==='real')
+       return {src:'assets/enemies/haruka.webp',catalogueId:'haruka'};
+     if(e.harukaRole==='shadow')
+       return {src:'assets/enemies/haruka_shadow.webp',catalogueId:'haruka_shadow'};
+   }
+   return null;
+ }
  function enemyId(e,i){return 'enemy-'+i;}
  function paintEnemies(b,stage){
    stage.querySelectorAll('.yc-enemy-slot,.yc-intent-overview').forEach(n=>n.remove());
@@ -62,11 +77,9 @@
      const shell=document.createElement('span');shell.className='yc-enemy-shell';
      // Until approved assets exist, a silhouette communicates enemy position without inventing identity.
      shell.innerHTML='<span class="yc-enemy-eye eye-l"></span><span class="yc-enemy-eye eye-r"></span>';
-     // q12 final boss already has a validated full-body combat asset.
-     // Use it in the field instead of the placeholder with red eyes.
-     const art=b.qid==='q12'&&b.wave===b.totalWaves-1&&e.kind==='boss'
-       ? {src:'assets/enemies/sakuya_battle.webp',catalogueId:'sakuya_battle'}
-       : window.YoiEnemyArt?.resolve(e,{qid:b.qid,wave:b.wave,index:i});
+     // Use approved, existing battle artwork for the named final-wave bosses.
+     // Leave other enemies on the normal enemy-art resolver.
+     const art=bossFieldArt(b,e)||window.YoiEnemyArt?.resolve(e,{qid:b.qid,wave:b.wave,index:i});
      if(art){
        const img=document.createElement('img');img.className='yc-enemy-art';img.src=art.src;
        img.alt='';img.decoding='async';img.draggable=false;
