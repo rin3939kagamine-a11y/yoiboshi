@@ -13,6 +13,9 @@ on:
       - 'js/battle_backgrounds_v1.js'
       - 'css/battle_backgrounds_v1.css'
       - 'tools/qa/battle_visual_real_smoke.py'
+      - 'css/battle_immersive_v1.css'
+      - 'js/battle_immersive_v1.js'
+      - 'css/battle_readability_v1.css'
       - '.github/workflows/mobile-landscape-qa.yml'
   push:
     branches: [main]
@@ -23,6 +26,10 @@ on:
       - 'index.html'
       - 'js/art_v2.js'
       - 'js/game.js'
+      - 'tools/qa/battle_visual_real_smoke.py'
+      - 'css/battle_immersive_v1.css'
+      - 'js/battle_immersive_v1.js'
+      - 'css/battle_readability_v1.css'
       - '.github/workflows/mobile-landscape-qa.yml'
   workflow_dispatch:
 
