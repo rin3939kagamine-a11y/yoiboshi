@@ -62,7 +62,11 @@
      const shell=document.createElement('span');shell.className='yc-enemy-shell';
      // Until approved assets exist, a silhouette communicates enemy position without inventing identity.
      shell.innerHTML='<span class="yc-enemy-eye eye-l"></span><span class="yc-enemy-eye eye-r"></span>';
-     const art=window.YoiEnemyArt?.resolve(e,{qid:b.qid,wave:b.wave,index:i});
+     // q12 final boss already has a validated full-body combat asset.
+     // Use it in the field instead of the placeholder with red eyes.
+     const art=b.qid==='q12'&&b.wave===b.totalWaves-1&&e.kind==='boss'
+       ? {src:'assets/enemies/sakuya_battle.webp',catalogueId:'sakuya_battle'}
+       : window.YoiEnemyArt?.resolve(e,{qid:b.qid,wave:b.wave,index:i});
      if(art){
        const img=document.createElement('img');img.className='yc-enemy-art';img.src=art.src;
        img.alt='';img.decoding='async';img.draggable=false;
