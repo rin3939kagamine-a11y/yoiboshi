@@ -20,18 +20,18 @@
    const boss=all.find(n=>b.enemies[Number(n.dataset.enemyIndex)]?.kind==='boss');
    const small=all.filter(n=>n!==boss);
    small.forEach((n,i)=>{
-     // Normal enemies have ONE fixed width regardless of enemy count or HP.
-     const left=boss?(small.length>1?40+i*15:50):
-       (small.length===1?71:small.length===2?55+i*21:48+i*16);
+     // The same enemy remains 16% wide regardless of how many targets live.
+     const left=boss?(small.length>1?22+i*17:36):
+       (small.length===1?68:small.length===2?55+i*19:46+i*17);
      n.style.setProperty('left',left+'%','important');
-     n.style.setProperty('width','14%','important');
+     n.style.setProperty('width','16%','important');
      n.style.setProperty('height','66%','important');
-     n.style.setProperty('bottom','5%','important');
+     n.style.setProperty('bottom','12%','important');
    });
    if(boss){
      // The boss sprite stays the same physical size when minions die.
-     boss.style.setProperty('left','69%','important');
-     boss.style.setProperty('width','30%','important');
+     boss.style.setProperty('left','56%','important');
+     boss.style.setProperty('width','44%','important');
      boss.style.setProperty('height','94%','important');
      boss.style.setProperty('bottom','1%','important');
    }
@@ -50,6 +50,14 @@
    place(scene.querySelector('.tb-q1-practice'),scene);
    place(scene.querySelector('.tb-battle-notes'),scene);
    positionEnemies(scene,stage);
+   // Raise both front allies above the overlay rather than clipping their feet.
+   const allies=[...stage.querySelectorAll(':scope > .yc-slot')];
+   const allyPos=[[2,43],[19,45],[4,19],[20,20]];
+   allies.forEach((n,i)=>{
+     const p=allyPos[i];if(!p)return;
+     n.style.setProperty('left',p[0]+'%','important');
+     n.style.setProperty('bottom',p[1]+'%','important');
+   });
  }
  tbRender=function(){
    const result=original.apply(this,arguments);
