@@ -20,7 +20,7 @@ for(const c of cases){
  const measure=()=>page.evaluate(()=>{
   const rc=s=>{let e=document.querySelector(s);if(!e)return null;let r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom,visible:getComputedStyle(e).display!=='none'};};
   const stage=rc('#ycTurnStage'),root=rc('.tb-root'),field=rc('.tb-field-col'),controls=rc('.tb-control-col'),commands=rc('.tb-commands'),row=rc('.tb-command-row'),enemies=[...document.querySelectorAll('#ycTurnStage>.yc-enemy-slot')].map(e=>{let r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom};});
-  return {viewport:{w:innerWidth,h:innerHeight},root,stage,field,controls,commands,row,enemies,cmdCount:document.querySelectorAll('.tb-command-row button').length,notes:document.querySelectorAll('.tb-battle-notes').length,scroll:{body:document.body.scrollHeight,html:document.documentElement.scrollHeight,ctrl:document.querySelector('.tb-control-col')?.scrollHeight,ctrlClient:document.querySelector('.tb-control-col')?.clientHeight}};
+  return {viewport:{w:innerWidth,h:innerHeight},root,stage,field,controls,commands,row,enemies,cmdCount:document.querySelectorAll('.tb-command-row .tb-action').length,notes:document.querySelectorAll('.tb-battle-notes').length,scroll:{body:document.body.scrollHeight,html:document.documentElement.scrollHeight,ctrl:document.querySelector('.tb-control-col')?.scrollHeight,ctrlClient:document.querySelector('.tb-control-col')?.clientHeight}};
  });
  let a=await measure();
  await page.screenshot({path:'qa-'+c.name+'-ally.png'});
