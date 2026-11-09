@@ -60,6 +60,17 @@ const assert = (ok,msg) => {if(!ok) throw new Error(msg);};
     assert(a.boxes[0].w>=size.width-3,size.name+' '+qid+' not fullscreen');
     assert(a.control.w>=size.width*.92,size.name+' '+qid+' side panel reappeared');
     assert(a.commandCount===4,size.name+' '+qid+' incomplete command set');
+    const numbers=await page.evaluate(()=>[...document.querySelectorAll('.yb-party-numbers')].map(e=>{
+      const hp=e.querySelector('.yb-party-number-hp'),ct=e.querySelector('.yb-party-number-ct');
+      const p=hp?.getBoundingClientRect(),c=ct?.getBoundingClientRect(),b=e.getBoundingClientRect();
+      return {hp:hp?.textContent,ct:ct?.textContent,within:!!p&&!!c&&p.left>=b.left-1&&c.left>=b.left-1&&p.bottom<=b.bottom+1&&c.bottom<=b.bottom+1,
+      stacked:!!p&&!!c&&Math.abs(p.top-c.top)>2};
+    }));
+    assert(numbers.length===4&&numbers.every(n=>n.within&&n.hp?.startsWith('HP ')&&n.ct?.startsWith('CT ')),
+      size.name+' '+qid+' HP/CT missing or clipped '+JSON.stringify(numbers));
+    if(size.height>size.width&&size.width<=700)assert(numbers.every(n=>n.stacked),
+      size.name+' '+qid+' HP/CT rows not separated on portrait phone '+JSON.stringify(numbers));
+
     assert(!a.enemyHudVisible,size.name+' '+qid+' duplicate floating enemy stats remain');
     assert(a.headerScroll<=a.headerClient+3,size.name+' '+qid+' header text clipped '+JSON.stringify({height:a.headerClient,scroll:a.headerScroll}));
     assert(a.controlScroll<=a.controlClient+3,size.name+' '+qid+' controls clipped '+JSON.stringify({height:a.controlClient,scroll:a.controlScroll}));
