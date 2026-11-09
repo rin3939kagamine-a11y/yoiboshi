@@ -1,0 +1,126 @@
+/* 宵星の契約者 RE:START Ver.0.50.1.0 — ホームの横画面レイアウト
+ * 横長の画面（PC・タブレット横・スマホ横）では、ホームをスクロールなしの1画面に収め、
+ * 画面いっぱいを使う。左：プロフィール・お知らせ・セリフ／中央：お気に入りキャラ／右：名前・バナー・メニュー。
+ * 縦長の画面は従来どおり。見た目だけの変更で、画面移動・セーブ・計算は変えない。
+ */
+@media (orientation:landscape) and (min-width:700px){
+ html:has(.home-mock-v301),body:has(.home-mock-v301){height:100%!important;overflow:hidden!important}
+ body:has(.home-mock-v301) .app,body:has(.home-mock-v301) .main{height:100dvh!important;min-height:0!important;overflow:hidden!important;width:100%!important;max-width:none!important}
+ body:has(.home-mock-v301) .page.home-page{width:100%!important;max-width:none!important;height:100dvh!important;min-height:0!important;padding:0!important;margin:0!important;overflow:hidden!important}
+
+ html body .home-v067.home-mock-v301{
+  --hl-pad:clamp(10px,1.5vw,28px);--hl-navh:94px;--hl-gap:clamp(8px,1.3vh,14px);
+  position:relative!important;isolation:isolate;display:grid!important;
+  grid-template-columns:clamp(250px,28vw,500px) minmax(0,1fr) clamp(280px,30vw,540px)!important;
+  grid-template-rows:auto minmax(0,1fr) auto auto!important;
+  grid-template-areas:"head head head" "news . copy" "pick . feat" "dia . menu"!important;
+  column-gap:var(--hl-pad)!important;row-gap:var(--hl-gap)!important;
+  width:100vw!important;max-width:none!important;height:100dvh!important;min-height:0!important;
+  margin:0!important;padding:var(--hl-pad) var(--hl-pad) calc(var(--hl-navh) + var(--hl-pad)) var(--hl-pad)!important;
+  overflow:hidden!important;box-sizing:border-box!important;
+  background:linear-gradient(#e9f6ff,#eff7fc 40%,#f2f7fc 78%,#e6f3ff)!important}
+
+ html body .home-mock-v301 > .mock-hero{display:contents!important}
+
+ /* 背景・キャラ（画面全体を基準に置く） */
+ html body .home-mock-v301 > .mock-hero > .mock-harbor,
+ html body .home-mock-v301 > .mock-hero > .mock-sky-wash{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+ html body .home-mock-v301 > .mock-hero > .mock-sky-wash{background:linear-gradient(90deg,#eef7ffcc 0%,#eef7ff00 24%,#eef7ff00 70%,#eef7ffb3 100%),linear-gradient(180deg,#e7f4ff99 0%,#e7f4ff00 22%,#e7f4ff00 80%,#e7f4ffcc 100%)!important;pointer-events:none}
+ html body .home-mock-v301 > .mock-hero:not(.mock-hero-scene) > .mock-character{position:absolute!important;z-index:0!important;bottom:0!important;top:auto!important;left:50%!important;height:100%!important;width:auto!important;max-width:none!important;object-fit:contain!important;object-position:center bottom!important;transform:translateX(-50%)!important}
+ html body .home-mock-v301 > .mock-hero:not(.mock-hero-scene) > .mock-character.hp-fit{top:calc(var(--hp-top) - 13%)!important;bottom:auto!important;left:47%!important;height:var(--hp-h)!important;transform:translateX(var(--hp-shift))!important}
+ html body .home-mock-v301 > .mock-hero.mock-hero-scene > .mock-character{position:absolute!important;z-index:0!important;top:0!important;bottom:0!important;left:50%!important;right:auto!important;width:auto!important;height:100%!important;max-width:100%!important;object-fit:cover!important;object-position:center top!important;transform:translateX(-50%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)!important;mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)!important}
+ html body .home-mock-v301 > .mock-hero.mock-hero-scene > .mock-sky-wash{background:linear-gradient(180deg,#e7f4ff00 0%,#e7f4ff00 82%,#e7f4ffb3 100%)!important}
+
+ /* 上段：ロゴ・通貨・プロフィール */
+ html body .home-mock-v301 > .mock-hero > .mock-header{grid-area:head!important;position:relative!important;inset:auto!important;width:auto!important;height:auto!important;padding:0!important;margin:0!important;z-index:6!important}
+ html body .home-mock-v301 .mock-header .mock-profile{position:absolute!important;left:0!important;top:calc(100% + clamp(6px,1vh,12px))!important;margin:0!important;max-width:clamp(250px,28vw,440px)!important;width:fit-content!important}
+ /* プロフィールは上段の下へはみ出して置き、右列は通貨のすぐ下から使う */
+ html body .home-mock-v301 > .mock-news-area{margin-top:clamp(84px,11vh,112px)!important}
+
+ /* 左：お知らせ・カード絵の切り替え・セリフ */
+ html body .home-mock-v301 > .mock-news-area{grid-area:news!important;align-self:start!important;display:block!important;position:relative!important;z-index:5!important;padding:0!important;width:auto!important;max-height:calc(100% - clamp(84px,11vh,112px))!important;min-height:0!important;overflow:hidden!important}
+ html body .home-mock-v301 > .mock-news-area .mock-news-board{width:auto!important;max-height:100%!important;overflow:hidden!important;background:#ffffffd9!important;backdrop-filter:blur(10px)}
+ html body .home-mock-v301 > .mock-news-area .mock-side-memo{display:none!important}
+ html body .home-mock-v301 > .mock-unit-picker{grid-area:pick!important;align-self:end!important;position:relative!important;z-index:5!important;display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:0!important;padding:0!important;width:auto!important}
+ html body .home-mock-v301 > .mock-hero > .mock-dialogue{grid-area:dia!important;align-self:end!important;position:relative!important;inset:auto!important;width:auto!important;max-width:none!important;margin:14px 0 0!important;z-index:6!important;height:auto!important;max-height:none!important;min-height:clamp(64px,10vh,110px)!important;overflow:visible!important}
+ html body .home-mock-v301 > .mock-hero > .mock-dialogue .mock-dialogue-text{max-height:none!important;overflow:visible!important;-webkit-line-clamp:unset!important;display:block!important}
+ html body .home-mock-v301 > .mock-hero > .mock-dialogue .mock-dialogue-text{font-size:clamp(14px,1.9vh,20px)!important;line-height:1.6!important}
+ html body .home-mock-v301 > .mock-hero > .mock-handwritten{grid-area:2/2/4/3!important;align-self:end!important;justify-self:start!important;position:relative!important;inset:auto!important;z-index:4!important;font-size:clamp(18px,3vh,32px)!important;pointer-events:none}
+
+ /* 右：名前・バナー・メニュー */
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy{grid-area:copy!important;align-self:center!important;position:relative!important;inset:auto!important;width:auto!important;max-width:none!important;margin:0!important;z-index:6!important;padding:clamp(12px,2vh,22px) clamp(14px,1.4vw,24px)!important;border-radius:22px!important;background:#ffffffc7!important;backdrop-filter:blur(12px);box-shadow:0 10px 30px #2a4f8a1f!important;display:grid!important;grid-template-columns:1fr 1fr!important;column-gap:10px!important;align-items:end}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy > :not(button){grid-column:1 / -1!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy small{color:#5c7aa8!important;opacity:1!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy h1{font-size:clamp(30px,6vh,68px)!important;line-height:1.05!important;margin:2px 0 0!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy em{font-size:clamp(16px,2.6vh,28px)!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy b{font-size:clamp(13px,1.7vh,18px)!important;margin-top:4px!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy p{font-size:clamp(12px,1.5vh,16px)!important;margin:4px 0 8px!important;line-height:1.55!important;text-shadow:none!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy button{width:100%!important;margin:0!important;min-height:44px!important;font-size:clamp(12px,min(1.6vh,1.05vw),16px)!important;padding:0 8px!important;white-space:nowrap!important;position:relative!important;inset:auto!important}
+ html body .home-mock-v301 > .mock-hero > .mock-feature{grid-area:feat!important;position:relative!important;inset:auto!important;width:auto!important;height:auto!important;margin:0!important;z-index:6!important}
+ html body .home-mock-v301 > .mock-hero > .mock-feature .mock-feature-card{width:auto!important;min-height:clamp(84px,13vh,150px)!important;height:auto!important}
+ html body .home-mock-v301 > .mock-hero > .mock-feature .mock-dots{margin-top:4px!important}
+ html body .home-mock-v301 > .mock-shortcuts{grid-area:menu!important;position:relative!important;z-index:6!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:var(--hl-gap)!important;margin:0!important;padding:0!important;width:auto!important}
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-card{height:clamp(70px,12vh,132px)!important;min-height:0!important;width:auto!important}
+
+ /* PCのナビは実際の7項目を1列に並べる（6列だと「設定」が下に隠れる） */
+ body:has(.home-mock-v301) .bottomnav{grid-template-columns:repeat(7,minmax(0,1fr))!important;max-height:none!important;overflow:hidden!important}
+ /* 開閉するもの：レイアウトの外に重ねて出す */
+ html body .home-mock-v301 > .mock-favorite-chooser{position:fixed!important;left:50%!important;bottom:calc(var(--hl-navh) + var(--hl-pad))!important;transform:translateX(-50%)!important;width:min(980px,94vw)!important;z-index:40!important;margin:0!important;border-radius:20px!important;box-shadow:0 16px 50px #1d3a6a40!important}
+ html body .home-mock-v301 > .mock-drawer{position:fixed!important;z-index:40!important;top:calc(var(--hl-pad) + 54px)!important;right:var(--hl-pad)!important;left:auto!important;bottom:auto!important;display:flex!important;flex-direction:column!important;gap:6px!important;padding:8px!important;border-radius:16px!important;background:#ffffffee!important;box-shadow:0 12px 34px #1d3a6a33!important;width:auto!important;min-width:160px!important}
+ html body .home-mock-v301 > .mock-team-warning{position:fixed!important;top:var(--hl-pad)!important;left:50%!important;transform:translateX(-50%)!important;z-index:30!important;width:auto!important;margin:0!important}
+ html body .home-mock-v301 > .mock-notice-overlay{position:fixed!important;inset:0!important;z-index:60!important}
+}
+
+/* 背の低い横画面（ノートPC・タブレット横）：補足の文を省いて詰める */
+@media (orientation:landscape) and (min-width:700px) and (max-height:820px){
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy p{display:none!important}
+ html body .home-mock-v301 > .mock-hero > .mock-handwritten{display:none!important}
+ /* お知らせは途中で切れないよう、新しい2件だけ出す（全件は「もっと見る」） */
+ html body .home-mock-v301 > .mock-news-area .mock-news-board .mock-news-line:nth-of-type(n+4){display:none!important}
+ html body .home-mock-v301 > .mock-news-area .mock-news-title{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;min-width:0!important}
+}
+@media (orientation:landscape) and (min-width:700px) and (max-height:640px){
+ html body .home-mock-v301 > .mock-news-area{display:none!important}
+}
+@media (orientation:landscape) and (min-width:700px){
+ /* 一枚絵の上に手書き文字が重なると読みにくいので出さない */
+ html body .home-mock-v301 > .mock-hero.mock-hero-scene > .mock-handwritten{display:none!important}
+}
+
+/* スマホの横画面：必要なものだけ残す */
+@media (orientation:landscape) and (min-width:700px) and (max-height:560px){
+ html body .home-v067.home-mock-v301{--hl-pad:8px;--hl-navh:60px;--hl-gap:6px;
+  padding-left:max(var(--hl-pad),env(safe-area-inset-left))!important;padding-right:max(var(--hl-pad),env(safe-area-inset-right))!important;
+  grid-template-columns:clamp(220px,32vw,340px) minmax(0,1fr) clamp(240px,36vw,380px)!important}
+ html body .home-mock-v301 .mock-header .mock-profile,
+ html body .home-mock-v301 .mock-logo small,
+ html body .home-mock-v301 > .mock-news-area,
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy small,
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy b,
+ html body .home-mock-v301 > .mock-hero > .mock-feature .mock-feature-text span,
+ html body .home-mock-v301 > .mock-hero > .mock-feature .mock-dots{display:none!important}
+ html body .home-mock-v301 .mock-logo strong{font-size:20px!important}
+ html body .home-mock-v301 .mock-pill,html body .home-mock-v301 .mock-icon-button{min-height:36px!important;height:36px!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy{padding:8px 10px!important;border-radius:16px!important;align-self:end!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy h1{font-size:28px!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy em{font-size:15px!important}
+ html body .home-mock-v301 > .mock-hero > .mock-character-copy button{min-height:36px!important;font-size:12px!important;padding:4px 6px!important;margin-top:4px!important}
+ html body .home-mock-v301 > .mock-hero > .mock-feature .mock-feature-card{min-height:58px!important;padding:8px 12px!important}
+ html body .home-mock-v301 > .mock-shortcuts{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-card{height:58px!important;padding:6px 8px!important}
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-icon,
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-arrow,
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-title small{display:none!important}
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-title{font-size:16px!important;white-space:nowrap!important}
+ html body .home-mock-v301 .mock-header .mock-profile{display:none!important}
+ html body .home-mock-v301 > .mock-hero > .mock-dialogue{min-height:56px!important;padding:8px 36px 8px 12px!important}
+ html body .home-mock-v301 > .mock-hero > .mock-dialogue .mock-dialogue-text{font-size:13px!important}
+ html body .home-mock-v301 > .mock-unit-picker button{min-height:32px!important;font-size:11px!important;padding:4px 8px!important}
+}
+
+/* 縦長の画面：1画面に収まらないときは縦にスクロールできるようにする */
+@media not all and (orientation:landscape) and (min-width:700px){
+ html:has(.home-mock-v301),body:has(.home-mock-v301){height:auto!important;overflow-x:hidden!important;overflow-y:auto!important}
+ body:has(.home-mock-v301) .app,body:has(.home-mock-v301) .main,body:has(.home-mock-v301) .page.home-page{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+}
