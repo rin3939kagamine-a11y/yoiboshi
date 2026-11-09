@@ -1,0 +1,40 @@
+name: Synchronize approved Haruka asset branch with main (temporary)
+on:
+  push:
+    branches: [feature/haruka-genuine-impostor-chibi-20261109]
+    paths:
+      - .github/workflows/sync-haruka-main-temporary.yml
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Merge latest main and preserve only the requested index cache update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git merge --no-edit -X theirs origin/main
+          python3 - <<'PY'
+          import subprocess,pathlib
+          path=pathlib.Path('index.html')
+          html=subprocess.check_output(['git','show','origin/main:index.html'],text=True)
+          old='js/chibi_bridge_v03321.js?v=20261109-dashboard-v1'
+          new='js/chibi_bridge_v03321.js?v=20261109-haruka-chibi-pair-v1'
+          assert html.count(old)==1
+          path.write_text(html.replace(old,new))
+          print('Updated index from current main, replacing only battle chibi bridge cache key')
+          PY
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'Keep latest game version while adding Haruka chibi asset references'
+          fi
+          git push origin HEAD:feature/haruka-genuine-impostor-chibi-20261109
