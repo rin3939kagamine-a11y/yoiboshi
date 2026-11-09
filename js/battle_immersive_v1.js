@@ -83,10 +83,17 @@
        left=70;w=30;bottom=1;actorHeight=94;
      }else if(hasBoss){
        const rank=Math.max(0,minionIndices.indexOf(index));
-       // Every minion has a stable slot inside the 20% left of the enemy half.
-       w=Math.min(9.5,19.2/nonBossCount);
-       left=50.4+rank*(19.2/nonBossCount);
-       bottom=10;actorHeight=66;
+       // Keep minions readable: stack their lanes vertically beside the
+       // fixed-size boss, entirely within the right-side 50% zone.
+       // Original roster indices preserve lane/size after a knock-out.
+       left=50.5;w=19;
+       if(nonBossCount===1){
+         bottom=12;actorHeight=70;
+       }else{
+         const lane=88/nonBossCount;
+         actorHeight=Math.min(43,lane-2);
+         bottom=6+(nonBossCount-1-rank)*lane;
+       }
      }else{
        const rank=Math.max(0,minionIndices.indexOf(index));
        w=Math.min(14,46/Math.max(1,nonBossCount));
