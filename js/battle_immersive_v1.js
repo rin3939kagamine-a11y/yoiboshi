@@ -46,6 +46,9 @@
    syncStageArt(scene,stage);
    scene.classList.add('yb-immersive');
    place(scene.querySelector('.tb-control-col'),scene);
+   // Keep the optional flame-info control in the light row, not on the art.
+   const lightRow=scene.querySelector('.yb-resource-dashboard .tb-light');
+   place(scene.querySelector('.tb-flame-caption-row'),lightRow);
    place(scene.querySelector('.tb-log'),scene);
    place(scene.querySelector('.tb-q1-practice'),scene);
    place(scene.querySelector('.tb-battle-notes'),scene);
