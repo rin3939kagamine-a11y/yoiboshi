@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "approved_at": "2026-11-09",
+  "scope": "historical_haruka_npc_chibi_pair",
+  "variants": [
+    {
+      "id": "haruka_npc_real",
+      "character_name": "霧島ハルカ",
+      "identity": "genuine",
+      "display_name": "ハルカ（本物）",
+      "asset": "assets/ART_V2/chibi/haruka_npc_real.png",
+      "original_attachment": "ゴシック・スチームパンクの角付き少女(1).png",
+      "original_order": 1,
+      "format": "PNG",
+      "width": 1254,
+      "height": 1254,
+      "alpha": "RGBA",
+      "bytes": 1872505,
+      "sha256": "f4cdf690d5c24799097105c0b9e1535ab704cadb4ad2cf7d5eda5a1d0541c99e",
+      "live_use": "q24 final-wave genuine Haruka enemy sprite"
+    },
+    {
+      "id": "haruka_npc_fake",
+      "character_name": "偽ハルカ",
+      "identity": "impostor",
+      "display_name": "偽ハルカ（別キャラクター）",
+      "asset": "assets/ART_V2/chibi/haruka_npc_fake.png",
+      "original_attachment": "ゴシックな疫病医師ちび少女(2).png",
+      "original_order": 2,
+      "format": "PNG",
+      "width": 1254,
+      "height": 1254,
+      "alpha": "RGBA",
+      "bytes": 1736392,
+      "sha256": "5afbbee5c018a811d4f0f999a33094e66fc27347fffb69f728a9dcb61303baed",
+      "live_use": "registered only; future role harukaRole=impostor; no encounter created"
+    }
+  ],
+  "distinct_from": [
+    "既存q24の仮面の影（harukaRole=shadow）",
+    "新規ガチャ用ヒロインの内部ID haruka"
+  ],
+  "unchanged": [
+    "existing_q24_story",
+    "combat_calculation",
+    "enemy_stats",
+    "gacha",
+    "save_format",
+    "other_character_art"
+  ]
+}
