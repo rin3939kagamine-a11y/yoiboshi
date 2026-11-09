@@ -149,3 +149,11 @@
 }
 .tb-root.q6-classic .yc-turn-stage.q6-classic-stage[data-place]:after{content:attr(data-place)}
 .tb-root.q6-classic .yc-turn-stage.q6-classic-stage[data-place=""]:after{display:none}
+
+/* 2026-11-09: The dashboard's centred enemy slots must not shift the classic
+ * side-view hitboxes left into the ally formation (especially 390px portrait).
+ * The classic renderer already provides its own left coordinates for both
+ * ordinary enemies and the giant boss. Preserve those coordinates. */
+.tb-root.q6-classic .q6-classic-stage .yc-enemy-slot{
+ transform:none!important;
+}

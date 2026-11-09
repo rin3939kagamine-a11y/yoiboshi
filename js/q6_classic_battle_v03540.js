@@ -84,14 +84,18 @@
   // Ally slots keep YoiChibi.FORMATION (left-hand formation), including damage popup anchors.
   var last=b.wave===b.totalWaves-1;
   stage.querySelectorAll(':scope > .yc-enemy-slot').forEach(function(node,i){
-   var e=b.enemies[i];if(!e)return;
+   // The display excludes defeated enemies, so DOM order may differ from
+   // the original battle.enemies indices used for target identity and visuals.
+   var enemyIndex=Number(node.dataset.enemyIndex);
+   if(!Number.isInteger(enemyIndex)||enemyIndex<0)enemyIndex=i;
+   var e=b.enemies[enemyIndex];if(!e)return;
    var giant=last&&e.kind==='boss';
    node.classList.toggle('q6-giant',giant);
    node.classList.toggle('q6-minion',!giant);
    var aura=statuses(e,b.tb.round).map(function(st){return st[0];});
    ['red','blue','green'].forEach(function(c){node.classList.toggle('q6-aura-'+c,aura.indexOf(c)>=0);});
-   node.style.setProperty('left',(giant?51:(last?70+(i%2)*8:52+i*13))+'%','important');
-   node.style.setProperty('bottom',(giant?1:(last?6:(i%2===0?9:5)))+'%','important');
+   node.style.setProperty('left',(giant?51:(last?70+(enemyIndex%2)*8:52+enemyIndex*13))+'%','important');
+   node.style.setProperty('bottom',(giant?1:(last?6:(enemyIndex%2===0?9:5)))+'%','important');
    if(giant){
     var shell=node.querySelector('.yc-enemy-shell');
     if(shell&&!shell.querySelector('img')){
