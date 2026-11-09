@@ -17,6 +17,7 @@ for(const c of cases){
   return {view,qid:battle?.qid,wave:battle?.wave,turnBattle:battle?.turnBattle,enemyCount:battle?.enemies?.length};
  });
  check(boot.qid==='q46'&&boot.turnBattle,'q46 turn battle did not render: '+JSON.stringify(boot));
+ await page.evaluate(()=>{document.querySelector('.bd-overlay')?.click();});
  const measure=()=>page.evaluate(()=>{
   const rc=s=>{let e=document.querySelector(s);if(!e)return null;let r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom,visible:getComputedStyle(e).display!=='none'};};
   const stage=rc('#ycTurnStage'),root=rc('.tb-root'),field=rc('.tb-field-col'),controls=rc('.tb-control-col'),commands=rc('.tb-commands'),row=rc('.tb-command-row'),enemies=[...document.querySelectorAll('#ycTurnStage>.yc-enemy-slot')].map(e=>{let r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,right:r.right,bottom:r.bottom};});
