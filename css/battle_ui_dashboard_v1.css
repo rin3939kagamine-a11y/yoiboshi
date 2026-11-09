@@ -510,8 +510,8 @@ body:has(.combat-page .tb-root.yb-battle-dashboard) .main{
    flex:1 1 auto!important;min-height:90px!important;
  }
  .combat-page .tb-root.yb-battle-dashboard .tb-control-col{
-   flex:0 0 247px!important;height:247px!important;
-   min-height:247px!important;max-height:247px!important;
+   flex:0 0 262px!important;height:262px!important;
+   min-height:262px!important;max-height:262px!important;
  }
 }
 @media(max-width:390px) and (orientation:portrait){
