@@ -7,7 +7,7 @@
 (function bossDirector(){
  'use strict';
  if(typeof tbEnemyMove!=='function'||typeof tbNewWave!=='function')return;
- const TALK=id=>`assets/ART_V2/story_cast/${id}_talk.webp`;
+ const TALK=id=>`assets/ART_V2/story_cast/${id==='touko'?'touko_true':id}_talk.webp`;
  const FACE=id=>`assets/ART_V2/face_icons/${id}.webp`;
  const BOSSES={
   q12:{id:'sakuya',name:'朔夜',title:'黒い星灯の契約者',art:'assets/enemies/sakuya_battle.webp',hp:2.0,
@@ -145,9 +145,9 @@
  try{if(typeof TB_SPECIAL!=='undefined'&&TB_SPECIAL.delete)TB_SPECIAL.delete('q17');}catch(_){}
 
  const css=`
- .bd-overlay{position:fixed;inset:0;z-index:9000;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg,rgba(6,8,20,.35),rgba(6,8,20,.85));animation:bdFade .35s ease;cursor:pointer}
- .bd-overlay img.bd-art{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:min(92vh,980px);max-width:96vw;object-fit:contain;filter:drop-shadow(0 0 30px rgba(170,90,255,.45));animation:bdRise .6s ease}
- .bd-band{position:relative;margin:0 0 6vh;width:min(920px,94vw);background:rgba(14,10,30,.88);border:1px solid rgba(220,170,255,.45);border-radius:18px;padding:18px 26px;color:#f4ecff;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+ .bd-overlay{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;box-sizing:border-box;overflow:hidden;padding:clamp(8px,2vh,20px) 0 calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(6,8,20,.35),rgba(6,8,20,.85));animation:bdFade .35s ease;cursor:pointer}
+ .bd-overlay img.bd-art{position:relative;flex:1 1 auto;min-height:0;display:block;height:auto;width:auto;max-height:min(75dvh,800px);max-width:92vw;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 0 30px rgba(170,90,255,.45));animation:bdRise .6s ease;pointer-events:none}
+ .bd-band{position:relative;flex:0 0 auto;box-sizing:border-box;margin:10px auto clamp(8px,2vh,24px);width:min(920px,94vw);background:rgba(14,10,30,.88);border:1px solid rgba(220,170,255,.45);border-radius:18px;padding:18px 26px;color:#f4ecff;box-shadow:0 10px 40px rgba(0,0,0,.5)}
  .bd-band small{display:block;letter-spacing:.2em;color:#c9a8ff;font-size:12px;font-weight:800}
  .bd-band strong{display:block;font-size:clamp(22px,3vw,34px);margin:2px 0 8px;letter-spacing:.06em}
  .bd-band p{margin:0;font-size:clamp(16px,1.6vw,21px);line-height:1.7}
@@ -161,7 +161,7 @@
  .tb-enemy.bd-phase2{box-shadow:0 0 0 2px #ff6f8e,0 0 22px rgba(255,80,120,.55)!important}
  .tb-enemy.bd-ult{animation:bdPulse 1s ease-in-out infinite}
  @keyframes bdFade{from{opacity:0}to{opacity:1}}
- @keyframes bdRise{from{opacity:0;transform:translate(-50%,40px)}to{opacity:1;transform:translate(-50%,0)}}
+ @keyframes bdRise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
  @keyframes bdSlide{from{opacity:0;transform:translate(-50%,-14px)}to{opacity:1;transform:translate(-50%,0)}}
  @keyframes bdPulse{0%,100%{box-shadow:0 0 0 2px #ff6f8e,0 0 12px rgba(255,80,120,.4)}50%{box-shadow:0 0 0 3px #ffb0c0,0 0 30px rgba(255,80,120,.9)}}
  @media (prefers-reduced-motion:reduce){.bd-overlay,.bd-overlay img.bd-art,.bd-strip,.tb-enemy.bd-ult{animation:none}}`;
@@ -173,9 +173,8 @@
  function overlay(cfg,label,line,after){
   closeOverlay();overlayOpen=true;
   const el=document.createElement('div');el.className='bd-overlay';el.setAttribute('role','dialog');
-  // Show battle art at full size; Haruka switches poses at the second phase.
-  // Keep Haruka's original conversation appearance for boss introductions and defeat lines.
-  const portrait=cfg.id==='haruka'?TALK(cfg.id):(label.startsWith('第2形態')&&cfg.phaseArt?cfg.phaseArt:cfg.art);
+  // Battle sprites remain in combat UI; dialogue cut-ins always use standing portraits.
+  const portrait=TALK(cfg.id);
   el.innerHTML=`<img class="bd-art" src="${portrait}" alt=""><div class="bd-band"><small>${label}</small><strong>${cfg.name}</strong><p>${line}</p><em>タップで進む</em></div>`;
   const done=()=>{if(!el.isConnected)return;el.remove();overlayOpen=false;clearTimeout(overlayTimer);if(after)after();};
   el.addEventListener('click',done);document.body.appendChild(el);
