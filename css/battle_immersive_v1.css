@@ -431,3 +431,27 @@ body:has(.combat-page .yb-immersive) .bottomnav{display:none!important}
    width:min(23%,clamp(72px,24dvh,130px))!important;
  }
 }
+
+
+/* Override the older high-specificity .page.combat-page safe-area padding:
+   the battlefield, not a padded card, owns the ENTIRE viewport. */
+body:has(.combat-page .tb-root.yb-battle-dashboard.yb-immersive) .page.combat-page{
+  width:100vw!important;max-width:none!important;
+  height:100dvh!important;max-height:100dvh!important;
+  margin:0!important;padding:0!important;
+}
+/* Portrait boss art is tall; do not force the artwork container into a
+   1:1 square (which previously shrank full-body illustrations to icons). */
+.combat-page .tb-root.yb-immersive.q6-classic .yc-enemy-slot.q6-giant .yc-enemy-shell,
+.combat-page .tb-root.yb-immersive.q6-classic .yc-enemy-slot.q6-giant .yc-enemy-shell.yc-enemy-art-shell{
+  position:relative!important;
+  width:100%!important;height:calc(100% - 18px)!important;
+  min-height:0!important;max-height:calc(100% - 18px)!important;
+  aspect-ratio:auto!important;flex:1 1 auto!important;
+  overflow:visible!important;
+}
+.combat-page .tb-root.yb-immersive.q6-classic .yc-enemy-slot.q6-giant .yc-enemy-art{
+  position:absolute!important;inset:0!important;
+  width:100%!important;height:100%!important;max-height:none!important;
+  object-fit:contain!important;object-position:center bottom!important;
+}
