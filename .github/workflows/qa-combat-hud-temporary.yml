@@ -9,16 +9,17 @@ permissions:
 jobs:
   viewport-regression:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+      options: --ipc=host
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install Playwright Chromium
-        run: |
-          npm install --no-save --no-package-lock playwright@1.57.0
-          npx playwright install --with-deps chromium
+      - name: Install Playwright JavaScript API (browsers preinstalled in image)
+        run: npm install --no-save --no-package-lock playwright@1.57.0
       - name: Serve game and inspect live DOM at four viewport sizes
         shell: bash
         run: |
