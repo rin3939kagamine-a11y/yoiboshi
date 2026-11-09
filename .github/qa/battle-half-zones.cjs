@@ -87,7 +87,8 @@ const fail=(msg)=>{throw new Error(msg)};
     let beforeBoss=a.enemies.find(n=>n.boss);
     await page.evaluate(()=>{
      const boss=battle.enemies.find(e=>e.kind==='boss');
-     battle.enemies.forEach(e=>{if(e!==boss)e.hp=0;});
+     const survivor=boss||battle.enemies.find(e=>e.hp>0);
+     battle.enemies.forEach(e=>{if(e!==survivor)e.hp=0;});
      tbRender();
     });
     const c=await measure();check(c,v.name+' '+qid+' after minion defeat');
