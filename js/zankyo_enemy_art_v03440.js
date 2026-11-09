@@ -24,7 +24,7 @@
    const slot=Math.max(0,parseInt(ctx.index,10)||0);
    const seed=(quest*13+wave*7+slot*3+(e.elite?17:0));
    const asset=pool[safeIndex(seed,pool.length)];
-   return {src:'assets/enemies/zankyo/'+asset+'.webp',catalogueId:asset,kind};
+   return {src:'assets/enemies/zankyo/'+asset+'.webp?v=0.50.7.0',catalogueId:asset,kind};
  }
  window.YoiEnemyArt=Object.freeze({resolve,groups:pools,total:all.length});
 })();

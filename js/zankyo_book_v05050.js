@@ -87,7 +87,7 @@ function zankyoBookPage(){
  const seen=ZANKYO_BOOK.filter(z=>book[z.id]);
  if(!zankyoSelected||!book[zankyoSelected])zankyoSelected=seen.length?seen[0].id:'';
  const sel=zankyoSelected?ZANKYO_BY_ID[zankyoSelected]:null,rec=sel?book[sel.id]:null;
- const src=id=>`assets/enemies/zankyo/${id}.webp`;
+ const src=id=>`assets/enemies/zankyo/${id}.webp?v=0.50.7.0`;
  const section=(title,list)=>`<h3 class="zk-group-title">${title}</h3><div class="zk-grid">${list.map(z=>{const ok=!!book[z.id];return `<button type="button" class="zk-card ${ok?'':'unknown'} ${zankyoSelected===z.id?'active':''}" ${ok?`onclick="openZankyoEntry('${z.id}')" aria-label="${esc(z.name)}を見る"`:'disabled aria-label="まだ出会っていない残響"'}><span class="zk-thumb"><img src="${src(z.id)}" alt="" loading="lazy"></span><span class="zk-name">${ok?esc(z.name):'？？？'}</span></button>`}).join('')}</div>`;
  return `${heading('ZANKYO COLLECTION','残響図鑑','戦闘で出会った残響が登録されます。残響は、強すぎる想いが持ち主の手を離れて、その場所に残ったもの。')}
  <div class="v680-jumpbar"><button class="btn" onclick="change('records')">記録・設定へ戻る</button><span class="chip">登録 ${seen.length} / ${ZANKYO_BOOK.length}体</span></div>
