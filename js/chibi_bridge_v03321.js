@@ -67,14 +67,14 @@
    const speed=b.tb?.speed||1;
    // Keep up to three visible enemies in fixed, non-overlapping right-side columns.
    // This is presentation-only: enemy order, target indices and combat data are unchanged.
-   const visibleEnemies=b.enemies.slice(0,3);
+   const visibleEnemies=b.enemies.map((e,i)=>({e,i})).filter(({e})=>e.hp>0).slice(0,3);
    const columns={1:[78],2:[69,87],3:[60,76,92]}[visibleEnemies.length]||[];
-   visibleEnemies.forEach((e,i)=>{
+   visibleEnemies.forEach(({e,i},slot)=>{
      const button=document.createElement('button');button.type='button';
-     button.className='yc-enemy-slot'+(e.hp<=0?' yc-enemy-ko':'')+(b.tb.targetEnemy===i?' yc-enemy-selected':'')+(typeof tbIsBroken==='function'&&tbIsBroken(e)?' yc-enemy-broken':'');
+     button.className='yc-enemy-slot'+(b.tb.targetEnemy===i?' yc-enemy-selected':'')+(typeof tbIsBroken==='function'&&tbIsBroken(e)?' yc-enemy-broken':'');
      button.dataset.enemyIndex=String(i);
      button.dataset.enemyCount=String(visibleEnemies.length);
-     button.style.left=columns[i]+'%';button.style.bottom='12%';
+     button.style.left=columns[slot]+'%';button.style.bottom='12%';
      button.style.setProperty('--yc-speed',speed);
      button.disabled=e.hp<=0;
      button.setAttribute('aria-label',e.name+'を狙う');
@@ -108,7 +108,7 @@
    overview.setAttribute('aria-label','敵の次の行動');
    const heading=document.createElement('strong');heading.textContent='敵の次の行動';
    overview.appendChild(heading);
-   b.enemies.slice(0,3).forEach((e,i)=>{
+   visibleEnemies.forEach(({e,i})=>{
      const item=document.createElement('span');
      item.className='yc-intent-chip'+(e.hp<=0?' yc-intent-downed':'')+
        (e.breakSkips>0?' yc-intent-broken':'');
