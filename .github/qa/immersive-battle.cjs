@@ -43,6 +43,17 @@ const { chromium } = require('playwright');
           scroll:document.documentElement.scrollHeight};
       });
       const a=await measure();
+      if(name==='phone390'||name==='desktop1280'){
+        const debugSprites=await page.evaluate(()=>[...document.querySelectorAll('#ycTurnStage>.yc-enemy-slot')].map(el=>{
+          const shell=el.querySelector('.yc-enemy-shell'),img=el.querySelector('img');
+          const r=n=>{if(!n)return null;const x=n.getBoundingClientRect();return {x:x.x,y:x.y,w:x.width,h:x.height};};
+          return {cls:el.className,slot:r(el),shell:r(shell),img:r(img),imgSrc:img?.getAttribute('src'),
+          imageLoaded:img?.complete,imageNatural:img?[img.naturalWidth,img.naturalHeight]:null,
+          slotCSS:{h:getComputedStyle(el).height,display:getComputedStyle(el).display},
+          shellCSS:{h:getComputedStyle(shell).height,flex:getComputedStyle(shell).flex,position:getComputedStyle(shell).position,aspect:getComputedStyle(shell).aspectRatio},
+          imgCSS:img?{height:getComputedStyle(img).height,opacity:getComputedStyle(img).opacity,visibility:getComputedStyle(img).visibility,position:getComputedStyle(img).position}:null};}));
+        console.log('SPRITES '+name+' '+JSON.stringify(debugSprites));
+      }
       await page.screenshot({path:'qa-'+name+'-start.png'});
       assert(a.scene&&a.scene.w>=w-5&&a.scene.h>=h-5,name+' scene is not full screen '+JSON.stringify(a.scene));
       assert(a.stage&&a.stage.w>=w*.96,name+' battlefield remains a small card '+JSON.stringify(a.stage));
