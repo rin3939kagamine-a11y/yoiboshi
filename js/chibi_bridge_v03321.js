@@ -11,7 +11,9 @@
  function member(a){
    const u=unit(a.id),id=u.person;
    const color=typeof tbColorForUnit==='function'?({'red':'#ff656d','blue':'#67afff','green':'#7cce94','yellow':'#ffe082','white':'#f2f4ff'}[tbColorForUnit(a.id)]||u.color):u.color;
-   return {id,name:person(u).name,color,fallbackSrc:characterIcon(id)};
+   // Not every playable unit has a chibi PNG; never turn its standee into a round token.
+   const standing=(typeof ART_V2!=='undefined'&&ART_V2.full_body?.[id])||characterPortrait(id);
+   return {id,name:person(u).name,color,fallbackSrc:standing};
  }
  function reset(clearEvents=true){if(api){api.destroy();}api=null;node=null;context=null;linkedBattle=null;mountSize=0;if(clearEvents)events.length=0;}
  function enqueue(event){if(visible())events.push({...event,b:current()});if(events.length>30)events.splice(0,events.length-30);}
@@ -45,6 +47,26 @@
    });
  }
 
+ // Special/event bosses skip the generic enemy catalogue.
+ const SPECIAL_BOSS_ART=Object.freeze({
+   q6:'assets/enemies/zankyo/part1-000.webp',
+   q12:'assets/enemies/sakuya_battle.webp',
+   q17:'assets/enemies/ibuki_battle.webp',
+   q18:'assets/enemies/zankyo/part1-008.webp',
+   q24:'assets/enemies/haruka.webp',
+   q28:'assets/enemies/saya.webp',
+   q29:'assets/enemies/zankyo/part1-004.webp',
+   q34:'assets/enemies/ibuki_battle.webp',
+   q35:'assets/enemies/aoi_dark.webp',
+   q40:'assets/enemies/aoi_dark.webp',
+   q45:'assets/enemies/aoi_dark.webp',
+   q46:'assets/enemies/ruri.webp',
+   q52:'assets/enemies/touko_true.webp',
+   q53:'assets/enemies/zankyo/part1-004.webp',
+   q58:'assets/enemies/touko_true.webp',
+   q81:'assets/enemies/touko_true.webp',
+   q89:'assets/enemies/enju.webp'
+ });
  function enemyId(e,i){return 'enemy-'+i;}
  function paintEnemies(b,stage){
    stage.querySelectorAll('.yc-enemy-slot,.yc-intent-overview').forEach(n=>n.remove());
@@ -62,13 +84,15 @@
      const shell=document.createElement('span');shell.className='yc-enemy-shell';
      // Until approved assets exist, a silhouette communicates enemy position without inventing identity.
      shell.innerHTML='<span class="yc-enemy-eye eye-l"></span><span class="yc-enemy-eye eye-r"></span>';
-     const art=window.YoiEnemyArt?.resolve(e,{qid:b.qid,wave:b.wave,index:i});
+     const special=e.kind==='cage'?'assets/enemies/echo_cage.webp':
+       e.kind==='boss'&&b.wave===b.totalWaves-1?SPECIAL_BOSS_ART[b.qid]:null;
+     const art=special?{src:special}:window.YoiEnemyArt?.resolve(e,{qid:b.qid,wave:b.wave,index:i});
      if(art){
        const img=document.createElement('img');img.className='yc-enemy-art';img.src=art.src;
        img.alt='';img.decoding='async';img.draggable=false;
        img.onerror=()=>{shell.classList.remove('yc-enemy-art-shell');img.remove();};
        shell.classList.add('yc-enemy-art-shell');shell.appendChild(img);
-       button.dataset.catalogueId=art.catalogueId;
+       if(art.catalogueId)button.dataset.catalogueId=art.catalogueId;
      }
      const info=document.createElement('span');info.className='yc-enemy-hud';
      const label=document.createElement('span');label.className='yc-enemy-label';label.textContent=e.name;

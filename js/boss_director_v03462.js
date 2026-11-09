@@ -173,9 +173,8 @@
  function overlay(cfg,label,line,after){
   closeOverlay();overlayOpen=true;
   const el=document.createElement('div');el.className='bd-overlay';el.setAttribute('role','dialog');
-  // Show battle art at full size; Haruka switches poses at the second phase.
-  // Keep Haruka's original conversation appearance for boss introductions and defeat lines.
-  const portrait=cfg.id==='haruka'?TALK(cfg.id):(label.startsWith('第2形態')&&cfg.phaseArt?cfg.phaseArt:cfg.art);
+  // Use full-size conversation standees in boss dialogue, not battle thumbnails.
+  const portrait=TALK(cfg.id);
   el.innerHTML=`<img class="bd-art" src="${portrait}" alt=""><div class="bd-band"><small>${label}</small><strong>${cfg.name}</strong><p>${line}</p><em>タップで進む</em></div>`;
   const done=()=>{if(!el.isConnected)return;el.remove();overlayOpen=false;clearTimeout(overlayTimer);if(after)after();};
   el.addEventListener('click',done);document.body.appendChild(el);
