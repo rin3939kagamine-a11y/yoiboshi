@@ -1,0 +1,432 @@
+/* Battle visual legibility / 2026-11-09
+   Keep the existing full-screen, single-scene layout. Increase HUD legibility,
+   do not create a new side/bottom page panel, and keep sprite sizes invariant. */
+.combat-page .tb-root.yb-immersive {
+  --yb-read-top: 112px;
+  --yb-read-bottom: 173px;
+  --yb-read-field-top: calc(max(3px, env(safe-area-inset-top)) + 157px);
+  --yb-read-field-bottom: calc(var(--yb-read-bottom) + 8px);
+}
+
+/* Upper strip: use readable foreground labels and a fixed-height enemy row. */
+.combat-page .tb-root.yb-immersive > .tb-topline {
+  height: 36px!important; min-height: 36px!important; max-height: 36px!important;
+  padding: 3px 9px!important;
+  border: 1px solid #7e95b388!important;
+  background: rgba(10, 25, 46, .91)!important;
+}
+.combat-page .tb-root.yb-immersive .tb-topline strong {
+  font-size: 14px!important; line-height: 20px!important; letter-spacing: .02em;
+}
+.combat-page .tb-root.yb-immersive .tb-topline .btn {
+  height: 30px!important; min-height: 30px!important; max-height: 30px!important;
+  font-size: 12px!important; font-weight: 700!important;
+  padding: 3px 10px!important;
+}
+.combat-page .tb-root.yb-immersive > .yb-tactical-header {
+  top: calc(max(3px, env(safe-area-inset-top)) + 39px)!important;
+  height: var(--yb-read-top)!important;
+  min-height: var(--yb-read-top)!important;
+  max-height: var(--yb-read-top)!important;
+  padding: 5px 7px!important; gap: 3px!important;
+  border-color: #7894bb!important;
+  background: rgba(8, 23, 44, .90)!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemies,
+.combat-page .tb-root.yb-immersive.q6-classic .tb-enemies.q6-detail-targets {
+  height: 72px!important; min-height: 72px!important; max-height: 72px!important;
+  flex: 0 0 72px!important;
+  gap: 6px!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy {
+  height: 72px!important; min-height: 72px!important; max-height: 72px!important;
+  grid-template-columns: minmax(0,1fr) auto!important;
+  grid-template-rows: 20px 9px 37px!important;
+  gap: 1px 5px!important; padding: 4px 9px!important;
+  border: 1px solid #6781a5!important;
+  background: rgba(39, 60, 91, .95)!important;
+  text-align: left!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy b {
+  font-size: 14px!important; line-height: 18px!important;
+  letter-spacing: .01em; color: #fff5d8!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy>small:first-of-type {
+  font-size: 12px!important; line-height: 18px!important;
+  color: #e8f2ff!important; font-variant-numeric: tabular-nums;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-hp {
+  height: 8px!important; min-height: 8px!important;
+  border-color: #6684a5!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-extra {
+  max-height: 36px!important; font-size: 12px!important; line-height: 15px!important;
+  overflow: hidden!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .yb-enemy-forecast {
+  font-size: 12px!important; font-weight: 750!important;
+  line-height: 16px!important; max-height: 33px!important;
+  padding: 5px 7px!important;
+  background: rgba(64, 91, 130, .85)!important;
+  color: #fff0b9!important;
+  text-overflow: ellipsis!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline {
+  height: 25px!important; min-height: 25px!important; max-height: 25px!important;
+  flex: 0 0 25px!important;
+  padding: 1px 7px!important; gap: 7px!important;
+  background: rgba(19, 37, 61, .93)!important;
+}
+.combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline > span:first-child {
+  font-size: 12px!important;
+}
+.combat-page .tb-root.yb-immersive .yb-turn-now {
+  font-size: 12px!important; max-width: 210px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-turn-token {
+  width: 23px!important; height: 23px!important;
+  min-width: 23px!important; min-height: 23px!important; flex-basis: 23px!important;
+}
+
+/* The stage remains within the same full-screen game surface. UI bands
+   overlap the scene's artwork rather than adding external page content. */
+.combat-page .tb-root.yb-immersive.q6-classic > .tb-layout-grid,
+.combat-page .tb-root.yb-immersive > .tb-layout-grid {
+  top: var(--yb-read-field-top)!important;
+  bottom: var(--yb-read-field-bottom)!important;
+}
+/* Duplicated target-name bars belong to the compact upper enemy cards.
+   Remove only redundant floating text / green lines, not enemy artwork. */
+.combat-page .tb-root.yb-immersive .yc-turn-stage .yc-enemy-slot .yc-enemy-hud {
+  display: none!important;
+}
+/* Tone down passive aura without disabling attack/hit/heal effects. */
+.combat-page .tb-root.yb-immersive .yc-slot.yc-lit .yc-actor {
+  filter: drop-shadow(0 0 5px var(--yc-c))!important;
+}
+
+/* Lower in-scene HUD: fixed-size and readable at normal browser zoom. */
+.combat-page .tb-root.yb-immersive > .tb-control-col,
+.combat-page .tb-root.yb-immersive.q6-classic > .tb-control-col {
+  height: var(--yb-read-bottom)!important;
+  min-height: var(--yb-read-bottom)!important;
+  max-height: var(--yb-read-bottom)!important;
+  grid-template-rows: 56px 37px 68px!important;
+  gap: 4px!important; padding: 4px!important;
+  border-color: #9ab2d4aa!important;
+  background: rgba(11, 25, 44, .89)!important;
+}
+.combat-page .tb-root.yb-immersive .tb-party-grid,
+.combat-page .tb-root.yb-immersive.q6-classic .tb-party-grid {
+  height: 56px!important; min-height: 56px!important; max-height: 56px!important;
+  gap: 5px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-party,
+.combat-page .tb-root.yb-immersive.q6-classic .tb-party {
+  height: 56px!important; min-height: 56px!important; max-height: 56px!important;
+  padding: 4px 8px!important; gap: 3px!important;
+  border-color: #a99775!important;
+}
+.combat-page .tb-root.yb-immersive .tb-party b {
+  font-size: 14px!important; line-height: 17px!important;
+  max-height: 17px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-party small {
+  font-size: 12px!important; line-height: 15px!important;
+  max-height: 15px!important;
+  font-variant-numeric: tabular-nums;
+}
+.combat-page .tb-root.yb-immersive .tb-party .tb-hp {
+  height: 8px!important; min-height: 8px!important;
+  margin: 2px 0!important;
+}
+.combat-page .tb-root.yb-immersive .yb-resource-dashboard {
+  height: 37px!important; min-height: 37px!important; max-height: 37px!important;
+  padding: 3px 9px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-flame-ui .tb-light {
+  height: 29px!important; min-height: 29px!important; max-height: 29px!important;
+  gap: 9px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-light strong,
+.combat-page .tb-root.yb-immersive .tb-light > span {
+  font-size: 14px!important; line-height: 20px!important; font-weight: 800!important;
+}
+.combat-page .tb-root.yb-immersive .tb-light .btn {
+  height: 28px!important; min-height: 28px!important; max-height: 28px!important;
+  font-size: 13px!important; padding: 3px 9px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-light > .tb-flame-caption-row,
+.combat-page .tb-root.yb-immersive .tb-light > .tb-flame-caption-row .tb-flame-info-btn {
+  height: 27px!important; min-height: 27px!important; max-height: 27px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-commands {
+  height: 68px!important; min-height: 68px!important; max-height: 68px!important;
+  padding: 4px 6px!important; gap: 3px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-commands>b {
+  font-size: 13px!important; line-height: 16px!important;
+  height: 16px!important; min-height: 16px!important; max-height: 16px!important;
+  flex-basis: 16px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-command-row,
+.combat-page .tb-root.yb-immersive.q6-classic .tb-command-row {
+  height: 41px!important; min-height: 41px!important; max-height: 41px!important;
+  flex-basis: 41px!important; grid-template-rows: 41px!important;
+  gap: 5px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-command-row .tb-skill-wrapper {
+  height: 41px!important; min-height: 41px!important; max-height: 41px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-command-row .btn,
+.combat-page .tb-root.yb-immersive.q6-classic .tb-command-row .btn {
+  height: 41px!important; min-height: 41px!important; max-height: 41px!important;
+  font-size: 14px!important; line-height: 1.2!important;
+  font-weight: 750!important; padding: 4px 9px!important;
+}
+.combat-page .tb-root.yb-immersive .tb-command-row .tb-action-attack {
+  font-size: 16px!important;
+}
+
+/* Narrow portrait: prioritize controls and HP, keep both rows of commands.
+   The HUD stays a stable overlay and does not cause page scrolling. */
+@media (orientation:portrait) and (max-width:700px) {
+  .combat-page .tb-root.yb-immersive {
+    --yb-read-top: 100px;
+    --yb-read-bottom: 201px;
+    --yb-read-field-top: calc(max(3px, env(safe-area-inset-top)) + 145px);
+    --yb-read-field-bottom: 209px;
+  }
+  .combat-page .tb-root.yb-immersive .tb-topline strong{font-size:12px!important}
+  .combat-page .tb-root.yb-immersive .tb-topline .btn {
+    font-size: 10px!important; padding: 2px 6px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemies,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-enemies.q6-detail-targets {
+    height: 63px!important; min-height:63px!important; max-height:63px!important;
+    flex-basis:63px!important;gap:3px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy {
+    height:63px!important;min-height:63px!important;max-height:63px!important;
+    grid-template-rows: 16px 7px 32px!important;
+    padding:3px 4px!important;gap:1px 2px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy b{
+    font-size:11px!important;line-height:15px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy>small:first-of-type {
+    font-size:9px!important;line-height:15px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-hp{
+    height:6px!important;min-height:6px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-extra {
+    font-size:9px!important;max-height:30px!important;line-height:12px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .yb-enemy-forecast{
+    font-size:10px!important;line-height:12px!important;
+    max-height:29px!important;padding:2px 3px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline {
+    height:22px!important;min-height:22px!important;max-height:22px!important;flex-basis:22px!important;
+    gap:3px!important;padding:1px 4px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline > span:first-child,
+  .combat-page .tb-root.yb-immersive .yb-turn-now{font-size:10px!important}
+  .combat-page .tb-root.yb-immersive .tb-turn-token{
+    width:20px!important;min-width:20px!important;height:20px!important;min-height:20px!important;flex-basis:20px!important;
+  }
+  .combat-page .tb-root.yb-immersive > .tb-control-col,
+  .combat-page .tb-root.yb-immersive.q6-classic > .tb-control-col {
+    grid-template-rows:54px 33px 102px!important;gap:2px!important;padding:3px!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-party-grid,
+  .combat-page .tb-root.yb-immersive .tb-party,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-party-grid,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-party {
+    height:54px!important;min-height:54px!important;max-height:54px!important;
+    padding:2px 3px!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-party b{font-size:11px!important;line-height:14px!important;max-height:14px!important}
+  .combat-page .tb-root.yb-immersive .tb-party small{font-size:10px!important;line-height:12px!important;max-height:12px!important}
+  .combat-page .tb-root.yb-immersive .tb-party .tb-hp{height:6px!important;min-height:6px!important}
+  .combat-page .tb-root.yb-immersive .yb-resource-dashboard{height:33px!important;min-height:33px!important;max-height:33px!important;padding:2px 4px!important}
+  .combat-page .tb-root.yb-immersive .tb-flame-ui .tb-light{height:27px!important;min-height:27px!important;max-height:27px!important;gap:3px!important}
+  .combat-page .tb-root.yb-immersive .tb-light strong{font-size:12px!important}
+  .combat-page .tb-root.yb-immersive .tb-light .btn{height:26px!important;min-height:26px!important;max-height:26px!important;font-size:11px!important;padding:2px 4px!important}
+  .combat-page .tb-root.yb-immersive .tb-commands{height:102px!important;min-height:102px!important;max-height:102px!important;padding:3px!important}
+  .combat-page .tb-root.yb-immersive .tb-commands>b{height:14px!important;min-height:14px!important;max-height:14px!important;flex-basis:14px!important;font-size:11px!important;line-height:14px!important}
+  .combat-page .tb-root.yb-immersive .tb-command-row,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-command-row {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:repeat(2,39px)!important;
+    height:81px!important;min-height:81px!important;max-height:81px!important;
+    flex-basis:81px!important;gap:3px!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-command-row .tb-skill-wrapper{height:39px!important;min-height:39px!important;max-height:39px!important}
+  .combat-page .tb-root.yb-immersive .tb-command-row .btn,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-command-row .btn {
+    height:39px!important;min-height:39px!important;max-height:39px!important;font-size:12px!important;padding:3px 5px!important;
+  }
+}
+
+/* Short landscape: retain full playability rather than obscuring the field. */
+@media (orientation:landscape) and (max-height:520px) {
+  .combat-page .tb-root.yb-immersive {
+    --yb-read-top:90px;
+    --yb-read-bottom:114px;
+    --yb-read-field-top:calc(max(3px,env(safe-area-inset-top)) + 135px);
+    --yb-read-field-bottom:121px;
+  }
+  .combat-page .tb-root.yb-immersive > .tb-topline{height:33px!important;min-height:33px!important;max-height:33px!important;padding:1px 5px!important}
+  .combat-page .tb-root.yb-immersive .tb-topline strong{font-size:12px!important}
+  .combat-page .tb-root.yb-immersive .tb-topline .btn{height:27px!important;min-height:27px!important;max-height:27px!important;font-size:10px!important;padding:2px 5px!important}
+  .combat-page .tb-root.yb-immersive > .yb-tactical-header{top:calc(max(3px,env(safe-area-inset-top)) + 36px)!important;padding:3px 4px!important;gap:1px!important}
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemies,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-enemies.q6-detail-targets {
+    height:46px!important;min-height:46px!important;max-height:46px!important;flex-basis:46px!important;gap:4px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy {
+    height:46px!important;min-height:46px!important;max-height:46px!important;
+    grid-template-rows:14px 6px 18px!important;padding:2px 5px!important;gap:1px 3px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy b{font-size:11px!important;line-height:13px!important}
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy>small:first-of-type{font-size:10px!important;line-height:13px!important}
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-extra{font-size:9px!important;max-height:18px!important;line-height:12px!important}
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .yb-enemy-forecast{font-size:10px!important;line-height:14px!important;max-height:18px!important;padding:1px 4px!important}
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-hp{height:6px!important;min-height:6px!important}
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline{height:21px!important;min-height:21px!important;max-height:21px!important;flex-basis:21px!important;padding:0 5px!important;gap:5px!important}
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline > span:first-child,
+  .combat-page .tb-root.yb-immersive .yb-turn-now{font-size:10px!important}
+  .combat-page .tb-root.yb-immersive .tb-turn-token{width:20px!important;min-width:20px!important;height:20px!important;min-height:20px!important;flex-basis:20px!important}
+  .combat-page .tb-root.yb-immersive > .tb-control-col,
+  .combat-page .tb-root.yb-immersive.q6-classic > .tb-control-col{
+    grid-template-rows:34px 25px 45px!important;gap:2px!important;padding:2px!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-party-grid,
+  .combat-page .tb-root.yb-immersive .tb-party,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-party-grid,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-party{
+    height:34px!important;min-height:34px!important;max-height:34px!important;
+    padding:1px 3px!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-party b{font-size:11px!important;line-height:13px!important;max-height:13px!important}
+  .combat-page .tb-root.yb-immersive .tb-party small{font-size:10px!important;line-height:11px!important;max-height:11px!important}
+  .combat-page .tb-root.yb-immersive .tb-party .tb-hp{height:5px!important;min-height:5px!important;margin:0!important}
+  .combat-page .tb-root.yb-immersive .yb-resource-dashboard{height:25px!important;min-height:25px!important;max-height:25px!important;padding:1px 4px!important}
+  .combat-page .tb-root.yb-immersive .tb-flame-ui .tb-light{height:22px!important;min-height:22px!important;max-height:22px!important;gap:5px!important}
+  .combat-page .tb-root.yb-immersive .tb-light strong{font-size:11px!important}
+  .combat-page .tb-root.yb-immersive .tb-light .btn{height:22px!important;min-height:22px!important;max-height:22px!important;font-size:10px!important;padding:1px 4px!important}
+  .combat-page .tb-root.yb-immersive .tb-commands{height:45px!important;min-height:45px!important;max-height:45px!important;padding:2px!important}
+  .combat-page .tb-root.yb-immersive .tb-commands>b{display:none!important}
+  .combat-page .tb-root.yb-immersive .tb-command-row,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-command-row {
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-template-rows:39px!important;
+    height:39px!important;min-height:39px!important;max-height:39px!important;
+    flex-basis:39px!important;gap:4px!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-command-row .tb-skill-wrapper{height:39px!important;min-height:39px!important;max-height:39px!important}
+  .combat-page .tb-root.yb-immersive .tb-command-row .btn,
+  .combat-page .tb-root.yb-immersive.q6-classic .tb-command-row .btn{
+    height:39px!important;min-height:39px!important;max-height:39px!important;font-size:12px!important;padding:2px 5px!important;
+  }
+}
+
+/* Maintain actual safe-area space on notched phones. */
+.combat-page .tb-root.yb-immersive > .tb-control-col {
+  bottom: max(4px,env(safe-area-inset-bottom))!important;
+}
+
+
+/* Explicit grid placement. Legacy .q6-classic ordering previously put flame
+   above HP and visually buried the status text under commands. */
+.combat-page .tb-root.yb-immersive > .tb-control-col > .tb-party-grid {
+  grid-row:1!important;order:0!important;align-self:stretch;
+}
+.combat-page .tb-root.yb-immersive > .tb-control-col > .yb-resource-dashboard {
+  grid-row:2!important;order:0!important;align-self:stretch;
+}
+.combat-page .tb-root.yb-immersive > .tb-control-col > .tb-commands {
+  grid-row:3!important;order:0!important;align-self:stretch;
+}
+
+/* Small enemy cards: one full-width name and a separate numerical HP row.
+   This prevents long character names colliding with numeric HP readings. */
+@media(orientation:portrait) and (max-width:700px){
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy {
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:15px 6px 12px 17px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy b{
+    grid-column:1/3!important;grid-row:1!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-hp{
+    grid-column:1/3!important;grid-row:2!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy>small:first-of-type{
+    grid-column:1/3!important;grid-row:3!important;
+    text-align:right!important;font-variant-numeric:tabular-nums;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-extra{
+    grid-column:1!important;grid-row:4!important;
+    max-height:17px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .yb-enemy-forecast{
+    grid-column:2!important;grid-row:4!important;max-height:17px!important;
+    white-space:nowrap!important;overflow:hidden!important;
+  }
+}
+
+/* Leave room for all status and next-turn icons on landscape devices. */
+@media(orientation:landscape) and (max-height:520px){
+  .combat-page .tb-root.yb-immersive .yb-tactical-header{
+    overflow:hidden!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline{
+    margin:0!important;padding:0 4px!important;
+  }
+}
+
+
+/* The selected-actor label inherited pale gold from the dark classic HUD.
+   The current command panel is light, so use strong readable contrast. */
+.combat-page .tb-root.yb-immersive .tb-commands>b{
+  color:#1b324c!important;
+  font-weight:800!important;
+  text-shadow:none!important;
+}
+@media(orientation:portrait) and (max-width:700px){
+  /* Preserve BOTH HP and CT values; do not truncate the combined label. */
+  .combat-page .tb-root.yb-immersive .tb-party small{
+    display:block!important;white-space:normal!important;
+    overflow:visible!important;text-overflow:clip!important;
+    max-height:25px!important;height:auto!important;
+    line-height:12px!important;word-break:normal!important;
+  }
+  .combat-page .tb-root.yb-immersive .tb-party>div{
+    overflow:hidden!important;max-height:50px!important;
+  }
+}
+
+/* Layout-only HP and cooldown values: inline on desktop, two stable rows
+   on narrow phones. Both numeric fields remain fully visible. */
+.combat-page .tb-root.yb-immersive .yb-party-numbers{
+  display:flex!important;align-items:center!important;gap:11px!important;
+  flex-wrap:nowrap!important;
+}
+.combat-page .tb-root.yb-immersive .yb-party-numbers > span{
+  display:inline-block;white-space:nowrap!important;
+  font-variant-numeric:tabular-nums;
+}
+@media(orientation:portrait) and (max-width:700px){
+  .combat-page .tb-root.yb-immersive .yb-party-numbers{
+    display:flex!important;flex-direction:column!important;
+    align-items:flex-start!important;justify-content:flex-start!important;
+    gap:0!important;line-height:12px!important;
+    overflow:hidden!important;max-height:24px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-party-numbers>span{
+    line-height:12px!important;font-size:10px!important;
+  }
+}
