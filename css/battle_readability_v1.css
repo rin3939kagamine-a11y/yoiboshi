@@ -273,9 +273,9 @@
 /* Short landscape: retain full playability rather than obscuring the field. */
 @media (orientation:landscape) and (max-height:520px) {
   .combat-page .tb-root.yb-immersive {
-    --yb-read-top:76px;
+    --yb-read-top:90px;
     --yb-read-bottom:114px;
-    --yb-read-field-top:calc(max(3px,env(safe-area-inset-top)) + 119px);
+    --yb-read-field-top:calc(max(3px,env(safe-area-inset-top)) + 135px);
     --yb-read-field-bottom:121px;
   }
   .combat-page .tb-root.yb-immersive > .tb-topline{height:33px!important;min-height:33px!important;max-height:33px!important;padding:1px 5px!important}
@@ -336,4 +336,54 @@
 /* Maintain actual safe-area space on notched phones. */
 .combat-page .tb-root.yb-immersive > .tb-control-col {
   bottom: max(4px,env(safe-area-inset-bottom))!important;
+}
+
+
+/* Explicit grid placement. Legacy .q6-classic ordering previously put flame
+   above HP and visually buried the status text under commands. */
+.combat-page .tb-root.yb-immersive > .tb-control-col > .tb-party-grid {
+  grid-row:1!important;order:0!important;align-self:stretch;
+}
+.combat-page .tb-root.yb-immersive > .tb-control-col > .yb-resource-dashboard {
+  grid-row:2!important;order:0!important;align-self:stretch;
+}
+.combat-page .tb-root.yb-immersive > .tb-control-col > .tb-commands {
+  grid-row:3!important;order:0!important;align-self:stretch;
+}
+
+/* Small enemy cards: one full-width name and a separate numerical HP row.
+   This prevents long character names colliding with numeric HP readings. */
+@media(orientation:portrait) and (max-width:700px){
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy {
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:15px 6px 12px 17px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy b{
+    grid-column:1/3!important;grid-row:1!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-hp{
+    grid-column:1/3!important;grid-row:2!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy>small:first-of-type{
+    grid-column:1/3!important;grid-row:3!important;
+    text-align:right!important;font-variant-numeric:tabular-nums;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-extra{
+    grid-column:1!important;grid-row:4!important;
+    max-height:17px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .yb-enemy-forecast{
+    grid-column:2!important;grid-row:4!important;max-height:17px!important;
+    white-space:nowrap!important;overflow:hidden!important;
+  }
+}
+
+/* Leave room for all status and next-turn icons on landscape devices. */
+@media(orientation:landscape) and (max-height:520px){
+  .combat-page .tb-root.yb-immersive .yb-tactical-header{
+    overflow:hidden!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-tactical-header .yb-timeline{
+    margin:0!important;padding:0 4px!important;
+  }
 }
