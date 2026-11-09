@@ -4,6 +4,10 @@ on:
     branches: [feature/compact-inframe-battle-ui-20261109]
     paths:
       - .github/workflows/qa-combat-hud-temporary.yml
+      - .github/qa/battle-layout-check.cjs
+      - css/battle_ui_dashboard_v1.css
+      - js/battle_turn_v032.js
+      - js/q6_classic_battle_v03540.js
 permissions:
   contents: read
 jobs:
