@@ -7,7 +7,8 @@
 .yc-stage .yc-slot:nth-child(3) .yc-actor img{animation-delay:-1.4s}
 .yc-stage .yc-slot:nth-child(4) .yc-actor img{animation-delay:-2.1s}
 .yc-stage .yc-slot:nth-child(5) .yc-actor img{animation-delay:-2.8s}
-.yc-actor.yc-fallback img{inset:30% 25% 10%;width:50%;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 2px 8px #0006}
+/* Missing chibi artwork: keep a scaled full-body silhouette, not a circular face cut-out. */
+.yc-actor.yc-fallback img{inset:0;width:100%;height:100%;aspect-ratio:auto;border-radius:0;object-fit:contain;object-position:center bottom;border:0;box-shadow:none;background:transparent}
 .yc-ring{position:absolute;left:22%;right:22%;bottom:0;height:7%;border-radius:50%;background:#0006;transform:translateY(40%)}
 .yc-slot.yc-active .yc-ring{background:#f2b552;box-shadow:0 0 12px #f2b552}
 .yc-slot.yc-lit .yc-actor{filter:drop-shadow(0 0 6px var(--yc-c)) drop-shadow(0 0 14px var(--yc-c))}
