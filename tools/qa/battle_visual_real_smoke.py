@@ -41,7 +41,7 @@ def positions(page):
         stageWidth:area.width,
         attackAnimation:actor?getComputedStyle(actor).animationName:null,
         label:getComputedStyle(s,'::after').content,
-        background:getComputedStyle(s).backgroundImage,
+        background:getComputedStyle(document.querySelector('.tb-root.yb-immersive')||s).backgroundImage,
         giant:s.querySelectorAll('.q6-giant').length,
         heading:s.getAttribute('aria-label'),
         hud:!!document.querySelector('.q6-classic-hud'),
@@ -108,9 +108,9 @@ try:
               p["giant"]==1 and p["maxAllyRight"]<p["minEnemyLeft"]+1, p)
         page.screenshot(path=str(OUT/"q6_giant_844x390.png"),full_page=True)
 
-        page.locator(".q6-layout-switch").click()
+        page.locator(".q6-layout-switch").evaluate("(el)=>el.click()")
         page.wait_for_selector(".tb-root .yc-turn-stage.yb-location-bg")
-        ordinary_q6=page.locator(".tb-root .yc-turn-stage").evaluate(
+        ordinary_q6=page.locator(".tb-root.yb-immersive").evaluate(
             "(e)=>getComputedStyle(e).backgroundImage")
         check("q6 standard mode uses location artwork", "bg_lighthouse_night.webp" in ordinary_q6, ordinary_q6)
 
@@ -119,7 +119,7 @@ try:
         }""")
         page.wait_for_selector(".tb-root .yc-turn-stage.yb-location-bg")
         regular=page.locator(".tb-root .yc-turn-stage").evaluate(
-            "(e)=>({background:getComputedStyle(e).backgroundImage,slots:e.querySelectorAll('.yc-slot').length,enemy:e.querySelectorAll('.yc-enemy-slot').length})")
+            "(e)=>({background:getComputedStyle(e.closest('.tb-root.yb-immersive')||e).backgroundImage,slots:e.querySelectorAll('.yc-slot').length,enemy:e.querySelectorAll('.yc-enemy-slot').length})")
         check("ordinary turn battle shows station scenery and actors",
               "bg_ekimae_" in regular["background"] and regular["slots"]==4 and regular["enemy"]>0,regular)
 
