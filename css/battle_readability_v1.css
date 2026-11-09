@@ -408,3 +408,25 @@
     overflow:hidden!important;max-height:50px!important;
   }
 }
+
+/* Layout-only HP and cooldown values: inline on desktop, two stable rows
+   on narrow phones. Both numeric fields remain fully visible. */
+.combat-page .tb-root.yb-immersive .yb-party-numbers{
+  display:flex!important;align-items:center!important;gap:11px!important;
+  flex-wrap:nowrap!important;
+}
+.combat-page .tb-root.yb-immersive .yb-party-numbers > span{
+  display:inline-block;white-space:nowrap!important;
+  font-variant-numeric:tabular-nums;
+}
+@media(orientation:portrait) and (max-width:700px){
+  .combat-page .tb-root.yb-immersive .yb-party-numbers{
+    display:flex!important;flex-direction:column!important;
+    align-items:flex-start!important;justify-content:flex-start!important;
+    gap:0!important;line-height:12px!important;
+    overflow:hidden!important;max-height:24px!important;
+  }
+  .combat-page .tb-root.yb-immersive .yb-party-numbers>span{
+    line-height:12px!important;font-size:10px!important;
+  }
+}
