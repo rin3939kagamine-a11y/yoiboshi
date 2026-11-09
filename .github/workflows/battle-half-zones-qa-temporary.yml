@@ -1,0 +1,39 @@
+name: Temporary battle half-zone QA
+on:
+  push:
+    branches: [fix/battle-half-zones-current-main-20261109]
+    paths:
+      - .github/workflows/battle-half-zones-qa-temporary.yml
+      - .github/qa/battle-half-zones.cjs
+      - js/battle_immersive_v1.js
+      - index.html
+permissions:
+  contents: read
+jobs:
+  chromium-zones:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+      options: --ipc=host
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: npm install --no-save --no-package-lock playwright@1.57.0
+      - name: Test left-right 50-percent team zones
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/battle-zone-server.log 2>&1 &
+          sleep 2
+          node .github/qa/battle-half-zones.cjs
+      - name: Upload viewport evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: battle-half-zones-screens
+          path: qa-*.png
+          if-no-files-found: ignore
