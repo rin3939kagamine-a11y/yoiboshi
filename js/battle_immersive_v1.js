@@ -68,7 +68,7 @@
    }
    const allEnemies=battleState.enemies||[];
    const bossIndex=allEnemies.findIndex(e=>e.kind==='boss');
-   const hasBoss=bossIndex>=0&&allEnemies[bossIndex].hp>0;
+   const hasBoss=bossIndex>=0; // Reserve original boss lane even after HP reaches zero.
    const minionIndices=allEnemies.map((e,i)=>e.kind==='boss'?-1:i).filter(i=>i>=0);
    const nonBossCount=Math.max(1,minionIndices.length);
    nodes.forEach(node=>{
