@@ -1,0 +1,35 @@
+name: Import approved Haruka pair chibi assets (temporary)
+on:
+  push:
+    branches: [feature/haruka-genuine-impostor-chibi-20261109]
+    paths:
+      - .github/workflows/import-haruka-chibi-temporary.yml
+permissions:
+  contents: write
+jobs:
+  add-original-images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import approved original PNG files; check exact SHA-256
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/ART_V2/chibi
+          curl -fLsS --retry 2 --connect-timeout 15 --max-time 120 'https://yoiboshi-contract.floot.app/_cdn/static/f6a1bf1b-dc91-4107-8c3b-0f41e37932ec-haruka_npc_real_chibi.png' -o assets/ART_V2/chibi/haruka_npc_real.png
+          curl -fLsS --retry 2 --connect-timeout 15 --max-time 120 'https://yoiboshi-contract.floot.app/_cdn/static/2c859c81-dd2e-4635-9a88-c03489d141aa-haruka_npc_fake_chibi.png' -o assets/ART_V2/chibi/haruka_npc_fake.png
+          echo 'f4cdf690d5c24799097105c0b9e1535ab704cadb4ad2cf7d5eda5a1d0541c99e  assets/ART_V2/chibi/haruka_npc_real.png' | sha256sum -c -
+          echo '5afbbee5c018a811d4f0f999a33094e66fc27347fffb69f728a9dcb61303baed  assets/ART_V2/chibi/haruka_npc_fake.png' | sha256sum -c -
+          file assets/ART_V2/chibi/haruka_npc_real.png assets/ART_V2/chibi/haruka_npc_fake.png
+      - name: Commit binary originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/ART_V2/chibi/haruka_npc_real.png assets/ART_V2/chibi/haruka_npc_fake.png
+          if ! git diff --cached --quiet; then
+            git commit -m 'Add approved genuine and impostor Haruka chibi originals'
+            git push origin HEAD:feature/haruka-genuine-impostor-chibi-20261109
+          fi
