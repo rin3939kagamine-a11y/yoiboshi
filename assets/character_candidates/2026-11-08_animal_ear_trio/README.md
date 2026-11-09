@@ -27,3 +27,20 @@
 - v2は1024×1536のRGBA PNG。元画像とRGB値はピクセル単位で一致し、**アルファ（透過度）のみ変更**。再描画・別人化なし。
 - QA画像は濃紺（RGB: 18,24,38）背景に合成したプレビュー。手順は `tools/qa/pr34_hair_transparency_fix.py` に記録。
 - 3枚目の `03_gray_pink_dynamic_no_cat_ears.png` は変更なし。ゲームへの実装・参照登録も変更なし。
+
+## 2026-11-09 髪の白残り再修正（v3）
+
+v2の暗背景確認で残っていた白・市松模様に対して、PR #34上の実画像を対象に成分単位の背景マスク補正を実行。
+
+| 使用推奨v3 | 暗色背景QA | 髪の拡大 |
+| --- | --- | --- |
+| `01_leopard_cat_dynamic_v3.png` | `qa_dark/01_leopard_cat_dynamic_v3_black.jpg` | `qa_dark/01_leopard_cat_dynamic_v3_hair_detail.jpg` |
+| `02_pink_bunny_dynamic_v3.png` | `qa_dark/02_pink_bunny_dynamic_v3_black.jpg` | `qa_dark/02_pink_bunny_dynamic_v3_hair_detail.jpg` |
+
+- **v3を優先利用**し、v1/v2は差分確認用として保持する。
+- **RGB全画素一致**（v2との比較をActionsのassertで検証）。補正はアルファチャンネルのみ。顔・髪の塗り・服・ポーズを描き直さない。
+- 元画像と同じ1024×1536・RGBA PNG。v2からの変更アルファ画素数は猫耳6,879、バニー2,875。
+- 検証画像は黒RGB(4,5,9)、濃紺RGB(17,21,33)、グレーRGB(109,114,120)に実際のv3を合成。
+- 修正処理: `tools/qa/pr34_hair_transparency_refine_v3.py`。
+- 残存する髪のごく細い明部が意匠のハイライトか焼き込みかは、拡大目視だけで完全に断定できない。完全除去の保証ではなく、v3品質候補として扱う。
+- キャラクター情報・ゲームロジック・ストーリー・確率・セーブデータは変更なし。
