@@ -131,6 +131,29 @@ const { chromium } = require('playwright');
       for(const key of ['scene','stage','header','controls']){
         assert(close(a[key].w,c[key].w)&&close(a[key].h,c[key].h),name+' layout changes after enemy defeat '+key);
       }
+
+      if(name==='phone390'||name==='desktop1280'||name==='landscape844'){
+        const q12=await page.evaluate(()=>{
+          view='records';battle=null;startBossTrial('q12');
+          document.querySelector('.bd-overlay')?.click();
+          return {qid:battle?.qid,wave:battle?.wave,turnBattle:battle?.turnBattle};
+        });
+        assert(q12.qid==='q12'&&q12.turnBattle,name+' q12 not loaded '+JSON.stringify(q12));
+        await page.evaluate(async()=>{
+          await Promise.all([...document.querySelectorAll('#ycTurnStage img')].map(img=>img.decode().catch(()=>{})));
+        });
+        const q12r=await measure();
+        await page.screenshot({path:'qa-'+name+'-q12.png'});
+        assert(q12r.controls.w>=w*.92,name+' q12 has side panel');
+        assert(inside(q12r.controls,w,h)&&inside(q12r.stage,w,h),name+' q12 overflow');
+        assert(q12r.enemy.length>=2,name+' q12 enemy missing');
+        for(let i=0;i<q12r.enemy.length;i++)for(let j=i+1;j<q12r.enemy.length;j++){
+          const x=q12r.enemy[i],y=q12r.enemy[j];
+          assert(Math.min(x.right,y.right)<=Math.max(x.x,y.x)+1||
+          Math.min(x.bottom,y.bottom)<=Math.max(x.y,y.y)+1,name+' q12 enemies overlap '+JSON.stringify([x,y]));
+        }
+        console.log('Q12 '+name+' '+JSON.stringify({enemy:q12r.enemy,stage:q12r.stage,controls:q12r.controls}));
+      }
       console.log(JSON.stringify({name,scene:a.scene,stage:a.stage,controls:a.controls,allyWidth:a.allies[0]?.w,bossWidth:prev.w,bossWidthAlone:newBoss.w,header:a.header,pass:true}));
     }catch(e){
       console.error('FAIL '+name,e.stack);
