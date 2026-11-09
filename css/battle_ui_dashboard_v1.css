@@ -518,15 +518,8 @@ body:has(.combat-page .tb-root.yb-battle-dashboard) .main{
  .combat-page .tb-root.yb-battle-dashboard .tb-topline{
    flex-basis:42px!important;height:42px!important;min-height:42px!important;max-height:42px!important;
  }
- .combat-page .tb-root.yb-battle-dashboard .yb-tactical-header{
-   flex-basis:82px!important;height:82px!important;min-height:82px!important;max-height:82px!important;
- }
- .combat-page .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemies{
-   height:50px!important;max-height:50px!important;flex-basis:50px!important;
- }
- .combat-page .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy{
-   height:50px!important;
- }
+ /* Keep the same enemy-header height across 1, 2 and 3 targets.
+    Changing visible enemy count must never resize the battlefield. */
 }
 @media(orientation:landscape) and (max-height:520px){
  .combat-page .tb-root.yb-battle-dashboard .yb-tactical-header{
@@ -546,4 +539,29 @@ body:has(.combat-page .tb-root.yb-battle-dashboard) .main{
  }
  .combat-page .tb-root.yb-battle-dashboard .tb-party-grid,
  .combat-page .tb-root.yb-battle-dashboard .tb-party{height:48px!important;min-height:48px!important;max-height:48px!important;flex-basis:48px!important}
+}
+
+
+/* Non-overlapping classic sprite containment. JS gives every enemy a disjoint
+   left-edge percentage and width; artwork must stay inside that assigned slot. */
+.combat-page .tb-root.yb-battle-dashboard.q6-classic .yc-turn-stage .yc-enemy-slot{
+  box-sizing:border-box!important;transform:none!important;overflow:hidden!important;
+  max-width:none!important;padding:0!important;
+}
+.combat-page .tb-root.yb-battle-dashboard.q6-classic .yc-enemy-slot .yc-enemy-shell,
+.combat-page .tb-root.yb-battle-dashboard.q6-classic .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
+  inset:auto!important;max-width:100%!important;width:100%!important;
+  margin:0!important;overflow:hidden!important;
+}
+.combat-page .tb-root.yb-battle-dashboard.q6-classic .yc-enemy-slot .yc-enemy-art{
+  display:block;max-width:100%!important;width:100%!important;
+  max-height:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center bottom!important;
+}
+@media(max-width:860px) and (orientation:portrait){
+  /* Controls use a fixed region. Longer details open as an overlay, not
+     by pushing the field or narrowing the stage. */
+  .combat-page .tb-root.yb-battle-dashboard .tb-control-col{
+    max-width:100%!important;width:100%!important;
+  }
 }
