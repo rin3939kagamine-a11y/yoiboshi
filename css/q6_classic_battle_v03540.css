@@ -1,4 +1,4 @@
-/* 宵星 q6 クラシックサイドビュー試作 0.35.4.0。q6以外は対象外。 */
+/* 宵星 クラシックサイドビュー 0.35.4.0（q6で試作）。Ver.0.50.2.0からすべてのターン制の戦闘に適用。 */
 .tb-root.q6-classic{
  --q6-gold:#c7a970;color:#f5ebd7!important;background:linear-gradient(#12213a,#10182b)!important;
  border:1px solid #9e885a!important;padding:6px!important;gap:5px!important
@@ -139,3 +139,13 @@
 @media(prefers-reduced-motion:reduce){
  .tb-root.q6-classic .yc-turn-stage .yc-slot .yc-actor.yc-attack{animation:none}
 }
+/* Ver.0.50.2.0 q6以外：依頼の場所の背景と場所名を使う。背景がない場所は灯台ではなく無地の夜色にする。 */
+.tb-root.q6-classic .yc-turn-stage.q6-classic-stage.q6-classic-generic{
+ background:linear-gradient(180deg,#1c2f4f 0%,#16253f 55%,#0e1828 100%)!important
+}
+.tb-root.q6-classic .yc-turn-stage.q6-classic-stage.q6-classic-generic.yb-location-bg{
+ background:linear-gradient(180deg,rgba(6,13,27,.20),rgba(9,17,30,.08) 47%,rgba(6,12,22,.84) 100%),
+  var(--yb-battle-image) center 52%/cover no-repeat,#17263b!important
+}
+.tb-root.q6-classic .yc-turn-stage.q6-classic-stage[data-place]:after{content:attr(data-place)}
+.tb-root.q6-classic .yc-turn-stage.q6-classic-stage[data-place=""]:after{display:none}

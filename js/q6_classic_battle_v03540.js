@@ -1,5 +1,6 @@
-/* 宵星の契約者 RE:START: q6 クラシックサイドビュー試作 v0.35.4.0
- * q6のターン制だけに適用。計算・編成・報酬・セーブは変更しない。
+/* 宵星の契約者 RE:START: クラシックサイドビュー v0.35.4.0（q6で試作）
+ * Ver.0.50.2.0 から、自動周回以外のすべてのターン制の戦闘に適用（以前はq6だけ）。
+ * 計算・編成・報酬・セーブは変更しない。
  * 現行 tbRender → ycRenderTurn の完了後、表示のみを調整する。
  */
 (function q6ClassicBattle(){
@@ -7,7 +8,24 @@
  if(typeof tbRender!=='function'||typeof tbCurrent!=='function')return;
  var enabled=true;
  var originalRender=tbRender;
- var bossImage='assets/enemies/zankyo/part1-000.webp';
+ var fallbackBoss='assets/enemies/zankyo/part1-000.webp';
+ // battle_turn_v032.js の eventBossArt と同じ対応（敵一覧の小さな絵と、戦場の大きな絵をそろえる）
+ var EVENT_BOSS_ART={q18:'assets/enemies/zankyo/part1-008.webp',q28:'assets/enemies/saya.webp',q34:'assets/enemies/ibuki_battle.webp',q35:'assets/enemies/aoi_dark.webp',q40:'assets/enemies/aoi_dark.webp',q45:'assets/enemies/aoi_dark.webp',q46:'assets/enemies/ruri.webp',q52:'assets/enemies/touko_true.webp',q58:'assets/enemies/touko_true.webp',q81:'assets/enemies/touko_true.webp',q89:'assets/enemies/enju.webp',q53:'assets/enemies/zankyo/part1-004.webp',q29:'assets/enemies/zankyo/part1-004.webp',q17:'assets/enemies/ibuki_battle.webp',q24:'assets/enemies/haruka.webp'};
+ // 大きく描くボスの絵：q6は従来どおり。ほかは残響図鑑の割り当て、なければq6と同じ絵。
+ function bossImageFor(b,e,i){
+  if(b.qid==='q6')return fallbackBoss;
+  // 物語のボス（透子・沙耶・イブキ・黒い灯の葵・ルリ・槐など）は、敵一覧と同じ専用の絵を使う
+  if(b.qid==='q12')return 'assets/enemies/sakuya_battle.webp';
+  if(EVENT_BOSS_ART[b.qid])return EVENT_BOSS_ART[b.qid];
+  try{
+   if(window.YoiEnemyArt){var r=window.YoiEnemyArt.resolve(e,{qid:b.qid,wave:b.wave,index:i});if(r&&r.src)return r.src;}
+  }catch(_){}
+  return fallbackBoss;
+ }
+ function placeName(b){
+  try{var q=QUEST_BY_ID[b.qid];if(q&&q.location)return String(q.location).replace(/^.*・/,'');}catch(_){}
+  return '';
+ }
  function el(tag,cls,label){
   var node=document.createElement(tag);
   if(cls)node.className=cls;
@@ -58,7 +76,11 @@
   var stage=field.querySelector('#ycTurnStage');
   if(!stage)return;
   stage.classList.add('q6-classic-stage');
-  stage.setAttribute('aria-label','旧灯台の戦場。左側が味方、右側が敵。敵を押すと対象を選択');
+  // 場所名のラベル：q6は従来の「旧灯台・残響域」、ほかは依頼の場所
+  var loc='';try{loc=String((QUEST_BY_ID[b.qid]||{}).location||'');}catch(_){}
+  stage.classList.toggle('q6-classic-generic',b.qid!=='q6');
+  stage.dataset.place=b.qid==='q6'?'旧灯台・残響域':loc;
+  stage.setAttribute('aria-label',(placeName(b)?placeName(b)+'の':'')+'戦場。左側が味方、右側が敵。敵を押すと対象を選択');
   // Ally slots keep YoiChibi.FORMATION (left-hand formation), including damage popup anchors.
   var last=b.wave===b.totalWaves-1;
   stage.querySelectorAll(':scope > .yc-enemy-slot').forEach(function(node,i){
@@ -74,7 +96,7 @@
     var shell=node.querySelector('.yc-enemy-shell');
     if(shell&&!shell.querySelector('img')){
      var img=el('img','yc-enemy-art');
-     img.src=bossImage;img.alt='';img.loading='eager';img.decoding='async';img.draggable=false;
+     img.src=bossImageFor(b,e,i);img.alt='';img.loading='eager';img.decoding='async';img.draggable=false;
      img.onerror=function(){img.remove();shell.classList.remove('yc-enemy-art-shell');};
      shell.classList.add('yc-enemy-art-shell');
      shell.appendChild(img);
@@ -95,7 +117,7 @@
  }
  function apply(){
   var b=tbCurrent();
-  if(!b||b.qid!=='q6'||!b.turnBattle||b.grind)return;
+  if(!b||!b.turnBattle||b.grind)return;
   var root=document.querySelector('.tb-root');if(!root)return;
   switcher(root.querySelector('.tb-topline'));
   if(!enabled)return;

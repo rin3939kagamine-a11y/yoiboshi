@@ -56,10 +56,12 @@
  function refresh(){
   if(typeof battle==='undefined'||!battle||battle.done||typeof view==='undefined'||view!=='combat')return;
   var stage=battle.turnBattle?
-    document.querySelector('.tb-root .yc-turn-stage:not(.q6-classic-stage)'):
+    document.querySelector('.tb-root .yc-turn-stage'):
     document.querySelector('.v024-battle-stage .arena.overhead');
-  // q6's authored lighthouse/HUD design and cinematic arenas keep their own visuals.
+  // Cinematic arenas keep their own visuals.
   if(!stage||stage.closest('.qcin-active'))return;
+  // q6は専用に描いた旧灯台の背景を使う（クラシック表示が全戦闘に広がったので、q6だけ除外）
+  if(battle.qid==='q6'&&stage.classList.contains('q6-classic-stage'))return;
   var file=resolve(battle.qid);
   if(!file){
    stage.classList.remove('yb-location-bg');
@@ -68,7 +70,9 @@
    return;
   }
   if(stage.dataset.ybBg===file&&stage.classList.contains('yb-location-bg'))return;
-  stage.style.setProperty('--yb-battle-image','url("'+file+'")');
+  // 絶対URLで渡す（CSSファイル側で解決されると css/assets/... を探して背景が出ないため）
+  var abs=file;try{abs=new URL(file,document.baseURI).href;}catch(_){}
+  stage.style.setProperty('--yb-battle-image','url("'+abs+'")');
   stage.dataset.ybBg=file;
   stage.classList.add('yb-location-bg');
  }
