@@ -65,11 +65,16 @@
    stage.querySelectorAll('.yc-enemy-slot,.yc-intent-overview').forEach(n=>n.remove());
    if(!b.turnBattle)return;
    const speed=b.tb?.speed||1;
-   b.enemies.slice(0,3).forEach((e,i)=>{
+   // Keep up to three visible enemies in fixed, non-overlapping right-side columns.
+   // This is presentation-only: enemy order, target indices and combat data are unchanged.
+   const visibleEnemies=b.enemies.slice(0,3);
+   const columns={1:[78],2:[69,87],3:[60,76,92]}[visibleEnemies.length]||[];
+   visibleEnemies.forEach((e,i)=>{
      const button=document.createElement('button');button.type='button';
      button.className='yc-enemy-slot'+(e.hp<=0?' yc-enemy-ko':'')+(b.tb.targetEnemy===i?' yc-enemy-selected':'')+(typeof tbIsBroken==='function'&&tbIsBroken(e)?' yc-enemy-broken':'');
      button.dataset.enemyIndex=String(i);
-     button.style.left=(57+i*13)+'%';button.style.bottom=(i===1?'19':'9')+'%';
+     button.dataset.enemyCount=String(visibleEnemies.length);
+     button.style.left=columns[i]+'%';button.style.bottom='12%';
      button.style.setProperty('--yc-speed',speed);
      button.disabled=e.hp<=0;
      button.setAttribute('aria-label',e.name+'を狙う');
