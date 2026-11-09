@@ -29,3 +29,55 @@
 @keyframes yc-spark{0%{opacity:0;transform:translateY(0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translateY(-260%) scale(1)}}
 @keyframes yc-num{0%{opacity:0;transform:translateY(20%)}20%{opacity:1;transform:translateY(-40%)}100%{opacity:0;transform:translateY(-120%)}}
 @media (prefers-reduced-motion:reduce){.yc-actor img{animation:none}}
+
+/* 2026-11-09: Uniform enemy field layout for every turn battle.
+ * Character images, targeting order, combat stats and the ally formation are unchanged. */
+.tb-root .yc-turn-stage .yc-enemy-slot{
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  gap:4px;box-sizing:border-box;transform:translateX(-50%);
+  width:min(14%,190px);min-width:0;max-width:none;height:68%;
+  padding:0;overflow:visible;
+}
+.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="1"]{width:min(24%,250px)}
+.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="2"]{width:min(17%,220px)}
+.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="3"]{width:min(14%,190px)}
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-hud{
+  position:relative;top:auto;left:auto;right:auto;order:0;
+  flex:0 0 auto;box-sizing:border-box;width:100%;max-width:100%;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:0;line-height:1.15;text-align:center;font-size:clamp(9px,.9vw,12px);
+  z-index:2;
+}
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-label{
+  display:block;width:100%;max-width:100%;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;
+}
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-weak{
+  max-width:100%;box-sizing:border-box;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-hp{flex:none;width:80%}
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell,
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
+  position:relative;order:1;inset:auto;flex:0 1 auto;
+  display:block;box-sizing:border-box;width:100%;height:auto;
+  max-height:calc(100% - 42px);aspect-ratio:1;
+  margin:0;overflow:hidden;
+}
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
+  background:transparent;box-shadow:none;border-radius:0;overflow:visible;
+}
+.tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-art{
+  position:relative;display:block;width:100%;height:100%;
+  max-width:100%;max-height:100%;object-fit:contain;object-position:center bottom;
+}
+@media(max-width:600px){
+  .tb-root .yc-turn-stage .yc-enemy-slot{gap:2px}
+  .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-hud{
+    font-size:9px;line-height:1.05;gap:1px;
+  }
+  .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell,
+  .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
+    max-height:calc(100% - 32px);
+  }
+}
