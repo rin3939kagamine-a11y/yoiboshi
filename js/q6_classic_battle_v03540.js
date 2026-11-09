@@ -83,7 +83,14 @@
   stage.setAttribute('aria-label',(placeName(b)?placeName(b)+'の':'')+'戦場。左側が味方、右側が敵。敵を押すと対象を選択');
   // Ally slots keep YoiChibi.FORMATION (left-hand formation), including damage popup anchors.
   var last=b.wave===b.totalWaves-1;
-  stage.querySelectorAll(':scope > .yc-enemy-slot').forEach(function(node,i){
+  // Use stable non-overlapping slots measured from the LEFT edge of each actor.
+  // This renderer intentionally disables translateX(-50%) on enemy slots.
+  var visibleNodes=Array.from(stage.querySelectorAll(':scope > .yc-enemy-slot'));
+  var bossPresent=last&&visibleNodes.some(function(node){
+    var idx=Number(node.dataset.enemyIndex);return b.enemies[idx]?.kind==='boss';
+  });
+  var smallCount=0;
+  visibleNodes.forEach(function(node,i){
    // The display excludes defeated enemies, so DOM order may differ from
    // the original battle.enemies indices used for target identity and visuals.
    var enemyIndex=Number(node.dataset.enemyIndex);
@@ -94,8 +101,25 @@
    node.classList.toggle('q6-minion',!giant);
    var aura=statuses(e,b.tb.round).map(function(st){return st[0];});
    ['red','blue','green'].forEach(function(c){node.classList.toggle('q6-aura-'+c,aura.indexOf(c)>=0);});
-   node.style.setProperty('left',(giant?51:(last?70+(enemyIndex%2)*8:52+enemyIndex*13))+'%','important');
-   node.style.setProperty('bottom',(giant?1:(last?6:(enemyIndex%2===0?9:5)))+'%','important');
+   // The old 49%-wide boss at left 51%, plus a 22%-wide minion at
+   // left 70%, overlapped on narrow phones. Reserve exclusive columns.
+   var count=visibleNodes.length;
+   var left,width;
+   if(bossPresent){
+     if(count===1){left=59;width=39;}
+     else if(count===2){
+       if(giant){left=66;width=32;}
+       else {left=49;width=15;}
+     }else if(giant){left=72;width=26;}
+     else {left=48+(smallCount++)*12;width=11;}
+   }else{
+     var slots={1:[[67,30]],2:[[54,20],[77,20]],3:[[50,14],[66,14],[82,14]]};
+     var slot=(slots[count]||slots[3])[i]||[50,14];
+     left=slot[0];width=slot[1];
+   }
+   node.style.setProperty('left',left+'%','important');
+   node.style.setProperty('width',width+'%','important');
+   node.style.setProperty('bottom',(giant?1:(last?6:(i%2===0?9:5)))+'%','important');
    if(giant){
     var shell=node.querySelector('.yc-enemy-shell');
     if(shell&&!shell.querySelector('img')){
