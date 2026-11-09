@@ -68,6 +68,26 @@ const { chromium } = require('playwright');
           return {visible,opaque,bbox,natural:[c.width,c.height]};
         });
         console.log('BOSSPIXELS '+name+' '+JSON.stringify(pixels));
+        if(name==='phone390'){
+          const inspect=await page.evaluate(()=>{
+            const el=document.querySelector('#ycTurnStage .yc-enemy-slot.q6-giant');
+            const img=el?.querySelector('img');
+            const chain=[];
+            for(let n=img;n&&chain.length<10;n=n.parentElement){
+              const c=getComputedStyle(n);
+              chain.push({tag:n.tagName,cls:n.className,display:c.display,opacity:c.opacity,z:c.zIndex,visibility:c.visibility,filter:c.filter,transform:c.transform});
+            }
+            const r=el?.getBoundingClientRect();
+            const onTop=r?document.elementFromPoint(r.left+r.width/2,r.top+r.height/2):null;
+            const canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;
+            canvas.getContext('2d').drawImage(img,0,0,512,512);
+            return {chain,onTop:onTop?.className,source:canvas.toDataURL('image/png')};
+          });
+          require('node:fs').writeFileSync('qa-ruri-art.png',Buffer.from(inspect.source.split(',')[1],'base64'));
+          delete inspect.source;
+          console.log('VISIBILITY '+name+' '+JSON.stringify(inspect));
+        }
+
 
       }
       await page.screenshot({path:'qa-'+name+'-start.png'});
