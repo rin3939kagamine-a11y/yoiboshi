@@ -1,0 +1,32 @@
+name: Reconstruct approved Aoi battle music
+on:
+  push:
+    branches: [feature/aoi-bgm-materialize-20261109]
+    paths: ['.github/workflows/aoi-bgm-reconstruct.yml']
+permissions:
+  contents: write
+jobs:
+  reconstruct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Reconstruct exactly the uploaded MP3 and verify SHA-256
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/audio
+          cat .bridge/aoi/part_*.b64 | base64 --decode > assets/audio/aoi_boss_mahogany_ledger.mp3
+          echo "0a111601dcbb8ef10fa7c39f8b05713d3462086e6869749b4c0a10ccd93601fe  assets/audio/aoi_boss_mahogany_ledger.mp3" | sha256sum -c -
+          test "$(stat -c %s assets/audio/aoi_boss_mahogany_ledger.mp3)" -eq 3937378
+      - name: Commit the original BGM and remove the transfer text
+        run: |
+          set -euo pipefail
+          rm -rf .bridge/aoi
+          rm -f .github/workflows/aoi-bgm-reconstruct.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A assets/audio/aoi_boss_mahogany_ledger.mp3 .bridge/aoi .github/workflows/aoi-bgm-reconstruct.yml
+          git commit -m "asset: add verified original Aoi battle music"
+          git push origin HEAD:feature/aoi-bgm-materialize-20261109
