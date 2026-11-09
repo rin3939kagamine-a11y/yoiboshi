@@ -21,7 +21,15 @@ const fail=(msg)=>{throw new Error(msg)};
     const boot=await page.evaluate((qid)=>{
       S.gameStarted=true;S.battleMode='turn';onboardingSuppressed=true;
       view='records';battle=null;
-      startBossTrial(qid);document.querySelector('.bd-overlay')?.click();
+      if(qid==='q6'){
+        S=fresh();S.gameStarted=true;S.battleMode='turn';S.onboarding.enabled=false;
+        Object.keys(S.storyFlags).forEach(id=>{S.storyFlags[id]=true;});
+        QUESTS.forEach(q=>{S.quests[q.id]={complete:true,clues:2};});
+        view='home';battle=null;startBattle('q6');
+      }else{
+        startBossTrial(qid);
+      }
+      document.querySelector('.bd-overlay')?.click();
       return {qid:battle?.qid,turn:battle?.turnBattle,final:battle?.wave===battle?.totalWaves-1};
     },qid);
     if(boot.qid!==qid||!boot.turn)fail(v.name+' '+qid+' failed to boot: '+JSON.stringify(boot));
