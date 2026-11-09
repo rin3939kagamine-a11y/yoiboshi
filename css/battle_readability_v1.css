@@ -2,9 +2,9 @@
    Keep the existing full-screen, single-scene layout. Increase HUD legibility,
    do not create a new side/bottom page panel, and keep sprite sizes invariant. */
 .combat-page .tb-root.yb-immersive {
-  --yb-read-top: 109px;
+  --yb-read-top: 112px;
   --yb-read-bottom: 173px;
-  --yb-read-field-top: calc(max(3px, env(safe-area-inset-top)) + 151px);
+  --yb-read-field-top: calc(max(3px, env(safe-area-inset-top)) + 157px);
   --yb-read-field-bottom: calc(var(--yb-read-bottom) + 8px);
 }
 
@@ -34,12 +34,12 @@
 }
 .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemies,
 .combat-page .tb-root.yb-immersive.q6-classic .tb-enemies.q6-detail-targets {
-  height: 75px!important; min-height: 75px!important; max-height: 75px!important;
-  flex: 0 0 75px!important;
+  height: 72px!important; min-height: 72px!important; max-height: 72px!important;
+  flex: 0 0 72px!important;
   gap: 6px!important;
 }
 .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy {
-  height: 75px!important; min-height: 75px!important; max-height: 75px!important;
+  height: 72px!important; min-height: 72px!important; max-height: 72px!important;
   grid-template-columns: minmax(0,1fr) auto!important;
   grid-template-rows: 20px 9px 37px!important;
   gap: 1px 5px!important; padding: 4px 9px!important;
@@ -192,9 +192,9 @@
    The HUD stays a stable overlay and does not cause page scrolling. */
 @media (orientation:portrait) and (max-width:700px) {
   .combat-page .tb-root.yb-immersive {
-    --yb-read-top: 94px;
+    --yb-read-top: 100px;
     --yb-read-bottom: 192px;
-    --yb-read-field-top: calc(max(3px, env(safe-area-inset-top)) + 136px);
+    --yb-read-field-top: calc(max(3px, env(safe-area-inset-top)) + 145px);
     --yb-read-field-bottom: 200px;
   }
   .combat-page .tb-root.yb-immersive .tb-topline strong{font-size:12px!important}
@@ -273,9 +273,9 @@
 /* Short landscape: retain full playability rather than obscuring the field. */
 @media (orientation:landscape) and (max-height:520px) {
   .combat-page .tb-root.yb-immersive {
-    --yb-read-top:73px;
+    --yb-read-top:76px;
     --yb-read-bottom:114px;
-    --yb-read-field-top:calc(max(3px,env(safe-area-inset-top)) + 112px);
+    --yb-read-field-top:calc(max(3px,env(safe-area-inset-top)) + 119px);
     --yb-read-field-bottom:121px;
   }
   .combat-page .tb-root.yb-immersive > .tb-topline{height:33px!important;min-height:33px!important;max-height:33px!important;padding:1px 5px!important}
