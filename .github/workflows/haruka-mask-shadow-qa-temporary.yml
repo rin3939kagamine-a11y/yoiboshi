@@ -1,0 +1,37 @@
+name: Temporary Haruka mask shadow identity QA
+on:
+  push:
+    branches: [fix/haruka-fake-is-mask-shadow-20261109]
+    paths:
+      - .github/workflows/haruka-mask-shadow-qa-temporary.yml
+      - .github/qa/haruka-shadow-identity.cjs
+      - js/chibi_bridge_v03321.js
+      - js/haruka_chapter4_v03458.js
+permissions:
+  contents: read
+jobs:
+  desktop-and-phone:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.57.0-noble
+      options: --ipc=host
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock playwright@1.57.0
+      - name: Check q24 genuine and fake sprites
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/haruka-shadow.log 2>&1 &
+          sleep 2
+          node .github/qa/haruka-shadow-identity.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: haruka-mask-shadow-screens
+          path: haruka-shadow-*.png
+          if-no-files-found: ignore
