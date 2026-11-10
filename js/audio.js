@@ -83,7 +83,7 @@ const AudioDirector=(()=>{
    let key='home';
    // Named boss themes begin only when the actual final-wave boss has appeared.
    // All other waves and battles keep their previous tracks.
-   if(view==='combat')key=bossEncounter&&questId==='q12'?'sakuya_boss':
+   if(view==='combat')key=bossEncounter&&(questId==='q12'||questId==='q173')?'sakuya_boss':
      bossEncounter&&(questId==='q17'||questId==='q34')?'ibuki_boss':
      bossEncounter&&questId==='q24'?'haruka_boss':
      bossEncounter&&questId==='q28'?'saya_boss':

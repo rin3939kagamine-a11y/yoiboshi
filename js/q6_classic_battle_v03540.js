@@ -10,7 +10,7 @@
  var originalRender=tbRender;
  var fallbackBoss='assets/enemies/zankyo/part1-000.webp?v=0.50.7.0';
  // battle_turn_v032.js の eventBossArt と同じ対応（敵一覧の小さな絵と、戦場の大きな絵をそろえる）
- var EVENT_BOSS_ART={q18:'assets/enemies/zankyo/part1-008.webp?v=0.50.7.0',q28:'assets/enemies/saya.webp',q34:'assets/enemies/ibuki_battle.webp',q35:'assets/enemies/aoi_dark.webp',q40:'assets/enemies/aoi_dark.webp',q45:'assets/enemies/aoi_dark.webp',q46:'assets/enemies/ruri.webp',q52:'assets/enemies/touko_true.webp',q58:'assets/enemies/touko_true.webp',q81:'assets/enemies/touko_true.webp',q89:'assets/enemies/enju.webp',q113:'assets/enemies/enju.webp',q53:'assets/enemies/zankyo/part1-004.webp?v=0.50.7.0',q29:'assets/enemies/zankyo/part1-004.webp?v=0.50.7.0',q17:'assets/enemies/ibuki_battle.webp',q24:'assets/enemies/haruka.webp'};
+ var EVENT_BOSS_ART={q18:'assets/enemies/zankyo/part1-008.webp?v=0.50.7.0',q28:'assets/enemies/saya.webp',q34:'assets/enemies/ibuki_battle.webp',q35:'assets/enemies/aoi_dark.webp',q40:'assets/enemies/aoi_dark.webp',q45:'assets/enemies/aoi_dark.webp',q46:'assets/enemies/ruri.webp',q52:'assets/enemies/touko_true.webp',q58:'assets/enemies/touko_true.webp',q81:'assets/enemies/touko_true.webp',q89:'assets/enemies/enju.webp',q113:'assets/enemies/enju.webp',q173:'assets/enemies/sakuya_battle.webp',q53:'assets/enemies/zankyo/part1-004.webp?v=0.50.7.0',q29:'assets/enemies/zankyo/part1-004.webp?v=0.50.7.0',q17:'assets/enemies/ibuki_battle.webp',q24:'assets/enemies/haruka.webp'};
  // 大きく描くボスの絵：q6は従来どおり。ほかは残響図鑑の割り当て、なければq6と同じ絵。
  function bossImageFor(b,e,i){
   if(b.qid==='q6')return fallbackBoss;
