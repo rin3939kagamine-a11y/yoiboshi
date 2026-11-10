@@ -2125,9 +2125,9 @@ function home(){
    <div class="mock-sky-wash" aria-hidden="true"></div>
    <div class="mock-spark spark-a" aria-hidden="true">✦</div><div class="mock-spark spark-b" aria-hidden="true">✧</div>
    <header class="mock-header">
-    <div class="mock-top-row"><div class="mock-logo"><strong>✧ 宵星の契約者</strong><small>YOIBOSHI NO KEIYAKUSHA</small></div>
+    <div class="mock-top-row">
     <div class="mock-currency-row"><button type="button" class="mock-pill" onclick="change('gacha')" aria-label="星晶石 ${S.gems}。募集へ">✧ <b>${S.gems.toLocaleString()}</b><span>＋</span></button><button type="button" class="mock-pill" onclick="change('training')" aria-label="育成コイン ${S.gold}。育成へ">◆ <b>${S.gold.toLocaleString()}</b><span>＋</span></button><button type="button" class="mock-icon-button" aria-label="お知らせ" onclick="showHomeNotice()">✉${homeNoticeRead()?'':'<i class="mock-unread"></i>'}</button><button type="button" class="mock-icon-button" aria-label="メニュー" aria-expanded="${homeMenuOpen}" onclick="toggleHomeMenu()">▦</button></div></div>
-    <div class="mock-profile"><img src="${characterIcon(lobbySelected)}" alt="${esc(who.name)}の顔アイコン"><div><strong>宵星相談室</strong><small>${chapter===0?'序章':`第${chapter}章`}まで到達 · 依頼 ${progress.completed}/${progress.total}</small><div class="mock-exp-track" role="progressbar" aria-valuenow="${progress.completed}" aria-valuemin="0" aria-valuemax="${progress.total}"><i style="width:${stagePct}%"></i></div></div></div>
+    <div class="mock-profile mock-profile-picker" role="button" tabindex="0" onclick="toggleHomePicker()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleHomePicker()}" aria-label="ホームのキャラを変更" aria-expanded="${homePickerOpen}"><img src="${characterIcon(lobbySelected)}" alt="${esc(who.name)}の顔アイコン"><div><strong>宵星相談室</strong><small>${chapter===0?'序章':`第${chapter}章`}まで到達 · 依頼 ${progress.completed}/${progress.total}</small><div class="mock-exp-track" role="progressbar" aria-valuenow="${progress.completed}" aria-valuemin="0" aria-valuemax="${progress.total}"><i style="width:${stagePct}%"></i></div></div><span class="mock-profile-hint">♡ キャラ変更</span></div>
    </header>
    
    <div class="mock-handwritten" aria-hidden="true">${esc(displayName)}と、<br>今日も一緒に ♡</div>

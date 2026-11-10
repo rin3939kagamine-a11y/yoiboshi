@@ -3172,3 +3172,9 @@ body:has(.combat-page .wave-battle:not(.qcin-active)) .combat-page {
 .home-mock-v301 .mock-achievement-memo{cursor:pointer}
 .home-mock-v301 .mock-achievement-memo.has-reward{box-shadow:0 0 0 3px #ffd36e,0 4px 15px #3c668c33;background:radial-gradient(circle at 73% 5%,#fff4c9d9,transparent 50%),linear-gradient(160deg,#f3c76a,#c9853a 70%,#8a5524)}
 .home-mock-v301 .mock-achievement-memo.has-reward strong{color:#fffbe8}
+
+/* Ver.0.54.7.0 ロゴを外したので通貨を右に寄せる／プロフィールを押すとホームのキャラ変更 */
+.home-mock-v301 .mock-top-row .mock-currency-row{margin-left:auto}
+.home-mock-v301 .mock-profile-picker{cursor:pointer;position:relative}
+.home-mock-v301 .mock-profile-picker:hover,.home-mock-v301 .mock-profile-picker:focus-visible{box-shadow:0 0 0 3px #ffb8d6,0 4px 15px #587eab33;outline:none}
+.home-mock-v301 .mock-profile-hint{align-self:center;margin-left:8px;white-space:nowrap;font-size:10px;font-weight:700;color:#c25f8f;background:#ffe3ef;border-radius:20px;padding:3px 8px}
