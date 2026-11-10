@@ -262,7 +262,7 @@ const ART_V2=Object.freeze({
 function characterArt(personId){return ART_V2.full_body[personId]||CANONICAL_ART[personId]||ART[personId]||'';}
 function characterPortrait(personId){return ART_V2.upper_body[personId]||characterArt(personId);}
 // Ver.0.55.0.0: 顔アイコンを作り直したR（新ヒロインは立ち絵）から顔中心の正方形で切り直した。古い画像が残らないよう版を付ける
-const FACE_ICON_VERSION='0.55.0.0';
+const FACE_ICON_VERSION='0.55.1.0';
 function characterIcon(personId){const p=ART_V2.face_icons[personId];if(!p)return characterArt(personId);const base=p.split('?')[0];return base+'?v='+FACE_ICON_VERSION;}
 // Keep the helper for older integrations, but the optional dynamic pose UI is retired.
 function hasDrivePose(personId){return false;}
