@@ -3167,3 +3167,8 @@ body:has(.combat-page .wave-battle:not(.qcin-active)) .combat-page {
   .combat-page .wave-battle:not(.qcin-active) .v688-unit-face {height:25px;}
   .combat-page .wave-battle:not(.qcin-active) .v688-skillbtn {min-height:28px!important;}
 }
+
+/* Ver.0.54.5.0 ホームの実績・報酬カード（受け取れる報酬があるときは金色で知らせる） */
+.home-mock-v301 .mock-achievement-memo{cursor:pointer}
+.home-mock-v301 .mock-achievement-memo.has-reward{box-shadow:0 0 0 3px #ffd36e,0 4px 15px #3c668c33;background:radial-gradient(circle at 73% 5%,#fff4c9d9,transparent 50%),linear-gradient(160deg,#f3c76a,#c9853a 70%,#8a5524)}
+.home-mock-v301 .mock-achievement-memo.has-reward strong{color:#fffbe8}
