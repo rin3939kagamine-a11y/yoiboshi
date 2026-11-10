@@ -1141,7 +1141,9 @@ const OPENING_LINES=Object.freeze([
 ]);
 function openingPage(){const line=OPENING_LINES[Math.min(openingStep,OPENING_LINES.length-1)];return `<main class="onb-opening" aria-label="オープニング" onclick="advanceOpening(event)"><button type="button" class="onb-skip" onclick="skipOpening(event)">スキップ</button><div class="onb-night"><div class="onb-star">✧</div><p class="onb-opening-line" aria-live="polite">${esc(line)}</p><p class="onb-opening-progress">${openingStep+1} / ${OPENING_LINES.length}</p><span class="onb-opening-next">タップして進む　›</span></div></main>`}
 function advanceOpening(e){if(e?.target?.closest('button'))return;openingStep++;if(openingStep>=OPENING_LINES.length){skipOpening();return}render()}
-function skipOpening(e){e?.stopPropagation?.();if(S.onboarding?.enabled)S.onboarding.stage='name';persist();view='nameEntry';render()}
+let openingReplay=false;
+function replayOpening(){openingReplay=true;openingStep=0;view='opening';render();window.scrollTo(0,0)}
+function skipOpening(e){e?.stopPropagation?.();if(openingReplay){openingReplay=false;openingStep=0;view='story';render();return}if(S.onboarding?.enabled)S.onboarding.stage='name';persist();view='nameEntry';render()}
 // One-time non-blocking help, only for new games on this install (not on Continue).
 const ONBOARD_GUIDES=Object.freeze({
  map:{title:'最初の依頼',text:'まず、光っている「商店街の時計音」のピンを押して、依頼を開いてみてくださいね。'},
@@ -1983,7 +1985,7 @@ function storyMenu(){
  const q=n=>!!S.quests['q'+n]?.complete;
  const meet=(id,cond,label,flag)=>{const it=item(id,cond,label);it.read=it.read||!!S[flag];return it;};
  const chapters=[
-  {title:'序章',items:[{id:'__prologue',label:'第0話　相談室、はじめました。',ok:true,read:!!S.storyFlags?.prologue},auto('q1_lead'),auto('q2_lead'),
+  {title:'序章',items:[{id:'__opening',label:'オープニング',ok:true,read:true},{id:'__prologue',label:'第0話　相談室、はじめました。',ok:true,read:!!S.storyFlags?.prologue},auto('q1_lead'),auto('q2_lead'),
     meet('shinonome_meet',()=>q(1),'東雲商店街の出会い','shinonomeMet'),meet('oldcafe_meet',()=>q(2),'旧喫茶街の出会い','oldcafeMet')]},
   {title:'第1章　増幅する残響',items:[auto('chapter1_open'),auto('q3_lead'),auto('q3'),meet('station_meet',()=>q(3),'東雲駅前の出会い','stationMet'),auto('q4_lead'),auto('q4'),
     meet('school_meet',()=>q(4),'旧第二小学校の出会い','schoolMet'),meet('office_meet',()=>q(4)&&S.schoolMet,'相談室の新しい顔ぶれ','officeMet'),auto('q5_lead'),auto('q5'),
@@ -2011,12 +2013,12 @@ function storyMenu(){
   {title:'第2部 第9章\u3000浜の子守歌',items:['chapter19_open',...["q109", "q110", "q111", "q112", "q113", "q114"].flatMap(k=>[k+'_intro',k+'_pre',k]),'chapter19_end'].filter(id=>st(id)).map(auto)},
   {title:'第2部 第10章\u3000灯の市',items:['chapter20_open',...["q115", "q116", "q117", "q118", "q119", "q120"].flatMap(k=>[k+'_intro',k+'_pre',k]),'chapter20_end'].filter(id=>st(id)).map(auto)}
  ];
- for(const c of chapters){c.items=c.items.filter(x=>x&&(x.id==='__prologue'||st(x.id)));c.open=c.items.filter(x=>x.ok);c.unread=c.open.filter(x=>!x.read).length;c.locked=c.items.length-c.open.length;}
+ for(const c of chapters){c.items=c.items.filter(x=>x&&(x.id==='__prologue'||x.id==='__opening'||st(x.id)));c.open=c.items.filter(x=>x.ok);c.unread=c.open.filter(x=>!x.read).length;c.locked=c.items.length-c.open.length;}
  const visible=chapters.map((c,i)=>({...c,i})).filter(c=>c.open.length);
  let next=null,nextCh=null;for(const c of visible){const x=c.open.find(y=>!y.read);if(x){next=x;nextCh=c;break;}}
  const current=nextCh?nextCh.i:(visible.length?visible[visible.length-1].i:0);
  const openIdx=storyMenuOpen===null?current:storyMenuOpen;
- const go=x=>x.id==='__prologue'?'openPrologue()':`openStory('${x.id}')`;
+ const go=x=>x.id==='__opening'?'replayOpening()':x.id==='__prologue'?'openPrologue()':`openStory('${x.id}')`;
  const nextCard=next?`<section class="card pad story-next"><small>次に読む話・${esc(nextCh.title)}</small><h2>${esc(next.label)}</h2><button type="button" class="btn primary story-next-btn" onclick="${go(next)}">読む ▸</button></section>`
   :`<section class="card pad story-next is-done"><small>未読の物語はありません</small><h2>依頼を進めると、続きの物語が解放されます</h2><button type="button" class="btn outline" onclick="change('city')">クエスト画面へ ›</button></section>`;
  const chapterCards=visible.map(c=>{const isOpen=openIdx===c.i;
