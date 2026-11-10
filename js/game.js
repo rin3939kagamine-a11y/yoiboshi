@@ -1131,12 +1131,13 @@ function startNewGame(){gachaMode='normal';const audio=validAudioSettings(S.audi
  next.akaneTrial=true;next.aoiTrial=true;next.storyFlags.__fleshout_v03413=true;next.onboarding={enabled:true,stage:'opening',seen:{}};S=next;onboardingSuppressed=false;openingStep=0;titleConfirm=false;titleSettingsOpen=false;interruptConfirm=false;questActionInProgress=false;romanceSelectionInProgress=false;storySession=null;dialog=null;pendingStory=null;citySheetQuest='';battle=null;persist();view='opening';render()}
 // v0.26.1.0: a fresh save alone enters this opening. Continue never replays it.
 const OPENING_LINES=Object.freeze([
+ '「おにいさん。わたしのこと、わすれないでね。」',
  '北の海へ開かれた港町、宵星市。',
- '港を見守る旧灯台には、街の記憶が静かに積み重なっている。',
- '人の強い想いが、音や景色となって留まることがある。',
- '人々は、その名を「残響」と呼んだ。',
- 'そして残響を鎮める光を、「星灯」と呼ぶ。',
- '今日、小さな相談室の扉が開く。'
+ '人の胸には、記憶と想いがともす、小さな灯がある。',
+ '忘れられた灯は、消えずに浜へ流れ着き、やがて「残響」と呼ばれた。',
+ '港の旧灯台は、かつてその灯を、毎晩海へ送り返していたという。',
+ '八年前の嵐の夜。ひとつの小さな光が、海へ消えた。',
+ 'そして今日。残響を鎮める光、「星灯」を手に、小さな相談室の扉が開く。'
 ]);
 function openingPage(){const line=OPENING_LINES[Math.min(openingStep,OPENING_LINES.length-1)];return `<main class="onb-opening" aria-label="オープニング" onclick="advanceOpening(event)"><button type="button" class="onb-skip" onclick="skipOpening(event)">スキップ</button><div class="onb-night"><div class="onb-star">✧</div><p class="onb-opening-line" aria-live="polite">${esc(line)}</p><p class="onb-opening-progress">${openingStep+1} / ${OPENING_LINES.length}</p><span class="onb-opening-next">タップして進む　›</span></div></main>`}
 function advanceOpening(e){if(e?.target?.closest('button'))return;openingStep++;if(openingStep>=OPENING_LINES.length){skipOpening();return}render()}
@@ -1248,7 +1249,7 @@ function quickMember(id){const u=unit(id),d=data(id);return `<div class="member"
 
 // Interactive introductory story: creative test script, not a finalized character biography or canonical chapter.
 const PROLOGUE=[
- {who:'narrator',title:'第0話　相談室、はじめました。',text:'宵星市・東雲商店街。朝の光が差し込む、小さな事務所。今日からあなたは、宵星相談室の責任者になる。'},
+ {who:'narrator',title:'第0話　相談室、はじめました。',text:'宵星市・東雲商店街。朝の光が差し込む、小さな事務所。市の求人で「宵星」という地名を見たとき、なぜか胸が騒いだ。その理由は分からないまま、今日からあなたは、宵星相談室の責任者になる。'},
  {who:'you',title:'新しい一日',text:'机の上には、街から届いた相談の手紙が何通か。封を切ろうとした、そのとき――'},
  {who:'aoi',title:'最初の挨拶',text:'「おはようございます、{name}さん。瀬名葵です。今日からこちらの相談室で、一緒に働きます。」'},
  {who:'you',title:'頼れるスタッフ',text:'出迎えてくれた葵が、書類を揃えた机の前に案内してくれる。'},
