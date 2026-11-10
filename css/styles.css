@@ -3178,3 +3178,7 @@ body:has(.combat-page .wave-battle:not(.qcin-active)) .combat-page {
 .home-mock-v301 .mock-profile-picker{cursor:pointer;position:relative}
 .home-mock-v301 .mock-profile-picker:hover,.home-mock-v301 .mock-profile-picker:focus-visible{box-shadow:0 0 0 3px #ffb8d6,0 4px 15px #587eab33;outline:none}
 .home-mock-v301 .mock-profile-hint{align-self:center;margin-left:8px;white-space:nowrap;font-size:10px;font-weight:700;color:#c25f8f;background:#ffe3ef;border-radius:20px;padding:3px 8px}
+
+/* Ver.0.55.0.0 顔アイコンは顔が真ん中の正方形に作り直したので、どの枠でも中央を見せる（顔が切れないように） */
+.lobby-face img,.home-favorites-rail .lobby-face img,.home-v067 .home-favorites-rail .lobby-face img,.v680-archive-tile img,.v676-companion img,.ticket-choice img,.gacha-v030-unit-item img,.home-mock-v301 .mock-profile img,.inq-companion img,.inq-hero img,.token .face img,.tb-turn-token img,.tb-party img,.tb-root.q6-classic .tb-party img,.tb-root.yb-battle-dashboard .tb-party>img,.v688-unit-face img,.smallportrait img{object-position:center 45%!important}
+.v680-archive-tile img{object-fit:cover!important}
