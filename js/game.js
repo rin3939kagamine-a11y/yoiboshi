@@ -1298,7 +1298,7 @@ function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyF
 // Narrative-only portrait cast; not a recruitable heroine and never serialized.
 // 立ち絵のない、声だけで登場する人物（名前は出すが立ち絵の枠は出さない）
 const STORY_VOICE_ONLY=new Set(['iroha','tokoyo','anokata']);
-const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'売人イブキ',haruka:'霧島 ハルカ',saya:'氷室 沙耶',natsume:'深川 なつめ',hotaru:'遠野 ほたる',aoi_dark:'瀬名 葵',ruri:'久遠 ルリ',ichika:'甘利 いちか',minori:'桐生 みのり',sumire:'九条 すみれ',kirie:'御堂 キリエ',enju:'宵宮 槐',wakaba:'筒井 わかば',urara:'赤坂 うらら',iroha:'大森 いろは',tokoyo:'市守り・常夜',anokata:'？？？'});
+const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'イブキ',haruka:'霧島 ハルカ',saya:'氷室 沙耶',natsume:'深川 なつめ',hotaru:'遠野 ほたる',aoi_dark:'瀬名 葵',ruri:'久遠 ルリ',ichika:'甘利 いちか',minori:'桐生 みのり',sumire:'九条 すみれ',kirie:'御堂 キリエ',enju:'宵宮 槐',wakaba:'筒井 わかば',urara:'赤坂 うらら',iroha:'大森 いろは',tokoyo:'市守り・常夜',anokata:'？？？'});
 const TRUE_TOUKO_STORY_IDS=Object.freeze(['q52_pre','q52','q53_intro','q53_pre','chapter9_end','q58_intro','q58_pre','q58','q59_intro','q59_pre','q59','q60_intro','chapter12_end','chapter13_end','chapter15_open','q86_intro','q87_intro','q87','q88_intro','q88','q89_intro','q89_pre','q89','q90_intro','q90_pre','q90','q81_intro','q81_pre','q81','q82_intro','q82_pre','q82','q83_intro','q83_pre','q83','q84_intro','q84_pre','q84']); // v0.34.56.0: 朔夜・イブキにも会話用の立ち絵
 const CHAPTER3_ONLY_VOICE=Object.freeze({ibuki:'売人イブキ'});
 function prologuePage(){
