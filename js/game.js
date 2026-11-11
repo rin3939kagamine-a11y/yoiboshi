@@ -549,14 +549,14 @@ function expressionPortraitMarkup(personId,face='normal',sceneKey='default',opts
  const actual=normalizeExpressionFace(face), hasAlt=hasExpressionArt(personId,actual);
  const trueTouko=personId==='touko'&&storySession&&(TRUE_TOUKO_STORY_IDS.includes(storySession.id)||(storySession.id==='q52_intro'&&storySession.step>=(CHAPTER_STORIES.q52_intro?.lines?.findIndex(l=>l.toukoReveal)??99))); // v0.36.0.0: 正体の姿は第9章まで使わない
  // v0.34.55.0: 透子は背景を抜いた会話用の上半身（story_cast/touko_talk.webp）を使う
- const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.71.0':personId==='sacchan'?'assets/ART_V2/story_cast/sakuya_talk.webp?v=0.49.1.0':['touko','sakuya','ibuki','haruka','saya','natsume','hotaru','aoi_dark','ruri','ichika','minori','sumire','kirie','enju','wakaba','urara'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.49.1.0`:expressionArt(personId,actual);
+ const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.71.0':personId==='sacchan'?'assets/ART_V2/story_cast/sakuya_talk.webp?v=0.49.1.0':['touko','sakuya','ibuki','haruka','saya','natsume','hotaru','aoi_dark','ruri','ichika','minori','sumire','kirie','enju','wakaba','urara','tokoyo'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.49.1.0`:expressionArt(personId,actual);
  const play=rememberExpression(sceneKey,personId,actual,!hasAlt);
  const wrapClass=[opts.wrapperClass||'',`expr-face-${actual}`,!hasAlt&&actual!=='normal'?'expr-uses-fallback':'',play?`expr-animate-${actual}`:'',opts.stateClass||''].filter(Boolean).join(' ');
  const alt=opts.alt||`${PEOPLE[personId]?.name||personId}の立ち絵`;
  const imageMarkup=`<img class="${opts.imageClass||'expr-character-img'}" src="${src}" alt="${esc(alt)}">`;
  // The fit applies only to the chapter-story expression portrait, never to fallback/full-body art.
  // Use a nested layer so speaker transitions and expression animations on the outer stage remain intact.
- const talkCast=['touko','sakuya','ibuki','haruka','saya','natsume','hotaru','aoi_dark','ruri','ichika','minori','sumire','kirie','enju','wakaba','urara'].includes(personId);
+ const talkCast=['touko','sakuya','ibuki','haruka','saya','natsume','hotaru','aoi_dark','ruri','ichika','minori','sumire','kirie','enju','wakaba','urara','tokoyo'].includes(personId);
  const fit=opts.chapterStoryFit&&(hasAlt||talkCast)&&typeof PORTRAIT_FIT!=='undefined'?PORTRAIT_FIT[trueTouko?'touko_true':personId]:null;
  const fittedMarkup=fit?`<div class="story-portrait-fit" style="--pf-s:${fit.s};--pf-u:${fit.u};--pf-x:${fit.x}"><div class="story-portrait-shift${fit.f?' is-top-fade':''}">${imageMarkup}</div></div>`:imageMarkup;
  return `<div class="${wrapClass}" data-person-id="${personId}" data-expression="${actual}" data-expression-source="${hasAlt?'art':'fallback'}">${fittedMarkup}${!hasAlt?expressionFallbackMarkup(actual):''}</div>`;
@@ -1310,7 +1310,7 @@ function choosePrologue(choice){if(!storySession||!['people','place'].includes(c
 function finishPrologue(){if(!S.storyFlags)S.storyFlags={};const first=!S.storyFlags.prologue;S.storyFlags.prologue=true;if(first&&['people','place'].includes(storySession?.choice))S.chapterChoiceMemory.prologue=storySession.choice;if(first)S.gems+=150;if(S.onboarding?.enabled&&S.onboarding.stage==='prologue'){S.onboarding.stage='q1';S.questGuideSeen=true;}persist();storySession=null;view='story';citySheetQuest='';render();toast(first?'序章クリア：星晶石150（初回のみ）':'序章を再読しました');window.scrollTo(0,0)}
 // Narrative-only portrait cast; not a recruitable heroine and never serialized.
 // 立ち絵のない、声だけで登場する人物（名前は出すが立ち絵の枠は出さない）
-const STORY_VOICE_ONLY=new Set(['iroha','tokoyo','anokata','sacchan','toyo','okinu']);
+const STORY_VOICE_ONLY=new Set(['iroha','anokata','sacchan','toyo','okinu']); // v0.65.1.0: 常夜は会話絵あり
 const STORY_ONLY_CAST=Object.freeze({touko:'白鷺 透子',sakuya:'朔夜',ibuki:'イブキ',haruka:'霧島 ハルカ',saya:'氷室 沙耶',natsume:'深川 なつめ',hotaru:'遠野 ほたる',aoi_dark:'瀬名 葵',ruri:'久遠 ルリ',ichika:'甘利 いちか',minori:'桐生 みのり',sumire:'九条 すみれ',kirie:'御堂 キリエ',enju:'宵宮 槐',wakaba:'筒井 わかば',urara:'赤坂 うらら',iroha:'大森 いろは',tokoyo:'市守り・常夜',anokata:'？？？',sacchan:'さっちゃん',toyo:'湯守・とよ',okinu:'灯籠職人・おきぬ'});
 const TRUE_TOUKO_STORY_IDS=Object.freeze(['q52_pre','q52','q53_intro','q53_pre','chapter9_end','q58_intro','q58_pre','q58','q59_intro','q59_pre','q59','q60_intro','chapter12_end','chapter13_end','chapter15_open','q86_intro','q87_intro','q87','q88_intro','q88','q89_intro','q89_pre','q89','q90_intro','q90_pre','q90','q81_intro','q81_pre','q81','q82_intro','q82_pre','q82','q83_intro','q83_pre','q83','q84_intro','q84_pre','q84']); // v0.34.56.0: 朔夜・イブキにも会話用の立ち絵
 const CHAPTER3_ONLY_VOICE=Object.freeze({ibuki:'売人イブキ'});
