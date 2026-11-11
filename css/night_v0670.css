@@ -71,7 +71,7 @@ html.os-on .os-quest .btn:disabled{opacity:.35}
 html.os-on .os-quest .os-quest-note small{color:var(--nt-sub)!important}
 /* 地図：昼の地図を夜に沈め、依頼のピンだけが灯る */
 html.os-on .os-quest .qmap-stage{background:#10163a!important;border:1px solid var(--nt-line)!important;box-shadow:inset 0 0 60px #0009,0 12px 40px #0006!important}
-html.os-on .os-quest .qmap-svg{filter:invert(1) hue-rotate(195deg) saturate(.55) brightness(.62) contrast(1.05)}
+html.os-on .os-quest .qmap-svg{filter:saturate(.85) brightness(.82)} /* 新しい地図画像が入るまでの暫定：昼の地図を少しだけ沈める */
 html.os-on .os-quest .qmap-pin .qmap-pin-core,html.os-on .os-quest .qmap-home-core{box-shadow:0 0 0 2px rgba(242,198,109,.55),0 0 18px rgba(242,198,109,.55)!important}
 html.os-on .os-quest .qmap-pin.done .qmap-pin-core{box-shadow:0 0 0 2px rgba(185,168,240,.45)!important;filter:saturate(.6) brightness(.85)}
 html.os-on .os-quest .qmap-pin [class*="label"],html.os-on .os-quest .qmap-home-label{background:rgba(14,20,56,.86)!important;color:var(--nt-text)!important;border:1px solid var(--nt-line)!important;box-shadow:none!important}
