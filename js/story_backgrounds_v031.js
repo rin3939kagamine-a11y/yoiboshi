@@ -702,7 +702,7 @@ function storyBackgroundFile(bg, time){
 
 // v0.65.3.0: 第3部・湯ノ花の専用背景。画像がそろったものから YUNOHANA_BG_READY に足していく。
 // 未完成の場所・時間帯は、これまでの背景のまま表示する。
-const YUNOHANA_BG_READY = new Set(['yn_kawabe:day','yn_kawabe:dusk','yn_kawabe:night']);
+const YUNOHANA_BG_READY = new Set(['yn_kawabe:day','yn_kawabe:dusk','yn_kawabe:night','yn_koubou:night','yn_gensen:day','yn_gensen:night','yn_haiyokan:night','yn_eki:day','yn_yukemuri:day','yn_yukemuri:dusk','yn_yukemuri:night','yn_nakaniwa:day','yn_nakaniwa:night']);
 const YUNOHANA_BG_PLACES = [
   ['yn_gensen', /湯ノ花・(源泉の湯小屋|源泉への山道|源泉の配管|源泉)(?!から)/],
   ['yn_kawabe', /湯ノ花・(川べり|石橋|川沿いの設営場|川沿いの夜道|川上の配管|源泉から川へ|月見屋の裏の川べり)/],
