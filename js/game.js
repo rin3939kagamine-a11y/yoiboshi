@@ -549,7 +549,7 @@ function expressionPortraitMarkup(personId,face='normal',sceneKey='default',opts
  const actual=normalizeExpressionFace(face), hasAlt=hasExpressionArt(personId,actual);
  const trueTouko=personId==='touko'&&storySession&&(TRUE_TOUKO_STORY_IDS.includes(storySession.id)||(storySession.id==='q52_intro'&&storySession.step>=(CHAPTER_STORIES.q52_intro?.lines?.findIndex(l=>l.toukoReveal)??99))); // v0.36.0.0: 正体の姿は第9章まで使わない
  // v0.34.55.0: 透子は背景を抜いた会話用の上半身（story_cast/touko_talk.webp）を使う
- const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.71.0':personId==='sacchan'?'assets/ART_V2/story_cast/sakuya_talk.webp?v=0.49.1.0':['touko','sakuya','ibuki','haruka','saya','natsume','hotaru','aoi_dark','ruri','ichika','minori','sumire','kirie','enju','wakaba','urara','tokoyo'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.49.1.0`:expressionArt(personId,actual);
+ const src=trueTouko?'assets/ART_V2/story_cast/touko_true_talk.webp?v=0.34.71.0':personId==='sacchan'?'assets/ART_V2/story_cast/sakuya_talk.webp?v=0.65.6.0':['touko','sakuya','ibuki','haruka','saya','natsume','hotaru','aoi_dark','ruri','ichika','minori','sumire','kirie','enju','wakaba','urara','tokoyo'].includes(personId)?`assets/ART_V2/story_cast/${personId}_talk.webp?v=0.65.6.0`:expressionArt(personId,actual);
  const play=rememberExpression(sceneKey,personId,actual,!hasAlt);
  const wrapClass=[opts.wrapperClass||'',`expr-face-${actual}`,!hasAlt&&actual!=='normal'?'expr-uses-fallback':'',play?`expr-animate-${actual}`:'',opts.stateClass||''].filter(Boolean).join(' ');
  const alt=opts.alt||`${PEOPLE[personId]?.name||personId}の立ち絵`;
