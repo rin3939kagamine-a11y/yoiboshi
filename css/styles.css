@@ -3182,3 +3182,18 @@ body:has(.combat-page .wave-battle:not(.qcin-active)) .combat-page {
 /* Ver.0.55.0.0 顔アイコンは顔が真ん中の正方形に作り直したので、どの枠でも中央を見せる（顔が切れないように） */
 .lobby-face img,.home-favorites-rail .lobby-face img,.home-v067 .home-favorites-rail .lobby-face img,.v680-archive-tile img,.v676-companion img,.ticket-choice img,.gacha-v030-unit-item img,.home-mock-v301 .mock-profile img,.inq-companion img,.inq-hero img,.token .face img,.tb-turn-token img,.tb-party img,.tb-root.q6-classic .tb-party img,.tb-root.yb-battle-dashboard .tb-party>img,.v688-unit-face img,.smallportrait img{object-position:center 45%!important}
 .v680-archive-tile img{object-fit:cover!important}
+
+/* v0.66.0.0 ストーリー画面：部→章→話のツリー */
+.story-part{padding:0!important;overflow:hidden}
+.story-part-head{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;background:linear-gradient(135deg,#f3effc,#eaf2fb);border:0;padding:16px 20px;cursor:pointer;text-align:left;color:inherit}
+.story-part-head small{display:block;font-size:12px;font-weight:800;letter-spacing:.12em;color:#7a62b8}
+.story-part-head b{display:block;font-size:19px;margin:2px 0 3px}
+.story-part-head em{font-style:normal;font-size:12.5px;color:#7b7f99}
+.story-part-head .story-new{font-style:normal}
+.story-opening .story-part-head{background:linear-gradient(135deg,#2a2150,#4a3a7a);color:#f5efff}
+.story-opening .story-part-head em{color:#d9c6ff}
+.story-opening .story-chapter-arrow{color:#fff}
+.story-part-body{display:grid;gap:8px;padding:12px}
+.story-part-body .story-chapter{border:1px solid #e3def2;box-shadow:none}
+.story-part-body .story-chapter-head{padding:13px 16px}
+.story-part-body .story-chapter-head b{font-size:15.5px}

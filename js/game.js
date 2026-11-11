@@ -2056,8 +2056,9 @@ function chapterStoryPage(){
  <div class="vn-dialogue-actions">${choices}<button type="button" class="vn-next" onclick="nextStory()" ${canAdvance?'':'disabled'}>${index===story.lines.length-1?'読み終える':'次へ　▸'}</button></div></div>${storyLogOpen?storyLogMarkup(story,index):''}</div></div>${scheduleStoryAuto(storySession.id,index,story.lines.length,canAdvance,storyLineText(sc))}`;
 }
 // v0.34.70.0: ストーリー画面。「次に読む話」を大きく1つ出し、章は折りたたむ。読めない話は出さない
-let storyMenuOpen=null;
+let storyMenuOpen=null, storyPartOpen=null; // v0.66.0.0: 部→章→話のツリー
 function toggleStoryChapter(i){storyMenuOpen=storyMenuOpen===i?-1:i;render();}
+function toggleStoryPart(k){storyPartOpen=storyPartOpen===k?'':k;storyMenuOpen=-1;render();}
 function storyMenu(){
  const st=id=>CHAPTER_STORIES[id]||(typeof romanceScript==='function'?romanceScript(id):null);
  const item=(id,okFn,label)=>{const x=st(id);return {id,label:label||x?.title||id,ok:!!okFn(),read:!!S.storyFlags?.[id]};};
@@ -2065,7 +2066,7 @@ function storyMenu(){
  const q=n=>!!S.quests['q'+n]?.complete;
  const meet=(id,cond,label,flag)=>{const it=item(id,cond,label);it.read=it.read||!!S[flag];return it;};
  const chapters=[
-  {title:'序章',items:[{id:'__opening',label:'オープニング',ok:true,read:true},{id:'__prologue',label:'第0話　相談室、はじめました。',ok:true,read:!!S.storyFlags?.prologue},auto('q1_lead'),auto('q2_lead'),
+  {title:'序章',items:[{id:'__prologue',label:'第0話　相談室、はじめました。',ok:true,read:!!S.storyFlags?.prologue},auto('q1_lead'),auto('q2_lead'),
     meet('shinonome_meet',()=>q(1),'東雲商店街の出会い','shinonomeMet'),meet('oldcafe_meet',()=>q(2),'旧喫茶街の出会い','oldcafeMet')]},
   {title:'第1章　増幅する残響',items:[auto('chapter1_open'),auto('q3_lead'),auto('q3'),meet('station_meet',()=>q(3),'東雲駅前の出会い','stationMet'),auto('q4_lead'),auto('q4'),
     meet('school_meet',()=>q(4),'旧第二小学校の出会い','schoolMet'),meet('office_meet',()=>q(4)&&S.schoolMet,'相談室の新しい顔ぶれ','officeMet'),auto('q5_lead'),auto('q5'),
@@ -2111,9 +2112,19 @@ function storyMenu(){
  const go=x=>x.id==='__opening'?'replayOpening()':x.id==='__prologue'?'openPrologue()':`openStory('${x.id}')`;
  const nextCard=next?`<section class="card pad story-next"><small>次に読む話・${esc(nextCh.title)}</small><h2>${esc(next.label)}</h2><button type="button" class="btn primary story-next-btn" onclick="${go(next)}">読む ▸</button></section>`
   :`<section class="card pad story-next is-done"><small>未読の物語はありません</small><h2>依頼を進めると、続きの物語が解放されます</h2><button type="button" class="btn outline" onclick="change('city')">クエスト画面へ ›</button></section>`;
- const chapterCards=visible.map(c=>{const isOpen=openIdx===c.i;
-  return `<section class="card story-chapter ${isOpen?'is-open':''}"><button type="button" class="story-chapter-head" onclick="toggleStoryChapter(${c.i})" aria-expanded="${isOpen}"><span><b>${esc(c.title)}</b><em>${c.open.length}話${c.unread?`・<i class="story-new">未読${c.unread}</i>`:''}${c.locked?`・あと${c.locked}話は未解放`:''}</em></span><span class="story-chapter-arrow">${isOpen?'▲':'▼'}</span></button>
-  ${isOpen?`<ol class="story-ep-list">${c.open.map(x=>`<li><button type="button" class="story-ep ${x.read?'is-read':'is-unread'}" onclick="${go(x)}"><span>${esc(x.label)}</span>${x.read?'<small>読み返す</small>':'<b class="story-new">NEW</b>'}</button></li>`).join('')}</ol>`:''}</section>`;}).join('');
+ const STORY_PARTS=[{key:'p1',title:'第1部',sub:'宵星',from:0,to:10},{key:'p2',title:'第2部',sub:'灯を売る人',from:11,to:20},{key:'p3',title:'第3部',sub:'灯籠流しの町',from:21,to:30}];
+ const partOf=i=>(STORY_PARTS.find(p=>i>=p.from&&i<=p.to)||STORY_PARTS[0]).key;
+ const openPart=storyPartOpen===null?partOf(current):storyPartOpen;
+ const chapterLabel=t=>String(t).replace(/^第\d+部\s*/,'');
+ const chapterCard=c=>{const isOpen=openIdx===c.i;
+  return `<section class="card story-chapter ${isOpen?'is-open':''}"><button type="button" class="story-chapter-head" onclick="toggleStoryChapter(${c.i})" aria-expanded="${isOpen}"><span><b>${esc(chapterLabel(c.title))}</b><em>${c.open.length}話${c.unread?`・<i class="story-new">未読${c.unread}</i>`:''}${c.locked?`・あと${c.locked}話は未解放`:''}</em></span><span class="story-chapter-arrow">${isOpen?'▲':'▼'}</span></button>
+  ${isOpen?`<ol class="story-ep-list">${c.open.map(x=>`<li><button type="button" class="story-ep ${x.read?'is-read':'is-unread'}" onclick="${go(x)}"><span>${esc(x.label)}</span>${x.read?'<small>読み返す</small>':'<b class="story-new">NEW</b>'}</button></li>`).join('')}</ol>`:''}</section>`;};
+ const openingCard=`<section class="card story-part story-opening"><button type="button" class="story-part-head" onclick="replayOpening()"><span><b>オープニング</b><em>物語のはじまり</em></span><span class="story-chapter-arrow">▶</span></button></section>`;
+ const partCards=STORY_PARTS.map(p=>{const cs=visible.filter(c=>c.i>=p.from&&c.i<=p.to);if(!cs.length)return '';
+  const isOpen=openPart===p.key, unread=cs.reduce((n,c)=>n+c.unread,0);
+  return `<section class="card story-part ${isOpen?'is-open':''}"><button type="button" class="story-part-head" onclick="toggleStoryPart('${p.key}')" aria-expanded="${isOpen}"><span><small>${esc(p.title)}</small><b>${esc(p.sub)}</b><em>${cs.length}章${unread?`・<i class="story-new">未読${unread}</i>`:''}</em></span><span class="story-chapter-arrow">${isOpen?'▲':'▼'}</span></button>
+  ${isOpen?`<div class="story-part-body">${cs.map(chapterCard).join('')}</div>`:''}</section>`;}).join('');
+ const chapterCards=openingCard+partCards;
  return `${heading('STORY / LIBRARY','ストーリー','')}${nextCard}<div class="story-chapters">${chapterCards}</div><p class="story-menu-note">戦闘の直前と後日談の物語は、クエストの出撃・勝利のときにも自動で流れます。</p>`;
 }
 let lobbySelected=(typeof S.homeFavorite==='string'&&PEOPLE[S.homeFavorite]&&(HERO_IDS.includes(S.homeFavorite)||UNITS.some(u=>u.person===S.homeFavorite&&data(u.id))))?S.homeFavorite:'momoka',lobbyLine=0;
