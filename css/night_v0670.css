@@ -101,3 +101,15 @@ html.os-on body:has(.os-quest),html.os-on body:has(.os-quest) .app,html.os-on bo
 html.os-on .os-quest .qmap-stage{background:rgba(16,22,58,.35)!important;border:1px solid rgba(242,198,109,.28)!important;box-shadow:0 0 0 4px rgba(11,16,48,.35),0 14px 40px #000a!important}
 html.os-on .os-quest .qmap-chapter-box,html.os-on .os-chapter-select,html.os-on .os-quest .btn.outline{background:rgba(20,26,66,.72)!important;backdrop-filter:blur(6px)}
 html.os-on .os-quest .os-quest-note small{text-shadow:0 1px 4px #000}
+
+/* ===== v0.67.3.0 ストーリー画面にも夜の港町の背景（一覧の後ろが広く空くので、こちらでよく見える） ===== */
+html.os-on body:has(.os-story),html.os-on body:has(.os-story) .app,html.os-on body:has(.os-story) .main{
+ background:linear-gradient(180deg,rgba(11,16,48,.45) 0%,rgba(11,16,48,.1) 40%,rgba(11,16,48,.45) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_portrait.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+@media (orientation:landscape){
+ html.os-on body:has(.os-story),html.os-on body:has(.os-story) .app,html.os-on body:has(.os-story) .main{
+  background:linear-gradient(180deg,rgba(11,16,48,.45) 0%,rgba(11,16,48,.1) 40%,rgba(11,16,48,.45) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_landscape.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+}
+/* 背景の町並みに文字が埋もれないよう、マスは少し濃く・すりガラスに */
+html.os-on .os-story .os-part,html.os-on .os-story .os-chap,html.os-on .os-story .os-ep-grid .story-ep{background:rgba(20,26,66,.78)!important;backdrop-filter:blur(8px)}
+html.os-on .os-story .os-ep-grid .story-ep.is-read{background:rgba(20,26,66,.62)!important}
+html.os-on .os-story .os-level-head b,html.os-on .os-story .page-title{text-shadow:0 2px 8px #000c}
