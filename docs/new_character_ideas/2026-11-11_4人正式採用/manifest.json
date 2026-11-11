@@ -1,0 +1,66 @@
+{
+  "project": "宵星の契約者 RE:START",
+  "approved_date": "2026-11-11",
+  "status": "officially_approved_asset_registered_in_draft_pr_unmerged",
+  "game_implementation": "not_implemented",
+  "destination_dir": "assets/ART_V2/full_body/2026-11-11_approved_4",
+  "png_spec": {
+    "dimensions": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "alpha_range": [
+      0,
+      254
+    ]
+  },
+  "qa": {
+    "sha256_match_original": true,
+    "git_blob_sha_match_original": true,
+    "dark_background_edge_visual_test": "pending",
+    "in_game_display": "not_tested"
+  },
+  "assets": [
+    {
+      "number": "01",
+      "description": "黒スーツ・ショートヘア",
+      "file": "01_black_suit.png",
+      "path": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "size_bytes": 746799,
+      "sha256": "7082e499b450d70372fc6e92b677c04aed94354ed4aed9edc1ec65a51ed849c5",
+      "git_blob_sha": "55bc42cecef0614b58fc064da07da757aa54148e",
+      "approved": true
+    },
+    {
+      "number": "02",
+      "description": "白レース衣装・ボブヘア",
+      "file": "02_white_lace.png",
+      "path": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "size_bytes": 979915,
+      "sha256": "e1d76316850d9d386233f9529c39627c542be38ade5979336c635351801cca92",
+      "git_blob_sha": "5afa92fdde89b3f370f9958f7a756dcae635126e",
+      "approved": true
+    },
+    {
+      "number": "03",
+      "description": "水色シャツ・黒パンツ",
+      "file": "03_blue_shirt.png",
+      "path": "assets/ART_V2/full_body/2026-11-11_approved_4/03_blue_shirt.png",
+      "size_bytes": 896579,
+      "sha256": "0aae62d1e4657586de24903406c05eb0f14ab14503a176547b76e457cadb534b",
+      "git_blob_sha": "80a0fad521fbf29b25fa204b481b6efce8221b5a",
+      "approved": true
+    },
+    {
+      "number": "04",
+      "description": "花柄フーディー・ロゴなし正面向き",
+      "file": "04_floral_sports_no_logo_front.png",
+      "path": "assets/ART_V2/full_body/2026-11-11_approved_4/04_floral_sports_no_logo_front.png",
+      "size_bytes": 1055419,
+      "sha256": "028a839b10eef86422f888c354f3aa8f9171fc88c7c9ffd3814811305d3a44a2",
+      "git_blob_sha": "d559652efd0968b2f0d4559ecd22a68f2b477229",
+      "approved": true
+    }
+  ]
+}
