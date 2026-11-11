@@ -1,0 +1,42 @@
+{
+  "project": "宵星の契約者 RE:START",
+  "approved_date": "2026-11-11",
+  "status": "adopted_pending_binary_upload_and_alpha_QA",
+  "target_directory": "assets/ART_V2/full_body/2026-11-11_approved_2/",
+  "images": [
+    {
+      "id": "01",
+      "label": "ミントフリルドレス",
+      "filename": "01_mint_ruffle_dress.png",
+      "target_path": "assets/ART_V2/full_body/2026-11-11_approved_2/01_mint_ruffle_dress.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "sha256": "850f4413f407b4915d91b259c80a161513692474d1d7da2b95b9f304d2b39c2f",
+      "bytes": 1128623,
+      "fully_transparent_pixel_count": 1069556,
+      "fully_opaque_pixel_count": 0,
+      "git_binary_uploaded": false,
+      "adoption": "approved",
+      "game_display_test": "not_performed",
+      "background_QA": "pending_repair"
+    },
+    {
+      "id": "02",
+      "label": "紺髪ピンクメッシュ私服",
+      "filename": "02_navy_pink_streetwear.png",
+      "target_path": "assets/ART_V2/full_body/2026-11-11_approved_2/02_navy_pink_streetwear.png",
+      "width": 1024,
+      "height": 1536,
+      "mode": "RGBA",
+      "sha256": "693c81ab94341e7bb1a348490d91d4bce31c898b6228d375588a108f51caadac",
+      "bytes": 2079433,
+      "fully_transparent_pixel_count": 0,
+      "fully_opaque_pixel_count": 1572864,
+      "git_binary_uploaded": false,
+      "adoption": "approved",
+      "game_display_test": "not_performed",
+      "background_QA": "fails_checkerboard_baked_into_opaque_background"
+    }
+  ]
+}
