@@ -1,0 +1,40 @@
+name: PR34 - Hair gap transparency v3
+on:
+  push:
+    branches:
+      - assets/animal-ear-trio-standees-20261108
+    paths:
+      - .github/workflows/pr34-hair-alpha-fix.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refine-hair-alpha:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout existing PR #34 head
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          ref: assets/animal-ear-trio-standees-20261108
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image-processing libraries
+        run: python -m pip install pillow numpy scipy opencv-python-headless
+      - name: Refine white holes without changing any RGB values
+        run: python tools/qa/pr34_hair_transparency_refine_v3.py
+      - name: Commit corrected v3 and dark-background verification to PR branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          git add assets/character_candidates/2026-11-08_animal_ear_trio/*_v3.png
+          git add assets/character_candidates/2026-11-08_animal_ear_trio/qa_dark/*_v3_*.jpg
+          git diff --cached --check
+          git commit -m "assets: clean verified hair-gap components in v3 standees"
+          git push origin HEAD:assets/animal-ear-trio-standees-20261108
