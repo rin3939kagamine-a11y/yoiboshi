@@ -1,7 +1,7 @@
 {
   "created": "2026-11-09",
   "purpose": "10 independent standee PNG assets; 2026-11-11 uploaded PNG exact-byte hashes staged; pending binary transfer",
-  "status": "documentation_only_png_0_of_10",
+  "status": "png_10_of_10_registered_qa_pending",
   "source": "10 user-uploaded 1024x1536 RGBA PNGs in conversation on 2026-11-11; old ZIP not retrieved",
   "items": [
     {
@@ -15,11 +15,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "708188f5c38c672c67c1e44eeedf6eaa9d611e5c8eb3ca4d294754faf03db532",
       "previous_manifest_bytes": 1410797,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_03-1.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_03-1.png",
+      "github_blob_sha": "e2e4d668c10105caf336f7c8365e5b0a8257bb41",
+      "github_readback_verified": false
     },
     {
       "number": 2,
@@ -32,11 +34,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "d2e5abf1abc1fb9453d6ea09f8114c52c49ce964be78ad9f3f721c3757208999",
       "previous_manifest_bytes": 1687893,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_03-2.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_03-2.png",
+      "github_blob_sha": "a93d72dcf91725eba98167cdf564f0fd943ad184",
+      "github_readback_verified": false
     },
     {
       "number": 3,
@@ -49,11 +53,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "ed116a29a1129ee41c9ece36bbe320e2a11b155b74b66c5f672e1944b1736d0c",
       "previous_manifest_bytes": 1427723,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_04-3.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_04-3.png",
+      "github_blob_sha": "4e01afca43b7af840ecb4bf8b557f1850f6d1e1d",
+      "github_readback_verified": false
     },
     {
       "number": 4,
@@ -66,11 +72,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "9ff375e50f7de6df543b2a0e246571e63a5109059e00afe8a987e18f4baf8152",
       "previous_manifest_bytes": 1521514,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_06-4.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_06-4.png",
+      "github_blob_sha": "1987348e96218fca2298fa3e0dfff38701a7da41",
+      "github_readback_verified": false
     },
     {
       "number": 5,
@@ -83,11 +91,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "56d655684e9b239b778d0738ab4be24bcfcb18a643330c8c11910b3ecfcc5b7a",
       "previous_manifest_bytes": 1306826,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_07-5.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_07-5.png",
+      "github_blob_sha": "bcb4e952c86b60c530ef8109beb75f33eff93c78",
+      "github_readback_verified": false
     },
     {
       "number": 6,
@@ -100,11 +110,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "f53e3960dbd77dd6ddda2601967c16c2158a7ade848789d8bb335ae8cef0e30b",
       "previous_manifest_bytes": 1745301,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_10-6.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_10-6.png",
+      "github_blob_sha": "8d8c51ba906993aee73f9c31f03fbd92452c6ae2",
+      "github_readback_verified": false
     },
     {
       "number": 7,
@@ -117,11 +129,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "8973695f8cb4b57635b6cd97c82d1157e7ac6fc4df1e7130a8b4176b2e467abe",
       "previous_manifest_bytes": 1578709,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_11-7.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_11-7.png",
+      "github_blob_sha": "6b65c081bffe20aeb16a2814e2710cf127bfde7a",
+      "github_readback_verified": false
     },
     {
       "number": 8,
@@ -134,11 +148,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "e182cb85678f1670c53ce1d2158e265bd469d0a8a369a93eb1902670cc5d1ea0",
       "previous_manifest_bytes": 1629969,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_12-8.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_12-8.png",
+      "github_blob_sha": "92d9744be5c395387d361574698ed54617655a93",
+      "github_readback_verified": false
     },
     {
       "number": 9,
@@ -151,11 +167,13 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "0c6e03f7dde279c27deda19e6de52bff516043264b2e7626b7f2babf430d6c60",
       "previous_manifest_bytes": 1802900,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_13-9.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_13-9.png",
+      "github_blob_sha": "996f3d544cfbc735d778a4909a6d85ed43cc669d",
+      "github_readback_verified": false
     },
     {
       "number": 10,
@@ -168,13 +186,22 @@
         1536
       ],
       "mode": "RGBA",
-      "png_binary_in_git": false,
+      "png_binary_in_git": true,
       "game_display_verified": false,
       "previous_manifest_sha256": "4c459a8ff18f0e08671d609c6a3b395a1f5bfff8c65d9b2127983df0d412b8ea",
       "previous_manifest_bytes": 1880975,
-      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_14-10.png"
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_14-10.png",
+      "github_blob_sha": "91c75ce75cd98881125c5cba8a4063554777623b",
+      "github_readback_verified": false
     }
   ],
   "source_uploaded_at": "2026-11-11",
-  "rechecked": "2026-11-11"
+  "rechecked": "2026-11-11",
+  "github_registration": {
+    "branch": "assets/ten-individual-standees-20261109-pending",
+    "committed_at_date": "2026-11-11",
+    "source": "user-uploaded 10 RGBA PNGs",
+    "integrity": "Git blob sha verified against original uploaded byte stream; post-commit path readback pending",
+    "png_count": 10
+  }
 }
