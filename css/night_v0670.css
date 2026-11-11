@@ -89,3 +89,15 @@ html.os-on.os-on body:has(.os-page):has(.os-page) .bottomnav.bottomnav button *{
 html.os-on .topbar .wallet{background:rgba(255,255,255,.08)!important;border:1px solid var(--nt-line)!important;box-shadow:none!important;color:var(--nt-text)!important}
 html.os-on .os-story .story-opening{background:transparent!important;border:0!important;box-shadow:none!important}
 html.os-on .os-story .story-opening .story-part-head{background:rgba(34,42,92,.82)!important}
+
+/* ===== v0.67.2.0 クエスト画面の背景（高台から見た夜の港町） ===== */
+html.os-on body:has(.os-quest),html.os-on body:has(.os-quest) .app,html.os-on body:has(.os-quest) .main{
+ background:linear-gradient(180deg,rgba(11,16,48,.55) 0%,rgba(11,16,48,.15) 45%,rgba(11,16,48,.35) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_portrait.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+@media (orientation:landscape){
+ html.os-on body:has(.os-quest),html.os-on body:has(.os-quest) .app,html.os-on body:has(.os-quest) .main{
+  background:linear-gradient(180deg,rgba(11,16,48,.55) 0%,rgba(11,16,48,.15) 45%,rgba(11,16,48,.35) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_landscape.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+}
+/* 地図の枠を少し透かして、背景の夜景となじませる */
+html.os-on .os-quest .qmap-stage{background:rgba(16,22,58,.35)!important;border:1px solid rgba(242,198,109,.28)!important;box-shadow:0 0 0 4px rgba(11,16,48,.35),0 14px 40px #000a!important}
+html.os-on .os-quest .qmap-chapter-box,html.os-on .os-chapter-select,html.os-on .os-quest .btn.outline{background:rgba(20,26,66,.72)!important;backdrop-filter:blur(6px)}
+html.os-on .os-quest .os-quest-note small{text-shadow:0 1px 4px #000}
