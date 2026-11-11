@@ -1186,11 +1186,19 @@ function dismissOnboardGuide(key){const ob=S.onboarding;if(!ob?.enabled||onboard
 }
 
 function toggleTitleSettings(){titleSettingsOpen=!titleSettingsOpen;titleConfirm=false;render()}
+// v0.68.0.0: タイトルの一枚絵。起動するたびにこの中から1枚を選ぶ（絵が増えたらここに足す）
+const TITLE_VISUALS=Object.freeze([
+ {id:'lighthouse',p:'assets/ART_V2/title/title_lighthouse_portrait.webp',l:'assets/ART_V2/title/title_lighthouse_landscape.webp'}
+]);
+let titleVisualPick=null;
+function titleVisual(){if(!titleVisualPick)titleVisualPick=TITLE_VISUALS[Math.floor(Math.random()*TITLE_VISUALS.length)];return titleVisualPick;}
+function titleVersionText(){const m=String(document.title||'').match(/Ver\.[0-9.]+/);return m?m[0]:'';}
 function titlePage(){
  const hasSave=!!S.gameStarted&&SaveStore.read()!==null;
+ const tv=titleVisual();
  const options=titleConfirm?`<div class="title-confirm" role="alertdialog" aria-label="はじめからの確認"><strong>今のデータは消えます</strong><p>現在のセーブが上書きされます。本当にはじめから遊びますか？</p><div><button type="button" onclick="cancelNewGame()">やめる</button><button type="button" class="danger" onclick="startNewGame()">削除してはじめる</button></div></div>`:'';
  const settings=titleSettingsOpen?`<div class="title-settings-panel"><button type="button" class="title-settings-back" onclick="toggleTitleSettings()">← タイトルに戻る</button>${audioSettingsCard()}</div>`:'';
- return `<main class="title-screen title-simple" aria-label="宵星の契約者 タイトル画面"><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><div class="title-subkicker">YOIBOSHI NO KEIYAKUSHA</div><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">Ver.0.34.71.1 · RE:START ALPHA</p></div>${options}${settings}</main>`;
+ return `<main class="title-screen title-simple has-visual" data-visual="${tv.id}" aria-label="宵星の契約者 タイトル画面"><div class="title-visual tv-p" aria-hidden="true" style="background-image:url('${tv.p}?v=0.68.0.0')"></div><div class="title-visual tv-l" aria-hidden="true" style="background-image:url('${tv.l}?v=0.68.0.0')"></div><div class="title-stars" aria-hidden="true"></div><div class="title-inner"><div class="title-masthead"><h1>宵星の契約者</h1><strong>RE:START</strong></div><div class="title-actions">${hasSave?'<button type="button" class="title-primary" onclick="continueGame()">つづきから</button>':''}<button type="button" class="title-secondary" onclick="requestNewGame()">はじめから</button><button type="button" class="title-settings-button" onclick="toggleTitleSettings()">設定　<span>音量・消音</span></button></div><p class="title-version">${titleVersionText()}</p></div>${options}${settings}</main>`;
 }
 
 function isSessionLocked(){return (view==='investigation')||(view==='combat'&&!!battle&&!battle.done)||(view==='prologue'&&!!storySession)||(view==='story'&&!!storySession)||(view==='date'&&!!S.love?.pending)||(view==='city'&&questActionInProgress)||(romanceSelectionInProgress&&!!dialog)}
