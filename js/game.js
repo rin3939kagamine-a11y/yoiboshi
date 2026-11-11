@@ -1188,7 +1188,8 @@ function dismissOnboardGuide(key){const ob=S.onboarding;if(!ob?.enabled||onboard
 function toggleTitleSettings(){titleSettingsOpen=!titleSettingsOpen;titleConfirm=false;render()}
 // v0.68.0.0: タイトルの一枚絵。起動するたびにこの中から1枚を選ぶ（絵が増えたらここに足す）
 const TITLE_VISUALS=Object.freeze([
- {id:'lighthouse',p:'assets/ART_V2/title/title_lighthouse_portrait.webp',l:'assets/ART_V2/title/title_lighthouse_landscape.webp'}
+ {id:'lighthouse',p:'assets/ART_V2/title/title_lighthouse_portrait.webp',l:'assets/ART_V2/title/title_lighthouse_landscape.webp'},
+ {id:'momoka',p:'assets/ART_V2/title/title_momoka_portrait.webp',l:'assets/ART_V2/title/title_momoka_landscape.webp'}
 ]);
 let titleVisualPick=null;
 function titleVisual(){if(!titleVisualPick)titleVisualPick=TITLE_VISUALS[Math.floor(Math.random()*TITLE_VISUALS.length)];return titleVisualPick;}
