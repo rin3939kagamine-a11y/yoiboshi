@@ -1,0 +1,34 @@
+name: Import Yoiboshi standee 2026-11-11
+on:
+  push:
+    branches:
+      - art/standee-20261111-purple-orange-idol
+    paths:
+      - .github/workflows/import-standee-20261111.yml
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Fetch and verify approved transparent PNG
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/ART_V2/full_body
+          curl --fail --location --silent --show-error --retry 3 'https://yoiboshi-contract.floot.app/_cdn/static/a347d242-486a-49c9-8bd0-41e5a2e85230-yoiboshi_2026-11-11_purple_orange_idol.png' -o 'assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png'
+          echo 'efe16fb7fac1eeef04780018e2ee161561e8c59a244322fef7637c017fc4393a  assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png' | sha256sum -c -
+          test "$(stat -c%s 'assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png')" = 1887802
+      - name: Commit asset and remove temporary importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 'assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png'
+          git rm '.github/workflows/import-standee-20261111.yml'
+          git commit -m 'assets: add transparent purple orange idol standee'
+          git push
