@@ -700,6 +700,32 @@ function storyBackgroundFile(bg, time){
   return STORY_BG_FILES[`${bg}:${time}`] || null;
 }
 
+// v0.65.3.0: 第3部・湯ノ花の専用背景。画像がそろったものから YUNOHANA_BG_READY に足していく。
+// 未完成の場所・時間帯は、これまでの背景のまま表示する。
+const YUNOHANA_BG_READY = new Set([]);
+const YUNOHANA_BG_PLACES = [
+  ['yn_gensen', /湯ノ花・(源泉の湯小屋|源泉への山道|源泉の配管|源泉)(?!から)/],
+  ['yn_kawabe', /湯ノ花・(川べり|石橋|川沿いの設営場|川沿いの夜道|川上の配管|源泉から川へ|月見屋の裏の川べり)/],
+  ['yn_yukemuri', /湯ノ花・(湯けむり通り|灯籠置き場)/],
+  ['yn_nakaniwa', /湯ノ花・月見屋の(中庭|縁側)/],
+  ['yn_koubou', /湯ノ花・灯籠工房/],
+  ['yn_haiyokan', /湯ノ花・(山の上の廃旅館|廃旅館の門)/],
+  ['yn_eki', /湯ノ花駅/]
+];
+const YUNOHANA_TIME_ORDER = {day:['day','dusk','night'], dusk:['dusk','day','night'], night:['night','dusk','day'], late:['night','dusk','day'], dawn:['day','dusk','night'], '':['night','day','dusk']};
+function yunohanaBackground(storyId, defaults){
+  if(!YUNOHANA_BG_READY.size || typeof romanceScript !== 'function') return null;
+  let place = '';
+  try { place = romanceScript(storyId)?.place || ''; } catch (_) { return null; }
+  const hit = YUNOHANA_BG_PLACES.find(([, re]) => re.test(place));
+  if(!hit) return null;
+  const want = /夜/.test(place) ? 'night' : (defaults?.time || '');
+  for(const t of (YUNOHANA_TIME_ORDER[want] || YUNOHANA_TIME_ORDER[''])){
+    if(YUNOHANA_BG_READY.has(`${hit[0]}:${t}`)) return `assets/ART_V2/backgrounds/bg_${hit[0]}_${t}.webp`;
+  }
+  return null;
+}
+
 function resolveStoryBackground(storyId, lineIndex){
   const defaults = STORY_BACKGROUNDS[storyId];
   // A single authored line may override the story-wide background; no lines are edited in v0.31.
@@ -712,6 +738,8 @@ function resolveStoryBackground(storyId, lineIndex){
     const [bg, time = ''] = lineBg.trim().split(':');
     return storyBackgroundFile(bg,time);
   }
+  const yn = yunohanaBackground(storyId, defaults);
+  if(yn) return yn;
   return defaults ? storyBackgroundFile(defaults.bg,defaults.time) : null;
 }
 
