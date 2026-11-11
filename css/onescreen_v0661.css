@@ -125,3 +125,11 @@ html.os-on,html.os-on body{overflow:hidden!important;overscroll-behavior:none}
  body:not(:has(.combat-page,.chapter-story-v071,.qcin-active,.vn-story,.tb-root.tb-wide)) .bottomnav button .ico{font-size:23px!important;width:auto!important;line-height:1!important}
  body:not(:has(.combat-page,.chapter-story-v071,.qcin-active,.vn-story,.tb-root.tb-wide)) .bottomnav .nav-label{font-size:10px!important;line-height:1.2!important;white-space:nowrap!important}
 }
+
+/* ===== v0.67.1.0 地図画像 ===== */
+.os-quest .qmap-stage .qmap-scroll{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
+.os-quest .qmap-stage .qmap-scroll::-webkit-scrollbar{display:none}
+.os-quest .qmap-stage .qmap-scroll:active{cursor:grabbing}
+.os-quest .qmap-stage .qmap-scroll .qmap-map{position:relative!important;inset:auto!important;min-height:0!important;overflow:visible!important}
+.os-quest .qmap-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.os-quest .qmap-map:has(.qmap-art) .qmap-svg{display:none!important}
