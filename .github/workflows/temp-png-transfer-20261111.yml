@@ -1,0 +1,27 @@
+name: One-time PNG asset transfer
+on:
+  push:
+    branches:
+      - feature/purple-braid-standee-20261111
+    paths:
+      - '.github/workflows/temp-png-transfer-20261111.yml'
+permissions:
+  contents: write
+jobs:
+  import-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download exact approved PNG and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/ART_V2/full_body
+          curl --fail --location --retry 3 --max-time 90 'https://yoiboshi-contract.floot.app/_cdn/static/e8d11e4b-18c9-4682-b6a7-f15ae77b7d80-temp_github_transfer_20261111_purple_braid.png' -o 'assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png'
+          echo 'a04df5c90ed3001dc2120c91d9339fee3ecd1834bc540bd5fef63e1e190953fd  assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png' | sha256sum -c -
+          git rm -f '.github/workflows/temp-png-transfer-20261111.yml'
+          git add 'assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png'
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'art: add purple braid full-body PNG asset'
+          git push origin HEAD:feature/purple-braid-standee-20261111
