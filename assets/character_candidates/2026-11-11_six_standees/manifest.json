@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-11",
+  "type": "standee_candidate_batch",
+  "status": "png_registered_pending_qa",
+  "note": "Image source bytes preserved. No game-code changes or final character adoption. Visual edge and in-game rendering QA pending.",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "color_mode": "RGBA",
+  "images": [
+    {
+      "number": 1,
+      "path": "assets/character_candidates/2026-11-11_six_standees/01_pink_floral_kimono.png",
+      "source_uploaded_filename": "73577d6a-9e1b-4eb9-b167-43ef57b31c69.png",
+      "bytes": 1466148,
+      "sha256": "5a8b6c1dff2c97991f9eec8e6d2084df4ed7ad0d5803762903189dd99590d09c",
+      "git_blob_sha": "00060805c831401973cf597244e5e871eec4796e"
+    },
+    {
+      "number": 2,
+      "path": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "source_uploaded_filename": "a3d0abe6-46a3-413d-9233-a8773d2ec64e.png",
+      "bytes": 790960,
+      "sha256": "c03ad26cc1e66b8235fc8ccdd6b775d11632b1740bdec7a7741c290343c6b8c7",
+      "git_blob_sha": "9c73fc98dca064e1edf290a0a9b18d1e74a9fcc5"
+    },
+    {
+      "number": 3,
+      "path": "assets/character_candidates/2026-11-11_six_standees/03_cat_cap_denim_shorts.png",
+      "source_uploaded_filename": "c34a0d5d-6c3b-4ec4-8270-448602e1f6bd.png",
+      "bytes": 1240149,
+      "sha256": "09097b24b8da3ece1cc30c83b3dedef9834bd8340d6a333b1a96c1021c193be2",
+      "git_blob_sha": "45212fa5c3577e8f59d35b303e7268083ac23e81"
+    },
+    {
+      "number": 4,
+      "path": "assets/character_candidates/2026-11-11_six_standees/04_white_blouse_black_tiered_skirt.png",
+      "source_uploaded_filename": "29edeea7-5afa-42ec-b47f-72275d93932f.png",
+      "bytes": 978178,
+      "sha256": "cb82d3ede82d39a0fd7b26a0076aad28c65e4a93096f367152d77a2c2877723f",
+      "git_blob_sha": "5fe79caec70404a70105d28773955618333e419a"
+    },
+    {
+      "number": 5,
+      "path": "assets/character_candidates/2026-11-11_six_standees/05_pink_blouse_white_pants.png",
+      "source_uploaded_filename": "799e0b5e-3dca-456e-a49a-7a107f86f9f0.png",
+      "bytes": 923108,
+      "sha256": "ac83b24c7a9eba0c969963f58f00a34e52141ade19ce7c5a2e1230f7efc8d79c",
+      "git_blob_sha": "50d46fe7578711cb40dbc66e1e28348911419d20"
+    },
+    {
+      "number": 6,
+      "path": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "source_uploaded_filename": "faccdeba-427e-44ff-8199-4af5df0e259e.png",
+      "bytes": 1332072,
+      "sha256": "bb7cc3b6da253cceb02e8dbff5707d65c43c607bfe0208a212d859923f40c08c",
+      "git_blob_sha": "cc4f8d85c78dc410f0e935b6b29a63466437f174"
+    }
+  ]
+}
