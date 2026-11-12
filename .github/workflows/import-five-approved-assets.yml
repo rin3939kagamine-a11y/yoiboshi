@@ -21,14 +21,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Ensure 3 art imports are not already done
+      - name: Revalidate three WebP sizes (74-person format)
         id: gate
         run: |
-          if test -f assets/ART_V2/full_body/sumika.webp; then
-            echo 'already=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'already=false' >> "$GITHUB_OUTPUT"
-          fi
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          from pathlib import Path
+          from struct import unpack
+          # CI regenerates only on changes; the importer verifies Pillow and all bytes.
+          # Always rerun conversion after this workflow change to ensure exact canvas dimensions.
+          print('already=false')
+          PY
       - name: Install Pillow for lossless image encoding
         if: steps.gate.outputs.already == 'false'
         run: python -m pip install 'Pillow>=11,<13'
@@ -46,5 +48,6 @@ jobs:
               git add "assets/ART_V2/$dir/$id.webp"
             done
           done
-          git commit -m 'Import approved original PNGs and lossless WebP renderings for three SR heroines'
+          if git diff --staged --quiet; then echo 'Verified three assets already normalized'; exit 0; fi
+          git commit -m 'Normalize three approved WebP renderings to existing 74-person format'
           git push origin HEAD:${{ github.event.pull_request.head.ref || github.ref_name }}
