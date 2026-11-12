@@ -3199,4 +3199,4 @@ body:has(.combat-page .wave-battle:not(.qcin-active)) .combat-page {
 .story-part-body .story-chapter-head b{font-size:15.5px}
 
 /* Quest sheet is modal: the fixed wallet header must not intercept its close button on compact displays. */
-body:has(.page.quest-v676 .qmap-sheet) .topbar{pointer-events:none}
+body:has(.qmap-sheet) .topbar,body:has(.qmap-sheet) .topbar *{pointer-events:none!important}
