@@ -17,7 +17,7 @@ PURPLE=SOURCE_DIR/"01_purple_check_noears_nomask.png"
 SOURCES=[
  ("sumika",None,str(PURPLE.relative_to(REPO)),906678,None,
   "ad9482bcf6bbe27cd9e1d903e60f13215d77233d2350f525797792df1a44ce4d","01_purple_check_noears_nomask.png"),
- ("reika","origin/main","assets/ART_V2/full_body/megane_woman_20261112.png",
+ ("reika","dda5194","assets/ART_V2/full_body/megane_woman_20261112.png",
   976455,"9507a8facc4bbc60401a6395d4d5057283ced6ba",None,"02_megane_woman_20261112.png"),
  ("hono","origin/assets/standee-ash-brown-navy-fleece-20261112",
   "assets/character_candidates/2026-11-12_ash_brown_navy_fleece/ash_brown_navy_fleece_full_body.png",
