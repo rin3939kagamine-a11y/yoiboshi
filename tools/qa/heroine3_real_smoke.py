@@ -75,7 +75,7 @@ try:
    };
   }""")
   ck("new ID registry length 3 and globally unique",metadata["ids"]==ids and metadata["unique"],metadata)
-  ck("version sequential", "0.69.2.0" in metadata["version"])
+  ck("version sequential", "0.70.2.0" in metadata["version"])
   ck("old 74 registry untouched",metadata["old74"]==74)
   ck("unchanged gacha rate",metadata["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and metadata["new19"]=={"SR":80,"SSR":15,"UR":5})
   ck("excluded hero IDs absent",not metadata["excluded"],metadata["excluded"])

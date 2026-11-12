@@ -154,7 +154,7 @@ try:
                 navDisplay:getComputedStyle(nav).display,
                 tabs:[...nav.querySelectorAll("button")].map(b),
                 sidebar:getComputedStyle(document.querySelector(".sidebar")).display,
-                favorite:b(document.querySelector(".mock-switch-button")),
+                favorite:b(document.querySelector(".mock-profile-picker")),
                 banner:b(document.querySelector(".mock-feature-card")),
                 hero:b(document.querySelector(".mock-hero"))};
             }""")
