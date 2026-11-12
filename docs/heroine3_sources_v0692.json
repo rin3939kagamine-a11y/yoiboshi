@@ -1,0 +1,71 @@
+{
+  "version": "0.69.2.0",
+  "count": 3,
+  "notes": [
+    "Original approval superseded by user correction 2026-11-12: only purple check, glasses woman and ash-brown navy fleece are admitted.",
+    "No art generation or retouching. Original PNG bytes are preserved and converted into lossless WebP displays, with upper-body and face crops only.",
+    "Source blobs, PNG dimensions (all 1024x1536 RGBA), and sha256 have been verified.",
+    "Excluded from implementation: platinum green robe (gallery 02; clothing-color redesign pending), DROOPY T-shirt (gallery 37; lettering removal version pending), long dark hair white shirt (gallery 20; cropped right hand pending).",
+    "New heroine IDs are distinct from the preexisting 153 persons; existing story/unit/dialogue/currency/gacha rates/save keys are unchanged."
+  ],
+  "entries": [
+    {
+      "number": 1,
+      "requested_id": "sumika",
+      "id": "sumika",
+      "name": "紫藤 すみか",
+      "age": 22,
+      "occupation": "古着店「夜想」のコーディネーター",
+      "source_url": "https://drive.google.com/file/d/1dKPQne9ACPae4ua2jtRN2GveP-D5EYxW/view",
+      "source_context": "PR #28 / docs/new_character_ideas/2026-11-08_purple_provisional.md (assets/provisional-purple-standee-20261108)",
+      "source_filename": "yoiboshi_provisional_purple_noears_nomask_smallhead_1024x1536.png",
+      "sha256": "ad9482bcf6bbe27cd9e1d903e60f13215d77233d2350f525797792df1a44ce4d",
+      "original_in_branch": "assets/ART_V2/source_originals/3_approved_20261112/01_purple_check_noears_nomask.png",
+      "unit_id": "sumika_work",
+      "display_art": {
+        "full_body": "assets/ART_V2/full_body/sumika.webp",
+        "upper_body": "assets/ART_V2/upper_body/sumika.webp",
+        "face_icons": "assets/ART_V2/face_icons/sumika.webp"
+      }
+    },
+    {
+      "number": 2,
+      "requested_id": "reika",
+      "id": "reika",
+      "name": "瀬戸 玲花",
+      "age": 29,
+      "occupation": "市立資料館の地域資料担当",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/dda5194/assets/ART_V2/full_body/megane_woman_20261112.png",
+      "source_filename": "megane_woman_20261112.png",
+      "source_git_blob": "9507a8facc4bbc60401a6395d4d5057283ced6ba",
+      "sha256": "044de9af6d08cb7f6462a23be8a8c1fd9cbbe83fdba7bb1d43111cce2ce1974b",
+      "original_in_branch": "assets/ART_V2/source_originals/3_approved_20261112/02_megane_woman_20261112.png",
+      "unit_id": "reika_work",
+      "display_art": {
+        "full_body": "assets/ART_V2/full_body/reika.webp",
+        "upper_body": "assets/ART_V2/upper_body/reika.webp",
+        "face_icons": "assets/ART_V2/face_icons/reika.webp"
+      }
+    },
+    {
+      "number": 3,
+      "requested_id": "hono",
+      "id": "hono",
+      "name": "小日向 ほの",
+      "age": 23,
+      "occupation": "駅前アウトドア用品店の販売員",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/assets/standee-ash-brown-navy-fleece-20261112/assets/character_candidates/2026-11-12_ash_brown_navy_fleece/ash_brown_navy_fleece_full_body.png",
+      "source_branch": "assets/standee-ash-brown-navy-fleece-20261112",
+      "source_filename": "ash_brown_navy_fleece_full_body.png",
+      "source_git_blob": "dd3ee70498d840a3f6fac79ac87dfd9a9f8495a2",
+      "sha256": "4f9caa3856fda93c29d32ea7048aeb895e76eefbd1e1f93c552637ab923bb86b",
+      "original_in_branch": "assets/ART_V2/source_originals/3_approved_20261112/03_ash_brown_navy_fleece.png",
+      "unit_id": "hono_work",
+      "display_art": {
+        "full_body": "assets/ART_V2/full_body/hono.webp",
+        "upper_body": "assets/ART_V2/upper_body/hono.webp",
+        "face_icons": "assets/ART_V2/face_icons/hono.webp"
+      }
+    }
+  ]
+}
