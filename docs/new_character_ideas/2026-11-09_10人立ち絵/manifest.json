@@ -1,0 +1,207 @@
+{
+  "created": "2026-11-09",
+  "purpose": "10 independent standee PNG assets; 2026-11-11 uploaded PNG exact-byte hashes staged; pending binary transfer",
+  "status": "png_10_of_10_registered_qa_pending",
+  "source": "10 user-uploaded 1024x1536 RGBA PNGs in conversation on 2026-11-11; old ZIP not retrieved",
+  "items": [
+    {
+      "number": 1,
+      "reference_photo": "IMG_2494.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/01_black_sweat_peace.png",
+      "expected_sha256": "b9c551c2b07f53a25ddf9d247b4c73fd21a8ce0456d62727e29c5fe875714b44",
+      "bytes": 1040819,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "708188f5c38c672c67c1e44eeedf6eaa9d611e5c8eb3ca4d294754faf03db532",
+      "previous_manifest_bytes": 1410797,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_03-1.png",
+      "github_blob_sha": "e2e4d668c10105caf336f7c8365e5b0a8257bb41",
+      "github_readback_verified": false
+    },
+    {
+      "number": 2,
+      "reference_photo": "IMG_4853.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/02_droopy_tee_smile.png",
+      "expected_sha256": "1feaa133384cdd9fb9bc0011c8ee2073adb978c9b7612549e2bd95876d9f60b4",
+      "bytes": 1092284,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "d2e5abf1abc1fb9453d6ea09f8114c52c49ce964be78ad9f3f721c3757208999",
+      "previous_manifest_bytes": 1687893,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_03-2.png",
+      "github_blob_sha": "a93d72dcf91725eba98167cdf564f0fd943ad184",
+      "github_readback_verified": false
+    },
+    {
+      "number": 3,
+      "reference_photo": "IMG_5052.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png",
+      "expected_sha256": "41b8aeb495e312b53b95e3a643d2f69525b0b81543c4ab86d359971906df0207",
+      "bytes": 896462,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "ed116a29a1129ee41c9ece36bbe320e2a11b155b74b66c5f672e1944b1736d0c",
+      "previous_manifest_bytes": 1427723,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_04-3.png",
+      "github_blob_sha": "4e01afca43b7af840ecb4bf8b557f1850f6d1e1d",
+      "github_readback_verified": false
+    },
+    {
+      "number": 4,
+      "reference_photo": "IMG_5283.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "expected_sha256": "f13ab0dbe26cdec5efa97fdf39478f29fe3e59de4eb99cc2c33843e6f3acf39f",
+      "bytes": 1038952,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "9ff375e50f7de6df543b2a0e246571e63a5109059e00afe8a987e18f4baf8152",
+      "previous_manifest_bytes": 1521514,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_06-4.png",
+      "github_blob_sha": "1987348e96218fca2298fa3e0dfff38701a7da41",
+      "github_readback_verified": false
+    },
+    {
+      "number": 5,
+      "reference_photo": "IMG_5324.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "expected_sha256": "ce3c73b2e465348ea465b78eded434c9a962b8ad7f820938610bfa790cce055f",
+      "bytes": 776335,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "56d655684e9b239b778d0738ab4be24bcfcb18a643330c8c11910b3ecfcc5b7a",
+      "previous_manifest_bytes": 1306826,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_07-5.png",
+      "github_blob_sha": "bcb4e952c86b60c530ef8109beb75f33eff93c78",
+      "github_readback_verified": false
+    },
+    {
+      "number": 6,
+      "reference_photo": "IMG_7184.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png",
+      "expected_sha256": "0055abcbdc46cc3fec058c8cd653edc783b551a9717443cb01c7569747eaf755",
+      "bytes": 1117785,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "f53e3960dbd77dd6ddda2601967c16c2158a7ade848789d8bb335ae8cef0e30b",
+      "previous_manifest_bytes": 1745301,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_10-6.png",
+      "github_blob_sha": "8d8c51ba906993aee73f9c31f03fbd92452c6ae2",
+      "github_readback_verified": false
+    },
+    {
+      "number": 7,
+      "reference_photo": "IMG_7951.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png",
+      "expected_sha256": "d2d4aaabfaa93f95e4eda72256fccdfe3173c8be842bc0d929d260eb866227af",
+      "bytes": 1104319,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "8973695f8cb4b57635b6cd97c82d1157e7ac6fc4df1e7130a8b4176b2e467abe",
+      "previous_manifest_bytes": 1578709,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_11-7.png",
+      "github_blob_sha": "6b65c081bffe20aeb16a2814e2710cf127bfde7a",
+      "github_readback_verified": false
+    },
+    {
+      "number": 8,
+      "reference_photo": "IMG_8666.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "expected_sha256": "39c2438bc75f7f68f94e9d5f1314ad320d351be90a34c4a712fa6dfccdfe2fd0",
+      "bytes": 973922,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "e182cb85678f1670c53ce1d2158e265bd469d0a8a369a93eb1902670cc5d1ea0",
+      "previous_manifest_bytes": 1629969,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_12-8.png",
+      "github_blob_sha": "92d9744be5c395387d361574698ed54617655a93",
+      "github_readback_verified": false
+    },
+    {
+      "number": 9,
+      "reference_photo": "IMG_8670.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "expected_sha256": "06a08f33be5eb50ba453ac09cd53546972ca66640ef876dd19a3a1869c78e3d8",
+      "bytes": 1132799,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "0c6e03f7dde279c27deda19e6de52bff516043264b2e7626b7f2babf430d6c60",
+      "previous_manifest_bytes": 1802900,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_13-9.png",
+      "github_blob_sha": "996f3d544cfbc735d778a4909a6d85ed43cc669d",
+      "github_readback_verified": false
+    },
+    {
+      "number": 10,
+      "reference_photo": "IMG_8676.jpeg",
+      "planned_path": "assets/character_candidates/2026-11-09_10_fullbody_standees/10_bunny_hood_blue_frills.png",
+      "expected_sha256": "3eadf34329a9bd169c66fe434d0944b08603ba18f88b90729d24ad0725f0a67a",
+      "bytes": 1422420,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "png_binary_in_git": true,
+      "game_display_verified": false,
+      "previous_manifest_sha256": "4c459a8ff18f0e08671d609c6a3b395a1f5bfff8c65d9b2127983df0d412b8ea",
+      "previous_manifest_bytes": 1880975,
+      "source_uploaded_filename": "ChatGPT 画像 2026年11月11日 12_37_14-10.png",
+      "github_blob_sha": "91c75ce75cd98881125c5cba8a4063554777623b",
+      "github_readback_verified": false
+    }
+  ],
+  "source_uploaded_at": "2026-11-11",
+  "rechecked": "2026-11-11",
+  "github_registration": {
+    "branch": "assets/ten-individual-standees-20261109-pending",
+    "committed_at_date": "2026-11-11",
+    "source": "user-uploaded 10 RGBA PNGs",
+    "integrity": "Git blob sha verified against original uploaded byte stream; post-commit path readback pending",
+    "png_count": 10
+  }
+}
