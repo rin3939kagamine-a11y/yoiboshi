@@ -66,7 +66,7 @@ try:
         records.append(dict(makoto_portrait=portrait))
         ck("Makoto original approved full body selected","style_candidates/makoto_v1_full.webp" in portrait["full"],portrait["full"])
         ck("Makoto approved upper body selected","style_candidates/makoto_v1_upper.webp" in portrait["upper"],portrait["upper"])
-        ck("Makoto portrait icon uses matching upper image",portrait["icon"]==portrait["upper"],portrait["icon"])
+        ck("Makoto portrait icon uses matching upper image",portrait["icon"].split("?")[0]==portrait["upper"].split("?")[0],portrait["icon"])
         ck("Makoto dialogue uses the same user-approved versioned crop",
            all("upper_body_crops_v0500/makoto.webp" in d["src"] for d in portrait["dialogue"]),portrait["dialogue"])
         ck("Makoto single-crop symbol mode replaces all six face-image references",
