@@ -74,6 +74,7 @@ try:
                 if(S.onboarding) S.onboarding.enabled=false;
                 for(const id of NEW_HERO_IDS_V0690)
                     S.owned[id+'_work']={lv:1,aff:0,lb:0,copies:0};
+                rosterCollectionOpen=true;
                 view='roster';render();
                 const cardNames=[...document.querySelectorAll('.roster-vnew-cardname')]
                     .map(node=>node.textContent.trim());
