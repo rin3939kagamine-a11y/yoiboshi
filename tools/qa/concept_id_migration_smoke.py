@@ -74,7 +74,8 @@ try:
                 hasNewRegistry:!!BYID.ena_work&&BYID.ena_work.person==='ena'
             };
         }""")
-        assert check["gallery"] == {"heroes":153,"unique":153,"depth":79}, check
+        ids_v0692=['sumika','reika','hono']
+        assert check["gallery"] == {"heroes":153+len(ids_v0692),"unique":153+len(ids_v0692),"depth":79}, check
         assert check["idempotent"] and check["oldSaveHasLegacy"] and check["oldSaveUnmodified"],check
         assert check["canonicalMapCount"] == 29,check
         assert check["units"]["ena"]["lv"] == 12 and check["units"]["ena"]["aff"] == 42,check
@@ -97,7 +98,7 @@ try:
             riko:data.find(x=>x.id==='riko_work')?.name,
             favorite:favs.has('ena_work')
         })""")
-        assert gallery["count"] == gallery["unique"] == 79,gallery
+        assert gallery["count"] == gallery["unique"] == 79+len(ids_v0692),gallery
         assert gallery["ena"] == "エナ" and "莉子" in gallery["riko"] and gallery["favorite"],gallery
         assert not errors,errors
         print(json.dumps({"status":"PASS","save_migration":check,"sr_gallery":gallery,"js_errors":errors},ensure_ascii=False))
