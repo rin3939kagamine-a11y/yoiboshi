@@ -245,13 +245,13 @@ const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5}); // Existing 19-heroine-only
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
-const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
+const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>heroV0690Visible(u.person)&&!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
 const NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)));
 const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['tsubaki'],erika:['erika'],kaname:['kaname'],kaede:['kaede'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}
 function kanameSRUnlocked(save=S){return !!save?.bondRead?.kaname?.[1]}
-function visibleUnitV026(u,save=S){return !!u&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)&&(!NEW_HERO_IDS_V0500.includes(u.person)||isV0500Revealed(u.person,save))}
+function visibleUnitV026(u,save=S){return !!u&&heroV0690Visible(u.person,save)&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)&&(!NEW_HERO_IDS_V0500.includes(u.person)||isV0500Revealed(u.person,save))}
 function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
 function availableNormalPool(save=S){return (gachaMode==='new19'?NEW19_GACHA_POOL:NORMAL_GACHA_POOL).filter(u=>recruitEligibleUnit(u,save))}
 function pickupActive(group,save=S){const start=save.pickupStartDay?.[group];return !!(DISTRICT_GACHA_IDS[group]&&Number.isSafeInteger(start)&&start>=1&&save.love?.day>=start&&save.love.day<start+PICKUP_DAYS)}
@@ -457,6 +457,7 @@ function extraHero(id){return ROMANCE7[id]||ROMANCE_SHINONOME[id]||ROMANCE_OLDCA
 function romancePlaceLike(place,id){return place.likes[id]??extraHero(id)?.likes[place.id]??'normal'}
 // Story reveal comes before romance access. Owned legacy Nagi stays in the save but is locked until q6.
 function heroineStoryRevealed(id,save=S){
+ if(!heroV0690Visible(id,save))return false;
  if(NEW_HERO_IDS_V027.includes(id))return isV027HeroRevealed(id,save);
  if(NEW_HERO_IDS_V028.includes(id))return isV028HeroRevealed(id,save);
   if(NEW_HERO_IDS_V0420.includes(id))return isV0420Revealed(id,save);
@@ -475,8 +476,8 @@ function heroineStoryRevealed(id,save=S){
  if(id==='kaede')return !!save.kaedeMet;
  return true;
 }
-function heroineVisibleInTalk(id,save=S){return heroineStoryRevealed(id,save)||(id==='nagi'&&heroineOwned(id,save))}
-function romanceHeroAvailable(id){return HERO_IDS.includes(id)&&heroineOwned(id)&&heroineStoryRevealed(id)}
+function heroineVisibleInTalk(id,save=S){return heroV0690Visible(id,save)&&(heroineStoryRevealed(id,save)||(id==='nagi'&&heroineOwned(id,save)))}
+function romanceHeroAvailable(id){return HERO_IDS.includes(id)&&heroV0690Visible(id,S)&&heroineOwned(id)&&heroineStoryRevealed(id)}
 // Daily speech is selected from existing affection. No new save field is required.
 function romanceStageTier(id,aff){return (id==='lilith'||id==='cocoa'||id==='mio'||id==='yume')?(aff<20?'early':aff<40&&id!=='cocoa'?'mid':'late'):'late'}
 function romanceStagePack(l,id){return (ROMANCE_STATION_STAGE_LINES[id]||ROMANCE_LIGHTHOUSE_STAGE_LINES[id]||ROMANCE_STAGE_LINES[id])?.[romanceStageTier(id,l.affection?.[id]||0)]||null}
@@ -937,9 +938,9 @@ function choiceDiaryMarkup(id){
  return `<div class="romance-diary-memory" aria-label="${esc(PEOPLE[id].name)}との思い出"><h3>ふたりの思い出</h3><div class="romance-notebook-list">${sections.join('')}</div></div>`;
 }
 
-function romanceNotebook(){const l=loveState();return `${heading('MEMORIES / DIARY','ヒロイン手帳','一緒に過ごして分かったことを記録しています。好みは訪問後に分かります。')}<div class="romance-notebook"><div class="flex space"><strong>${l.day}日目の記録 · 今日の天気：${ROMANCE_WEATHER_LABELS[l.weather]}</strong><button class="btn outline mini" onclick="change('talk')">交流へ戻る</button></div><section class="card pad"><h3>天気とお誘いの記録</h3><p>${l.weatherHistory.slice(-12).map(h=>esc(h.note||`${h.day}日目：${ROMANCE_WEATHER_LABELS[h.weather]||''}`)).join(' / ')||'まだ記録はありません'}</p><p>${l.inviteHistory.slice(-12).map(h=>`${h.day}日目：${esc(PEOPLE[h.person]?.name||'')} → ${esc(ROMANCE_PLACES.find(p=>p.id===h.place)?.short||'')}（${h.fulfilled?'一緒に行った':'お誘い'}）`).join(' / ')||'まだお誘いはありません'}</p></section>${HERO_IDS.filter(id=>romanceHeroAvailable(id)).map(id=>`<section class="card pad"><h2>${esc(PEOPLE[id].name)}</h2><p>親密度 ${heroAff(id)}/100 · ${esc(heroStage(heroAff(id)))}</p>${choiceDiaryMarkup(id)}<div class="romance-notebook-list">${ROMANCE_PLACES.map(p=>{const n=l.visits[id][p.id]||0;const hint=l.hints[id][p.id];return `<div class="romance-note"><strong>${esc(p.name)}</strong><small>${n?esc(({like:'すごく喜んでいた',normal:'穏やかに楽しんでいた',dislike:'少し苦手そうだった'})[romancePlaceLike(p,id)])+` · 訪問${n}回`:'まだ一緒に行っていない'}</small>${hint?`<p>${esc(hint)}</p>`:''}</div>`}).join('')}</div></section>`).join('')}</div>`}
+function romanceNotebook(){const l=loveState();return `${heading('MEMORIES / DIARY','ヒロイン手帳','一緒に過ごして分かったことを記録しています。好みは訪問後に分かります。')}<div class="romance-notebook"><div class="flex space"><strong>${l.day}日目の記録 · 今日の天気：${ROMANCE_WEATHER_LABELS[l.weather]}</strong><button class="btn outline mini" onclick="change('talk')">交流へ戻る</button></div><section class="card pad"><h3>天気とお誘いの記録</h3><p>${l.weatherHistory.slice(-12).map(h=>esc(h.note||`${h.day}日目：${ROMANCE_WEATHER_LABELS[h.weather]||''}`)).join(' / ')||'まだ記録はありません'}</p><p>${l.inviteHistory.filter(h=>heroV0690Visible(h.person,S)).slice(-12).map(h=>`${h.day}日目：${esc(PEOPLE[h.person]?.name||'')} → ${esc(ROMANCE_PLACES.find(p=>p.id===h.place)?.short||'')}（${h.fulfilled?'一緒に行った':'お誘い'}）`).join(' / ')||'まだお誘いはありません'}</p></section>${HERO_IDS.filter(id=>romanceHeroAvailable(id)).map(id=>`<section class="card pad"><h2>${esc(PEOPLE[id].name)}</h2><p>親密度 ${heroAff(id)}/100 · ${esc(heroStage(heroAff(id)))}</p>${choiceDiaryMarkup(id)}<div class="romance-notebook-list">${ROMANCE_PLACES.map(p=>{const n=l.visits[id][p.id]||0;const hint=l.hints[id][p.id];return `<div class="romance-note"><strong>${esc(p.name)}</strong><small>${n?esc(({like:'すごく喜んでいた',normal:'穏やかに楽しんでいた',dislike:'少し苦手そうだった'})[romancePlaceLike(p,id)])+` · 訪問${n}回`:'まだ一緒に行っていない'}</small>${hint?`<p>${esc(hint)}</p>`:''}</div>`}).join('')}</div></section>`).join('')}</div>`}
 
-function romanceHeroAvailableFromSave(id,save){return HERO_IDS.includes(id)&&heroineOwned(id,save)&&heroineStoryRevealed(id,save)}
+function romanceHeroAvailableFromSave(id,save){return HERO_IDS.includes(id)&&heroineOwned(id,save)&&(HERO_V0690_ID_SET.has(id)||heroineStoryRevealed(id,save))}
 // Ver.0.69.1: convert only the former new-heroine ID and its SR card or bond IDs.
 // User-entered player names remain unchanged. Boss 霞シオン is unaffected.
 function migrateShionHeroToSubaru(raw){
@@ -1282,7 +1283,7 @@ const nav=[['home','⌂','ホーム'],['story','▤','ストーリー'],['city',
 function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.71.1 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
 function heading(en,title,sub){return `<div class="eyebrow">${en}</div><h1 class="page-title">${title}</h1><p class="desc">${sub}</p>`}
 function chars(cards,buttons=true){
- const units=cards.map(id=>unit(id)).filter(Boolean);
+ const units=cards.map(id=>unit(id)).filter(u=>visibleUnitV026(u));
  const compact=onePortraitPerPerson(units).sort((a,b)=>(a.person==='momoka'?0:a.person==='milku'?1:2)-(b.person==='momoka'?0:b.person==='milku'?1:2));
  return `<div class="chargrid">${compact.map(u=>{
  const group=COMPACT_PEOPLE.has(u.person)?units.filter(x=>x.person===u.person):null;
@@ -1612,7 +1613,7 @@ const BOND_STORY_CATALOG=Object.freeze({...BOND_STORIES,...Object.fromEntries(NE
 
 // The name reveal is unlocked by actually reading Shino's second bond story.
 function heroineDisplayName(id,save=S){return id==='shino'&&save.bondRead?.shino?.[1]?'シノ(灯)':PEOPLE[id]?.name||id}
-function isHero(id){return HERO_IDS.includes(id)}
+function isHero(id){return HERO_IDS.includes(id)&&heroV0690Visible(id,S)}
 function heroAff(id){return Math.max(loveState()?.affection?.[id]||0,...UNITS.filter(u=>u.person===id&&data(u.id)&&(!CHAPTER2_LATE_HERO_IDS.includes(id)||!isChapter2ReservedTrial(u))).map(u=>data(u.id).aff))}
 function setHeroAff(id,value){const n=Math.max(0,Math.min(100,value));if(extraHero(id))loveState().affection[id]=n;for(const u of UNITS.filter(u=>u.person===id&&data(u.id)&&(!CHAPTER2_LATE_HERO_IDS.includes(id)||!isChapter2ReservedTrial(u))))data(u.id).aff=n}
 function bondSeen(id,i){return !!S.bondRead?.[id]?.[i]}
@@ -2187,19 +2188,19 @@ function storyMenu(){
  }
  return `<div class="os-page os-story" data-level="${level}"><div class="os-side">${heading('STORY / LIBRARY','ストーリー','')}${nextCard}${openingCard}</div><div class="os-tree">${panel}</div></div>`;
 }
-let lobbySelected=(typeof S.homeFavorite==='string'&&PEOPLE[S.homeFavorite]&&(HERO_IDS.includes(S.homeFavorite)||UNITS.some(u=>u.person===S.homeFavorite&&data(u.id))))?S.homeFavorite:'momoka',lobbyLine=0;
+let lobbySelected=(typeof S.homeFavorite==='string'&&PEOPLE[S.homeFavorite]&&heroV0690Visible(S.homeFavorite,S)&&(HERO_IDS.includes(S.homeFavorite)||UNITS.some(u=>u.person===S.homeFavorite&&data(u.id))))?S.homeFavorite:'momoka',lobbyLine=0;
 let candidatePreviewPose='standing';
 let rosterFilter='all', rosterRoleFilter='all', rosterHighlight='';
 // 編成画面だけの選択状態。保存データとは分離して管理する。
 let rosterEditSlot=0, rosterRarityFilter='all', rosterPickerOpen=false, rosterCollectionOpen=false; // v0.34.69.x: 交代は押したときだけ一覧を開く
-function selectRosterSlot(index){if(!Number.isInteger(index)||index<0||index>3)return;rosterEditSlot=index;rosterPickerOpen=true;render();}
+function selectRosterSlot(index){if(hiddenV0690Party())return toast('編成の保存内容を保持するため公開再開後に変更できます');if(!Number.isInteger(index)||index<0||index>3)return;rosterEditSlot=index;rosterPickerOpen=true;render();}
 function closeRosterPicker(){rosterPickerOpen=false;render();}
 function toggleRosterCollection(){rosterCollectionOpen=!rosterCollectionOpen;render();}
 function changeRosterRarityFilter(value){if(!['all','SR','SSR','UR'].includes(value))return;rosterRarityFilter=value;render();}
-function assignRosterOwnedUnit(id){if(!data(id)||!unit(id))return toast('未所持のユニットは編成できません');rosterPickerOpen=false;return setSlot(rosterEditSlot,id);}
+function assignRosterOwnedUnit(id){if(hiddenV0690Party())return toast('元の一時非表示の編成を保持するため公開再開後に変更できます');if(!data(id)||!unit(id))return toast('未所持のユニットは編成できません');rosterPickerOpen=false;return setSlot(rosterEditSlot,id);}
 
 const isConcept=personId=>personId.startsWith('concept')&&!DISTRICT_HERO_IDS.includes(personId);
-const homeMembers=()=>Array.from(new Set([...HERO_IDS.filter(id=>romanceHeroAvailable(id)),...UNITS.filter(u=>data(u.id)).map(u=>u.person)]));
+const homeMembers=()=>Array.from(new Set([...HERO_IDS.filter(id=>romanceHeroAvailable(id)),...UNITS.filter(u=>data(u.id)&&visibleUnitV026(u)).map(u=>u.person)]));
 function lobbyCycle(offset){const members=homeMembers();let current=members.indexOf(lobbySelected);lobbySwitch(members[(current+offset+members.length)%members.length]||members[0]||'momoka')}
 function homeFromRoster(p){if(!homeMembers().includes(p))return; lobbySwitch(p);change('home')}
 function changeRosterFilter(filter){if(!['all','owned','unowned','visual','trainable'].includes(filter))return;rosterFilter=filter;render();}
@@ -2217,7 +2218,10 @@ function poseSelector(personId){
 
 function highlightUnit(id){if(!BYID[id])return;rosterHighlight=id;render();}
 
-function lobbySwitch(p){if(!PEOPLE[p]||!homeMembers().includes(p))return;lobbySelected=p;lobbyLine=0;S.homeFavorite=p;S.homeUnitId=homeUnit(p)?.id||null;persist();if(view==='home')render()}
+function lobbySwitch(p){if(!PEOPLE[p]||!homeMembers().includes(p))return;lobbySelected=p;lobbyLine=0;
+ // Retain a hidden heroine's saved home choice while temporarily displaying others.
+ if(heroV0690Visible(S.homeFavorite,S)){S.homeFavorite=p;S.homeUnitId=homeUnit(p)?.id||null;persist();}
+ if(view==='home')render()}
 // v0.68.6.0: ホームでキャラをタッチしたときの専用セリフ（頭をなでる／つつく／つつきすぎ）
 let homeTouchLine=null,homeTouchLast={},homeTouchStage=0;
 const HOME_TOUCH_LINES=Object.freeze({
@@ -2352,12 +2356,12 @@ function homeTouchReact(zone){
 function lobbyTalk(){homeTouchLine=null;const lines=isHero(lobbySelected)?homeWords(lobbySelected):PEOPLE[lobbySelected].lines;lobbyLine=(lobbyLine+1)%lines.length;if(view==='home')render()}
 let homePickerOpen=false;
 function toggleHomePicker(){homePickerOpen=!homePickerOpen;if(view==='home')render()}
-function openHomeCharacterDetail(){const u=UNITS.find(u=>u.person===lobbySelected&&data(u.id));if(u){S.selected=u.id;change('unit')}else change('roster')}
+function openHomeCharacterDetail(){const u=UNITS.find(u=>u.person===lobbySelected&&data(u.id)&&visibleUnitV026(u));if(u){S.selected=u.id;change('unit')}else change('roster')}
 // Home UI read-only progression summary; does not write to the save.
 function homeProgressSummary(){
  const completed=QUESTS.filter(q=>S.quests[q.id]?.complete).length;
  const next=QUESTS.find(q=>!S.quests[q.id]?.complete&&questSheetAction(q).kind!=='locked')||null;
- const owned=UNITS.filter(u=>data(u.id));
+ const owned=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));
  return {completed,total:QUESTS.length,next,owned:owned.length,trainable:owned.filter(canTrainUnit).length};
 }
 function homeGoToNextQuest(id){
@@ -2395,7 +2399,7 @@ function homeBannerTouchEnd(event){if(homeTouchX===null)return;const distance=(e
 function homeNewsMarkup(){return HOME_NEWS.map(n=>`<div class="mock-news-line"><span class="mock-news-tag ${n.kind==='メンテナンス'?'maintenance':n.kind==='イベント'?'event':''}">${esc(n.kind)}</span><time datetime="${n.date.replace(/\//g,'-')}">${n.date.slice(5)}</time><span class="mock-news-title">${esc(n.title)}</span></div>`).join('')}
 function home(){
  const members=homeMembers();
- if(!members.includes(lobbySelected)){lobbySelected=members.includes(S.homeFavorite)?S.homeFavorite:(members[0]||'momoka');lobbyLine=0;}
+ if(!members.includes(lobbySelected)){lobbySelected=members.includes(S.homeFavorite)?S.homeFavorite:(members.includes('momoka')?'momoka':(members[0]||'momoka'));lobbyLine=0;}
  const who=PEOPLE[lobbySelected],temporary=isConcept(lobbySelected);
  const featured=homeUnit(lobbySelected),fullScene=!!featured&&unitHasScene(featured),homeArt=featured?unitArt(featured,'scene'):characterPortrait(lobbySelected);
  const progress=homeProgressSummary(),next=progress.next;
@@ -2633,12 +2637,19 @@ function startAutoRepeat(id){
 function progressQuest(){const id=S.currentQuest;if(!id)return;startInvestigation(id)}
 // Ver.0.26.1.0 — team composition rules. Never normalize saved party data on load.
 const PARTY_ROLE_LIMIT=2;
-function partyRoleCounts(ids=S.party){
+/* Temporary display/battle overlay; do NOT assign to S.party. */
+function hiddenV0690Party(save=S){
+ return Array.isArray(save?.party)&&save.party.some(id=>BYID[id]&&!heroV0690Visible(BYID[id].person,save));
+}
+function visibleParty(save=S){
+ return hiddenV0690Party(save)?fresh().party.slice():(Array.isArray(save?.party)?save.party:[]);
+}
+function partyRoleCounts(ids=visibleParty()){
  const counts=Object.fromEntries(Object.keys(ROLES).map(role=>[role,0]));
  for(const id of ids){const role=unit(id)?.role;if(Object.prototype.hasOwnProperty.call(counts,role))counts[role]++;}
  return counts;
 }
-function teamRuleError(ids=S.party){
+function teamRuleError(ids=visibleParty()){
  if(!Array.isArray(ids)||ids.length!==4||ids.some(id=>!unit(id)||!data(id)))return '所持している4人のユニットを編成してください。';
  const persons=new Set(),roles=partyRoleCounts(ids);
  for(const id of ids){const personId=unit(id).person;if(persons.has(personId))return '同じヒロインは1人までです。重複している編成枠を変更してください。';persons.add(personId);}
@@ -2647,7 +2658,7 @@ function teamRuleError(ids=S.party){
 }
 function slotRuleReason(slot,id){
  if(!Number.isInteger(slot)||slot<0||slot>=4||!data(id)||!unit(id))return '所持していないユニットです';
- const chosen=unit(id),others=S.party.filter((_,i)=>i!==slot).map(unit).filter(Boolean);
+ const chosen=unit(id),others=visibleParty().filter((_,i)=>i!==slot).map(unit).filter(Boolean);
  if(others.some(u=>u.person===chosen.person))return '同じヒロインが編成中';
  if(others.filter(u=>u.role===chosen.role).length>=PARTY_ROLE_LIMIT)return 'このロールは2人まで';
  return '';
@@ -2662,22 +2673,23 @@ function requireValidParty(){
  dialog={title:'出撃チームの見直しが必要です',message:error,html:'<button type="button" class="btn primary full" onclick="openTeamFix()">編成画面へ移動する →</button>'};render();return false;
 }
 function roleCountMarkup(){const counts=partyRoleCounts();return `<div class="v0253-role-counts" aria-label="編成中のロール人数">${Object.keys(ROLES).map(role=>`<span class="${counts[role]>PARTY_ROLE_LIMIT?'over':''}">${ROLES[role].name} ${counts[role]}/${PARTY_ROLE_LIMIT}</span>`).join('')}</div>`}
-function teamPower(){return S.party.reduce((sum,id)=>{if(!data(id))return sum;const st=unitPower(id);return sum+Math.round(st.hp/12+st.atk*8+st.def*12)},0)}
+function teamPower(){return visibleParty().reduce((sum,id)=>{if(!data(id))return sum;const st=unitPower(id);return sum+Math.round(st.hp/12+st.atk*8+st.def*12)},0)}
 function unitPower(id){const u=unit(id),d=data(id),r=ROLES[u.role];let stats={hp:r.hp+Math.round((d.lv-1)*r.hp*.055),atk:r.atk+(d.lv-1)*2,def:r.def+Math.floor((d.lv-1)/2),rate:r.rate};for(let i=1;i<=d.lb;i++){if(u.role==='attacker')stats.atk+=2;else if(u.role==='tank'){stats.hp+=12;stats.def+=1}else if(u.role==='healer'){stats.hp+=6;stats.atk+=1}else{stats.hp+=8;stats.atk+=1}}return stats}
 function skillRank(id){return Math.max(0,(data(id)?.lb||0)-3)}
 function roster(){
+ const party=visibleParty();
  const owned=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));
  const roleChoices=[['all','すべて'],['attacker','アタッカー'],['tank','タンク'],['healer','ヒーラー'],['support','サポーター']];
  const rarityChoices=['all','R','SR','SSR','UR'];
  const rarityOrder={UR:0,SSR:1,SR:2,R:3};
  const shown=owned.filter(u=>(rosterRoleFilter==='all'||u.role===rosterRoleFilter)&&(rosterRarityFilter==='all'||u.rarity===rosterRarityFilter))
-   .sort((a,b)=>{const ai=S.party.includes(a.id)?0:1,bi=S.party.includes(b.id)?0:1;return ai-bi || (rarityOrder[a.rarity]??9)-(rarityOrder[b.rarity]??9) || (data(b.id)?.lv||1)-(data(a.id)?.lv||1) || person(a).name.localeCompare(person(b).name,'ja');});
+   .sort((a,b)=>{const ai=party.includes(a.id)?0:1,bi=party.includes(b.id)?0:1;return ai-bi || (rarityOrder[a.rarity]??9)-(rarityOrder[b.rarity]??9) || (data(b.id)?.lv||1)-(data(a.id)?.lv||1) || person(a).name.localeCompare(person(b).name,'ja');});
  const totalPeople=new Set(owned.map(u=>u.person)).size;
  const editing=Math.max(0,Math.min(3,rosterEditSlot));
  const roleCount=roleCountMarkup();
  const warning=teamRuleError();
  const slots=[0,1,2,3].map(i=>{
-   const id=S.party[i],u=unit(id),d=id?data(id):null;
+   const id=party[i],u=unit(id),d=id?data(id):null;
    const name=u?person(u).name:'空き枠';
    return `<button type="button" class="roster-vnew-slot ${rosterPickerOpen&&editing===i?'is-editing':''}" onclick="selectRosterSlot(${i})" aria-pressed="${editing===i}" aria-label="${i+1}枠目 ${esc(name)} ${u?u.rarity:'空き'} を選択">
        <span class="roster-vnew-slotnum">SLOT ${i+1} ${rosterPickerOpen&&editing===i?'<b>交代中</b>':''}</span>
@@ -2689,7 +2701,7 @@ function roster(){
      </button>`;
  }).join('');
  const cards=shown.map(u=>{
-   const d=data(u.id),reason=slotRuleReason(editing,u.id),inParty=S.party.includes(u.id),inCurrent=S.party[editing]===u.id;
+   const d=data(u.id),reason=slotRuleReason(editing,u.id),inParty=party.includes(u.id),inCurrent=party[editing]===u.id;
    return `<article class="roster-vnew-unit ${inCurrent?'is-current':''}" data-unit-id="${u.id}" data-person-id="${u.person}">
      <button type="button" class="roster-vnew-pick" onclick="assignRosterOwnedUnit('${u.id}')" ${reason?'disabled':''} title="${esc(reason||'選択中の編成枠へ入れる')}" aria-label="${esc(person(u).name)} ${u.rarity} Lv.${d.lv} ${reason?'選択不可 '+reason:'を編成枠'+(editing+1)+'へ'}">
        <span class="roster-vnew-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="" loading="lazy"></span>
@@ -2704,7 +2716,7 @@ function roster(){
  }).join('');
  const filters=`<div class="roster-vnew-filters"><div class="roster-vnew-filterrow" role="group" aria-label="ロールで絞り込み">${roleChoices.map(([id,label])=>`<button type="button" class="roster-vnew-filter ${rosterRoleFilter===id?'active':''}" aria-pressed="${rosterRoleFilter===id}" onclick="changeRosterRoleFilter('${id}')">${label}</button>`).join('')}</div>
      <div class="roster-vnew-filterrow" role="group" aria-label="レアリティで絞り込み">${rarityChoices.map(id=>`<button type="button" class="roster-vnew-filter ${rosterRarityFilter===id?'active':''}" aria-pressed="${rosterRarityFilter===id}" onclick="changeRosterRarityFilter('${id}')">${id==='all'?'全レア':id}</button>`).join('')}</div></div>`;
- const browse=shown.map(u=>{const d=data(u.id);return `<article class="roster-vnew-unit roster-browse-unit"><button type="button" class="roster-vnew-pick" onclick="openUnit('${u.id}')" aria-label="${esc(person(u).name)} ${u.rarity} の詳細"><span class="roster-vnew-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="" loading="lazy"></span><span class="roster-vnew-cardbody"><strong class="roster-vnew-cardname">${esc(person(u).name)}</strong><span class="roster-vnew-subtitle">${esc(u.title)}</span><span class="roster-vnew-info"><b class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</b><span>Lv.${d.lv}</span><span>${ROLES[u.role].name}</span></span>${S.party.includes(u.id)?'<span class="roster-vnew-action">出撃チームに編成中</span>':''}</span></button><div class="roster-vnew-cardtools"><button type="button" class="roster-vnew-detail" onclick="openUnit('${u.id}')">詳細を見る</button><button type="button" class="roster-vnew-detail" onclick="openTrainingFor('${u.id}')">育成</button></div></article>`;}).join('');
+ const browse=shown.map(u=>{const d=data(u.id);return `<article class="roster-vnew-unit roster-browse-unit"><button type="button" class="roster-vnew-pick" onclick="openUnit('${u.id}')" aria-label="${esc(person(u).name)} ${u.rarity} の詳細"><span class="roster-vnew-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="" loading="lazy"></span><span class="roster-vnew-cardbody"><strong class="roster-vnew-cardname">${esc(person(u).name)}</strong><span class="roster-vnew-subtitle">${esc(u.title)}</span><span class="roster-vnew-info"><b class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</b><span>Lv.${d.lv}</span><span>${ROLES[u.role].name}</span></span>${party.includes(u.id)?'<span class="roster-vnew-action">出撃チームに編成中</span>':''}</span></button><div class="roster-vnew-cardtools"><button type="button" class="roster-vnew-detail" onclick="openUnit('${u.id}')">詳細を見る</button><button type="button" class="roster-vnew-detail" onclick="openTrainingFor('${u.id}')">育成</button></div></article>`;}).join('');
  const picker=rosterPickerOpen?`<div class="roster-picker-backdrop" onclick="if(event.target===this)closeRosterPicker()"><section class="roster-picker card" role="dialog" aria-modal="true" aria-label="SLOT ${editing+1}に入れる仲間を選ぶ">
      <div class="roster-picker-head"><div><small>SLOT ${editing+1}</small><h3>入れる仲間を選ぶ</h3></div><button type="button" class="btn outline roster-picker-close" onclick="closeRosterPicker()">閉じる ✕</button></div>
      ${filters}
@@ -2714,7 +2726,7 @@ function roster(){
  return `${heading('FORMATION / OWNED UNITS','出撃編成','枠の「交代する」を押すと、入れる仲間を選べます。')}
    <nav class="roster-vnew-links" aria-label="編成の関連メニュー"><button type="button" class="btn primary" onclick="change('training')">✦ 仲間の育成へ ›</button></nav>
    <section class="roster-vnew-team card" id="v0241-team" aria-label="出撃チーム">
-     <div class="roster-vnew-head"><div><small>YOUR TEAM</small><h3>出撃チーム <span>${S.party.filter(id=>!!data(id)).length} / 4</span></h3></div><strong>編成戦力 ${teamPower().toLocaleString()}</strong></div>
+     <div class="roster-vnew-head"><div><small>YOUR TEAM</small><h3>出撃チーム <span>${party.filter(id=>!!data(id)).length} / 4</span></h3></div><strong>編成戦力 ${teamPower().toLocaleString()}</strong></div>
      <p class="roster-vnew-rules">同じヒロインは1人まで・同じロールは2人まで</p>
      ${roleCount}
      ${warning?`<p class="v0253-team-warning" role="status">${esc(warning)}<br>枠の「交代する」から編成を変更してください。</p>`:''}
@@ -2738,7 +2750,7 @@ function chooseSlot(i){
  return `<button type="button" class="slot-choice" ${reason?'disabled':''} title="${esc(reason)}" onclick="setSlot(${i},'${u.id}')"><img src="${characterPortrait(u.person)}" alt=""><strong>${person(u).name}</strong><span>${ROLES[u.role].name}${isConcept(u.person)?'（仮）':''}</span>${reason?`<small>${esc(reason)}</small>`:''}</button>`;
  }).join('')}</div><button class="btn outline full" onclick="setSlot(${i},'')">この枠を空ける</button>`};render();
 }
-function setSlot(i,id){if(!Number.isInteger(i)||i<0||i>=4)return;if(id){const reason=slotRuleReason(i,id);if(reason)return toast(reason);}S.party[i]=id;S.party=S.party.filter(Boolean);persist();dialog=null;render()}
+function setSlot(i,id){if(hiddenV0690Party())return toast('一時非表示中の編成を保存したままにするため公開再開後に変更できます');if(!Number.isInteger(i)||i<0||i>=4)return;if(id){const reason=slotRuleReason(i,id);if(reason)return toast(reason);}S.party[i]=id;S.party=S.party.filter(Boolean);persist();dialog=null;render()}
 function openUnit(id){if(!visibleUnitV026(unit(id)))return;S.selected=id;persist();view='unit';render();window.scrollTo(0,0)}
 // Dedicated training menu. These filters and selection are UI-only; no save fields are added.
 let trainingSelectedUnit='',trainingRoleFilter='all',trainingRarityFilter='all';
@@ -2798,7 +2810,7 @@ function trainingPage(){
  </section>`;
 }
 function unitDetail(){
- const u=unit(S.selected)||UNITS[0],d=data(u.id),p=person(u),s=d?unitPower(u.id):ROLES[u.role],rank=d?skillRank(u.id):0;
+ const u=(visibleUnitV026(unit(S.selected))?unit(S.selected):UNITS.find(x=>visibleUnitV026(x)&&data(x.id)))||UNITS[0],d=data(u.id),p=person(u),s=d?unitPower(u.id):ROLES[u.role],rank=d?skillRank(u.id):0;
  const temp=isConcept(u.person);
  const status=d?`所持中 · Lv.${d.lv}`:'未所持';
  const lv=d?.lv||1, nextCost=lv*ECONOMY.LEVEL_COST_PER_LV;
@@ -2895,7 +2907,7 @@ function candidateShowcase(){
  const candidateLooks=['茶色ニット','ピースサイン','白チャイナ服','ベレー帽とコート','レースのメイド服','青と金の衣装','紫色の毛先','オフィススタイル','イルミネーション','カメラと緑の衣装'];
  return `<section class="visual-showcase" aria-label="ビジュアル候補${VISUAL_CANDIDATES.length}人">
  <div class="section"><h3>ビジュアル候補${VISUAL_CANDIDATES.length}人 ／ イラスト先行枠</h3></div>
- <p class="notice">登録キャラクターのうち、東雲商店街4人・旧喫茶街4人・東雲駅前6人を除いたイラスト先行枠です。候補29は背景透過済みです。未設定の候補は通常ガチャの対象外で、無料で試遊加入できます。恋愛対象は全${HERO_IDS.length}人です。</p>
+ <p class="notice">登録キャラクターのうち、東雲商店街4人・旧喫茶街4人・東雲駅前6人を除いたイラスト先行枠です。候補29は背景透過済みです。未設定の候補は通常ガチャの対象外で、無料で試遊加入できます。恋愛対象は全${HERO_IDS.filter(id=>heroV0690Visible(id,S)).length}人です。</p>
  <div class="new-candidate-pose-switch" role="group" aria-label="立ち絵ポーズ切り替え"><button type="button" class="btn ${candidatePreviewPose==='standing'?'primary':'outline'}" onclick="candidatePoseChange('standing')">棒立ち</button><button type="button" class="btn ${candidatePreviewPose==='dynamic'?'primary':'outline'}" onclick="candidatePoseChange('dynamic')">動きあり</button><small>動きありは候補11〜27のうち対応画像がある人物のみです。今回の候補28〜36は採用静止画です</small></div>
  <div class="visual-cards">${VISUAL_CANDIDATES.map((u,i)=>{const p=person(u),has=!!data(u.id),newLabel=NEW_VISUAL_LABELS[u.person],desc=newLabel||candidateLooks[i]||'外見仮登録',poseArt=newLabel?candidateDisplayArt(u.person):characterPortrait(u.person);return `<article class="visual-card"><img src="${poseArt}" alt="${esc(p.name)}の採用キャラクター画像" loading="${newLabel?'eager':'lazy'}"><div class="visual-info"><b>${esc(p.name)}</b><span>${esc(desc)}</span><small>設定・能力は試遊用の仮登録</small><button type="button" class="btn mini full" ${has?'disabled':''} onclick="previewRecruit('${u.id}')">${has?'試遊加入済み':'無料で試遊加入'}</button><button type="button" class="btn mini full" onclick="openUnit('${u.id}')">立ち絵・詳細を見る</button></div></article>`}).join('')}</div></section>`;
 }
@@ -2965,7 +2977,7 @@ function closeRecruitReveal(){const root=$('recruit-reveal');if(root)root.remove
 function heroTalkPage(u){
  if(!romanceHeroAvailable(u.person))u={person:HERO_IDS.find(x=>romanceHeroAvailable(x))||'momoka'};
  const id=u.person,p=PEOPLE[id],aff=heroAff(id),stage=heroStage(aff),l=loveState();
- const owned=UNITS.filter(x=>data(x.id)),members=onePortraitPerPerson(owned);
+ const owned=UNITS.filter(x=>data(x.id)&&visibleUnitV026(x)),members=onePortraitPerPerson(owned);
  const nextEpisodes=[0,1,2,3,4].map(i=>{
   const req=(i+1)*20,entry=BOND_STORY_CATALOG[`bond_${id}_${i}`],available=bondAvailable(id,i),read=bondSeen(id,i),missing=bondMemoryHint(id,i);
   if(!entry)return `<div class="v676-episode romance-episode"><span class="v676-episode-no">0${i+1}</span><div><strong>第${i+1}話 · 制作予定</strong><small>親密度${req}以上 · 次回追加</small></div><button disabled>準備中</button></div>`;
@@ -2993,7 +3005,7 @@ function chooseHeroChat(){return toast('おでかけの帰り道で返事を選�
 
 function talk(){
  const selectedHero=unit(S.selected);if(loveState()?.activeHero&&isHero(loveState().activeHero))return heroTalkPage({person:loveState().activeHero});if(selectedHero&&isHero(selectedHero.person)&&data(selectedHero.id))return heroTalkPage(selectedHero);
- const units=UNITS.filter(u=>data(u.id));const u=unit(S.selected)&&data(S.selected)?unit(S.selected):units[0],d=data(u.id),p=person(u),temp=isConcept(u.person);const people=onePortraitPerPerson(units), variants=units.filter(x=>x.person===u.person);
+ const units=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));const u=visibleUnitV026(unit(S.selected))&&data(S.selected)?unit(S.selected):units[0],d=data(u.id),p=person(u),temp=isConcept(u.person);const people=onePortraitPerPerson(units), variants=units.filter(x=>x.person===u.person);
  const stories=['出会いの日','少しだけ近い距離','相談室の帰り道','ふたりの大切な約束'];
  return `${heading('BONDS / DAILY LIFE','交流・日常','お気に入りの仲間と会話して、親密度を深めましょう。')}
  <div class="v676-talk-shell">
@@ -3075,7 +3087,7 @@ function archive(){
  ${p?`<section class="v680-archive-feature card"><div class="v680-archive-picture"><img src="${characterArt(personId)}" alt="${esc(p.name)}の立ち絵"></div><div class="v680-archive-copy"><span class="v675-eyebrow">COLLECTION / ${isConcept(personId)?'PROVISIONAL':'PROFILE'}</span><h2>${esc(p.name)}</h2><p>${esc(p.intro)}</p>${tomoshibiMarkup(personId)}<p class="notice">${esc(p.note)}</p><h3>所持バージョン</h3><div class="v680-archive-versions">${variants.map(u=>`<button class="btn" onclick="openUnit('${u.id}')">${esc(u.rarity)} · ${esc(u.title)}（Lv.${data(u.id).lv}）</button>`).join('')}</div><h3>セリフ・会話テキスト</h3><div class="v680-quote-list">${(p.lines||[]).map(line=>`<blockquote>「${esc(line)}」</blockquote>`).join('')}</div>${isConcept(personId)?'<small>仮設定の人物です。未決定のプロフィールは創作していません。</small>':''}</div></section>`:'<div class="card pad">まだ所持キャラクターがいません。</div>'}
  <div class="v680-archive-grid">${people.map(id=>{const x=PEOPLE[id];return `<button class="v680-archive-tile ${id===personId?'selected':''}" onclick="archiveSelect('${id}')" aria-pressed="${id===personId}"><img src="${characterIcon(id)}" alt=""><span>${esc(x.name)}</span><small>${owned.filter(u=>u.person===id).length}バージョン</small></button>`}).join('')}</div>`;
 }
-function archiveSelect(id){if(NEW_HERO_IDS_V027.includes(id)&&!isV027HeroRevealed(id))return;if(!UNITS.some(u=>u.person===id&&data(u.id)))return;archiveSelected=id;render()}
+function archiveSelect(id){if(!heroV0690Visible(id,S))return;if(NEW_HERO_IDS_V027.includes(id)&&!isV027HeroRevealed(id))return;if(!UNITS.some(u=>u.person===id&&data(u.id)))return;archiveSelected=id;render()}
 const ACHIEVEMENTS=[
  {id:'draw_1',name:'最初の出会い',detail:'累計ガチャ1回',type:'pulls',target:1,gems:100,gold:0},
  {id:'draw_10',name:'星灯の仲間',detail:'累計ガチャ10回',type:'pulls',target:10,gems:200,gold:0},
@@ -3298,7 +3310,7 @@ function startBattle(id,grind=null,preview=false){
    const pre=questPreBattleStory(id);
    if(pre){questStoryFlow={type:'pre',qid:id,storyId:pre};openStory(pre);return;}
   }
-  const heroes=S.party.map((v,i)=>{const s=unitPower(v);return {
+  const heroes=visibleParty().map((v,i)=>{const s=unitPower(v);return {
     id:v,hp:s.hp,max:s.hp,x:18+(i%2)*22,y:30+Math.floor(i/2)*45,
     atk:s.atk,def:s.def,spd:s.rate,attackTimer:.4+i*.19,cooldowns:[0,0],shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1
   }});
