@@ -1,0 +1,55 @@
+name: Generate 74 heroine WebP assets
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/heroine74-assets.yml'
+      - 'tools/generate_heroine74_assets.py'
+      - 'docs/heroine74_sources_v0690.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image processor
+        run: python -m pip install pillow==11.3.0
+      - name: Create and validate 222 transparent WebP files
+        run: python tools/generate_heroine74_assets.py
+      - name: Syntax-check existing and new JavaScript
+        run: |
+          node --check js/game.js
+          node --check js/heroines_v0500.js
+          node --check js/heroines_v0690.js
+          node --check js/heroines_v0690_wire.js
+          node --check js/chapter23_v0580.js
+      - name: Commit generated assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/ART_V2/full_body assets/ART_V2/upper_body assets/ART_V2/face_icons docs/heroine74_asset_qa_v0690.json
+          if git diff --staged --quiet; then echo "All files already up to date"; exit 0; fi
+          git commit -m "assets: add 74 heroine full-body, upper-body and face WebP images"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Concurrent main update, rebasing attempt $attempt"
+            git pull --rebase origin main
+            sleep 3
+          done
+          echo "Could not publish generated assets" >&2
+          exit 1
+      - name: Upload generator QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: heroine74-asset-report
+          path: docs/heroine74_asset_qa_v0690.json
+          if-no-files-found: warn
