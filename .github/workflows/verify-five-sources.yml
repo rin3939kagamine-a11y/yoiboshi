@@ -29,7 +29,7 @@ jobs:
           import hashlib,io,subprocess
           from pathlib import Path
           from PIL import Image
-          items=[            ('megane','origin/main','assets/ART_V2/full_body/megane_woman_20261112.png',976455,'9507a8facc4bbc60401a6395d4d5057283ced6ba'),
+          items=[            ('megane','dda5194','assets/ART_V2/full_body/megane_woman_20261112.png',976455,'9507a8facc4bbc60401a6395d4d5057283ced6ba'),
             ('fleece','origin/assets/standee-ash-brown-navy-fleece-20261112','assets/character_candidates/2026-11-12_ash_brown_navy_fleece/ash_brown_navy_fleece_full_body.png',1010833,'dd3ee70498d840a3f6fac79ac87dfd9a9f8495a2')
           ]
           purple=Path('assets/ART_V2/source_originals/3_approved_20261112/01_purple_check_noears_nomask.png').read_bytes()
