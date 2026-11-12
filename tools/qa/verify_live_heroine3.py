@@ -34,7 +34,11 @@ with sync_playwright() as p:
         page.close()
     gallery=browser.new_page(viewport={"width":390,"height":844})
     resp=gallery.goto(site+"sr_gallery.html",wait_until="load",timeout=90000)
-    gallery.wait_for_function("document.querySelectorAll('.tile').length>10")
+    gallery_errors=[];gallery.on("pageerror",lambda x:gallery_errors.append(str(x)))
+    pre=gallery.evaluate("""() => ({title:document.title,tiles:document.querySelectorAll('.tile').length,body:document.body?.innerText?.slice(0,700),sourceScripts:[...document.scripts].map(s=>s.getAttribute('src')),hasGallery:!!document.querySelector('#gallery'),galleryHead:document.querySelector('#gallery')?.outerHTML.slice(0,200)})""")
+    print("LIVE_GALLERY_DIAGNOSTIC",json.dumps({"status":resp.status,"meta":pre,"errors":gallery_errors},ensure_ascii=False),flush=True)
+    gallery.screenshot(path=str(out/"before_gallery_390x844.png"),full_page=True)
+    gallery.wait_for_function("document.querySelectorAll('.tile').length>10",timeout=7000)
     gallery.wait_for_function("""() => ['sumika_work','reika_work','hono_work'].every(id=>{
       const card=[...document.querySelectorAll('.tile')].find(x=>x.textContent.includes(id));
       const im=card?.querySelector('img');
