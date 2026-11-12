@@ -1,0 +1,19 @@
+name: QA - Three heroine browser initialization diagnostic
+on:
+  pull_request:
+    paths: ['tools/qa/heroine3_diagnostic.py', '.github/workflows/heroine3-diagnostic.yml','js/game.js','js/heroines_v0692.js','index.html']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - run: python tools/qa/heroine3_diagnostic.py

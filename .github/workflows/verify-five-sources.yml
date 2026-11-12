@@ -1,0 +1,151 @@
+name: QA - Verify three heroine source images
+on:
+  push:
+    branches:
+      - feature/add-five-approved-heroines-20261112
+  pull_request:
+    paths:
+      - '.github/workflows/verify-five-sources.yml'
+      - 'js/heroines_v0692.js'
+      - 'index.html'
+permissions:
+  contents: write
+jobs:
+  sources:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image inspector
+        run: python -m pip install Pillow
+      - name: Inspect historical PNGs exactly at their original refs
+        run: |
+          python - <<'PY'
+          import hashlib,io,subprocess
+          from pathlib import Path
+          from PIL import Image
+          items=[            ('megane','dda5194','assets/ART_V2/full_body/megane_woman_20261112.png',976455,'9507a8facc4bbc60401a6395d4d5057283ced6ba'),
+            ('fleece','origin/assets/standee-ash-brown-navy-fleece-20261112','assets/character_candidates/2026-11-12_ash_brown_navy_fleece/ash_brown_navy_fleece_full_body.png',1010833,'dd3ee70498d840a3f6fac79ac87dfd9a9f8495a2')
+          ]
+          purple=Path('assets/ART_V2/source_originals/3_approved_20261112/01_purple_check_noears_nomask.png').read_bytes()
+          assert len(purple)==906678
+          assert hashlib.sha256(purple).hexdigest()=='ad9482bcf6bbe27cd9e1d903e60f13215d77233d2350f525797792df1a44ce4d'
+          print('VERIFIED purple-check original SHA256')
+          for name,ref,path,size,sha in items:
+            if ref.startswith('origin/assets/'):
+              short=ref.removeprefix('origin/')
+              subprocess.run(['git','fetch','--no-tags','origin',f'refs/heads/{short}:refs/remotes/origin/{short}'],check=True,stdout=subprocess.DEVNULL)
+            raw=subprocess.check_output(['git','show',f'{ref}:{path}'])
+            blob=subprocess.check_output(['git','hash-object','--stdin'],input=raw).decode().strip()
+            assert blob==sha,(name,'git_blob',blob,sha)
+            assert len(raw)==size,(name,'bytes',len(raw),size)
+            image=Image.open(io.BytesIO(raw));image.verify()
+            image=Image.open(io.BytesIO(raw))
+            assert image.width>500 and image.height>800,(name,image.size)
+            print('VERIFIED',name,'size',image.size,'mode',image.mode,'bytes',size,'gitsha',sha,'sha256',hashlib.sha256(raw).hexdigest())
+          PY
+
+      - name: Convert only the three pinned originals to the existing 74-heroine WebP sizes
+        run: python tools/qa/import_five_approved_assets.py
+      - name: Commit verified derived WebP assets to PR branch (never main)
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for kind in full_body upper_body face_icons; do
+            for id in sumika reika hono; do
+              git add "assets/ART_V2/$kind/$id.webp"
+            done
+          done
+          git add assets/ART_V2/source_originals/3_approved_20261112/
+          if git diff --staged --quiet; then
+            echo 'All 9 display WebPs already match the source-approved image conversion'
+          else
+            git commit -m 'Match 74-heroine exact WebP dimensions for three confirmed originals'
+            git push origin HEAD:feature/add-five-approved-heroines-20261112
+          fi
+      - name: Install browser for integration diagnostics
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run browser initialization diagnostics
+        run: python tools/qa/heroine3_diagnostic.py
+
+      - name: Test three approved SR heroines in real game and gallery
+        run: python tools/qa/heroine3_real_smoke.py
+      - name: Publish three SR browser QA screenshots and data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: heroine3-real-game
+          path: qa_artifacts/heroine3/
+          if-no-files-found: warn
+
+  regressions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Set up Chromium, Pillow and Playwright for all existing QA
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Check all JavaScript grammar
+        run: find js -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Legacy 19 heroine actual browser
+        if: success() || failure()
+        run: python tools/qa/heroines_v0500_smoke.py
+      - name: Legacy symbol reactions
+        if: success() || failure()
+        run: python tools/qa/symbol_reactions_v0500_smoke.py
+      - name: Legacy 79 heroine depth
+        if: success() || failure()
+        run: python tools/qa/character_depth_real_smoke.py
+      - name: Legacy concept ID migration
+        if: success() || failure()
+        run: python tools/qa/concept_id_migration_smoke.py
+      - name: Legacy mobile landscape
+        if: success() || failure()
+        run: python tools/qa/mobile_landscape_real_smoke.py
+      - name: Legacy battle visuals and q6
+        if: success() || failure()
+        run: python tools/qa/battle_visual_real_smoke.py
+      - name: Legacy R restoration and gacha
+        if: success() || failure()
+        run: python tools/qa/r_restoration_real_smoke.py
+      - name: Existing 74 heroines art and browser QA (test-only gate)
+        if: success() || failure()
+        run: python tools/qa/heroine74_smoke.py
+      - name: Existing 74 heroines hidden and save migration
+        if: success() || failure()
+        run: python tools/qa/heroine74_hidden_smoke.py
+      - name: Makoto existing portrait hash and alpha validation
+        if: success() || failure()
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import hashlib
+          tests={'full':((1024,1536),'ad6e4f1b5e983270a2226432b20d2d7c64f1f5ed71fd9010b2cbacde6a1c3f83'),'upper':((665,820),'f0dffeaf7f2c4f370e017408e070d1a0d558cf9432fb2ab5552455ab1e9959dd')}
+          for key,(size,sha) in tests.items():
+              p=Path(f'assets/ART_V2/style_candidates/makoto_v1_{key}.webp')
+              im=Image.open(p)
+              assert im.size==size and im.mode=='RGBA'
+              assert im.getchannel('A').getextrema()==(0,255)
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==sha
+          print('PASS Makoto existing portraits unchanged')
+          PY
+      - name: Archive all existing QA outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: heroine3-existing-regressions
+          path: qa_artifacts/
+          if-no-files-found: warn
