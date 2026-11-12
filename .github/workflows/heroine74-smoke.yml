@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'tools/qa/heroine74_smoke.py'
+      - 'tools/qa/heroine74_hidden_smoke.py'
       - 'js/game.js'
       - 'js/heroines_v0690.js'
       - 'js/heroines_v0510_text.js'
@@ -37,12 +38,16 @@ jobs:
         run: |
           python -m pip install pillow==11.3.0 playwright==1.56.0
           python -m playwright install --with-deps chromium
-      - name: Validate image assets and browser state
+      - name: Validate image assets and browser state with gate forced ON (test-only)
         run: python tools/qa/heroine74_smoke.py
+      - name: Validate gate OFF, saved hidden ownership, UI visibility, and ON restoration
+        run: python tools/qa/heroine74_hidden_smoke.py
       - name: Store screenshots and report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: heroine74-mobile-qa
-          path: qa_artifacts/heroine74/
+          path: |
+            qa_artifacts/heroine74/
+            qa_artifacts/heroine74_gate/
           if-no-files-found: warn

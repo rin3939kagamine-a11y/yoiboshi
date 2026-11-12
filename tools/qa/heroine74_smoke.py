@@ -101,6 +101,12 @@ try:
             page = browser.new_page(viewport={"width":w,"height":h})
             errors = []
             page.on("pageerror", lambda e: errors.append(str(e)))
+            # Exercise the reverse switch without modifying the checked-in default.
+            toggle_source=(ROOT/"js/heroines_v0690.js").read_text(encoding="utf-8")
+            needle="const HERO_V0690_ENABLED = false;"
+            assert toggle_source.count(needle)==1,"Global gate must default to false"
+            enabled_source=toggle_source.replace(needle,"const HERO_V0690_ENABLED = true;")
+            page.route("**/js/heroines_v0690.js*",lambda route: route.fulfill(status=200,content_type="application/javascript",body=enabled_source))
             page.goto(url,wait_until="load",timeout=90000)
             page.wait_for_function("typeof NEW_HERO_IDS_V0690 !== 'undefined' && typeof NORMAL_GACHA_POOL !== 'undefined'",timeout=90000)
             metrics = page.evaluate("""() => ({
