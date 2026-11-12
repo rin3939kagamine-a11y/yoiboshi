@@ -12,7 +12,10 @@ with sync_playwright() as p:
         page=browser.new_page(viewport={"width":w,"height":h})
         exceptions=[];page.on("pageerror",lambda x:exceptions.append(str(x)))
         response=page.goto(site,wait_until="load",timeout=90000)
-        page.wait_for_function("typeof HERO_IDS!=='undefined' && typeof BYID!=='undefined' && typeof ART_V2!=='undefined'",timeout=30000)
+        diagnostics=page.evaluate("""() => ({title:document.title,loc:location.href,ready:document.readyState,game:typeof HERO_IDS,unit:typeof BYID,art:typeof ART_V2,scripts:[...document.querySelectorAll('script[src]')].map(x=>x.src).slice(-12)})""")
+        print("INITIAL_LIVE",json.dumps({"response":response.status,"meta":diagnostics,"errors":exceptions},ensure_ascii=False),flush=True)
+        page.screenshot(path=str(out/f"before_{w}x{h}.png"),full_page=True)
+        page.wait_for_function("typeof HERO_IDS!=='undefined' && typeof BYID!=='undefined' && typeof ART_V2!=='undefined'",timeout=15000)
         found=page.evaluate("""() => ({
           title:document.title,
           people:['sumika','reika','hono'].map(id=>({
