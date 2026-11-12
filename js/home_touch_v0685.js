@@ -38,6 +38,7 @@
   busy=true;setTimeout(()=>{busy=false;},250);
   if(zone==='chest'){
    const stage=homeTouchReact('chest')||0;
+   if(stage<0){sparkle(e.clientX,e.clientY,'tap');requestAnimationFrame(bounce);return;}
    sparkle(e.clientX,e.clientY,stage>=1?'angry':'chest');
    requestAnimationFrame(()=>shake(stage));
    return;
