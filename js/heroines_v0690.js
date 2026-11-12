@@ -13,13 +13,13 @@ const HERO_V0690_ENABLED = true;
 const HERO_V0690_UNLOCK_RULES = Object.freeze(Object.fromEntries(
   NEW_HERO_IDS_V0690.map(id=>[id,Object.freeze({enabled:true,storyFlag:null})])
 ));
-const HERO_V0690_ID_SET = new Set(NEW_HERO_IDS_V0690);
+const HERO_V0690_ID_SET = new Set([...NEW_HERO_IDS_V0690,...(typeof NEW_HERO_IDS_V0750!=='undefined'?NEW_HERO_IDS_V0750:[])]);
 function heroV0690Visible(id,save){
  if(!HERO_V0690_ID_SET.has(id))return true;
  if(!HERO_V0690_ENABLED)return false;
  const rule=HERO_V0690_UNLOCK_RULES[id],qid=NEW_HERO_REVEAL_V0690[id]?.[1];
  // Owned cards from pre-gate saves are never removed or made unusable.
  if(save?.owned?.[id+'_work'])return true;
- return !!rule?.enabled&&!!qid&&!!save?.quests?.[qid]?.complete&&
+ return (rule?!!rule.enabled:true)&&!!qid&&!!save?.quests?.[qid]?.complete&&
    (save?.hero74RevealMode!=='story'||save?.hero74MeetSeen?.[qid]===true);
 }
