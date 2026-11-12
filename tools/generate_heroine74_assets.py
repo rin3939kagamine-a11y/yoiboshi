@@ -159,7 +159,18 @@ def save_webp(im,path):
 
 def build_one(entry, i, total):
     id=entry["id"]
-    original,uri=get_source(entry["source_url"])
+    preferred=entry.get("preferred_source")
+    if preferred:
+        local=(ROOT/preferred).resolve()
+        if not local.is_relative_to(ROOT.resolve()) or not local.is_file():
+            raise ValueError("Approved local source PNG missing: "+str(local))
+        with Image.open(local) as image:
+            original=image.convert("RGBA").copy()
+        if original.getchannel("A").getextrema()[0]!=0:
+            raise ValueError("Approved PNG lacks true alpha: "+str(local))
+        uri=preferred
+    else:
+        original,uri=get_source(entry["source_url"])
     clean,method=strip_solid_edge_background(original)
     if not clean.getchannel("A").getbbox():
         raise ValueError("Source contains no figure")

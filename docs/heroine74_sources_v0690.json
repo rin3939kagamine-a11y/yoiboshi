@@ -5,7 +5,9 @@
     "74 new heroines with custom dialogue",
     "requested iroha ID redirected to honjo_iroha to avoid the preexisting 大森いろは NPC",
     "source links retain historical commit",
-    "normal recruitment rarity rates unchanged"
+    "normal recruitment rarity rates unchanged",
+    "0.69.1: pharmacy heroine renamed shion -> subaru; old saves migrated.",
+    "0.69.1: ramu/noi approved RGBA PNGs are local source_originals, superseding historical image URLs."
   ],
   "entries": [
     {
@@ -154,9 +156,9 @@
     },
     {
       "number": 18,
-      "requested_id": "shion",
-      "id": "shion",
-      "name": "沖田 シオン",
+      "requested_id": "subaru",
+      "id": "subaru",
+      "name": "沖田 すばる",
       "age": 25,
       "occupation": "駅前の薬局の薬剤師",
       "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png"
@@ -663,7 +665,8 @@
       "name": "黒咲 らむ",
       "age": 21,
       "occupation": "古着ゴスショップの店員",
-      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/21e45a94fd187a42b83e3de9404a87ba0b131566/assets/provisional/2026-11-11_black_pink_uniform/full_body/01_black_pink_uniform.png"
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/21e45a94fd187a42b83e3de9404a87ba0b131566/assets/provisional/2026-11-11_black_pink_uniform/full_body/01_black_pink_uniform.png",
+      "preferred_source": "assets/ART_V2/source_originals/ramu_full_body_transparent.png"
     },
     {
       "number": 53,
@@ -672,7 +675,8 @@
       "name": "真壁 ノイ",
       "age": 25,
       "occupation": "クラブ「ドック」のDJ",
-      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/cef565c63a0dd045c52f301d989714dc50d9f234/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v1.png"
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/cef565c63a0dd045c52f301d989714dc50d9f234/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v1.png",
+      "preferred_source": "assets/ART_V2/source_originals/noi_full_body_transparent.png"
     }
   ]
 }

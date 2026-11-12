@@ -436,7 +436,7 @@
       ]
     },
     {
-      "id": "shion",
+      "id": "subaru",
       "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
       "source_size": [
         1024,
@@ -1949,12 +1949,12 @@
     },
     {
       "id": "ramu",
-      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/21e45a94fd187a42b83e3de9404a87ba0b131566/assets/provisional/2026-11-11_black_pink_uniform/full_body/01_black_pink_uniform.png",
+      "source": "assets/ART_V2/source_originals/ramu_full_body_transparent.png",
       "source_size": [
         1024,
         1536
       ],
-      "alpha_method": "edge_background_extraction",
+      "alpha_method": "user_png_source_alpha",
       "output_full": [
         1024,
         1536
@@ -1976,12 +1976,12 @@
     },
     {
       "id": "noi",
-      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/cef565c63a0dd045c52f301d989714dc50d9f234/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v1.png",
+      "source": "assets/ART_V2/source_originals/noi_full_body_transparent.png",
       "source_size": [
         1024,
         1536
       ],
-      "alpha_method": "edge_background_extraction",
+      "alpha_method": "user_png_source_alpha",
       "output_full": [
         1024,
         1536
