@@ -67,6 +67,43 @@ try:
             page.screenshot(path=str(report_dir / (orientation + ".png")),full_page=True)
             assert metrics["documentWidth"] <= metrics["viewport"] + 18, metrics
             print("PASS browser",orientation,metrics,flush=True)
+            # Actual UI rendering: populate a throwaway save with all 74 SR cards.
+            appearance=page.evaluate("""() => {
+                S=fresh();
+                S.gameStarted=true;
+                if(S.onboarding) S.onboarding.enabled=false;
+                for(const id of NEW_HERO_IDS_V0690)
+                    S.owned[id+'_work']={lv:1,aff:0,lb:0,copies:0};
+                view='roster';render();
+                const cardNames=[...document.querySelectorAll('.roster-vnew-cardname')]
+                    .map(node=>node.textContent.trim());
+                const missingRoster=NEW_HERO_IDS_V0690.filter(id=>!cardNames.includes(PEOPLE[id].name));
+                const rosterWidth=document.documentElement.scrollWidth;
+                const rosterCards=document.querySelectorAll('.roster-vnew-unit').length;
+                const brokenTalk=[];
+                for(const id of NEW_HERO_IDS_V0690){
+                    if(!romanceHeroAvailable(id)){brokenTalk.push(id+': unavailable');continue;}
+                    S.love.activeHero=id;
+                    S.selected=id+'_work';
+                    view='talk';render();
+                    const panel=document.querySelector('.v676-talk-main');
+                    if(!panel||!panel.textContent.includes(PEOPLE[id].name))
+                        brokenTalk.push(id+': missing talk');
+                    if(!BOND_STORY_CATALOG['bond_'+id+'_0'] || !ROMANCE_V0690[id].topics?.length)
+                        brokenTalk.push(id+': missing bond');
+                }
+                view='gacha';render();
+                return {missingRoster,rosterWidth,rosterCards,brokenTalk,
+                  talkImages:NEW_HERO_IDS_V0690.filter(id=>!ART_V2.upper_body[id]).length,
+                  gachaCandidates:availableNormalPool(S)
+                     .filter(u=>NEW_HERO_IDS_V0690.includes(u.person)).length,
+                  gachaDOM:!!document.querySelector('.gacha-v030-tools')};
+            }""")
+            assert not appearance["missingRoster"], (orientation,"roster",appearance)
+            assert not appearance["brokenTalk"], (orientation,"talk",appearance)
+            assert appearance["gachaCandidates"]==74 and appearance["gachaDOM"],(orientation,"gacha",appearance)
+            assert appearance["rosterWidth"]<=w+18, (orientation,"roster overflow",appearance)
+            print("PASS full roster, 74 romance views and recruit UI",orientation,flush=True)
 
             # Save migration smoke: remove any 0.69 heroine affinity keys,
             # reload that old-shaped data, and confirm app stays operational.

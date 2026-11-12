@@ -1,5 +1,10 @@
 name: QA - 74 heroines and mobile views
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/qa/heroine74_smoke.py'
+      - '.github/workflows/heroine74-smoke.yml'
   workflow_run:
     workflows: ["Generate 74 heroine WebP assets"]
     types: [completed]
