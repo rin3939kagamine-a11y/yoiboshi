@@ -194,6 +194,17 @@ try:
   gallery=browser.new_page(viewport={"width":390,"height":844})
   gerrs=[];gallery.on("pageerror",lambda x:gerrs.append(str(x)))
   gallery.goto(base+"/sr_gallery.html",wait_until="load",timeout=90000)
+  gallery.evaluate("""async ()=>{
+    const required=['sumika_work','reika_work','hono_work'];
+    const cards=[...document.querySelectorAll('.tile')];
+    for(const id of required){
+      const card=cards.find(c=>c.textContent?.includes(id));
+      if(!card)throw Error('No gallery card: '+id);
+      const img=card.querySelector('img');
+      img.loading='eager';
+      await img.decode();
+    }
+  }""")
   g=gallery.evaluate("""()=>{
     const names=['sumika_work','reika_work','hono_work'];
     const cards=[...document.querySelectorAll('.tile')];
