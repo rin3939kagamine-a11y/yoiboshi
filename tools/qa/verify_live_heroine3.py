@@ -39,11 +39,20 @@ with sync_playwright() as p:
     print("LIVE_GALLERY_DIAGNOSTIC",json.dumps({"status":resp.status,"meta":pre,"errors":gallery_errors},ensure_ascii=False),flush=True)
     gallery.screenshot(path=str(out/"before_gallery_390x844.png"),full_page=True)
     gallery.wait_for_function("document.querySelectorAll('.tile').length>10",timeout=7000)
-    gallery.wait_for_function("""() => ['sumika_work','reika_work','hono_work'].every(id=>{
-      const card=[...document.querySelectorAll('.tile')].find(x=>x.textContent.includes(id));
-      const im=card?.querySelector('img');
-      return !!im && im.complete && im.naturalWidth>0;
-    })""",timeout=30000)
+    for id in ['sumika_work','reika_work','hono_work']:
+        target=gallery.locator('article.tile').filter(has_text=id)
+        assert target.count()==1,('missing card',id)
+        src=target.locator('img').get_attribute('src')
+        response=gallery.request.get(site+src,timeout=30000)
+        print('LIVE_IMAGE_HTTP',id,src,response.status,flush=True)
+        assert response.status==200,(id,src,response.status)
+        target.scroll_into_view_if_needed(timeout=15000)
+        target.locator('img').evaluate('(el)=>el.loading="eager"')
+        gallery.wait_for_function("""id=>{
+           const card=[...document.querySelectorAll('article.tile')].find(x=>x.textContent.includes(id));
+           const img=card?.querySelector('img');
+           return !!img&&img.complete&&img.naturalWidth>0;
+        }""",arg=id,timeout=30000)
     cards=gallery.evaluate("""() =>['sumika_work','reika_work','hono_work'].map(id=>{
       const card=[...document.querySelectorAll('.tile')].find(x=>x.textContent.includes(id));
       const img=card?.querySelector('img');
