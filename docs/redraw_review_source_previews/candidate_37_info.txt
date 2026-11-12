@@ -1,0 +1,5 @@
+ref=origin/assets/ten-individual-standees-20261109-pending
+path=assets/character_candidates/2026-11-09_10_fullbody_standees/02_droopy_tee_smile.png
+source_sha256=1feaa133384cdd9fb9bc0011c8ee2073adb978c9b7612549e2bd95876d9f60b4
+source_size=(1024, 1536)
+reference_only=true

@@ -1,0 +1,5 @@
+ref=0b0ed4529e29f6dca50ce81864a34c95180fba71
+path=assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png
+source_sha256=5feb077be0374276bcc778bfdd5b28773493882d3b0a588863b99a95f0ec6bd0
+source_size=(1024, 1536)
+reference_only=true

@@ -1,0 +1,5 @@
+ref=origin/assets/8-fullbody-candidates-20261108
+path=assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp
+source_sha256=7d808fb6017a02dcfe6288f3b442898712a4c6e667f4c6a12917a0efe04d66c5
+source_size=(1024, 1536)
+reference_only=true
