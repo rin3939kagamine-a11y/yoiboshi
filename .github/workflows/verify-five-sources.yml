@@ -56,3 +56,13 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Run browser initialization diagnostics
         run: python tools/qa/heroine3_diagnostic.py
+
+      - name: Test three approved SR heroines in real game and gallery
+        run: python tools/qa/heroine3_real_smoke.py
+      - name: Publish three SR browser QA screenshots and data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: heroine3-real-game
+          path: qa_artifacts/heroine3/
+          if-no-files-found: warn
