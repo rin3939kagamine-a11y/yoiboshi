@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-11",
+  "source": "user-uploaded original PNGs",
+  "status": "binary_uploaded_to_pr_branch",
+  "purpose": "candidate full-body art; not yet assigned to game characters",
+  "images": [
+    {
+      "path": "assets/character_candidates/2026-11-11_3_fullbody/01_blonde_maid.png",
+      "original_sha256": "321b008fd3bbc901d18245bcf4812db51b03aa83df306426ec17f51dd264b412",
+      "git_blob_sha": "b2def42d7e63a41b5a74b0183eef7efd049253df",
+      "bytes": 1075518,
+      "pixels": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "has_transparent_pixels": true
+    },
+    {
+      "path": "assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "original_sha256": "61da8059600a467ad43ae7f41ae51d5d456ed03da27c86a94b09e21b46950ea8",
+      "git_blob_sha": "542e608540e8e857b179ff5768000fd8409068e9",
+      "bytes": 1077251,
+      "pixels": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "has_transparent_pixels": true
+    },
+    {
+      "path": "assets/character_candidates/2026-11-11_3_fullbody/03_navy_furisode.png",
+      "original_sha256": "bacd1437619aa5c3b875925f435f238cab43309aa9ede072ac9db8235fda3126",
+      "git_blob_sha": "6719cd31e7e997b962785a8f4de2a63300df7f6b",
+      "bytes": 1787770,
+      "pixels": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "has_transparent_pixels": true
+    }
+  ],
+  "game_integration": false
+}
