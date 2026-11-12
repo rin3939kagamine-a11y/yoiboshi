@@ -49,8 +49,8 @@ for(const id of NEW_HERO_IDS_V028){const h=ROMANCE_V028[id],p=h.profile;PEOPLE[i
 for(const id of NEW_HERO_IDS_V0420){const h=ROMANCE_V0420[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／正式ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0420[id]};}
 // v0.50: additional roster only. Existing PEOPLE entries remain intact.
 for(const id of NEW_HERO_IDS_V0500){const h=ROMANCE_V0500[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／正式ヒロイン（仮レアリティ）`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0500[id]};}
-for(const id of NEW_HERO_IDS_V0690){const h=ROMANCE_V0690[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／新ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0690[id]||TOMOSHIBI_V0692[id]};}
-// Append-only registration of three approved SR heroines; previous records and juri are unchanged.
+for(const id of NEW_HERO_IDS_V0690){const h=ROMANCE_V0690[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／新ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0690[id]};}
+// Append-only registration of three approved SR heroines; existing records are unchanged.
 for(const id of NEW_HERO_IDS_V0692){const h=ROMANCE_V0692[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／新ヒロイン`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0692[id]};}
 // Unrevealed identities are not available for recruitment or interaction until a future chapter explicitly marks chapter3Met[id].
 function isV027HeroRevealed(id,save=S){return !!save?.chapter3Met?.[id];}
