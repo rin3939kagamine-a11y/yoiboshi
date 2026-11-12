@@ -9,7 +9,7 @@ on:
       - 'js/heroines_v0692.js'
       - 'index.html'
 permissions:
-  contents: read
+  contents: write
 jobs:
   sources:
     runs-on: ubuntu-24.04
@@ -50,6 +50,24 @@ jobs:
             print('VERIFIED',name,'size',image.size,'mode',image.mode,'bytes',size,'gitsha',sha,'sha256',hashlib.sha256(raw).hexdigest())
           PY
 
+      - name: Convert only the three pinned originals to the existing 74-heroine WebP sizes
+        run: python tools/qa/import_five_approved_assets.py
+      - name: Commit verified derived WebP assets to PR branch (never main)
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for kind in full_body upper_body face_icons; do
+            for id in sumika reika hono; do
+              git add "assets/ART_V2/$kind/$id.webp"
+            done
+          done
+          git add assets/ART_V2/source_originals/3_approved_20261112/
+          if git diff --staged --quiet; then
+            echo 'All 9 display WebPs already match the source-approved image conversion'
+          else
+            git commit -m 'Match 74-heroine exact WebP dimensions for three confirmed originals'
+            git push origin HEAD:feature/add-five-approved-heroines-20261112
+          fi
       - name: Install browser for integration diagnostics
         run: |
           python -m pip install playwright==1.56.0
