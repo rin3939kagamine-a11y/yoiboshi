@@ -6,7 +6,7 @@
     "requested iroha ID redirected to honjo_iroha to avoid the preexisting 大森いろは NPC",
     "source links retain historical commit",
     "normal recruitment rarity rates unchanged",
-    "0.69.1: pharmacy heroine renamed shion -> subaru; old saves migrated.",
+    "0.69.1: pharmacy heroine is now subaru, with automatic save migration for existing owners.",
     "0.69.1: ramu/noi approved RGBA PNGs are local source_originals, superseding historical image URLs."
   ],
   "entries": [

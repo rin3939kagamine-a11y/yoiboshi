@@ -4,6 +4,7 @@ import json
 import os
 import threading
 from pathlib import Path
+import re
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 
 from PIL import Image
@@ -27,6 +28,61 @@ for id in ids:
             assert im.getchannel("A").getextrema()[0] == 0, file
             assert im.getchannel("A").getbbox(), file
 print("PASS: 222 WebP images and 74 unique IDs", flush=True)
+
+
+# 0.69.1 static regression: search the complete repository, including text,
+# CSS, documentation and tests. The old heroine ID is allowed ONLY in
+# migration logic and this regression test; the existing boss is not renamed.
+old_names=[
+    re.compile("九条"+r"\s*"+"ゆかり"),
+    re.compile("芹沢"+r"\s*"+"はるか"),
+    re.compile("沖田"+r"\s*"+"シオン"),
+]
+text_extensions={".js",".json",".html",".md",".txt",".py",".yml",".yaml",".css",".csv"}
+violations=[]
+legacy_references=[]
+for path in ROOT.rglob("*"):
+    if not path.is_file() or path.suffix.lower() not in text_extensions:
+        continue
+    rel=path.relative_to(ROOT).as_posix()
+    if any(part in {".git","node_modules","qa_artifacts",".venv","venv"} for part in path.parts):
+        continue
+    if path.stat().st_size>12_000_000:continue
+    try:
+        contents=path.read_text(encoding="utf-8")
+    except (UnicodeError,OSError):
+        continue
+    for pattern in old_names:
+        for match in pattern.finditer(contents):
+            violations.append({"path":rel,"term":match.group(0)})
+    if "shion" in contents:
+        legacy_references.append(rel)
+        if rel not in {"js/game.js","tools/qa/heroine74_smoke.py"}:
+            violations.append({"path":rel,"term":"old heroine ID reference"})
+for kind in ("full_body","upper_body","face_icons"):
+    assert not (ROOT/"assets"/"ART_V2"/kind/("shion"+".webp")).exists()
+assert "subaru" in ids and "shion" not in ids,(len(ids),ids)
+assert not violations,violations
+print("PASS: repository-wide legacy surname/name/heroine-ID search", sorted(set(legacy_references)),flush=True)
+
+# Dark-background proofs use the committed generated WebPs, not the original
+# chat previews. Keep the original PNGs as the exact alpha source of truth.
+dark_out=ROOT/"qa_artifacts"/"heroine74"/"dark_background"
+dark_out.mkdir(parents=True,exist_ok=True)
+for heroine in ("ramu","noi"):
+    src=ROOT/"assets"/"ART_V2"/"source_originals"/(heroine+"_full_body_transparent.png")
+    assert src.exists(),src
+    with Image.open(src) as im:
+        assert im.mode=="RGBA" and im.getchannel("A").getextrema()[0]==0,src
+    for kind in ("full_body","upper_body","face_icons"):
+        file=ROOT/"assets"/"ART_V2"/kind/(heroine+".webp")
+        with Image.open(file) as raw:
+            portrait=raw.convert("RGBA")
+            assert portrait.getchannel("A").getextrema()[0]==0,file
+            dark=Image.new("RGBA",portrait.size,(12,20,39,255))
+            dark.alpha_composite(portrait)
+            dark.convert("RGB").save(dark_out/(heroine+"_"+kind+".png"))
+print("PASS: six transparent sprites composited on dark navy for visual QA",flush=True)
 
 os.chdir(ROOT)
 class Quiet(SimpleHTTPRequestHandler):
@@ -67,6 +123,49 @@ try:
             page.screenshot(path=str(report_dir / (orientation + ".png")),full_page=True)
             assert metrics["documentWidth"] <= metrics["viewport"] + 18, metrics
             print("PASS browser",orientation,metrics,flush=True)
+            legacy = page.evaluate("""() => {
+                const original=fresh();
+                original.playerName='shion';
+                original.owned.shion_work={lv:12,aff:68,lb:2,copies:1};
+                original.selected='shion_work';
+                original.homeFavorite='shion';
+                original.homeUnitId='shion_work';
+                original.party=['shion_work'];
+                original.bondRead.shion=[true,true,false,false,false];
+                original.bondLastTopic.shion=3;
+                original.love.affection.shion=68;
+                original.love.activeHero='shion';
+                const upgraded=migrateSave(original);
+                const repeated=migrateSave(upgraded);
+                return {
+                   fullName:PEOPLE.subaru?.name,
+                   noOldHero:!HERO_IDS.includes('shion')&&HERO_IDS.includes('subaru'),
+                   srCard:NEW_UNIT_ROSTER_V0690.some(u=>u.id==='subaru_work'&&u.person==='subaru'&&u.rarity==='SR'),
+                   gacha:NORMAL_GACHA_POOL.some(u=>u.id==='subaru_work'),
+                   selected:upgraded.selected,
+                   favorite:upgraded.homeFavorite,
+                   homeUnit:upgraded.homeUnitId,
+                   party:upgraded.party,
+                   owned:upgraded.owned.subaru_work,
+                   staleOwned:!!upgraded.owned.shion_work,
+                   affection:upgraded.love.affection.subaru,
+                   bond:upgraded.bondRead.subaru,
+                   bondTopic:upgraded.bondLastTopic.subaru,
+                   playerName:upgraded.playerName,
+                   activeHero:upgraded.love.activeHero,
+                   idempotent:!!repeated.owned.subaru_work&&!repeated.owned.shion_work
+                };
+            }""")
+            assert legacy["fullName"]=="沖田 すばる",legacy
+            assert legacy["noOldHero"] and legacy["srCard"] and legacy["gacha"],legacy
+            assert legacy["selected"]=="subaru_work",legacy
+            assert legacy["favorite"]=="subaru" and legacy["homeUnit"]=="subaru_work",legacy
+            assert legacy["party"]==["subaru_work"] and not legacy["staleOwned"],legacy
+            assert legacy["owned"]["lv"]==12 and legacy["owned"]["aff"]==68,legacy
+            assert legacy["affection"]==68 and legacy["bond"][:2]==[True,True],legacy
+            assert legacy["bondTopic"]==3 and legacy["playerName"]=="shion",legacy
+            assert legacy["activeHero"]=="subaru" and legacy["idempotent"],legacy
+            print("PASS: subaru recruitment, ownership and old-save migration",orientation,flush=True)
             # Actual UI rendering: populate a throwaway save with all 74 SR cards.
             appearance=page.evaluate("""() => {
                 S=fresh();

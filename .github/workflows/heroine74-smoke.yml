@@ -4,6 +4,14 @@ on:
     branches: [main]
     paths:
       - 'tools/qa/heroine74_smoke.py'
+      - 'js/game.js'
+      - 'js/heroines_v0690.js'
+      - 'js/heroines_v0510_text.js'
+      - 'docs/heroine74_sources_v0690.json'
+      - 'assets/ART_V2/full_body/**'
+      - 'assets/ART_V2/upper_body/**'
+      - 'assets/ART_V2/face_icons/**'
+      - 'assets/ART_V2/source_originals/**'
       - '.github/workflows/heroine74-smoke.yml'
   workflow_run:
     workflows: ["Generate 74 heroine WebP assets"]
