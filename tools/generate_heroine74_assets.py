@@ -12,6 +12,7 @@ import time
 import urllib.error
 import urllib.request
 from collections import deque
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from PIL import Image
@@ -149,11 +150,29 @@ def crop_face(im):
 
 def save_webp(im,path):
     path.parent.mkdir(parents=True,exist_ok=True)
-    im.save(path,format="WEBP",quality=91,method=6,lossless=False)
+    im.save(path,format="WEBP",quality=91,method=3,lossless=False)
     with Image.open(path) as check:
         assert check.size==im.size,(path,check.size,im.size)
         assert check.mode=="RGBA",(path,check.mode)
         assert check.getchannel("A").getextrema()[0]==0,(path,"no transparent margin")
+
+
+def build_one(entry, i, total):
+    id=entry["id"]
+    original,uri=get_source(entry["source_url"])
+    clean,method=strip_solid_edge_background(original)
+    if not clean.getchannel("A").getbbox():
+        raise ValueError("Source contains no figure")
+    full=compose_contain(clean,(1024,1536),8)
+    upper=crop_to_figure(clean,0.56,(768,1024))
+    face=crop_face(clean)
+    for typ,image in [("full_body",full),("upper_body",upper),("face_icons",face)]:
+        save_webp(image,ROOT/"assets"/"ART_V2"/typ/(id+".webp"))
+    print(f"{i:02d}/{total} PASS {id} {method}",flush=True)
+    return dict(id=id,source=uri,source_size=list(original.size),
+                alpha_method=method,output_full=[1024,1536],
+                output_upper=[768,1024],output_face=[400,400],
+                full_bbox=full.getchannel("A").getbbox())
 
 
 def main():
@@ -162,33 +181,23 @@ def main():
     assert len(entries)==74
     results=[]
     errors=[]
-    for i,entry in enumerate(entries,1):
-        id=entry["id"]
-        try:
-            original,uri=get_source(entry["source_url"])
-            clean,method=strip_solid_edge_background(original)
-            bounds=clean.getchannel("A").getbbox()
-            if not bounds:
-                raise ValueError("Source contains no figure")
-            # Retain the entire source, including hair, hands, and shoes.
-            full=compose_contain(clean,(1024,1536),8)
-            upper=crop_to_figure(clean,0.56,(768,1024))
-            face=crop_face(clean)
-            for typ,image in [("full_body",full),("upper_body",upper),("face_icons",face)]:
-                save_webp(image,ROOT/"assets"/"ART_V2"/typ/(id+".webp"))
-            results.append(dict(id=id,source=uri,source_size=list(original.size),
-                                alpha_method=method,output_full=[1024,1536],
-                                output_upper=[768,1024],output_face=[400,400],
-                                full_bbox=full.getchannel("A").getbbox()))
-            print(f"{i:02d}/{len(entries)} PASS {id} {method}",flush=True)
-        except Exception as exc:
-            errors.append({"id":id,"error":str(exc)})
-            print(f"{i:02d}/{len(entries)} FAIL {id}: {exc}",flush=True)
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        pending={pool.submit(build_one,entry,i,len(entries)):entry
+                 for i,entry in enumerate(entries,1)}
+        for done in as_completed(pending):
+            entry=pending[done]
+            try:
+                results.append(done.result())
+            except Exception as exc:
+                errors.append({"id":entry["id"],"error":str(exc)})
+                print("FAIL",entry["id"],str(exc),flush=True)
+    results.sort(key=lambda x: next(i for i,e in enumerate(entries) if e["id"]==x["id"]))
     REPORT.parent.mkdir(parents=True,exist_ok=True)
-    REPORT.write_text(json.dumps(dict(total=len(entries),passed=len(results),failed=errors,
-        results=results,notes=["Automated transparency/dimension QA only; browser visual QA not done",
-        "Edge-extracted flat source backgrounds require visual review"]),ensure_ascii=False,indent=2)+"\n",
-        encoding="utf-8")
+    REPORT.write_text(json.dumps(dict(total=len(entries),passed=len(results),
+        failed=errors,results=results,
+        notes=["Automated transparency/dimension QA only; browser visual QA not done",
+               "Edge-extracted flat source backgrounds require visual review"]),
+        ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     if errors:
         raise SystemExit(f"{len(errors)} of {len(entries)} images failed; not publishing incomplete asset set")
     print(f"PASS: {len(results)}/{len(entries)} * 3 = {len(results)*3} WebP files")
