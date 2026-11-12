@@ -101,12 +101,9 @@ try:
             page = browser.new_page(viewport={"width":w,"height":h})
             errors = []
             page.on("pageerror", lambda e: errors.append(str(e)))
-            # Exercise the reverse switch without modifying the checked-in default.
+            # The published gate is enabled; each heroine is still quest-locked.
             toggle_source=(ROOT/"js/heroines_v0690.js").read_text(encoding="utf-8")
-            needle="const HERO_V0690_ENABLED = false;"
-            assert toggle_source.count(needle)==1,"Global gate must default to false"
-            enabled_source=toggle_source.replace(needle,"const HERO_V0690_ENABLED = true;")
-            page.route("**/js/heroines_v0690.js*",lambda route: route.fulfill(status=200,content_type="application/javascript",body=enabled_source))
+            assert toggle_source.count("const HERO_V0690_ENABLED = true;")==1
             page.goto(url,wait_until="load",timeout=90000)
             page.wait_for_function("typeof NEW_HERO_IDS_V0690 !== 'undefined' && typeof NORMAL_GACHA_POOL !== 'undefined'",timeout=90000)
             metrics = page.evaluate("""() => ({
@@ -129,6 +126,50 @@ try:
             page.screenshot(path=str(report_dir / (orientation + ".png")),full_page=True)
             assert metrics["documentWidth"] <= metrics["viewport"] + 18, metrics
             print("PASS browser",orientation,metrics,flush=True)
+            gate=page.evaluate("""() => {
+                const newSave=fresh(),q1Save=fresh(),legacy=fresh(),owned=fresh();
+                const groups=Object.entries(HERO74_ENCOUNTERS);
+                const mapped=Object.entries(NEW_HERO_REVEAL_V0690);
+                const namesOk=groups.every(([qid,group])=>
+                    group.heroes.every(id=>group.lines.some(line=>
+                        line.who===id&&line.text.includes(ROMANCE_V0690[id].profile.name+"といいます")))
+                );
+                const linesOk=groups.every(([qid,group])=>group.lines.length===group.heroes.length*4);
+                const allNewHidden=NEW_HERO_IDS_V0690.every(id=>!heroV0690Visible(id,newSave));
+                const initialPool=availableNormalPool(newSave).filter(u=>HERO_V0690_ID_SET.has(u.person)).length;
+                q1Save.quests.q1={complete:true};
+                const pending=hero74PendingQuestIds(q1Save);
+                const q1Before=NEW_HERO_IDS_V0690.filter(id=>heroV0690Visible(id,q1Save));
+                const backLog=hero74EncounterScript('hero74_backlog',q1Save);
+                const q1Lines=hero74EncounterScript('hero74_q1',q1Save)?.lines.length;
+                q1Save.hero74MeetSeen.q1=true;
+                const q1After=NEW_HERO_IDS_V0690.filter(id=>heroV0690Visible(id,q1Save));
+                const q1Pool=availableNormalPool(q1Save).filter(u=>HERO_V0690_ID_SET.has(u.person)).length;
+                legacy.quests.q1={complete:true};
+                delete legacy.hero74RevealMode;
+                const upgraded=migrateSave(legacy);
+                owned.owned.subaru_work={lv:1,aff:0,lb:0,copies:0};
+                return {
+                  quests:groups.length,heroCount:groups.reduce((n,[qid,g])=>n+g.heroes.length,0),
+                  mapped:mapped.length,uniqueHeroes:new Set(groups.flatMap(([qid,g])=>g.heroes)).size,
+                  namesOk,linesOk,allNewHidden,initialPool,
+                  pendingBefore:pending,q1Before,q1After,q1Pool,q1Lines,
+                  backlogLines:backLog?.lines.length||0,pendingAfter:hero74PendingQuestIds(q1Save),
+                  legacyMode:upgraded.hero74RevealMode,legacyQ1Revealed:heroV0690Visible('chitose',upgraded),
+                  ownedBeforeQuest:heroV0690Visible('subaru',owned)
+                };
+            }""")
+            assert gate["quests"]==38 and gate["heroCount"]==74, (orientation,gate)
+            assert gate["mapped"]==74 and gate["uniqueHeroes"]==74, (orientation,gate)
+            assert gate["namesOk"] and gate["linesOk"],(orientation,gate)
+            assert gate["allNewHidden"] and gate["initialPool"]==0,(orientation,gate)
+            assert gate["pendingBefore"]==["q1"] and not gate["q1Before"],(orientation,gate)
+            assert gate["q1Lines"]==8 and gate["backlogLines"]==9,(orientation,gate)
+            assert set(gate["q1After"])=={"chitose","nonoka"} and gate["q1Pool"]==2,(orientation,gate)
+            assert not gate["pendingAfter"],(orientation,gate)
+            assert gate["legacyMode"]=="legacy" and gate["legacyQ1Revealed"],(orientation,gate)
+            assert gate["ownedBeforeQuest"],(orientation,gate)
+            print("PASS: quest-gated 74 heroines, dialogues and legacy saves",orientation,gate,flush=True)
             legacy = page.evaluate("""() => {
                 const original=fresh();
                 original.playerName='shion';
