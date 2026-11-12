@@ -3004,6 +3004,12 @@ function startHeroChat(id){const u=unit(id);if(u&&isHero(u.person))return startR
 function chooseHeroChat(){return toast('おでかけの帰り道で返事を選んでください')}
 
 function talk(){
+ // When a previously selected V0.69 heroine is temporarily hidden, show an
+ // existing owned heroine without overwriting the player's saved selection.
+ if(!heroV0690Visible(loveState()?.activeHero,S)||!heroV0690Visible(unit(S.selected)?.person,S)){
+   const fallback=HERO_IDS.find(id=>romanceHeroAvailable(id))||'momoka';
+   return heroTalkPage({person:fallback});
+ }
  const selectedHero=unit(S.selected);if(loveState()?.activeHero&&isHero(loveState().activeHero))return heroTalkPage({person:loveState().activeHero});if(selectedHero&&isHero(selectedHero.person)&&data(selectedHero.id))return heroTalkPage(selectedHero);
  const units=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));const u=visibleUnitV026(unit(S.selected))&&data(S.selected)?unit(S.selected):units[0],d=data(u.id),p=person(u),temp=isConcept(u.person);const people=onePortraitPerPerson(units), variants=units.filter(x=>x.person===u.person);
  const stories=['出会いの日','少しだけ近い距離','相談室の帰り道','ふたりの大切な約束'];
