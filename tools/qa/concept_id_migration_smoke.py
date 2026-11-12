@@ -74,7 +74,7 @@ try:
                 hasNewRegistry:!!BYID.ena_work&&BYID.ena_work.person==='ena'
             };
         }""")
-        assert check["gallery"] == {"heroes":79,"unique":79,"depth":79}, check
+        assert check["gallery"] == {"heroes":153,"unique":153,"depth":79}, check
         assert check["idempotent"] and check["oldSaveHasLegacy"] and check["oldSaveUnmodified"],check
         assert check["canonicalMapCount"] == 29,check
         assert check["units"]["ena"]["lv"] == 12 and check["units"]["ena"]["aff"] == 42,check

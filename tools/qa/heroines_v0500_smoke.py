@@ -26,7 +26,7 @@ try:
         result=page.evaluate("""()=> {
           const errors=[],ids=NEW_HERO_IDS_V0500,oldCount=HERO_IDS.length-ids.length;
           const unique=[...new Set(HERO_IDS)];
-          if(ids.length!==19||oldCount!==60||unique.length!==79)errors.push('IDs count or duplicate');
+          if(ids.length!==19||oldCount!==60+NEW_HERO_IDS_V0690.length||unique.length!==79+NEW_HERO_IDS_V0690.length)errors.push('IDs count or duplicate');
           if(Object.keys(CHARACTER_DEPTH_V1).length!==79)errors.push('depth count');
           if(Object.keys(ROMANCE_V0500).length!==19)errors.push('romance count');
           const originalSet=new Set(NORMAL_GACHA_POOL.map(u=>u.person));
