@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-08",
+  "project": "yoiboshi",
+  "status": "approved_png_uploaded_pr_unmerged",
+  "dimensions": [
+    1024,
+    1536
+  ],
+  "image_format": "RGBA PNG",
+  "game_implementation": "assets_registered_only_not_in_game",
+  "github_png_files_uploaded": true,
+  "destination_dir": "assets/ART_V2/full_body/2026-11-08_approved_8",
+  "assets": [
+    {
+      "reference_photo_number": 1,
+      "file": "01_mint_black_idol.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "16b3c4c880ef6ec7d366de23b06afc8532d674ce668e0921774f24d64dd33f14"
+    },
+    {
+      "reference_photo_number": 2,
+      "file": "02_white_shirt_suspenders.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "ad54d59b9c110b3f329dafaeb55bec592fcbd005b69b4451922d9f3c0af66b65"
+    },
+    {
+      "reference_photo_number": 3,
+      "file": "03_short_bob_mustard.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "9e9c15f756a2db9a36e5c7226487c11425f0df4373d4cdec0d093fc3bff2d8da"
+    },
+    {
+      "reference_photo_number": 4,
+      "file": "04_navy_business_suit.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "d95b6b03f5b8c56cd947b156d15f556bd100fe6b73b447b67e6aad4b2e2b56d3"
+    },
+    {
+      "reference_photo_number": 5,
+      "file": "05_light_blue_workwear.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "3c5a24c514c6968a223f02789605b335192cfa7b657470f2a493fddd75d96925"
+    },
+    {
+      "reference_photo_number": 6,
+      "file": "06_caramel_knit.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "33cc9d5ea5d755b302c98790382dd069a1824a7e56b32a03960f320fe5751daa"
+    },
+    {
+      "reference_photo_number": 7,
+      "file": "07_black_knit_plaid.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "fb16d04e06699af01e531f8e081b646d5229c86270be6dcefc4c2c39773be33b"
+    },
+    {
+      "reference_photo_number": 8,
+      "file": "08_mustard_plaid_street.png",
+      "approved": true,
+      "github_uploaded": true,
+      "sha256": "adbc65edae13b755d4afa883a3f89dc6156117b2633a83eb9ee3866963942be4"
+    }
+  ],
+  "source_archive": "yoiboshi_approved_8_fullbody_2026-11-08.zip",
+  "qa": {
+    "source_zip_crc": "pass",
+    "source_png_sha256_matched": "8/8",
+    "github_blob_sha_matched": "8/8",
+    "png_dimensions": "1024x1536",
+    "color_mode": "RGBA",
+    "alpha_min_max": [
+      0,
+      254
+    ],
+    "browser_render_check": "pending"
+  }
+}
