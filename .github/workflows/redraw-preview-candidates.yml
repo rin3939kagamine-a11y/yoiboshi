@@ -1,0 +1,56 @@
+name: Prepare source thumbnails for three manual redraw candidates
+on:
+  push:
+    branches: [assets/redraw-review-02-20-37-20261112]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read original source images, create reference-only thumbnails
+        run: |
+          python -m pip install pillow==11.3.0
+          python - <<'PY'
+          import subprocess,base64,io,hashlib
+          from pathlib import Path
+          from PIL import Image,ImageOps
+          refs=[
+            ("02","0b0ed4529e29f6dca50ce81864a34c95180fba71","assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png"),
+            ("20","origin/assets/8-fullbody-candidates-20261108","assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp"),
+            ("37","origin/assets/ten-individual-standees-20261109-pending","assets/character_candidates/2026-11-09_10_fullbody_standees/02_droopy_tee_smile.png")
+          ]
+          out=Path("docs/redraw_review_source_previews");out.mkdir(parents=True,exist_ok=True)
+          subprocess.run(["git","fetch","--no-tags","origin","0b0ed4529e29f6dca50ce81864a34c95180fba71"],check=True)
+          for label,ref,path in refs:
+            if ref.startswith("origin/assets/"):
+              b=ref.removeprefix("origin/")
+              subprocess.run(["git","fetch","origin",f"refs/heads/{b}:refs/remotes/origin/{b}"],check=True)
+            raw=subprocess.check_output(["git","show",f"{ref}:{path}"])
+            src=Image.open(io.BytesIO(raw)).convert("RGBA")
+            thumb=ImageOps.contain(src,(512,768))
+            buf=io.BytesIO();thumb.save(buf,format="WEBP",quality=85,method=5)
+            blob=buf.getvalue()
+            assert len(blob)<450000
+            (out/f"candidate_{label}_preview.b64.txt").write_text(base64.b64encode(blob).decode("ascii"))
+            (out/f"candidate_{label}_info.txt").write_text(f"ref={ref}\npath={path}\nsource_sha256={hashlib.sha256(raw).hexdigest()}\nsource_size={src.size}\nreference_only=true\n")
+            print("PREVIEW",label,"original_size",src.size,"preview_bytes",len(blob))
+          PY
+      - name: Commit reference-only previews (do not alter originals)
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/redraw_review_source_previews/
+          if git diff --cached --quiet; then
+            echo 'Already prepared'
+          else
+            git commit -m 'Store source reference thumbnails for requested three candidate redesigns'
+            git push origin HEAD:assets/redraw-review-02-20-37-20261112
+          fi
