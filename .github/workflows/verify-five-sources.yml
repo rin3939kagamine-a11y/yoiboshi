@@ -84,3 +84,68 @@ jobs:
           name: heroine3-real-game
           path: qa_artifacts/heroine3/
           if-no-files-found: warn
+
+  regressions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Set up Chromium, Pillow and Playwright for all existing QA
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Check all JavaScript grammar
+        run: find js -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Legacy 19 heroine actual browser
+        if: success() || failure()
+        run: python tools/qa/heroines_v0500_smoke.py
+      - name: Legacy symbol reactions
+        if: success() || failure()
+        run: python tools/qa/symbol_reactions_v0500_smoke.py
+      - name: Legacy 79 heroine depth
+        if: success() || failure()
+        run: python tools/qa/character_depth_real_smoke.py
+      - name: Legacy concept ID migration
+        if: success() || failure()
+        run: python tools/qa/concept_id_migration_smoke.py
+      - name: Legacy mobile landscape
+        if: success() || failure()
+        run: python tools/qa/mobile_landscape_real_smoke.py
+      - name: Legacy battle visuals and q6
+        if: success() || failure()
+        run: python tools/qa/battle_visual_real_smoke.py
+      - name: Legacy R restoration and gacha
+        if: success() || failure()
+        run: python tools/qa/r_restoration_real_smoke.py
+      - name: Existing 74 heroines art and browser QA (test-only gate)
+        if: success() || failure()
+        run: python tools/qa/heroine74_smoke.py
+      - name: Existing 74 heroines hidden and save migration
+        if: success() || failure()
+        run: python tools/qa/heroine74_hidden_smoke.py
+      - name: Makoto existing portrait hash and alpha validation
+        if: success() || failure()
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import hashlib
+          tests={'full':((1024,1536),'ad6e4f1b5e983270a2226432b20d2d7c64f1f5ed71fd9010b2cbacde6a1c3f83'),'upper':((665,820),'f0dffeaf7f2c4f370e017408e070d1a0d558cf9432fb2ab5552455ab1e9959dd')}
+          for key,(size,sha) in tests.items():
+              p=Path(f'assets/ART_V2/style_candidates/makoto_v1_{key}.webp')
+              im=Image.open(p)
+              assert im.size==size and im.mode=='RGBA'
+              assert im.getchannel('A').getextrema()==(0,255)
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==sha
+          print('PASS Makoto existing portraits unchanged')
+          PY
+      - name: Archive all existing QA outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: heroine3-existing-regressions
+          path: qa_artifacts/
+          if-no-files-found: warn
