@@ -2,7 +2,7 @@ name: Import three approved existing standees (no image generation)
 on:
   pull_request:
     paths:
-      - 'tools/qa/import_three_approved_assets.py'
+      - 'tools/qa/import_five_approved_assets.py'
       - '.github/workflows/import-three-approved-assets.yml'
   workflow_dispatch:
 permissions:
@@ -35,7 +35,7 @@ jobs:
       - name: Re-read exact original images, verify, convert without redrawing
         if: steps.gate.outputs.already == 'false'
         run: python tools/qa/import_three_approved_assets.py
-      - name: Commit three verified original files and fifteen display WEBPs
+      - name: Commit three verified original files and nine display WEBPs
         if: steps.gate.outputs.already == 'false'
         run: |
           git config user.name 'github-actions[bot]'
