@@ -9,7 +9,7 @@ const TOMOSHIBI_V0690=Object.freeze({"ruru":{"color":"ドールの靴とレー�
 /* V0.69 public-release gate. Never delete original profiles, SR cards or assets.
    Switching this single value to true restores every currently unlocked
    heroine. For staggered releases edit individual rule.enabled or storyFlag. */
-const HERO_V0690_ENABLED = false;
+const HERO_V0690_ENABLED = true;
 const HERO_V0690_UNLOCK_RULES = Object.freeze(Object.fromEntries(
   NEW_HERO_IDS_V0690.map(id=>[id,Object.freeze({enabled:true,storyFlag:null})])
 ));
@@ -17,6 +17,9 @@ const HERO_V0690_ID_SET = new Set(NEW_HERO_IDS_V0690);
 function heroV0690Visible(id,save){
  if(!HERO_V0690_ID_SET.has(id))return true;
  if(!HERO_V0690_ENABLED)return false;
- const rule=HERO_V0690_UNLOCK_RULES[id];
- return !!rule?.enabled&&(!rule.storyFlag||save?.storyFlags?.[rule.storyFlag]===true);
+ const rule=HERO_V0690_UNLOCK_RULES[id],qid=NEW_HERO_REVEAL_V0690[id]?.[1];
+ // Owned cards from pre-gate saves are never removed or made unusable.
+ if(save?.owned?.[id+'_work'])return true;
+ return !!rule?.enabled&&!!qid&&!!save?.quests?.[qid]?.complete&&
+   (save?.hero74RevealMode!=='story'||save?.hero74MeetSeen?.[qid]===true);
 }
