@@ -1,4 +1,4 @@
-"""Convert ONLY the five approved original PNG images into display formats.
+"""Convert ONLY the three approved original PNG images into display formats.
 No generation, retouch, redrawing or recoloring; original PNG bytes remain unchanged.
 Output upper_body and face_icons are display-only crops of the SAME artwork.
 Run under GitHub Actions with exact source Git refs and verified Git blob IDs.
@@ -11,27 +11,20 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 REPO=Path(__file__).resolve().parents[2]
-SOURCE_DIR=REPO/"assets/ART_V2/source_originals/5_approved_20261112"
+SOURCE_DIR=REPO/"assets/ART_V2/source_originals/3_approved_20261112"
 ASSETS=REPO/"assets/ART_V2"
 PURPLE=SOURCE_DIR/"01_purple_check_noears_nomask.png"
 SOURCES=[
  ("sumika",None,str(PURPLE.relative_to(REPO)),906678,None,
   "ad9482bcf6bbe27cd9e1d903e60f13215d77233d2350f525797792df1a44ce4d","01_purple_check_noears_nomask.png"),
- ("elma","0b0ed4529e29f6dca50ce81864a34c95180fba71",
-  "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
-  1771831,"96e893a1de6a573bc70026e2e5451954eda0f67d",None,"02_platinum_green_academy_nomask.png"),
- ("nono","origin/assets/ten-individual-standees-20261109-pending",
-  "assets/character_candidates/2026-11-09_10_fullbody_standees/02_droopy_tee_smile.png",
-  1092284,"a93d72dcf91725eba98167cdf564f0fd943ad184",None,"03_droopy_tee_smile.png"),
  ("reika","origin/main","assets/ART_V2/full_body/megane_woman_20261112.png",
-  976455,"9507a8facc4bbc60401a6395d4d5057283ced6ba",None,"04_megane_woman_20261112.png"),
+  976455,"9507a8facc4bbc60401a6395d4d5057283ced6ba",None,"02_megane_woman_20261112.png"),
  ("hono","origin/assets/standee-ash-brown-navy-fleece-20261112",
   "assets/character_candidates/2026-11-12_ash_brown_navy_fleece/ash_brown_navy_fleece_full_body.png",
-  1010833,"dd3ee70498d840a3f6fac79ac87dfd9a9f8495a2",None,"05_ash_brown_navy_fleece.png")
+  1010833,"dd3ee70498d840a3f6fac79ac87dfd9a9f8495a2",None,"03_ash_brown_navy_fleece.png")
 ]
 
 def retrieve():
-    subprocess.run(["git","fetch","--no-tags","origin","0b0ed4529e29f6dca50ce81864a34c95180fba71"],check=True,stdout=subprocess.DEVNULL)
     for _,ref,_,_,_,_,_ in SOURCES:
         if ref and ref.startswith("origin/assets/"):
             b=ref[len("origin/"):]
@@ -81,7 +74,7 @@ def main():
                 assert check.mode=="RGBA" and check.width>0 and check.height>0,(id,kind)
         completed.append(dict(id=id,source_sha256=hashlib.sha256(raw).hexdigest(),size=img.size,original=str(original.relative_to(REPO))))
         print("IMPORTED_ORIGINAL_UNCHANGED",completed[-1])
-    assert len(completed)==5
-    print("PASS all 5 originals, 15 WEBP renderings; no source art changes")
+    assert len(completed)==3
+    print("PASS all 3 originals, 9 WEBP renderings; no source art changes")
 
 if __name__=="__main__":main()
