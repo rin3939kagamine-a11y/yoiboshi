@@ -12,7 +12,9 @@
   // 画像の外枠ではなく、人物がいる中央寄りの範囲だけを当たりにする
   const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
   if(!(x>0.18&&x<0.82&&y>0.02&&y<0.98))return false;
-  return y<0.24?'head':'tap';
+  if(y<0.20)return 'head';
+  if(y<0.40&&x>0.30&&x<0.70)return 'chest';
+  return 'tap';
  }
  let taps=[];
  function bounce(){
@@ -20,8 +22,13 @@
   img.classList.remove('is-touched');void img.offsetWidth;img.classList.add('is-touched');
   setTimeout(()=>img.classList.remove('is-touched'),520);
  }
+ function shake(stage){
+  const img=document.querySelector('.mock-hero .mock-character');if(!img)return;
+  const c=stage>=2?'is-recoil':'is-flinch';img.classList.remove('is-flinch','is-recoil','is-touched');void img.offsetWidth;img.classList.add(c);
+  setTimeout(()=>img.classList.remove(c),stage>=2?900:520);
+ }
  function sparkle(x,y,zone){
-  const s=document.createElement('span');s.className='home-touch-spark';s.textContent=zone==='head'?'♪':'♡';
+  const s=document.createElement('span');s.className='home-touch-spark';s.textContent=zone==='head'?'♪':zone==='chest'?'!?':zone==='angry'?'💢':'♡';if(zone==='chest'||zone==='angry')s.classList.add('is-alert');
   s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);
   setTimeout(()=>s.remove(),900);
  }
@@ -29,6 +36,12 @@
   const zone=busy?false:hitCharacter(e);
   if(!zone||typeof homeTouchReact!=='function')return;
   busy=true;setTimeout(()=>{busy=false;},250);
+  if(zone==='chest'){
+   const stage=homeTouchReact('chest')||0;
+   sparkle(e.clientX,e.clientY,stage>=1?'angry':'chest');
+   requestAnimationFrame(()=>shake(stage));
+   return;
+  }
   const now=Date.now();taps=taps.filter(t=>now-t<5000);taps.push(now);
   sparkle(e.clientX,e.clientY,zone);
   homeTouchReact(taps.length>=5&&zone==='tap'?'many':zone);

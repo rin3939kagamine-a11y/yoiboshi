@@ -2180,17 +2180,35 @@ function highlightUnit(id){if(!BYID[id])return;rosterHighlight=id;render();}
 
 function lobbySwitch(p){if(!PEOPLE[p]||!homeMembers().includes(p))return;lobbySelected=p;lobbyLine=0;S.homeFavorite=p;S.homeUnitId=homeUnit(p)?.id||null;persist();if(view==='home')render()}
 // v0.68.6.0: ホームでキャラをタッチしたときの専用セリフ（頭をなでる／つつく／つつきすぎ）
-let homeTouchLine=null,homeTouchLast={};
+let homeTouchLine=null,homeTouchLast={},homeTouchStage=0;
 const HOME_TOUCH_LINES=Object.freeze({
  momoka:{head:['わっ、頭なでた!?　……えへへ、もう一回だけなら、いいよ。','なでなでされると、たい焼きより元気出るかも！','ちょ、ちょっと！　髪がくしゃくしゃになっちゃう〜。'],tap:['なになに？　呼んだ？','つんつんしないの！　くすぐったいってば。','ん？　今日のおすすめは、商店街のたい焼き屋さんだよ！'],many:['もー！　責任者さん、さっきからつつきすぎ！','……そんなに構ってほしいの？　しょうがないなあ。']},
  milku:{head:['あ……。撫でられるのは、少しだけ恥ずかしいです。','ふふ、子ども扱いですか？　……悪くはないですけど。','お、お茶がこぼれちゃいますから……！'],tap:['はい、なんでしょう？','ひゃっ……びっくりしました。','おかわりですか？　すぐに淹れますね。'],many:['も、もう……そんなにつつかれたら、手元が狂ってしまいます。','ふふ、今日はずいぶん甘えん坊さんですね。']},
  polite:{head:['あ……撫でられると、少し照れてしまいます。','ふふ、ありがとうございます。元気が出ました。','急にどうしたんですか？　……嫌じゃないですけど。'],tap:['はい、呼びましたか？','わっ……びっくりしました。','何かご用でしょうか？'],many:['も、もう……からかわないでください。','そんなにつつかれたら、困ってしまいます。']},
  casual:{head:['わっ、なに急に？　……まあ、悪くないけど。','えへへ、なでられるの、けっこう好きかも。','髪、くしゃくしゃになるってば〜。'],tap:['ん？　呼んだ？','わっ、びっくりした！','なになに、どうしたの？'],many:['もー、つつきすぎ！','ちょっと、さっきから何回目？　……ふふ、しょうがないなあ。']}
 });
+// v0.68.7.0: 胸のあたりを触ったとき。1回目は慌てる、続けると怒る、さらに続けると本気で引く（段階は10秒で元に戻る）
+const HOME_TOUCH_CHEST=Object.freeze({
+ momoka:[['ひゃっ!?　ど、どこ触ってるの、責任者さん！','わわっ……！　い、今のは事故だよね？　事故ってことにしてあげる！','ちょっ……!?　し、心臓に悪いから、そういうのナシ！'],['もー！　二回目は事故じゃないでしょ！　たい焼きおごりの刑だからね！','責任者さんのえっち！　……ほんとに怒るよ？'],['……責任者さん。しばらく口きいてあげない。','ねえ、玲奈さん呼んでこようか？　本気で。']],
+ milku:[['きゃっ……！　あ、あの、そこは……その……。','ひゃい!?　お、お盆、落としそうになりました……！','……っ。い、今のは見なかったことにしますね。'],['あの……二度目は、さすがに怒りますよ？','もう……！　お茶、熱いのを淹れて差し上げましょうか？'],['……責任者さん。今日のおやつは、なしです。','そういうことをする方には、もうお茶は出せません。']],
+ polite:[['ひゃっ……!?　ど、どこを触っているんですか！','い、今のは……手が滑っただけ、ですよね？','……っ！　急にそういうのは、困ります……！'],['二回目は、さすがに見過ごせませんよ？','怒りますよ……？　本当に。'],['……最低です。しばらく近づかないでください。','次やったら、本気で通報しますからね。']],
+ casual:[['ひゃっ!?　ちょ、どこ触ってんの！','わっ……!?　い、今のはナシ！　ノーカン！','……っ、びっくりしたじゃん！　なに考えてんの！'],['ちょっと！　二回目はわざとでしょ！','いい加減にしないと、ほんとに怒るからね！'],['……最っ低。しばらく話しかけないで。','はい、次やったら絶交ね。本気で。']]
+});
+let homeChestCount=0,homeChestAt=0;
 function homeTouchReact(zone){
  const id=lobbySelected;
  let set=HOME_TOUCH_LINES[id];
  if(!set){const ls=(isHero(id)?homeWords(id):PEOPLE[id]?.lines)||[];set=/です|ます|ません|でしょう/.test(ls.join(''))?HOME_TOUCH_LINES.polite:HOME_TOUCH_LINES.casual;}
+ if(zone==='chest'){
+  const now=Date.now();homeChestCount=(now-homeChestAt<10000)?homeChestCount+1:0;homeChestAt=now;
+  const tone=HOME_TOUCH_CHEST[id]?id:(set===HOME_TOUCH_LINES.polite?'polite':'casual');
+  const steps=HOME_TOUCH_CHEST[tone],stage=Math.min(homeChestCount,steps.length-1),cpool=steps[stage];
+  let cl=cpool[Math.floor(Math.random()*cpool.length)];
+  if(isHero(id))cl=cl.replaceAll('責任者さん',heroCall(id));
+  homeTouchLine=cl;homeTouchStage=stage;
+  if(view==='home')render();
+  return stage;
+ }
  const pool=set[zone]||set.tap;
  const key=id+':'+zone;let k=Math.floor(Math.random()*pool.length);
  if(pool.length>1&&k===homeTouchLast[key])k=(k+1)%pool.length;
