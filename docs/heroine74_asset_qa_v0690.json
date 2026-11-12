@@ -1954,7 +1954,7 @@
         1024,
         1536
       ],
-      "alpha_method": "user_png_source_alpha",
+      "alpha_method": "source_alpha",
       "output_full": [
         1024,
         1536
@@ -1968,9 +1968,9 @@
         400
       ],
       "full_bbox": [
-        189,
+        192,
         16,
-        754,
+        753,
         1524
       ]
     },
@@ -1981,7 +1981,7 @@
         1024,
         1536
       ],
-      "alpha_method": "user_png_source_alpha",
+      "alpha_method": "source_alpha",
       "output_full": [
         1024,
         1536
@@ -1995,10 +1995,10 @@
         400
       ],
       "full_bbox": [
-        260,
+        262,
         17,
-        706,
-        1517
+        705,
+        1516
       ]
     }
   ],
