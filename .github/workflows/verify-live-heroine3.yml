@@ -1,0 +1,28 @@
+name: Verify merged 3 heroines on live GitHub Pages
+on:
+  push:
+    branches: [assets/redraw-review-02-20-37-20261112]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Chromium
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Verify 3 SR heroines and art on public live site
+        run: python tools/qa/verify_live_heroine3.py
+      - name: Save browser observations and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-heroine3-check
+          path: qa_artifacts/live_three_heroines
+          if-no-files-found: warn
