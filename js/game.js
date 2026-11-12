@@ -1283,7 +1283,7 @@ const nav=[['home','⌂','ホーム'],['story','▤','ストーリー'],['city',
 function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.71.1 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
 function heading(en,title,sub){return `<div class="eyebrow">${en}</div><h1 class="page-title">${title}</h1><p class="desc">${sub}</p>`}
 function chars(cards,buttons=true){
- const units=cards.map(id=>unit(id)).filter(u=>visibleUnitV026(u));
+ const units=cards.map(id=>unit(id)).filter(u=>!!u&&heroV0690Visible(u.person,S));
  const compact=onePortraitPerPerson(units).sort((a,b)=>(a.person==='momoka'?0:a.person==='milku'?1:2)-(b.person==='momoka'?0:b.person==='milku'?1:2));
  return `<div class="chargrid">${compact.map(u=>{
  const group=COMPACT_PEOPLE.has(u.person)?units.filter(x=>x.person===u.person):null;
@@ -2200,7 +2200,7 @@ function changeRosterRarityFilter(value){if(!['all','SR','SSR','UR'].includes(va
 function assignRosterOwnedUnit(id){if(hiddenV0690Party())return toast('元の一時非表示の編成を保持するため公開再開後に変更できます');if(!data(id)||!unit(id))return toast('未所持のユニットは編成できません');rosterPickerOpen=false;return setSlot(rosterEditSlot,id);}
 
 const isConcept=personId=>personId.startsWith('concept')&&!DISTRICT_HERO_IDS.includes(personId);
-const homeMembers=()=>Array.from(new Set([...HERO_IDS.filter(id=>romanceHeroAvailable(id)),...UNITS.filter(u=>data(u.id)&&visibleUnitV026(u)).map(u=>u.person)]));
+const homeMembers=()=>Array.from(new Set([...HERO_IDS.filter(id=>romanceHeroAvailable(id)),...UNITS.filter(u=>data(u.id)&&heroV0690Visible(u.person,S)).map(u=>u.person)]));
 function lobbyCycle(offset){const members=homeMembers();let current=members.indexOf(lobbySelected);lobbySwitch(members[(current+offset+members.length)%members.length]||members[0]||'momoka')}
 function homeFromRoster(p){if(!homeMembers().includes(p))return; lobbySwitch(p);change('home')}
 function changeRosterFilter(filter){if(!['all','owned','unowned','visual','trainable'].includes(filter))return;rosterFilter=filter;render();}
@@ -2361,7 +2361,7 @@ function openHomeCharacterDetail(){const u=UNITS.find(u=>u.person===lobbySelecte
 function homeProgressSummary(){
  const completed=QUESTS.filter(q=>S.quests[q.id]?.complete).length;
  const next=QUESTS.find(q=>!S.quests[q.id]?.complete&&questSheetAction(q).kind!=='locked')||null;
- const owned=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));
+ const owned=UNITS.filter(u=>data(u.id)&&heroV0690Visible(u.person,S));
  return {completed,total:QUESTS.length,next,owned:owned.length,trainable:owned.filter(canTrainUnit).length};
 }
 function homeGoToNextQuest(id){
@@ -2810,7 +2810,7 @@ function trainingPage(){
  </section>`;
 }
 function unitDetail(){
- const u=(visibleUnitV026(unit(S.selected))?unit(S.selected):UNITS.find(x=>visibleUnitV026(x)&&data(x.id)))||UNITS[0],d=data(u.id),p=person(u),s=d?unitPower(u.id):ROLES[u.role],rank=d?skillRank(u.id):0;
+ const u=(heroV0690Visible(unit(S.selected)?.person,S)?unit(S.selected):UNITS.find(x=>heroV0690Visible(x.person,S)&&data(x.id)))||UNITS[0],d=data(u.id),p=person(u),s=d?unitPower(u.id):ROLES[u.role],rank=d?skillRank(u.id):0;
  const temp=isConcept(u.person);
  const status=d?`所持中 · Lv.${d.lv}`:'未所持';
  const lv=d?.lv||1, nextCost=lv*ECONOMY.LEVEL_COST_PER_LV;
@@ -2977,7 +2977,7 @@ function closeRecruitReveal(){const root=$('recruit-reveal');if(root)root.remove
 function heroTalkPage(u){
  if(!romanceHeroAvailable(u.person))u={person:HERO_IDS.find(x=>romanceHeroAvailable(x))||'momoka'};
  const id=u.person,p=PEOPLE[id],aff=heroAff(id),stage=heroStage(aff),l=loveState();
- const owned=UNITS.filter(x=>data(x.id)&&visibleUnitV026(x)),members=onePortraitPerPerson(owned);
+ const owned=UNITS.filter(x=>data(x.id)&&heroV0690Visible(x.person,S)),members=onePortraitPerPerson(owned);
  const nextEpisodes=[0,1,2,3,4].map(i=>{
   const req=(i+1)*20,entry=BOND_STORY_CATALOG[`bond_${id}_${i}`],available=bondAvailable(id,i),read=bondSeen(id,i),missing=bondMemoryHint(id,i);
   if(!entry)return `<div class="v676-episode romance-episode"><span class="v676-episode-no">0${i+1}</span><div><strong>第${i+1}話 · 制作予定</strong><small>親密度${req}以上 · 次回追加</small></div><button disabled>準備中</button></div>`;
@@ -3011,7 +3011,7 @@ function talk(){
    return heroTalkPage({person:fallback});
  }
  const selectedHero=unit(S.selected);if(loveState()?.activeHero&&isHero(loveState().activeHero))return heroTalkPage({person:loveState().activeHero});if(selectedHero&&isHero(selectedHero.person)&&data(selectedHero.id))return heroTalkPage(selectedHero);
- const units=UNITS.filter(u=>data(u.id)&&visibleUnitV026(u));const u=visibleUnitV026(unit(S.selected))&&data(S.selected)?unit(S.selected):units[0],d=data(u.id),p=person(u),temp=isConcept(u.person);const people=onePortraitPerPerson(units), variants=units.filter(x=>x.person===u.person);
+ const units=UNITS.filter(u=>data(u.id)&&heroV0690Visible(u.person,S));const u=heroV0690Visible(unit(S.selected)?.person,S)&&data(S.selected)?unit(S.selected):units[0],d=data(u.id),p=person(u),temp=isConcept(u.person);const people=onePortraitPerPerson(units), variants=units.filter(x=>x.person===u.person);
  const stories=['出会いの日','少しだけ近い距離','相談室の帰り道','ふたりの大切な約束'];
  return `${heading('BONDS / DAILY LIFE','交流・日常','お気に入りの仲間と会話して、親密度を深めましょう。')}
  <div class="v676-talk-shell">
