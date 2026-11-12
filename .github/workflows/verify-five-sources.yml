@@ -1,0 +1,50 @@
+name: QA - Verify five heroine source images
+on:
+  push:
+    branches:
+      - feature/add-five-approved-heroines-20261112
+  pull_request:
+    paths:
+      - '.github/workflows/verify-five-sources.yml'
+      - 'js/heroines_v0692.js'
+      - 'index.html'
+permissions:
+  contents: read
+jobs:
+  sources:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image inspector
+        run: python -m pip install Pillow
+      - name: Inspect historical PNGs exactly at their original refs
+        run: |
+          python - <<'PY'
+          import hashlib,io,subprocess
+          from PIL import Image
+          items=[
+            ('platinum','0b0ed4529e29f6dca50ce81864a34c95180fba71','assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png',1771831,'96e893a1de6a573bc70026e2e5451954eda0f67d'),
+            ('droopy','origin/assets/ten-individual-standees-20261109-pending','assets/character_candidates/2026-11-09_10_fullbody_standees/02_droopy_tee_smile.png',1092284,'a93d72dcf91725eba98167cdf564f0fd943ad184'),
+            ('megane','origin/main','assets/ART_V2/full_body/megane_woman_20261112.png',976455,'9507a8facc4bbc60401a6395d4d5057283ced6ba'),
+            ('fleece','origin/assets/standee-ash-brown-navy-fleece-20261112','assets/character_candidates/2026-11-12_ash_brown_navy_fleece/ash_brown_navy_fleece_full_body.png',1010833,'dd3ee70498d840a3f6fac79ac87dfd9a9f8495a2')
+          ]
+          subprocess.run(['git','fetch','--no-tags','origin','0b0ed4529e29f6dca50ce81864a34c95180fba71'],check=True,stdout=subprocess.DEVNULL)
+          for name,ref,path,size,sha in items:
+            if ref.startswith('origin/assets/'):
+              short=ref.removeprefix('origin/')
+              subprocess.run(['git','fetch','--no-tags','origin',f'refs/heads/{short}:refs/remotes/origin/{short}'],check=True,stdout=subprocess.DEVNULL)
+            raw=subprocess.check_output(['git','show',f'{ref}:{path}'])
+            blob=subprocess.check_output(['git','hash-object','--stdin'],input=raw).decode().strip()
+            assert blob==sha,(name,'git_blob',blob,sha)
+            assert len(raw)==size,(name,'bytes',len(raw),size)
+            image=Image.open(io.BytesIO(raw));image.verify()
+            image=Image.open(io.BytesIO(raw))
+            assert image.width>500 and image.height>800,(name,image.size)
+            print('VERIFIED',name,'size',image.size,'mode',image.mode,'bytes',size,'gitsha',sha,'sha256',hashlib.sha256(raw).hexdigest())
+          PY
