@@ -245,7 +245,7 @@ const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5}); // Existing 19-heroine-only
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
-const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>heroV0690Visible(u.person)&&!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
+const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
 const NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)));
 const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['tsubaki'],erika:['erika'],kaname:['kaname'],kaede:['kaede'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
@@ -416,7 +416,7 @@ function questUnlocked(q){
  return !intro||!!S.storyFlags?.[intro];
 }
 
-const fresh=()=>({version:1,storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,chapter6_open:false,q31:false,q32:false,q33:false,q34:false,q35:false,q36:false,chapter6_end:false,chapter7_open:false,q37:false,q38:false,q39:false,q40:false,q41:false,q42:false,chapter7_end:false,chapter8_open:false,q43:false,q44:false,q45:false,q46:false,q47:false,q48:false,chapter8_end:false,chapter9_open:false,q49:false,q50:false,q51:false,q52:false,q53:false,q54:false,chapter9_end:false,chapter10_open:false,q55:false,q56:false,q57:false,q58:false,q59:false,q60:false,chapter10_end:false,chapter11_open:false,q61:false,q62:false,q63:false,q64:false,q65:false,q66:false,chapter11_end:false,chapter12_open:false,q67:false,q68:false,q69:false,q70:false,q71:false,q72:false,chapter12_end:false,chapter13_open:false,q73:false,q74:false,q75:false,q76:false,q77:false,q78:false,chapter13_end:false,chapter14_open:false,q79:false,q80:false,q81:false,q82:false,q83:false,q84:false,chapter14_end:false,chapter15_open:false,q85:false,q86:false,q87:false,q88:false,q89:false,q90:false,chapter15_end:false,chapter16_open:false,q91:false,q92:false,q93:false,q94:false,q95:false,q96:false,chapter16_end:false,chapter17_open:false,q97:false,q98:false,q99:false,q100:false,q101:false,q102:false,chapter17_end:false,chapter18_open:false,q103:false,q104:false,q105:false,q106:false,q107:false,q108:false,chapter18_end:false,chapter19_open:false,q109:false,q110:false,q111:false,q112:false,q113:false,q114:false,chapter19_end:false,chapter20_open:false,q115:false,q116:false,q117:false,q118:false,q119:false,q120:false,chapter20_end:false,chapter21_open:false,q121:false,q122:false,q123:false,q124:false,q125:false,q126:false,chapter21_end:false,chapter22_open:false,q127:false,q128:false,q129:false,q130:false,q131:false,q132:false,chapter22_end:false,chapter23_open:false,q133:false,q134:false,q135:false,q136:false,q137:false,q138:false,chapter23_end:false,chapter24_open:false,q139:false,q140:false,q141:false,q142:false,q143:false,q144:false,chapter24_end:false,chapter25_open:false,q145:false,q146:false,q147:false,q148:false,q149:false,q150:false,chapter25_end:false,chapter26_open:false,q151:false,q152:false,q153:false,q154:false,q155:false,q156:false,chapter26_end:false,chapter27_open:false,q157:false,q158:false,q159:false,q160:false,q161:false,q162:false,chapter27_end:false,chapter28_open:false,q163:false,q164:false,q165:false,q166:false,q167:false,q168:false,chapter28_end:false,chapter29_open:false,q169:false,q170:false,q171:false,q172:false,q173:false,q174:false,chapter29_end:false,chapter30_open:false,q175:false,q176:false,q177:false,q178:false,q179:false,q180:false,chapter30_end:false,chapter31_open:false,q181:false,q182:false,q183:false,q184:false,q185:false,q186:false,chapter31_end:false,chapter32_open:false,q187:false,q188:false,q189:false,q190:false,q191:false,q192:false,chapter32_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},chapterChoiceMemory:{},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},choiceMemories:{},choiceMemoryDay:{},choiceMemoryShown:{},choiceBattleShown:{},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
+const fresh=()=>({version:1,hero74RevealMode:'story',hero74MeetSeen:{},storyFlags:{prologue:false,chapter1_open:false,chapter1_end:false,chapter2_open:false,q7:false,q8:false,q9:false,q10:false,q11:false,q12:false,chapter2_end:false,chapter3_open:false,q13:false,q14:false,q15:false,q16:false,q17:false,q18:false,chapter3_end:false,chapter4_open:false,q19:false,q20:false,q21:false,q22:false,q23:false,q24:false,chapter4_end:false,chapter5_open:false,q25:false,q26:false,q27:false,q28:false,q29:false,q30:false,chapter5_end:false,chapter6_open:false,q31:false,q32:false,q33:false,q34:false,q35:false,q36:false,chapter6_end:false,chapter7_open:false,q37:false,q38:false,q39:false,q40:false,q41:false,q42:false,chapter7_end:false,chapter8_open:false,q43:false,q44:false,q45:false,q46:false,q47:false,q48:false,chapter8_end:false,chapter9_open:false,q49:false,q50:false,q51:false,q52:false,q53:false,q54:false,chapter9_end:false,chapter10_open:false,q55:false,q56:false,q57:false,q58:false,q59:false,q60:false,chapter10_end:false,chapter11_open:false,q61:false,q62:false,q63:false,q64:false,q65:false,q66:false,chapter11_end:false,chapter12_open:false,q67:false,q68:false,q69:false,q70:false,q71:false,q72:false,chapter12_end:false,chapter13_open:false,q73:false,q74:false,q75:false,q76:false,q77:false,q78:false,chapter13_end:false,chapter14_open:false,q79:false,q80:false,q81:false,q82:false,q83:false,q84:false,chapter14_end:false,chapter15_open:false,q85:false,q86:false,q87:false,q88:false,q89:false,q90:false,chapter15_end:false,chapter16_open:false,q91:false,q92:false,q93:false,q94:false,q95:false,q96:false,chapter16_end:false,chapter17_open:false,q97:false,q98:false,q99:false,q100:false,q101:false,q102:false,chapter17_end:false,chapter18_open:false,q103:false,q104:false,q105:false,q106:false,q107:false,q108:false,chapter18_end:false,chapter19_open:false,q109:false,q110:false,q111:false,q112:false,q113:false,q114:false,chapter19_end:false,chapter20_open:false,q115:false,q116:false,q117:false,q118:false,q119:false,q120:false,chapter20_end:false,chapter21_open:false,q121:false,q122:false,q123:false,q124:false,q125:false,q126:false,chapter21_end:false,chapter22_open:false,q127:false,q128:false,q129:false,q130:false,q131:false,q132:false,chapter22_end:false,chapter23_open:false,q133:false,q134:false,q135:false,q136:false,q137:false,q138:false,chapter23_end:false,chapter24_open:false,q139:false,q140:false,q141:false,q142:false,q143:false,q144:false,chapter24_end:false,chapter25_open:false,q145:false,q146:false,q147:false,q148:false,q149:false,q150:false,chapter25_end:false,chapter26_open:false,q151:false,q152:false,q153:false,q154:false,q155:false,q156:false,chapter26_end:false,chapter27_open:false,q157:false,q158:false,q159:false,q160:false,q161:false,q162:false,chapter27_end:false,chapter28_open:false,q163:false,q164:false,q165:false,q166:false,q167:false,q168:false,chapter28_end:false,chapter29_open:false,q169:false,q170:false,q171:false,q172:false,q173:false,q174:false,chapter29_end:false,chapter30_open:false,q175:false,q176:false,q177:false,q178:false,q179:false,q180:false,chapter30_end:false,chapter31_open:false,q181:false,q182:false,q183:false,q184:false,q185:false,q186:false,chapter31_end:false,chapter32_open:false,q187:false,q188:false,q189:false,q190:false,q191:false,q192:false,chapter32_end:false,q3:false,q4:false,q5:false,q6:false,seaside_meet:false,lighthouse_meet:false},gems:10000,gold:1800,pulls:0,owned:{momoka_work:{lv:1,aff:0,lb:0,copies:0},milku_work:{lv:1,aff:0,lb:0,copies:0},momoka_sky:{lv:1,aff:0,lb:0,copies:0},milku_star:{lv:1,aff:0,lb:0,copies:0},akane_work:{lv:1,aff:0,lb:0,copies:0},aoi_work:{lv:1,aff:0,lb:0,copies:0}},party:['momoka_work','milku_work','akane_work','aoi_work'],quests:{},achievements:{},grindRuns:{},gachaPity:0,gachaSrStreak:0,dailyChats:{},love:initialLove(),dailySkips:{date:"",count:0},chapterChoiceMemory:{},bondRead:{momoka:[false,false,false,false,false],milku:[false,false,false,false,false],...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,[false,false,false,false,false]]))},choiceMemories:{},choiceMemoryDay:{},choiceMemoryShown:{},choiceBattleShown:{},bondLastTopic:{momoka:-1,milku:-1,...Object.fromEntries(NEW_HERO_IDS.map(id=>[id,-1]))},talks:0,selected:'momoka_work',currentQuest:'q1',battleMode:'turn',battleModeOptInV03466:true,mode:'auto',homeFavorite:'momoka',homeUnitId:'momoka_work',playerName:'主人公',questGuideSeen:false,onboarding:{enabled:false,stage:'none',seen:{}},artPose:'dynamic',audio:validAudioSettings(null),gameStarted:false,investigations:{},insightRewards:{},shinonomeMet:false,oldcafeMet:false,oldcafeMeetingProgress:0,stationMet:false,stationMeetingProgress:0,schoolMet:false,schoolMeetingProgress:0,officeMet:false,officeMeetingProgress:0,seasideMet:false,seasideMeetingProgress:0,lighthouseMet:false,lighthouseMeetingProgress:0,tsubakiMet:false,erikaMet:false,kanameMet:false,kaedeMet:false,tsubakiMeetingProgress:0,erikaMeetingProgress:0,kanameMeetingProgress:0,kaedeMeetingProgress:0,sisterTalkSeen:{},chapter3Met:{saki:false,yuzu:false,anzu:false,reiko:false,chiyo:false,nazuna:false},chapter4Met:Object.fromEntries(NEW_HERO_IDS_V028.map(id=>[id,false])),heroSelectTickets:1,heroSelectTicketGranted:true,pickupStartDay:{shinonome:null,oldcafe:null,station:null,school_new:null,seaside:null,lighthouse:null,tsubaki:null,erika:null,kaname:null,kaede:null,chapter3_port:null,chapter4_city:null}});
 // SaveStore deliberately reads/writes only KEY. OLD_KEY remains strictly read-only for backup.
 const SaveStore=Object.freeze({
   key:KEY,
@@ -972,6 +972,10 @@ function migrateSave(raw){
   result.battleMode=raw.battleModeOptInV03466===true&&raw.battleMode==='legacy'?'legacy':'turn';
   result.battleModeOptInV03466=true;
   result.storyFlags=isRecord(raw.storyFlags)?{...defaults.storyFlags,...raw.storyFlags}:defaults.storyFlags;
+  // Old saves predate the reveal marker and immediately unlock cleared quests.
+  result.hero74RevealMode=raw.hero74RevealMode==='story'?'story':'legacy';
+  result.hero74MeetSeen=isRecord(raw.hero74MeetSeen)?Object.fromEntries(
+    HERO74_QUEST_IDS.filter(qid=>raw.hero74MeetSeen[qid]===true).map(qid=>[qid,true])):{};
   // A completed episode alone makes its first selection eligible for restoration.
   // Legacy saves have no evidence of the original selection and remain neutral.
   result.chapterChoiceMemory={};
@@ -1631,6 +1635,7 @@ function homeWords(id){
 }
 function heroCall(id){return heroClose(id)?id==='momoka'?'キミ':'あなた':'責任者さん'}
 function romanceScript(id){
+ if(id.startsWith('hero74_'))return hero74EncounterScript(id,S);
  if(id==='shinonome_meet')return SHINONOME_MEETING;
  if(id==='oldcafe_meet')return OLDCAFE_MEETING;
  if(id==='station_meet')return STATION_MEETING;
@@ -1669,6 +1674,11 @@ const FLESHOUT_SOLVED_TAILS=Object.freeze({q1:['葵「時計に残された未�
 const FLESHOUT_LEADS=Object.freeze({q1_lead:'q1',q2_lead:'q2',q3_lead:'q3',q4_lead:'q4',q5_lead:'q5',q7_lead:'q7',q8_lead:'q8',q9_lead:'q9',q10_lead:'q10',q11_lead:'q11',q12_lead:'q12'});
 const FLESHOUT_PREBATTLE=Object.freeze({q6_ready:'q6'});
 function storyAllowed(id){
+ if(id==='hero74_backlog')return hero74PendingQuestIds(S).length>0;
+ if(id.startsWith('hero74_')){
+  const qid=id.slice('hero74_'.length);
+  return !!HERO74_ENCOUNTERS[qid]&&!!S.quests?.[qid]?.complete;
+ }
  if(FLESHOUT_LEADS[id])return questNarrativeReady(QUEST_BY_ID[FLESHOUT_LEADS[id]]);
  if(FLESHOUT_PREBATTLE[id])return investigationState(FLESHOUT_PREBATTLE[id])?.phase==='ready'||!!S.storyFlags?.[id];
  if(id==='chapter32_open')return !!S.storyFlags?.chapter31_end;
@@ -1960,6 +1970,14 @@ function skipChapterStory(){if(storySession)finishStory()}
 function finishStory(){
  if(!storySession)return;
  const id=storySession.id;
+ if(id==='hero74_backlog'||(id.startsWith('hero74_')&&HERO74_ENCOUNTERS[id.slice('hero74_'.length)])){
+  const qids=id==='hero74_backlog'?hero74PendingQuestIds(S):[id.slice('hero74_'.length)];
+  if(!S.hero74MeetSeen||typeof S.hero74MeetSeen!=='object')S.hero74MeetSeen={};
+  for(const qid of qids)S.hero74MeetSeen[qid]=true;
+  persist();storySession=null;view=id==='hero74_backlog'?'home':'city';render();
+  if(qids.length)toast('街で出会った人たちの記録を読み終えました。');
+  return;
+ }
  if(BOND_STORY_CATALOG[id]){
   const script=BOND_STORY_CATALOG[id],i=script.threshold/20-1;
   const first=!bondSeen(script.person,i);
@@ -2024,6 +2042,10 @@ function finishStory(){
  if(flow)questStoryFlow=null;
  persist();storySession=null;
  if(flow?.type==='pre'){view='city';startBattle(flow.qid);return;}
+ // An independent encounter starts after the original epilogue finishes.
+ if(flow?.type==='post'&&hero74PendingQuestIds(S).includes(flow.qid)){
+  view='city';openStory('hero74_'+flow.qid);return;
+ }
  view=flow?.type==='post'?'city':'story';render();
  if(first)toast(flow?.type==='post'?'後日談を読了しました。':'物語を読了しました。');
 }
@@ -2438,6 +2460,7 @@ function home(){
   ${homePickerOpen?`<section class="home-chooser mock-favorite-chooser"><div class="home-chooser-head"><strong>お気に入りキャラを選択</strong><button type="button" onclick="toggleHomePicker()">× 閉じる</button></div><div class="lobby-people home-favorites-rail">${members.map(p=>`<button type="button" class="lobby-face ${lobbySelected===p?'active':''}" aria-pressed="${lobbySelected===p}" onclick="lobbySwitch('${p}')"><img src="${characterIcon(p)}" alt=""><span>${esc(PEOPLE[p].name)}</span></button>`).join('')}</div></section>`:''}
 
   <section class="mock-shortcuts" aria-label="メインメニュー">${cards.map(([cls,title,en,ico,click])=>`<button type="button" class="mock-menu-card ${cls} home-picture-card ${cls==='quest'?'story':cls==='contact'?'contact':cls==='summon'?'summon':'form'}" onclick="${click}" aria-label="${title}へ移動"><span class="mock-menu-icon">${ico}</span><span class="mock-menu-title">${title}<small>${en}</small></span><span class="mock-menu-arrow">›</span></button>`).join('')}</section>
+  ${hero74PendingQuestIds(S).length?`<section class="card pad hero74-home-meetings" aria-label="街で出会った人"><h3>街で出会った人</h3><p>まだ読んでいない出会いの場面をまとめて見られます（${hero74PendingQuestIds(S).reduce((n,qid)=>n+HERO74_ENCOUNTERS[qid].heroes.length,0)}人）。クリア済みのクエストと所持キャラの情報はそのまま残ります。</p><button type="button" class="btn primary" onclick="openStory('hero74_backlog')">出会いの記録を読む</button></section>`:''}
   ${teamRuleError()?`<button class="mock-team-warning" onclick="change('roster')">編成の見直しが必要です。編成画面へ ›</button>`:''}
   <section class="mock-news-area"><div class="mock-news-board"><div class="mock-news-header"><h2>♧ お知らせ</h2><button type="button" onclick="showHomeNotice()">もっと見る　›</button></div>${homeNewsMarkup()}</div>${homeAchievementCard()}</section>
   ${homeNoticeOpen?`<div class="mock-notice-overlay" role="dialog" aria-modal="true" aria-label="お知らせ一覧"><div class="mock-notice-sheet"><div class="mock-news-header"><h2>お知らせ</h2><button type="button" onclick="hideHomeNotice()">× 閉じる</button></div>${homeNewsMarkup()}</div></div>`:''}
@@ -3678,8 +3701,10 @@ function finishBattle(won){
   if(callback)dialog.message+=`\n\n【${PEOPLE[callback.id].name}／帰還後のひと言】\n${callback.text}`;
   if(won&&firstClear&&!battle.grind){
   const after=questAfterStory(questId);
-  pendingStory=after?{type:'post',qid:questId,storyId:after}:null;
-  dialog.message+=after?'\n閉じると後日談が始まります。':'\n続きの物語は「ストーリー」画面から読めます。';
+  const meet=HERO74_ENCOUNTERS[questId]?'hero74_'+questId:null;
+  const nextStoryId=after||meet;
+  pendingStory=nextStoryId?{type:'post',qid:questId,storyId:nextStoryId}:null;
+  dialog.message+=after?'\n閉じると後日談が始まります。':meet?'\n閉じると街での出会いが始まります。':'\n続きの物語は「ストーリー」画面から読めます。';
  }
   battle=null;questActionInProgress=false;view='city';lastFrame=0; // v0.34.41.0: 勝利後はホームへ飛ばさず、続きの物語→（初回案内中なら）ホームの順にする
   if(next){dialog=null;startBattle(questId,next);return}
