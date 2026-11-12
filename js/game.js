@@ -2179,7 +2179,28 @@ function poseSelector(personId){
 function highlightUnit(id){if(!BYID[id])return;rosterHighlight=id;render();}
 
 function lobbySwitch(p){if(!PEOPLE[p]||!homeMembers().includes(p))return;lobbySelected=p;lobbyLine=0;S.homeFavorite=p;S.homeUnitId=homeUnit(p)?.id||null;persist();if(view==='home')render()}
-function lobbyTalk(){const lines=isHero(lobbySelected)?homeWords(lobbySelected):PEOPLE[lobbySelected].lines;lobbyLine=(lobbyLine+1)%lines.length;if(view==='home')render()}
+// v0.68.6.0: ホームでキャラをタッチしたときの専用セリフ（頭をなでる／つつく／つつきすぎ）
+let homeTouchLine=null,homeTouchLast={};
+const HOME_TOUCH_LINES=Object.freeze({
+ momoka:{head:['わっ、頭なでた!?　……えへへ、もう一回だけなら、いいよ。','なでなでされると、たい焼きより元気出るかも！','ちょ、ちょっと！　髪がくしゃくしゃになっちゃう〜。'],tap:['なになに？　呼んだ？','つんつんしないの！　くすぐったいってば。','ん？　今日のおすすめは、商店街のたい焼き屋さんだよ！'],many:['もー！　責任者さん、さっきからつつきすぎ！','……そんなに構ってほしいの？　しょうがないなあ。']},
+ milku:{head:['あ……。撫でられるのは、少しだけ恥ずかしいです。','ふふ、子ども扱いですか？　……悪くはないですけど。','お、お茶がこぼれちゃいますから……！'],tap:['はい、なんでしょう？','ひゃっ……びっくりしました。','おかわりですか？　すぐに淹れますね。'],many:['も、もう……そんなにつつかれたら、手元が狂ってしまいます。','ふふ、今日はずいぶん甘えん坊さんですね。']},
+ polite:{head:['あ……撫でられると、少し照れてしまいます。','ふふ、ありがとうございます。元気が出ました。','急にどうしたんですか？　……嫌じゃないですけど。'],tap:['はい、呼びましたか？','わっ……びっくりしました。','何かご用でしょうか？'],many:['も、もう……からかわないでください。','そんなにつつかれたら、困ってしまいます。']},
+ casual:{head:['わっ、なに急に？　……まあ、悪くないけど。','えへへ、なでられるの、けっこう好きかも。','髪、くしゃくしゃになるってば〜。'],tap:['ん？　呼んだ？','わっ、びっくりした！','なになに、どうしたの？'],many:['もー、つつきすぎ！','ちょっと、さっきから何回目？　……ふふ、しょうがないなあ。']}
+});
+function homeTouchReact(zone){
+ const id=lobbySelected;
+ let set=HOME_TOUCH_LINES[id];
+ if(!set){const ls=(isHero(id)?homeWords(id):PEOPLE[id]?.lines)||[];set=/です|ます|ません|でしょう/.test(ls.join(''))?HOME_TOUCH_LINES.polite:HOME_TOUCH_LINES.casual;}
+ const pool=set[zone]||set.tap;
+ const key=id+':'+zone;let k=Math.floor(Math.random()*pool.length);
+ if(pool.length>1&&k===homeTouchLast[key])k=(k+1)%pool.length;
+ homeTouchLast[key]=k;
+ let line=pool[k];
+ if(isHero(id))line=line.replaceAll('責任者さん',heroCall(id));
+ homeTouchLine=line;
+ if(view==='home')render();
+}
+function lobbyTalk(){homeTouchLine=null;const lines=isHero(lobbySelected)?homeWords(lobbySelected):PEOPLE[lobbySelected].lines;lobbyLine=(lobbyLine+1)%lines.length;if(view==='home')render()}
 let homePickerOpen=false;
 function toggleHomePicker(){homePickerOpen=!homePickerOpen;if(view==='home')render()}
 function openHomeCharacterDetail(){const u=UNITS.find(u=>u.person===lobbySelected&&data(u.id));if(u){S.selected=u.id;change('unit')}else change('roster')}
@@ -2232,7 +2253,7 @@ function home(){
  const banners=homeBanners(next);homeBannerIndex=Math.min(homeBannerIndex,banners.length-1);
  const banner=banners[homeBannerIndex];
  const lines=isHero(lobbySelected)?homeWords(lobbySelected):who.lines;
- const phrase=lines[lobbyLine%lines.length]||'';
+ const phrase=homeTouchLine||lines[lobbyLine%lines.length]||'';
  const cardTitle=featured?.title||'ホームイラスト';
  const roman=(who.roman||who.en||who.nameEn||({momoka:'Momoka',milku:'Milku'}[lobbySelected]||lobbySelected)).toString();
  const displayName=who.name.split(/[ 　]/).pop()||who.name;
