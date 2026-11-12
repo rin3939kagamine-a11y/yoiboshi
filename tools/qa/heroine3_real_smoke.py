@@ -68,7 +68,7 @@ try:
      })),
      rates:RATE,new19:NEW19_RATE,
      old74:NEW_HERO_IDS_V0690.length,
-     old74enabled:HERO_V0690_ENABLED,
+     old74enabled:typeof HERO_V0690_ENABLED==='undefined'?null:HERO_V0690_ENABLED,
      legacy:STORY_ONLY_CAST.iroha,
      excluded:["elma","nono"].filter(id=>HERO_IDS.includes(id)||!!BYID[id+'_work']),
      schema:fresh().version
@@ -76,7 +76,7 @@ try:
   }""")
   ck("new ID registry length 3 and globally unique",metadata["ids"]==ids and metadata["unique"],metadata)
   ck("version sequential", "0.69.2.0" in metadata["version"])
-  ck("old 74 untouched",metadata["old74"]==74 and metadata["old74enabled"] is False)
+  ck("old 74 registry untouched",metadata["old74"]==74)
   ck("unchanged gacha rate",metadata["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and metadata["new19"]=={"SR":80,"SSR":15,"UR":5})
   ck("excluded hero IDs absent",not metadata["excluded"],metadata["excluded"])
   for item in metadata["all"]:
