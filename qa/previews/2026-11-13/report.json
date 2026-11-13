@@ -1,0 +1,119 @@
+{
+  "pr64_v1": {
+    "file": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v1.png",
+    "ref": "4788202e943344e48f2a9b45920042071f5c0f19",
+    "bytes": 1465140,
+    "sha256": "edba2b78575fd1ebfb713c47729ef35aeb24b68ff4e65ccb263842cf18099e4c",
+    "sha256_expected": "edba2b78575fd1ebfb713c47729ef35aeb24b68ff4e65ccb263842cf18099e4c",
+    "sha256_matches": true,
+    "git_blob_sha": "bd21d625502f298b862fa954276e04eea9551b8b",
+    "git_blob_expected": "bd21d625502f298b862fa954276e04eea9551b8b",
+    "git_blob_matches": true,
+    "format": "PNG",
+    "mode": "RGB",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha_min_max": null,
+    "fully_transparent_pixels": 0,
+    "partially_transparent_pixels": 0,
+    "fully_opaque_pixels": 1572864,
+    "alpha_bounding_box": [
+      0,
+      0,
+      1024,
+      1536
+    ]
+  },
+  "pr64_v2": {
+    "file": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png",
+    "ref": "4788202e943344e48f2a9b45920042071f5c0f19",
+    "bytes": 814761,
+    "sha256": "02977e9175e79b945ea67e08669622cd8ac08b4fc282c19dc9fe268aa4b9f175",
+    "sha256_expected": "02977e9175e79b945ea67e08669622cd8ac08b4fc282c19dc9fe268aa4b9f175",
+    "sha256_matches": true,
+    "git_blob_sha": "53b5f76211945fb6dfda8d1122a6faf374d95e2d",
+    "git_blob_expected": "53b5f76211945fb6dfda8d1122a6faf374d95e2d",
+    "git_blob_matches": true,
+    "format": "PNG",
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha_min_max": [
+      0,
+      255
+    ],
+    "fully_transparent_pixels": 1091328,
+    "partially_transparent_pixels": 474478,
+    "fully_opaque_pixels": 7058,
+    "alpha_bounding_box": [
+      249,
+      0,
+      717,
+      1536
+    ]
+  },
+  "pr81": {
+    "file": "assets/character_candidates/2026-11-12_rust_red_standee/full_body.png",
+    "ref": "ad61f756f3d8e0ec933dc68ada7a9979c4e54f1f",
+    "bytes": 1483532,
+    "sha256": "c87f6a6efcd54dbd4ae5e4c4cb3c1956be92793f8ba3c25713df7e3f61eb349e",
+    "sha256_expected": "c87f6a6efcd54dbd4ae5e4c4cb3c1956be92793f8ba3c25713df7e3f61eb349e",
+    "sha256_matches": true,
+    "git_blob_sha": "cb29e7103f5aa37b912a23b48b4cf9ce0b6fa72c",
+    "git_blob_expected": "cb29e7103f5aa37b912a23b48b4cf9ce0b6fa72c",
+    "git_blob_matches": true,
+    "format": "PNG",
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha_min_max": [
+      0,
+      254
+    ],
+    "fully_transparent_pixels": 1219514,
+    "partially_transparent_pixels": 353350,
+    "fully_opaque_pixels": 0,
+    "alpha_bounding_box": [
+      25,
+      0,
+      989,
+      1536
+    ]
+  },
+  "pr82": {
+    "file": "assets/character_candidates/2026-11-12_brown_ponytail_white_lace/brown_ponytail_white_lace_full_body.png",
+    "ref": "9aedf446ee3a7dabff0fe1bd9ba0d13e9ffb44f9",
+    "bytes": 1416036,
+    "sha256": "9bcb3d095fbbcf0ba53152d2b244df14056766e64ac946e01ebcb5b67f00f486",
+    "sha256_expected": "9bcb3d095fbbcf0ba53152d2b244df14056766e64ac946e01ebcb5b67f00f486",
+    "sha256_matches": true,
+    "git_blob_sha": "07069993185031ea93823f881c51a924c96b63c9",
+    "git_blob_expected": "07069993185031ea93823f881c51a924c96b63c9",
+    "git_blob_matches": true,
+    "format": "PNG",
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "alpha_min_max": [
+      0,
+      254
+    ],
+    "fully_transparent_pixels": 1263465,
+    "partially_transparent_pixels": 309399,
+    "fully_opaque_pixels": 0,
+    "alpha_bounding_box": [
+      33,
+      0,
+      973,
+      1536
+    ]
+  }
+}
