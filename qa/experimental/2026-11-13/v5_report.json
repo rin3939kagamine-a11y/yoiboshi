@@ -1,0 +1,20 @@
+{
+  "v5a_strict": {
+    "file": "qa/experimental/2026-11-13/pr64_v5a_strict_CANDIDATE.png",
+    "size": 923210,
+    "sha256": "ac918844752468a4f3ae2564e6aada667e83b9a0d0613b411296ad9a2ca1500d",
+    "pixels_changed": 4327
+  },
+  "v5b_soft": {
+    "file": "qa/experimental/2026-11-13/pr64_v5b_soft_CANDIDATE.png",
+    "size": 924096,
+    "sha256": "2ce1c0044ee218a6275076fabb88b44f2a904e687490055a5aa1480d821f1a42",
+    "pixels_changed": 5407
+  },
+  "v5c_balanced": {
+    "file": "qa/experimental/2026-11-13/pr64_v5c_balanced_CANDIDATE.png",
+    "size": 924031,
+    "sha256": "458879be2b23aef7afbe0d675c0719f524af6f377dbe2433f8100e5d74f253e6",
+    "pixels_changed": 5112
+  }
+}
