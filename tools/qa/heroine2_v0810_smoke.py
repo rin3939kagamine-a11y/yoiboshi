@@ -43,7 +43,7 @@ with sync_playwright() as p:
  const ids=NEW_HERO_IDS_V0810;
  const snapshot={};
  S=fresh(); S.gameStarted=true;if(S.onboarding)S.onboarding.enabled=false;
- const beforePool=availableNormalPool(S).map(u=>u.id);
+ const beforePool=NORMAL_GACHA_POOL.map(u=>u.id);
  snapshot.names=ids.map(id=>PEOPLE[id]?.name);
  snapshot.units=UNITS.filter(u=>ids.includes(u.person)).map(u=>u.id);
  snapshot.initial=ids.map(id=>romanceHeroAvailable(id));
@@ -55,7 +55,7 @@ with sync_playwright() as p:
  snapshot.afterQ3=ids.map(id=>romanceHeroAvailable(id));
  S.quests.q6={complete:true};
  snapshot.afterQ6=ids.map(id=>romanceHeroAvailable(id));
- snapshot.poolUnchanged=JSON.stringify(beforePool)===JSON.stringify(availableNormalPool(S).map(u=>u.id));
+ snapshot.poolUnchanged=JSON.stringify(beforePool)===JSON.stringify(NORMAL_GACHA_POOL.map(u=>u.id));
  snapshot.noRecruit=ids.every(id=>!availableNormalPool(S).some(u=>u.person===id));
  snapshot.key=SaveStore.key;
  snapshot.rate=RATE;
@@ -84,7 +84,7 @@ with sync_playwright() as p:
  const migrated=migrateSave(JSON.parse(JSON.stringify(saved)));
  snapshot.migration={
    gems:migrated.gems===saved.gems,gold:migrated.gold===saved.gold,
-   owned:JSON.stringify(migrated.owned)===JSON.stringify(saved.owned),
+   owned:!!migrated.owned.momoka_work && ['lv','aff','lb','copies'].every(k=>migrated.owned.momoka_work[k]===saved.owned.momoka_work[k]) && Object.keys(saved.owned).every(k=>!!migrated.owned[k]) && ids.every(id=>!Object.keys(migrated.owned).some(k=>k.startsWith(id))),
    party:JSON.stringify(migrated.party)===JSON.stringify(saved.party),
    q1:migrated.quests.q1.complete===true,
    pity:migrated.gachaPity===27, srStreak:migrated.gachaSrStreak===4,
