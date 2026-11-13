@@ -1654,6 +1654,7 @@ function homeWords(id){
 }
 function heroCall(id){return heroClose(id)?id==='momoka'?'キミ':'あなた':'責任者さん'}
 function romanceScript(id){
+ if(V0810_MEET_STORIES[id])return V0810_MEET_STORIES[id];
  if(id.startsWith('hero74_'))return hero74EncounterScript(id,S);
  if(id==='shinonome_meet')return SHINONOME_MEETING;
  if(id==='oldcafe_meet')return OLDCAFE_MEETING;
@@ -2073,6 +2074,10 @@ function skipChapterStory(){if(storySession)finishStory()}
 function finishStory(){
  if(!storySession)return;
  const id=storySession.id;
+ if(V0810_MEET_STORIES[id]){
+  S.storyFlags[id]=true;persist();storySession=null;view='talk';render();
+  toast('出会いの記録を読み終えました。交流は引き続き利用できます。');return;
+ }
  if(id==='hero74_backlog'||(id.startsWith('hero74_')&&HERO74_ENCOUNTERS[id.slice('hero74_'.length)])){
   const qids=id==='hero74_backlog'?hero74PendingQuestIds(S):[id.slice('hero74_'.length)];
   if(!S.hero74MeetSeen||typeof S.hero74MeetSeen!=='object')S.hero74MeetSeen={};
@@ -3141,6 +3146,7 @@ function heroTalkPage(u){
  ${romanceTodayCard(id)}<div class="v676-talk-summary"><div><span class="v676-eyebrow">BOND LEVEL · ${esc(stage)}</span><h3>親密度 <b>${aff}</b> <small>/ 100</small></h3><div class="v676-affinity-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${aff}"><i style="width:${aff}%"></i></div></div>
  <button class="v676-chat-button" ${!romanceHeroAvailable(id)||l.actions<=0&&!l.pending?'disabled':''} onclick="${l.pending?'openRomancePending()':`openRomancePlacePicker('${id}')`}">${l.pending?'♡ 帰り道の会話を続ける':'♡ '+heroineDisplayName(id)+'とお出かけ'} <small>${l.pending?'会話の続きがあります':l.actions<=0?'今日の行動は終わりです':`残り${l.actions}回 ・ 行き先を選びます`}</small></button></div></section>
  <aside class="v676-talk-aside">
+ ${NEW_HERO_IDS_V0810.includes(id)?`<section class="v676-talk-card"><div class="v676-side-title"><span>FIRST MEETING</span><h3>出会いの日</h3></div><button class="btn outline" onclick="openStory('v0810_meet_${id}')">出会いの物語を読む</button><small>本編のクエスト・報酬には影響しません。</small></section>`:''}
  ${characterDepthCard(id,aff)}
  ${extraHero(id)?`<section class="v676-talk-card romance-topics"><div class="v676-side-title"><span>DAILY TOPICS</span><h3>日常の話題 · 8話題</h3></div><div class="romance-topic-grid">${romanceTopicLines(id).map((topic,i)=>`<button type="button" class="btn outline mini" onclick="showRomanceTopic('${id}',${i})">${esc(topic.title)}</button>`).join('')}</div><small>話題は自由に読み返せます。行動回数と親密度は変わりません。</small></section>`:''}<section class="v676-talk-card v676-episode-card"><div class="v676-side-title"><span>PERSONAL STORIES</span><h3>絆エピソード · ${esc(stage)}</h3></div>${nextEpisodes}</section><p class="v676-talk-disclaimer">恋愛会話は試作用。好みは訪問後の手帳に記録されます。</p></aside></div>`;
 }
