@@ -9,6 +9,32 @@ from PIL import Image
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[2]
+# Compare actual source definitions against main, rather than comparing a pool
+# before/after quest completion (quest unlocks legitimately change the pool).
+import subprocess
+baseline=subprocess.check_output(["git","show","origin/main:js/game.js"],cwd=ROOT,text=True)
+current=(ROOT/"js/game.js").read_text(encoding="utf-8")
+unchanged_definitions=[
+    "const KEY=",
+    "const RATE=Object.freeze(",
+    "const NEW19_RATE=Object.freeze(",
+    "const GACHA_CONFIG=Object.freeze(",
+    "const NORMAL_GACHA_POOL=Object.freeze(",
+    "const NEW19_GACHA_POOL=Object.freeze(",
+    "const UNITS=[",
+    "UNITS.push("
+]
+for term in unchanged_definitions:
+    start_a=baseline.find(term);start_b=current.find(term)
+    assert start_a>=0 and start_b>=0,(term,"missing")
+    if term=="const UNITS=[":
+        a=baseline[start_a:baseline.find("\\n];",start_a)+3]
+        b=current[start_b:current.find("\\n];",start_b)+3]
+    else:
+        a=baseline[start_a:baseline.find("\\n",start_a)]
+        b=current[start_b:current.find("\\n",start_b)]
+    assert a==b,(term,"changed from main")
+print("STATIC INVARIANTS: save key, rarity rates, unit base roster, unit appends, and both gacha pool definitions equal main",flush=True)
 K="sakakibara_kaho"
 R="minase_ririka"
 FILES={
