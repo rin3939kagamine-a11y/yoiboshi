@@ -1,0 +1,55 @@
+name: 2026-11-13 PR64 high-quality person matting candidate
+on:
+  push:
+    branches: [qa/20261113-independent-standee-check]
+    paths: [.github/workflows/qa-20261113-pr64-u2net.yml]
+permissions:
+  contents: write
+jobs:
+  rematte:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated background remover
+        run: python -m pip install --quiet "rembg[cpu]" pillow
+      - name: Independently rerun full-size U2Net segmentation on original v1
+        run: |
+          python - <<'PY'
+          import hashlib,io,os,json,urllib.request
+          from PIL import Image
+          from rembg import remove,new_session
+          ref='4788202e943344e48f2a9b45920042071f5c0f19'
+          url=f'https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/{ref}/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v1.png'
+          with urllib.request.urlopen(url,timeout=80) as r:raw=r.read()
+          assert hashlib.sha256(raw).hexdigest()=='edba2b78575fd1ebfb713c47729ef35aeb24b68ff4e65ccb263842cf18099e4c'
+          im=Image.open(io.BytesIO(raw)).convert('RGB')
+          session=new_session('u2net')
+          out=remove(im,session=session,post_process_mask=True,alpha_matting=True,alpha_matting_foreground_threshold=240,alpha_matting_background_threshold=8,alpha_matting_erode_size=5).convert('RGBA')
+          assert out.size==(1024,1536)
+          os.makedirs('qa/experimental/2026-11-13',exist_ok=True)
+          path='qa/experimental/2026-11-13/pr64_v4_u2net_fullsize_CANDIDATE.png'
+          out.save(path,optimize=True,compress_level=9)
+          with open(path,'rb') as f: data=f.read()
+          alpha=out.getchannel('A');hist=alpha.histogram()
+          obj={'path':path,'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data),'mode':out.mode,'size':list(out.size),'alpha_min_max':list(alpha.getextrema()),'transparent':hist[0],'partial':sum(hist[1:255]),'opaque':hist[255]}
+          print('V4_U2NET_QA',json.dumps(obj),flush=True)
+          with open('qa/experimental/2026-11-13/v4_u2net_report.json','w') as f:json.dump(obj,f,indent=2)
+          small=out.resize((384,576),Image.Resampling.LANCZOS)
+          panel=Image.new('RGB',(768,576))
+          for x,bg in [(0,'#101019'),(384,'#e8ebee')]:
+              lay=Image.new('RGBA',(384,576),bg);lay.alpha_composite(small);panel.paste(lay.convert('RGB'),(x,0))
+          panel.save('qa/experimental/2026-11-13/v4_u2net_dark_light.jpg',quality=90,optimize=True)
+          for region,rect in [('hair',(210,0,725,650)),('torso',(210,250,755,880)),('feet',(225,1120,730,1536))]:
+              sub=out.crop(rect);lay=Image.new('RGBA',sub.size,'#101019');lay.alpha_composite(sub)
+              lay.convert('RGB').resize((850,round(sub.height*850/sub.width)),Image.Resampling.LANCZOS).save('qa/experimental/2026-11-13/v4_u2net_'+region+'.jpg',quality=91,optimize=True)
+          PY
+      - name: Commit unapproved candidate only to QA branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/experimental/2026-11-13/
+          git diff --staged --quiet || (git commit -m "QA: isolate full U2Net PR64 alternative mask for review" && git push)
