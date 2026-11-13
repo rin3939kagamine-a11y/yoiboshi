@@ -41,9 +41,14 @@ FILES={
  K:"assets/character_candidates/2026-11-12_rust_red_standee/full_body.png",
  R:"assets/character_candidates/2026-11-12_brown_ponytail_white_lace/brown_ponytail_white_lace_full_body.png"
 }
+EXPECTED_ORIGINAL_SHA256={
+ K:"c87f6a6efcd54dbd4ae5e4c4cb3c1956be92793f8ba3c25713df7e3f61eb349e",
+ R:"9bcb3d095fbbcf0ba53152d2b244df14056766e64ac946e01ebcb5b67f00f486"
+}
 for name,p in FILES.items():
     path=ROOT/p
     raw=path.read_bytes()
+    assert hashlib.sha256(raw).hexdigest()==EXPECTED_ORIGINAL_SHA256[name],(name,"approved source changed")
     with Image.open(path) as im:
         assert im.size==(1024,1536),(name,im.size)
         assert im.mode=="RGBA",(name,im.mode)
