@@ -47,14 +47,17 @@ with sync_playwright() as p:
  snapshot.names=ids.map(id=>PEOPLE[id]?.name);
  snapshot.units=UNITS.filter(u=>ids.includes(u.person)).map(u=>u.id);
  snapshot.initial=ids.map(id=>romanceHeroAvailable(id));
+ snapshot.meetBefore=ids.map(id=>storyAllowed('v0810_meet_'+id));
  snapshot.bonds=ids.map(id=>Object.keys(ROMANCE_V0810[id].stories).length);
  snapshot.profiles=ids.map(id=>HEROINE_PROFILES_ALL[id]?.age);
  snapshot.settings=ids.map(id=>CHARACTER_DEPTH_V0810[id]?.growth);
  snapshot.noKinship= !JSON.stringify(ROMANCE_V0810).includes('小春');
  S.quests.q3={complete:true};
  snapshot.afterQ3=ids.map(id=>romanceHeroAvailable(id));
+ snapshot.meetQ3=ids.map(id=>storyAllowed('v0810_meet_'+id));
  S.quests.q6={complete:true};
  snapshot.afterQ6=ids.map(id=>romanceHeroAvailable(id));
+ snapshot.meetQ6=ids.map(id=>storyAllowed('v0810_meet_'+id));
  snapshot.poolUnchanged=JSON.stringify(beforePool)===JSON.stringify(NORMAL_GACHA_POOL.map(u=>u.id));
  snapshot.noRecruit=ids.every(id=>!availableNormalPool(S).some(u=>u.person===id));
  snapshot.key=SaveStore.key;
@@ -75,6 +78,15 @@ with sync_playwright() as p:
    try{openBondEpisode(id,0);snapshot.talk[id].storyOpened=!!storySession&&storySession.id==='bond_'+id+'_0';}catch(e){snapshot.talk[id].storyError=String(e)}
    storySession=null;view='talk';
  }
+ snapshot.meetings={};const meetGems=S.gems;
+ for(const id of ids){
+   const storyId='v0810_meet_'+id;
+   view='talk';openStory(storyId);
+   const opened=storySession?.id===storyId && view==='story';
+   if(opened)finishStory();
+   snapshot.meetings[id]={opened,finished:!!S.storyFlags?.[storyId],returned:view==='talk'};
+ }
+ snapshot.meetingRewardUnchanged=S.gems===meetGems;
  const saved=fresh();
  saved.owned.momoka_work={lv:3,aff:22,lb:1,copies:2};
  saved.gems=1234;saved.gold=4321;saved.party=['momoka_work','milku_work'];
@@ -112,9 +124,10 @@ for device,r in results.items():
     assert r["names"]==["榊原 夏帆","水瀬 莉々花"],(device,r.get("names"))
     assert r["units"]==[],(device,"units changed",r["units"])
     assert r["initial"]==[False,False],(device,"initial unlocked")
-    assert r["afterQ3"]==[False,True],(device,"q3 gate")
-    assert r["afterQ6"]==[True,True],(device,"q6 gate")
+    assert r["afterQ3"]==[False,True] and r["meetBefore"]==[False,False] and r["meetQ3"]==[False,True],(device,"q3 gate")
+    assert r["afterQ6"]==[True,True] and r["meetQ6"]==[True,True],(device,"q6 gate")
     assert r["bonds"]==[5,5],(device,"bond count")
+    assert r["meetingRewardUnchanged"] and all(all(v.values()) for v in r["meetings"].values()),(device,"meeting replay")
     assert r["profiles"]==[25,23],(device,"profile")
     assert r["noKinship"],(device,"family claim")
     assert r["poolUnchanged"] and r["noRecruit"],(device,"gacha regression")
