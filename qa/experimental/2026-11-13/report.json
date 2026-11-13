@@ -1,0 +1,38 @@
+{
+  "v3a_decontam": {
+    "path": "qa/experimental/2026-11-13/pr64_v3a_decontam_CANDIDATE.png",
+    "bytes": 887152,
+    "sha256": "0bccbd6a7191644709ee6067e78a9896897e7def795ad83941668ed66a9e3fdc",
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparent": 1091328,
+    "partial": 474478
+  },
+  "v3b_decontam_t03": {
+    "path": "qa/experimental/2026-11-13/pr64_v3b_decontam_t03_CANDIDATE.png",
+    "bytes": 881212,
+    "sha256": "c3b9034fdd5bc680288cfdfe39421eb76726e461825b54b3fddda759395593a9",
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparent": 1110225,
+    "partial": 455581
+  },
+  "v3c_decontam_t07": {
+    "path": "qa/experimental/2026-11-13/pr64_v3c_decontam_t07_CANDIDATE.png",
+    "bytes": 879598,
+    "sha256": "24c642edd6244e0cbe95c2f5c0497a42fc59e78c47c97ef721211c268d09ca04",
+    "mode": "RGBA",
+    "size": [
+      1024,
+      1536
+    ],
+    "transparent": 1114011,
+    "partial": 451795
+  }
+}
