@@ -1,0 +1,17 @@
+{
+  "path": "qa/experimental/2026-11-13/pr64_v4_u2net_fullsize_CANDIDATE.png",
+  "sha256": "f072cf87ed00c891bcf9eddee98e3a8e192e24cc44742233b6587f5925b672fe",
+  "bytes": 923200,
+  "mode": "RGBA",
+  "size": [
+    1024,
+    1536
+  ],
+  "alpha_min_max": [
+    0,
+    255
+  ],
+  "transparent": 1123047,
+  "partial": 13728,
+  "opaque": 436089
+}
