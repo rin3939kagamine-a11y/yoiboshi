@@ -1,0 +1,59 @@
+{
+  "collection": "2026-11-13_4_standees",
+  "status": "registered_and_game_integrated_v0.76.0.0",
+  "note": "2026-11-13 user-supplied PNG files; no pixels altered in registration",
+  "images": [
+    {
+      "path": "assets/character_candidates/2026-11-13_4_standees/01_red_hair_striped_sweater.png",
+      "original_name": "赤髪ゴシックコーデのアニメ女性.png",
+      "git_blob_sha": "f9d6b2bed8039ea5a53b0d691c282cbd7116350e",
+      "sha256": "3231f16530aa50630c71122d7c030f096930bf05cda11301e08585df7a7b4e5c",
+      "bytes": 1662557,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "heroine_id": "seri"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_4_standees/02_apron_dress_cardigan.png",
+      "original_name": "穏やかな表情のワンピース姿の女性.png",
+      "git_blob_sha": "fdd05689cf2eb12157988ea27ab7569f135239b3",
+      "sha256": "78cf73ed6fb12e08c50f90a550acf1f6874b8282a5dc89426539dd5f4809cf2f",
+      "bytes": 1275955,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "heroine_id": "hatsune"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_4_standees/03_pink_bob_cat_ears.png",
+      "original_name": "ChatGPT_画像_2026年11月13日_08_36_38.png",
+      "git_blob_sha": "b3cbf7a8e7dcdb307599f8397710ef439e26e260",
+      "sha256": "b623f22c0c461cc4bc66f75484b293bbda5f034629d9c9f0fdf083e672011f1e",
+      "bytes": 1388886,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "heroine_id": "minto"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_4_standees/04_gray_knit_dress.png",
+      "original_name": "灰色ニットドレスの優雅な女性.png",
+      "git_blob_sha": "6ec2c45bfc6e3e1dc1bd308431c910f098d0ee98",
+      "sha256": "339f0521e185ad45ec440777cbe78b406a0373eac939b3af2f1a81a38a5904c1",
+      "bytes": 1500385,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "heroine_id": "nagomi"
+    }
+  ]
+}

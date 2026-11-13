@@ -13,7 +13,7 @@ const HERO_V0690_ENABLED = true;
 const HERO_V0690_UNLOCK_RULES = Object.freeze(Object.fromEntries(
   NEW_HERO_IDS_V0690.map(id=>[id,Object.freeze({enabled:true,storyFlag:null})])
 ));
-const HERO_V0690_ID_SET = new Set([...NEW_HERO_IDS_V0690,...(typeof NEW_HERO_IDS_V0750!=='undefined'?NEW_HERO_IDS_V0750:[])]);
+const HERO_V0690_ID_SET = new Set([...NEW_HERO_IDS_V0690,...(typeof NEW_HERO_IDS_V0750!=='undefined'?NEW_HERO_IDS_V0750:[]),...(typeof NEW_HERO_IDS_V0760!=='undefined'?NEW_HERO_IDS_V0760:[])]);
 function heroV0690Visible(id,save){
  if(!HERO_V0690_ID_SET.has(id))return true;
  if(!HERO_V0690_ENABLED)return false;

@@ -304,7 +304,11 @@ const NEW_HERO_REVEAL_V0690=Object.freeze({
   "setsuna": ["quest", "q193"],
   "emiri": ["quest", "q69"],
   "yue": ["quest", "q13"],
-  "madoka": ["quest", "q122"]
+  "madoka": ["quest", "q122"],
+  "seri": ["quest", "q71"],
+  "hatsune": ["quest", "q40"],
+  "minto": ["quest", "q42"],
+  "nagomi": ["quest", "q19"]
 });
 const HERO74_ENCOUNTERS=Object.freeze({
   "q1": {
@@ -2264,6 +2268,134 @@ const HERO74_ENCOUNTERS=Object.freeze({
       {
         "who": "madoka",
         "text": "「外れても大丈夫。次の一発のほうが、だいたい当たるから」"
+      },
+      {
+        "who": "narrator",
+        "text": "また街で会えたら、声をかけてみよう。"
+      }
+    ]
+  },
+  "q71": {
+    "title": "街で出会った人・東雲駅前・深夜の広場",
+    "place": "東雲駅前・深夜の広場",
+    "requires": [
+      "q71"
+    ],
+    "heroes": [
+      "seri"
+    ],
+    "lines": [
+      {
+        "who": "narrator",
+        "text": "深夜の広場の隅で、赤い髪の人がドラムスティックを指で回していた。"
+      },
+      {
+        "who": "you",
+        "text": "「こんにちは。少しだけ、お話を聞かせてもらえますか？」"
+      },
+      {
+        "who": "seri",
+        "text": "「……紅谷セリ。そこのライブハウスで、ドラム叩いてる」"
+      },
+      {
+        "who": "seri",
+        "text": "「走りすぎたら、私が後ろで支えるから」"
+      },
+      {
+        "who": "narrator",
+        "text": "また街で会えたら、声をかけてみよう。"
+      }
+    ]
+  },
+  "q40": {
+    "title": "街で出会った人・宵星相談室・裏通り",
+    "place": "宵星相談室・裏通り",
+    "requires": [
+      "q40"
+    ],
+    "heroes": [
+      "hatsune"
+    ],
+    "lines": [
+      {
+        "who": "narrator",
+        "text": "相談室の裏通りで、エプロン姿の女性が古い下宿の前に打ち水をしていた。"
+      },
+      {
+        "who": "you",
+        "text": "「こんにちは。少しだけ、お話を聞かせてもらえますか？」"
+      },
+      {
+        "who": "hatsune",
+        "text": "「あらあら、相談室の方？　この下宿「ひなた荘」の大家、高瀬はつねです」"
+      },
+      {
+        "who": "hatsune",
+        "text": "「困ったときは、まずお茶にしましょうね」"
+      },
+      {
+        "who": "narrator",
+        "text": "また街で会えたら、声をかけてみよう。"
+      }
+    ]
+  },
+  "q42": {
+    "title": "街で出会った人・旧喫茶街・星見堂",
+    "place": "旧喫茶街・星見堂",
+    "requires": [
+      "q42"
+    ],
+    "heroes": [
+      "minto"
+    ],
+    "lines": [
+      {
+        "who": "narrator",
+        "text": "星見堂の向かいの猫カフェから、鈴の音と一緒に猫耳の店員が顔を出した。"
+      },
+      {
+        "who": "you",
+        "text": "「こんにちは。少しだけ、お話を聞かせてもらえますか？」"
+      },
+      {
+        "who": "minto",
+        "text": "「いらっしゃいにゃー！　……あ、天羽ミントです。猫カフェ「こたつ猫」の店員だよ」"
+      },
+      {
+        "who": "minto",
+        "text": "「落ちこんだときは、猫みたいに丸くなればいいんだよ」"
+      },
+      {
+        "who": "narrator",
+        "text": "また街で会えたら、声をかけてみよう。"
+      }
+    ]
+  },
+  "q19": {
+    "title": "街で出会った人・東雲駅前・セレクトショップ",
+    "place": "東雲駅前・セレクトショップ",
+    "requires": [
+      "q19"
+    ],
+    "heroes": [
+      "nagomi"
+    ],
+    "lines": [
+      {
+        "who": "narrator",
+        "text": "セレクトショップの隣の香水店で、店主が小瓶を光にかざしていた。"
+      },
+      {
+        "who": "you",
+        "text": "「こんにちは。少しだけ、お話を聞かせてもらえますか？」"
+      },
+      {
+        "who": "nagomi",
+        "text": "「いらっしゃいませ。香水店「Lien」で調香をしております、藤枝なごみです」"
+      },
+      {
+        "who": "nagomi",
+        "text": "「香りは、言葉より先に思い出を連れてくるんです」"
       },
       {
         "who": "narrator",
