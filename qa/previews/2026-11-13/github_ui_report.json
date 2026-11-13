@@ -1,0 +1,44 @@
+{
+  "pr64_v2": {
+    "url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/art/20261111-pink-underlayer-standee/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png",
+    "status": 200,
+    "title": "yoiboshi/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png at art/20261111-pink-underlayer-standee · rin3939kagamine-a11y/yoiboshi · GitHub",
+    "fullResolutionImageVisible": true,
+    "images": [
+      {
+        "src": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/art/20261111-pink-underlayer-standee/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png?raw=true",
+        "alt": "pink_underlayer_black_street_v2_transparency_CANDIDATE.png",
+        "naturalWidth": 1024,
+        "naturalHeight": 1536
+      }
+    ]
+  },
+  "pr81": {
+    "url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/assets/2026-11-12-rust-red-standee-cb29e7/assets/character_candidates/2026-11-12_rust_red_standee/full_body.png",
+    "status": 200,
+    "title": "yoiboshi/assets/character_candidates/2026-11-12_rust_red_standee/full_body.png at assets/2026-11-12-rust-red-standee-cb29e7 · rin3939kagamine-a11y/yoiboshi · GitHub",
+    "fullResolutionImageVisible": true,
+    "images": [
+      {
+        "src": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/assets/2026-11-12-rust-red-standee-cb29e7/assets/character_candidates/2026-11-12_rust_red_standee/full_body.png?raw=true",
+        "alt": "full_body.png",
+        "naturalWidth": 1024,
+        "naturalHeight": 1536
+      }
+    ]
+  },
+  "pr82": {
+    "url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/assets/2026-11-12-brown-ponytail-lace-standee/assets/character_candidates/2026-11-12_brown_ponytail_white_lace/brown_ponytail_white_lace_full_body.png",
+    "status": 200,
+    "title": "yoiboshi/assets/character_candidates/2026-11-12_brown_ponytail_white_lace/brown_ponytail_white_lace_full_body.png at assets/2026-11-12-brown-ponytail-lace-standee · rin3939kagamine-a11y/yoiboshi · GitHub",
+    "fullResolutionImageVisible": true,
+    "images": [
+      {
+        "src": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/assets/2026-11-12-brown-ponytail-lace-standee/assets/character_candidates/2026-11-12_brown_ponytail_white_lace/brown_ponytail_white_lace_full_body.png?raw=true",
+        "alt": "brown_ponytail_white_lace_full_body.png",
+        "naturalWidth": 1024,
+        "naturalHeight": 1536
+      }
+    ]
+  }
+}
