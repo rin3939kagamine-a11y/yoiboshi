@@ -82,6 +82,37 @@ jobs:
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
           NODE_PATH=/tmp/yoiboshi-qa-pw/node_modules node /tmp/yoiboshi-qa-pw/test.cjs
+      - name: Check actual GitHub blob preview pages in the browser
+        shell: bash
+        run: |
+          cat > /tmp/yoiboshi-qa-pw/github-ui.cjs <<'JS'
+          const {chromium}=require('playwright'),fs=require('fs');
+          (async()=>{
+            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+            const pages={
+              pr64_v2:'https://github.com/rin3939kagamine-a11y/yoiboshi/blob/art/20261111-pink-underlayer-standee/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png',
+              pr81:'https://github.com/rin3939kagamine-a11y/yoiboshi/blob/assets/2026-11-12-rust-red-standee-cb29e7/assets/character_candidates/2026-11-12_rust_red_standee/full_body.png',
+              pr82:'https://github.com/rin3939kagamine-a11y/yoiboshi/blob/assets/2026-11-12-brown-ponytail-lace-standee/assets/character_candidates/2026-11-12_brown_ponytail_white_lace/brown_ponytail_white_lace_full_body.png'
+            };
+            const result={};
+            for(const [name,url] of Object.entries(pages)){
+              const page=await browser.newPage({viewport:{width:1280,height:900}});
+              try{
+                const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
+                await page.waitForTimeout(2200);
+                const imgs=await page.evaluate(()=>[...document.images].filter(i=>i.complete && i.naturalWidth>=800 && i.naturalHeight>=1000).map(i=>({src:i.currentSrc.slice(0,250),alt:i.alt,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight})));
+                const title=await page.title();
+                result[name]={url,status:response?.status()??null,title,fullResolutionImageVisible:imgs.length>0,images:imgs};
+                await page.screenshot({path:'qa/previews/2026-11-13/github_ui_'+name+'.jpg',type:'jpeg',quality:82,fullPage:false});
+              }catch(e){result[name]={url,error:String(e).slice(0,250),fullResolutionImageVisible:false}}
+              await page.close();
+            }
+            fs.writeFileSync('qa/previews/2026-11-13/github_ui_report.json',JSON.stringify(result,null,2));
+            console.log('GITHUB_UI_RESULT',JSON.stringify(result));
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+          NODE_PATH=/tmp/yoiboshi-qa-pw/node_modules node /tmp/yoiboshi-qa-pw/github-ui.cjs
       - name: Commit preview evidence only
         run: |
           git config user.name "github-actions[bot]"
