@@ -1,0 +1,90 @@
+name: 2026-11-13 isolated game-style standee preview
+on:
+  push:
+    branches:
+      - qa/20261113-independent-standee-check
+    paths:
+      - .github/workflows/qa-20261113-preview.yml
+permissions:
+  contents: write
+jobs:
+  render-existing-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install headless test browser
+        shell: bash
+        run: |
+          npm install --prefix /tmp/yoiboshi-qa-pw --no-package-lock playwright@1.56.1
+          /tmp/yoiboshi-qa-pw/node_modules/.bin/playwright install chromium
+      - name: Download only the image candidates into an untracked temporary directory
+        shell: bash
+        run: |
+          mkdir -p qa/tmp_assets
+          python - <<'PY'
+          import hashlib, urllib.request
+          base='https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/'
+          targets={
+          'pr64_v2': ('4788202e943344e48f2a9b45920042071f5c0f19','assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png','02977e9175e79b945ea67e08669622cd8ac08b4fc282c19dc9fe268aa4b9f175'),
+          'pr81': ('ad61f756f3d8e0ec933dc68ada7a9979c4e54f1f','assets/character_candidates/2026-11-12_rust_red_standee/full_body.png','c87f6a6efcd54dbd4ae5e4c4cb3c1956be92793f8ba3c25713df7e3f61eb349e'),
+          'pr82': ('9aedf446ee3a7dabff0fe1bd9ba0d13e9ffb44f9','assets/character_candidates/2026-11-12_brown_ponytail_white_lace/brown_ponytail_white_lace_full_body.png','9bcb3d095fbbcf0ba53152d2b244df14056766e64ac946e01ebcb5b67f00f486')
+          }
+          for name,(sha,path,expected) in targets.items():
+             with urllib.request.urlopen(base+sha+'/'+path,timeout=60) as f: data=f.read()
+             assert hashlib.sha256(data).hexdigest()==expected
+             with open('qa/tmp_assets/'+name+'.png','wb') as f:f.write(data)
+             print(name,len(data))
+          PY
+      - name: Use existing game preview CSS and DOM for candidate display test
+        shell: bash
+        run: |
+          python3 -m http.server 8765 > /tmp/yoiboshi-http.log 2>&1 &
+          mkdir -p qa/previews/2026-11-13
+          cat > /tmp/yoiboshi-qa-pw/test.cjs <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('fs');
+          (async()=>{
+            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+            const results={};
+            const imgs=['pr64_v2','pr81','pr82'];
+            for (const [target,viewport] of [['desktop',{width:1280,height:900}],['mobile',{width:390,height:844}]]) {
+              const page=await browser.newPage({viewport,deviceScaleFactor:1});
+              const response=await page.goto('http://127.0.0.1:8765/preview_character_acting_v1.html',{waitUntil:'domcontentloaded',timeout:45000});
+              if(!response || response.status() !== 200)throw Error('Preview page HTTP failure');
+              const outcome=await page.evaluate(async (names)=>{
+                document.body.classList.add('static');
+                const cards=[...document.querySelectorAll('.acting-demo-card')].slice(0,3);
+                if(cards.length!==3)throw Error('Existing game preview DOM unavailable');
+                let results=[];
+                for(let i=0;i<3;i++){
+                  const card=cards[i],name=names[i],img=card.querySelector('.acting-demo-stage img');
+                  card.querySelector('.head strong').textContent=name+' (QA candidate only)';
+                  img.src='/qa/tmp_assets/'+name+'.png';
+                  await img.decode();
+                  const rect=img.getBoundingClientRect(),stage=card.querySelector('.acting-demo-stage').getBoundingClientRect();
+                  const style=getComputedStyle(img);
+                  results.push({name,loaded:img.complete && img.naturalWidth===1024 && img.naturalHeight===1536,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,imageBox:[rect.width,rect.height],stageBox:[stage.width,stage.height],objectFit:style.objectFit,objectPosition:style.objectPosition});
+                }
+                return results;
+              },imgs);
+              if(outcome.some(v=>!v.loaded)) throw Error('Candidate missing from preview '+target);
+              fs.mkdirSync('qa/previews/2026-11-13',{recursive:true});
+              await page.screenshot({path:'qa/previews/2026-11-13/game_style_'+target+'.jpg',type:'jpeg',quality:84,fullPage:true});
+              results[target]={preview_page:'preview_character_acting_v1.html',viewport,outcome};
+              await page.close();
+            }
+            fs.writeFileSync('qa/previews/2026-11-13/game_style_preview.json',JSON.stringify(results,null,2));
+            console.log('GAME_STYLE_PREVIEW_QA',JSON.stringify(results));
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+          NODE_PATH=/tmp/yoiboshi-qa-pw/node_modules node /tmp/yoiboshi-qa-pw/test.cjs
+      - name: Commit preview evidence only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/previews/2026-11-13/
+          git diff --staged --quiet || (git commit -m "QA: verify candidates in existing game acting preview on desktop and mobile" && git push)
