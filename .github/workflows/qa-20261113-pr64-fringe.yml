@@ -1,0 +1,66 @@
+name: 2026-11-13 PR64 fringe cleanup experiments isolated
+on:
+  push:
+    branches: [qa/20261113-independent-standee-check]
+    paths: [.github/workflows/qa-20261113-pr64-fringe.yml]
+permissions:
+  contents: write
+jobs:
+  clean-fringe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet pillow numpy
+      - name: Generate pixel-preserving edge-color matting candidates, without touching PR64
+        shell: bash
+        run: |
+          python - <<'PY'
+          import io,urllib.request,hashlib,json,os
+          from PIL import Image
+          import numpy as np
+          base='https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/4788202e943344e48f2a9b45920042071f5c0f19/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/'
+          def dl(path,expected):
+              with urllib.request.urlopen(base+path,timeout=60) as r: raw=r.read()
+              assert hashlib.sha256(raw).hexdigest()==expected
+              return Image.open(io.BytesIO(raw)).convert('RGBA')
+          original=dl('pink_underlayer_black_street_v1.png','edba2b78575fd1ebfb713c47729ef35aeb24b68ff4e65ccb263842cf18099e4c')
+          candidate=dl('pink_underlayer_black_street_v2_transparency_CANDIDATE.png','02977e9175e79b945ea67e08669622cd8ac08b4fc282c19dc9fe268aa4b9f175')
+          src=np.array(original,dtype=np.float32)
+          v2=np.array(candidate,dtype=np.float32)
+          mask=v2[:,:,3]/255.0
+          print('Mean RGB difference between source and v2',float(np.mean(np.abs(src[:,:,:3]-v2[:,:,:3]))))
+          c=src[:,:,:3]
+          # Invert white-checker compositing at low-alpha boundaries. Opaque interiors are unchanged.
+          matte=np.clip((c-250.0*(1.0-mask[...,None]))/np.maximum(mask[...,None],0.001),0,255)
+          matte=np.where(mask[...,None] > .985,c,matte)
+          os.makedirs('qa/experimental/2026-11-13',exist_ok=True)
+          stats={}
+          for name,trim in [('v3a_decontam',0.0),('v3b_decontam_t03',0.03),('v3c_decontam_t07',0.07)]:
+              nextmask=np.clip((mask-trim)/(1.0-trim),0,1)
+              rgba=np.dstack((matte,nextmask*255)).astype('uint8')
+              dst=Image.fromarray(rgba,'RGBA')
+              p='qa/experimental/2026-11-13/pr64_'+name+'_CANDIDATE.png'
+              dst.save(p,optimize=True,compress_level=9)
+              with open(p,'rb') as f:b=f.read()
+              stats[name]={'path':p,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'mode':dst.mode,'size':list(dst.size),'transparent':int((rgba[:,:,3]==0).sum()),'partial':int(((rgba[:,:,3]>0)&(rgba[:,:,3]<255)).sum())}
+              print('CANDIDATE',name,stats[name],flush=True)
+              small=dst.resize((384,576),Image.Resampling.LANCZOS)
+              panel=Image.new('RGB',(768,576))
+              for x,bg in [(0,'#101019'),(384,'#e8ebee')]:
+                  lay=Image.new('RGBA',(384,576),bg);lay.alpha_composite(small);panel.paste(lay.convert('RGB'),(x,0))
+              panel.save('qa/experimental/2026-11-13/'+name+'_dark_light.jpg',quality=90,optimize=True)
+              for region,rect in [('hair',(210,0,725,650)),('torso',(210,250,755,880)),('feet',(225,1120,730,1536))]:
+                  sub=dst.crop(rect)
+                  lay=Image.new('RGBA',sub.size,'#101019');lay.alpha_composite(sub)
+                  lay.convert('RGB').resize((850,round(sub.height*850/sub.width)),Image.Resampling.LANCZOS).save('qa/experimental/2026-11-13/'+name+'_'+region+'.jpg',quality=91,optimize=True)
+          with open('qa/experimental/2026-11-13/report.json','w') as f:json.dump(stats,f,indent=2)
+          PY
+      - name: Commit candidates to independent QA branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/experimental/2026-11-13/
+          git diff --staged --quiet || (git commit -m "QA: experiment with PR64 fringe decontamination, not approved" && git push)
