@@ -1,0 +1,116 @@
+{
+  "desktop": {
+    "preview_page": "preview_character_acting_v1.html",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "outcome": [
+      {
+        "name": "pr64_v2",
+        "loaded": true,
+        "naturalWidth": 1024,
+        "naturalHeight": 1536,
+        "imageBox": [
+          257,
+          290
+        ],
+        "stageBox": [
+          257,
+          290
+        ],
+        "objectFit": "contain",
+        "objectPosition": "50% 20%"
+      },
+      {
+        "name": "pr81",
+        "loaded": true,
+        "naturalWidth": 1024,
+        "naturalHeight": 1536,
+        "imageBox": [
+          257,
+          290
+        ],
+        "stageBox": [
+          257,
+          290
+        ],
+        "objectFit": "contain",
+        "objectPosition": "50% 20%"
+      },
+      {
+        "name": "pr82",
+        "loaded": true,
+        "naturalWidth": 1024,
+        "naturalHeight": 1536,
+        "imageBox": [
+          257,
+          290
+        ],
+        "stageBox": [
+          257,
+          290
+        ],
+        "objectFit": "contain",
+        "objectPosition": "50% 20%"
+      }
+    ]
+  },
+  "mobile": {
+    "preview_page": "preview_character_acting_v1.html",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "outcome": [
+      {
+        "name": "pr64_v2",
+        "loaded": true,
+        "naturalWidth": 1024,
+        "naturalHeight": 1536,
+        "imageBox": [
+          352,
+          290
+        ],
+        "stageBox": [
+          352,
+          290
+        ],
+        "objectFit": "contain",
+        "objectPosition": "50% 20%"
+      },
+      {
+        "name": "pr81",
+        "loaded": true,
+        "naturalWidth": 1024,
+        "naturalHeight": 1536,
+        "imageBox": [
+          352,
+          290
+        ],
+        "stageBox": [
+          352,
+          290
+        ],
+        "objectFit": "contain",
+        "objectPosition": "50% 20%"
+      },
+      {
+        "name": "pr82",
+        "loaded": true,
+        "naturalWidth": 1024,
+        "naturalHeight": 1536,
+        "imageBox": [
+          352,
+          290
+        ],
+        "stageBox": [
+          352,
+          290
+        ],
+        "objectFit": "contain",
+        "objectPosition": "50% 20%"
+      }
+    ]
+  }
+}
