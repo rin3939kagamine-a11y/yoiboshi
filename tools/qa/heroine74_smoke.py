@@ -55,10 +55,12 @@ for path in ROOT.rglob("*"):
     for pattern in old_names:
         for match in pattern.finditer(contents):
             violations.append({"path":rel,"term":match.group(0)})
-    if "shion" in contents:
+    # Disallow the obsolete standalone heroine ID, not modern NPC identifiers
+    # such as kasumi_shion or the SHION∞ story title. Existing boss is untouched.
+    if re.search(r"(?<![a-zA-Z0-9_])shion(?![a-zA-Z0-9_])",contents):
         legacy_references.append(rel)
         if rel not in {"js/game.js","tools/qa/heroine74_smoke.py"}:
-            violations.append({"path":rel,"term":"old heroine ID reference"})
+            violations.append({"path":rel,"term":"old standalone heroine ID reference"})
 for kind in ("full_body","upper_body","face_icons"):
     assert not (ROOT/"assets"/"ART_V2"/kind/("shion"+".webp")).exists()
 assert "subaru" in ids and "shion" not in ids,(len(ids),ids)
