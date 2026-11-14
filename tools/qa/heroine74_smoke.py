@@ -141,7 +141,7 @@ try:
                     group.heroes.every(id=>!!PEOPLE[id]?.name&&group.lines.some(line=>
                         line.who===id&&(legacy74.has(id)
                           ? line.text.includes(PEOPLE[id].name+"といいます")
-                          : compact(line.text).includes(compact(PEOPLE[id].name))))
+                          : compact(line.text).includes(compact(PEOPLE[id].name)))))
                 );
                 const linesOk=groups.every(([qid,group])=>
                     group.lines.length===group.heroes.reduce((n,id)=>n+(legacy74.has(id)?4:5),0));
