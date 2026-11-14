@@ -1,0 +1,51 @@
+name: QA - Legacy CI audit (test-only)
+on:
+  push:
+    branches:
+      - qa/20261115-refresh-legacy-ci-assertions
+    paths:
+      - 'tools/qa/**'
+      - '.github/workflows/qa-legacy-ci-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qa-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install exact browser QA dependencies
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Check source and test Python syntax
+        run: |
+          python -m py_compile tools/qa/concept_id_migration_smoke.py tools/qa/heroines_v0500_smoke.py tools/qa/character_depth_real_smoke.py tools/qa/heroine74_smoke.py tools/qa/heroine74_hidden_smoke.py tools/qa/heroine3_real_smoke.py
+      - name: Legacy concept IDs and save compatibility
+        run: python tools/qa/concept_id_migration_smoke.py
+      - name: New19 heroines and normal pool regressions
+        run: python tools/qa/heroines_v0500_smoke.py
+      - name: Original 79 heroine depth cards
+        run: python tools/qa/character_depth_real_smoke.py
+      - name: 74 heroines plus approved later meetings
+        run: python tools/qa/heroine74_smoke.py
+      - name: Unrevealed 74 heroine gate
+        run: python tools/qa/heroine74_hidden_smoke.py
+      - name: Three added heroines and minimum supported app version
+        run: python tools/qa/heroine3_real_smoke.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-legacy-ci-audit
+          path: |
+            qa_artifacts/new19_v0500/
+            qa_artifacts/character_depth/
+            qa_artifacts/heroine74/
+            qa_artifacts/heroine3/
+          if-no-files-found: warn

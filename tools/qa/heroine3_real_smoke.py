@@ -3,7 +3,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from threading import Thread
-import hashlib,json
+import hashlib,json,re
 from PIL import Image
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[2]
@@ -75,7 +75,8 @@ try:
    };
   }""")
   ck("new ID registry length 3 and globally unique",metadata["ids"]==ids and metadata["unique"],metadata)
-  ck("version sequential", "0.70.2.0" in metadata["version"])
+  version_match=re.search(r"Ver\.(\d+)\.(\d+)\.(\d+)\.(\d+)",metadata["version"])
+  ck("app version >= original v0.70.2.0", bool(version_match) and tuple(map(int,version_match.groups())) >= (0,70,2,0),metadata["version"])
   ck("old 74 registry untouched",metadata["old74"]==74)
   ck("unchanged gacha rate",metadata["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and metadata["new19"]=={"SR":80,"SSR":15,"UR":5})
   ck("excluded hero IDs absent",not metadata["excluded"],metadata["excluded"])

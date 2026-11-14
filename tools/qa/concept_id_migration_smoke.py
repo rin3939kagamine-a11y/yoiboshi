@@ -53,7 +53,9 @@ try:
             const before = localStorage.getItem('yoiboshi-reboot-v1');
             const m = load();
             const hero = HERO_IDS;
-            const gallery = {heroes:hero.length,unique:new Set(hero).size,depth:Object.keys(CHARACTER_DEPTH_V1).length};
+            const newer=[NEW_HERO_IDS_V0690,NEW_HERO_IDS_V0692,NEW_HERO_IDS_V0750,NEW_HERO_IDS_V0760,NEW_HERO_IDS_V0780,NEW_HERO_IDS_V0810,NEW_HERO_IDS_V0830];
+             const expected=79+newer.reduce((n,ids)=>n+ids.length,0);
+             const gallery = {heroes:hero.length,unique:new Set(hero).size,depth:Object.keys(CHARACTER_DEPTH_V1).length,expected};
             const after = localStorage.getItem('yoiboshi-reboot-v1');
             return {
                 gallery,
@@ -74,8 +76,11 @@ try:
                 hasNewRegistry:!!BYID.ena_work&&BYID.ena_work.person==='ena'
             };
         }""")
-        ids_v0692=['sumika','reika','hono']
-        assert check["gallery"] == {"heroes":153+len(ids_v0692),"unique":153+len(ids_v0692),"depth":79}, check
+        expected=check["gallery"]["expected"]
+        assert expected>=79
+        assert check["gallery"]["heroes"] == expected, check
+        assert check["gallery"]["unique"] == expected, check
+        assert check["gallery"]["depth"] == 79, check
         assert check["idempotent"] and check["oldSaveHasLegacy"] and check["oldSaveUnmodified"],check
         assert check["canonicalMapCount"] == 29,check
         assert check["units"]["ena"]["lv"] == 12 and check["units"]["ena"]["aff"] == 42,check
@@ -98,7 +103,7 @@ try:
             riko:data.find(x=>x.id==='riko_work')?.name,
             favorite:favs.has('ena_work')
         })""")
-        assert gallery["count"] == gallery["unique"] == 79+len(ids_v0692),gallery
+        assert gallery["count"] == gallery["unique"] == 82,gallery  # Separate static SR gallery: 79 original + 3 v0692
         assert gallery["ena"] == "エナ" and "莉子" in gallery["riko"] and gallery["favorite"],gallery
         assert not errors,errors
         print(json.dumps({"status":"PASS","save_migration":check,"sr_gallery":gallery,"js_errors":errors},ensure_ascii=False))
