@@ -1,7 +1,7 @@
 /* Ver.0.50.0.1: opt-in unified symbol reaction renderer. No save/state/schema/old art files changed.
  * Existing 62 crops live in an independent versioned directory, leaving legacy upper_body and expressions untouched.
  * ichika: user-approved dynamic full-body crop. juri: provisional pre-Aries image until replacement.
- * "haruka" is shared by a historical NPC (霧島ハルカ) and new heroine (芹沢はるか).
+ * "haruka" is shared by a historical NPC (霧島ハルカ) and new heroine (朝倉はるか).
  * Callers can pass legacyNpcHaruka to preserve the historic NPC portrait.
  */
 const SYMBOL_REACTION_EXISTING_V0500=Object.freeze(["ageha","akane","anzu","aoi","chihiro","chinatsu","chiyo","cocoa","ena","erika","fumika","hiyori","hotaru","ichika","jun","juri","kaede","kagari","kaname","karen","kirari","koharu","koyori","kurumi","kyoko","lilith","luna","mai","makoto","marin","maron","meru","milku","minori","mio","miyabi","mizuki","momoka","nagi","natsume","nazuna","noel","reiko","reina","riko","ritsu","saeko","saki","sanae","sena","shino","shio","shizuku","suiran","touko","touko_true","towa","tsubaki","yui","yume","yuriko","yuzu"]);

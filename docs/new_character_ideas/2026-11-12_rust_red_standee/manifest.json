@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-12",
+  "status": "binary_uploaded_to_pr_branch",
+  "source": "AI-generated full-body standee from two user-provided reference screenshots, then pose changed and alpha made transparent",
+  "candidate_name": "unassigned",
+  "description": "Long wavy brown hair, rust-red sleeveless two-piece outfit, hand near hair, crossed-leg pose",
+  "files": [
+    {
+      "path": "assets/character_candidates/2026-11-12_rust_red_standee/full_body.png",
+      "format": "PNG",
+      "width": 1024,
+      "height": 1536,
+      "color_mode": "RGBA",
+      "has_transparent_pixels": true,
+      "bytes": 1483532,
+      "sha256": "c87f6a6efcd54dbd4ae5e4c4cb3c1956be92793f8ba3c25713df7e3f61eb349e",
+      "git_blob_sha": "cb29e7103f5aa37b912a23b48b4cf9ce0b6fa72c"
+    }
+  ],
+  "qa": {
+    "source_blob_hash_matches": true,
+    "github_readback": "pending",
+    "appearance_in_game": "not_tested"
+  },
+  "game_integration": false
+}

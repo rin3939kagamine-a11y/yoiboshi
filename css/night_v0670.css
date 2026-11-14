@@ -1,0 +1,115 @@
+/* Ver.0.67.0.0 ストーリー・クエスト画面の夜空テーマ
+   色：夜藍 #141a3a / 深夜 #0b1030 / 星灯の金 #f2c66d / 薄藤 #b9a8f0 / 霧白 #e8ecff
+   主役は「星灯の金」。次に読む話・進行中の依頼・選択中の項目だけを金で灯し、ほかは静かな藍でまとめる。 */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&display=swap');
+
+html.os-on{
+ --nt-deep:#0b1030; --nt-base:#141a3a; --nt-card:rgba(34,42,92,.72); --nt-card-2:rgba(48,56,116,.62);
+ --nt-line:rgba(185,168,240,.26); --nt-text:#e8ecff; --nt-sub:#a9b1d8; --nt-gold:#f2c66d; --nt-gold-2:#ffdf9a; --nt-lilac:#b9a8f0;
+ --nt-serif:'Shippori Mincho','Yu Mincho','Hiragino Mincho ProN',serif;
+ color-scheme:dark;
+}
+/* 空：上ほど深く、地平に薄く藤色。星は静止した点描で、動かさない */
+html.os-on body,html.os-on .app,html.os-on .main{background:
+ radial-gradient(1.2px 1.2px at 12% 18%,#fff9 50%,transparent 51%),
+ radial-gradient(1px 1px at 27% 42%,#fff7 50%,transparent 51%),
+ radial-gradient(1.6px 1.6px at 41% 11%,#ffe9b8cc 50%,transparent 51%),
+ radial-gradient(1px 1px at 58% 33%,#fff6 50%,transparent 51%),
+ radial-gradient(1.3px 1.3px at 73% 15%,#fff8 50%,transparent 51%),
+ radial-gradient(1px 1px at 86% 48%,#fff6 50%,transparent 51%),
+ radial-gradient(1.4px 1.4px at 93% 8%,#fff8 50%,transparent 51%),
+ radial-gradient(1px 1px at 6% 62%,#fff5 50%,transparent 51%),
+ radial-gradient(1.2px 1.2px at 64% 71%,#fff5 50%,transparent 51%),
+ radial-gradient(ellipse 120% 60% at 50% 115%,#3a2f6e 0%,transparent 60%),
+ linear-gradient(180deg,var(--nt-deep) 0%,var(--nt-base) 55%,#1d2150 100%) fixed!important;
+ color:var(--nt-text)}
+html.os-on .page{background:transparent!important;color:var(--nt-text)}
+/* 上部バー・下メニューも夜に合わせる */
+html.os-on .topbar{background:rgba(11,16,48,.78)!important;border-bottom:1px solid var(--nt-line)!important;box-shadow:none!important;backdrop-filter:blur(8px)}
+html.os-on .topbar *{color:var(--nt-text)!important}
+html.os-on .topbar .pill,html.os-on .topbar [class*="money"],html.os-on .topbar [class*="currency"]{background:rgba(255,255,255,.07)!important;border-color:var(--nt-line)!important}
+html.os-on .bottomnav{background:rgba(14,20,56,.92)!important;border-color:var(--nt-line)!important;box-shadow:0 -6px 30px #0008!important}
+html.os-on .bottomnav button{color:#b8c0e6!important;background:transparent!important}
+html.os-on .bottomnav button.active{background:rgba(242,198,109,.14)!important;color:var(--nt-gold-2)!important;box-shadow:inset 0 0 0 1px rgba(242,198,109,.45)!important}
+
+/* 見出し：明朝で、飾りの英字ラベルは出さない */
+html.os-on .os-page .eyebrow,html.os-on .os-quest .qmap-top-kicker{display:none!important}
+html.os-on .os-page .page-title,html.os-on .os-quest .qmap-topline h1{font-family:var(--nt-serif);font-weight:700;letter-spacing:.08em;color:var(--nt-text)!important;text-shadow:0 0 18px rgba(185,168,240,.35)}
+
+/* ---- ストーリー ---- */
+html.os-on .os-story .story-next{background:linear-gradient(135deg,rgba(60,48,110,.9),rgba(28,34,82,.92))!important;border:1px solid rgba(242,198,109,.55)!important;box-shadow:0 0 0 1px rgba(242,198,109,.12),0 10px 34px rgba(242,198,109,.16)!important;color:var(--nt-text)!important}
+html.os-on .os-story .story-next small{color:var(--nt-gold-2)!important;opacity:.9}
+html.os-on .os-story .story-next h2{font-family:var(--nt-serif);color:#fff!important;letter-spacing:.04em}
+html.os-on .os-story .story-next .btn{background:linear-gradient(180deg,var(--nt-gold-2),var(--nt-gold))!important;color:#2a2040!important;border:0!important;font-weight:900;box-shadow:0 0 18px rgba(242,198,109,.45)!important}
+html.os-on .story-opening .story-part-head{background:var(--nt-card)!important;border:1px solid var(--nt-line);color:var(--nt-text)!important}
+html.os-on .story-opening .story-part-head b{font-family:var(--nt-serif)}
+html.os-on .story-opening .story-part-head em{color:var(--nt-sub)!important}
+html.os-on .os-part{background:var(--nt-card)!important;border:1px solid var(--nt-line)!important;color:var(--nt-text)!important;backdrop-filter:blur(6px)}
+html.os-on .os-part small{color:var(--nt-lilac)!important}
+html.os-on .os-part b{font-family:var(--nt-serif);font-size:20px;letter-spacing:.06em;color:#fff}
+html.os-on .os-part em,html.os-on .os-chap em,html.os-on .os-level-head em{color:var(--nt-sub)!important}
+html.os-on .os-part .story-chapter-arrow{color:var(--nt-gold)!important}
+html.os-on .os-part.is-current{border-color:rgba(242,198,109,.6)!important;box-shadow:0 0 22px rgba(242,198,109,.18)!important}
+html.os-on .os-level-head b{font-family:var(--nt-serif);color:#fff!important;letter-spacing:.05em}
+html.os-on .os-back{background:transparent!important;border:1px solid var(--nt-line)!important;color:var(--nt-lilac)!important}
+html.os-on .os-chap{background:var(--nt-card)!important;border:1px solid var(--nt-line)!important;color:var(--nt-text)!important}
+html.os-on .os-chap b{color:#eef0ff!important}
+html.os-on .os-chap.has-unread{border-color:rgba(242,198,109,.45)!important;background:var(--nt-card-2)!important}
+html.os-on .os-ep-grid .story-ep{background:var(--nt-card)!important;border:1px solid var(--nt-line)!important;color:var(--nt-text)!important}
+html.os-on .os-ep-grid .story-ep.is-read{background:rgba(255,255,255,.04)!important;color:var(--nt-sub)!important}
+html.os-on .os-ep-grid .story-ep.is-unread{border-color:rgba(242,198,109,.4)!important}
+html.os-on .os-page .story-new{background:var(--nt-gold)!important;color:#2a2040!important;box-shadow:0 0 10px rgba(242,198,109,.5)}
+
+/* ---- クエスト ---- */
+html.os-on .os-quest .qmap-chapter-box{background:var(--nt-card)!important;border:1px solid var(--nt-line)!important;color:var(--nt-text)!important;box-shadow:none!important}
+html.os-on .os-quest .qmap-chapter-box small,html.os-on .os-quest .qmap-chapter-box span{color:var(--nt-sub)!important}
+html.os-on .os-quest .qmap-chapter-box strong{font-family:var(--nt-serif);color:#fff!important}
+html.os-on .os-chapter-select{background:var(--nt-card)!important;border:1px solid var(--nt-line)!important;color:var(--nt-text)!important}
+html.os-on .os-chapter-select option,html.os-on .os-chapter-select optgroup{background:#1a2050;color:var(--nt-text)}
+html.os-on .os-quest .btn.outline{background:transparent!important;border:1px solid var(--nt-line)!important;color:var(--nt-lilac)!important}
+html.os-on .os-quest .btn:disabled{opacity:.35}
+html.os-on .os-quest .os-quest-note small{color:var(--nt-sub)!important}
+/* 地図：昼の地図を夜に沈め、依頼のピンだけが灯る */
+html.os-on .os-quest .qmap-stage{background:#10163a!important;border:1px solid var(--nt-line)!important;box-shadow:inset 0 0 60px #0009,0 12px 40px #0006!important}
+
+html.os-on .os-quest .qmap-pin .qmap-pin-core,html.os-on .os-quest .qmap-home-core{box-shadow:0 0 0 2px rgba(242,198,109,.55),0 0 18px rgba(242,198,109,.55)!important}
+html.os-on .os-quest .qmap-pin.done .qmap-pin-core{box-shadow:0 0 0 2px rgba(185,168,240,.45)!important;filter:saturate(.6) brightness(.85)}
+html.os-on .os-quest .qmap-pin [class*="label"],html.os-on .os-quest .qmap-home-label{background:rgba(14,20,56,.86)!important;color:var(--nt-text)!important;border:1px solid var(--nt-line)!important;box-shadow:none!important}
+html.os-on .os-quest .qmap-new-mark{background:var(--nt-gold)!important;color:#2a2040!important}
+@media (prefers-reduced-motion:no-preference){
+ html.os-on .os-quest .qmap-pin.progress .qmap-pin-core,html.os-on .os-quest .qmap-pin:not(.done):not(.locked) .qmap-pin-core{animation:nt-lamp 2.8s ease-in-out infinite}
+ @keyframes nt-lamp{0%,100%{box-shadow:0 0 0 2px rgba(242,198,109,.5),0 0 12px rgba(242,198,109,.35)}50%{box-shadow:0 0 0 2px rgba(242,198,109,.8),0 0 26px rgba(242,198,109,.75)}}
+}
+html.os-on :focus-visible{outline:2px solid var(--nt-gold)!important;outline-offset:2px}
+/* 下メニュー・通貨表示は既存の指定が強いので、詳細度を上げて上書きする */
+html.os-on.os-on body:has(.os-page):has(.os-page) .bottomnav.bottomnav{background:rgba(14,20,56,.94)!important;border-color:var(--nt-line)!important;box-shadow:0 -6px 30px #0008!important}
+html.os-on.os-on body:has(.os-page):has(.os-page) .bottomnav.bottomnav button{color:#b8c0e6!important;background:transparent!important}
+html.os-on.os-on body:has(.os-page):has(.os-page) .bottomnav.bottomnav button.active{background:rgba(242,198,109,.14)!important;color:var(--nt-gold-2)!important;box-shadow:inset 0 0 0 1px rgba(242,198,109,.45)!important}
+html.os-on.os-on body:has(.os-page):has(.os-page) .bottomnav.bottomnav button *{color:inherit!important}
+html.os-on .topbar .wallet{background:rgba(255,255,255,.08)!important;border:1px solid var(--nt-line)!important;box-shadow:none!important;color:var(--nt-text)!important}
+html.os-on .os-story .story-opening{background:transparent!important;border:0!important;box-shadow:none!important}
+html.os-on .os-story .story-opening .story-part-head{background:rgba(34,42,92,.82)!important}
+
+/* ===== v0.67.2.0 クエスト画面の背景（高台から見た夜の港町） ===== */
+html.os-on body:has(.os-quest),html.os-on body:has(.os-quest) .app,html.os-on body:has(.os-quest) .main{
+ background:linear-gradient(180deg,rgba(11,16,48,.55) 0%,rgba(11,16,48,.15) 45%,rgba(11,16,48,.35) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_portrait.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+@media (orientation:landscape){
+ html.os-on body:has(.os-quest),html.os-on body:has(.os-quest) .app,html.os-on body:has(.os-quest) .main{
+  background:linear-gradient(180deg,rgba(11,16,48,.55) 0%,rgba(11,16,48,.15) 45%,rgba(11,16,48,.35) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_landscape.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+}
+/* 地図の枠を少し透かして、背景の夜景となじませる */
+html.os-on .os-quest .qmap-stage{background:rgba(16,22,58,.35)!important;border:1px solid rgba(242,198,109,.28)!important;box-shadow:0 0 0 4px rgba(11,16,48,.35),0 14px 40px #000a!important}
+html.os-on .os-quest .qmap-chapter-box,html.os-on .os-chapter-select,html.os-on .os-quest .btn.outline{background:rgba(20,26,66,.72)!important;backdrop-filter:blur(6px)}
+html.os-on .os-quest .os-quest-note small{text-shadow:0 1px 4px #000}
+
+/* ===== v0.67.3.0 ストーリー画面にも夜の港町の背景（一覧の後ろが広く空くので、こちらでよく見える） ===== */
+html.os-on body:has(.os-story),html.os-on body:has(.os-story) .app,html.os-on body:has(.os-story) .main{
+ background:linear-gradient(180deg,rgba(11,16,48,.45) 0%,rgba(11,16,48,.1) 40%,rgba(11,16,48,.45) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_portrait.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+@media (orientation:landscape){
+ html.os-on body:has(.os-story),html.os-on body:has(.os-story) .app,html.os-on body:has(.os-story) .main{
+  background:linear-gradient(180deg,rgba(11,16,48,.45) 0%,rgba(11,16,48,.1) 40%,rgba(11,16,48,.45) 100%),url('../assets/ART_V2/backgrounds/bg_quest_night_landscape.webp?v=0.67.2.0') center bottom/cover no-repeat fixed,#0b1030!important}
+}
+/* 背景の町並みに文字が埋もれないよう、マスは少し濃く・すりガラスに */
+html.os-on .os-story .os-part,html.os-on .os-story .os-chap,html.os-on .os-story .os-ep-grid .story-ep{background:rgba(20,26,66,.78)!important;backdrop-filter:blur(8px)}
+html.os-on .os-story .os-ep-grid .story-ep.is-read{background:rgba(20,26,66,.62)!important}
+html.os-on .os-story .os-level-head b,html.os-on .os-story .page-title{text-shadow:0 2px 8px #000c}

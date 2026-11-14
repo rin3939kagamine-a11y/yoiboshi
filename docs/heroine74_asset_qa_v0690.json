@@ -1,0 +1,2009 @@
+{
+  "total": 74,
+  "passed": 74,
+  "failed": [],
+  "results": [
+    {
+      "id": "ruru",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/0b0ed4529e29f6dca50ce81864a34c95180fba71/assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "kei",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/a0ba2b62b1017a46850e7efda209cd56d1b1b4d9/assets/character_candidates/2026-11-08/yoiboshi_gray_bob_fullbody_no_mask.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        304,
+        61,
+        707,
+        1484
+      ]
+    },
+    {
+      "id": "rara",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/a0ba2b62b1017a46850e7efda209cd56d1b1b4d9/assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        310,
+        59,
+        735,
+        1481
+      ]
+    },
+    {
+      "id": "ryo",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/0f435c89272651b7f1faa48876020ebb4f2f528b/assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        38,
+        12,
+        1004,
+        1524
+      ]
+    },
+    {
+      "id": "hinako",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/bfef2ee194dd74e3f501d43b213e4e83fb8fe46a/assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        69,
+        102,
+        955,
+        1433
+      ]
+    },
+    {
+      "id": "lira",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/bfef2ee194dd74e3f501d43b213e4e83fb8fe46a/assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_02_silver_horns.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        69,
+        102,
+        955,
+        1432
+      ]
+    },
+    {
+      "id": "nonoka",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/bfef2ee194dd74e3f501d43b213e4e83fb8fe46a/assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_03_plaid_dynamic.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        264,
+        20,
+        856,
+        1510
+      ]
+    },
+    {
+      "id": "kohaku",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c001993458bac923c989cf61713dcdebbdd872bc/assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        332,
+        47,
+        692,
+        1488
+      ]
+    },
+    {
+      "id": "raimu",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c001993458bac923c989cf61713dcdebbdd872bc/assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_02_green_plaid_dynamic.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        316,
+        47,
+        695,
+        1489
+      ]
+    },
+    {
+      "id": "yuria",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c001993458bac923c989cf61713dcdebbdd872bc/assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        333,
+        47,
+        695,
+        1489
+      ]
+    },
+    {
+      "id": "leona",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/64a089a55d6b666a0ac1cad321f337d0023c2cda/assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        82,
+        51,
+        942,
+        1479
+      ]
+    },
+    {
+      "id": "mimi",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/64a089a55d6b666a0ac1cad321f337d0023c2cda/assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic_v3.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        84,
+        55,
+        939,
+        1471
+      ]
+    },
+    {
+      "id": "tia",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/64a089a55d6b666a0ac1cad321f337d0023c2cda/assets/character_candidates/2026-11-08_animal_ear_trio/03_gray_pink_dynamic_no_cat_ears.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        38,
+        12,
+        998,
+        1524
+      ]
+    },
+    {
+      "id": "kanon",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/370d36aad772a17fe4710024b27aa9a89d18e1a7/assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        50,
+        12,
+        957,
+        1524
+      ]
+    },
+    {
+      "id": "mikoto",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        298,
+        74,
+        693,
+        1471
+      ]
+    },
+    {
+      "id": "sakura",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/02_red_nurse_no_glasses.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        156,
+        64,
+        869,
+        1472
+      ]
+    },
+    {
+      "id": "subaru",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        312,
+        65,
+        814,
+        1471
+      ]
+    },
+    {
+      "id": "mira",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        73,
+        1002,
+        1485
+      ]
+    },
+    {
+      "id": "nozomi",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        72,
+        12,
+        985,
+        1524
+      ]
+    },
+    {
+      "id": "tomoe",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "chisato",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1000,
+        1524
+      ]
+    },
+    {
+      "id": "kanoko",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        56,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "nao",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1000,
+        1524
+      ]
+    },
+    {
+      "id": "miki",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/07_burgundy_blouse_black_skirt.webp",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        981,
+        1524
+      ]
+    },
+    {
+      "id": "mao",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/08_blonde_black_offshoulder.webp",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        44,
+        12,
+        989,
+        1524
+      ]
+    },
+    {
+      "id": "himeka",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1000,
+        1524
+      ]
+    },
+    {
+      "id": "misaki",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        29,
+        12,
+        977,
+        1524
+      ]
+    },
+    {
+      "id": "himari",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        15,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "risa",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        27,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "minami",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        48,
+        24,
+        1000,
+        1524
+      ]
+    },
+    {
+      "id": "noriko",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "kozue",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/07_black_knit_plaid.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        981,
+        1524
+      ]
+    },
+    {
+      "id": "yuu",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        119,
+        12,
+        987,
+        1524
+      ]
+    },
+    {
+      "id": "tsukasa",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/01_black_sweat_peace.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        109,
+        12,
+        965,
+        1524
+      ]
+    },
+    {
+      "id": "azusa",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        96,
+        22,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "rion",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        21,
+        996,
+        1510
+      ]
+    },
+    {
+      "id": "komachi",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        24,
+        959,
+        1524
+      ]
+    },
+    {
+      "id": "seira",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        38,
+        12,
+        981,
+        1524
+      ]
+    },
+    {
+      "id": "aika",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        103,
+        12,
+        977,
+        1524
+      ]
+    },
+    {
+      "id": "moe",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "chako",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        994,
+        1524
+      ]
+    },
+    {
+      "id": "sora",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/10_bunny_hood_blue_frills.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "tamaki",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        40,
+        12,
+        973,
+        1524
+      ]
+    },
+    {
+      "id": "yuna",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        72,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "kazusa",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/03_blue_shirt.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "maya",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/04_floral_sports_no_logo_front.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        998,
+        1524
+      ]
+    },
+    {
+      "id": "nana",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/bb0fa153c49a4b5cee75ac395ac8d7e5d2e65914/assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        40,
+        12,
+        961,
+        1524
+      ]
+    },
+    {
+      "id": "roze",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/a249a3eed6fc036feb86cec10a9544980c30f193/assets/provisional_standees/2026-11-11/gothic_rose_blonde_v1.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        38,
+        12,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "manatsu",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/4fb3649282a5208424817e5db15aab017430f1de/assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        72,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "ren",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c7d4e888391cc76c622dc7eea16e1c937784f6dd/assets/ART_V2/full_body/standee_black_blonde_20261111.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        286,
+        17,
+        704,
+        1520
+      ]
+    },
+    {
+      "id": "chitose",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/8d980406b0d822d1f49854fb7b0c1fa83766987d/assets/provisional_standees/2026-11-11/brown_steampunk_beret_v1.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        31,
+        12,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "mikan",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/025179b996464f8f1016d4e0c835eeaaade63e7c/assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        987,
+        1524
+      ]
+    },
+    {
+      "id": "mahiru",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/69fc587e1678b1c241b8032333383147fe683acb/assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        40,
+        13,
+        987,
+        1524
+      ]
+    },
+    {
+      "id": "airi",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/a3c70e88e381d255d483892377b63d2c0f65a12a/assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        232,
+        14,
+        812,
+        1522
+      ]
+    },
+    {
+      "id": "shieru",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/cac55c2219f3b4f440ae18d36951189fe7457484/assets/ART_V2/full_body/2026-11-11_new/silver_gothic_crown.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1004,
+        1524
+      ]
+    },
+    {
+      "id": "tsumugi",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/ff7830705717f8f2fa4bbd362693fe5ee81f8bef/assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        56,
+        12,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "mirei",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/c5731aeb2e71dcaee731424174364dbfa53896e7/assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "ui",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/01_pink_floral_kimono.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        21,
+        998,
+        1508
+      ]
+    },
+    {
+      "id": "miharu",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        33,
+        13,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "konatsu",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/03_cat_cap_denim_shorts.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        40,
+        12,
+        959,
+        1510
+      ]
+    },
+    {
+      "id": "rinka",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/04_white_blouse_black_tiered_skirt.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        52,
+        30,
+        955,
+        1508
+      ]
+    },
+    {
+      "id": "michiru",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/05_pink_blouse_white_pants.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        27,
+        996,
+        1524
+      ]
+    },
+    {
+      "id": "ran",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        25,
+        998,
+        1524
+      ]
+    },
+    {
+      "id": "rise",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/fc6cfe5b573d2da33c492180e640aa25d5db5343/assets/character_candidates/2026-11-11_3_fullbody/01_blonde_maid.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        295,
+        12,
+        858,
+        1524
+      ]
+    },
+    {
+      "id": "satsuki",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/fc6cfe5b573d2da33c492180e640aa25d5db5343/assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1006,
+        1524
+      ]
+    },
+    {
+      "id": "chizuru",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/fc6cfe5b573d2da33c492180e640aa25d5db5343/assets/character_candidates/2026-11-11_3_fullbody/03_navy_furisode.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        8,
+        12,
+        1000,
+        1511
+      ]
+    },
+    {
+      "id": "kokoro",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/main/assets/character_candidates/2026-11-11_6_standees/01_knit_cap_twintails.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        40,
+        12,
+        979,
+        1524
+      ]
+    },
+    {
+      "id": "kasumi",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/main/assets/character_candidates/2026-11-11_6_standees/02_navy_outfit_ivory_tote.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        80,
+        12,
+        979,
+        1524
+      ]
+    },
+    {
+      "id": "ayu",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/main/assets/character_candidates/2026-11-11_6_standees/03_diver_black_blue_suit.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        40,
+        12,
+        1002,
+        1524
+      ]
+    },
+    {
+      "id": "honjo_iroha",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/main/assets/character_candidates/2026-11-11_6_standees/04_black_top_plaid_skirt.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        56,
+        12,
+        955,
+        1524
+      ]
+    },
+    {
+      "id": "asuka",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/main/assets/character_candidates/2026-11-11_6_standees/05_pink_twintails_military.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        174,
+        12,
+        987,
+        1524
+      ]
+    },
+    {
+      "id": "kanna",
+      "source": "https://raw.githubusercontent.com/rin3939kagamine-a11y/yoiboshi/main/assets/character_candidates/2026-11-11_6_standees/06_brown_lace_top_denim.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        54,
+        12,
+        1000,
+        1524
+      ]
+    },
+    {
+      "id": "ramu",
+      "source": "assets/ART_V2/source_originals/ramu_full_body_transparent.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        192,
+        16,
+        753,
+        1524
+      ]
+    },
+    {
+      "id": "noi",
+      "source": "assets/ART_V2/source_originals/noi_full_body_transparent.png",
+      "source_size": [
+        1024,
+        1536
+      ],
+      "alpha_method": "source_alpha",
+      "output_full": [
+        1024,
+        1536
+      ],
+      "output_upper": [
+        768,
+        1024
+      ],
+      "output_face": [
+        400,
+        400
+      ],
+      "full_bbox": [
+        262,
+        17,
+        705,
+        1516
+      ]
+    }
+  ],
+  "notes": [
+    "Automated transparency/dimension QA only; browser visual QA not done",
+    "Edge-extracted flat source backgrounds require visual review"
+  ]
+}

@@ -1,0 +1,2 @@
+/* Character depth cards for 3 new SR heroine additions; earlier cards unchanged. */
+const CHARACTER_DEPTH_V0692=Object.freeze({"sumika":{"habit":"話す前に相手の襟元やボタンをつい確認する","inside":"自分の好きな色を否定されたことをまだ気にしている","growth":"誰かに合わせるだけでなく、自分の好きな服を選べる","cg":"閉店後の古着店で、互いに選んだ一着を交換して見せる"},"reika":{"habit":"会話の終わりに手帳の余白を指でなぞる","inside":"間違った記録を残すことを人一倍怖がる","growth":"形に残せない思いも大切な記憶として受け入れる","cg":"資料館の窓辺で、古い地図を広げる二人"},"hono":{"habit":"寒そうな人を見ると防寒着の素材の話をする","inside":"頼ってもらえる自分でいなければ、と無理をする","growth":"疲れたときは素直に誰かの手を借りられる","cg":"海沿いのベンチで温かいココアを分け合う"}});

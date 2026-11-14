@@ -1,0 +1,73 @@
+{
+  "collection": "2026-11-11_6_standees",
+  "status": "candidate_registered_not_game_integrated",
+  "note": "2026-11-11 user-supplied PNG files; item 02 replaced with the corrected transparent image; no pixels altered in registration",
+  "images": [
+    {
+      "path": "assets/character_candidates/2026-11-11_6_standees/01_knit_cap_twintails.png",
+      "git_blob_sha": "948bf6a6d9115b668237463613a4c43e939fda5e",
+      "sha256": "7be4cd1935001f197a6053a5d831a6b761a36a07b9bb4342fea5e38dddce01e8",
+      "bytes": 1211263,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-11_6_standees/02_navy_outfit_ivory_tote.png",
+      "git_blob_sha": "de94ab59b8d1c1363bf38eb4c8f25de052ef2765",
+      "sha256": "ecc1d47193e764f6874c9dc4353d03da05ed9aecb891a8ca5db276a4f26547ea",
+      "bytes": 845630,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-11_6_standees/03_diver_black_blue_suit.png",
+      "git_blob_sha": "75782272147694141c45a8dd32f5da6d55f5acd6",
+      "sha256": "d9f0f3e26e14431669407adc4b613ed516dcb15ea1bf7b318534c168be35a121",
+      "bytes": 931190,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-11_6_standees/04_black_top_plaid_skirt.png",
+      "git_blob_sha": "b904280dcda5615a4bd1da68e0063a0b98b2c1ac",
+      "sha256": "2cee0efbd5c80c96c632c7df90389144136b6b0f535bd49314bed9fd99faaee7",
+      "bytes": 1041444,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-11_6_standees/05_pink_twintails_military.png",
+      "git_blob_sha": "2112077061a554297322249b052c96cdd604706e",
+      "sha256": "95470d43b9346e9115f76d9c9f1935ac8f35a5c7bfb2637ad2b4fcc817995ed5",
+      "bytes": 1115223,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-11_6_standees/06_brown_lace_top_denim.png",
+      "git_blob_sha": "eaeb38925bb5929431ff755c0f0e296bd1438d87",
+      "sha256": "e7036916463236a16eb05838f541a4ffdf024bc5687698d8ca982992ccf8b0a7",
+      "bytes": 1023422,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "collection": "2026-11-13_9_standees",
+  "status": "candidate_registered_not_game_integrated",
+  "note": "2026-11-13 user-supplied PNG files; no pixels altered in registration",
+  "images": [
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/01_floral_dress_low_twintails.png",
+      "original_name": "驚き顔の花柄ワンピース女性.png",
+      "git_blob_sha": "c7d9bccd93e33fd8a04501595de8c8df6487f2cf",
+      "sha256": "725caea15fb72d36df800fba2fc1c446ad5f887c22008d55ed21548aac8df433",
+      "bytes": 1745726,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/02_cargo_pants_ponytail.png",
+      "original_name": "カーゴパンツのポニーテール女性.png",
+      "git_blob_sha": "6784b23fc924d4e29bf54928f80777bcd90fd3de",
+      "sha256": "37591c85f71a86812e8d43d5b8eec166d57bf371673f4c75d08955001aaa7eee",
+      "bytes": 1565548,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/03_gothic_black_trench_coat.png",
+      "original_name": "ゴシック黒髪ロングのトレンチコート少女.png",
+      "git_blob_sha": "d9b67c691218873fd85b9c8954f825a1e91385e0",
+      "sha256": "5d459a6ff1e7aee999adcebd3b29ab48f012880587a3beb9d4a3c9b7bcef2835",
+      "bytes": 1467536,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/04_platinum_white_hoodie.png",
+      "original_name": "プラチナブロンドの白いフーディーガール.png",
+      "git_blob_sha": "ca7296e29d48b2ea1c6ff4130ba5c126ab979b1a",
+      "sha256": "862b2d795299fedf84b55e7112f2565a42b54fdcea7ef588605e85a6cec3325c",
+      "bytes": 1615661,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/05_sheer_tulle_summer_dress.png",
+      "original_name": "透け感チュールの夏ドレス姿.png",
+      "git_blob_sha": "76370423cf6881b1674f9d9ea3ce4417e7348222",
+      "sha256": "468a07bf8ccad830ff17ce4278578ee13f768d5cc49e2c7a45addd98390404ba",
+      "bytes": 1867627,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/06_purple_black_gothic_nun.png",
+      "original_name": "紫と黒のゴシック修道女メイド.png",
+      "git_blob_sha": "704f459f7373e2f0e474b1b5d2b22526a767b2e9",
+      "sha256": "0621735b32654872a6b79356efee0bff8d858b1b11dfadf0159108251a2fbcd5",
+      "bytes": 1966348,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/07_rose_hair_black_knit.png",
+      "original_name": "ローズヘアの黒ニットアニメガール.png",
+      "git_blob_sha": "6a6548527c7d96db5095937626f531f751d8416d",
+      "sha256": "1548346a991683ac8678078662e256b6b0893ffcce5f3a6fff843d48b108f24c",
+      "bytes": 1588256,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/08_glasses_black_hair_red_jacket.png",
+      "original_name": "眼鏡に触れる黒髪アニメガール.png",
+      "git_blob_sha": "11844f0d504c796b5a461139862b46455f31a25f",
+      "sha256": "8614c9d4970fb23dd458ee86f18f8d7680851b62e52ef5b3def7d7838e6d935a",
+      "bytes": 1468271,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/character_candidates/2026-11-13_9_standees/09_peace_sign_plaid_shirt.png",
+      "original_name": "ピースサインのカジュアルアニメガール.png",
+      "git_blob_sha": "cc07191b6922319f42a664d7f850e3eceb5a4eeb",
+      "sha256": "750862c1c1df8a18ae613fad3de16449f043807cb68d46151460dfccf0db7409",
+      "bytes": 1703074,
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA"
+    }
+  ]
+}

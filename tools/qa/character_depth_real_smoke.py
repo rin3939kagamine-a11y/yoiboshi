@@ -1,4 +1,4 @@
-"""Browser QA for the real game with all 79 character-depth cards.
+"""Browser QA for the legacy 79 character-depth cards; 74 new heroines have separate QA.
 No gameplay progression or persistent saves are changed.
 """
 from pathlib import Path
@@ -26,7 +26,7 @@ try:
         page.goto(f"http://127.0.0.1:{srv.server_port}/index.html",wait_until="load",timeout=120000)
         page.wait_for_function("typeof characterDepthCard==='function' && typeof HERO_IDS!=='undefined' && typeof fresh==='function'")
         d=page.evaluate("""()=>{
-           const ids=Object.keys(CHARACTER_DEPTH_V1),expected=[...new Set(HERO_IDS)];
+           const ids=Object.keys(CHARACTER_DEPTH_V1),expected=[...new Set(HERO_IDS.filter(id=>!NEW_HERO_IDS_V0690.includes(id)&&!NEW_HERO_IDS_V0692.includes(id)&&!(typeof NEW_HERO_IDS_V0750!=='undefined'&&NEW_HERO_IDS_V0750.includes(id))&&!(typeof NEW_HERO_IDS_V0760!=='undefined'&&NEW_HERO_IDS_V0760.includes(id))&&!(typeof NEW_HERO_IDS_V0780!=='undefined'&&NEW_HERO_IDS_V0780.includes(id))))];
            const errors=[];
            for(const id of ids){
              const v=CHARACTER_DEPTH_V1[id];

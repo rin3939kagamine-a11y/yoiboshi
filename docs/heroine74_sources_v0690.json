@@ -1,0 +1,682 @@
+{
+  "version": "0.69.0.0",
+  "count": 74,
+  "notes": [
+    "74 new heroines with custom dialogue",
+    "requested iroha ID redirected to honjo_iroha to avoid the preexisting 大森いろは NPC",
+    "source links retain historical commit",
+    "normal recruitment rarity rates unchanged",
+    "0.69.1: pharmacy heroine is now subaru, with automatic save migration for existing owners.",
+    "0.69.1: ramu/noi approved RGBA PNGs are local source_originals, superseding historical image URLs."
+  ],
+  "entries": [
+    {
+      "number": 1,
+      "requested_id": "ruru",
+      "id": "ruru",
+      "name": "朱鷺田 るる",
+      "age": 22,
+      "occupation": "甘ロリ服のドールショップ店員",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/0b0ed4529e29f6dca50ce81864a34c95180fba71/assets/provisional_standees/2026-11-08/02_orange_red_lolita.png"
+    },
+    {
+      "number": 3,
+      "requested_id": "kei",
+      "id": "kei",
+      "name": "宇佐美 ケイ",
+      "age": 29,
+      "occupation": "港のセレクトショップのバイヤー",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/a0ba2b62b1017a46850e7efda209cd56d1b1b4d9/assets/character_candidates/2026-11-08/yoiboshi_gray_bob_fullbody_no_mask.png"
+    },
+    {
+      "number": 4,
+      "requested_id": "rara",
+      "id": "rara",
+      "name": "桃井 らら",
+      "age": 21,
+      "occupation": "メイド喫茶「星屑亭」の新人（ここあの後輩）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/a0ba2b62b1017a46850e7efda209cd56d1b1b4d9/assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png"
+    },
+    {
+      "number": 5,
+      "requested_id": "ryo",
+      "id": "ryo",
+      "name": "赤羽 リョウ",
+      "age": 23,
+      "occupation": "駅前のスケボーショップ店員",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/0f435c89272651b7f1faa48876020ebb4f2f528b/assets/character_candidates/2026-11-08/red_hoodie_fullbody.png"
+    },
+    {
+      "number": 6,
+      "requested_id": "hinako",
+      "id": "hinako",
+      "name": "野々村 ひなこ",
+      "age": 22,
+      "occupation": "宵星大学の学生・カフェのバイト",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/bfef2ee194dd74e3f501d43b213e4e83fb8fe46a/assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png"
+    },
+    {
+      "number": 7,
+      "requested_id": "lira",
+      "id": "lira",
+      "name": "茨木 リラ",
+      "age": 24,
+      "occupation": "旧喫茶街の地下ゴシックバーのバーテンダー（角はトレードマーク）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/bfef2ee194dd74e3f501d43b213e4e83fb8fe46a/assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_02_silver_horns.png"
+    },
+    {
+      "number": 8,
+      "requested_id": "nonoka",
+      "id": "nonoka",
+      "name": "春日 ののか",
+      "age": 21,
+      "occupation": "東雲商店街のパン屋の娘",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/bfef2ee194dd74e3f501d43b213e4e83fb8fe46a/assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_03_plaid_dynamic.png"
+    },
+    {
+      "number": 9,
+      "requested_id": "kohaku",
+      "id": "kohaku",
+      "name": "秋月 こはく",
+      "age": 24,
+      "occupation": "港の喫茶店のバリスタ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c001993458bac923c989cf61713dcdebbdd872bc/assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png"
+    },
+    {
+      "number": 10,
+      "requested_id": "raimu",
+      "id": "raimu",
+      "name": "柳瀬 ライム",
+      "age": 22,
+      "occupation": "宅録の作曲家（DTM）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c001993458bac923c989cf61713dcdebbdd872bc/assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_02_green_plaid_dynamic.png"
+    },
+    {
+      "number": 11,
+      "requested_id": "yuria",
+      "id": "yuria",
+      "name": "葛城 ユリア",
+      "age": 25,
+      "occupation": "地下劇場の照明スタッフ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c001993458bac923c989cf61713dcdebbdd872bc/assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png"
+    },
+    {
+      "number": 12,
+      "requested_id": "leona",
+      "id": "leona",
+      "name": "獅子堂 レオナ",
+      "age": 24,
+      "occupation": "クラブ「ドック」のショーダンサー",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/64a089a55d6b666a0ac1cad321f337d0023c2cda/assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png"
+    },
+    {
+      "number": 13,
+      "requested_id": "mimi",
+      "id": "mimi",
+      "name": "卯月 みみ",
+      "age": 22,
+      "occupation": "「ドック」のショーダンサー（レオナの相方）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/64a089a55d6b666a0ac1cad321f337d0023c2cda/assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic_v3.png"
+    },
+    {
+      "number": 14,
+      "requested_id": "tia",
+      "id": "tia",
+      "name": "姫野 ティア",
+      "age": 21,
+      "occupation": "ゲーセン常連のプリ機マニアのギャル",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/64a089a55d6b666a0ac1cad321f337d0023c2cda/assets/character_candidates/2026-11-08_animal_ear_trio/03_gray_pink_dynamic_no_cat_ears.png"
+    },
+    {
+      "number": 15,
+      "requested_id": "kanon",
+      "id": "kanon",
+      "name": "美作 カノン",
+      "age": 26,
+      "occupation": "港のバー「ラビットホール」のバニースタッフ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/370d36aad772a17fe4710024b27aa9a89d18e1a7/assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png"
+    },
+    {
+      "number": 16,
+      "requested_id": "mikoto",
+      "id": "mikoto",
+      "name": "小田切 みこと",
+      "age": 25,
+      "occupation": "ジューススタンドの店主",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png"
+    },
+    {
+      "number": 17,
+      "requested_id": "sakura",
+      "id": "sakura",
+      "name": "東条 さくら",
+      "age": 26,
+      "occupation": "市民病院の看護師（写真はハロウィン衣装）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/02_red_nurse_no_glasses.png"
+    },
+    {
+      "number": 18,
+      "requested_id": "subaru",
+      "id": "subaru",
+      "name": "沖田 すばる",
+      "age": 25,
+      "occupation": "駅前の薬局の薬剤師",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png"
+    },
+    {
+      "number": 19,
+      "requested_id": "mira",
+      "id": "mira",
+      "name": "有栖川 ミラ",
+      "age": 23,
+      "occupation": "ゴスロリ服店「黒薔薇館」の店員（リリスの後輩）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c777193ca246c9a9d3f6880284cb4dcb5499d757/assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png"
+    },
+    {
+      "number": 21,
+      "requested_id": "nozomi",
+      "id": "nozomi",
+      "name": "白河 のぞみ",
+      "age": 24,
+      "occupation": "駅ビルの化粧品カウンターの美容部員",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp"
+    },
+    {
+      "number": 22,
+      "requested_id": "tomoe",
+      "id": "tomoe",
+      "name": "松岡 ともえ",
+      "age": 25,
+      "occupation": "ホームセンターの店員",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp"
+    },
+    {
+      "number": 23,
+      "requested_id": "chisato",
+      "id": "chisato",
+      "name": "若宮 ちさと",
+      "age": 24,
+      "occupation": "宵星銀行の窓口係",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp"
+    },
+    {
+      "number": 24,
+      "requested_id": "kanoko",
+      "id": "kanoko",
+      "name": "春川 かのこ",
+      "age": 23,
+      "occupation": "歯科衛生士",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp"
+    },
+    {
+      "number": 25,
+      "requested_id": "nao",
+      "id": "nao",
+      "name": "森下 なお",
+      "age": 26,
+      "occupation": "中学校の音楽の先生",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp"
+    },
+    {
+      "number": 26,
+      "requested_id": "miki",
+      "id": "miki",
+      "name": "川島 みき",
+      "age": 22,
+      "occupation": "美容室のアシスタント",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/07_burgundy_blouse_black_skirt.webp"
+    },
+    {
+      "number": 27,
+      "requested_id": "mao",
+      "id": "mao",
+      "name": "黒木 マオ",
+      "age": 25,
+      "occupation": "バー「ルミエール」のホールスタッフ（エリカの店）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/3031cc936b3fdecd55dede1ec00b58ae2d67477b/assets/ART_V2/full_body/candidates_2026-11-08/08_blonde_black_offshoulder.webp"
+    },
+    {
+      "number": 28,
+      "requested_id": "himeka",
+      "id": "himeka",
+      "name": "雨宮 ひめか",
+      "age": 21,
+      "occupation": "駅前のアイドルユニットのセンター",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png"
+    },
+    {
+      "number": 29,
+      "requested_id": "misaki",
+      "id": "misaki",
+      "name": "久我 ミサキ",
+      "age": 31,
+      "occupation": "港のビストロのシェフ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png"
+    },
+    {
+      "number": 30,
+      "requested_id": "himari",
+      "id": "himari",
+      "name": "野村 ひまり",
+      "age": 24,
+      "occupation": "タウン誌の編集者",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png"
+    },
+    {
+      "number": 31,
+      "requested_id": "risa",
+      "id": "risa",
+      "name": "真田 理沙",
+      "age": 32,
+      "occupation": "弁護士",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png"
+    },
+    {
+      "number": 32,
+      "requested_id": "minami",
+      "id": "minami",
+      "name": "大林 ミナミ",
+      "age": 29,
+      "occupation": "漁港の船の整備士",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png"
+    },
+    {
+      "number": 33,
+      "requested_id": "noriko",
+      "id": "noriko",
+      "name": "吉岡 のりこ",
+      "age": 30,
+      "occupation": "商店街の和菓子屋の若女将",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png"
+    },
+    {
+      "number": 34,
+      "requested_id": "kozue",
+      "id": "kozue",
+      "name": "坂井 こずえ",
+      "age": 28,
+      "occupation": "ピン芸人",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/07_black_knit_plaid.png"
+    },
+    {
+      "number": 35,
+      "requested_id": "yuu",
+      "id": "yuu",
+      "name": "古賀 ユウ",
+      "age": 26,
+      "occupation": "楽器店の店員・ギタリスト",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/d09eda716e1af1ceef2cda980e2d193bc69d7e6b/assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png"
+    },
+    {
+      "number": 36,
+      "requested_id": "tsukasa",
+      "id": "tsukasa",
+      "name": "宮本 つかさ",
+      "age": 24,
+      "occupation": "eスポーツ選手",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/01_black_sweat_peace.png"
+    },
+    {
+      "number": 38,
+      "requested_id": "azusa",
+      "id": "azusa",
+      "name": "中村 あずさ",
+      "age": 26,
+      "occupation": "猫カフェの店長",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png"
+    },
+    {
+      "number": 39,
+      "requested_id": "rion",
+      "id": "rion",
+      "name": "黒川 リオン",
+      "age": 23,
+      "occupation": "大学の映画研究会（ホラー映画好き）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png"
+    },
+    {
+      "number": 40,
+      "requested_id": "komachi",
+      "id": "komachi",
+      "name": "犬飼 こまち",
+      "age": 27,
+      "occupation": "トリマー",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png"
+    },
+    {
+      "number": 41,
+      "requested_id": "seira",
+      "id": "seira",
+      "name": "冬木 せいら",
+      "age": 23,
+      "occupation": "港のイルミネーション会社の企画担当",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png"
+    },
+    {
+      "number": 42,
+      "requested_id": "aika",
+      "id": "aika",
+      "name": "千葉 あいか",
+      "age": 28,
+      "occupation": "宵星郵便局の窓口係",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png"
+    },
+    {
+      "number": 43,
+      "requested_id": "moe",
+      "id": "moe",
+      "name": "鷲尾 もえ",
+      "age": 22,
+      "occupation": "旧家のお嬢様の大学生",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png"
+    },
+    {
+      "number": 44,
+      "requested_id": "chako",
+      "id": "chako",
+      "name": "猫田 ちゃこ",
+      "age": 21,
+      "occupation": "編み物作家（ニット帽は手作り）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png"
+    },
+    {
+      "number": 45,
+      "requested_id": "sora",
+      "id": "sora",
+      "name": "雪村 そら",
+      "age": 21,
+      "occupation": "ゲーム配信者（ミオの配信仲間）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/2738f5c53092bbc874fb34279f3697d886e5386f/assets/character_candidates/2026-11-09_10_fullbody_standees/10_bunny_hood_blue_frills.png"
+    },
+    {
+      "number": 46,
+      "requested_id": "tamaki",
+      "id": "tamaki",
+      "name": "神崎 環",
+      "age": 30,
+      "occupation": "宵星署の刑事",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png"
+    },
+    {
+      "number": 47,
+      "requested_id": "yuna",
+      "id": "yuna",
+      "name": "有村 ゆな",
+      "age": 23,
+      "occupation": "結婚式場のブライダルモデル（はるかの仕事仲間）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png"
+    },
+    {
+      "number": 48,
+      "requested_id": "kazusa",
+      "id": "kazusa",
+      "name": "中島 かずさ",
+      "age": 26,
+      "occupation": "市役所観光課（百合子の部下）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/03_blue_shirt.png"
+    },
+    {
+      "number": 49,
+      "requested_id": "maya",
+      "id": "maya",
+      "name": "新堂 マヤ",
+      "age": 27,
+      "occupation": "ジムのトレーナー",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/ed13f0da1f0123cd5d8040565737faf789fb0380/assets/ART_V2/full_body/2026-11-11_approved_4/04_floral_sports_no_logo_front.png"
+    },
+    {
+      "number": 50,
+      "requested_id": "nana",
+      "id": "nana",
+      "name": "宮坂 なな",
+      "age": 22,
+      "occupation": "予備校のチューター",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/bb0fa153c49a4b5cee75ac395ac8d7e5d2e65914/assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png"
+    },
+    {
+      "number": 52,
+      "requested_id": "roze",
+      "id": "roze",
+      "name": "薔薇宮 ロゼ",
+      "age": 26,
+      "occupation": "旧居留地の洋館ホテルの支配人",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/a249a3eed6fc036feb86cec10a9544980c30f193/assets/provisional_standees/2026-11-11/gothic_rose_blonde_v1.png"
+    },
+    {
+      "number": 54,
+      "requested_id": "manatsu",
+      "id": "manatsu",
+      "name": "南条 マナツ",
+      "age": 22,
+      "occupation": "海の家の看板娘",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/4fb3649282a5208424817e5db15aab017430f1de/assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png"
+    },
+    {
+      "number": 55,
+      "requested_id": "ren",
+      "id": "ren",
+      "name": "鬼塚 レン",
+      "age": 25,
+      "occupation": "ライブハウスのベーシスト（ルナのバンド仲間）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c7d4e888391cc76c622dc7eea16e1c937784f6dd/assets/ART_V2/full_body/standee_black_blonde_20261111.png"
+    },
+    {
+      "number": 56,
+      "requested_id": "chitose",
+      "id": "chitose",
+      "name": "時任 ちとせ",
+      "age": 22,
+      "occupation": "東雲商店街の時計修理工房の跡継ぎ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/8d980406b0d822d1f49854fb7b0c1fa83766987d/assets/provisional_standees/2026-11-11/brown_steampunk_beret_v1.png"
+    },
+    {
+      "number": 57,
+      "requested_id": "mikan",
+      "id": "mikan",
+      "name": "柑野 みかん",
+      "age": 21,
+      "occupation": "アイドルユニットのメンバー（ひめかと同じ）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/025179b996464f8f1016d4e0c835eeaaade63e7c/assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png"
+    },
+    {
+      "number": 58,
+      "requested_id": "mahiru",
+      "id": "mahiru",
+      "name": "日比野 まひる",
+      "age": 20,
+      "occupation": "宵星大学2年（なずなの後輩）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/69fc587e1678b1c241b8032333383147fe683acb/assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png"
+    },
+    {
+      "number": 59,
+      "requested_id": "airi",
+      "id": "airi",
+      "name": "夢咲 あいり",
+      "age": 23,
+      "occupation": "駅前のパンケーキ店の店員",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/a3c70e88e381d255d483892377b63d2c0f65a12a/assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png"
+    },
+    {
+      "number": 60,
+      "requested_id": "shieru",
+      "id": "shieru",
+      "name": "冠木 シエル",
+      "age": 24,
+      "occupation": "ゴシックメタルバンドのボーカル",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/cac55c2219f3b4f440ae18d36951189fe7457484/assets/ART_V2/full_body/2026-11-11_new/silver_gothic_crown.png"
+    },
+    {
+      "number": 61,
+      "requested_id": "tsumugi",
+      "id": "tsumugi",
+      "name": "青柳 つむぎ",
+      "age": 22,
+      "occupation": "港の風景を描く美大生",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/ff7830705717f8f2fa4bbd362693fe5ee81f8bef/assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png"
+    },
+    {
+      "number": 62,
+      "requested_id": "mirei",
+      "id": "mirei",
+      "name": "葛西 ミレイ",
+      "age": 22,
+      "occupation": "宅配ピザのバイト・スケーター",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/c5731aeb2e71dcaee731424174364dbfa53896e7/assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png"
+    },
+    {
+      "number": 63,
+      "requested_id": "ui",
+      "id": "ui",
+      "name": "花園 うい",
+      "age": 22,
+      "occupation": "旧喫茶街の甘味処の看板娘",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/01_pink_floral_kimono.png"
+    },
+    {
+      "number": 64,
+      "requested_id": "miharu",
+      "id": "miharu",
+      "name": "久住 ミハル",
+      "age": 28,
+      "occupation": "市長秘書",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png"
+    },
+    {
+      "number": 65,
+      "requested_id": "konatsu",
+      "id": "konatsu",
+      "name": "今井 こなつ",
+      "age": 21,
+      "occupation": "遊園地の着ぐるみスタッフ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/03_cat_cap_denim_shorts.png"
+    },
+    {
+      "number": 66,
+      "requested_id": "rinka",
+      "id": "rinka",
+      "name": "秋吉 りんか",
+      "age": 25,
+      "occupation": "ピアノ講師",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/04_white_blouse_black_tiered_skirt.png"
+    },
+    {
+      "number": 67,
+      "requested_id": "michiru",
+      "id": "michiru",
+      "name": "今村 みちる",
+      "age": 26,
+      "occupation": "観光バスのガイド",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/05_pink_blouse_white_pants.png"
+    },
+    {
+      "number": 68,
+      "requested_id": "ran",
+      "id": "ran",
+      "name": "香月 らん",
+      "age": 24,
+      "occupation": "調香師",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/f6561bee92faaaa5c8cfd58acb9a6b6e49d78202/assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png"
+    },
+    {
+      "number": 69,
+      "requested_id": "rise",
+      "id": "rise",
+      "name": "小桜 リセ",
+      "age": 22,
+      "occupation": "港のコンセプトカフェのメイド",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/fc6cfe5b573d2da33c492180e640aa25d5db5343/assets/character_candidates/2026-11-11_3_fullbody/01_blonde_maid.png"
+    },
+    {
+      "number": 70,
+      "requested_id": "satsuki",
+      "id": "satsuki",
+      "name": "魚住 さつき",
+      "age": 24,
+      "occupation": "港の朝市の魚屋の娘",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/fc6cfe5b573d2da33c492180e640aa25d5db5343/assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png"
+    },
+    {
+      "number": 71,
+      "requested_id": "chizuru",
+      "id": "chizuru",
+      "name": "筆坂 千鶴",
+      "age": 24,
+      "occupation": "書道家",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/fc6cfe5b573d2da33c492180e640aa25d5db5343/assets/character_candidates/2026-11-11_3_fullbody/03_navy_furisode.png"
+    },
+    {
+      "number": 72,
+      "requested_id": "kokoro",
+      "id": "kokoro",
+      "name": "本多 こころ",
+      "age": 21,
+      "occupation": "市立図書館のアルバイト（文香の後輩）",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/main/assets/character_candidates/2026-11-11_6_standees/01_knit_cap_twintails.png"
+    },
+    {
+      "number": 73,
+      "requested_id": "kasumi",
+      "id": "kasumi",
+      "name": "土屋 かすみ",
+      "age": 34,
+      "occupation": "陶芸工房の主",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/main/assets/character_candidates/2026-11-11_6_standees/02_navy_outfit_ivory_tote.png"
+    },
+    {
+      "number": 74,
+      "requested_id": "ayu",
+      "id": "ayu",
+      "name": "海野 あゆ",
+      "age": 26,
+      "occupation": "港のダイビングショップのインストラクター",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/main/assets/character_candidates/2026-11-11_6_standees/03_diver_black_blue_suit.png"
+    },
+    {
+      "number": 75,
+      "requested_id": "iroha",
+      "id": "honjo_iroha",
+      "name": "本条 いろは",
+      "age": 23,
+      "occupation": "古本屋の店番",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/main/assets/character_candidates/2026-11-11_6_standees/04_black_top_plaid_skirt.png"
+    },
+    {
+      "number": 76,
+      "requested_id": "asuka",
+      "id": "asuka",
+      "name": "剣崎 アスカ",
+      "age": 24,
+      "occupation": "ミリタリーショップの店員・サバゲー好き",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/main/assets/character_candidates/2026-11-11_6_standees/05_pink_twintails_military.png"
+    },
+    {
+      "number": 77,
+      "requested_id": "kanna",
+      "id": "kanna",
+      "name": "葉山 カンナ",
+      "age": 29,
+      "occupation": "港のワインバーのソムリエ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/main/assets/character_candidates/2026-11-11_6_standees/06_brown_lace_top_denim.png"
+    },
+    {
+      "number": 51,
+      "requested_id": "ramu",
+      "id": "ramu",
+      "name": "黒咲 らむ",
+      "age": 21,
+      "occupation": "古着ゴスショップの店員",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/21e45a94fd187a42b83e3de9404a87ba0b131566/assets/provisional/2026-11-11_black_pink_uniform/full_body/01_black_pink_uniform.png",
+      "preferred_source": "assets/ART_V2/source_originals/ramu_full_body_transparent.png"
+    },
+    {
+      "number": 53,
+      "requested_id": "noi",
+      "id": "noi",
+      "name": "真壁 ノイ",
+      "age": 25,
+      "occupation": "クラブ「ドック」のDJ",
+      "source_url": "https://github.com/rin3939kagamine-a11y/yoiboshi/blob/cef565c63a0dd045c52f301d989714dc50d9f234/assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v1.png",
+      "preferred_source": "assets/ART_V2/source_originals/noi_full_body_transparent.png"
+    }
+  ]
+}

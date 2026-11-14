@@ -1,0 +1,64 @@
+/* Ver.0.68.0.0 タイトル画面：一枚絵の上に、空の中のロゴと、下の金のボタン */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&display=swap');
+.title-screen.has-visual{background:#0b1030!important}
+.title-screen.has-visual:before,.title-screen.has-visual:after,.title-screen.has-visual .title-stars{display:none!important}
+.title-screen.has-visual .title-visual{position:absolute;inset:0;z-index:0;background-position:center bottom;background-size:cover;background-repeat:no-repeat;pointer-events:none}
+.title-screen.has-visual .tv-l{display:none}
+@media (orientation:landscape){.title-screen.has-visual .tv-p{display:none}.title-screen.has-visual .tv-l{display:block}}
+.title-screen.has-visual .title-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,40,.35) 0%,rgba(8,12,40,0) 30%,rgba(8,12,40,0) 52%,rgba(8,12,40,.72) 100%)}
+@media (prefers-reduced-motion:no-preference){
+ .title-screen.has-visual .title-visual{animation:tv-in 1.6s ease-out both}
+ @keyframes tv-in{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+}
+.title-screen.has-visual .title-inner{position:relative;z-index:1;height:100%;width:min(520px,92vw);display:flex;flex-direction:column;justify-content:space-between!important;align-items:center;padding:clamp(48px,11vh,110px) 0 clamp(26px,5vh,48px);gap:0!important}
+.title-screen.has-visual .title-masthead{text-align:center}
+.title-screen.has-visual .title-masthead h1{font-family:'Shippori Mincho','Yu Mincho','Hiragino Mincho ProN',serif;font-weight:800;font-size:clamp(40px,11vw,76px);letter-spacing:.14em;line-height:1.15;margin:0;color:#fff8e8;text-shadow:0 0 22px rgba(242,198,109,.55),0 0 2px #fff,0 4px 18px rgba(0,0,0,.6)}
+.title-screen.has-visual .title-masthead strong{display:block;margin-top:10px;font-family:'Shippori Mincho','Yu Mincho',serif;font-size:clamp(14px,3.6vw,20px);letter-spacing:.5em;color:#f2c66d;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.title-screen.has-visual .title-actions{width:100%;display:flex;flex-direction:column;gap:10px}
+.title-screen.has-visual .title-primary,.title-screen.has-visual .title-secondary,.title-screen.has-visual .title-settings-button{width:100%;min-height:54px;border-radius:999px;font-family:'Shippori Mincho','Yu Mincho',serif;font-weight:800;font-size:18px;letter-spacing:.2em;cursor:pointer}
+.title-screen.has-visual .title-actions>button:first-child{background:linear-gradient(180deg,#ffe3a3,#f2c66d)!important;color:#2a2040!important;border:0!important;box-shadow:0 0 26px rgba(242,198,109,.55),0 8px 22px rgba(0,0,0,.45)!important}
+.title-screen.has-visual .title-actions>button:not(:first-child){background:rgba(14,20,56,.6)!important;color:#f3f0ff!important;border:1px solid rgba(242,198,109,.45)!important;backdrop-filter:blur(6px);box-shadow:none!important}
+.title-screen.has-visual .title-settings-button{font-size:15px;letter-spacing:.12em;min-height:46px}
+.title-screen.has-visual .title-settings-button span{font-family:sans-serif;font-size:11px;letter-spacing:0;opacity:.75;font-weight:600}
+.title-screen.has-visual .title-version{margin:12px 0 0;font-size:11px;color:#c9cdea;opacity:.8;text-align:center;letter-spacing:.06em}
+.title-screen.has-visual .title-primary:focus-visible,.title-screen.has-visual .title-secondary:focus-visible,.title-screen.has-visual .title-settings-button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (orientation:landscape) and (max-height:520px){
+ .title-screen.has-visual .title-inner{flex-direction:row;width:min(900px,94vw);align-items:center;justify-content:space-between!important;padding:0 2vw}
+ .title-screen.has-visual .title-masthead{text-align:left;align-self:flex-start;margin-top:8vh}
+ .title-screen.has-visual .title-masthead h1{font-size:clamp(38px,7vw,58px)}
+ .title-screen.has-visual .title-actions{width:min(300px,38vw);align-self:flex-end;margin-bottom:5vh}
+ .title-screen.has-visual .title-actions .title-version{text-align:right}
+}
+
+.title-screen.has-visual .title-masthead h1{white-space:nowrap;font-size:min(76px,11.5vw)}
+.title-screen.has-visual .title-masthead,.title-screen.has-visual .title-actions{border:0!important}
+.title-screen.has-visual .title-masthead:before,.title-screen.has-visual .title-masthead:after,.title-screen.has-visual .title-actions:before,.title-screen.has-visual .title-actions:after{display:none!important}
+.title-screen.has-visual .title-inner{width:min(560px,92vw)}
+@media (orientation:landscape) and (max-height:520px){.title-screen.has-visual .title-masthead h1{font-size:min(58px,7vw)}}
+/* ボタンは画面の下へ、灯台を隠さない位置に */
+.title-screen.has-visual .title-actions{margin-top:auto}
+.title-screen.has-visual .tv-p{background-position:74% bottom}
+@media (orientation:landscape) and (max-height:520px){
+ .title-screen.has-visual .title-inner{flex-direction:column;align-items:flex-start;justify-content:space-between!important;padding:5vh 0 4vh}
+ .title-screen.has-visual .title-masthead{margin-top:0}
+ .title-screen.has-visual .title-actions{align-self:flex-start;margin-bottom:0;width:min(300px,40vw)}
+ .title-screen.has-visual .title-version{text-align:left!important;align-self:flex-start}
+}
+/* 横画面：ロゴは左上、ボタンは左下（灯台やキャラを隠さない） */
+@media (orientation:landscape) and (max-height:520px){
+ .title-screen.has-visual .title-inner{width:94vw!important;align-items:flex-start!important}
+}
+@media (orientation:landscape) and (min-height:521px){
+ .title-screen.has-visual[data-visual="momoka"] .title-inner{width:min(1200px,94vw)!important;align-items:flex-start!important}
+ .title-screen.has-visual[data-visual="momoka"] .title-actions{width:min(340px,30vw)}
+}
+.title-screen.has-visual[data-visual="momoka"] .tv-p{background-position:42% bottom}
+/* 後ろ姿の絵：縦画面は2人が下にいるので、ボタンを空の中（ロゴのすぐ下）に置く */
+@media (orientation:portrait){
+ .title-screen.has-visual[data-visual="backview"] .title-actions{margin-top:clamp(28px,6vh,60px)}
+ .title-screen.has-visual[data-visual="backview"] .title-version{margin-top:auto}
+}
+@media (orientation:landscape) and (min-height:521px){
+ .title-screen.has-visual[data-visual="backview"] .title-inner{width:min(1200px,94vw)!important;align-items:flex-start!important}
+ .title-screen.has-visual[data-visual="backview"] .title-actions{width:min(340px,28vw)}
+}
