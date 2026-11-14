@@ -85,3 +85,39 @@ info={"created_from":"GitHub Pull API and exact PR refs","scope":"open unmerged 
 (DEST/"README.md").write_text(f"# Unmerged PR character art visual audit\n\nOpen PRs scanned: {len(prs)}. Source image records: {len(records)}. Same binary already in main: {len(records)-len(all_records)}. Not in main: {len(all_records)}. Contact sheets: {math.ceil(len(all_records)/(C*R))}.\n\nThis is a *visual QA inventory* not proof that two different illustrations portray the same fictional person. Same blob is proven by Git SHA. Visually similar characters need human review.\n",encoding="utf-8")
 print(json.dumps({k:info[k] for k in ["open_prs","source_records","excluded_main","unique_files"]},ensure_ascii=False))
 print("Potential cross-PR matches:",len(suggest),"errors",errors[:8])
+
+
+# Group only demonstrably identical-character revisions within the same PR:
+# PR34: 01 leopard cat v1/v2/v3 and 02 pink bunny v1/v2/v3;
+# PR64: the explicitly versioned same-character pink-inner standee v1/v2/v3.
+# Cross-PR identity is not proven by filenames, visual similarity or dHash.
+group_map={}
+for row in all_records:
+    n=row["pr"];p=Path(row["file"]).name
+    if n==34 and p.startswith("01_leopard_cat_dynamic"):key="34:01_leopard"
+    elif n==34 and p.startswith("02_pink_bunny_dynamic"):key="34:02_bunny"
+    elif n==64 and p.startswith("pink_underlayer_black_street_v"):key="64:pink_underlayer"
+    else:key=f'{n}:{row["file"]}'
+    group_map.setdefault(key,[]).append(row)
+groups=[{"group_id":f"G{i:03d}","pr_numbers":sorted(set(x["pr"] for x in values)),"files":[{"pr":x["pr"],"path":x["file"],"sha":x["sha"]} for x in values],"anchor":Path(values[-1]["file"]).stem} for i,values in enumerate(group_map.values(),1)]
+assert len(groups)==len(all_records)-6,("variant reduction should be 6",len(groups),len(all_records))
+(DEST/"groups_provisional.json").write_text(json.dumps({"count_groups":len(groups),"evidence_scope":"2 within-PR version series plus 1 regenerated v3 series; any further cross-PR overlap unproven","groups":groups},ensure_ascii=False,indent=2),encoding="utf-8")
+md=["# 未マージPRの人物画像・重複整理（2026-11-14）","",
+    "**注意：以下は画像の暫定候補グループであり、71人の独立した人物が確定したことを意味しない。**",
+    "GitHubの現在OpenのPRを走査。mainとバイナリ完全一致の画像は除外。明示的なv1/v2/v3再制作と同じ衣装・容姿が認められる3系列だけを束ね、PRをまたぐ同一人物は人物設定・IDの証拠がないため未確定とした。",
+    f"Open PR {len(prs)}件、対象画像 {len(all_records)}点、版違い3系列をまとめて**暫定{len(groups)}グループ**。**PR間の同一人物確定束ねは0組**。","",
+    "| 仮グループ | PR | 画像パス（各行Git blob SHA） |","|---|---|---|"]
+for group in groups:
+    detail="<br>".join("`"+f["path"]+"` (`"+f["sha"][:12]+"`)" for f in group["files"])
+    md.append(f'| {group["group_id"]} | '+", ".join("#"+str(x) for x in group["pr_numbers"])+f" | {detail} |")
+md += ["","## 目視の曖昧な候補（同一人物と断定せず）",
+        "- #58 `01_black_sweat_peace.png` と #64 `pink_underlayer_black_street_v3_regenerated_CANDIDATE.png`：黒いオーバーサイズトップスという衣装モチーフが似るが、髪の色分布・襟袖・ポーズが異なり、同一人物の証拠はない。",
+        "- #38 `04_navy_business_suit.png` と #59 `01_black_suit.png`：短髪スーツという構成のみ共通し、同一人物とは判定不能。",
+        "- #38 `05_light_blue_workwear.png` と #59 `03_blue_shirt.png`：青いトップスと短髪が共通するが、視覚同一性は未確定。",
+        "- #58 `09_cat_knit_hat_twintails.png` と #75 `03_cat_cap_denim_shorts.png`：猫柄帽子の意匠が似るが衣装・髪形が異なり未確定。",
+        "",
+        "## 証跡",
+        "連絡表 `contact_01.jpg`〜`contact_04.jpg`、全画像のGit blob・dimとdHash `report.json`、グループの正規化 `groups_provisional.json`。dHash値だけでは人物同一性を証明できない。",
+        "ゲーム本体・既存キャラ・セーブ・ガチャに変更なし。"]
+(DEST/"GROUPS.md").write_text("\n".join(md)+"\n",encoding="utf-8")
+print("GROUPS PROVISIONAL",len(groups),"cross-PR confirmed",0,flush=True)
