@@ -1,0 +1,37 @@
+name: QA - Kaho Ririka stage2 SR
+on:
+  push:
+    branches:
+      - feature/20261115-kaho-ririka-sr-units
+    paths:
+      - 'js/game.js'
+      - 'js/heroines_v0810_units.js'
+      - 'js/performance_v016.js'
+      - 'index.html'
+      - 'tools/qa/stage2_v0810_smoke.py'
+      - '.github/workflows/qa-stage2-v0810.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Chromium old-save, odds, pool, unit regressions
+        run: python tools/qa/stage2_v0810_smoke.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-stage2-v0810
+          path: qa_artifacts/stage2_v0810/
+          if-no-files-found: warn
