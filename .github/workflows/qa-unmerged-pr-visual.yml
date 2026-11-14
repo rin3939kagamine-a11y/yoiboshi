@@ -37,5 +37,7 @@ jobs:
             echo 'Audit unchanged'
           else
             git commit -m 'QA inventory and visual contact sheets for open PR standees'
+            git fetch origin qa/20261114-unmerged-character-visual-audit
+            git rebase origin/qa/20261114-unmerged-character-visual-audit
             git push origin HEAD:qa/20261114-unmerged-character-visual-audit
           fi
