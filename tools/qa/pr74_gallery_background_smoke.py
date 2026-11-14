@@ -123,7 +123,7 @@ with sync_playwright() as p:
             page.wait_for_function("""file=>{
               const bg=document.querySelector('.story-panel .story-bg');
               return bg&&getComputedStyle(bg).backgroundImage.includes(file);
-            }""",filename,timeout=15000)
+            }""",arg=filename,timeout=15000)
             displayed[id]=page.locator(".story-panel .story-bg").count()>0
             if id in {"q103_intro","q105_pre","q106_intro","q107_intro"}:
                 page.screenshot(path=str(REPORT/(device+"_"+id+".png")),full_page=True)
