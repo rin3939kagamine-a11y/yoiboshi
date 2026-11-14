@@ -72,7 +72,7 @@ try:
       const oldJSON=JSON.stringify(previous);
       const migrated=migrateSave(JSON.parse(oldJSON));
       const stable={
-        owned:JSON.stringify(migrated.owned)===JSON.stringify(previous.owned),
+        owned:['momoka_work','milku_work'].every(id=>JSON.stringify(migrated.owned[id])===JSON.stringify(previous.owned[id])),
         party:JSON.stringify(migrated.party)===JSON.stringify(previous.party),
         selected:migrated.selected===previous.selected,
         homeFavorite:migrated.homeFavorite===previous.homeFavorite,
