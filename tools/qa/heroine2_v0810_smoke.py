@@ -83,6 +83,8 @@ with sync_playwright() as p:
  snapshot.profiles=ids.map(id=>HEROINE_PROFILES_ALL[id]?.age);
  snapshot.settings=ids.map(id=>CHARACTER_DEPTH_V0810[id]?.growth);
  snapshot.noKinship= !JSON.stringify(ROMANCE_V0810).includes('小春');
+ snapshot.meetingNoKinship=!JSON.stringify(V0810_MEET_STORIES).includes('小春')&&!JSON.stringify(V0810_MEET_STORIES).includes('姉妹')&&!JSON.stringify(V0810_MEET_STORIES).includes('親戚');
+ snapshot.approvedDetails=ids.map(id=>({occupation:ROMANCE_V0810[id].profile.occupation,personality:ROMANCE_V0810[id].profile.personality}));
  S.quests.q3={complete:true};
  snapshot.afterQ3=ids.map(id=>romanceHeroAvailable(id));
  snapshot.meetQ3=ids.map(id=>storyAllowed('v0810_meet_'+id));
@@ -160,7 +162,11 @@ for device,r in results.items():
     assert r["bonds"]==[5,5],(device,"bond count")
     assert r["meetingRewardUnchanged"] and all(all(v.values()) for v in r["meetings"].values()),(device,"meeting replay")
     assert r["profiles"]==[25,23],(device,"profile")
-    assert r["noKinship"],(device,"family claim")
+    assert r["noKinship"] and r["meetingNoKinship"],(device,"family claim")
+    assert r["approvedDetails"]==[
+        {"occupation":"港町のギャラリーで展示・空間演出を担当","personality":"穏やかで大人っぽく、人に気を配る。自分の悩みは後回しにしがち。"},
+        {"occupation":"街のフォトスタジオで衣装・小物のスタイリングを担当","personality":"柔らかな物腰と繊細な感性を持つ。仕事には芯の強さを見せる。"}
+    ],(device,"approved profile regression")
     assert r["poolUnchanged"] and r["noRecruit"],(device,"gacha regression")
     assert r["key"]=="yoiboshi-reboot-v1",(device,"save key changed")
     assert r["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},(device,"rates changed")
