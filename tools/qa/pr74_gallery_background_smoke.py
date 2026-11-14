@@ -49,7 +49,7 @@ allowed={"q103_intro","q105_intro","q105_pre","q105","q106_intro","q106_pre","q1
 def extract_map(s):
     m=re.search(r"const STORY_BACKGROUNDS = Object\.freeze\(\{([\s\S]*?)\n\}\);",s)
     assert m
-    return dict(re.findall(r"^\s*([a-zA-Z0-9_]+): Object\.freeze\(\{bg:'([^']+)',time:'([^']+)'\}\),?",m.group(1),flags=re.M))
+    return {name:(bg,time) for name,bg,time in re.findall(r"^\s*([a-zA-Z0-9_]+): Object\.freeze\(\{bg:'([^']+)',time:'([^']+)'\}\),?",m.group(1),flags=re.M)}
 bm,cm=extract_map(base),extract_map(current)
 assert set(bm)==set(cm),("scene keys unexpectedly changed")
 for key in bm:
