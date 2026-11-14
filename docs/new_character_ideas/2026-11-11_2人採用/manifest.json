@@ -2,7 +2,7 @@
   "project": "宵星の契約者 RE:START",
   "approved_date": "2026-11-11",
   "character_decision_date": "2026-11-15",
-  "status": "identities_finalized_pending_binary_upload_and_alpha_QA",
+  "status": "local_qa_completed_images_not_uploaded",
   "target_directory": "assets/ART_V2/full_body/2026-11-11_approved_2/",
   "character_implementation": "not_started",
   "images": [
@@ -27,9 +27,13 @@
       "git_binary_uploaded": false,
       "adoption": "approved",
       "game_display_test": "not_performed",
-      "background_QA": "pending_outline_reinspection",
+      "background_QA": "failed_pale_edge_fringe_and_low_alpha_dust",
       "source_digest_type": "original_previous_record",
-      "qa_result": "not_verified"
+      "qa_result": "failed_local_outline_qa_2026-11-15",
+      "original_source_found": true,
+      "source_sha256_verified": true,
+      "regeneration_attempted": true,
+      "regeneration_accepted": false
     },
     {
       "id": "02",
@@ -52,10 +56,23 @@
       "git_binary_uploaded": false,
       "adoption": "approved",
       "game_display_test": "not_performed",
-      "background_QA": "fails_checkerboard_baked_into_opaque_background",
+      "background_QA": "original_failed_checkerboard_baked_regeneration_passed_local",
       "source_digest_type": "original_previous_record",
       "regeneration": "approved_no_patchwork",
-      "qa_result": "failed_original_regeneration_pending"
+      "qa_result": "passed_local_regenerated_candidate_v1_not_uploaded",
+      "original_source_found": true,
+      "source_sha256_verified": true,
+      "candidate_filename": "02_navy_pink_streetwear_regenerated_v1.png",
+      "candidate_target_path": "assets/ART_V2/full_body/2026-11-11_approved_2/02_navy_pink_streetwear_regenerated_v1.png",
+      "candidate_sha256": "32d0177cc3f1c7a5f3a0469b93031a82d835e1343a84f67e4417f605f37b00fd",
+      "candidate_bytes": 929849,
+      "candidate_format": "PNG RGBA",
+      "candidate_width": 1024,
+      "candidate_height": 1536,
+      "candidate_alpha_zero_count": 1161152,
+      "candidate_local_dark_light_QA": "passed",
+      "github_readback_sha256_verified": false
     }
-  ]
+  ],
+  "last_local_qa_date": "2026-11-15"
 }
