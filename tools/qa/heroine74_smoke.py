@@ -132,11 +132,19 @@ try:
                 const newSave=fresh(),q1Save=fresh(),legacy=fresh(),owned=fresh();
                 const groups=Object.entries(HERO74_ENCOUNTERS);
                 const mapped=Object.entries(NEW_HERO_REVEAL_V0690);
+                // The original 74 scripted meetings have four lines/hero and a
+                // fixed introduction. Later 17 approved meetings have five lines
+                // and personalized greetings, including one narrator conclusion.
+                const legacy74=new Set(NEW_HERO_IDS_V0690);
+                const compact=text=>(text||'').replace(/\\s+/g,'');
                 const namesOk=groups.every(([qid,group])=>
                     group.heroes.every(id=>!!PEOPLE[id]?.name&&group.lines.some(line=>
-                        line.who===id&&line.text.includes(PEOPLE[id].name+"といいます")))
+                        line.who===id&&(legacy74.has(id)
+                          ? line.text.includes(PEOPLE[id].name+"といいます")
+                          : compact(line.text).includes(compact(PEOPLE[id].name))))
                 );
-                const linesOk=groups.every(([qid,group])=>group.lines.length===group.heroes.length*4);
+                const linesOk=groups.every(([qid,group])=>
+                    group.lines.length===group.heroes.reduce((n,id)=>n+(legacy74.has(id)?4:5),0));
                 const allNewHidden=NEW_HERO_IDS_V0690.every(id=>!heroV0690Visible(id,newSave));
                 const initialPool=availableNormalPool(newSave).filter(u=>HERO_V0690_ID_SET.has(u.person)).length;
                 q1Save.quests.q1={complete:true};
@@ -161,8 +169,9 @@ try:
                   ownedBeforeQuest:heroV0690Visible('subaru',owned)
                 };
             }""")
-            assert gate["quests"]==38 and gate["heroCount"]==74, (orientation,gate)
-            assert gate["mapped"]==74 and gate["uniqueHeroes"]==74, (orientation,gate)
+            # 38 original quest meetings + 17 later independent meetings.
+            assert gate["quests"]==55 and gate["heroCount"]==91, (orientation,gate)
+            assert gate["mapped"]==91 and gate["uniqueHeroes"]==91, (orientation,gate)
             assert gate["namesOk"] and gate["linesOk"],(orientation,gate)
             assert gate["allNewHidden"] and gate["initialPool"]==0,(orientation,gate)
             assert gate["pendingBefore"]==["q1"] and not gate["q1Before"],(orientation,gate)
@@ -171,7 +180,7 @@ try:
             assert not gate["pendingAfter"],(orientation,gate)
             assert gate["legacyMode"]=="legacy" and gate["legacyQ1Revealed"],(orientation,gate)
             assert gate["ownedBeforeQuest"],(orientation,gate)
-            print("PASS: quest-gated 74 heroines, dialogues and legacy saves",orientation,gate,flush=True)
+            print("PASS: original 74 + 17 later quest-gated heroine meetings, dialogues and legacy saves",orientation,gate,flush=True)
             legacy = page.evaluate("""() => {
                 const original=fresh();
                 original.playerName='shion';
