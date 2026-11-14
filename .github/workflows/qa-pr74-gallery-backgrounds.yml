@@ -1,0 +1,38 @@
+name: QA - PR74 Gallery backgrounds
+on:
+  push:
+    branches:
+      - feature/gallery-backgrounds-20261111
+    paths:
+      - 'assets/ART_V2/backgrounds/bg_gallery_*.webp'
+      - 'assets/ART_V2/backgrounds/bg_hokan_night.webp'
+      - 'js/story_backgrounds_v031.js'
+      - 'tools/qa/pr74_gallery_background_smoke.py'
+      - '.github/workflows/qa-pr74-gallery-backgrounds.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qa-four-gallery-backgrounds:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image and browser QA dependencies
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Test WebP integrity, chapter 18 visual mapping, save/gacha safety and old backgrounds
+        run: python tools/qa/pr74_gallery_background_smoke.py
+      - name: Retain QA screenshots and image checksums
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-pr74-gallery-backgrounds
+          path: qa_artifacts/pr74_gallery/
+          if-no-files-found: warn
