@@ -103,7 +103,7 @@ try:
             riko:data.find(x=>x.id==='riko_work')?.name,
             favorite:favs.has('ena_work')
         })""")
-        assert gallery["count"] == gallery["unique"] == 79+len(ids_v0692),gallery
+        assert gallery["count"] == gallery["unique"] == 82,gallery  # Separate static SR gallery: 79 original + 3 v0692
         assert gallery["ena"] == "エナ" and "莉子" in gallery["riko"] and gallery["favorite"],gallery
         assert not errors,errors
         print(json.dumps({"status":"PASS","save_migration":check,"sr_gallery":gallery,"js_errors":errors},ensure_ascii=False))
