@@ -13,7 +13,7 @@ def git_main(path):
 old=git_main('js/game.js')
 now=(ROOT/'js/game.js').read_text()
 for token in ['const KEY=','const RATE=','const NEW19_RATE=','const GACHA_CONFIG=','const NORMAL_GACHA_POOL=','const NEW19_GACHA_POOL=',
-              'function rollNormalGachaRarity(','function drawNormalGachaUnit(','function migrateSave(','function fresh(']:
+              'function rollNormalGachaRarity(','function drawNormalGachaUnit(','function migrateSave(']:
     def definition(src):
         start=src.index(token)
         return src[start:src.index('\n',start)]
