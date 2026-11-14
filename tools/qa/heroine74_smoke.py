@@ -136,7 +136,7 @@ try:
                 // fixed introduction. Later 17 approved meetings have five lines
                 // and personalized greetings, including one narrator conclusion.
                 const legacy74=new Set(NEW_HERO_IDS_V0690);
-                const compact=text=>(text||'').replace(/\\s+/g,'');
+                const compact=text=>(text||'').replace(/\s+/g,'');
                 const namesOk=groups.every(([qid,group])=>
                     group.heroes.every(id=>!!PEOPLE[id]?.name&&group.lines.some(line=>
                         line.who===id&&(legacy74.has(id)
