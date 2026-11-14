@@ -26,7 +26,12 @@ try:
         result=page.evaluate("""()=> {
           const errors=[],ids=NEW_HERO_IDS_V0500,oldCount=HERO_IDS.length-ids.length;
           const unique=[...new Set(HERO_IDS)];
-          if(ids.length!==19||oldCount!==60+NEW_HERO_IDS_V0690.length+NEW_HERO_IDS_V0692.length||unique.length!==79+NEW_HERO_IDS_V0690.length+NEW_HERO_IDS_V0692.length)errors.push('IDs count or duplicate');
+          // The first 79 heroines are fixed (original 60 plus this cohort of 19).
+          // Later cohorts each have a stable registry; do not freeze the total at v0692.
+          const additions=[NEW_HERO_IDS_V0690,NEW_HERO_IDS_V0692,NEW_HERO_IDS_V0750,
+            NEW_HERO_IDS_V0760,NEW_HERO_IDS_V0780,NEW_HERO_IDS_V0810,NEW_HERO_IDS_V0830];
+          const expected=79+additions.reduce((n,cohort)=>n+cohort.length,0);
+          if(ids.length!==19||oldCount!==expected-19||HERO_IDS.length!==expected||unique.length!==expected)errors.push('IDs count or duplicate');
           if(Object.keys(CHARACTER_DEPTH_V1).length!==79)errors.push('depth count');
           if(Object.keys(ROMANCE_V0500).length!==19)errors.push('romance count');
           const originalSet=new Set(NORMAL_GACHA_POOL.map(u=>u.person));
@@ -54,7 +59,7 @@ try:
           const after=availableNormalPool(save).filter(u=>u.person==='sumire');
           if(after.length!==3)errors.push('sumire units not recruitable after q73');
           gachaMode='normal';
-          return {count:ids.length,oldCount,total:unique.length,normalPoolSize:NORMAL_GACHA_POOL.length,
+          return {count:ids.length,oldCount,total:unique.length,normalPoolSize:NORMAL_GACHA_POOL.length,srPoolSize:NORMAL_GACHA_POOL.filter(u=>u.rarity==='SR').length,
                   checkedStories:ids.reduce((n,id)=>n+Object.keys(ROMANCE_V0500[id].stories).length,0),
                   checkedUnits:NEW_UNIT_ROSTER_V0500.length,errors};
         }""")
