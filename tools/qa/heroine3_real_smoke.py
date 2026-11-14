@@ -75,7 +75,7 @@ try:
    };
   }""")
   ck("new ID registry length 3 and globally unique",metadata["ids"]==ids and metadata["unique"],metadata)
-  version_match=re.search(r"Ver\\.(\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+)",metadata["version"])
+   version_match=re.search(r"Ver\.(\d+)\.(\d+)\.(\d+)\.(\d+)",metadata["version"])
   ck("app version >= original v0.70.2.0", bool(version_match) and tuple(map(int,version_match.groups())) >= (0,70,2,0),metadata["version"])
   ck("old 74 registry untouched",metadata["old74"]==74)
   ck("unchanged gacha rate",metadata["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and metadata["new19"]=={"SR":80,"SSR":15,"UR":5})
