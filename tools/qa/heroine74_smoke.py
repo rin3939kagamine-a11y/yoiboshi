@@ -133,8 +133,8 @@ try:
                 const groups=Object.entries(HERO74_ENCOUNTERS);
                 const mapped=Object.entries(NEW_HERO_REVEAL_V0690);
                 const namesOk=groups.every(([qid,group])=>
-                    group.heroes.every(id=>group.lines.some(line=>
-                        line.who===id&&line.text.includes(ROMANCE_V0690[id].profile.name+"といいます")))
+                    group.heroes.every(id=>!!PEOPLE[id]?.name&&group.lines.some(line=>
+                        line.who===id&&line.text.includes(PEOPLE[id].name+"といいます")))
                 );
                 const linesOk=groups.every(([qid,group])=>group.lines.length===group.heroes.length*4);
                 const allNewHidden=NEW_HERO_IDS_V0690.every(id=>!heroV0690Visible(id,newSave));
