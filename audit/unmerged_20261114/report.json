@@ -1,0 +1,3753 @@
+{
+  "created_from": "GitHub Pull API and exact PR refs",
+  "scope": "open unmerged PR images, excludes identical binary already in main and QA previews",
+  "open_prs": 32,
+  "source_records": 77,
+  "excluded_main": 0,
+  "unique_files": 77,
+  "image_records": [
+    {
+      "pr": 29,
+      "file": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "sha": "e4a60b9af98f6ed280f3ef6304d99a91d070b307",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "170f17132b0f0e0e",
+      "thumbnail_file": "thumb_001.jpg"
+    },
+    {
+      "pr": 29,
+      "file": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "sha": "96e893a1de6a573bc70026e2e5451954eda0f67d",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f17172f0f0f0e0e",
+      "thumbnail_file": "thumb_002.jpg"
+    },
+    {
+      "pr": 30,
+      "file": "assets/character_candidates/2026-11-08/yoiboshi_gray_bob_fullbody_no_mask.png",
+      "sha": "2995b823b117ad326016070ae8923eaf262744ad",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "480f968d1e18161e",
+      "thumbnail_file": "thumb_003.jpg"
+    },
+    {
+      "pr": 30,
+      "file": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "sha": "3ba88209756570f8fa3a3ed40760b1444e939fb0",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0e0e0e4f4d4d5a",
+      "thumbnail_file": "thumb_004.jpg"
+    },
+    {
+      "pr": 31,
+      "file": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "sha": "25a52a42b27cf0537ab0ec73cf7925285e3fc55e",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e0f07171e0e1e06",
+      "thumbnail_file": "thumb_005.jpg"
+    },
+    {
+      "pr": 32,
+      "file": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "sha": "1922d27637a9698ecc3dc6546e6957670514514b",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0d0f86030f4c070c",
+      "thumbnail_file": "thumb_006.jpg"
+    },
+    {
+      "pr": 32,
+      "file": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_02_silver_horns.png",
+      "sha": "d94d891f84b07942ecab33031fbcbc66ccbb11ac",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d8e37338b0c0f0e",
+      "thumbnail_file": "thumb_007.jpg"
+    },
+    {
+      "pr": 32,
+      "file": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_03_plaid_dynamic.png",
+      "sha": "bc894b9b59b224ea95a29ad2b84487a1b17d2117",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "3269707271292432",
+      "thumbnail_file": "thumb_008.jpg"
+    },
+    {
+      "pr": 33,
+      "file": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "sha": "e4a188fa039da58f02d922882fd31d61f90bb415",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d4e0e0d0f4e0e18",
+      "thumbnail_file": "thumb_009.jpg"
+    },
+    {
+      "pr": 33,
+      "file": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_02_green_plaid_dynamic.png",
+      "sha": "f8ba5252d69a665eacf0f2776639449a1c0a9873",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d4d0e8d0d4c180a",
+      "thumbnail_file": "thumb_010.jpg"
+    },
+    {
+      "pr": 33,
+      "file": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "sha": "bf156b9a78b04770a2943dd503d75d3d5f8fd2c9",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d4f4e4e4f4d0d08",
+      "thumbnail_file": "thumb_011.jpg"
+    },
+    {
+      "pr": 34,
+      "file": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "sha": "5a42e4f0b65c65a4d4f650452403cfd999bf4231",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4e0b25070f0f1a1c",
+      "thumbnail_file": "thumb_012.jpg"
+    },
+    {
+      "pr": 34,
+      "file": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "sha": "4f606eb727af49bd688c4bd7e825352742f255e6",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4e0b25070f0f1a1c",
+      "thumbnail_file": "thumb_013.jpg"
+    },
+    {
+      "pr": 34,
+      "file": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "sha": "e6124123476f28450cff77bf885c0784215f82ce",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4e0b25070f0f1a1c",
+      "thumbnail_file": "thumb_014.jpg"
+    },
+    {
+      "pr": 34,
+      "file": "assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic.png",
+      "sha": "0e35ef8853a48c117898456ad48e4c1a5622f18b",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f06279d0c095a5a",
+      "thumbnail_file": "thumb_015.jpg"
+    },
+    {
+      "pr": 34,
+      "file": "assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic_v2.png",
+      "sha": "48774700190b9de4a0ebd182ad7729fe724bfd05",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f06279d0c095a5a",
+      "thumbnail_file": "thumb_016.jpg"
+    },
+    {
+      "pr": 34,
+      "file": "assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic_v3.png",
+      "sha": "02a360400db624aa6b3acf7c77bc6a920821b612",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f06279d0c095a5a",
+      "thumbnail_file": "thumb_017.jpg"
+    },
+    {
+      "pr": 34,
+      "file": "assets/character_candidates/2026-11-08_animal_ear_trio/03_gray_pink_dynamic_no_cat_ears.png",
+      "sha": "9d065b1c245125ba1a34c22502bc56bc4db1db29",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f313b0d27078f0e",
+      "thumbnail_file": "thumb_018.jpg"
+    },
+    {
+      "pr": 35,
+      "file": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "sha": "93184eada478e70fe3bca558743a7d661be348ba",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e0f27231b0e0e0e",
+      "thumbnail_file": "thumb_019.jpg"
+    },
+    {
+      "pr": 36,
+      "file": "assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png",
+      "sha": "4f8e016fbf1e426e8601a254c69e808f41b1fa66",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0d0d4e0d0f4d1a9a",
+      "thumbnail_file": "thumb_020.jpg"
+    },
+    {
+      "pr": 36,
+      "file": "assets/ART_V2/future_candidates/2026-11-08_four_final/02_red_nurse_no_glasses.png",
+      "sha": "479458023baf5de9f475434b40a5cb62fc4412bb",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0d8686860e4e4656",
+      "thumbnail_file": "thumb_021.jpg"
+    },
+    {
+      "pr": 36,
+      "file": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "sha": "9575e19dee2c26b19b290a081b5d0f58e42e61db",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0f460f0f4d4646",
+      "thumbnail_file": "thumb_022.jpg"
+    },
+    {
+      "pr": 36,
+      "file": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "sha": "86c840971762c25b36e7219bd59547bdb3f751f8",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e0f1f33070f0e0e",
+      "thumbnail_file": "thumb_023.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "sha": "debb8446a14a77e4d6d99703683aa3a6014bf2ce",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f1b1f261e1c0e0f",
+      "thumbnail_file": "thumb_024.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "sha": "07e15d43edaffc5d34414fcb17072c120bb5e310",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e1f170f0f0e0e1e",
+      "thumbnail_file": "thumb_025.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "sha": "5e9aa93287e6eccdf107ac5d6e43a0c14151c8fc",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "1e3f0f07130f1c2f",
+      "thumbnail_file": "thumb_026.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "sha": "548403c40f5c8316a91f123e80e4fad2c7b5fb4b",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f0f170e1f1e0f0f",
+      "thumbnail_file": "thumb_027.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "sha": "2f9b97c01631654334848076af2e9e3c9f544d63",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "1e0f2f1f0f0e1f1c",
+      "thumbnail_file": "thumb_028.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "sha": "018a11b6789112f98cef9ca5bea57fc77b5fe168",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4f0f8f8e8f170f4f",
+      "thumbnail_file": "thumb_029.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/07_burgundy_blouse_black_skirt.webp",
+      "sha": "78f4caa48b4555d081da3aab919cd6a49460bda6",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "8f8f8d8d0e8f9f96",
+      "thumbnail_file": "thumb_030.jpg"
+    },
+    {
+      "pr": 37,
+      "file": "assets/ART_V2/full_body/candidates_2026-11-08/08_blonde_black_offshoulder.webp",
+      "sha": "0ab95550d7ae37e402353a3a5e5515cfe5e464b6",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d8f069c0f4b4f43",
+      "thumbnail_file": "thumb_031.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "sha": "5e8902bec7f0cc2d866b7a4c451b6b43a2f70714",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "8e0f1b1f1f0f0f0c",
+      "thumbnail_file": "thumb_032.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "sha": "e2488fa8803fc1770452f0e80140802b65787c27",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e0f17170e161636",
+      "thumbnail_file": "thumb_033.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "sha": "53c840acbaf6cb610a3e28d7aa22a67f03cc55ee",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e2f071b0f071f0e",
+      "thumbnail_file": "thumb_034.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "sha": "5f7c758c7abc1ee51c828949931c62606e2af907",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e0f0e33331e1e16",
+      "thumbnail_file": "thumb_035.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "sha": "63c30cf8ad54cbbd50c72c0f710da8dfc32249ca",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0c0f0f07363e2e2e",
+      "thumbnail_file": "thumb_036.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "sha": "92a78a4695c2cb830c805d48f0b6017fd962bfaf",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e07070f0f0f1f17",
+      "thumbnail_file": "thumb_037.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/07_black_knit_plaid.png",
+      "sha": "a2a6b1c2374efa3b21148fc47b19d45d1eedadea",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0717373c2e273317",
+      "thumbnail_file": "thumb_038.jpg"
+    },
+    {
+      "pr": 38,
+      "file": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "sha": "d73588c1fc99a670ec36005368a1c95365e919d0",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e073727160e0606",
+      "thumbnail_file": "thumb_039.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/01_black_sweat_peace.png",
+      "sha": "e2e4d668c10105caf336f7c8365e5b0a8257bb41",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e0616960d1d0f46",
+      "thumbnail_file": "thumb_040.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/02_droopy_tee_smile.png",
+      "sha": "a93d72dcf91725eba98167cdf564f0fd943ad184",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d8e969d8d9d2d25",
+      "thumbnail_file": "thumb_041.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png",
+      "sha": "4e01afca43b7af840ecb4bf8b557f1850f6d1e1d",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "490e8e8f960f4d4d",
+      "thumbnail_file": "thumb_042.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "sha": "1987348e96218fca2298fa3e0dfff38701a7da41",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d8c8e8e9d0d4d4d",
+      "thumbnail_file": "thumb_043.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "sha": "bcb4e952c86b60c530ef8109beb75f33eff93c78",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "480e0e4e0c4d4d4c",
+      "thumbnail_file": "thumb_044.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png",
+      "sha": "8d8c51ba906993aee73f9c31f03fbd92452c6ae2",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0d161737080f4d",
+      "thumbnail_file": "thumb_045.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png",
+      "sha": "6b65c081bffe20aeb16a2814e2710cf127bfde7a",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "8d2e069d0d8d1c0a",
+      "thumbnail_file": "thumb_046.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "sha": "92d9744be5c395387d361574698ed54617655a93",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0e9e8e8e4d4a4a",
+      "thumbnail_file": "thumb_047.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "sha": "996f3d544cfbc735d778a4909a6d85ed43cc669d",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d4f0e8e9d4a0d4d",
+      "thumbnail_file": "thumb_048.jpg"
+    },
+    {
+      "pr": 58,
+      "file": "assets/character_candidates/2026-11-09_10_fullbody_standees/10_bunny_hood_blue_frills.png",
+      "sha": "91c75ce75cd98881125c5cba8a4063554777623b",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "96362e2f0f8d8d9d",
+      "thumbnail_file": "thumb_049.jpg"
+    },
+    {
+      "pr": 59,
+      "file": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "sha": "55bc42cecef0614b58fc064da07da757aa54148e",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0d060e4c4d4d4c",
+      "thumbnail_file": "thumb_050.jpg"
+    },
+    {
+      "pr": 59,
+      "file": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "sha": "5afa92fdde89b3f370f9958f7a756dcae635126e",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d4e4e960f4d0d0d",
+      "thumbnail_file": "thumb_051.jpg"
+    },
+    {
+      "pr": 59,
+      "file": "assets/ART_V2/full_body/2026-11-11_approved_4/03_blue_shirt.png",
+      "sha": "80a0fad521fbf29b25fa204b481b6efce8221b5a",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0e8e96ad481c9a",
+      "thumbnail_file": "thumb_052.jpg"
+    },
+    {
+      "pr": 59,
+      "file": "assets/ART_V2/full_body/2026-11-11_approved_4/04_floral_sports_no_logo_front.png",
+      "sha": "d559652efd0968b2f0d4559ecd22a68f2b477229",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "968e4d4d160d0d4d",
+      "thumbnail_file": "thumb_053.jpg"
+    },
+    {
+      "pr": 61,
+      "file": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "sha": "58cde317f425006729ec2dfc31844b0b1a1ff334",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f0317170f0e0c1c",
+      "thumbnail_file": "thumb_054.jpg"
+    },
+    {
+      "pr": 62,
+      "file": "assets/provisional/2026-11-11_black_pink_uniform/full_body/01_black_pink_uniform.png",
+      "sha": "feb3110c63e4fe1a5916a07e181e6447142f536c",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "b2f13070f0b26260",
+      "thumbnail_file": "thumb_055.jpg"
+    },
+    {
+      "pr": 63,
+      "file": "assets/provisional_standees/2026-11-11/gothic_rose_blonde_v1.png",
+      "sha": "f17a24a3ddba83de45c4931699d5c117a053a6f5",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f173379cd4d0c13",
+      "thumbnail_file": "thumb_056.jpg"
+    },
+    {
+      "pr": 64,
+      "file": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v1.png",
+      "sha": "bd21d625502f298b862fa954276e04eea9551b8b",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "b272627131b0b232",
+      "thumbnail_file": "thumb_057.jpg"
+    },
+    {
+      "pr": 64,
+      "file": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png",
+      "sha": "53b5f76211945fb6dfda8d1122a6faf374d95e2d",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d8db6960e0e0d05",
+      "thumbnail_file": "thumb_058.jpg"
+    },
+    {
+      "pr": 64,
+      "file": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "sha": "8fe73a731742556d12bed3697407ccfd45ce4820",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0e0e371f1717162e",
+      "thumbnail_file": "thumb_059.jpg"
+    },
+    {
+      "pr": 65,
+      "file": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "sha": "9c99a912f96a6d001b51969fdd8a0139938aeaa9",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "074b1f2f4f0e0e1e",
+      "thumbnail_file": "thumb_060.jpg"
+    },
+    {
+      "pr": 66,
+      "file": "assets/ART_V2/full_body/standee_black_blonde_20261111.png",
+      "sha": "3ac148316a84ffefc18a8aa4244a4d0ac6471e9e",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4c0c329e0c4c8c9a",
+      "thumbnail_file": "thumb_061.jpg"
+    },
+    {
+      "pr": 67,
+      "file": "assets/provisional_standees/2026-11-11/brown_steampunk_beret_v1.png",
+      "sha": "c6a64c1ad16967b056949427f489c229344ba54d",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d8e960f131e4d46",
+      "thumbnail_file": "thumb_062.jpg"
+    },
+    {
+      "pr": 68,
+      "file": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "sha": "764fa6b510eb1ec67c219ab83d1e59969a6c1648",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f2f274b0f1e0e17",
+      "thumbnail_file": "thumb_063.jpg"
+    },
+    {
+      "pr": 69,
+      "file": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "sha": "657fffbade5bfaf8466f3dc6da00fdce543110c1",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f0f0e0e1e0c0e07",
+      "thumbnail_file": "thumb_064.jpg"
+    },
+    {
+      "pr": 70,
+      "file": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "sha": "c438826d285896f70da7ccdcb7d6b996abba0f10",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f0f0f371e1e1e1c",
+      "thumbnail_file": "thumb_065.jpg"
+    },
+    {
+      "pr": 71,
+      "file": "assets/ART_V2/full_body/2026-11-11_new/silver_gothic_crown.png",
+      "sha": "fc298defeda5147a0dc959e029641020e1f75dbd",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f0b63691b53070f",
+      "thumbnail_file": "thumb_066.jpg"
+    },
+    {
+      "pr": 72,
+      "file": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "sha": "0e7a5371aca44dae241611719d796650f3d696d5",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f0b0737070e1e0e",
+      "thumbnail_file": "thumb_067.jpg"
+    },
+    {
+      "pr": 73,
+      "file": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "sha": "dec694e1ebaf1e88fc4cb046359f59ee84637b60",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0f2b2b0f0f0e0f0f",
+      "thumbnail_file": "thumb_068.jpg"
+    },
+    {
+      "pr": 75,
+      "file": "assets/character_candidates/2026-11-11_six_standees/01_pink_floral_kimono.png",
+      "sha": "00060805c831401973cf597244e5e871eec4796e",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4f8e272b139b4c0e",
+      "thumbnail_file": "thumb_069.jpg"
+    },
+    {
+      "pr": 75,
+      "file": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "sha": "9c73fc98dca064e1edf290a0a9b18d1e74a9fcc5",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0d1f460f4d4d0d9e",
+      "thumbnail_file": "thumb_070.jpg"
+    },
+    {
+      "pr": 75,
+      "file": "assets/character_candidates/2026-11-11_six_standees/03_cat_cap_denim_shorts.png",
+      "sha": "45212fa5c3577e8f59d35b303e7268083ac23e81",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4f0e8e0f0d4d9596",
+      "thumbnail_file": "thumb_071.jpg"
+    },
+    {
+      "pr": 75,
+      "file": "assets/character_candidates/2026-11-11_six_standees/04_white_blouse_black_tiered_skirt.png",
+      "sha": "5fe79caec70404a70105d28773955618333e419a",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4e8d06968a4e0d0e",
+      "thumbnail_file": "thumb_072.jpg"
+    },
+    {
+      "pr": 75,
+      "file": "assets/character_candidates/2026-11-11_six_standees/05_pink_blouse_white_pants.png",
+      "sha": "50d46fe7578711cb40dbc66e1e28348911419d20",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d8e979f9d9d9d8d",
+      "thumbnail_file": "thumb_073.jpg"
+    },
+    {
+      "pr": 75,
+      "file": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "sha": "cc4f8d85c78dc410f0e935b6b29a63466437f174",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0e8e062f0f0e4d",
+      "thumbnail_file": "thumb_074.jpg"
+    },
+    {
+      "pr": 76,
+      "file": "assets/character_candidates/2026-11-11_3_fullbody/01_blonde_maid.png",
+      "sha": "b2def42d7e63a41b5a74b0183eef7efd049253df",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "968d0e0f0f4c4d1d",
+      "thumbnail_file": "thumb_075.jpg"
+    },
+    {
+      "pr": 76,
+      "file": "assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "sha": "542e608540e8e857b179ff5768000fd8409068e9",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "4d0e8e9e9e961f0f",
+      "thumbnail_file": "thumb_076.jpg"
+    },
+    {
+      "pr": 76,
+      "file": "assets/character_candidates/2026-11-11_3_fullbody/03_navy_furisode.png",
+      "sha": "6719cd31e7e997b962785a8f4de2a63300df7f6b",
+      "in_main_by_identical_blob": false,
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "dhash": "0d4c272b2b0b0d4d",
+      "thumbnail_file": "thumb_077.jpg"
+    }
+  ],
+  "perceptual_suggestions": [
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 5,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "distance": 7,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 7,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 7,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 7,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 7,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 33,
+      "file_b": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 61,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 70,
+      "file_a": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 8,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_02_green_plaid_dynamic.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/02_droopy_tee_smile.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/05_pink_blouse_white_pants.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 68,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 9,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 76,
+      "file_b": "assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 61,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 61,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 65,
+      "file_a": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 10,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 33,
+      "file_b": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_02_silver_horns.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/03_gray_pink_dynamic_no_cat_ears.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 59,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 59,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 64,
+      "file_a": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/04_white_blouse_black_tiered_skirt.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 65,
+      "file_a": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 69,
+      "file_a": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 72,
+      "file_a": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 11,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 31,
+      "file_b": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 31,
+      "file_b": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 34,
+      "file_b": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 34,
+      "file_b": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 34,
+      "file_b": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_02_green_plaid_dynamic.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/01_pink_floral_kimono.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/08_blonde_black_offshoulder.webp",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 65,
+      "file_a": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 68,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 69,
+      "file_a": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 12,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 32,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_02_silver_horns.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 34,
+      "file_b": "assets/character_candidates/2026-11-08_animal_ear_trio/03_gray_pink_dynamic_no_cat_ears.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/08_blonde_black_offshoulder.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/03_cat_cap_denim_shorts.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 33,
+      "file_b": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 35,
+      "file_b": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_02_silver_horns.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 76,
+      "file_b": "assets/character_candidates/2026-11-11_3_fullbody/01_blonde_maid.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/08_mustard_plaid_street.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png",
+      "pr_b": 67,
+      "file_b": "assets/provisional_standees/2026-11-11/brown_steampunk_beret_v1.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/03_cat_apron_bob.png",
+      "pr_b": 76,
+      "file_b": "assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/04_cream_hoodie_longhair.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/05_pink_blouse_white_pants.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 61,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 64,
+      "file_a": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 67,
+      "file_a": "assets/provisional_standees/2026-11-11/brown_steampunk_beret_v1.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/01_pink_floral_kimono.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 69,
+      "file_a": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 13,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/02_orange_red_lolita.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 34,
+      "file_b": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 34,
+      "file_b": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 34,
+      "file_b": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 29,
+      "file_a": "assets/provisional_standees/2026-11-08/03_platinum_green_academy_nomask.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/02_black_sleeveless_white_pants.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 30,
+      "file_a": "assets/character_candidates/2026-11-08/yoiboshi_pink_maid_fullbody.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 31,
+      "file_a": "assets/character_candidates/2026-11-08/red_hoodie_fullbody.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/04_white_blouse_black_tiered_skirt.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 33,
+      "file_b": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/02_red_nurse_no_glasses.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_01_cream_knit.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 32,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_approved_3/candidate_02_silver_horns.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 37,
+      "file_b": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_01_beige_dynamic.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_02_green_plaid_dynamic.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_02_green_plaid_dynamic.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/03_blue_shirt.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 33,
+      "file_a": "assets/ART_V2/full_body_dynamic/2026-11-08_candidates/yoiboshi_03_burgundy_dynamic.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/01_lavender_dress.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v2.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 36,
+      "file_b": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/01_leopard_cat_dynamic_v3.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic_v2.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 34,
+      "file_a": "assets/character_candidates/2026-11-08_animal_ear_trio/02_pink_bunny_dynamic_v3.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/07_award_envelope_peace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 35,
+      "file_a": "assets/ART_V2/character_candidates/bunny_maid_20261108_full_body.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/02_red_nurse_no_glasses.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/03_cat_cap_denim_shorts.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/03_blue_nurse_no_mask.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 36,
+      "file_a": "assets/ART_V2/future_candidates/2026-11-08_four_final/04_black_gothic_no_horns_wings.png",
+      "pr_b": 73,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_braid_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/01_long_dark_hair_white_shirt.webp",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/02_wavy_brown_hair_cream_blouse.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/03_white_tshirt_blue_denim.webp",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/01_black_sweat_peace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 67,
+      "file_b": "assets/provisional_standees/2026-11-11/brown_steampunk_beret_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/04_mint_tweed_double_peace.webp",
+      "pr_b": 76,
+      "file_b": "assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/04_navy_business_suit.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/05_pink_knit_cardigan.webp",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v3_regenerated_CANDIDATE.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/06_bob_hair_blue_cardigan.webp",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/07_burgundy_blouse_black_skirt.webp",
+      "pr_b": 38,
+      "file_b": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 37,
+      "file_a": "assets/ART_V2/full_body/candidates_2026-11-08/08_blonde_black_offshoulder.webp",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/01_mint_black_idol.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/02_white_shirt_suspenders.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "pr_b": 61,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/03_short_bob_mustard.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/05_light_blue_workwear.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 58,
+      "file_b": "assets/character_candidates/2026-11-09_10_fullbody_standees/01_black_sweat_peace.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 65,
+      "file_b": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 38,
+      "file_a": "assets/ART_V2/full_body/2026-11-08_approved_8/06_caramel_knit.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/05_cafe_staff_with_dog.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/06_red_fur_costume_peace.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/08_lace_houndstooth_darkhair.png",
+      "pr_b": 59,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_approved_4/01_black_suit.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/09_cat_knit_hat_twintails.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/06_lavender_floral_dress.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 58,
+      "file_a": "assets/character_candidates/2026-11-09_10_fullbody_standees/10_bunny_hood_blue_frills.png",
+      "pr_b": 76,
+      "file_b": "assets/character_candidates/2026-11-11_3_fullbody/01_blonde_maid.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 59,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_approved_4/02_white_lace.png",
+      "pr_b": 64,
+      "file_b": "assets/provisional/2026-11-11_pink_underlayer_standee/full_body/pink_underlayer_black_street_v2_transparency_CANDIDATE.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 59,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_approved_4/03_blue_shirt.png",
+      "pr_b": 66,
+      "file_b": "assets/ART_V2/full_body/standee_black_blonde_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 59,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_approved_4/03_blue_shirt.png",
+      "pr_b": 75,
+      "file_b": "assets/character_candidates/2026-11-11_six_standees/03_cat_cap_denim_shorts.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 61,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_bowtie_burgundy_standee.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 65,
+      "file_a": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "pr_b": 68,
+      "file_b": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 65,
+      "file_a": "assets/provisional/2026-11-11_beach_standee/full_body/beach_standee_v1.png",
+      "pr_b": 69,
+      "file_b": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 68,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "pr_b": 70,
+      "file_b": "assets/provisional/2026-11-11_pink_sideponytail_standee/full_body/pink_sideponytail_smile_v1.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 68,
+      "file_a": "assets/ART_V2/full_body/2026-11-11_purple_orange_idol.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 69,
+      "file_a": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "pr_b": 72,
+      "file_b": "assets/provisional/2026-11-11_blue_beret_standee/full_body/blue_beret_20261111.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 69,
+      "file_a": "assets/provisional/2026-11-11_cream_hoodie_wink/full_body/cream_hoodie_wink_v1.png",
+      "pr_b": 76,
+      "file_b": "assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "distance": 14,
+      "same_blob": false
+    },
+    {
+      "pr_a": 75,
+      "file_a": "assets/character_candidates/2026-11-11_six_standees/05_pink_blouse_white_pants.png",
+      "pr_b": 76,
+      "file_b": "assets/character_candidates/2026-11-11_3_fullbody/02_auburn_offshoulder.png",
+      "distance": 14,
+      "same_blob": false
+    }
+  ],
+  "errors": []
+}
