@@ -1,0 +1,59 @@
+name: QA - Three approved conversation crops
+on:
+  push:
+    branches:
+      - art/20261115-approved-three-chat-crops
+    paths:
+      - 'tools/qa/crop_three_approved_portraits.py'
+      - 'tools/qa/approved_three_crops_browser_smoke.py'
+      - 'js/heroines_v0810_wire.js'
+      - 'js/heroines_v0830_wire.js'
+      - '.github/workflows/qa-approved-three-crops.yml'
+      - 'assets/ART_V2/upper_body/sakakibara_kaho.webp'
+      - 'assets/ART_V2/upper_body/minase_ririka.webp'
+      - 'assets/ART_V2/upper_body/tokiwa_aone.webp'
+      - 'assets/ART_V2/face_icons/sakakibara_kaho.webp'
+      - 'assets/ART_V2/face_icons/minase_ririka.webp'
+      - 'assets/ART_V2/face_icons/tokiwa_aone.webp'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  crop-and-chromium-qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow and Chromium test dependencies
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Generate only from SHA-locked original PNGs; verify exact crop and alpha
+        run: |
+          python tools/qa/crop_three_approved_portraits.py --generate
+          python tools/qa/crop_three_approved_portraits.py --verify
+      - name: Check real Chromium conversation and icons portrait/landscape
+        run: python tools/qa/approved_three_crops_browser_smoke.py
+      - name: Register exact QA-passed WebP binaries on this PR branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- assets/ART_V2/upper_body/{sakakibara_kaho,minase_ririka,tokiwa_aone}.webp assets/ART_V2/face_icons/{sakakibara_kaho,minase_ririka,tokiwa_aone}.webp
+          if git diff --cached --quiet; then
+            echo "Cropped assets already committed; reproducibility verified."
+          else
+            git commit -m "art: register 6 QA-passed approved-PNG conversation WebP crops"
+            git push origin HEAD:art/20261115-approved-three-chat-crops
+          fi
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: approved-three-crop-qa
+          path: qa_artifacts/approved_three_crops/
+          if-no-files-found: warn
