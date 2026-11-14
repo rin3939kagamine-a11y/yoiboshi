@@ -1,11 +1,19 @@
 {
   "project": "宵星の契約者 RE:START",
   "approved_date": "2026-11-11",
-  "status": "adopted_pending_binary_upload_and_alpha_QA",
+  "character_decision_date": "2026-11-15",
+  "status": "identities_finalized_pending_binary_upload_and_alpha_QA",
   "target_directory": "assets/ART_V2/full_body/2026-11-11_approved_2/",
+  "character_implementation": "not_started",
   "images": [
     {
       "id": "01",
+      "character_name": "千代崎 鈴葉",
+      "character_name_kana": "ちよざき すずは",
+      "character_id": "chiyozaki_suzuha",
+      "age": 22,
+      "occupation": "海辺のテーマパークで衣装管理とゲスト案内",
+      "personality": "控えめで礼儀正しいが、トラブル時は機転が利く",
       "label": "ミントフリルドレス",
       "filename": "01_mint_ruffle_dress.png",
       "target_path": "assets/ART_V2/full_body/2026-11-11_approved_2/01_mint_ruffle_dress.png",
@@ -19,10 +27,18 @@
       "git_binary_uploaded": false,
       "adoption": "approved",
       "game_display_test": "not_performed",
-      "background_QA": "pending_repair"
+      "background_QA": "pending_outline_reinspection",
+      "source_digest_type": "original_previous_record",
+      "qa_result": "not_verified"
     },
     {
       "id": "02",
+      "character_name": "櫻場 蓮花",
+      "character_name_kana": "さくらば れんか",
+      "character_id": "sakuraba_renka",
+      "age": 24,
+      "occupation": "港のカジノ風アミューズメント施設のフロアマネージャー",
+      "personality": "冷静で観察力が高く、勝負事には意外と熱い",
       "label": "紺髪ピンクメッシュ私服",
       "filename": "02_navy_pink_streetwear.png",
       "target_path": "assets/ART_V2/full_body/2026-11-11_approved_2/02_navy_pink_streetwear.png",
@@ -36,7 +52,10 @@
       "git_binary_uploaded": false,
       "adoption": "approved",
       "game_display_test": "not_performed",
-      "background_QA": "fails_checkerboard_baked_into_opaque_background"
+      "background_QA": "fails_checkerboard_baked_into_opaque_background",
+      "source_digest_type": "original_previous_record",
+      "regeneration": "approved_no_patchwork",
+      "qa_result": "failed_original_regeneration_pending"
     }
   ]
 }
