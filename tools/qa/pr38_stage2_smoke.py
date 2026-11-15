@@ -125,12 +125,12 @@ try:
       };
    }""")
    assert baseline["ids"]==list(IDS),baseline
-   assert baseline["normalSR"]==181 and baseline["priorSR"]==173 and baseline["unique"],baseline
+   assert baseline["normalSR"]==56 and baseline["priorSR"]==56 and baseline["unique"],baseline
    assert baseline["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
-   assert baseline["new19"]=={"SR":80,"SSR":15,"UR":5} and baseline["cost"]==[120,1000],baseline
+   assert baseline["new19"]=={"R":80,"SSR":15,"UR":5} and baseline["cost"]==[120,1000],baseline
    assert all(baseline["saved"].values()),baseline["saved"]
    for u,id,person,name,role,stats,skills,p,tgt in zip(baseline["units"],IDS,PERSONS,NAMES,ROLES,STATS,SKILLS,PASSIVES,TARGETS):
-    assert (u["id"],u["person"],u["name"],u["rarity"],u["role"])==(id,person,name,"SR",role),u
+    assert (u["id"],u["person"],u["name"],u["rarity"],u["role"])==(id,person,name,"R",role),u
     assert (u["stats"]["hp"],u["stats"]["atk"],u["stats"]["def"])==stats,u
     assert u["skills"]==list(skills) and u["target"]==list(tgt),u
     assert (u["passive"],u["passiveVal"])==p,u
