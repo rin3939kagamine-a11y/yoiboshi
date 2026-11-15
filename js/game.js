@@ -100,11 +100,11 @@ const UNITS=[
 {id:'maron_trial',person:'maron',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
 
 {id:'momoka_daily',person:'momoka',title:'いつもの一日',rarity:'R',role:'attacker',color:'#fbabc6',s:['元気な一撃','みんな、がんばろ！']},
-{id:'momoka_work',person:'momoka',title:'相談室のお手伝い',rarity:'R',role:'support',color:'#d1a7f9',s:['元気をお届け','ちょっと待って！']},
+{id:'momoka_work',person:'momoka',title:'相談室のお手伝い',rarity:'SR',role:'support',color:'#d1a7f9',s:['元気をお届け','ちょっと待って！']},
 {id:'momoka_sky',person:'momoka',title:'青空の約束',rarity:'SSR',role:'healer',color:'#7dcef1',s:['応急サポート','大丈夫だよ！']},
 {id:'momoka_star',person:'momoka',title:'星灯のきらめき',rarity:'UR',role:'tank',color:'#ffd18c',s:['笑顔のバリア','ここは任せて！']},
 {id:'milku_daily',person:'milku',title:'カフェのひととき',rarity:'R',role:'support',color:'#f6a1bb',s:['お飲み物です','ひとやすみ']},
-{id:'milku_work',person:'milku',title:'いつもの帰り道',rarity:'R',role:'healer',color:'#b5ddfb',s:['お手当てします','みんなの笑顔']},
+{id:'milku_work',person:'milku',title:'いつもの帰り道',rarity:'SR',role:'healer',color:'#b5ddfb',s:['お手当てします','みんなの笑顔']},
 {id:'milku_sky',person:'milku',title:'午後のティータイム',rarity:'SSR',role:'tank',color:'#daa3fb',s:['お守りします','ご心配なく']},
 {id:'milku_star',person:'milku',title:'大切な約束',rarity:'UR',role:'attacker',color:'#f7c57b',s:['凛とした一撃','心を込めて']},
  {id:'nagi_dusk',person:'nagi',title:'紅の境界',rarity:'R',role:'support',color:'#cd657b',s:['星灯の結界','紅糸の封縛']},
@@ -256,7 +256,7 @@ function homeUnit(personId){
 function setHomeUnit(id){const u=unit(id);if(!u||!visibleUnitV026(u)||!data(id)||u.person!==lobbySelected)return;S.homeUnitId=id;persist();render()}
 
 const RATE=Object.freeze({R:60,SR:25,SSR:10,UR:5}); // Confirmed normal recruitment odds.
-const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5}); // Existing 19-heroine-only odds; no R units.
+const NEW19_RATE=Object.freeze({R:80,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R.
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
