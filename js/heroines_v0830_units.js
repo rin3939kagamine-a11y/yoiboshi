@@ -3,7 +3,7 @@
  * The existing performance engine implements enemy_ct (2.6s), ct (2.3s)
  * and ct_focus (+7% at SR) without modifying any other unit behavior. */
 const NEW_UNIT_ROSTER_V0830=Object.freeze([
- {id:'tokiwa_aone_work',person:'tokiwa_aone',title:'音が灯る舞台裏',rarity:'SR',role:'support',
+ {id:'tokiwa_aone_work',person:'tokiwa_aone',title:'音が灯る舞台裏',rarity:'R',role:'support',
   color:'#8b87b8',s:['ミュートの合図','次の一拍']}
 ]);
 const NEW_UNIT_DESIGN_V0830=Object.freeze({
