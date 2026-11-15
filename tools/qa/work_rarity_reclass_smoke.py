@@ -76,7 +76,7 @@ for path,n in FILES.items():
  expected=b[:x]+replaced+b[y:]
  if path=="js/game.js":
   old_rate="const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5}); // Existing 19-heroine-only odds; no R units."
-  new_rate="const NEW19_RATE=Object.freeze({R:80,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R."
+  new_rate="const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R."
   assert expected.count(old_rate)==1
   expected=expected.replace(old_rate,new_rate)
  assert a==expected,("Non-rarity or unexpected gacha changes",path)
@@ -196,7 +196,7 @@ try:
    assert data["workTotal"]==227 and data["unique"],data
    assert data["passiveChecked"]==468 and not data["passiveMismatch"],(mode,data["passiveMismatch"])
    assert data["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},data
-   assert data["rate19"]=={"R":80,"SSR":15,"UR":5},data
+   assert data["rate19"]=={"R":80,"SR":0,"SSR":15,"UR":5},data
    assert data["saveOK"] and all(k["exists"] and k["rarity"]==("SR" if k["id"] in ("momoka_work","shio_work") else "R") and k["owned"] and k["usable"] for k in data["kept"]),data
    assert all(not g["before"] and g["after"] for g in data["gates"]),data
    reports[mode]=data
