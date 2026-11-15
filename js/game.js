@@ -143,7 +143,7 @@ const UNITS=[
  {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
-UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500,...NEW_UNIT_ROSTER_V0690,...NEW_UNIT_ROSTER_V0692,...NEW_UNIT_ROSTER_V0750,...NEW_UNIT_ROSTER_V0760,...NEW_UNIT_ROSTER_V0780,...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830,...NEW_UNIT_ROSTER_V0840,...NEW_UNIT_ROSTER_V0850);
+UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500,...NEW_UNIT_ROSTER_V0690,...NEW_UNIT_ROSTER_V0692,...NEW_UNIT_ROSTER_V0750,...NEW_UNIT_ROSTER_V0760,...NEW_UNIT_ROSTER_V0780,...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830,...NEW_UNIT_ROSTER_V0840,...NEW_UNIT_ROSTER_V0850,...NEW_UNIT_ROSTER_V0860);
 // Approved R portraits are provided separately; retain preexisting restored R IDs in saves.
 const APPROVED_R_UNIT_IDS=Object.freeze(["ageha_daily","akane_daily","anzu_daily","aoi_daily","chihiro_daily","chinatsu_daily","chiyo_daily","cocoa_daily","rico_show","erika_daily","fumika_daily","hiyori_daily","hotaru_daily","ichika_daily","jun_daily","kaede_daily","kagari_daily","kaname_daily","karen_daily","kirari_daily","koharu_daily","koyori_daily","kurumi_daily","kyoko_daily","lilith_daily","luna_daily","mai_wind","makoto_daily","marine_cafe","maron_daily","meru_daily","milku_daily","minori_daily","mio_daily","miyabi_daily","mizuki_daily","momoka_daily","nagi_dusk","natsume_daily","nazuna_daily","noel_daily","reiko_daily","reina_daily","riko_daily","ritsu_daily","saeko_daily","saki_daily","sanae_daily","sena_daily","shino_daily","shio_daily","shizuku_daily","suiran_daily","towa_daily","tsubaki_daily","yui_daily","yume_tomorrow","yuriko_daily","yuzu_daily"]);
 const RESTORED_R_UNIT_IDS=new Set([...APPROVED_R_UNIT_IDS,'shio_pool']); // Keep the previous pool outfit without newly assigned portrait.
@@ -231,7 +231,7 @@ const MOMOKA_UNIT_ARTWORK_V03447=Object.freeze({momoka_work:{portrait:'assets/UN
 const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNIT_ART/tsubaki_work.webp'},erika_work:{portrait:'assets/UNIT_ART/erika_work.webp'},kaede_work:{portrait:'assets/UNIT_ART/kaede_work.webp'}});
 // User-approved ordinary outfits: portrait only. Binary images are added separately.
 const APPROVED_R_ARTWORK=Object.freeze(Object.fromEntries(APPROVED_R_UNIT_IDS.map(id=>[id,{portrait:'assets/UNIT_ART/'+id+'.webp'}])));
-const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...NEW_UNIT_ARTWORK_V0690,...NEW_UNIT_ARTWORK_V0692,...NEW_UNIT_ARTWORK_V0750,...NEW_UNIT_ARTWORK_V0760,...NEW_UNIT_ARTWORK_V0780,...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...NEW_UNIT_ARTWORK_V0840,...NEW_UNIT_ARTWORK_V0850,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
+const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...NEW_UNIT_ARTWORK_V0690,...NEW_UNIT_ARTWORK_V0692,...NEW_UNIT_ARTWORK_V0750,...NEW_UNIT_ARTWORK_V0760,...NEW_UNIT_ARTWORK_V0780,...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...NEW_UNIT_ARTWORK_V0840,...NEW_UNIT_ARTWORK_V0850,...NEW_UNIT_ARTWORK_V0860,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
 function unitArt(u,kind='portrait'){
  const config=UNIT_ARTWORK[u.id]||{};
  // Makoto's accepted portrait takes priority over outdated generic UNIT_ART portraits.
@@ -262,7 +262,7 @@ const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}
 function kanameSRUnlocked(save=S){return !!save?.bondRead?.kaname?.[1]}
 function visibleUnitV026(u,save=S){return !!u&&heroV0690Visible(u.person,save)&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)&&(!NEW_HERO_IDS_V0500.includes(u.person)||isV0500Revealed(u.person,save))}
-function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V0810.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0830.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0840.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0850.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
+function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V0810.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0830.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0840.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0850.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0860.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
 function availableNormalPool(save=S){return (gachaMode==='new19'?NEW19_GACHA_POOL:NORMAL_GACHA_POOL).filter(u=>recruitEligibleUnit(u,save))}
 function pickupActive(group,save=S){const start=save.pickupStartDay?.[group];return !!(DISTRICT_GACHA_IDS[group]&&Number.isSafeInteger(start)&&start>=1&&save.love?.day>=start&&save.love.day<start+PICKUP_DAYS)}
 function activePickupId(save=S){return ['chapter4_city','chapter3_port','kaede','kaname','erika','tsubaki','lighthouse','seaside','school_new','station','oldcafe','shinonome'].find(group=>pickupActive(group,save))||'normal'}
@@ -3650,12 +3650,12 @@ function applyBattleStartPassives(){
 }
 function passiveAttackMultiplier(a,e){
  const u=unit(a.id),p=unitPassive(u),v=passiveValue(u)/100;
- if(p.type==='attack'||p.type==='renka_attack'||p.type==='honoka_attack')return 1+v;
+ if(p.type==='attack'||p.type==='renka_attack'||p.type==='honoka_attack'||p.type==='rio_attack')return 1+v;
  if(p.type==='finish'&&e.hp/e.max<=.5)return 1+v;
  if(p.type==='weaken_finish'&&e.vulnerableUntil>battle.sim)return 1+v;
  return 1;
 }
-function passiveHealMultiplier(a,teammate){const u=unit(a.id),p=unitPassive(u),v=passiveValue(u)/100;return 1+(p.type==='heal'?v:((p.type==='rescue'&&teammate.hp/teammate.max<=.5)?v:0))}
+function passiveHealMultiplier(a,teammate){const u=unit(a.id),p=unitPassive(u),v=passiveValue(u)/100;return 1+(p.type==='heal'?v:(((p.type==='rescue'||p.type==='marika_rescue')&&teammate.hp/teammate.max<=.5)?v:0))}
 function passiveShieldMultiplier(a,teammate){const u=unit(a.id),p=unitPassive(u),v=passiveValue(u)/100;return 1+((p.type==='shield_low'&&teammate.hp/teammate.max<=.5)||p.type==='shield'?v:0)}
 function passiveIncomingMultiplier(a){const p=unitPassive(unit(a.id));return p.type==='guard'?1-passiveValue(unit(a.id))/100:1}
 function tickTimedEffects(){
@@ -3701,6 +3701,61 @@ function applySkill(i,j,kind,target){
  const heal=(ally,base)=>{const n=Math.round(base*boost*passiveHealMultiplier(a,ally)*(ally.healBuffUntil>battle.sim?(ally.healBuffMult||1):1));const gain=Math.min(ally.max-ally.hp,n);ally.hp+=gain;if(gain>0)battlePopup(ally,gain,'heal');return gain};
  const shield=(ally,base)=>{const n=Math.round(base*boost*passiveShieldMultiplier(a,ally));ally.shield+=n;return n};
  switch(type){
+ // PR #59 formally adopted four SR units (v0860). Legacy skill cases unchanged.
+ case 'sayaka_team_attack_up':{
+  const rate=NEW_UNIT_EFFECTS_V0860.sayakaAttackPercent/100*boost*
+   (unitPassive(u).type==='sayaka_buff'?1+passiveValue(u)/100:1);
+  const duration=NEW_UNIT_EFFECTS_V0860.sayakaBuffSeconds;
+  for(const ally of battle.allies.filter(x=>x.hp>0)){
+   ally.rallyMult=Math.max(ally.rallyMult||1,1+rate);
+   ally.rallyUntil=Math.max(ally.rallyUntil||0,battle.sim+duration);
+  }
+  log(`味方全員の攻撃+${(rate*100).toFixed(2)}%／${duration}秒`);break;
+ }
+ case 'sayaka_team_defense_up':{
+  const rate=NEW_UNIT_EFFECTS_V0860.sayakaDefensePercent/100*boost*
+   (unitPassive(u).type==='sayaka_buff'?1+passiveValue(u)/100:1);
+  const duration=NEW_UNIT_EFFECTS_V0860.sayakaBuffSeconds;
+  for(const ally of battle.allies.filter(x=>x.hp>0)){
+   ally.defenseBuffMult=Math.max(ally.defenseBuffMult||1,1+rate);
+   ally.defenseBuffUntil=Math.max(ally.defenseBuffUntil||0,battle.sim+duration);
+  }
+  log(`味方全員の防御+${(rate*100).toFixed(2)}%／${duration}秒`);break;
+ }
+ case 'marika_heal_all_22':{
+  let total=0;
+  for(const ally of battle.allies.filter(x=>x.hp>0))total+=heal(ally,NEW_UNIT_EFFECTS_V0860.marikaHealAll);
+  log(`味方全体を計${total}回復`);break;
+ }
+ case 'marika_heal_one_65':{
+  log(`${person(unit(teammate.id)).name}を${heal(teammate,NEW_UNIT_EFFECTS_V0860.marikaHealOne)}回復`);break;
+ }
+ case 'nanami_strike_26':{
+  log(`${enemy.name}に${strike(enemy,NEW_UNIT_EFFECTS_V0860.nanamiStrikeBase)}ダメージ`);break;
+ }
+ case 'nanami_attack_down':{
+  const value=NEW_UNIT_EFFECTS_V0860.nanamiAttackDownPercent/100*boost;
+  const seconds=NEW_UNIT_EFFECTS_V0860.nanamiAttackDownSeconds+
+   (unitPassive(u).type==='nanami_debuff_extend'?passiveValue(u):0);
+  enemy.weakenMult=Math.min(enemy.weakenMult||1,Math.max(.5,1-value));
+  enemy.weakenUntil=Math.max(enemy.weakenUntil||0,battle.sim+seconds);
+  log(`${enemy.name}の攻撃-${Math.round(value*100)}%／${seconds}秒`);break;
+ }
+ case 'rio_strike_self_attack':{
+  // Deal damage first, then enable the self-buff for subsequent attacks.
+  const dealt=strike(enemy,NEW_UNIT_EFFECTS_V0860.rioStrikeBase);
+  const rate=NEW_UNIT_EFFECTS_V0860.rioSelfAttackPercent/100*boost;
+  a.rallyMult=Math.max(a.rallyMult||1,1+rate);
+  a.rallyUntil=Math.max(a.rallyUntil||0,battle.sim+NEW_UNIT_EFFECTS_V0860.rioSelfAttackSeconds);
+  log(`${enemy.name}に${dealt}ダメージ／自身の攻撃+${Math.round(rate*100)}%／${NEW_UNIT_EFFECTS_V0860.rioSelfAttackSeconds}秒`);break;
+ }
+ case 'rio_aoe_18':{
+  let n=0,total=0;
+  for(const e of battle.enemies.filter(x=>x.hp>0)){
+   total+=strike(e,NEW_UNIT_EFFECTS_V0860.rioAoeBase);n++;
+  }
+  log(`敵${n}体に威力${NEW_UNIT_EFFECTS_V0860.rioAoeBase}で合計${total}ダメージ`);break;
+ }
  // PR #95 adopted trio: isolated approved SR effects; no legacy case changes.
  case 'cecil_defense_up':{
   const v=NEW_UNIT_EFFECTS_V0850.cecilDefensePercent/100*boost*

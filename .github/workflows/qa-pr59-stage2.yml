@@ -1,0 +1,55 @@
+name: QA - PR59 approved 4 SR units real battle
+on:
+  push:
+    branches:
+      - feature/20261115-pr59-approved4-stage2-sr
+    paths:
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/heroines_v0860_units.js'
+      - 'index.html'
+      - 'tools/qa/pr59_stage2_smoke.py'
+      - 'tools/qa/redraw3_stage2_smoke.py'
+      - 'tools/qa/tokiwa_aone_stage2_smoke.py'
+      - 'tools/qa/suzuha_renka_stage2_smoke.py'
+      - 'docs/new_character_ideas/2026-11-15_pr59_approved4/STAGE2_QA.md'
+      - '.github/workflows/qa-pr59-stage2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Setup real Chromium testing
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: JS and QA syntax
+        run: |
+          node --check js/game.js
+          node --check js/performance_v016.js
+          node --check js/heroines_v0860_units.js
+          python -m py_compile tools/qa/pr59_stage2_smoke.py tools/qa/redraw3_stage2_smoke.py
+          python -m py_compile tools/qa/tokiwa_aone_stage2_smoke.py tools/qa/suzuha_renka_stage2_smoke.py
+      - name: Four SR unit skills in real battle, gacha odds and old saves
+        run: python tools/qa/pr59_stage2_smoke.py
+      - name: Existing stage2 SR regressions (Aone, Suzuha/Renka, Cecil/Honoka/Kana)
+        run: |
+          python tools/qa/tokiwa_aone_stage2_smoke.py
+          python tools/qa/suzuha_renka_stage2_smoke.py
+          python tools/qa/redraw3_stage2_smoke.py
+      - name: Upload exact battle calculations and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr59-stage2-real-battle
+          path: qa_artifacts/pr59_stage2/
+          if-no-files-found: warn

@@ -40,7 +40,7 @@ for path in ("js/heroines_v0810_units.js","js/heroines_v0830_units.js","js/heroi
              "js/heroines_v0850.js","js/heroines_v0850_wire.js"):
  assert (ROOT/path).read_text()==main_source(path),("old character/units changed",path)
 assert "NEW_UNIT_ROSTER_V0850" in new and "NEW_UNIT_DESIGN_V0850" in new_perf
-assert old_index.count("heroines_v0850_units.js")==0 and new_index.count("heroines_v0850_units.js")==1
+assert old_index.count("heroines_v0850_units.js")==1 and new_index.count("heroines_v0850_units.js")==1
 assert new_index.index("heroines_v0850_units.js") < new_index.index("js/performance_v016.js") < new_index.index("js/game.js")
 
 class Quiet(SimpleHTTPRequestHandler):
@@ -114,7 +114,7 @@ try:
    }""")
    assert baseline["key"]=="yoiboshi-reboot-v1" and baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
    assert baseline["new19Rates"]=={"SR":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
-   assert baseline["count"]==162 and baseline["oldRemaining"]==159 and baseline["poolUnique"],baseline
+   assert baseline["count"]==166 and baseline["oldRemaining"]==163 and baseline["poolUnique"],baseline
    assert all(baseline["legacy"].values()),baseline
    assert (baseline["healerBaseline"]["hp"],baseline["healerBaseline"]["atk"],baseline["healerBaseline"]["def"])==(148,9,5),baseline
    assert (baseline["oldStats"]["milku"]["hp"],baseline["oldStats"]["milku"]["atk"],baseline["oldStats"]["milku"]["def"])==(148,9,5),baseline
