@@ -1,0 +1,72 @@
+name: QA - Redraw3 stage1 characters and portraits
+on:
+  push:
+    branches:
+      - feature/20261115-redraw3-stage1-romance
+    paths:
+      - 'js/heroines_v0850.js'
+      - 'js/heroines_v0850_wire.js'
+      - 'js/game.js'
+      - 'js/character_depth_v1.js'
+      - 'index.html'
+      - 'assets/ART_V2/full_body/ginjo_cecil.png'
+      - 'assets/ART_V2/full_body/hasegawa_honoka.png'
+      - 'assets/ART_V2/full_body/ueda_kana.png'
+      - 'tools/qa/build_redraw3_stage1_crops.py'
+      - 'tools/qa/redraw3_stage1_smoke.py'
+      - 'docs/new_character_ideas/2026-11-15_redraw3/STAGE1_QA.md'
+      - 'tools/qa/concept_id_migration_smoke.py'
+      - 'tools/qa/heroines_v0500_smoke.py'
+      - 'tools/qa/character_depth_real_smoke.py'
+      - '.github/workflows/qa-redraw3-stage1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow and Chromium
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Code syntax and protected scope
+        run: |
+          node --check js/game.js
+          node --check js/heroines_v0850.js
+          node --check js/heroines_v0850_wire.js
+          node --check js/character_depth_v1.js
+          python -m py_compile tools/qa/build_redraw3_stage1_crops.py tools/qa/redraw3_stage1_smoke.py
+          python -m py_compile tools/qa/concept_id_migration_smoke.py tools/qa/heroines_v0500_smoke.py tools/qa/character_depth_real_smoke.py
+      - name: Verify approved blobs and crop face/upper portraits without generation
+        run: python tools/qa/build_redraw3_stage1_crops.py
+      - name: Commit lossless WebP crops, originals remain unchanged
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/ART_V2/upper_body/ginjo_cecil.webp assets/ART_V2/face_icons/ginjo_cecil.webp
+          git add assets/ART_V2/upper_body/hasegawa_honoka.webp assets/ART_V2/face_icons/hasegawa_honoka.webp
+          git add assets/ART_V2/upper_body/ueda_kana.webp assets/ART_V2/face_icons/ueda_kana.webp
+          if git diff --cached --quiet; then
+            echo 'No portrait crop differences'
+          else
+            git commit -m 'art: 3人の承認済みPNGから会話用WebP6点を無劣化切り抜き'
+            git push origin HEAD:feature/20261115-redraw3-stage1-romance
+          fi
+      - name: Chromium stage1 QA in portrait/landscape
+        run: python tools/qa/redraw3_stage1_smoke.py
+      - name: Upload QA reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: redraw3-stage1-qa
+          path: qa_artifacts/redraw3_stage1/
+          if-no-files-found: warn
