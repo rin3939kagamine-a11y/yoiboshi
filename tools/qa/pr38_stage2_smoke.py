@@ -204,8 +204,8 @@ try:
          akoHigh:passiveHealMultiplier({id:'nishimura_ako_work'}, {hp:130,max:200})
        };
        out.passiveDamage={
-         shiho:passiveDamageMultiplier({id:'kitahara_shiho_work'},mkEnemy('dummy',600)),
-         tomoe:passiveDamageMultiplier({id:'takasaka_tomoe_work'},mkEnemy('dummy',600))
+         shiho:passiveAttackMultiplier({id:'kitahara_shiho_work'},mkEnemy('dummy',600)),
+         tomoe:passiveAttackMultiplier({id:'takasaka_tomoe_work'},mkEnemy('dummy',600))
        };
      }finally{Math.random=originalRandom;}
      return out;
