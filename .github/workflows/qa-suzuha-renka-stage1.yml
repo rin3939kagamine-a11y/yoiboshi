@@ -13,6 +13,8 @@ on:
       - 'index.html'
       - 'tools/qa/build_suzuha_renka_crops.py'
       - 'tools/qa/suzuha_renka_stage1_smoke.py'
+      - 'tools/qa/heroine2_v0810_smoke.py'
+      - 'tools/qa/tokiwa_aone_romance_smoke.py'
       - '.github/workflows/qa-suzuha-renka-stage1.yml'
   workflow_dispatch:
 permissions:
@@ -39,6 +41,12 @@ jobs:
           node --check js/heroines_v0840.js
           node --check js/heroines_v0840_wire.js
           node --check js/character_depth_v1.js
+      - name: Python regression tests syntax
+        run: |
+          python -m py_compile tools/qa/suzuha_renka_stage1_smoke.py
+          python -m py_compile tools/qa/build_suzuha_renka_crops.py
+          python -m py_compile tools/qa/heroine2_v0810_smoke.py
+          python -m py_compile tools/qa/tokiwa_aone_romance_smoke.py
       - name: Generate reproducible lossless portraits from approved full-body originals
         run: python tools/qa/build_suzuha_renka_crops.py
       - name: Commit upper-body and face crops to PR branch
