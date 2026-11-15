@@ -168,7 +168,7 @@ try:
        x=fixture('noel_star');applySkill(0,0,'enemy',0);
        snapshots.noelDebuff={weak:x.enemies[0].weakenMult,until:x.enemies[0].weakenUntil};
        x=fixture('momoka_work');const before=x.allies.map(z=>z.cooldowns.slice());
-       x.allies[0].cooldowns=[25,26];x.allies[1].cooldowns=[25,26];
+       x.allies[0].cooldowns=[0,26];x.allies[1].cooldowns=[25,26];
        applySkill(0,0,'ally',1);snapshots.momokaCT=x.allies.map(z=>z.cooldowns);
        return snapshots;
      }finally{battle=null;Math.random=oldRandom;}
@@ -185,7 +185,7 @@ try:
    assert combat["renkaCooldown"]==24 and combat["renkaExpiry"]==1,combat
    assert abs(combat["aoneCT"][0]-2.6)<1e-9 and combat["aoneCT"][1:]==[0,0],combat
    assert combat["yuiDefense"]==[1.3,1.3] and combat["noelDebuff"]=={"weak":.72,"until":18},combat
-   assert all(row==[22.7,23.7] for row in combat["momokaCT"]),combat
+   assert combat["momokaCT"][0]==[16.7,23.7] and combat["momokaCT"][1]==[22.7,23.7],combat
    assert not errors,(mode,errors)
    page.evaluate("""()=>{S=fresh();S.gameStarted=true;S.onboarding.enabled=false;S.quests.q6={complete:true};S.owned.chiyozaki_suzuha_work={lv:1,aff:0,lb:0,copies:0};S.selected='chiyozaki_suzuha_work';view='unit';render();}""")
    page.screenshot(path=str(OUT/f"{mode}_suzuha_unit.png"),full_page=True)
