@@ -108,7 +108,7 @@ try:
     assert data["normalRegistered"] and data["specialAbsent"] and not data["unready"] and not data["q3"] and data["q6"],data
     assert data["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and data["gachaCost"]==[120,1000],data
     assert data["key"]=="yoiboshi-reboot-v1",data
-    assert data["allUnique"] and data["srCount"]==166,data
+    assert data["allUnique"] and data["srCount"]==173,data
     assert all(data["stable"].values()),data
     assert data["oldUnit"]["skills"]==["ct","stun"] and data["oldUnit"]["rarity"]=="SR",data
     assert data["existingStages"]=={"kaho":["attack_up","attack_down"],"ririka":["heal_one","cleanse"]},data

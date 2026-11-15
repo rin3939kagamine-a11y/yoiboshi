@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PR #59 four approved SRs — browser/live applySkill QA, q6, 166 pool, safe saves."""
+"""PR #59 four approved SRs — browser/live applySkill QA, q6, 173 pool, safe saves."""
 import json, subprocess
 from pathlib import Path
 from functools import partial
@@ -41,7 +41,7 @@ for path in ("js/heroines_v0810_units.js","js/heroines_v0830_units.js",
              "js/heroines_v0860.js","js/heroines_v0860_wire.js"):
  assert (ROOT/path).read_text(encoding="utf-8")==source_on_main(path),("legacy hero file changed",path)
 assert "NEW_UNIT_ROSTER_V0860" in new and "NEW_UNIT_DESIGN_V0860" in new_perf
-assert old_index.count("heroines_v0860_units.js")==0
+assert old_index.count("heroines_v0860_units.js")==1
 assert new_index.count("heroines_v0860_units.js")==1
 assert new_index.index("heroines_v0860_units.js")<new_index.index("js/performance_v016.js")<new_index.index("js/game.js")
 for id in PERSONS:
@@ -126,7 +126,7 @@ try:
    assert baseline["key"]=="yoiboshi-reboot-v1",baseline
    assert baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
    assert baseline["new19Rates"]=={"SR":80,"SSR":15,"UR":5},baseline
-   assert baseline["costs"]==[120,1000] and baseline["srCount"]==166 and baseline["withoutNew"]==162 and baseline["unique"],baseline
+   assert baseline["costs"]==[120,1000] and baseline["srCount"]==173 and baseline["withoutNew"]==169 and baseline["unique"],baseline
    assert all(baseline["legacy"].values()),baseline
    assert (baseline["healerBase"]["hp"],baseline["healerBase"]["atk"],baseline["healerBase"]["def"])==(148,9,5),baseline
    for actual,id,person,name,role,stats,skills,passive in zip(baseline["units"],IDS,PERSONS,NAMES,

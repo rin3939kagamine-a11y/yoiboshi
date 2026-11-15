@@ -1,0 +1,56 @@
+name: QA - PR32 PR36 approved 7 SR units stage2
+on:
+  push:
+    branches:
+      - feature/20261115-pr32-pr36-approved7-stage2-sr
+    paths:
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/heroines_v0870_units.js'
+      - 'index.html'
+      - 'tools/qa/pr32_pr36_stage2_smoke.py'
+      - 'tools/qa/pr59_stage2_smoke.py'
+      - 'tools/qa/redraw3_stage2_smoke.py'
+      - 'tools/qa/tokiwa_aone_stage2_smoke.py'
+      - 'tools/qa/suzuha_renka_stage2_smoke.py'
+      - '.github/workflows/qa-pr32-pr36-stage2.yml'
+      - 'docs/new_character_ideas/2026-11-15_pr32_pr36_stage2/STAGE2_QA.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium for real browser integration QA
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Syntax checks
+        run: |
+          node --check js/heroines_v0870_units.js
+          node --check js/performance_v016.js
+          node --check js/game.js
+          python -m py_compile tools/qa/pr32_pr36_stage2_smoke.py tools/qa/pr59_stage2_smoke.py tools/qa/redraw3_stage2_smoke.py tools/qa/tokiwa_aone_stage2_smoke.py tools/qa/suzuha_renka_stage2_smoke.py
+      - name: Seven SR skills in real combat, q6 gate, gacha odds, save compatibility, mobile UI
+        run: python tools/qa/pr32_pr36_stage2_smoke.py
+      - name: Existing stage2 SR regressions
+        run: |
+          python tools/qa/pr59_stage2_smoke.py
+          python tools/qa/redraw3_stage2_smoke.py
+          python tools/qa/tokiwa_aone_stage2_smoke.py
+          python tools/qa/suzuha_renka_stage2_smoke.py
+      - name: Upload real combat QA and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr32-pr36-stage2-real-battle
+          path: qa_artifacts/pr32_pr36_stage2/
+          if-no-files-found: warn
