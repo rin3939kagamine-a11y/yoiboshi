@@ -110,6 +110,15 @@ missing=sorted(set(higher)-set(full))
 assert len(higher)==75 and len(full)==56 and len(missing)==19
 assert set(full)==FULL56,("Unexpected 4-complete character list",sorted(set(full)^FULL56))
 
+# Protect the entire performance engine except the deliberately scoped
+# compatibility rule that keeps former SR _work passive magnitudes unchanged.
+old_perf=origin("js/performance_v016.js")
+new_perf=(ROOT/"js/performance_v016.js").read_text(encoding="utf8")
+old_passive="function passiveValue(u){const p=unitPassive(u),scale=PASSIVE_SCALE[p.type];return scale[['R','SR','SSR','UR'].indexOf(u.rarity)]}"
+new_passive="// Legacy _work units newly labeled R retain their previously approved SR passive amounts.\n// This changes no skill formula, trait identity, or other character's passive tier.\nfunction passiveValue(u){const p=unitPassive(u),scale=PASSIVE_SCALE[p.type];const effectTier=(u.id.endsWith('_work')&&u.rarity==='R')?'SR':u.rarity;return scale[['R','SR','SSR','UR'].indexOf(effectTier)]}"
+assert old_perf.count(old_passive)==1
+assert new_perf==old_perf.replace(old_passive,new_passive),"Performance engine changed beyond passive tier preservation"
+
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 srv=ThreadingHTTPServer(("127.0.0.1",0),partial(Quiet,directory=str(ROOT)))
@@ -149,6 +158,11 @@ try:
      const q6=fresh();q6.quests.q6={complete:true};
      const gates=['kato_hazuki_work','takahashi_ayano_work'].map(id=>({
        id,before:recruitEligibleUnit(BYID[id],fresh()),after:recruitEligibleUnit(BYID[id],q6)}));
+     const passiveMismatch=UNITS.filter(u=>{
+       const tier=u.id.endsWith('_work')?'SR':u.rarity;
+       const oldVal=PASSIVE_SCALE[unitPassive(u).type][['R','SR','SSR','UR'].indexOf(tier)];
+       return passiveValue(u)!==oldVal;
+     }).map(u=>({id:u.id,rarity:u.rarity,value:passiveValue(u)}));
      const oldSave=S,oldMode=gachaMode,draw={};
      try{
        S=q6;gachaMode='normal';
@@ -173,13 +187,14 @@ try:
        normalWork:NORMAL_GACHA_POOL.filter(u=>u.id.endsWith('_work')).length,
        specialWork:NEW19_GACHA_POOL.filter(u=>u.id.endsWith('_work')).length,
        unique:new Set(UNITS.map(u=>u.id)).size===UNITS.length,rate:{...RATE},rate19:{...NEW19_RATE},
-       kept,saveOK,gates,draw};
+       kept,saveOK,gates,draw,passiveMismatch,passiveChecked:UNITS.length};
    }""")
    assert not errors,(mode,errors)
    assert data["all"]=={"R":254,"SR":60,"SSR":77,"UR":77},data
    assert data["normal"]=={"R":212,"SR":56,"SSR":56,"UR":57} and data["normalWork"]==208,data
    assert data["special"]=={"R":19,"SR":0,"SSR":19,"UR":19} and data["specialWork"]==19,data
    assert data["workTotal"]==227 and data["unique"],data
+   assert data["passiveChecked"]==468 and not data["passiveMismatch"],(mode,data["passiveMismatch"])
    assert data["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},data
    assert data["rate19"]=={"R":80,"SSR":15,"UR":5},data
    assert data["saveOK"] and all(k["exists"] and k["rarity"]==("SR" if k["id"] in ("momoka_work","shio_work") else "R") and k["owned"] and k["usable"] for k in data["kept"]),data
