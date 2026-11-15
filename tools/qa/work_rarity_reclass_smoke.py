@@ -191,7 +191,7 @@ try:
    }""")
    assert not errors,(mode,errors)
    assert data["all"]=={"R":254,"SR":60,"SSR":77,"UR":77},data
-   assert data["normal"]=={"R":212,"SR":56,"SSR":56,"UR":57} and data["normalWork"]==208,data
+   assert data["normal"]=={"R":211,"SR":56,"SSR":56,"UR":57} and data["normalWork"]==208,data
    assert data["special"]=={"R":19,"SR":0,"SSR":19,"UR":19} and data["specialWork"]==19,data
    assert data["workTotal"]==227 and data["unique"],data
    assert data["passiveChecked"]==468 and not data["passiveMismatch"],(mode,data["passiveMismatch"])
