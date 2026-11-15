@@ -3,11 +3,11 @@
  * Kana: uniquely approved HP165 ATK11 DEF5 differs from the existing healer baseline.
  * Only ueda_kana_work overrides the role base; all other healers remain HP148 ATK9 DEF5. */
 const NEW_UNIT_ROSTER_V0850=Object.freeze([
- {id:'ginjo_cecil_work',person:'ginjo_cecil',title:'幕が開くその前に',rarity:'SR',role:'support',color:'#28446c',
+ {id:'ginjo_cecil_work',person:'ginjo_cecil',title:'幕が開くその前に',rarity:'R',role:'support',color:'#28446c',
   s:['紺と金の守り','幕間の合図']},
- {id:'hasegawa_honoka_work',person:'hasegawa_honoka',title:'夕暮れのシャッター',rarity:'SR',role:'attacker',color:'#bf846c',
+ {id:'hasegawa_honoka_work',person:'hasegawa_honoka',title:'夕暮れのシャッター',rarity:'R',role:'attacker',color:'#bf846c',
   s:['一瞬を捉えて','みんなの息遣い']},
- {id:'ueda_kana_work',person:'ueda_kana',title:'みんなで笑う祭り',rarity:'SR',role:'healer',color:'#de995e',
+ {id:'ueda_kana_work',person:'ueda_kana',title:'みんなで笑う祭り',rarity:'R',role:'healer',color:'#de995e',
   s:['大丈夫のひとこと','笑顔を分け合おう']}
 ]);
 const NEW_UNIT_DESIGN_V0850=Object.freeze({
