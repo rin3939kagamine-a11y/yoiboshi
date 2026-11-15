@@ -26,7 +26,7 @@ try:
         page.goto(f"http://127.0.0.1:{srv.server_port}/index.html",wait_until="load",timeout=120000)
         page.wait_for_function("typeof characterDepthCard==='function' && typeof HERO_IDS!=='undefined' && typeof fresh==='function'")
         d=page.evaluate("""()=>{
-           const ids=Object.keys(CHARACTER_DEPTH_V1),expected=[...new Set(HERO_IDS.filter(id=>!NEW_HERO_IDS_V0690.includes(id)&&!NEW_HERO_IDS_V0692.includes(id)&&!(typeof NEW_HERO_IDS_V0750!=='undefined'&&NEW_HERO_IDS_V0750.includes(id))&&!(typeof NEW_HERO_IDS_V0760!=='undefined'&&NEW_HERO_IDS_V0760.includes(id))&&!(typeof NEW_HERO_IDS_V0780!=='undefined'&&NEW_HERO_IDS_V0780.includes(id))&&!(typeof NEW_HERO_IDS_V0810!=='undefined'&&NEW_HERO_IDS_V0810.includes(id))&&!(typeof NEW_HERO_IDS_V0830!=='undefined'&&NEW_HERO_IDS_V0830.includes(id))))];
+           const ids=Object.keys(CHARACTER_DEPTH_V1),expected=[...new Set(HERO_IDS.filter(id=>!NEW_HERO_IDS_V0690.includes(id)&&!NEW_HERO_IDS_V0692.includes(id)&&!(typeof NEW_HERO_IDS_V0750!=='undefined'&&NEW_HERO_IDS_V0750.includes(id))&&!(typeof NEW_HERO_IDS_V0760!=='undefined'&&NEW_HERO_IDS_V0760.includes(id))&&!(typeof NEW_HERO_IDS_V0780!=='undefined'&&NEW_HERO_IDS_V0780.includes(id))&&!(typeof NEW_HERO_IDS_V0810!=='undefined'&&NEW_HERO_IDS_V0810.includes(id))&&!(typeof NEW_HERO_IDS_V0830!=='undefined'&&NEW_HERO_IDS_V0830.includes(id))&&!(typeof NEW_HERO_IDS_V0840!=='undefined'&&NEW_HERO_IDS_V0840.includes(id))))];
            const errors=[];
            for(const id of ids){
              const v=CHARACTER_DEPTH_V1[id];
@@ -43,13 +43,19 @@ try:
              if(!high.includes(v.inside)||!high.includes(v.growth))errors.push(id+": level80 gate");
              if(high.includes(v.cg))errors.push(id+": CG concept leak");
            }
+           const latest=NEW_HERO_IDS_V0840.map(id=>({id,record:CHARACTER_DEPTH_V0840[id],early:characterDepthCard(id,0),mid:characterDepthCard(id,40),high:characterDepthCard(id,80)}));
            return {count:ids.length,expected:expected.length,missing:expected.filter(x=>!ids.includes(x)),
              extras:ids.filter(x=>!expected.includes(x)),errors,
-             unregistered:characterDepthCard("fake_test_id",100)};
+             latest,unregistered:characterDepthCard("fake_test_id",100)};
         }""")
         check("79 distinct character records",d["count"]==79,d)
         check("all live game heroine IDs covered",d["expected"]==79 and not d["missing"] and not d["extras"],d)
         check("all records complete, no spoilers, correct affinity gates",not d["errors"],d["errors"])
+        check("new two have separate complete character-depth cards",len(d["latest"])==2 and
+              all(v["record"] and all(k in v["record"] for k in ("habit","inside","growth","cg"))
+                  and v["record"]["habit"] in v["early"] and v["record"]["inside"] not in v["early"]
+                  and v["record"]["inside"] in v["mid"] and v["record"]["growth"] not in v["mid"]
+                  and v["record"]["growth"] in v["high"] for v in d["latest"]),d["latest"])
         check("unknown character returns no panel",d["unregistered"]=="",d["unregistered"])
         for w,h in [(390,844),(568,320),(844,390),(926,428),(1280,800)]:
             page.set_viewport_size({"width":w,"height":h})
