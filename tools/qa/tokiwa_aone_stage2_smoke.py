@@ -35,7 +35,7 @@ old_aone=main_source('js/heroines_v0830_units.js')
 assert old_aone.count("rarity:'SR'")==1
 assert (ROOT/'js/heroines_v0830_units.js').read_text()==old_aone.replace("rarity:'SR'","rarity:'R'")
 assert "const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5})" in old_game
-assert "const NEW19_RATE=Object.freeze({R:80,SSR:15,UR:5})" in new_game
+assert "const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5})" in new_game
 assert '...NEW_UNIT_ROSTER_V0830' in old_game and '...NEW_UNIT_ROSTER_V0830' in new_game
 assert '...NEW_UNIT_ARTWORK_V0830' in old_game and '...NEW_UNIT_ARTWORK_V0830' in new_game
 assert '...NEW_UNIT_DESIGN_V0830' in old_perf and '...NEW_UNIT_DESIGN_V0830' in new_perf
