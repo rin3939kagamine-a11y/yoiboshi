@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Tokiwa Aone stage-2 SR: source-only scope and real-browser regression QA."""
-import json, subprocess, threading
+import json, re, subprocess, threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -18,15 +18,24 @@ new_index=(ROOT/"index.html").read_text()
 
 # Regression after the Aone unit is already merged on main:
 # compare immutable legacy definitions, not the historical PR #91 before/after diff.
-for token in ('const KEY=','const ROLES=','const RATE=','const NEW19_RATE=',
+for token in ('const KEY=','const ROLES=','const RATE=',
               'const GACHA_CONFIG=','const NORMAL_GACHA_POOL=',
               'const NEW19_GACHA_POOL=','function drawNormalGachaUnit(',
               'function rollNormalGachaRarity(','function migrateSave('):
     i=old_game.index(token);j=new_game.index(token)
     assert old_game[i:old_game.index('\n',i)]==new_game[j:new_game.index('\n',j)],('core drift',token)
 i=old_game.index('const UNITS=[');j=new_game.index('const UNITS=[')
-assert old_game[i:old_game.index('\n];',i)+3]==new_game[j:new_game.index('\n];',j)+3]
-assert (ROOT/'js/heroines_v0830_units.js').read_text()==main_source('js/heroines_v0830_units.js')
+original_roster=old_game[i:old_game.index('\n];',i)+3]
+for id in ("tsubaki_work","erika_work","kaede_work"):
+    pattern=r"(\{id:'"+id+r"'[^{}]*?rarity:')SR(')"
+    original_roster,count=re.subn(pattern,r"\g<1>R\g<2>",original_roster)
+    assert count==1,id
+assert original_roster==new_game[j:new_game.index('\n];',j)+3]
+old_aone=main_source('js/heroines_v0830_units.js')
+assert old_aone.count("rarity:'SR'")==1
+assert (ROOT/'js/heroines_v0830_units.js').read_text()==old_aone.replace("rarity:'SR'","rarity:'R'")
+assert "const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5})" in old_game
+assert "const NEW19_RATE=Object.freeze({R:80,SSR:15,UR:5})" in new_game
 assert '...NEW_UNIT_ROSTER_V0830' in old_game and '...NEW_UNIT_ROSTER_V0830' in new_game
 assert '...NEW_UNIT_ARTWORK_V0830' in old_game and '...NEW_UNIT_ARTWORK_V0830' in new_game
 assert '...NEW_UNIT_DESIGN_V0830' in old_perf and '...NEW_UNIT_DESIGN_V0830' in new_perf
@@ -100,7 +109,7 @@ try:
       };
     }""")
     assert data["exists"] and data["id"]=="tokiwa_aone_work",data
-    assert (data["person"],data["title"],data["rarity"],data["role"])==("tokiwa_aone","音が灯る舞台裏","SR","support"),data
+    assert (data["person"],data["title"],data["rarity"],data["role"])==("tokiwa_aone","音が灯る舞台裏","R","support"),data
     assert data["skills"]==["enemy_ct","ct"] and data["labels"]==["ミュートの合図","次の一拍"],data
     assert data["passive"]=={"type":"ct_focus","name":"音の先読み"} and data["value"]==7,data
     assert data["stats"]["hp"]==165 and data["stats"]["atk"]==11 and data["stats"]["def"]==5,data
@@ -108,7 +117,7 @@ try:
     assert data["normalRegistered"] and data["specialAbsent"] and not data["unready"] and not data["q3"] and data["q6"],data
     assert data["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and data["gachaCost"]==[120,1000],data
     assert data["key"]=="yoiboshi-reboot-v1",data
-    assert data["allUnique"] and data["srCount"]==181,data
+    assert data["allUnique"] and data["srCount"]==56,data
     assert all(data["stable"].values()),data
     assert data["oldUnit"]["skills"]==["ct","stun"] and data["oldUnit"]["rarity"]=="SR",data
     assert data["existingStages"]=={"kaho":["attack_up","attack_down"],"ririka":["heal_one","cleanse"]},data
