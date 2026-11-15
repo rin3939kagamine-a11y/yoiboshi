@@ -26,7 +26,7 @@ try:
         page.goto(f"http://127.0.0.1:{srv.server_port}/index.html",wait_until="load",timeout=120000)
         page.wait_for_function("typeof characterDepthCard==='function' && typeof HERO_IDS!=='undefined' && typeof fresh==='function'")
         d=page.evaluate("""()=>{
-           const ids=Object.keys(CHARACTER_DEPTH_V1),expected=[...new Set(HERO_IDS.filter(id=>!NEW_HERO_IDS_V0690.includes(id)&&!NEW_HERO_IDS_V0692.includes(id)&&!(typeof NEW_HERO_IDS_V0750!=='undefined'&&NEW_HERO_IDS_V0750.includes(id))&&!(typeof NEW_HERO_IDS_V0760!=='undefined'&&NEW_HERO_IDS_V0760.includes(id))&&!(typeof NEW_HERO_IDS_V0780!=='undefined'&&NEW_HERO_IDS_V0780.includes(id))&&!(typeof NEW_HERO_IDS_V0810!=='undefined'&&NEW_HERO_IDS_V0810.includes(id))&&!(typeof NEW_HERO_IDS_V0830!=='undefined'&&NEW_HERO_IDS_V0830.includes(id))&&!(typeof NEW_HERO_IDS_V0840!=='undefined'&&NEW_HERO_IDS_V0840.includes(id))&&!(typeof NEW_HERO_IDS_V0850!=='undefined'&&NEW_HERO_IDS_V0850.includes(id))))];
+           const ids=Object.keys(CHARACTER_DEPTH_V1),expected=[...new Set(HERO_IDS.filter(id=>!NEW_HERO_IDS_V0690.includes(id)&&!NEW_HERO_IDS_V0692.includes(id)&&!(typeof NEW_HERO_IDS_V0750!=='undefined'&&NEW_HERO_IDS_V0750.includes(id))&&!(typeof NEW_HERO_IDS_V0760!=='undefined'&&NEW_HERO_IDS_V0760.includes(id))&&!(typeof NEW_HERO_IDS_V0780!=='undefined'&&NEW_HERO_IDS_V0780.includes(id))&&!(typeof NEW_HERO_IDS_V0810!=='undefined'&&NEW_HERO_IDS_V0810.includes(id))&&!(typeof NEW_HERO_IDS_V0830!=='undefined'&&NEW_HERO_IDS_V0830.includes(id))&&!(typeof NEW_HERO_IDS_V0840!=='undefined'&&NEW_HERO_IDS_V0840.includes(id))&&!(typeof NEW_HERO_IDS_V0850!=='undefined'&&NEW_HERO_IDS_V0850.includes(id))&&!(typeof NEW_HERO_IDS_V0860!=='undefined'&&NEW_HERO_IDS_V0860.includes(id))))];
            const errors=[];
            for(const id of ids){
              const v=CHARACTER_DEPTH_V1[id];
@@ -46,7 +46,7 @@ try:
            const latest=NEW_HERO_IDS_V0840.map(id=>({id,record:CHARACTER_DEPTH_V0840[id],early:characterDepthCard(id,0),mid:characterDepthCard(id,40),high:characterDepthCard(id,80)}));
            return {count:ids.length,expected:expected.length,missing:expected.filter(x=>!ids.includes(x)),
              extras:ids.filter(x=>!expected.includes(x)),errors,
-             latest, newest:NEW_HERO_IDS_V0850.map(id=>({id, record:CHARACTER_DEPTH_V0850[id], early:characterDepthCard(id,0), mid:characterDepthCard(id,40), high:characterDepthCard(id,80)})),unregistered:characterDepthCard("fake_test_id",100)};
+             latest, newest:NEW_HERO_IDS_V0850.map(id=>({id, record:CHARACTER_DEPTH_V0850[id], early:characterDepthCard(id,0), mid:characterDepthCard(id,40), high:characterDepthCard(id,80)})),pr59:NEW_HERO_IDS_V0860.map(id=>({id, record:CHARACTER_DEPTH_V0860[id], early:characterDepthCard(id,0), mid:characterDepthCard(id,40), high:characterDepthCard(id,80)})),unregistered:characterDepthCard("fake_test_id",100)};
         }""")
         check("79 distinct character records",d["count"]==79,d)
         check("all live game heroine IDs covered",d["expected"]==79 and not d["missing"] and not d["extras"],d)
@@ -64,6 +64,14 @@ try:
                  v["record"]["inside"] in v["mid"] and
                  v["record"]["growth"] not in v["mid"] and
                  v["record"]["growth"] in v["high"] for v in d["newest"]),d["newest"])
+        check("PR59 four independent character-depth cards have correct affinity gates",
+              len(d["pr59"])==4 and all(v["record"] and
+                 all(k in v["record"] for k in ("habit","inside","growth","cg")) and
+                 v["record"]["habit"] in v["early"] and
+                 v["record"]["inside"] not in v["early"] and
+                 v["record"]["inside"] in v["mid"] and
+                 v["record"]["growth"] not in v["mid"] and
+                 v["record"]["growth"] in v["high"] for v in d["pr59"]),d["pr59"])
         check("unknown character returns no panel",d["unregistered"]=="",d["unregistered"])
         for w,h in [(390,844),(568,320),(844,390),(926,428),(1280,800)]:
             page.set_viewport_size({"width":w,"height":h})

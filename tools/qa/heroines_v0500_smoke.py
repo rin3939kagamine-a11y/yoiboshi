@@ -29,7 +29,7 @@ try:
           // The first 79 heroines are fixed (original 60 plus this cohort of 19).
           // Later cohorts each have a stable registry; do not freeze the total at v0692.
           const additions=[NEW_HERO_IDS_V0690,NEW_HERO_IDS_V0692,NEW_HERO_IDS_V0750,
-            NEW_HERO_IDS_V0760,NEW_HERO_IDS_V0780,NEW_HERO_IDS_V0810,NEW_HERO_IDS_V0830,NEW_HERO_IDS_V0840,NEW_HERO_IDS_V0850];
+            NEW_HERO_IDS_V0760,NEW_HERO_IDS_V0780,NEW_HERO_IDS_V0810,NEW_HERO_IDS_V0830,NEW_HERO_IDS_V0840,NEW_HERO_IDS_V0850,NEW_HERO_IDS_V0860];
           const expected=79+additions.reduce((n,cohort)=>n+cohort.length,0);
           if(ids.length!==19||oldCount!==expected-19||HERO_IDS.length!==expected||unique.length!==expected)errors.push('IDs count or duplicate');
           if(Object.keys(CHARACTER_DEPTH_V1).length!==79)errors.push('depth count');
