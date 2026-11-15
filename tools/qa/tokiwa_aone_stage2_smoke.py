@@ -23,9 +23,9 @@ for token in ('const KEY=','const ROLES=','const RATE=','const NEW19_RATE=',
               'const NEW19_GACHA_POOL=','function drawNormalGachaUnit(',
               'function rollNormalGachaRarity(','function migrateSave('):
     i=old_game.index(token);j=new_game.index(token)
-    assert old_game[i:old_game.index('\\n',i)]==new_game[j:new_game.index('\\n',j)],('core drift',token)
+    assert old_game[i:old_game.index('\n',i)]==new_game[j:new_game.index('\n',j)],('core drift',token)
 i=old_game.index('const UNITS=[');j=new_game.index('const UNITS=[')
-assert old_game[i:old_game.index('\\n];',i)+3]==new_game[j:new_game.index('\\n];',j)+3]
+assert old_game[i:old_game.index('\n];',i)+3]==new_game[j:new_game.index('\n];',j)+3]
 assert (ROOT/'js/heroines_v0830_units.js').read_text()==main_source('js/heroines_v0830_units.js')
 assert '...NEW_UNIT_ROSTER_V0830' in old_game and '...NEW_UNIT_ROSTER_V0830' in new_game
 assert '...NEW_UNIT_ARTWORK_V0830' in old_game and '...NEW_UNIT_ARTWORK_V0830' in new_game
