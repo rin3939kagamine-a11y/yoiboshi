@@ -132,7 +132,7 @@ try:
                 assert data["screen"]["episodes"] == 5 and data["screen"]["topics"] == 8 and data["screen"]["depth"] == 1, (mode,id,data)
                 assert data["bondFirst"] and data["bondOpened"], (mode,id,data)
                 assert all(data["oldSave"].values()), (mode,id,data)
-                assert f"/full_body/{id}.png" in data["screen"]["img"], (mode,id,data)
+                assert f"/upper_body/{id}.webp" in data["screen"]["img"], (mode,id,data)
                 for slot, src in zip(("full_body","upper_body","face_icons"),data["images"]):
                     assert f"/{slot}/{id}." in src, (mode,id,slot,src)
                     response = page.request.get(url.rsplit("/",1)[0] + "/" + src, timeout=20000)
