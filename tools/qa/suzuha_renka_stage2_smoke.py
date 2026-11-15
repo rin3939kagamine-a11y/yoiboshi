@@ -97,7 +97,7 @@ try:
    }""".replace("unitPowerForQA(id)","ROLES[u.role]"))
    assert baseline["key"]=="yoiboshi-reboot-v1" and baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
    assert baseline["new19Rates"]=={"SR":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
-   assert baseline["unique"] and baseline["srCount"]==162 and all(baseline["saved"].values()),baseline
+   assert baseline["unique"] and baseline["srCount"]==166 and all(baseline["saved"].values()),baseline
    a,b=baseline["ids"]
    assert (a["person"],a["rarity"],a["role"])==("chiyozaki_suzuha","SR","support"),a
    assert (b["person"],b["rarity"],b["role"])==("sakuraba_renka","SR","attacker"),b
