@@ -66,7 +66,7 @@ try:
         check("excluded character legacy conversion unchanged", registry["juriRetirement"], registry)
         check("restored R never migrated to SR", not registry["retiredRestored"], registry)
         check("Makoto R uses approved image, SR unaffected", registry["makotoR"] == "assets/UNIT_ART/makoto_daily.webp" and "makoto_daily.webp" not in registry["makotoSR"], registry)
-        check("normal and new19 odds fixed", registry["rate"] == {"R":60,"SR":25,"SSR":10,"UR":5} and registry["new19"] == {"R":80,"SSR":15,"UR":5}, registry)
+        check("normal and new19 odds fixed", registry["rate"] == {"R":60,"SR":25,"SSR":10,"UR":5} and registry["new19"] == {"R":80,"SR":0,"SSR":15,"UR":5}, registry)
         check("R represented in normal pool", registry["rInPool"] > 0, registry)
 
         def load_case(source_js):
