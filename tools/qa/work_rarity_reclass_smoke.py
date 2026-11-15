@@ -12,8 +12,8 @@ ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/"qa_artifacts/work_rarity_reclass"
 OUT.mkdir(parents=True,exist_ok=True)
 FILES={
- "js/game.js":5,"js/new_units_v026.js":31,
- "js/heroines_v027.js":6,"js/heroines_v028.js":12,"js/heroines_v0420.js":6,
+ "js/game.js":3,"js/new_units_v026.js":1,
+ "js/heroines_v027.js":0,"js/heroines_v028.js":0,"js/heroines_v0420.js":0,
  "js/heroines_v0500.js":19,"js/heroines_v0690.js":74,"js/heroines_v0692.js":3,
  "js/heroines_v0750.js":9,"js/heroines_v0760.js":4,"js/heroines_v0780.js":4,
  "js/heroines_v0810_units.js":2,"js/heroines_v0830_units.js":1,
@@ -22,7 +22,13 @@ FILES={
  "js/heroines_v0880_units.js":8,"js/heroines_v0890_units.js":8,
  "js/heroines_v0900_units.js":7,"js/heroines_v0910_units.js":12,
 }
-assert sum(FILES.values())==227
+assert sum(FILES.values())==171
+FULL56=set("""koharu lilith shio koyori marin yui shizuku suiran kyoko cocoa mai luna
+ makoto fumika ena riko noel mio jun yume shino hiyori ageha kirari maron
+ momoka milku nagi chinatsu aoi akane reina saki yuzu anzu reiko chiyo nazuna
+ sena mizuki meru kagari chihiro karen miyabi sanae kurumi ritsu towa yuriko
+ natsume hotaru minori ichika juri saeko""".split())
+assert len(FULL56)==56
 
 def origin(path):
  return subprocess.check_output(["git","show","origin/main:"+path],cwd=ROOT,text=True)
@@ -59,7 +65,7 @@ for path,n in FILES.items():
  x,y=get_section(b,path);arr=b[x:y];ids=[]
  def rewrite(match):
   obj=match.group();u=parse_obj(obj,path)
-  if not u["id"].endswith("_work") or u["rarity"]=="R":return obj
+  if not u["id"].endswith("_work") or u["person"] in FULL56 or u["rarity"]=="R":return obj
   assert u["rarity"]=="SR",u
   updated,count=re.subn(r'((?:"rarity"|rarity)\s*:\s*["\x27])SR(["\x27])',
                         lambda v:v.group(1)+"R"+v.group(2),obj)
@@ -67,7 +73,13 @@ for path,n in FILES.items():
   ids.append(u["id"])
   return updated
  replaced=re.sub(r"\{[^{}]*\}",rewrite,arr)
- assert a==b[:x]+replaced+b[y:],("Non-rarity changes",path)
+ expected=b[:x]+replaced+b[y:]
+ if path=="js/game.js":
+  old_rate="const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5}); // Existing 19-heroine-only odds; no R units."
+  new_rate="const NEW19_RATE=Object.freeze({R:80,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R."
+  assert expected.count(old_rate)==1
+  expected=expected.replace(old_rate,new_rate)
+ assert a==expected,("Non-rarity or unexpected gacha changes",path)
  assert len(ids)==n,(path,len(ids),n)
  changed[path]=ids
  old_items.extend(parse_obj(v.group(),path) for v in re.finditer(r"\{[^{}]*\}",arr))
@@ -78,13 +90,17 @@ pre={u["id"]:u for u in old_items};post={u["id"]:u for u in new_items}
 assert len(pre)==len(post)==468
 assert set(pre)==set(post)
 assert Counter(u["rarity"] for u in old_items)=={"R":83,"SR":231,"SSR":77,"UR":77}
-assert Counter(u["rarity"] for u in new_items)=={"R":310,"SR":4,"SSR":77,"UR":77}
+assert Counter(u["rarity"] for u in new_items)=={"R":254,"SR":60,"SSR":77,"UR":77}
 all_changed={id for ids in changed.values() for id in ids}
-assert len(all_changed)==227
+assert len(all_changed)==171
+assert all(pre[id]["person"] not in FULL56 for id in all_changed)
+assert sum(len(ids) for path,ids in changed.items() if path=="js/heroines_v0500.js")==19
 for id,u in pre.items():
  assert post[id]["person"]==u["person"] and post[id]["file"]==u["file"]
  assert post[id]["rarity"]==("R" if id in all_changed else u["rarity"])
-assert sorted(u["id"] for u in new_items if u["rarity"]=="SR")==[
+assert sorted(u["id"] for u in new_items if u["rarity"]=="SR" and u["id"].endswith("_work"))==sorted(
+ u["id"] for u in old_items if u["id"].endswith("_work") and u["person"] in FULL56)
+assert sorted(u["id"] for u in new_items if u["rarity"]=="SR" and not u["id"].endswith("_work"))==[
  "cocoa_trial","kyoko_trial","luna_trial","shizuku_trial"]
 all4=defaultdict(set)
 for u in old_items: all4[u["person"]].add(u["rarity"])
@@ -92,6 +108,7 @@ higher=sorted(p for p,levels in all4.items() if levels.intersection({"SSR","UR"}
 full=sorted(p for p in higher if {"R","SR","SSR","UR"}.issubset(all4[p]))
 missing=sorted(set(higher)-set(full))
 assert len(higher)==75 and len(full)==56 and len(missing)==19
+assert set(full)==FULL56,("Unexpected 4-complete character list",sorted(set(full)^FULL56))
 
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
@@ -135,11 +152,21 @@ try:
      const oldSave=S,oldMode=gachaMode,draw={};
      try{
        S=q6;gachaMode='normal';
-       try{draw.normal=drawNormalGachaUnit(.72)?.id||'draw successful';}
+       try{const id=drawNormalGachaUnit(.72)?.id;draw.normal=id;draw.normalRarity=BYID[id]?.rarity;}
        catch(e){draw.normalError=String(e);}
+       try{const id=drawNormalGachaUnit(.1)?.id;draw.normalR=id;draw.normalRRarity=BYID[id]?.rarity;}
+       catch(e){draw.normalRError=String(e);}
+       try{const id=drawNormalGachaUnit(.86)?.id;draw.normalSSR=id;draw.normalSSRRarity=BYID[id]?.rarity;}
+       catch(e){draw.normalSSRError=String(e);}
+       try{const id=drawNormalGachaUnit(.98)?.id;draw.normalUR=id;draw.normalURRarity=BYID[id]?.rarity;}
+       catch(e){draw.normalURError=String(e);}
        gachaMode='new19';
-       try{draw.special=drawNormalGachaUnit(.4)?.id||'draw successful';}
+       try{const id=drawNormalGachaUnit(.4)?.id;draw.special=id;draw.specialRarity=BYID[id]?.rarity;}
        catch(e){draw.specialError=String(e);}
+     try{const id=drawNormalGachaUnit(.82)?.id;draw.specialSSR=id;draw.specialSSRRarity=BYID[id]?.rarity;}
+       catch(e){draw.specialSSRError=String(e);}
+       try{const id=drawNormalGachaUnit(.98)?.id;draw.specialUR=id;draw.specialURRarity=BYID[id]?.rarity;}
+       catch(e){draw.specialURError=String(e);}
      }finally{S=oldSave;gachaMode=oldMode;}
      return {all:freq(UNITS),normal:freq(NORMAL_GACHA_POOL),special:freq(NEW19_GACHA_POOL),
        workTotal:UNITS.filter(u=>u.id.endsWith('_work')).length,
@@ -149,13 +176,13 @@ try:
        kept,saveOK,gates,draw};
    }""")
    assert not errors,(mode,errors)
-   assert data["all"]=={"R":310,"SR":4,"SSR":77,"UR":77},data
-   assert data["normal"]["SR"]==0 and data["normalWork"]==208,data
+   assert data["all"]=={"R":254,"SR":60,"SSR":77,"UR":77},data
+   assert data["normal"]=={"R":212,"SR":56,"SSR":56,"UR":57} and data["normalWork"]==208,data
    assert data["special"]=={"R":19,"SR":0,"SSR":19,"UR":19} and data["specialWork"]==19,data
    assert data["workTotal"]==227 and data["unique"],data
    assert data["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},data
-   assert data["rate19"]=={"SR":80,"SSR":15,"UR":5},data
-   assert data["saveOK"] and all(k["exists"] and k["rarity"]=="R" and k["owned"] and k["usable"] for k in data["kept"]),data
+   assert data["rate19"]=={"R":80,"SSR":15,"UR":5},data
+   assert data["saveOK"] and all(k["exists"] and k["rarity"]==("SR" if k["id"] in ("momoka_work","shio_work") else "R") and k["owned"] and k["usable"] for k in data["kept"]),data
    assert all(not g["before"] and g["after"] for g in data["gates"]),data
    reports[mode]=data
    ctx.close()
@@ -175,6 +202,10 @@ if "--require-gacha" in sys.argv:
  for mode,data in reports.items():
   assert "normalError" not in data["draw"],("NORMAL GACHA BLOCKER",mode,data["draw"])
   assert "specialError" not in data["draw"],("SPECIAL GACHA BLOCKER",mode,data["draw"])
+  assert not any(k.endswith("Error") for k in data["draw"]),(mode,data["draw"])
+  assert data["draw"]["normalRarity"]=="SR" and data["draw"]["normalRRarity"]=="R",(mode,data["draw"])
+  assert data["draw"]["normalSSRRarity"]=="SSR" and data["draw"]["normalURRarity"]=="UR",(mode,data["draw"])
+  assert data["draw"]["specialRarity"]=="R" and data["draw"]["specialSSRRarity"]=="SSR" and data["draw"]["specialURRarity"]=="UR",(mode,data["draw"])
  print("GACHA_HEALTH_PASS",flush=True)
 else:
  print("GACHA_HEALTH_OBSERVED",json.dumps({mode:d["draw"] for mode,d in reports.items()},ensure_ascii=False),flush=True)
