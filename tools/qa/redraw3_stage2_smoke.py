@@ -114,7 +114,7 @@ try:
    }""")
    assert baseline["key"]=="yoiboshi-reboot-v1" and baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
    assert baseline["new19Rates"]=={"SR":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
-   assert baseline["count"]==166 and baseline["oldRemaining"]==163 and baseline["poolUnique"],baseline
+   assert baseline["count"]==173 and baseline["oldRemaining"]==170 and baseline["poolUnique"],baseline
    assert all(baseline["legacy"].values()),baseline
    assert (baseline["healerBaseline"]["hp"],baseline["healerBaseline"]["atk"],baseline["healerBaseline"]["def"])==(148,9,5),baseline
    assert (baseline["oldStats"]["milku"]["hp"],baseline["oldStats"]["milku"]["atk"],baseline["oldStats"]["milku"]["def"])==(148,9,5),baseline
