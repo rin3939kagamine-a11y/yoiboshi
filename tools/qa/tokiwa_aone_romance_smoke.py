@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Chromium QA for stage-1 Aone romance (no units and no changed old saves)."""
+"""Regression QA for Aone romance with her separately approved stage-2 unit; old saves/odds unchanged."""
 import json,hashlib,subprocess
 from pathlib import Path
 from functools import partial
@@ -39,7 +39,7 @@ with sync_playwright() as p:
     S=fresh();S.gameStarted=true;if(S.onboarding)S.onboarding.enabled=false;
     out.key=SaveStore.key;out.rate=JSON.parse(JSON.stringify(RATE));
     out.poolInitial=NORMAL_GACHA_POOL.map(u=>u.id);
-    out.noUnit=!UNITS.some(u=>u.person===id);
+    out.unitIds=UNITS.filter(u=>u.person===id).map(u=>u.id);\n    out.noUnit=!UNITS.some(u=>u.person===id);
     out.noNormal= !NORMAL_GACHA_POOL.some(u=>u.person===id);
     out.noNew19=!NEW19_GACHA_POOL.some(u=>u.person===id);
     out.idOnce=NEW_HERO_IDS_V0830.length===1 && NEW_HERO_IDS_V0830[0]===id;
@@ -90,15 +90,15 @@ with sync_playwright() as p:
   }""")
   assert data['key']=='yoiboshi-reboot-v1',data
   assert data['rate']=={'R':60,'SR':25,'SSR':10,'UR':5},data
-  assert data['idOnce'] and data['noUnit'] and data['noNormal'] and data['noNew19'] and data['poolUnchanged'],data
+  assert data['idOnce'] and data['unitIds']==['tokiwa_aone_work'] and data['poolUnchanged'],data
   assert data['name']=='常盤 碧音' and data['profile']['age']==25 and '音響・照明' in data['profile']['occupation'],data
   assert data['bonds']==5 and [x[0] for x in data['episodes']]==[20,40,60,80,100],data
   assert all(x[1]=='tokiwa_aone' and x[2]>=5 for x in data['episodes']),data
   assert data['before']=={'talk':False,'meeting':False} and data['after']=={'talk':True,'meeting':True},data
   assert data['meetRequires']==['q6'] and data['meetOpened'] and data['meetFinished'] and data['noReward'],data
   assert data['screen']['name']=='♡ 常盤 碧音' and data['screen']['episodes']==5 and data['screen']['topics']==8 and data['screen']['depth']==1,data
-  assert 'pink_underlayer_black_street_v3_regenerated_CANDIDATE.png' in data['screen']['img'],data
-  assert all('pink_underlayer_black_street_v3_regenerated_CANDIDATE.png' in s for s in data['images']),data
+  assert 'assets/ART_V2/upper_body/tokiwa_aone.webp' in data['screen']['img'],data
+  assert 'pink_underlayer_black_street_v3_regenerated_CANDIDATE.png' in data['images'][0],data\n  assert 'assets/ART_V2/upper_body/tokiwa_aone.webp' in data['images'][1],data\n  assert 'assets/ART_V2/face_icons/tokiwa_aone.webp' in data['images'][2],data
   assert data['bondFirst'] and data['bondOpened'],data
   assert all(data['oldSave'].values()),data
   assert not errors,errors
