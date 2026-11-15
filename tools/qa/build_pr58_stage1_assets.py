@@ -124,7 +124,7 @@ def run():
    assert np.array_equal(source_pixels[:,:,:3][visible],output_pixels[:,:,:3][visible]),(id,slot,"visible colors changed")
    record["crops"][slot]={"path":str(output.relative_to(ROOT)),"crop":[x,y,x+w,y+h],"sha256":sha(output)}
   records[id]=record
-  print(f"PR58 {id} halo={status} removed_pixels={detail['removed']} opaque_preserved=True icons=2 PASS",flush=True)
+  print(f"PR58 {id} halo={status} removed_pixels={detail['removed']} reason={detail['reason']} opaque_preserved=True icons=2 PASS",flush=True)
  (OUT/"image_report.json").write_text(json.dumps(records,ensure_ascii=False,indent=2),encoding="utf-8")
  print("PR58 source, halo safety and lossless crops QA PASS",flush=True)
 
