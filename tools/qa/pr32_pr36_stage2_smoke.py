@@ -126,7 +126,7 @@ try:
    }""")
    assert baseline["key"]=="yoiboshi-reboot-v1",baseline
    assert baseline["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
-   assert baseline["rate19"]=={"R":80,"SSR":15,"UR":5},baseline
+   assert baseline["rate19"]=={"R":80,"SR":0,"SSR":15,"UR":5},baseline
    assert baseline["costs"]==[120,1000] and baseline["srCount"]==56 and baseline["withoutSeven"]==56 and baseline["unique"],baseline
    assert all(baseline["legacy"].values()),baseline
    for u,id,person,name,role,base,skills,passive in zip(
