@@ -34,7 +34,9 @@ def run():
                 crop.save(target, "WEBP", lossless=True, method=6)
                 with Image.open(target) as verify:
                     assert verify.mode == "RGBA" and verify.size == crop.size
-                    assert verify.tobytes() == crop.tobytes(), (hero, slot, "lossless crop altered")
+                    assert verify.getchannel("A").tobytes() == crop.getchannel("A").tobytes(), (hero, slot, "alpha altered")
+                    # WEBP may canonicalize hidden RGB under fully transparent pixels.
+                    assert all(a[:3] == b[:3] for a, b in zip(crop.getdata(), verify.getdata()) if a[3] > 0), (hero, slot, "visible RGB altered")
                 print(f"{hero} {slot} {crop.size} SHA-256 {hashlib.sha256(target.read_bytes()).hexdigest()}")
     print("SUZUHA RENKA ART CROP PASS")
 
