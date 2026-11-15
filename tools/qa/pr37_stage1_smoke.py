@@ -94,8 +94,8 @@ reports={}
 try:
  with sync_playwright() as p:
   browser=p.chromium.launch(headless=True,args=["--no-sandbox"])
-  for mode,width,hseven in (("portrait",390,844),("landscape",844,390)):
-   ctx=browser.new_context(viewport={"width":width,"hseven":hseven})
+  for mode,width,height in (("portrait",390,844),("landscape",844,390)):
+   ctx=browser.new_context(viewport={"width":width,"height":height})
    page=ctx.new_page()
    errors=[]
    page.on("pageerror",lambda e:errors.append(str(e)))
@@ -201,8 +201,8 @@ try:
        const wrap=document.createElement('section');wrap.id='pr37-qa-mattes';
        wrap.style.cssText='position:fixed;inset:0;z-index:999999;display:flex;gap:0;pointer-events:none;';
        for(const bg of ['#f3f3f3','#1d202c']){
-         const cell=document.createElement('div');cell.style.cssText='hseven:100%;width:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:'+bg+';';
-         const im=document.createElement('img');im.src=src;im.style.cssText='max-width:100%;max-hseven:100%;object-fit:contain;';
+         const cell=document.createElement('div');cell.style.cssText='height:100%;width:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:'+bg+';';
+         const im=document.createElement('img');im.src=src;im.style.cssText='max-width:100%;max-height:100%;object-fit:contain;';
          cell.appendChild(im);wrap.appendChild(cell);
        }
        document.body.appendChild(wrap);
