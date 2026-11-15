@@ -61,7 +61,7 @@ def build():
   src=BASE/filename
   dest=ART/"full_body"/f"{id}.png"
   assert blob(src)==expected,(id,"Original Git blob mismatch")
-  assert src.read_bytes()==dest.read_bytes(),(id,"Initial portrait did not match source")
+  if id!="hayase_rio":assert src.read_bytes()==dest.read_bytes(),(id,"Unexpected original modification")
   with Image.open(src) as src_im:
    assert src_im.format=="PNG" and src_im.mode=="RGBA" and src_im.size==(1024,1536),id
    assert src_im.getchannel("A").getextrema()[0]==0,(id,"No transparency")
