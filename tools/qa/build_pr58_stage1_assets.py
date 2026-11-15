@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 
 ROOT=Path(__file__).resolve().parents[2]
-BASE=ROOT/"docs/new_character_ideas/2026-11-15_pr58_approved8"
+BASE=ROOT/"docs/new_character_ideas/2026-11-15_pr58_adopted8"
 ART=ROOT/"assets/ART_V2"
 OUT=ROOT/"qa_artifacts/pr58_stage1"
 OUT.mkdir(parents=True,exist_ok=True)
@@ -104,7 +104,7 @@ def run():
   }
   preview(original,id+"_original")
   preview(image,id+"_placed")
-  record={"source":"docs/new_character_ideas/2026-11-15_pr58_approved8/"+filename,
+  record={"source":"docs/new_character_ideas/2026-11-15_pr58_adopted8/"+filename,
           "source_git_blob":expected_blob,"source_sha256":sha(source),
           "placed_sha256":sha(dst),"status":status,"method":detail["reason"],
           "removed_pixels":detail["removed"],"dimensions":[1024,1536],

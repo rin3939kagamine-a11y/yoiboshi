@@ -1,8 +1,8 @@
-name: QA - PR58 eight approved heroines stage1
+name: QA - PR58 eight adopted heroines stage1
 on:
   push:
     branches:
-      - feature/20261115-pr58-approved8-stage1
+      - feature/20261115-pr58-adopted8-stage1
   workflow_dispatch:
 permissions:
   contents: write
@@ -42,9 +42,9 @@ jobs:
             echo 'No artwork changes needed; existing artifacts are deterministic'
           else
             git commit -m 'art: PR58承認済み8人の安全な輪郭処理と切り抜きアイコン16点を登録'
-            git fetch origin feature/20261115-pr58-approved8-stage1
-            git rebase origin/feature/20261115-pr58-approved8-stage1
-            git push origin HEAD:feature/20261115-pr58-approved8-stage1
+            git fetch origin feature/20261115-pr58-adopted8-stage1
+            git rebase origin/feature/20261115-pr58-adopted8-stage1
+            git push origin HEAD:feature/20261115-pr58-adopted8-stage1
           fi
       - name: Test real browser, q6 gate, interactions, bonds, image status, save and gacha invariants
         run: python tools/qa/pr58_stage1_smoke.py
