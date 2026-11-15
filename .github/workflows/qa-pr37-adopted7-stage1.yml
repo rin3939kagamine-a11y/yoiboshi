@@ -41,7 +41,7 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No artwork changes needed; existing artifacts are deterministic'
           else
-            git commit -m 'art: PR37承認済み8人の安全な輪郭処理と切り抜きアイコン16点を登録'
+            git commit -m 'art: PR37承認済み7人の安全な輪郭処理と切り抜きアイコン14点を登録'
             git fetch origin feature/20261115-pr37-adopted7-stage1
             git rebase origin/feature/20261115-pr37-adopted7-stage1
             git push origin HEAD:feature/20261115-pr37-adopted7-stage1
