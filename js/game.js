@@ -100,11 +100,11 @@ const UNITS=[
 {id:'maron_trial',person:'maron',title:'新規イラスト試遊',rarity:'R',role:'support',color:'#8c96b8',s:['仮スキルⅠ','仮スキルⅡ']},
 
 {id:'momoka_daily',person:'momoka',title:'いつもの一日',rarity:'R',role:'attacker',color:'#fbabc6',s:['元気な一撃','みんな、がんばろ！']},
-{id:'momoka_work',person:'momoka',title:'相談室のお手伝い',rarity:'SR',role:'support',color:'#d1a7f9',s:['元気をお届け','ちょっと待って！']},
+{id:'momoka_work',person:'momoka',title:'相談室のお手伝い',rarity:'R',role:'support',color:'#d1a7f9',s:['元気をお届け','ちょっと待って！']},
 {id:'momoka_sky',person:'momoka',title:'青空の約束',rarity:'SSR',role:'healer',color:'#7dcef1',s:['応急サポート','大丈夫だよ！']},
 {id:'momoka_star',person:'momoka',title:'星灯のきらめき',rarity:'UR',role:'tank',color:'#ffd18c',s:['笑顔のバリア','ここは任せて！']},
 {id:'milku_daily',person:'milku',title:'カフェのひととき',rarity:'R',role:'support',color:'#f6a1bb',s:['お飲み物です','ひとやすみ']},
-{id:'milku_work',person:'milku',title:'いつもの帰り道',rarity:'SR',role:'healer',color:'#b5ddfb',s:['お手当てします','みんなの笑顔']},
+{id:'milku_work',person:'milku',title:'いつもの帰り道',rarity:'R',role:'healer',color:'#b5ddfb',s:['お手当てします','みんなの笑顔']},
 {id:'milku_sky',person:'milku',title:'午後のティータイム',rarity:'SSR',role:'tank',color:'#daa3fb',s:['お守りします','ご心配なく']},
 {id:'milku_star',person:'milku',title:'大切な約束',rarity:'UR',role:'attacker',color:'#f7c57b',s:['凛とした一撃','心を込めて']},
  {id:'nagi_dusk',person:'nagi',title:'紅の境界',rarity:'R',role:'support',color:'#cd657b',s:['星灯の結界','紅糸の封縛']},
@@ -143,9 +143,9 @@ const UNITS=[
  {id:'kaname_daily',person:'kaname',title:'夜明けに残る約束',rarity:'R',role:'attacker',color:'#80638f',s:['紫電の一閃','八年分の刃']},
  {id:'kaede_daily',person:'kaede',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']},
  // v0.35.0.0: R廃止に伴い、第2章の3人にSRユニットを追加（Rの役割・技名を引き継ぐ）
- {id:'tsubaki_work',person:'tsubaki',title:'伝承を追う足音',rarity:'SR',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
- {id:'erika_work',person:'erika',title:'仮面の向こうの素顔',rarity:'SR',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
- {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
+ {id:'tsubaki_work',person:'tsubaki',title:'伝承を追う足音',rarity:'R',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
+ {id:'erika_work',person:'erika',title:'仮面の向こうの素顔',rarity:'R',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
+ {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
 UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500,...NEW_UNIT_ROSTER_V0690,...NEW_UNIT_ROSTER_V0692,...NEW_UNIT_ROSTER_V0750,...NEW_UNIT_ROSTER_V0760,...NEW_UNIT_ROSTER_V0780,...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830,...NEW_UNIT_ROSTER_V0840,...NEW_UNIT_ROSTER_V0850,...NEW_UNIT_ROSTER_V0860,...NEW_UNIT_ROSTER_V0870,...NEW_UNIT_ROSTER_V0880,...NEW_UNIT_ROSTER_V0890,...NEW_UNIT_ROSTER_V0900,...NEW_UNIT_ROSTER_V0910);
