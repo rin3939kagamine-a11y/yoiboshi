@@ -141,7 +141,7 @@ const UNITS=[
  {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
-UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500,...NEW_UNIT_ROSTER_V0690,...NEW_UNIT_ROSTER_V0692,...NEW_UNIT_ROSTER_V0750,...NEW_UNIT_ROSTER_V0760,...NEW_UNIT_ROSTER_V0780,...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830);
+UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500,...NEW_UNIT_ROSTER_V0690,...NEW_UNIT_ROSTER_V0692,...NEW_UNIT_ROSTER_V0750,...NEW_UNIT_ROSTER_V0760,...NEW_UNIT_ROSTER_V0780,...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830,...NEW_UNIT_ROSTER_V0840);
 // Approved R portraits are provided separately; retain preexisting restored R IDs in saves.
 const APPROVED_R_UNIT_IDS=Object.freeze(["ageha_daily","akane_daily","anzu_daily","aoi_daily","chihiro_daily","chinatsu_daily","chiyo_daily","cocoa_daily","rico_show","erika_daily","fumika_daily","hiyori_daily","hotaru_daily","ichika_daily","jun_daily","kaede_daily","kagari_daily","kaname_daily","karen_daily","kirari_daily","koharu_daily","koyori_daily","kurumi_daily","kyoko_daily","lilith_daily","luna_daily","mai_wind","makoto_daily","marine_cafe","maron_daily","meru_daily","milku_daily","minori_daily","mio_daily","miyabi_daily","mizuki_daily","momoka_daily","nagi_dusk","natsume_daily","nazuna_daily","noel_daily","reiko_daily","reina_daily","riko_daily","ritsu_daily","saeko_daily","saki_daily","sanae_daily","sena_daily","shino_daily","shio_daily","shizuku_daily","suiran_daily","towa_daily","tsubaki_daily","yui_daily","yume_tomorrow","yuriko_daily","yuzu_daily"]);
 const RESTORED_R_UNIT_IDS=new Set([...APPROVED_R_UNIT_IDS,'shio_pool']); // Keep the previous pool outfit without newly assigned portrait.
@@ -229,7 +229,7 @@ const MOMOKA_UNIT_ARTWORK_V03447=Object.freeze({momoka_work:{portrait:'assets/UN
 const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNIT_ART/tsubaki_work.webp'},erika_work:{portrait:'assets/UNIT_ART/erika_work.webp'},kaede_work:{portrait:'assets/UNIT_ART/kaede_work.webp'}});
 // User-approved ordinary outfits: portrait only. Binary images are added separately.
 const APPROVED_R_ARTWORK=Object.freeze(Object.fromEntries(APPROVED_R_UNIT_IDS.map(id=>[id,{portrait:'assets/UNIT_ART/'+id+'.webp'}])));
-const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...NEW_UNIT_ARTWORK_V0690,...NEW_UNIT_ARTWORK_V0692,...NEW_UNIT_ARTWORK_V0750,...NEW_UNIT_ARTWORK_V0760,...NEW_UNIT_ARTWORK_V0780,...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
+const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...NEW_UNIT_ARTWORK_V0690,...NEW_UNIT_ARTWORK_V0692,...NEW_UNIT_ARTWORK_V0750,...NEW_UNIT_ARTWORK_V0760,...NEW_UNIT_ARTWORK_V0780,...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...NEW_UNIT_ARTWORK_V0840,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
 function unitArt(u,kind='portrait'){
  const config=UNIT_ARTWORK[u.id]||{};
  // Makoto's accepted portrait takes priority over outdated generic UNIT_ART portraits.
@@ -260,7 +260,7 @@ const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}
 function kanameSRUnlocked(save=S){return !!save?.bondRead?.kaname?.[1]}
 function visibleUnitV026(u,save=S){return !!u&&heroV0690Visible(u.person,save)&&!RETIRED_R_TO_SR[u.id]&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V028.includes(u.person)||isV028HeroRevealed(u.person,save))&&(!NEW_HERO_IDS_V0420.includes(u.person)||isV0420Revealed(u.person,save))&&isV0420Revealed(u.id,save)&&(!NEW_HERO_IDS_V0500.includes(u.person)||isV0500Revealed(u.person,save))}
-function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V0810.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0830.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
+function recruitEligibleUnit(u,save=S){return visibleUnitV026(u,save)&&(!NEW_HERO_IDS_V0810.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0830.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0840.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V027.includes(u.person)||isV027HeroRevealed(u.person,save))&&(u.person!=='nagi'||!!save.quests?.q6?.complete)&&(!DISTRICT_HERO_IDS.includes(u.person)||(SHINONOME_HERO_IDS.includes(u.person)?!!save.shinonomeMet:OLDCAFE_HERO_IDS.includes(u.person)?!!save.oldcafeMet:STATION_HERO_IDS.includes(u.person)?!!save.stationMet:SCHOOL_HERO_IDS.includes(u.person)?!!save.schoolMet:OFFICE_HERO_IDS.includes(u.person)?!!save.officeMet:SEASIDE_HERO_IDS.includes(u.person)?!!save.seasideMet:CHAPTER2_ALL_HERO_IDS.includes(u.person)?(u.person==='tsubaki'?!!save.tsubakiMet:u.person==='erika'?!!save.erikaMet:u.person==='kaname'?!!save.kanameMet:!!save.kaedeMet):!!save.lighthouseMet))}
 function availableNormalPool(save=S){return (gachaMode==='new19'?NEW19_GACHA_POOL:NORMAL_GACHA_POOL).filter(u=>recruitEligibleUnit(u,save))}
 function pickupActive(group,save=S){const start=save.pickupStartDay?.[group];return !!(DISTRICT_GACHA_IDS[group]&&Number.isSafeInteger(start)&&start>=1&&save.love?.day>=start&&save.love.day<start+PICKUP_DAYS)}
 function activePickupId(save=S){return ['chapter4_city','chapter3_port','kaede','kaname','erika','tsubaki','lighthouse','seaside','school_new','station','oldcafe','shinonome'].find(group=>pickupActive(group,save))||'normal'}
@@ -3642,7 +3642,7 @@ function applyBattleStartPassives(){
 }
 function passiveAttackMultiplier(a,e){
  const u=unit(a.id),p=unitPassive(u),v=passiveValue(u)/100;
- if(p.type==='attack')return 1+v;
+ if(p.type==='attack'||p.type==='renka_attack')return 1+v;
  if(p.type==='finish'&&e.hp/e.max<=.5)return 1+v;
  if(p.type==='weaken_finish'&&e.vulnerableUntil>battle.sim)return 1+v;
  return 1;
@@ -3693,6 +3693,34 @@ function applySkill(i,j,kind,target){
  const heal=(ally,base)=>{const n=Math.round(base*boost*passiveHealMultiplier(a,ally)*(ally.healBuffUntil>battle.sim?(ally.healBuffMult||1):1));const gain=Math.min(ally.max-ally.hp,n);ally.hp+=gain;if(gain>0)battlePopup(ally,gain,'heal');return gain};
  const shield=(ally,base)=>{const n=Math.round(base*boost*passiveShieldMultiplier(a,ally));ally.shield+=n;return n};
  switch(type){
+ // Dedicated SR effects only; existing skill cases are unchanged.
+ case 'suzuha_defense_up':{
+  const v=NEW_UNIT_EFFECTS_V0840.suzuhaDefensePercent/100*boost*
+   (unitPassive(u).type==='suzuha_defense_focus'?1+passiveValue(u)/100:1);
+  for(const ally of battle.allies.filter(x=>x.hp>0)){
+   ally.defenseBuffMult=Math.max(ally.defenseBuffMult||1,1+v);
+   ally.defenseBuffUntil=Math.max(ally.defenseBuffUntil||0,battle.sim+NEW_UNIT_EFFECTS_V0840.suzuhaDefenseSeconds);
+  }
+  log(`味方全体の防御力+${(v*100).toFixed(2)}%／${NEW_UNIT_EFFECTS_V0840.suzuhaDefenseSeconds}秒`);break;
+ }
+ case 'suzuha_cleanse_heal':{
+  for(const key of ['weakenUntil','vulnerableUntil','staggerUntil','attackDownUntil','defenseDownUntil','healDownUntil'])teammate[key]=0;
+  teammate.weakenMult=1;teammate.vulnerableMult=1;
+  log(`${person(unit(teammate.id)).name}の弱体を解除／${heal(teammate,NEW_UNIT_EFFECTS_V0840.suzuhaCleanseHeal)}回復`);break;
+ }
+ case 'renka_strike_down':{
+  const damage=strike(enemy,NEW_UNIT_EFFECTS_V0840.renkaStrikeBase);
+  const value=NEW_UNIT_EFFECTS_V0840.renkaAttackDownPercent/100*boost;
+  enemy.weakenMult=Math.min(enemy.weakenMult||1,Math.max(.5,1-value));
+  enemy.weakenUntil=Math.max(enemy.weakenUntil||0,battle.sim+NEW_UNIT_EFFECTS_V0840.renkaAttackDownSeconds);
+  log(`${enemy.name}に${damage}ダメージ／攻撃-${Math.round(value*100)}%／${NEW_UNIT_EFFECTS_V0840.renkaAttackDownSeconds}秒`);break;
+ }
+ case 'renka_enemy_ct_all':{
+  const seconds=NEW_UNIT_EFFECTS_V0840.renkaEnemyCtAllSeconds*boost;
+  const enemies=battle.enemies.filter(x=>x.hp>0);
+  for(const e of enemies)e.attackTimer=Math.max(0,e.attackTimer)+seconds;
+  log(`生存敵${enemies.length}体の次回攻撃CTを${seconds.toFixed(1)}秒延長`);break;
+ }
  case 'single':log(`${enemy.name}に${strike(enemy,34)}ダメージ`);break;
  case 'drain':{const damage=strike(enemy,30),value=Math.min(a.max-a.hp,Math.round(damage*.30*(unitPassive(u).type==='drain_heal_focus'?1+passiveValue(u)/100:1)));a.hp+=value;if(value)battlePopup(a,value,'heal');log(`${enemy.name}に${damage}ダメージ／自身を${value}回復`);break}
  case 'pierce':log(`${enemy.name}に防護貫通で${strike(enemy,31,unitPassive(u).type==='pierce_focus'?1+passiveValue(u)/100:1,{pierce:true})}ダメージ`);break;
