@@ -126,9 +126,9 @@ try:
           S.party=[id];S.selected=id;S.homeFavorite=u.person;S.homeUnitId=id;
           persist();
           return {id,rarity:u.rarity,owned:S.owned[id],party:S.party,selected:S.selected,
-            home:S.homeUnitId,art:unitCardArt(u),resultMarkup:recruitCardMarkup(drawResults[0])};
+            home:S.homeUnitId,art:unitCardArt(u),expectedArt:unitArt(u,'portrait'),approvedR:APPROVED_R_UNIT_IDS.includes(id),resultMarkup:recruitCardMarkup(drawResults[0])};
         }""")
-        check("C: actual draw returns R", fresh_pull.get("rarity") == "R" and fresh_pull.get("art") == "assets/UNIT_ART/" + fresh_pull.get("id", "") + ".webp", fresh_pull)
+        check("C: actual draw returns R with unchanged registered art", fresh_pull.get("rarity") == "R" and bool(fresh_pull.get("art")) and fresh_pull.get("art") == fresh_pull.get("expectedArt") and (not fresh_pull.get("approvedR") or fresh_pull.get("art") == "assets/UNIT_ART/" + fresh_pull.get("id", "") + ".webp"), fresh_pull)
         check("C: R appears correctly on result card", ">R</span>" in fresh_pull["resultMarkup"], fresh_pull)
         page.reload(wait_until="load", timeout=120000)
         page.wait_for_function("typeof load==='function'")
