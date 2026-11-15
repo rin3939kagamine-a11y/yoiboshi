@@ -46,7 +46,7 @@ assert prev[a:prev.index("\n];",a)+3]==game[b:game.index("\n];",b)+3],"old UNITS
 # Legacy switch cases and original calculations must be byte-equal.
 marker="// PR #59 formally adopted"
 a=prev.index(marker);b=game.index(marker)
-assert prev[a:prev.index("\n  checkBattleDone();",a)]==game[b:game.index("\n  checkBattleDone();",b)],"legacy skill switch changed"
+assert prev[a:prev.index("\n checkBattleDone();",a)]==game[b:game.index("\n checkBattleDone();",b)],"legacy skill switch changed"
 for p in ("js/heroines_v0860_units.js","js/heroines_v0870.js","js/heroines_v0870_wire.js",
           "js/heroines_v0850_units.js"):
     assert (ROOT/p).read_text(encoding="utf-8")==old(p),("existing art/character/unit modified",p)
