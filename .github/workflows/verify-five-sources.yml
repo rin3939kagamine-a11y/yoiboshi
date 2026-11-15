@@ -8,6 +8,7 @@ on:
       - '.github/workflows/verify-five-sources.yml'
       - 'js/heroines_v0692.js'
       - 'index.html'
+      - 'tools/qa/heroine3_real_smoke.py'
 permissions:
   contents: write
 jobs:
@@ -75,7 +76,7 @@ jobs:
       - name: Run browser initialization diagnostics
         run: python tools/qa/heroine3_diagnostic.py
 
-      - name: Test three approved SR heroines in real game and gallery
+      - name: Test three approved R heroines in real game and gallery
         run: python tools/qa/heroine3_real_smoke.py
       - name: Publish three SR browser QA screenshots and data
         if: always()
