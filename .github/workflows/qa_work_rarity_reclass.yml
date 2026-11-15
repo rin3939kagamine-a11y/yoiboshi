@@ -1,0 +1,38 @@
+name: QA - all _work SR to R migration
+on:
+  push:
+    branches:
+      - feature/20261115-reclass-all-work-to-r
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Syntax check
+        run: |
+          for file in js/game.js js/new_units_v026.js js/heroines_v*.js js/heroines_v*_units.js; do node --check "$file"; done
+          python -m py_compile tools/qa/work_rarity_reclass_smoke.py
+      - name: Inventory and strict diff, 227 units, save, skills, gates and mobile
+        run: python tools/qa/work_rarity_reclass_smoke.py
+      - name: Gacha actual draw health (block merge if empty SR draw)
+        run: python tools/qa/work_rarity_reclass_smoke.py --require-gacha
+      - name: Upload audit and test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-work-rarity-reclass
+          path: qa_artifacts/work_rarity_reclass/
+          if-no-files-found: warn
