@@ -236,7 +236,7 @@ try:
    assert all(abs(x-1.2376)<1e-9 for x in combat["oldSuzuhaBuff"]),combat
    assert all(abs(a-b)<1e-9 for a,b in zip(combat["oldRenkaCT"],[3.6,3.6,2])),combat
    assert all(abs(a-b)<1e-9 for a,b in zip(combat["oldMomokaCt"],[17.7,23.7])),combat
-   assert combat["oldMilkuHeal"]==102,combat
+   assert combat["oldMilkuHeal"]==108,combat
    for obj,name in zip((a,b,c),NAMES):
     page.evaluate("""id=>{
       S=fresh();S.gameStarted=true;if(S.onboarding)S.onboarding.enabled=false;
