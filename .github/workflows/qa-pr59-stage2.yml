@@ -12,6 +12,7 @@ on:
       - 'tools/qa/redraw3_stage2_smoke.py'
       - 'tools/qa/tokiwa_aone_stage2_smoke.py'
       - 'tools/qa/suzuha_renka_stage2_smoke.py'
+      - 'docs/new_character_ideas/2026-11-15_pr59_approved4/STAGE2_QA.md'
       - '.github/workflows/qa-pr59-stage2.yml'
   workflow_dispatch:
 permissions:
@@ -40,6 +41,11 @@ jobs:
           python -m py_compile tools/qa/tokiwa_aone_stage2_smoke.py tools/qa/suzuha_renka_stage2_smoke.py
       - name: Four SR unit skills in real battle, gacha odds and old saves
         run: python tools/qa/pr59_stage2_smoke.py
+      - name: Existing stage2 SR regressions (Aone, Suzuha/Renka, Cecil/Honoka/Kana)
+        run: |
+          python tools/qa/tokiwa_aone_stage2_smoke.py
+          python tools/qa/suzuha_renka_stage2_smoke.py
+          python tools/qa/redraw3_stage2_smoke.py
       - name: Upload exact battle calculations and screenshots
         if: always()
         uses: actions/upload-artifact@v4
