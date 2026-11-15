@@ -66,7 +66,7 @@ try:
         check("excluded character legacy conversion unchanged", registry["juriRetirement"], registry)
         check("restored R never migrated to SR", not registry["retiredRestored"], registry)
         check("Makoto R uses approved image, SR unaffected", registry["makotoR"] == "assets/UNIT_ART/makoto_daily.webp" and "makoto_daily.webp" not in registry["makotoSR"], registry)
-        check("normal and new19 odds fixed", registry["rate"] == {"R":60,"SR":25,"SSR":10,"UR":5} and registry["new19"] == {"SR":80,"SSR":15,"UR":5}, registry)
+        check("normal and new19 odds fixed", registry["rate"] == {"R":60,"SR":25,"SSR":10,"UR":5} and registry["new19"] == {"R":80,"SR":0,"SSR":15,"UR":5}, registry)
         check("R represented in normal pool", registry["rInPool"] > 0, registry)
 
         def load_case(source_js):
@@ -126,9 +126,9 @@ try:
           S.party=[id];S.selected=id;S.homeFavorite=u.person;S.homeUnitId=id;
           persist();
           return {id,rarity:u.rarity,owned:S.owned[id],party:S.party,selected:S.selected,
-            home:S.homeUnitId,art:unitCardArt(u),resultMarkup:recruitCardMarkup(drawResults[0])};
+            home:S.homeUnitId,art:unitCardArt(u),expectedArt:unitArt(u,'portrait'),approvedR:APPROVED_R_UNIT_IDS.includes(id),resultMarkup:recruitCardMarkup(drawResults[0])};
         }""")
-        check("C: actual draw returns R", fresh_pull.get("rarity") == "R" and fresh_pull.get("art") == "assets/UNIT_ART/" + fresh_pull.get("id", "") + ".webp", fresh_pull)
+        check("C: actual draw returns R with unchanged registered art", fresh_pull.get("rarity") == "R" and bool(fresh_pull.get("art")) and fresh_pull.get("art") == fresh_pull.get("expectedArt") and (not fresh_pull.get("approvedR") or fresh_pull.get("art") == "assets/UNIT_ART/" + fresh_pull.get("id", "") + ".webp"), fresh_pull)
         check("C: R appears correctly on result card", ">R</span>" in fresh_pull["resultMarkup"], fresh_pull)
         page.reload(wait_until="load", timeout=120000)
         page.wait_for_function("typeof load==='function'")
@@ -158,9 +158,9 @@ try:
           return {normal,new19,new19Pool:pool.length,drawn:draws.length,new19R:draws.filter(x=>x==='R').length,
                   normalUiR:normalUi.includes('60%'),newUiNoR:!newUi.includes('60%')&&newUi.includes('80%')};
         }""")
-        for mode, expected in [("normal", {"R":60,"SR":25,"SSR":10,"UR":5}),("new19", {"R":0,"SR":80,"SSR":15,"UR":5})]:
+        for mode, expected in [("normal", {"R":60,"SR":25,"SSR":10,"UR":5}),("new19", {"R":80,"SR":0,"SSR":15,"UR":5})]:
             check(mode + " large-sample distribution", all(abs(dist[mode][r]/1000-expected[r]) < 1.0 for r in expected), dist[mode])
-        check("new19 has eligible SR/SSR/UR units and no R/throws", dist["new19Pool"] >= 3 and dist["drawn"] == 2000 and dist["new19R"] == 0, dist)
+        check("new19 R/SSR/UR units preserve original 80/15/5 appearance weights", dist["new19Pool"] >= 3 and dist["drawn"] == 2000 and 1500 < dist["new19R"] < 1700, dist)
         check("displayed rate table matches selected banner", dist["normalUiR"] and dist["newUiNoR"], dist)
 
         # Real screen bounds, while approved art files are deliberately absent.

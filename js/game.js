@@ -143,9 +143,9 @@ const UNITS=[
  {id:'kaname_daily',person:'kaname',title:'夜明けに残る約束',rarity:'R',role:'attacker',color:'#80638f',s:['紫電の一閃','八年分の刃']},
  {id:'kaede_daily',person:'kaede',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']},
  // v0.35.0.0: R廃止に伴い、第2章の3人にSRユニットを追加（Rの役割・技名を引き継ぐ）
- {id:'tsubaki_work',person:'tsubaki',title:'伝承を追う足音',rarity:'SR',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
- {id:'erika_work',person:'erika',title:'仮面の向こうの素顔',rarity:'SR',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
- {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'SR',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
+ {id:'tsubaki_work',person:'tsubaki',title:'伝承を追う足音',rarity:'R',role:'attacker',color:'#b87183',s:['突撃調査','諦めない一歩']},
+ {id:'erika_work',person:'erika',title:'仮面の向こうの素顔',rarity:'R',role:'support',color:'#b69bbf',s:['仮面の取引','とっておきの一杯']},
+ {id:'kaede_work',person:'kaede',title:'帰り道のしおり',rarity:'R',role:'healer',color:'#b16d81',s:['刺繍の守り','ほどけない糸']}
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
 UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500,...NEW_UNIT_ROSTER_V0690,...NEW_UNIT_ROSTER_V0692,...NEW_UNIT_ROSTER_V0750,...NEW_UNIT_ROSTER_V0760,...NEW_UNIT_ROSTER_V0780,...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830,...NEW_UNIT_ROSTER_V0840,...NEW_UNIT_ROSTER_V0850,...NEW_UNIT_ROSTER_V0860,...NEW_UNIT_ROSTER_V0870,...NEW_UNIT_ROSTER_V0880,...NEW_UNIT_ROSTER_V0890,...NEW_UNIT_ROSTER_V0900,...NEW_UNIT_ROSTER_V0910);
@@ -256,7 +256,7 @@ function homeUnit(personId){
 function setHomeUnit(id){const u=unit(id);if(!u||!visibleUnitV026(u)||!data(id)||u.person!==lobbySelected)return;S.homeUnitId=id;persist();render()}
 
 const RATE=Object.freeze({R:60,SR:25,SSR:10,UR:5}); // Confirmed normal recruitment odds.
-const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5}); // Existing 19-heroine-only odds; no R units.
+const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R.
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
@@ -3046,7 +3046,7 @@ function summonHero(){
  const mode=gachaMode==='new19'?'new19':gachaMode!=='normal'&&pickupActive(gachaMode)?gachaMode:'normal';
  const label=mode==='normal'?'通常募集':mode==='new19'?'新ヒロイン19人募集':'期間限定ピックアップ';
  const rates=mode==='new19'?NEW19_RATE:RATE;
- return `<section class="recruit-stage gacha-v030-stage" aria-label="星灯募集ステージ"><div class="gacha-v030-stage-top"><span class="mini-overline">YOIBOSHI · STELLAR RECRUIT</span><span class="gacha-v030-mode">${label}</span></div><div class="recruit-sigil" aria-hidden="true">✦</div><h2>星々の導き、仲間との出会い</h2><p>星灯の光で新しい仲間と出会おう。</p><div class="recruit-balance">所持 星晶石 ✧ <b>${S.gems.toLocaleString()}</b></div><div class="recruit-actions"><button class="btn summon-one" onclick="pull(1)">✧ 1回募集<small>星晶石 ${GACHA_CONFIG.ONE_COST.toLocaleString()}</small></button><button class="btn summon-ten" onclick="pull(10)">✦ 10回募集<small>星晶石 ${GACHA_CONFIG.TEN_COST.toLocaleString()}</small></button></div><p class="recruit-rate">${mode==='new19'?'':`R ${rates.R}% · `}SR ${rates.SR}% · SSR ${rates.SSR}% · UR ${rates.UR}%</p></section>`;
+ return `<section class="recruit-stage gacha-v030-stage" aria-label="星灯募集ステージ"><div class="gacha-v030-stage-top"><span class="mini-overline">YOIBOSHI · STELLAR RECRUIT</span><span class="gacha-v030-mode">${label}</span></div><div class="recruit-sigil" aria-hidden="true">✦</div><h2>星々の導き、仲間との出会い</h2><p>星灯の光で新しい仲間と出会おう。</p><div class="recruit-balance">所持 星晶石 ✧ <b>${S.gems.toLocaleString()}</b></div><div class="recruit-actions"><button class="btn summon-one" onclick="pull(1)">✧ 1回募集<small>星晶石 ${GACHA_CONFIG.ONE_COST.toLocaleString()}</small></button><button class="btn summon-ten" onclick="pull(10)">✦ 10回募集<small>星晶石 ${GACHA_CONFIG.TEN_COST.toLocaleString()}</small></button></div><p class="recruit-rate">${mode==='new19'?`R ${rates.R}% · `:`R ${rates.R}% · SR ${rates.SR}% · `}SSR ${rates.SSR}% · UR ${rates.UR}%</p></section>`;
 }
 
 function ticketSelectMarkup(){
@@ -3057,17 +3057,17 @@ function pickupMarkup(){
  const active=['shinonome','oldcafe','station','school_new','seaside','lighthouse','tsubaki','erika','kaname','kaede','chapter3_port','chapter4_city'].filter(group=>pickupActive(group));
  const chosen=gachaMode==='new19'?'new19':gachaMode!=='normal'&&pickupActive(gachaMode)?gachaMode:'normal';
  const labels={shinonome:'東雲商店街',oldcafe:'旧喫茶街',station:'東雲駅前',school_new:'旧校舎・相談室',seaside:'臨海公園',lighthouse:'旧灯台',tsubaki:'神楽坂 椿',erika:'城ヶ崎 エリカ',kaname:'紫藤 カナメ',kaede:'神楽坂 楓',chapter3_port:'第3章・港',chapter4_city:'第4章・点灯式',new19:'新ヒロイン19人（仮）'};
- return `<section class="gacha-v030-mode-picker" aria-label="募集バナーの選択"><div class="gacha-v030-picker-heading"><b>募集バナー</b><small>出会い済みの対象のみ表示</small></div><div class="gacha-v030-mode-scroll"><button class="gacha-v030-choice ${chosen==='normal'?'selected':''}" aria-pressed="${chosen==='normal'}" onclick="setGachaMode('normal')">通常募集</button>${NEW_HERO_IDS_V0500.some(id=>isV0500Revealed(id))?`<button class="gacha-v030-choice ${chosen==='new19'?'selected':''}" aria-pressed="${chosen==='new19'}" onclick="setGachaMode('new19')">新ヒロイン19人 <small>仮配分</small></button>`:''}${active.map(group=>`<button class="gacha-v030-choice ${chosen===group?'selected':''}" aria-pressed="${chosen===group}" onclick="setGachaMode('${group}')">${labels[group]} <small>残り${PICKUP_DAYS-(S.love.day-S.pickupStartDay[group])}日</small></button>`).join('')}</div>${chosen==='normal'?'':`<p class="gacha-v030-pickup-info">${chosen==='new19'?'新ヒロイン専用の仮募集枠。従来の通常募集は変更せず、レアリティ別確率も据え置きです。':labels[chosen]+'の対象キャラは同じレアリティ内で選択重み3倍。レアリティ別確率は変わりません。'}</p>`}</section>`;
+ return `<section class="gacha-v030-mode-picker" aria-label="募集バナーの選択"><div class="gacha-v030-picker-heading"><b>募集バナー</b><small>出会い済みの対象のみ表示</small></div><div class="gacha-v030-mode-scroll"><button class="gacha-v030-choice ${chosen==='normal'?'selected':''}" aria-pressed="${chosen==='normal'}" onclick="setGachaMode('normal')">通常募集</button>${NEW_HERO_IDS_V0500.some(id=>isV0500Revealed(id))?`<button class="gacha-v030-choice ${chosen==='new19'?'selected':''}" aria-pressed="${chosen==='new19'}" onclick="setGachaMode('new19')">新ヒロイン19人 <small>仮配分</small></button>`:''}${active.map(group=>`<button class="gacha-v030-choice ${chosen===group?'selected':''}" aria-pressed="${chosen===group}" onclick="setGachaMode('${group}')">${labels[group]} <small>残り${PICKUP_DAYS-(S.love.day-S.pickupStartDay[group])}日</small></button>`).join('')}</div>${chosen==='normal'?'':`<p class="gacha-v030-pickup-info">${chosen==='new19'?'新ヒロイン専用の仮募集枠。ユニット別の排出率を維持し、旧SR80%枠をR80%として表示します。':labels[chosen]+'の対象キャラは同じレアリティ内で選択重み3倍。レアリティ別確率は変わりません。'}</p>`}</section>`;
 }
 function recruitmentLineupMarkup(){
  const pool=availableNormalPool();
- const rarities=['UR','SSR','SR',...(gachaMode==='new19'?[]:['R'])];
- return `<details class="recruit-directory gacha-v030-directory"><summary>募集可能ユニット <small>${pool.length}体・タップして確認</small></summary><div class="directory-content"><p class="gacha-v030-small-note">現在のストーリー進行で、通常募集から排出されるユニットです。ピックアップ中もこの対象から抽選されます。</p>${rarities.map(rarity=>{const group=pool.filter(u=>u.rarity===rarity);return group.length?`<section class="gacha-v030-rarity-block"><h4>${rarity} <small>${group.length}体</small></h4><div class="gacha-v030-unit-grid">${group.map(u=>`<div class="gacha-v030-unit-item"><img loading="lazy" src="${u.rarity==='R'?unitCardArt(u):characterIcon(u.person)}" alt=""><span><b>${esc(person(u).name)}</b><small>${esc(u.title)}</small></span><em>${u.rarity}</em></div>`).join('')}</div></section>`:''}).join('')}</div></details>`;
+ const rarities=gachaMode==='new19'?['UR','SSR','R']:['UR','SSR','SR','R'];
+ return `<details class="recruit-directory gacha-v030-directory"><summary>募集可能ユニット <small>${pool.length}体・タップして確認</small></summary><div class="directory-content"><p class="gacha-v030-small-note">現在のストーリー進行で、選択中の募集枠から排出されるユニットです。</p>${rarities.map(rarity=>{const group=pool.filter(u=>u.rarity===rarity);return group.length?`<section class="gacha-v030-rarity-block"><h4>${rarity} <small>${group.length}体</small></h4><div class="gacha-v030-unit-grid">${group.map(u=>`<div class="gacha-v030-unit-item"><img loading="lazy" src="${u.rarity==='R'?unitCardArt(u):characterIcon(u.person)}" alt=""><span><b>${esc(person(u).name)}</b><small>${esc(u.title)}</small></span><em>${u.rarity}</em></div>`).join('')}</div></section>`:''}).join('')}</div></details>`;
 }
 function recruitmentDetailsMarkup(){
  const rates=gachaMode==='new19'?NEW19_RATE:RATE;
- const rarities=gachaMode==='new19'?RARITIES.filter(r=>r!=='R'):RARITIES;
- return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${rarities.map(r=>`<div><strong>${r}</strong><b>${rates[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定。${gachaMode==='new19'?'新ヒロイン募集はSR以上です。':'通常募集にはRも含まれます。'}ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。</p><p class="gacha-v030-small-note">UR天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
+ const rarities=gachaMode==='new19'?RARITIES.filter(r=>r!=='SR'):RARITIES;
+ return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${rarities.map(r=>`<div><strong>${r}</strong><b>${rates[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定。${gachaMode==='new19'?'新ヒロイン募集はR80%・SSR15%・UR5%です。':'通常募集にはRも含まれます。'}ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。</p><p class="gacha-v030-small-note">UR天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
 }
 
 function nagiTrialBanner(){return S.quests.q6?.complete?`<div class="gachahero nagi-banner"><img src="${characterPortrait('nagi')}" alt="白峰 凪"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>白峰 凪 ／ 紅の境界</h2><p>寡黙な外部協力者が、新たに募集ラインナップへ。<br>初回限定のお試し募集で、すぐに編成・交流を体験できます。</p><button class="btn nagi-trial" ${S.nagiTrial?'disabled':''} onclick="trialNagiRecruit()">${S.nagiTrial?'お試し募集済み':'凪の無料お試し募集（1回限り）'}</button></div></div>`:''}

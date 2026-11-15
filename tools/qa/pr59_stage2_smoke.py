@@ -125,13 +125,13 @@ try:
    }""")
    assert baseline["key"]=="yoiboshi-reboot-v1",baseline
    assert baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
-   assert baseline["new19Rates"]=={"SR":80,"SSR":15,"UR":5},baseline
-   assert baseline["costs"]==[120,1000] and baseline["srCount"]==173 and baseline["withoutNew"]==169 and baseline["unique"],baseline
+   assert baseline["new19Rates"]=={"R":80,"SR":0,"SSR":15,"UR":5},baseline
+   assert baseline["costs"]==[120,1000] and baseline["srCount"]==56 and baseline["withoutNew"]==56 and baseline["unique"],baseline
    assert all(baseline["legacy"].values()),baseline
    assert (baseline["healerBase"]["hp"],baseline["healerBase"]["atk"],baseline["healerBase"]["def"])==(148,9,5),baseline
    for actual,id,person,name,role,stats,skills,passive in zip(baseline["units"],IDS,PERSONS,NAMES,
        ("support","healer","attacker","attacker"),BASE,SKILLS,PASSIVES):
-    assert (actual["id"],actual["person"],actual["name"],actual["rarity"],actual["role"])==(id,person,name,"SR",role),actual
+    assert (actual["id"],actual["person"],actual["name"],actual["rarity"],actual["role"])==(id,person,name,"R",role),actual
     assert (actual["stats"]["hp"],actual["stats"]["atk"],actual["stats"]["def"])==stats,actual
     assert actual["skills"]==list(skills),actual
     assert actual["targets"]==(["ally","ally"] if role in ("support","healer") else ["enemy","enemy"]),actual

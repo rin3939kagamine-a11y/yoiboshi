@@ -78,10 +78,10 @@ try:
   version_match=re.search(r"Ver\.(\d+)\.(\d+)\.(\d+)\.(\d+)",metadata["version"])
   ck("app version >= original v0.70.2.0", bool(version_match) and tuple(map(int,version_match.groups())) >= (0,70,2,0),metadata["version"])
   ck("old 74 registry untouched",metadata["old74"]==74)
-  ck("unchanged gacha rate",metadata["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and metadata["new19"]=={"SR":80,"SSR":15,"UR":5})
+  ck("unchanged gacha rate",metadata["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and metadata["new19"]=={"R":80,"SR":0,"SSR":15,"UR":5})
   ck("excluded hero IDs absent",not metadata["excluded"],metadata["excluded"])
   for item in metadata["all"]:
-   ck(item["id"]+" SR unit and two skills",item["rank"]=="SR" and item["skills"]==2,item)
+   ck(item["id"]+" R unit and two skills",item["rank"]=="R" and item["skills"]==2,item)
    ck(item["id"]+" full portraits wired",item["art"].split("?")[0]==f"assets/ART_V2/full_body/{item['id']}.webp" and all([item["full"],item["upper"],item["icon"]]),item)
    ck(item["id"]+" 5 bonds and 4 moods",item["romance"] and item["stories"]==5 and item["moods"]==4,item)
    ck(item["id"]+" depth card",item["depth"] and all(item["depth"].get(k) for k in ["habit","inside","growth","cg"]),item)
@@ -137,7 +137,7 @@ try:
     }
     return {rows,party:S.party,hasOwned:NEW_HERO_IDS_V0692.every(id=>!!S.owned[id+'_work'])};
   }""")
-  ck("three selected SR units saved in one party",born["hasOwned"] and born["party"]==["sumika_work","reika_work","hono_work","momoka_work"],born)
+  ck("three selected R units saved in one party",born["hasOwned"] and born["party"]==["sumika_work","reika_work","hono_work","momoka_work"],born)
   for a in born["rows"]:
    depth=next(item["depth"] for item in metadata["all"] if item["id"]==a["id"])
    ck(a["id"]+" real talk view and profile",a["available"] and a["talks"] and a["profile"],a)
@@ -175,7 +175,7 @@ try:
     if(battle.tb){battle.tb.auto=true;battle.tb.speed=200;tbAdvance();}
     return {ok:true,members,waves:battle.totalWaves};
   }""")
-  ck("real battle includes all 3 new SR units",combat.get("ok") and all(x+"_work" in combat["members"] for x in ids),combat)
+  ck("real battle includes all 3 new R units",combat.get("ok") and all(x+"_work" in combat["members"] for x in ids),combat)
   page.wait_for_function("()=>!battle",timeout=120000)
   ck("actual turn combat completed",True)
   # Mobile and landscape in real talk, roster and gallery.

@@ -3,10 +3,10 @@
  * Unrelated save, pity, rarity rates, prior units and narrative remain unchanged.
  */
 const NEW_UNIT_ROSTER_V0860=Object.freeze([
- {id:'takamiya_sayaka_work',person:'takamiya_sayaka',title:'灯のともるフロント',rarity:'SR',role:'support',color:'#41536a',s:['旅路へのエール','夜港のエスコート']},
- {id:'shirase_marika_work',person:'shirase_marika',title:'やさしさを包んで',rarity:'SR',role:'healer',color:'#d4baca',s:['みんなに焼き菓子を','あなたへのひと包み']},
- {id:'miyoshi_nanami_work',person:'miyoshi_nanami',title:'まっすぐな言葉',rarity:'SR',role:'attacker',color:'#5b9ac3',s:['真実の一筆','伝える勇気']},
- {id:'hayase_rio_work',person:'hayase_rio',title:'最高の一曲',rarity:'SR',role:'attacker',color:'#f087ab',s:['ビートアップ！','フルパワー・ステップ']}
+ {id:'takamiya_sayaka_work',person:'takamiya_sayaka',title:'灯のともるフロント',rarity:'R',role:'support',color:'#41536a',s:['旅路へのエール','夜港のエスコート']},
+ {id:'shirase_marika_work',person:'shirase_marika',title:'やさしさを包んで',rarity:'R',role:'healer',color:'#d4baca',s:['みんなに焼き菓子を','あなたへのひと包み']},
+ {id:'miyoshi_nanami_work',person:'miyoshi_nanami',title:'まっすぐな言葉',rarity:'R',role:'attacker',color:'#5b9ac3',s:['真実の一筆','伝える勇気']},
+ {id:'hayase_rio_work',person:'hayase_rio',title:'最高の一曲',rarity:'R',role:'attacker',color:'#f087ab',s:['ビートアップ！','フルパワー・ステップ']}
 ]);
 const NEW_UNIT_DESIGN_V0860=Object.freeze({
  takamiya_sayaka_work:{skills:['sayaka_team_attack_up','sayaka_team_defense_up'],passive:['sayaka_buff','旅先への気配り']},

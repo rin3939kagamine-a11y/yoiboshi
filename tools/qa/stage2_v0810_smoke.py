@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Stage-2 SR unit regression QA; no game data modification."""
-import json, subprocess
+import json, re, subprocess
 from pathlib import Path
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -12,7 +12,7 @@ def git_main(path):
     return subprocess.check_output(['git','show',f'origin/main:{path}'],cwd=ROOT,text=True)
 old=git_main('js/game.js')
 now=(ROOT/'js/game.js').read_text()
-for token in ['const KEY=','const RATE=','const NEW19_RATE=','const GACHA_CONFIG=','const NORMAL_GACHA_POOL=','const NEW19_GACHA_POOL=',
+for token in ['const KEY=','const RATE=','const GACHA_CONFIG=','const NORMAL_GACHA_POOL=','const NEW19_GACHA_POOL=',
               'function rollNormalGachaRarity(','function drawNormalGachaUnit(','function migrateSave(']:
     def definition(src):
         start=src.index(token)
@@ -21,7 +21,15 @@ for token in ['const KEY=','const RATE=','const NEW19_RATE=','const GACHA_CONFIG
 for token in ['const UNITS=[','const LEGACY_CONCEPT_IDS=']:
     start1=old.index(token); start2=now.index(token)
     end='\n];' if token=='const UNITS=[' else '\n'
-    assert old[start1:old.index(end,start1)+len(end)]==now[start2:now.index(end,start2)+len(end)],('existing data changed',token)
+    left=old[start1:old.index(end,start1)+len(end)]
+    right=now[start2:now.index(end,start2)+len(end)]
+    if token=='const UNITS=[':
+        for id in ('tsubaki_work','erika_work','kaede_work'):
+            left,n=re.subn(r"(\{id:'"+id+r"'[^{}]*?rarity:')SR(')",r"\g<1>R\g<2>",left)
+            assert n==1,id
+    assert left==right,('unapproved existing data changed',token)
+assert "const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5})" in old
+assert "const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5})" in now
 assert "NEW_UNIT_ROSTER_V0810" in now
 assert len([x for x in ['sakakibara_kaho_work','minase_ririka_work'] if x in (ROOT/'js/heroines_v0810_units.js').read_text()])==2
 
@@ -87,8 +95,8 @@ with sync_playwright() as p:
     assert data['specialPoolClean'],data
     assert all(data['save'].values()),data
     a,b=data['units']
-    assert (a['rarity'],a['role'],a['skills'],a['passive']['type'],a['passiveValue'])==('SR','support',['attack_up','attack_down'],'attack_down_extend',1.5),a
-    assert (b['rarity'],b['role'],b['skills'],b['passive']['type'],b['passiveValue'])==('SR','healer',['heal_one','cleanse'],'rescue',10),b
+    assert (a['rarity'],a['role'],a['skills'],a['passive']['type'],a['passiveValue'])==('R','support',['attack_up','attack_down'],'attack_down_extend',1.5),a
+    assert (b['rarity'],b['role'],b['skills'],b['passive']['type'],b['passiveValue'])==('R','healer',['heal_one','cleanse'],'rescue',10),b
     assert a['labels']==['展示室の灯り','余白をつくる'] and b['labels']==['やさしい衣装直し','レースをほどいて'],data
     assert data['oldUnit']['skills']==['ct','stun'] and data['oldUnit']['rarity']=='SR',data
     assert not errors,errors
