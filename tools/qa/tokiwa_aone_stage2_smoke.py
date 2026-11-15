@@ -16,27 +16,22 @@ new_perf=(ROOT/"js/performance_v016.js").read_text()
 old_index=main_source("index.html")
 new_index=(ROOT/"index.html").read_text()
 
-# Remove only exactly-approved additive inserts; all existing code must then
-# match main byte-for-byte. Also protects gacha, save, and existing character data.
-game_pairs=[
- ("...NEW_UNIT_ROSTER_V0810);","...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830);"),
- ("...NEW_UNIT_ARTWORK_V0810,...MOMOKA_UNIT_ARTWORK","...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...MOMOKA_UNIT_ARTWORK"),
- ("&&(!NEW_HERO_IDS_V0810.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V027.includes","&&(!NEW_HERO_IDS_V0810.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V0830.includes(u.person)||heroineStoryRevealed(u.person,save))&&(!NEW_HERO_IDS_V027.includes")
-]
-assert old_game!=new_game
-back=new_game
-for a,b in game_pairs:
-    assert old_game.count(a)==1 and back.count(b)==1,(a,b)
-    back=back.replace(b,a)
-assert back==old_game,"Unexpected js/game.js drift"
-perf_old="...NEW_UNIT_DESIGN_V0810\n});"
-perf_new="...NEW_UNIT_DESIGN_V0810,\n  ...NEW_UNIT_DESIGN_V0830\n});"
-assert old_perf.count(perf_old)==1 and new_perf.count(perf_new)==1
-assert new_perf.replace(perf_new,perf_old)==old_perf,"Unexpected performance engine change"
-index_old='<script defer src="js/heroines_v0810_units.js?v=20261115"></script><script defer src="js/performance_v016.js'
-index_new='<script defer src="js/heroines_v0810_units.js?v=20261115"></script><script defer src="js/heroines_v0830_units.js?v=20261115"></script><script defer src="js/performance_v016.js'
-assert old_index.count(index_old)==1 and new_index.count(index_new)==1
-assert new_index.replace(index_new,index_old)==old_index,"Unexpected index.html drift"
+# Regression after the Aone unit is already merged on main:
+# compare immutable legacy definitions, not the historical PR #91 before/after diff.
+for token in ('const KEY=','const ROLES=','const RATE=','const NEW19_RATE=',
+              'const GACHA_CONFIG=','const NORMAL_GACHA_POOL=',
+              'const NEW19_GACHA_POOL=','function drawNormalGachaUnit(',
+              'function rollNormalGachaRarity(','function migrateSave('):
+    i=old_game.index(token);j=new_game.index(token)
+    assert old_game[i:old_game.index('\n',i)]==new_game[j:new_game.index('\n',j)],('core drift',token)
+i=old_game.index('const UNITS=[');j=new_game.index('const UNITS=[')
+assert old_game[i:old_game.index('\n];',i)+3]==new_game[j:new_game.index('\n];',j)+3]
+assert (ROOT/'js/heroines_v0830_units.js').read_text()==main_source('js/heroines_v0830_units.js')
+assert '...NEW_UNIT_ROSTER_V0830' in old_game and '...NEW_UNIT_ROSTER_V0830' in new_game
+assert '...NEW_UNIT_ARTWORK_V0830' in old_game and '...NEW_UNIT_ARTWORK_V0830' in new_game
+assert '...NEW_UNIT_DESIGN_V0830' in old_perf and '...NEW_UNIT_DESIGN_V0830' in new_perf
+assert 'js/heroines_v0830_units.js' in old_index and 'js/heroines_v0830_units.js' in new_index
+assert 'js/heroines_v0840_units.js' in new_index and '...NEW_UNIT_ROSTER_V0840' in new_game
 
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*args):pass
@@ -113,7 +108,7 @@ try:
     assert data["normalRegistered"] and data["specialAbsent"] and not data["unready"] and not data["q3"] and data["q6"],data
     assert data["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and data["gachaCost"]==[120,1000],data
     assert data["key"]=="yoiboshi-reboot-v1",data
-    assert data["allUnique"] and data["srCount"]==157,data
+    assert data["allUnique"] and data["srCount"]==159,data
     assert all(data["stable"].values()),data
     assert data["oldUnit"]["skills"]==["ct","stun"] and data["oldUnit"]["rarity"]=="SR",data
     assert data["existingStages"]=={"kaho":["attack_up","attack_down"],"ririka":["heal_one","cleanse"]},data
