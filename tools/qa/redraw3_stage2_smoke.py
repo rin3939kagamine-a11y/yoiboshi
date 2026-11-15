@@ -113,7 +113,7 @@ try:
        roster:cases,legacy:legacyCheck,oldUnitSpecs};
    }""")
    assert baseline["key"]=="yoiboshi-reboot-v1" and baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
-   assert baseline["new19Rates"]=={"R":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
+   assert baseline["new19Rates"]=={"R":80,"SR":0,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
    assert baseline["count"]==56 and baseline["oldRemaining"]==56 and baseline["poolUnique"],baseline
    assert all(baseline["legacy"].values()),baseline
    assert (baseline["healerBaseline"]["hp"],baseline["healerBaseline"]["atk"],baseline["healerBaseline"]["def"])==(148,9,5),baseline
