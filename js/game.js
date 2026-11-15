@@ -256,7 +256,7 @@ function homeUnit(personId){
 function setHomeUnit(id){const u=unit(id);if(!u||!visibleUnitV026(u)||!data(id)||u.person!==lobbySelected)return;S.homeUnitId=id;persist();render()}
 
 const RATE=Object.freeze({R:60,SR:25,SSR:10,UR:5}); // Confirmed normal recruitment odds.
-const NEW19_RATE=Object.freeze({R:80,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R.
+const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R.
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
