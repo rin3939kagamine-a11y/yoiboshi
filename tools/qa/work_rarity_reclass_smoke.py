@@ -79,6 +79,17 @@ for path,n in FILES.items():
   new_rate="const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5}); // Keep the same 80/15/5 per-unit weights after the 19 work units change from SR to R."
   assert expected.count(old_rate)==1
   expected=expected.replace(old_rate,new_rate)
+  ui_rewrites=(
+   ("${mode==='new19'?'':`R ${rates.R}% · `}SR ${rates.SR}% · SSR ${rates.SSR}% · UR ${rates.UR}%", "${mode==='new19'?`R ${rates.R}% · `:`R ${rates.R}% · SR ${rates.SR}% · `}SSR ${rates.SSR}% · UR ${rates.UR}%"),
+   ("const rarities=['UR','SSR','SR',...(gachaMode==='new19'?[]:['R'])];", "const rarities=gachaMode==='new19'?['UR','SSR','R']:['UR','SSR','SR','R'];"),
+   ("const rarities=gachaMode==='new19'?RARITIES.filter(r=>r!=='R'):RARITIES;", "const rarities=gachaMode==='new19'?RARITIES.filter(r=>r!=='SR'):RARITIES;"),
+   ("'新ヒロイン募集はSR以上です。'", "'新ヒロイン募集はR80%・SSR15%・UR5%です。'"),
+   ("'新ヒロイン専用の仮募集枠。従来の通常募集は変更せず、レアリティ別確率も据え置きです。'", "'新ヒロイン専用の仮募集枠。ユニット別の排出率を維持し、旧SR80%枠をR80%として表示します。'"),
+   ("現在のストーリー進行で、通常募集から排出されるユニットです。ピックアップ中もこの対象から抽選されます。", "現在のストーリー進行で、選択中の募集枠から排出されるユニットです。"),
+  )
+  for before,after in ui_rewrites:
+   assert expected.count(before)==1,('UI anchor',before)
+   expected=expected.replace(before,after)
  assert a==expected,("Non-rarity or unexpected gacha changes",path)
  assert len(ids)==n,(path,len(ids),n)
  changed[path]=ids
@@ -181,6 +192,13 @@ try:
        catch(e){draw.specialSSRError=String(e);}
        try{const id=drawNormalGachaUnit(.98)?.id;draw.specialUR=id;draw.specialURRarity=BYID[id]?.rarity;}
        catch(e){draw.specialURError=String(e);}
+       draw.specialUI={
+         bannerR80:summonHero().includes('R 80%')&&!summonHero().includes('SR 0%'),
+         detailsR80:recruitmentDetailsMarkup().includes('<strong>R</strong><b>80%</b>'),
+         detailsNoSR:!recruitmentDetailsMarkup().includes('<strong>SR</strong>'),
+         lineupR:recruitmentLineupMarkup().includes('<h4>R <small>'),
+         correctDetail:recruitmentDetailsMarkup().includes('新ヒロイン募集はR80%・SSR15%・UR5%')
+       };
      }finally{S=oldSave;gachaMode=oldMode;}
      return {all:freq(UNITS),normal:freq(NORMAL_GACHA_POOL),special:freq(NEW19_GACHA_POOL),
        workTotal:UNITS.filter(u=>u.id.endsWith('_work')).length,
@@ -217,6 +235,7 @@ if "--require-gacha" in sys.argv:
  for mode,data in reports.items():
   assert "normalError" not in data["draw"],("NORMAL GACHA BLOCKER",mode,data["draw"])
   assert "specialError" not in data["draw"],("SPECIAL GACHA BLOCKER",mode,data["draw"])
+  assert all(data["draw"]["specialUI"].values()),("Special R80 UI mismatch",mode,data["draw"]["specialUI"])
   assert not any(k.endswith("Error") for k in data["draw"]),(mode,data["draw"])
   assert data["draw"]["normalRarity"]=="SR" and data["draw"]["normalRRarity"]=="R",(mode,data["draw"])
   assert data["draw"]["normalSSRRarity"]=="SSR" and data["draw"]["normalURRarity"]=="UR",(mode,data["draw"])
