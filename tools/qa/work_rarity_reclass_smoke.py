@@ -174,7 +174,7 @@ try:
        catch(e){draw.normalSSRError=String(e);}
        try{const id=drawNormalGachaUnit(.98)?.id;draw.normalUR=id;draw.normalURRarity=BYID[id]?.rarity;}
        catch(e){draw.normalURError=String(e);}
-       gachaMode='new19';
+       gachaMode='new19';S=fresh();S.quests.q73={complete:true};
        try{const id=drawNormalGachaUnit(.4)?.id;draw.special=id;draw.specialRarity=BYID[id]?.rarity;}
        catch(e){draw.specialError=String(e);}
      try{const id=drawNormalGachaUnit(.82)?.id;draw.specialSSR=id;draw.specialSSRRarity=BYID[id]?.rarity;}
