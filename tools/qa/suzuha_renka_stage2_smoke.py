@@ -36,7 +36,7 @@ for k in ("const SKILL_TARGET=","const SKILL_LABEL=","const PASSIVE_SCALE=","con
 assert game_now.count("...NEW_UNIT_ROSTER_V0840")==1
 assert game_now.count("...NEW_UNIT_ARTWORK_V0840")==1
 assert perf_now.count("...NEW_UNIT_DESIGN_V0840")==1
-assert index_before.count('heroines_v0840_units.js')==0 and index_now.count('heroines_v0840_units.js')==1
+assert index_before.count('heroines_v0840_units.js')==1 and index_now.count('heroines_v0840_units.js')==1
 
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self,*a):pass
