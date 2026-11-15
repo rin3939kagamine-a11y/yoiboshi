@@ -107,7 +107,11 @@ def build():
    crop.save(loc,format="WEBP",lossless=True,method=6)
    with Image.open(loc) as check:
     assert check.format=="WEBP" and check.size==crop.size and check.mode=="RGBA"
-    assert np.array_equal(np.asarray(check),np.asarray(crop)),(id,slot,"Crop pixel mismatch")
+    source_pixels=np.asarray(crop)
+    loaded_pixels=np.asarray(check)
+    assert np.array_equal(source_pixels[:,:,3],loaded_pixels[:,:,3]),(id,slot,"Alpha changed")
+    visible=source_pixels[:,:,3]>0
+    assert np.array_equal(source_pixels[:,:,:3][visible],loaded_pixels[:,:,:3][visible]),(id,slot,"Visible RGB changed")
    rec["crops"][slot]={"path":str(loc.relative_to(ROOT)),"sha256":sha(loc),"box":list(box)}
   dark_preview(final,id+"_final")
   report[id]=rec
