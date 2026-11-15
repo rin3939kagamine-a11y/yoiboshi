@@ -61,6 +61,8 @@ jobs:
             echo 'No derived image changes to register'
           else
             git commit -m 'art: PR59採用4人の切り抜き8点と許容範囲の輪郭色補正を登録'
+            git fetch origin feature/20261115-pr59-approved4-stage1
+            git rebase origin/feature/20261115-pr59-approved4-stage1
             git push origin HEAD:feature/20261115-pr59-approved4-stage1
           fi
       - name: Run actual-game Chromium QA in portrait/landscape with light/dark backgrounds
