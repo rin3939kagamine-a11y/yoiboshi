@@ -41,7 +41,7 @@ for path in ("js/heroines_v0810_units.js","js/heroines_v0830_units.js",
              "js/heroines_v0860.js","js/heroines_v0860_wire.js"):
  assert (ROOT/path).read_text(encoding="utf-8")==source_on_main(path),("legacy hero file changed",path)
 assert "NEW_UNIT_ROSTER_V0860" in new and "NEW_UNIT_DESIGN_V0860" in new_perf
-assert old_index.count("heroines_v0860_units.js")==0
+assert old_index.count("heroines_v0860_units.js")==1
 assert new_index.count("heroines_v0860_units.js")==1
 assert new_index.index("heroines_v0860_units.js")<new_index.index("js/performance_v016.js")<new_index.index("js/game.js")
 for id in PERSONS:
