@@ -1,0 +1,80 @@
+name: QA - Suzuha & Renka stage 1
+on:
+  push:
+    branches:
+      - feature/20261115-suzuha-renka-romance-only
+    paths:
+      - 'assets/ART_V2/full_body/chiyozaki_suzuha.png'
+      - 'assets/ART_V2/full_body/sakuraba_renka.png'
+      - 'js/heroines_v0840.js'
+      - 'js/heroines_v0840_wire.js'
+      - 'js/character_depth_v1.js'
+      - 'js/game.js'
+      - 'index.html'
+      - 'tools/qa/build_suzuha_renka_crops.py'
+      - 'tools/qa/suzuha_renka_stage1_smoke.py'
+      - 'tools/qa/heroine2_v0810_smoke.py'
+      - 'tools/qa/tokiwa_aone_romance_smoke.py'
+      - '.github/workflows/qa-suzuha-renka-stage1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image and Chromium dependencies
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: JavaScript syntax
+        run: |
+          node --check js/game.js
+          node --check js/heroines_v0840.js
+          node --check js/heroines_v0840_wire.js
+          node --check js/character_depth_v1.js
+      - name: Python regression tests syntax
+        run: |
+          python -m py_compile tools/qa/suzuha_renka_stage1_smoke.py
+          python -m py_compile tools/qa/build_suzuha_renka_crops.py
+          python -m py_compile tools/qa/heroine2_v0810_smoke.py
+          python -m py_compile tools/qa/tokiwa_aone_romance_smoke.py
+      - name: Generate reproducible lossless portraits from approved full-body originals
+        run: python tools/qa/build_suzuha_renka_crops.py
+      - name: Commit upper-body and face crops to PR branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/ART_V2/upper_body/chiyozaki_suzuha.webp assets/ART_V2/face_icons/chiyozaki_suzuha.webp
+          git add assets/ART_V2/upper_body/sakuraba_renka.webp assets/ART_V2/face_icons/sakuraba_renka.webp
+          if git diff --cached --quiet; then
+            echo 'Portrait crops are unchanged'
+          else
+            git commit -m 'art: stage1 鈴葉・蓮花の無劣化上半身・顔アイコンを登録'
+            git push origin HEAD:feature/20261115-suzuha-renka-romance-only
+          fi
+      - name: Chromium stage-1 QA (portrait + landscape, old saves, odds, bonds)
+        run: python tools/qa/suzuha_renka_stage1_smoke.py
+      - name: Regression - previously added Kaho and Ririka
+        run: python tools/qa/heroine2_v0810_smoke.py
+      - name: Regression - previously added Tokiwa Aone
+        run: python tools/qa/tokiwa_aone_romance_smoke.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-suzuha-renka-stage1
+          path: |
+            qa_artifacts/suzuha_renka/
+            qa_artifacts/heroine2_v0810/
+            qa_artifacts/tokiwa_aone/
+          if-no-files-found: warn

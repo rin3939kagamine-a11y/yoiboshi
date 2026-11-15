@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draft-only QA for #81/#82, without adding units, gacha probability or changing the save key."""
+"""Regression QA for #81/#82 romance after their separately approved stage-2 unit additions; save/odds unchanged."""
 import json, hashlib
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -155,7 +155,7 @@ out.write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding="utf-8")
 print(json.dumps(results,ensure_ascii=False,indent=2),flush=True)
 for device,r in results.items():
     assert r["names"]==["榊原 夏帆","水瀬 莉々花"],(device,r.get("names"))
-    assert r["units"]==[],(device,"units changed",r["units"])
+    assert r["units"]==["sakakibara_kaho_work","minase_ririka_work"],(device,"stage-2 unit baseline changed",r["units"])
     assert r["initial"]==[False,False],(device,"initial unlocked")
     assert r["afterQ3"]==[False,True] and r["meetBefore"]==[False,False] and r["meetQ3"]==[False,True],(device,"q3 gate")
     assert r["afterQ6"]==[True,True] and r["meetQ6"]==[True,True],(device,"q6 gate")
@@ -167,7 +167,7 @@ for device,r in results.items():
         {"occupation":"港町のギャラリーで展示・空間演出を担当","personality":"穏やかで大人っぽく、人に気を配る。自分の悩みは後回しにしがち。"},
         {"occupation":"街のフォトスタジオで衣装・小物のスタイリングを担当","personality":"柔らかな物腰と繊細な感性を持つ。仕事には芯の強さを見せる。"}
     ],(device,"approved profile regression")
-    assert r["poolUnchanged"] and r["noRecruit"],(device,"gacha regression")
+    assert r["poolUnchanged"] and not r["noRecruit"],(device,"approved stage-2 recruit baseline changed")
     assert r["key"]=="yoiboshi-reboot-v1",(device,"save key changed")
     assert r["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},(device,"rates changed")
     for id in [K,R]:
@@ -176,4 +176,4 @@ for device,r in results.items():
         assert t["firstBond"] and t["storyOpened"],(device,id,t)
     assert all(r["migration"].values()),(device,"save migration",r["migration"])
     assert not r["page_errors"],(device,"JS errors",r["page_errors"])
-print("PASS: PR81/82 dialogue-only, quest gates, image transparency, old saves and gacha invariants")
+print("PASS: PR81/82 romance regression with already-approved stage-2 units, quest gates, old saves and gacha invariants")
