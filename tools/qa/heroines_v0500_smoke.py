@@ -40,7 +40,7 @@ try:
             const a=ROMANCE_V0500[id]; const p=a?.profile;
             if(!p||!p.name||p.age<20||a.topics?.length!==8||Object.keys(a.stories||{}).length!==5)errors.push(id+': incomplete story/character data');
             const all=UNITS.filter(u=>u.person===id);
-            if(all.length!==3||all.map(u=>u.rarity).join('/')!=='SR/SSR/UR')errors.push(id+': units');
+            if(all.length!==3||all.map(u=>u.rarity).join('/')!=='R/SSR/UR')errors.push(id+': units');
             if(all.some(u=>!UNIT_DESIGN[u.id]||!UNIT_ARTWORK[u.id]))errors.push(id+': unit metadata');
             if(!CHARACTER_DEPTH_V1[id])errors.push(id+': depth missing');
             if(!ART_V2.full_body[id]||!ART_V2.upper_body[id])errors.push(id+': art path missing');
@@ -57,7 +57,7 @@ try:
           if(initial.length!==0)errors.push('new roster not chapter-gated');
           save.quests.q73={...(save.quests.q73||{}),complete:true};
           const after=availableNormalPool(save).filter(u=>u.person==='sumire');
-          if(after.length!==3)errors.push('sumire units not recruitable after q73');
+          if(after.length!==3||after.filter(u=>u.rarity==='R').length!==1)errors.push('sumire R/SSR/UR units not recruitable after q73');
           gachaMode='normal';
           return {count:ids.length,oldCount,total:unique.length,normalPoolSize:NORMAL_GACHA_POOL.length,srPoolSize:NORMAL_GACHA_POOL.filter(u=>u.rarity==='SR').length,
                   checkedStories:ids.reduce((n,id)=>n+Object.keys(ROMANCE_V0500[id].stories).length,0),
