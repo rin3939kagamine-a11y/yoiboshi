@@ -1,0 +1,45 @@
+name: QA - Suzuha & Renka stage2 SR
+on:
+  push:
+    branches:
+      - feature/20261115-suzuha-renka-stage2-sr
+    paths:
+      - 'index.html'
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/heroines_v0840_units.js'
+      - 'tools/qa/suzuha_renka_stage2_smoke.py'
+      - '.github/workflows/qa-suzuha-renka-stage2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test runtime
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Verify JavaScript and test syntax
+        run: |
+          node --check js/game.js
+          node --check js/performance_v016.js
+          node --check js/heroines_v0840_units.js
+          python -m py_compile tools/qa/suzuha_renka_stage2_smoke.py
+      - name: Verify approved SR effects, saves, rates, pools and existing combat
+        run: python tools/qa/suzuha_renka_stage2_smoke.py
+      - name: Upload Chromium report and portrait/landscape screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: suzuha-renka-stage2
+          path: qa_artifacts/suzuha_renka_stage2/
+          if-no-files-found: warn
