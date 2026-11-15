@@ -39,7 +39,8 @@ with sync_playwright() as p:
     S=fresh();S.gameStarted=true;if(S.onboarding)S.onboarding.enabled=false;
     out.key=SaveStore.key;out.rate=JSON.parse(JSON.stringify(RATE));
     out.poolInitial=NORMAL_GACHA_POOL.map(u=>u.id);
-    out.unitIds=UNITS.filter(u=>u.person===id).map(u=>u.id);\n    out.noUnit=!UNITS.some(u=>u.person===id);
+    out.unitIds=UNITS.filter(u=>u.person===id).map(u=>u.id);
+    out.noUnit=!UNITS.some(u=>u.person===id);
     out.noNormal= !NORMAL_GACHA_POOL.some(u=>u.person===id);
     out.noNew19=!NEW19_GACHA_POOL.some(u=>u.person===id);
     out.idOnce=NEW_HERO_IDS_V0830.length===1 && NEW_HERO_IDS_V0830[0]===id;
@@ -98,7 +99,9 @@ with sync_playwright() as p:
   assert data['meetRequires']==['q6'] and data['meetOpened'] and data['meetFinished'] and data['noReward'],data
   assert data['screen']['name']=='♡ 常盤 碧音' and data['screen']['episodes']==5 and data['screen']['topics']==8 and data['screen']['depth']==1,data
   assert 'assets/ART_V2/upper_body/tokiwa_aone.webp' in data['screen']['img'],data
-  assert 'pink_underlayer_black_street_v3_regenerated_CANDIDATE.png' in data['images'][0],data\n  assert 'assets/ART_V2/upper_body/tokiwa_aone.webp' in data['images'][1],data\n  assert 'assets/ART_V2/face_icons/tokiwa_aone.webp' in data['images'][2],data
+  assert 'pink_underlayer_black_street_v3_regenerated_CANDIDATE.png' in data['images'][0],data
+  assert 'assets/ART_V2/upper_body/tokiwa_aone.webp' in data['images'][1],data
+  assert 'assets/ART_V2/face_icons/tokiwa_aone.webp' in data['images'][2],data
   assert data['bondFirst'] and data['bondOpened'],data
   assert all(data['oldSave'].values()),data
   assert not errors,errors
