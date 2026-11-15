@@ -96,11 +96,11 @@ try:
      };
    }""".replace("unitPowerForQA(id)","ROLES[u.role]"))
    assert baseline["key"]=="yoiboshi-reboot-v1" and baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
-   assert baseline["new19Rates"]=={"SR":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
-   assert baseline["unique"] and baseline["srCount"]==173 and all(baseline["saved"].values()),baseline
+   assert baseline["new19Rates"]=={"R":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
+   assert baseline["unique"] and baseline["srCount"]==56 and all(baseline["saved"].values()),baseline
    a,b=baseline["ids"]
-   assert (a["person"],a["rarity"],a["role"])==("chiyozaki_suzuha","SR","support"),a
-   assert (b["person"],b["rarity"],b["role"])==("sakuraba_renka","SR","attacker"),b
+   assert (a["person"],a["rarity"],a["role"])==("chiyozaki_suzuha","R","support"),a
+   assert (b["person"],b["rarity"],b["role"])==("sakuraba_renka","R","attacker"),b
    assert (a["stats"]["hp"],a["stats"]["atk"],a["stats"]["def"])==(165,11,5),a
    assert (b["stats"]["hp"],b["stats"]["atk"],b["stats"]["def"])==(125,19,3),b
    assert a["skills"]==["suzuha_defense_up","suzuha_cleanse_heal"] and a["targets"]==["ally","ally"],a
@@ -112,9 +112,9 @@ try:
    assert "-18%" in b["texts"][0] and "1.6秒" in b["texts"][1] and "+6%" in b["texts"][2],b
    assert baseline["old"]==[
      {"id":"momoka_work","rarity":"SR","skills":["ct","stun"],"passive":{"type":"team_start_atk","name":"相談室の応援"},"pvalue":5},
-     {"id":"tokiwa_aone_work","rarity":"SR","skills":["enemy_ct","ct"],"passive":{"type":"ct_focus","name":"音の先読み"},"pvalue":7},
-     {"id":"sakakibara_kaho_work","rarity":"SR","skills":["attack_up","attack_down"],"passive":{"type":"attack_down_extend","name":"空間演出の目利き"},"pvalue":1.5},
-     {"id":"minase_ririka_work","rarity":"SR","skills":["heal_one","cleanse"],"passive":{"type":"rescue","name":"細やかな気配り"},"pvalue":10}
+     {"id":"tokiwa_aone_work","rarity":"R","skills":["enemy_ct","ct"],"passive":{"type":"ct_focus","name":"音の先読み"},"pvalue":7},
+     {"id":"sakakibara_kaho_work","rarity":"R","skills":["attack_up","attack_down"],"passive":{"type":"attack_down_extend","name":"空間演出の目利き"},"pvalue":1.5},
+     {"id":"minase_ririka_work","rarity":"R","skills":["heal_one","cleanse"],"passive":{"type":"rescue","name":"細やかな気配り"},"pvalue":10}
    ],baseline["old"]
    for unit in (a,b):
     response=page.request.get(url.rsplit("/",1)[0]+"/"+unit["image"])
