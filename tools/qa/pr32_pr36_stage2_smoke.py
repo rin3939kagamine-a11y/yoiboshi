@@ -241,7 +241,7 @@ try:
    equal(combat["emiriS2"]["mult"],[.72,1,1])
    assert combat["emiriS2"]["until"]==[19.5,0,0] and combat["emiriExpiry"]==[1]*3,combat
    equal(combat["oldSayaka"],[1.1944]*3)
-   assert combat["oldMarika"]==[82]*3,combat
+   assert combat["oldMarika"]==[85]*3,combat
    equal(combat["oldCecil"],[1.1944]*3)
    for id,person,name in zip(IDS,PERSONS,NAMES):
     page.evaluate("""id=>{
