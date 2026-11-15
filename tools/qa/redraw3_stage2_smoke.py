@@ -113,14 +113,14 @@ try:
        roster:cases,legacy:legacyCheck,oldUnitSpecs};
    }""")
    assert baseline["key"]=="yoiboshi-reboot-v1" and baseline["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
-   assert baseline["new19Rates"]=={"SR":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
-   assert baseline["count"]==173 and baseline["oldRemaining"]==170 and baseline["poolUnique"],baseline
+   assert baseline["new19Rates"]=={"R":80,"SSR":15,"UR":5} and baseline["costs"]==[120,1000],baseline
+   assert baseline["count"]==56 and baseline["oldRemaining"]==56 and baseline["poolUnique"],baseline
    assert all(baseline["legacy"].values()),baseline
    assert (baseline["healerBaseline"]["hp"],baseline["healerBaseline"]["atk"],baseline["healerBaseline"]["def"])==(148,9,5),baseline
    assert (baseline["oldStats"]["milku"]["hp"],baseline["oldStats"]["milku"]["atk"],baseline["oldStats"]["milku"]["def"])==(148,9,5),baseline
    a,b,c=baseline["roster"]
    for obj,id,person,role,base in zip((a,b,c),IDS,PERSONS,("support","attacker","healer"),((165,11,5),(125,19,3),(165,11,5))):
-    assert (obj["id"],obj["person"],obj["rarity"],obj["role"])==(id,person,"SR",role),obj
+    assert (obj["id"],obj["person"],obj["rarity"],obj["role"])==(id,person,"R",role),obj
     assert (obj["stats"]["hp"],obj["stats"]["atk"],obj["stats"]["def"])==base,obj
     assert obj["normal"] and not obj["special"] and not obj["before"] and not obj["atQ3"] and obj["atQ6"] and obj["q6Access"],obj
     assert f"/full_body/{person}.png" in obj["art"],obj
@@ -136,9 +136,9 @@ try:
    assert baseline["oldUnitSpecs"]==[
     {"id":"momoka_work","rarity":"SR","skills":["ct","stun"],"passive":{"type":"team_start_atk","name":"相談室の応援"}},
     {"id":"milku_work","rarity":"SR","skills":["heal_one","heal_boost"],"passive":{"type":"rescue","name":"帰り道の手当て"}},
-    {"id":"tokiwa_aone_work","rarity":"SR","skills":["enemy_ct","ct"],"passive":{"type":"ct_focus","name":"音の先読み"}},
-    {"id":"chiyozaki_suzuha_work","rarity":"SR","skills":["suzuha_defense_up","suzuha_cleanse_heal"],"passive":{"type":"suzuha_defense_focus","name":"お守りの仕立て"}},
-    {"id":"sakuraba_renka_work","rarity":"SR","skills":["renka_strike_down","renka_enemy_ct_all"],"passive":{"type":"renka_attack","name":"勝負師の勘"}}
+    {"id":"tokiwa_aone_work","rarity":"R","skills":["enemy_ct","ct"],"passive":{"type":"ct_focus","name":"音の先読み"}},
+    {"id":"chiyozaki_suzuha_work","rarity":"R","skills":["suzuha_defense_up","suzuha_cleanse_heal"],"passive":{"type":"suzuha_defense_focus","name":"お守りの仕立て"}},
+    {"id":"sakuraba_renka_work","rarity":"R","skills":["renka_strike_down","renka_enemy_ct_all"],"passive":{"type":"renka_attack","name":"勝負師の勘"}}
    ],baseline["oldUnitSpecs"]
    for obj in (a,b,c):
     response=page.request.get(url.rsplit("/",1)[0]+"/"+obj["art"],timeout=30000)
