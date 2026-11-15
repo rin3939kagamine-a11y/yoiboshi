@@ -112,7 +112,7 @@ try:
                 heroineCount: NEW_HERO_IDS_V0690.length,
                 uniqueHeroIDs: new Set(HERO_IDS).size === HERO_IDS.length,
                 profiles: NEW_HERO_IDS_V0690.filter(id => PEOPLE[id] && ROMANCE_V0690[id] && HERO_IDS.includes(id)).length,
-                srCards: NEW_UNIT_ROSTER_V0690.filter(u => u.rarity === 'SR').length,
+                rCards: NEW_UNIT_ROSTER_V0690.filter(u => u.rarity === 'R').length,
                 normalPool: NORMAL_GACHA_POOL.filter(u => NEW_HERO_IDS_V0690.includes(u.person)).length,
                 completeArtPaths: NEW_HERO_IDS_V0690.filter(id => ART_V2.full_body[id] && ART_V2.upper_body[id] && ART_V2.face_icons[id]).length,
                 preserveStoryNPC: STORY_ONLY_CAST.iroha === '大森 いろは',
@@ -120,7 +120,7 @@ try:
                 viewport: window.innerWidth,
                 documentWidth: document.documentElement.scrollWidth
             })""")
-            for field in ["heroineCount","profiles","srCards","normalPool","completeArtPaths"]:
+            for field in ["heroineCount","profiles","rCards","normalPool","completeArtPaths"]:
                 assert metrics[field] == 74, (orientation,field,metrics)
             for field in ["uniqueHeroIDs","preserveStoryNPC","unchangedRates"]:
                 assert metrics[field], (orientation,field,metrics)
@@ -198,7 +198,7 @@ try:
                 return {
                    fullName:PEOPLE.subaru?.name,
                    noOldHero:!HERO_IDS.includes('shion')&&HERO_IDS.includes('subaru'),
-                   srCard:NEW_UNIT_ROSTER_V0690.some(u=>u.id==='subaru_work'&&u.person==='subaru'&&u.rarity==='SR'),
+                   rCard:NEW_UNIT_ROSTER_V0690.some(u=>u.id==='subaru_work'&&u.person==='subaru'&&u.rarity==='R'),
                    gacha:NORMAL_GACHA_POOL.some(u=>u.id==='subaru_work'),
                    selected:upgraded.selected,
                    favorite:upgraded.homeFavorite,
@@ -215,7 +215,7 @@ try:
                 };
             }""")
             assert legacy["fullName"]=="沖田 すばる",legacy
-            assert legacy["noOldHero"] and legacy["srCard"] and legacy["gacha"],legacy
+            assert legacy["noOldHero"] and legacy["rCard"] and legacy["gacha"],legacy
             assert legacy["selected"]=="subaru_work",legacy
             assert legacy["favorite"]=="subaru" and legacy["homeUnit"]=="subaru_work",legacy
             assert legacy["party"]==["subaru_work"] and not legacy["staleOwned"],legacy
