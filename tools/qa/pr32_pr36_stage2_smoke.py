@@ -126,12 +126,12 @@ try:
    }""")
    assert baseline["key"]=="yoiboshi-reboot-v1",baseline
    assert baseline["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},baseline
-   assert baseline["rate19"]=={"SR":80,"SSR":15,"UR":5},baseline
-   assert baseline["costs"]==[120,1000] and baseline["srCount"]==173 and baseline["withoutSeven"]==166 and baseline["unique"],baseline
+   assert baseline["rate19"]=={"R":80,"SSR":15,"UR":5},baseline
+   assert baseline["costs"]==[120,1000] and baseline["srCount"]==56 and baseline["withoutSeven"]==56 and baseline["unique"],baseline
    assert all(baseline["legacy"].values()),baseline
    for u,id,person,name,role,base,skills,passive in zip(
        baseline["units"],IDS,PERSONS,NAMES,ROLES,BASE,SKILLS,PASSIVES):
-    assert (u["id"],u["person"],u["name"],u["role"],u["rarity"],u["gate"])==(id,person,name,role,"SR","q6"),u
+    assert (u["id"],u["person"],u["name"],u["role"],u["rarity"],u["gate"])==(id,person,name,role,"R","q6"),u
     assert (u["stats"]["hp"],u["stats"]["atk"],u["stats"]["def"])==base,u
     assert u["skills"]==list(skills),u
     assert u["targets"]==["enemy" if z in ("honoka_strike_ct","honoka_enemy_attack_down_all","rio_strike_self_attack","nanami_attack_down") else "ally" for z in skills],u
