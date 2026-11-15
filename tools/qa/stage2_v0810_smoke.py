@@ -29,7 +29,7 @@ for token in ['const UNITS=[','const LEGACY_CONCEPT_IDS=']:
             assert n==1,id
     assert left==right,('unapproved existing data changed',token)
 assert "const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5})" in old
-assert "const NEW19_RATE=Object.freeze({R:80,SSR:15,UR:5})" in now
+assert "const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5})" in now
 assert "NEW_UNIT_ROSTER_V0810" in now
 assert len([x for x in ['sakakibara_kaho_work','minase_ririka_work'] if x in (ROOT/'js/heroines_v0810_units.js').read_text()])==2
 
