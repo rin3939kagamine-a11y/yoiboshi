@@ -4,13 +4,13 @@
  * Role base stats, save schema, old units, gacha rates remain unchanged.
  */
 const NEW_UNIT_ROSTER_V0870=Object.freeze([
- {id:'aizawa_noa_work',person:'aizawa_noa',title:'心ほどけるカフェ',rarity:'SR',role:'support',color:'#d6c4ac',gate:'q6',s:['朝のエール','ほっとひと息']},
- {id:'yukishiro_mio_work',person:'yukishiro_mio',title:'銀月のまなざし',rarity:'SR',role:'attacker',color:'#7d7b9b',gate:'q6',s:['銀月の一閃','静寂の帳']},
- {id:'shiratori_yuzuha_work',person:'shiratori_yuzuha',title:'明日へのステップ',rarity:'SR',role:'support',color:'#d67eae',gate:'q6',s:['リズムに乗って','ステージを守る光']},
- {id:'tsukishima_shino_work',person:'tsukishima_shino',title:'小さな気配り',rarity:'SR',role:'healer',color:'#a38fc4',gate:'q6',s:['あなたに一杯','みんなでひと休み']},
- {id:'hanasaki_rena_work',person:'hanasaki_rena',title:'頼れるナース',rarity:'SR',role:'support',color:'#d96774',gate:'q6',s:['ナースの指揮','みんなのケア']},
- {id:'takamine_rino_work',person:'takamine_rino',title:'やさしい手当て',rarity:'SR',role:'healer',color:'#7faed6',gate:'q6',s:['みんなに手当て','あなただけのケア']},
- {id:'hoshino_emiri_work',person:'hoshino_emiri',title:'黒薔薇の約束',rarity:'SR',role:'attacker',color:'#74536f',gate:'q6',s:['黒薔薇の鼓動','夜の微笑み']}
+ {id:'aizawa_noa_work',person:'aizawa_noa',title:'心ほどけるカフェ',rarity:'R',role:'support',color:'#d6c4ac',gate:'q6',s:['朝のエール','ほっとひと息']},
+ {id:'yukishiro_mio_work',person:'yukishiro_mio',title:'銀月のまなざし',rarity:'R',role:'attacker',color:'#7d7b9b',gate:'q6',s:['銀月の一閃','静寂の帳']},
+ {id:'shiratori_yuzuha_work',person:'shiratori_yuzuha',title:'明日へのステップ',rarity:'R',role:'support',color:'#d67eae',gate:'q6',s:['リズムに乗って','ステージを守る光']},
+ {id:'tsukishima_shino_work',person:'tsukishima_shino',title:'小さな気配り',rarity:'R',role:'healer',color:'#a38fc4',gate:'q6',s:['あなたに一杯','みんなでひと休み']},
+ {id:'hanasaki_rena_work',person:'hanasaki_rena',title:'頼れるナース',rarity:'R',role:'support',color:'#d96774',gate:'q6',s:['ナースの指揮','みんなのケア']},
+ {id:'takamine_rino_work',person:'takamine_rino',title:'やさしい手当て',rarity:'R',role:'healer',color:'#7faed6',gate:'q6',s:['みんなに手当て','あなただけのケア']},
+ {id:'hoshino_emiri_work',person:'hoshino_emiri',title:'黒薔薇の約束',rarity:'R',role:'attacker',color:'#74536f',gate:'q6',s:['黒薔薇の鼓動','夜の微笑み']}
 ]);
 const NEW_UNIT_DESIGN_V0870=Object.freeze({
  aizawa_noa_work:{skills:['sayaka_team_attack_up','kana_heal_all_25'],passive:['sayaka_buff','あたたかな声かけ']},
