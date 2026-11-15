@@ -29,7 +29,7 @@ for token in ("const KEY=","const ROLES=","const UNITS=[","UNITS.push(","const R
              "const NEW19_GACHA_POOL=","function migrateSave(","function drawNormalGachaUnit(",
              "function unitPower(","function applySkill("):
  a,b=old.index(token),new.index(token)
- end="\\n];" if token=="const UNITS=[" else "\\n"
+ end="\n];" if token=="const UNITS=[" else "\n"
  assert old[a:old.index(end,a)+len(end)]==new[b:new.index(end,b)+len(end)],("protected code changed",token)
 assert "NEW_UNIT_ROSTER_V0850" not in new and "NEW_UNIT_ARTWORK_V0850" not in new
 for id,name,age,blob,src in zip(IDS,NAMES,AGES,BLOBS,SOURCES):
