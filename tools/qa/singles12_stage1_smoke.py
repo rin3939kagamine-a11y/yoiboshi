@@ -95,11 +95,12 @@ for id in IDS:
  assert np.array_equal(original[original[:,:,3]>=33],placed[original[:,:,3]>=33]),(id,"visible pixels changed")
  if result[id]["status"]=="原本のまま":
   assert np.array_equal(original,placed),(id,"source should be pixel identical")
- if id not in HALO_IDS:
-  assert result[id]["status"]=="原本のまま" and src.read_bytes()==full.read_bytes(),(id,"clean original changed")
  else:
+  assert id in HALO_IDS,(id,"clean source must not be modified")
   assert result[id]["removed_pixels"]>0,(id,"no removed pixels reported")
   assert np.count_nonzero((original[:,:,3]>0)&(placed[:,:,3]==0))==result[id]["removed_pixels"],(id,"unexpected removals")
+ if id not in HALO_IDS:
+  assert result[id]["status"]=="原本のまま" and src.read_bytes()==full.read_bytes(),(id,"clean original changed")
  assert __import__("hashlib").sha256(full.read_bytes()).hexdigest()==result[id]["placed_sha256"],(id,"cleaned destination hash mismatch")
  for slot,size in (("upper_body",(720,960)),("face_icons",(400,400))):
   with Image.open(ROOT/"assets/ART_V2"/slot/f"{id}.webp") as im:
