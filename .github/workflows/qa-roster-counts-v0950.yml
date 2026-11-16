@@ -1,4 +1,4 @@
-name: QA - legacy roster assertions after v0950
+name: QA - legacy roster and retired-65 save migrations
 on:
   pull_request:
     paths:
@@ -6,9 +6,7 @@ on:
       - 'tools/qa/heroines_v0500_smoke.py'
       - 'tools/qa/concept_id_migration_smoke.py'
       - 'tools/qa/character_depth_real_smoke.py'
-      - 'tools/qa/fujimiya_shion_smoke.py'
-      - 'tools/qa/nagasawa_mayu_smoke.py'
-      - 'tools/qa/adopted20_stage2_smoke.py'
+      - 'tools/qa/retired65_smoke.py'
   push:
     branches:
       - qa/20261116-roster-counts-after-pr114
@@ -18,9 +16,7 @@ on:
       - 'tools/qa/heroines_v0500_smoke.py'
       - 'tools/qa/concept_id_migration_smoke.py'
       - 'tools/qa/character_depth_real_smoke.py'
-      - 'tools/qa/fujimiya_shion_smoke.py'
-      - 'tools/qa/nagasawa_mayu_smoke.py'
-      - 'tools/qa/adopted20_stage2_smoke.py'
+      - 'tools/qa/retired65_smoke.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -43,20 +39,18 @@ jobs:
             tools/qa/heroines_v0500_smoke.py \
             tools/qa/concept_id_migration_smoke.py \
             tools/qa/character_depth_real_smoke.py \
-            tools/qa/fujimiya_shion_smoke.py \
-            tools/qa/nagasawa_mayu_smoke.py \
-            tools/qa/adopted20_stage2_smoke.py
-      - name: Execute all six updated tests without suppressing any failures
+                                    tools/qa/retired65_smoke.py
+      - name: Verify active cohort plus migration of 65 retired duplicate IDs
         shell: bash
         run: |
+          # The Shion, Mayu and adopted20 live-unit assertions target units retired by PR117.
+          # Explicitly run the save-migration replacement rather than suppressing failures.
           failures=0
           for test in \
             tools/qa/heroines_v0500_smoke.py \
             tools/qa/concept_id_migration_smoke.py \
             tools/qa/character_depth_real_smoke.py \
-            tools/qa/fujimiya_shion_smoke.py \
-            tools/qa/nagasawa_mayu_smoke.py \
-            tools/qa/adopted20_stage2_smoke.py
+                                    tools/qa/retired65_smoke.py
           do
             echo "::group::${test}"
             if python "${test}"; then
