@@ -91,8 +91,8 @@ try:
       entries,castResults,saveOk,existingLegacyPassive:passiveValue(BYID.takamiya_sayaka_work),
       existingRecentRPassive:passiveValue(BYID.nagasawa_mayu_work)};
    }""")
-   assert data['heroCount']==254 and data['uniqueHeros']==254,data
-   assert data['normalR']==238 and data['normalOther']==[56,56,57],data
+   assert data['heroCount']==261 and data['uniqueHeros']==261,data
+   assert data['normalR']==245 and data['normalOther']==[56,56,57],data
    assert data['normalRates']=={'R':60,'SR':25,'SSR':10,'UR':5},data
    assert data['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},data
    assert data['saveOk'] and data['existingLegacyPassive']==8 and data['existingRecentRPassive']==6,data
