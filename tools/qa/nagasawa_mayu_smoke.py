@@ -102,7 +102,7 @@ try:
      result.legacyAttack=cast('takamiya_sayaka_work',0);
      return result;
    }""")
-   assert info["heroCount"]==249 and info["uniqueHero"] and info["inHeroLists"],info
+   assert info["heroCount"]==254 and info["uniqueHero"] and info["inHeroLists"],info
    assert info["name"].replace(" ","")=="長沢まゆ" and info["age"]==21,info
    assert info["job"]=="洋服店スタッフ" and info["personality"]=="明るくカジュアル",info
    assert info["unitId"]=="nagasawa_mayu_work" and info["unitPerson"]=="nagasawa_mayu",info
@@ -115,7 +115,7 @@ try:
    assert info["passive"]=={"type":"sayaka_buff","val":6},info
    assert info["oldSupportPassive"]==8 and info["earlierRSupportPassive"]==6,info
    assert info["freshLocked"] and info["q6Open"],info
-   assert info["normalPool"]==[233,56,56,57] and info["allR"]==276,info
+   assert info["normalPool"]==[238,56,56,57] and info["allR"]==281,info
    assert info["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},info
    assert info["newRates"]=={"R":80,"SR":0,"SSR":15,"UR":5},info
    assert info["topics"]==8 and info["bonds"]==5,info
