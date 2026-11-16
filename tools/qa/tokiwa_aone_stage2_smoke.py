@@ -25,17 +25,12 @@ for token in ('const KEY=','const ROLES=','const RATE=',
     i=old_game.index(token);j=new_game.index(token)
     assert old_game[i:old_game.index('\n',i)]==new_game[j:new_game.index('\n',j)],('core drift',token)
 i=old_game.index('const UNITS=[');j=new_game.index('const UNITS=[')
-original_roster=old_game[i:old_game.index('\n];',i)+3]
-for id in ("tsubaki_work","erika_work","kaede_work"):
-    pattern=r"(\{id:'"+id+r"'[^{}]*?rarity:')SR(')"
-    original_roster,count=re.subn(pattern,r"\g<1>R\g<2>",original_roster)
-    assert count==1,id
-assert original_roster==new_game[j:new_game.index('\n];',j)+3]
+assert old_game[i:old_game.index('\n];',i)+3]==new_game[j:new_game.index('\n];',j)+3],"existing unit registry must be identical to main"
 old_aone=main_source('js/heroines_v0830_units.js')
-assert old_aone.count("rarity:'SR'")==1
-assert (ROOT/'js/heroines_v0830_units.js').read_text()==old_aone.replace("rarity:'SR'","rarity:'R'")
-assert "const NEW19_RATE=Object.freeze({SR:80,SSR:15,UR:5})" in old_game
-assert "const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5})" in new_game
+assert (ROOT/'js/heroines_v0830_units.js').read_text()==old_aone,"earlier R-relabelled Tokiwa unit must remain intact"
+for token in ('const NEW19_RATE=','function unitPower('):
+    i=old_game.index(token);j=new_game.index(token)
+    assert old_game[i:old_game.index('\n',i)]==new_game[j:new_game.index('\n',j)],("unchanged gacha or power",token)
 assert '...NEW_UNIT_ROSTER_V0830' in old_game and '...NEW_UNIT_ROSTER_V0830' in new_game
 assert '...NEW_UNIT_ARTWORK_V0830' in old_game and '...NEW_UNIT_ARTWORK_V0830' in new_game
 assert '...NEW_UNIT_DESIGN_V0830' in old_perf and '...NEW_UNIT_DESIGN_V0830' in new_perf
