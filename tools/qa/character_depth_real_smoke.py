@@ -64,8 +64,8 @@ try:
                  v["record"]["inside"] in v["mid"] and
                  v["record"]["growth"] not in v["mid"] and
                  v["record"]["growth"] in v["high"] for v in d["newest"]),d["newest"])
-        check("PR59 four independent character-depth cards have correct affinity gates",
-              len(d["pr59"])==4 and all(v["record"] and
+        check("Retired PR59 duplicate depth records are absent",
+              len(d["pr59"])==0 and all(v["record"] and
                  all(k in v["record"] for k in ("habit","inside","growth","cg")) and
                  v["record"]["habit"] in v["early"] and
                  v["record"]["inside"] not in v["early"] and

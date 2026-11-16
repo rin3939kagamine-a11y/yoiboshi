@@ -8,6 +8,8 @@ on:
       - '.github/workflows/qa-r-portrait-switch.yml'
       - 'js/game.js'
       - 'tools/qa/r_portrait_switch_smoke.py'
+      - 'tools/qa/character_depth_real_smoke.py'
+      - 'tools/qa/heroine74_hidden_smoke.py'
   workflow_dispatch:
 permissions:
   contents: read
