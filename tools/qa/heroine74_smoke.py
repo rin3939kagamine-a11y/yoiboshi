@@ -261,7 +261,7 @@ try:
             }""")
             assert not appearance["missingRoster"], (orientation,"roster",appearance)
             assert not appearance["brokenTalk"], (orientation,"talk",appearance)
-            assert appearance["gachaCandidates"]==74 and appearance["gachaDOM"],(orientation,"gacha",appearance)
+            assert appearance["gachaCandidates"]==75 and appearance["gachaDOM"],(orientation,"gacha",appearance)
             assert appearance["rosterWidth"]<=w+18, (orientation,"roster overflow",appearance)
             print("PASS full roster, 74 romance views and recruit UI",orientation,flush=True)
 
