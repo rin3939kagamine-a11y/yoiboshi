@@ -86,8 +86,9 @@ try:
                 assert not state["failure"] and not state["leak"],(label,screen,state)
                 assert state["overflow"]<=18,(label,screen,state)
             before=stats["preMeeting"]
-            assert not before["visible"] and before["pool"]==0,(label,before)
-            assert before["homeButton"] and before["queue"]==["q1"],(label,before)
+            # v0.99.3.0 makes the q1 heroines visible on quest clear, without an encounter interruption.
+            assert set(before["visible"])=={"chitose","nonoka"} and before["pool"]==2,(label,before)
+            assert not before["homeButton"] and before["queue"]==["q1"],(label,before)
             after=stats["afterMeeting"]
             assert set(after["visible"])=={"chitose","nonoka"} and after["pool"]==2,(label,after)
             assert not after["queue"],(label,after)
