@@ -110,8 +110,8 @@ try:
    assert results["passiveType"]=="rio_attack" and results["passiveValue"]==4,results
    assert results["rSkill"]==6 and results["rNew20"]==4,results
    assert results["newUnique"] and results["hasHero"],results
-   assert results["heroineCount"]==249,results
-   assert results["normalPool"]==[233,56,56,57] and results["allR"]==276,results
+   assert results["heroineCount"]==254,results
+   assert results["normalPool"]==[238,56,56,57] and results["allR"]==281,results
    assert results["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},results
    assert results["new19"]=={"R":80,"SR":0,"SSR":15,"UR":5},results
    assert not (results["revealedBefore"] or results["visibleBefore"] or results["normalBefore"]),results
