@@ -34,7 +34,7 @@ try:
           if(ids.length!==19||oldCount!==expected-19||HERO_IDS.length!==expected||unique.length!==expected)errors.push('IDs count or duplicate');
           if(Object.keys(CHARACTER_DEPTH_V1).length!==79)errors.push('depth count');
           if(Object.keys(ROMANCE_V0500).length!==19)errors.push('romance count');
-           const allowed=new Set(SR_BATCH1_UNIT_IDS);
+           const allowed=new Set([...SR_BATCH1_UNIT_IDS,...SR_BATCH2_UNIT_IDS]);
            if(NORMAL_GACHA_POOL.some(u=>ids.includes(u.person)&&!allowed.has(u.id)))errors.push('existing normal gacha pool contaminated');
           for(const id of ids){
             const a=ROMANCE_V0500[id]; const p=a?.profile;
@@ -42,7 +42,7 @@ try:
             const all=UNITS.filter(u=>u.person===id);
              const original=all.filter(u=>!allowed.has(u.id));
              const costume=all.filter(u=>allowed.has(u.id));
-             const n=SR_BATCH1_EXISTING_R_IDS.includes(id+'_work')?1:0;
+             const n=(SR_BATCH1_EXISTING_R_IDS.includes(id+'_work')?1:0)+(SR_BATCH2_EXISTING_R_IDS.includes(id+'_work')?1:0);
              if(original.length!==3||original.map(u=>u.rarity).join('/')!=='R/SSR/UR'||costume.length!==n||costume.some(u=>u.rarity!=='SR'))errors.push(id+': units');
             if(all.some(u=>!UNIT_DESIGN[u.id]||!UNIT_ARTWORK[u.id]))errors.push(id+': unit metadata');
             if(!CHARACTER_DEPTH_V1[id])errors.push(id+': depth missing');
