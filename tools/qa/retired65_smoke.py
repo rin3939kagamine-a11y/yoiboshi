@@ -109,9 +109,9 @@ try:
         for(const dest of targets)if(!BYID[dest]||BYID[dest].rarity!=='R')problems.push('destination missing: '+dest);
         for(const [src,dest] of Object.entries(mapping)){
           if(RETIRED_DUPLICATE_R_TO_CANONICAL[src]!==dest)problems.push('wrong mapping: '+src);
-          const raw={owned:{[src]:{lv:5,aff:3,lb:9,copies:2},[dest]:{lv:2,aff:9,lb:1,copies:4},other_safe_work:{lv:3}},party:[src,dest,'other_safe_work'],selected:src,homeUnitId:src,gems:1234};
+          const raw={owned:{[src]:{lv:5,aff:3,lb:9,copies:2},[dest]:{lv:2,aff:9,lb:1,copies:4},other_safe_work:{lv:3}},party:[src,dest,'other_safe_work'],selected:src,homeUnitId:src,homeFavorite:src.replace(/_work$/,''),gems:1234};
           const out=convertRetiredRSave(raw);
-          if(out.owned[src]||!out.owned[dest]||out.owned[dest].lv!==5||out.owned[dest].aff!==9||out.owned[dest].lb!==7||out.owned[dest].copies!==7||out.party.join(',')!==dest+',other_safe_work'||out.selected!==dest||out.homeUnitId!==dest||out.gems!==1234||out.owned.other_safe_work.lv!==3)problems.push('merge save failed: '+src);
+          if(out.owned[src]||!out.owned[dest]||out.owned[dest].lv!==5||out.owned[dest].aff!==9||out.owned[dest].lb!==7||out.owned[dest].copies!==7||out.party.join(',')!==dest+',other_safe_work'||out.selected!==dest||out.homeUnitId!==dest||out.homeFavorite!==dest.replace(/_work$/,'')||out.gems!==1234||out.owned.other_safe_work.lv!==3)problems.push('merge save failed: '+src);
           const solo=convertRetiredRSave({owned:{[src]:{lv:4,aff:2,lb:11,copies:1}},party:[src]});
           if(solo.owned[src]||!solo.owned[dest]||solo.owned[dest].lb!==7||solo.party[0]!==dest)problems.push('solo save failed: '+src);
         }

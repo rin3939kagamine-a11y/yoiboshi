@@ -229,6 +229,7 @@ const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
  "yukishiro_mio_work": "lira_work"
 });
 const RETIRED_ALL_SAVE_MAP=Object.freeze({...RETIRED_R_TO_SR,...RETIRED_DUPLICATE_R_TO_CANONICAL});
+const RETIRED_DUPLICATE_HERO_TO_CANONICAL=Object.freeze(Object.fromEntries(Object.entries(RETIRED_DUPLICATE_R_TO_CANONICAL).map(([from,to])=>[from.slice(0,-5),to.slice(0,-5)])));
 const R2SR=id=>RETIRED_ALL_SAVE_MAP[id]||id;
 // Ver.0.49.2.0: legacy save migration ONLY. These old concept IDs are deliberately retained
 // here for backward compatibility; all live registries must use canonical IDs.
@@ -279,6 +280,7 @@ function convertRetiredRSave(raw){
  out.owned=owned;
  if(Array.isArray(raw.party)){const seen=new Set();out.party=raw.party.map(id=>typeof id==='string'?R2SR(id):id).filter(id=>{if(seen.has(id))return false;seen.add(id);return true;});}
  for(const k of ['selected','homeUnitId'])if(typeof raw[k]==='string')out[k]=R2SR(raw[k]);
+ if(typeof raw.homeFavorite==='string'&&RETIRED_DUPLICATE_HERO_TO_CANONICAL[raw.homeFavorite])out.homeFavorite=RETIRED_DUPLICATE_HERO_TO_CANONICAL[raw.homeFavorite];
  return out;
 }
 

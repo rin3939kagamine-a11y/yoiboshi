@@ -39,7 +39,7 @@ try:
      const saveOk=JSON.stringify(migrated.owned.momoka_work)===JSON.stringify(save.owned.momoka_work)&&
       JSON.stringify(migrated.owned.tsukasa_work)===JSON.stringify(save.owned.nagasawa_mayu_work)&&
       JSON.stringify(migrated.party)===JSON.stringify(['momoka_work','tsukasa_work'])&&
-      migrated.selected==='tsukasa_work'&&migrated.homeFavorite===save.homeFavorite&&
+      migrated.selected==='tsukasa_work'&&migrated.homeFavorite==='tsukasa'&&
       migrated.homeUnitId==='tsukasa_work'&&migrated.gems===2345&&migrated.gold===4321&&
       migrated.gachaPity===8&&migrated.gachaSrStreak===2&&
       migrated.quests.q2.complete===true&&migrated.storyFlags.oldEntry===true&&
@@ -91,7 +91,7 @@ try:
       entries,castResults,saveOk,existingLegacyPassive:!!BYID.tamaki_work,
       existingRecentRPassive:!!BYID.tsukasa_work};
    }""")
-   assert data['heroCount']==196 and data['uniqueHeros']==261,data
+   assert data['heroCount']==196 and data['uniqueHeros']==196,data
    assert data['normalR']==180 and data['normalOther']==[56,56,57],data
    assert data['normalRates']=={'R':60,'SR':25,'SSR':10,'UR':5},data
    assert data['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},data

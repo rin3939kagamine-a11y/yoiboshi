@@ -41,7 +41,7 @@ try:
     const saved=JSON.stringify(migrated.owned.momoka_work)===JSON.stringify(snapshot.owned.momoka_work)&&
        JSON.stringify(migrated.owned.tsukasa_work)===JSON.stringify(snapshot.owned.nagasawa_mayu_work)&&
        JSON.stringify(migrated.party)===JSON.stringify(['momoka_work','tsukasa_work'])&&
-       migrated.selected==='tsukasa_work'&&migrated.homeFavorite===snapshot.homeFavorite&&
+       migrated.selected==='tsukasa_work'&&migrated.homeFavorite==='tsukasa'&&
        migrated.homeUnitId==='tsukasa_work'&&migrated.gems===2345&&migrated.gold===4321&&
        migrated.gachaPity===8&&migrated.gachaSrStreak===2&&
        migrated.quests.q2.complete&&migrated.storyFlags.oldEntry&&
@@ -89,7 +89,7 @@ try:
       saved,entries,casts,legacyPassive:!!BYID.tamaki_work,
       lastRPassive:!!BYID.tsukasa_work};
    }""",IDS)
-   assert d['heroCount']==196 and d['unique']==261,d
+   assert d['heroCount']==196 and d['unique']==196,d
    assert d['pool']==[180,56,56,57] and d['allR']==223,d
    assert d['rates']=={'R':60,'SR':25,'SSR':10,'UR':5},d
    assert d['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},d
