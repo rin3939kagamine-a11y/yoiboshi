@@ -40,12 +40,19 @@ try:
      save.gems=2345;save.gold=4321;save.gachaPity=8;save.gachaSrStreak=2;
      save.quests.q2={complete:true};save.storyFlags.oldEntry=true;
      const migrated=migrateSave(JSON.parse(JSON.stringify(save)));
-     const saveOk=JSON.stringify(save.owned)===JSON.stringify(migrated.owned)
-        &&JSON.stringify(save.party)===JSON.stringify(migrated.party)
-        &&save.selected===migrated.selected&&save.homeFavorite===migrated.homeFavorite
-        &&save.homeUnitId===migrated.homeUnitId&&migrated.gems===2345&&migrated.gold===4321
-        &&migrated.gachaPity===8&&migrated.gachaSrStreak===2
-        &&migrated.quests.q2.complete&&migrated.storyFlags.oldEntry&&!migrated.owned[uid];
+     const saveStatus={
+       momoka:JSON.stringify(save.owned.momoka_work)===JSON.stringify(migrated.owned.momoka_work),
+       shion:JSON.stringify(save.owned.fujimiya_shion_work)===JSON.stringify(migrated.owned.fujimiya_shion_work),
+       party:JSON.stringify(save.party)===JSON.stringify(migrated.party),
+       selected:save.selected===migrated.selected,
+       favorite:save.homeFavorite===migrated.homeFavorite,
+       homeUnit:save.homeUnitId===migrated.homeUnitId,
+       gems:migrated.gems===2345,gold:migrated.gold===4321,
+       pity:migrated.gachaPity===8,streak:migrated.gachaSrStreak===2,
+       quest:!!migrated.quests.q2.complete,flag:!!migrated.storyFlags.oldEntry,
+       notAlreadyOwned:!migrated.owned[uid]
+     };
+     const saveOk=Object.values(saveStatus).every(Boolean);
      const result={
        name:PEOPLE[id]?.name,age:r.profile.age,job:r.profile.occupation,
        personality:r.profile.personality,heroId:id,unitId:u?.id,unitPerson:u?.person,
@@ -69,7 +76,7 @@ try:
        meeting:V0940_MEET_STORIES['v0940_meet_'+id],
        depth:CHARACTER_DEPTH_V0940[id],profile:HEROINE_PROFILES[id],
        art:[unitArt(u),ART_V2.full_body[id],ART_V2.upper_body[id],ART_V2.face_icons[id]],
-       saveOk
+       saveOk,saveStatus
      };
      function ally(id,i){return {id,hp:120,max:200,atk:ROLES[BYID[id].role].atk,
        def:ROLES[BYID[id].role].def,shield:0,taunt:0,cooldowns:[15,16],
@@ -84,6 +91,7 @@ try:
        battle={qid:'q2',sim:10,phase:'fight',done:false,log:[],popups:[],
          allies:[ally(actor,0),ally('momoka_work',1),ally('milku_work',2)],
          enemies:[foe('A'),foe('B')]};
+       battle.allies[0].cooldowns=[0,0]; // The caster must be ready; other allies have outstanding CT.
        applySkill(0,slot,'ally',1);
        return {ally: battle.allies.map(x=>({
          rallyMult:x.rallyMult,rallyUntil:x.rallyUntil,cooldowns:x.cooldowns})),
