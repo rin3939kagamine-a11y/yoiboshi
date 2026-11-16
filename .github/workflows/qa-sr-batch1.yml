@@ -1,0 +1,79 @@
+name: QA - SR costume batch1 (10 units and source-preserving alpha)
+on:
+  push:
+    branches: [feature/20261116-sr-costume-batch1, main]
+    paths:
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/heroines_sr_batch1_units.js'
+      - 'index.html'
+      - 'assets/UNIT_ART/*'
+      - 'tools/qa/sr_batch1_*.py'
+      - '.github/workflows/qa-sr-batch1.yml'
+  pull_request:
+    paths:
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/heroines_sr_batch1_units.js'
+      - 'index.html'
+      - 'assets/UNIT_ART/*'
+      - 'tools/qa/sr_batch1_*.py'
+      - '.github/workflows/qa-sr-batch1.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sr-batch1:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install image libraries and browser test harness
+        run: |
+          python -m pip install pillow==11.3.0 numpy==2.2.6 opencv-python-headless==4.11.0.86 playwright==1.56.0
+      - name: Validate JavaScript and QA Python syntax
+        run: |
+          for file in js/heroines_sr_batch1_units.js js/game.js js/performance_v016.js; do node --check "$file"; done
+          python -m py_compile tools/qa/sr_batch1_art.py tools/qa/sr_batch1_smoke.py
+      - name: Convert 10 approved source PNGs to alpha WEBP; preserve white dresses
+        run: python tools/qa/sr_batch1_art.py
+      - name: Commit source-derived RGBA art and temporary before-after previews
+        if: github.ref == 'refs/heads/feature/20261116-sr-costume-batch1' && github.event_name == 'push'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for id in kaori_concert rui_atelier suzune_enbu chikage_holiday sumire_classic wakaba_midnight mitsuki_ca komugi_ehon haruka_bride kirie_koubou; do
+            git add "assets/UNIT_ART/${id}.webp"
+          done
+          git add docs/qa/sr_batch1_previews/*.jpg
+          if git diff --cached --quiet; then
+            echo "No changes to generated alpha assets"
+          else
+            git commit -m "art: derive ten alpha WEBP portraits from approved white-background PNGs"
+            git fetch origin feature/20261116-sr-costume-batch1
+            git rebase origin/feature/20261116-sr-costume-batch1
+            git push origin HEAD:feature/20261116-sr-costume-batch1
+          fi
+      - name: Main assets must already match reproducible source conversion
+        if: github.ref == 'refs/heads/main'
+        run: git diff --exit-code -- assets/UNIT_ART/
+      - name: Browser integration with live battle casts and original saves
+        run: |
+          python -m playwright install --with-deps chromium
+          python tools/qa/sr_batch1_smoke.py
+      - name: Upload image and browser QA
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sr-batch1-qa
+          path: |
+            qa_artifacts/sr_batch1/
+            docs/qa/sr_batch1_previews/
+          if-no-files-found: warn
