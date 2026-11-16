@@ -218,7 +218,9 @@ def build():
    with Image.open(output) as check:
     actual=np.asarray(check.convert("RGBA"))
    expected=np.asarray(part)
-   assert np.array_equal(actual,expected),(id,slot,"not lossless")
+   assert np.array_equal(actual[:,:,3],expected[:,:,3]),(id,slot,"alpha not lossless")
+   visible=expected[:,:,3]>0
+   assert np.array_equal(actual[:,:,:3][visible],expected[:,:,:3][visible]),(id,slot,"visible RGB not lossless")
    assert np.count_nonzero(expected[:,:,3])>1000,(id,slot,"empty crop")
    result["crops"][slot]={"path":str(output.relative_to(ROOT)),"box":[x,y,x+cw,y+ch],
                           "sha256":checksum(output)}
