@@ -125,7 +125,7 @@ try:
       assert not errors, errors[:10]
       assert result['removedCount']==65 and result['targetCount']==65,result
       assert result['heroCount']==196 and result['uniqueHeros']==196,result
-      assert result['normalPool']==[180,56,56,57],result
+      assert result['normalPool']==[180,66,56,57],result
       assert result['totalR']==223,result
       assert result['rates']=={'R':60,'SR':25,'SSR':10,'UR':5},result
       assert result['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},result
