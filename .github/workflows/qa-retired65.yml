@@ -1,0 +1,47 @@
+name: QA - retire 65 duplicate heroines and migrate saves
+on:
+  pull_request:
+    paths:
+      - 'js/game.js'
+      - 'js/heroines_v08*.js'
+      - 'js/heroines_v09*.js'
+      - 'assets/ART_V2/full_body/**'
+      - 'assets/ART_V2/upper_body/**'
+      - 'assets/ART_V2/face_icons/**'
+      - 'tools/qa/retired65_smoke.py'
+      - '.github/workflows/qa-retired65.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'js/game.js'
+      - 'js/heroines_v08*.js'
+      - 'js/heroines_v09*.js'
+      - 'tools/qa/retired65_smoke.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  retirement-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium QA
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Syntax check all edited JavaScript and QA
+        run: |
+          for f in js/game.js js/heroines_v0{860,870,880,890,900,910,920,930,940}.js js/heroines_v0{860,870,880,890,900,910,920,930,940}_units.js; do node --check "$f"; done
+          python -m py_compile tools/qa/retired65_smoke.py
+      - name: Browser QA (portrait and landscape)
+        run: python tools/qa/retired65_smoke.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retired65-qa
+          path: qa_artifacts/retired65/
+          if-no-files-found: warn
