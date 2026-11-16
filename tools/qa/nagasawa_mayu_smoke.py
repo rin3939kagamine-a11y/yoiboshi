@@ -42,7 +42,7 @@ try:
      const migrated=migrateSave(JSON.parse(JSON.stringify(save)));
      const saveStatus={
        momoka:JSON.stringify(save.owned.momoka_work)===JSON.stringify(migrated.owned.momoka_work),
-       shion:JSON.stringify(save.owned.fujimiya_shion_work)===JSON.stringify(migrated.owned.fujimiya_shion_work),
+       earlierHero:JSON.stringify(save.owned.fujimiya_shion_work)===JSON.stringify(migrated.owned.fujimiya_shion_work),
        party:JSON.stringify(save.party)===JSON.stringify(migrated.party),
        selected:save.selected===migrated.selected,
        favorite:save.homeFavorite===migrated.homeFavorite,
