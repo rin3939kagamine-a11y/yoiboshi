@@ -2401,9 +2401,6 @@ function finishStory(){
  persist();storySession=null;
  if(flow?.type==='pre'){view='city';startBattle(flow.qid);return;}
  // An independent encounter starts after the original epilogue finishes.
- if(flow?.type==='post'&&hero74PendingQuestIds(S).includes(flow.qid)){
-  view='city';openStory('hero74_'+flow.qid);return;
- }
  view=flow?.type==='post'?'city':'story';render();
  if(first)toast(flow?.type==='post'?'後日談を読了しました。':'物語を読了しました。');
 }
@@ -4384,7 +4381,7 @@ function finishBattle(won){
   if(callback)dialog.message+=`\n\n【${PEOPLE[callback.id].name}／帰還後のひと言】\n${callback.text}`;
   if(won&&firstClear&&!battle.grind){
   const after=questAfterStory(questId);
-  const meet=HERO74_ENCOUNTERS[questId]?'hero74_'+questId:null;
+  const meet=null; // v0.99.3.0: 街での出会いは物語の途中に自動で挟まない（ホームの「街で出会った人」から読める）
   const nextStoryId=after||meet;
   pendingStory=nextStoryId?{type:'post',qid:questId,storyId:nextStoryId}:null;
   dialog.message+=after?'\n閉じると後日談が始まります。':meet?'\n閉じると街での出会いが始まります。':'\n続きの物語は「ストーリー」画面から読めます。';

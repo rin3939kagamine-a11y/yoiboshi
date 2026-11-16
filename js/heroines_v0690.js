@@ -20,6 +20,5 @@ function heroV0690Visible(id,save){
  const rule=HERO_V0690_UNLOCK_RULES[id],qid=NEW_HERO_REVEAL_V0690[id]?.[1];
  // Owned cards from pre-gate saves are never removed or made unusable.
  if(save?.owned?.[id+'_work'])return true;
- return (rule?!!rule.enabled:true)&&!!qid&&!!save?.quests?.[qid]?.complete&&
-   (save?.hero74RevealMode!=='story'||save?.hero74MeetSeen?.[qid]===true);
+ return (rule?!!rule.enabled:true)&&!!qid&&!!save?.quests?.[qid]?.complete; // v0.99.3.0: 出会いの場面を読まなくても、依頼を解決すれば登場する
 }
