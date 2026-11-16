@@ -29,7 +29,8 @@ try:
     const h=expressionPortraitMarkup(id,'smile','qa:crop:'+id,{eventKey:0});
     if(!h.includes('data-expression-source="symbol"')||!h.includes('symbol-reaction-head'))fail.push(id+':missing symbol');
     const path=artV2TalkCropV0500(id);
-    if(!path.endsWith(id+'.webp?v=0.50.0.1'))fail.push(id+':asset registry');
+    const version=(id==='touko'||id==='touko_true')?'0.99.5.0':'0.50.0.1';
+    if(!path.endsWith(id+'.webp?v='+version))fail.push(id+':asset registry');
     if(existing.includes(id)&&!path.includes('upper_body_crops_v0500/'))fail.push(id+':unsafe overwrite path');
     if(newIds.includes(id)&&!path.includes('ART_V2/upper_body/'))fail.push(id+':new crop path');
    }

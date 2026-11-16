@@ -174,7 +174,8 @@ try:
             assert gate["mapped"]==91 and gate["uniqueHeroes"]==91, (orientation,gate)
             assert gate["namesOk"] and gate["linesOk"],(orientation,gate)
             assert gate["allNewHidden"] and gate["initialPool"]==0,(orientation,gate)
-            assert gate["pendingBefore"]==["q1"] and not gate["q1Before"],(orientation,gate)
+            # v0.99.3.0: q1 heroine IDs appear as soon as their quest is complete.
+            assert gate["pendingBefore"]==["q1"] and set(gate["q1Before"])=={"chitose","nonoka"},(orientation,gate)
             assert gate["q1Lines"]==8 and gate["backlogLines"]==9,(orientation,gate)
             assert set(gate["q1After"])=={"chitose","nonoka"} and gate["q1Pool"]==2,(orientation,gate)
             assert not gate["pendingAfter"],(orientation,gate)

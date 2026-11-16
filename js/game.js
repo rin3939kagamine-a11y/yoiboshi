@@ -313,14 +313,20 @@ const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNI
 // User-approved ordinary outfits: portrait only. Binary images are added separately.
 const APPROVED_R_ARTWORK=Object.freeze(Object.fromEntries(APPROVED_R_UNIT_IDS.map(id=>[id,{portrait:'assets/UNIT_ART/'+id+'.webp'}])));
 const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...NEW_UNIT_ARTWORK_V0690,...NEW_UNIT_ARTWORK_V0692,...NEW_UNIT_ARTWORK_V0750,...NEW_UNIT_ARTWORK_V0760,...NEW_UNIT_ARTWORK_V0780,...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...NEW_UNIT_ARTWORK_V0840,...NEW_UNIT_ARTWORK_V0850,...NEW_UNIT_ARTWORK_V0860,...NEW_UNIT_ARTWORK_V0870,...NEW_UNIT_ARTWORK_V0880,...NEW_UNIT_ARTWORK_V0890,...NEW_UNIT_ARTWORK_V0900,...NEW_UNIT_ARTWORK_V0910,...NEW_UNIT_ARTWORK_V0920,...NEW_UNIT_ARTWORK_V0930,...NEW_UNIT_ARTWORK_V0940,...NEW_UNIT_ARTWORK_V0950,...NEW_UNIT_ARTWORK_V0960,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
+// Reclassified R units always use the same person's already-approved R outfit.
+const R_PORTRAITS_BY_PERSON=Object.freeze(Object.fromEntries(APPROVED_R_UNIT_IDS
+ .map(id=>BYID[id]).filter(u=>u&&u.rarity==='R')
+ .map(u=>[u.person,APPROVED_R_ARTWORK[u.id].portrait])));
 function unitArt(u,kind='portrait'){
  const config=UNIT_ARTWORK[u.id]||{};
- // Makoto's accepted portrait takes priority over outdated generic UNIT_ART portraits.
- // Preserve actual story/rarity scene CGs, but use one consistent base image everywhere else.
+ if(u.rarity==='R')return R_PORTRAITS_BY_PERSON[u.person]||config.portrait||characterPortrait(u.person);
  if(kind==='scene'&&config.scene)return config.scene;
- if(u.rarity==='R'&&config.portrait)return config.portrait;
  if(u.person==='makoto')return kind==='portrait'?characterPortrait(u.person):characterArt(u.person);
  return config.portrait||(kind==='portrait'?characterPortrait(u.person):characterArt(u.person));
+}
+function rarityCharacterPortrait(u){
+ return u&&u.rarity==='R'&&R_PORTRAITS_BY_PERSON[u.person]
+  ?R_PORTRAITS_BY_PERSON[u.person]:characterPortrait(u.person);
 }
 // v0.34.47.0: 編成・育成・募集の小さなカード用。SSR・URは一枚絵、SR・Rは立ち絵
 function unitCardArt(u){return unitHasScene(u)?unitArt(u,'scene'):unitArt(u,'portrait');}
@@ -1447,7 +1453,7 @@ function chars(cards,buttons=true){
  const group=COMPACT_PEOPLE.has(u.person)?units.filter(x=>x.person===u.person):null;
  const d=data(u.id);
  if(group){const all=UNITS.filter(x=>x.person===u.person),numOwned=all.filter(x=>data(x.id)).length;return `<article class="charcard compact-person-card" data-person="${u.person}"><div class="art"><img src="${characterPortrait(u.person)}" alt="${person(u).name}の正式代表イラスト"><span class="sticker chip">代表イラスト1枚</span></div><div class="inside"><h3 class="unit-name">${person(u).name}</h3><p class="compact-meta">4バージョン／所持 ${numOwned}／4</p><p class="compact-desc">外見は共通、役割・育成は別々</p><details class="compact-expand" ${buttons?'':'open'}><summary>各バージョンを${buttons?'見る':'確認する'}（${group.length}種類）</summary>${compactVariantRows(u.person,group)}</details></div></article>`;}
- return `<div class="charcard"><div class="art"><img class="${u.person==='chinatsu'?'portrait-top':''}" src="${characterPortrait(u.person)}" alt="${person(u).name}のキャラクターイラスト"><span class="rtag">${u.rarity}</span><span class="sticker chip">${ROLES[u.role].name}</span></div><div class="inside"><h3 class="unit-name">${person(u).name}</h3><div class="unit-subtitle">${u.title}</div><p class="unit-status ${d?'is-owned':'is-unowned'}">${d?'所持中 · Lv.'+d.lv+' · '+d.lb+'/7凸':'未所持'}<span class="unit-rarity">${u.rarity}</span></p>${buttons?`<button class="btn mini full unit-details" onclick="openUnit('${u.id}')">${d?'詳細・育成':'詳細を見る'}</button>`:''}</div></div>`;
+ return `<div class="charcard"><div class="art"><img class="${u.person==='chinatsu'?'portrait-top':''}" src="${rarityCharacterPortrait(u)}" alt="${person(u).name}のキャラクターイラスト"><span class="rtag">${u.rarity}</span><span class="sticker chip">${ROLES[u.role].name}</span></div><div class="inside"><h3 class="unit-name">${person(u).name}</h3><div class="unit-subtitle">${u.title}</div><p class="unit-status ${d?'is-owned':'is-unowned'}">${d?'所持中 · Lv.'+d.lv+' · '+d.lb+'/7凸':'未所持'}<span class="unit-rarity">${u.rarity}</span></p>${buttons?`<button class="btn mini full unit-details" onclick="openUnit('${u.id}')">${d?'詳細・育成':'詳細を見る'}</button>`:''}</div></div>`;
  }).join('')}</div>`;
 }
 function quickMember(id){const u=unit(id),d=data(id);return `<div class="member"><img class="smallportrait" src="${characterIcon(u.person)}" alt=""><div style="flex:1"><strong>${person(u).name} <span class="tiny">${u.title}</span></strong><p>${ROLES[u.role].name} · ${u.rarity} · Lv.${d?.lv||1}</p></div><span class="chip">${d?.lb||0}/7凸</span></div>`}
@@ -3372,7 +3378,7 @@ function chooseSlot(i){
  return `<div class="slot-person-group" data-person="${u.person}"><img class="slot-person-main-image" src="${characterPortrait(u.person)}" alt="${person(u).name}の代表イラスト"><strong>${person(u).name}</strong><div class="slot-person-versions">${group.map(x=>{const reason=slotRuleReason(i,x.id);return `<button type="button" ${reason?'disabled':''} title="${esc(reason)}" onclick="setSlot(${i},'${x.id}')">${x.rarity} · ${esc(x.title)} · ${ROLES[x.role].name}${reason?`（${esc(reason)}）`:''}</button>`}).join('')}</div></div>`;
  }
  const reason=slotRuleReason(i,u.id);
- return `<button type="button" class="slot-choice" ${reason?'disabled':''} title="${esc(reason)}" onclick="setSlot(${i},'${u.id}')"><img src="${characterPortrait(u.person)}" alt=""><strong>${person(u).name}</strong><span>${ROLES[u.role].name}${isConcept(u.person)?'（仮）':''}</span>${reason?`<small>${esc(reason)}</small>`:''}</button>`;
+ return `<button type="button" class="slot-choice" ${reason?'disabled':''} title="${esc(reason)}" onclick="setSlot(${i},'${u.id}')"><img src="${rarityCharacterPortrait(u)}" alt=""><strong>${person(u).name}</strong><span>${ROLES[u.role].name}${isConcept(u.person)?'（仮）':''}</span>${reason?`<small>${esc(reason)}</small>`:''}</button>`;
  }).join('')}</div><button class="btn outline full" onclick="setSlot(${i},'')">この枠を空ける</button>`};render();
 }
 function setSlot(i,id){if(hiddenV0690Party())return toast('一時非表示中の編成を保存したままにするため公開再開後に変更できます');if(!Number.isInteger(i)||i<0||i>=4)return;if(id){const reason=slotRuleReason(i,id);if(reason)return toast(reason);}S.party[i]=id;S.party=S.party.filter(Boolean);persist();dialog=null;render()}
@@ -3656,7 +3662,7 @@ function talk(){
  return `${heading('BONDS / DAILY LIFE','交流・日常','お気に入りの仲間と会話して、親密度を深めましょう。')}
  <div class="v676-talk-shell">
  <section class="v676-talk-main" aria-label="${esc(heroineDisplayName(id))}と交流">
-   <div class="v676-talk-portrait"><img src="${characterPortrait(u.person)}" alt="${esc(p.name)}の立ち絵"><span class="v676-portrait-caption">YOIBOSHI · DAILY LIFE</span></div>
+   <div class="v676-talk-portrait"><img src="${rarityCharacterPortrait(u)}" alt="${esc(p.name)}の立ち絵"><span class="v676-portrait-caption">YOIBOSHI · DAILY LIFE</span></div>
    <div class="v676-talk-dialog"><div class="v676-talk-nameplate"><span>♡ ${esc(heroineDisplayName(id))}</span><small>${temp?'設定暫定':esc(p.note)}</small></div><p>${esc(p.lines[Math.min(2,Math.floor(d.aff/35))])}</p></div>
    <div class="v676-talk-summary"><div><span class="v676-eyebrow">BOND LEVEL</span><h3>親密度 <b>${d.aff}</b> <small>/ 100</small></h3><div class="v676-affinity-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${d.aff}"><i style="width:${d.aff}%"></i></div></div><button class="v676-chat-button" ${chatCountToday(u.id)>=ECONOMY.DAILY_CHAT_MAX?'disabled':''} onclick="chat('${u.id}')">♡ 会話する <small>${chatCountToday(u.id)}/${ECONOMY.DAILY_CHAT_MAX}回 · ${chatCountToday(u.id)>=ECONOMY.DAILY_CHAT_MAX?'本日上限':'+8'}</small></button></div>
  </section>
