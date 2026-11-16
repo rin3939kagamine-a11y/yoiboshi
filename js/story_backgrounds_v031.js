@@ -1551,6 +1551,45 @@ function yunohanaBackground(storyId, defaults){
   return null;
 }
 
+
+// v0.99.2.0: 背景が指定されていない物語（街で出会った人など）は、場所の名前から背景を選ぶ。
+const STORY_BG_BY_PLACE = [
+  [/バー|LUNA/, 'lumiere','late'],
+  [/ルミエール|夜会場/, 'lumiere','night'],
+  [/ドック/, 'dock','live'],
+  [/夜市/, 'yoichi','night'],
+  [/料亭|居酒屋/, 'ryotei','night'],
+  [/プラネタリウム/, 'planetarium','night'],
+  [/前夜祭|祭/, 'matsuri','dusk'],
+  [/ギャラリー/, 'gallery','night'],
+  [/市民ホール/, 'gallery_stage','day'],
+  [/スタジオ/, 'studio','day'],
+  [/市役所/, 'shiyakusho','night'],
+  [/書庫|図書/, 'toshokan','day'],
+  [/小学校|学校|教室/, 'kyoushitsu','day'],
+  [/灯ヶ峰/, 'higamine','dusk'],
+  [/旧灯台|灯台/, 'lighthouse','dusk'],
+  [/旧喫茶街|星見堂|喫茶/, 'kissa','day'],
+  [/倉庫/, 'soko','dusk'],
+  [/港|岸壁|朝市|臨海|海辺|サーフ/, 'kaihin','day'],
+  [/相談室/, 'soudan','day'],
+  [/駅/, 'ekimae','day'],
+  [/商店街|古着屋|鳴海/, 'shotengai','day']
+];
+function placeBackground(storyId){
+  if(typeof romanceScript !== 'function') return null;
+  let place = '';
+  try { place = romanceScript(storyId)?.place || ''; } catch (_) { return null; }
+  if(!place) return null;
+  const hit = STORY_BG_BY_PLACE.find(([re]) => re.test(place));
+  if(!hit) return null;
+  let [, bg, time] = hit;
+  if(/夜|深夜|ネオン/.test(place)){
+    for(const t of ['night','late']) if(STORY_BG_FILES[`${bg}:${t}`]) { time = t; break; }
+  }
+  return storyBackgroundFile(bg,time);
+}
+
 function resolveStoryBackground(storyId, lineIndex){
   const defaults = STORY_BACKGROUNDS[storyId];
   // A single authored line may override the story-wide background; no lines are edited in v0.31.
@@ -1565,7 +1604,8 @@ function resolveStoryBackground(storyId, lineIndex){
   }
   const yn = yunohanaBackground(storyId, defaults);
   if(yn) return yn;
-  return defaults ? storyBackgroundFile(defaults.bg,defaults.time) : null;
+  if(defaults) return storyBackgroundFile(defaults.bg,defaults.time);
+  return placeBackground(storyId);
 }
 
 // Cache actual decoded image objects outside the re-rendered #app subtree.
