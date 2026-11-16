@@ -120,8 +120,9 @@ try:
                 viewport: window.innerWidth,
                 documentWidth: document.documentElement.scrollWidth
             })""")
-            for field in ["heroineCount","profiles","rCards","normalPool","completeArtPaths"]:
+            for field in ["heroineCount","profiles","rCards","completeArtPaths"]:
                 assert metrics[field] == 74, (orientation,field,metrics)
+            assert metrics["normalPool"] == 75, (orientation,"normalPool",metrics)
             for field in ["uniqueHeroIDs","preserveStoryNPC","unchangedRates"]:
                 assert metrics[field], (orientation,field,metrics)
             assert not errors, (orientation,errors)
