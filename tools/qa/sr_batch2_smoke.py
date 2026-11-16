@@ -37,11 +37,11 @@ try:
                const before=fresh(),source=fresh();
                source.gems=1234;source.gold=5678;source.gachaPity=7;
                for(const id of ids)source.owned[id+'_work']={lv:5,aff:12,lb:1,copies:2};
-               source.party=['kaori_work','rui_work','suzune_work','chikage_work'];
-               source.selected='kaori_work';source.homeFavorite='rui';source.homeUnitId='rui_work';
+               source.party=ids.slice(0,4).map(id=>id+'_work');
+               source.selected=ids[0]+'_work';source.homeFavorite=ids[1];source.homeUnitId=ids[1]+'_work';
                const migrated=migrateSave(JSON.parse(JSON.stringify(source)));
                const saveOk=ids.every(id=>JSON.stringify(migrated.owned[id+'_work'])===JSON.stringify(source.owned[id+'_work'])) &&
-                   migrated.selected==='kaori_work' && migrated.homeUnitId==='rui_work' &&
+                   migrated.selected===ids[0]+'_work' && migrated.homeUnitId===ids[1]+'_work' &&
                    JSON.stringify(migrated.party)===JSON.stringify(source.party) &&
                    migrated.gems===1234 && migrated.gold===5678 && migrated.gachaPity===7;
                const entries=ids.map((id,i)=>{
