@@ -1,0 +1,74 @@
+name: QA - SR costume batch2 (10 opaque silhouettes and game regression)
+on:
+  push:
+    branches: [feature/20261117-sr-costume-batch2, main]
+    paths:
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/heroines_sr_batch2_units.js'
+      - 'index.html'
+      - 'assets/UNIT_ART/*'
+      - 'tools/qa/sr_batch2_*.py'
+      - '.github/workflows/qa-sr-batch2.yml'
+  pull_request:
+    paths:
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/heroines_sr_batch2_units.js'
+      - 'index.html'
+      - 'assets/UNIT_ART/*'
+      - 'tools/qa/sr_batch2_*.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  batch2:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install QA runtime
+        run: python -m pip install pillow==11.3.0 numpy==2.2.6 opencv-python-headless==4.11.0.86 playwright==1.56.0
+      - name: Syntax checks
+        run: |
+          node --check js/game.js
+          node --check js/performance_v016.js
+          node --check js/heroines_sr_batch2_units.js
+          python -m py_compile tools/qa/sr_batch2_art.py tools/qa/sr_batch2_smoke.py
+      - name: Preserve source silhouettes and QA each PNG on dark navy
+        run: python tools/qa/sr_batch2_art.py
+      - name: Commit only ten approved alpha WEBP assets to feature branch
+        if: github.ref == 'refs/heads/feature/20261117-sr-costume-batch2' && github.event_name == 'push'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for id in urara_izakaya mizore_cinema ayane_market miyu_hakama arisa_show kotoha_atelier yukino_trip nene_staff yukari_silver ruru_dollshop; do
+            git add "assets/UNIT_ART/${id}.webp"
+          done
+          if git diff --cached --quiet; then
+            echo "No asset change"
+          else
+            git commit -m "art: add ten RGBA SR batch2 portraits with full opaque silhouettes"
+            git push origin HEAD:feature/20261117-sr-costume-batch2
+          fi
+      - name: Committed assets must reproduce exactly
+        if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+        run: git diff --exit-code -- assets/UNIT_ART/
+      - name: Browser and save/gacha regression, portrait and landscape
+        run: |
+          python -m playwright install --with-deps chromium
+          python tools/qa/sr_batch2_smoke.py
+      - name: Upload ten visual comparisons and QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sr-batch2-qa
+          path: qa_artifacts/sr_batch2/
+          if-no-files-found: warn
