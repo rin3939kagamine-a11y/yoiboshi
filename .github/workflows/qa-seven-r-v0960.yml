@@ -1,0 +1,82 @@
+name: QA - seven approved R heroines v0960
+on:
+  push:
+    branches:
+      - feature/20261116-seven-new-r-v0960
+      - main
+    paths:
+      - '.github/workflows/qa-seven-r-v0960.yml'
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/character_depth_v1.js'
+      - 'js/heroines_v0960*.js'
+      - 'index.html'
+      - 'tools/qa/seven_r_v0960_*.py'
+      - 'assets/ART_V2/full_body/*'
+      - 'assets/ART_V2/upper_body/*'
+      - 'assets/ART_V2/face_icons/*'
+  pull_request:
+    paths:
+      - '.github/workflows/qa-seven-r-v0960.yml'
+      - 'js/game.js'
+      - 'js/performance_v016.js'
+      - 'js/character_depth_v1.js'
+      - 'js/heroines_v0960*.js'
+      - 'index.html'
+      - 'tools/qa/seven_r_v0960_*.py'
+      - 'assets/ART_V2/full_body/*'
+      - 'assets/ART_V2/upper_body/*'
+      - 'assets/ART_V2/face_icons/*'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  seven-r-stage1-stage2:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install browser and image QA tools
+        run: |
+          python -m pip install pillow==11.3.0 playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Grammar check all changed scripts
+        run: |
+          for file in js/game.js js/performance_v016.js js/character_depth_v1.js js/heroines_v0960.js js/heroines_v0960_units.js js/heroines_v0960_wire.js; do node --check "$file"; done
+          python -m py_compile tools/qa/seven_r_v0960_art.py tools/qa/seven_r_v0960_smoke.py
+      - name: Verify seven source hashes and create transparent PNG plus cropped WEBP
+        run: python tools/qa/seven_r_v0960_art.py
+      - name: Commit 21 source-derived game assets
+        if: github.ref == 'refs/heads/feature/20261116-seven-new-r-v0960'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for id in kuromiya_sera haruno_hana komiya_anna hoshimiya_nemu kumano_miku ichijo_maki natsukawa_yu; do
+            git add "assets/ART_V2/full_body/${id}.png" "assets/ART_V2/upper_body/${id}.webp" "assets/ART_V2/face_icons/${id}.webp"
+          done
+          if git diff --cached --quiet; then
+            echo 'All 21 image assets already committed'
+          else
+            git commit -m 'art: retain seven source drawings, remove three flat backdrops, crop fourteen portraits'
+            git fetch origin feature/20261116-seven-new-r-v0960
+            git rebase origin/feature/20261116-seven-new-r-v0960
+            git push origin HEAD:feature/20261116-seven-new-r-v0960
+          fi
+      - name: Main must already contain all 21 generated assets
+        if: github.ref == 'refs/heads/main'
+        run: git diff --exit-code -- assets/ART_V2/full_body/ assets/ART_V2/upper_body/ assets/ART_V2/face_icons/
+      - name: Browser QA - 7 heroines, 14 skills, q6, pool, save, both orientations
+        run: python tools/qa/seven_r_v0960_smoke.py
+      - name: Upload art and browser reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seven-r-v0960-qa
+          path: qa_artifacts/seven_r_v0960/
+          if-no-files-found: warn
