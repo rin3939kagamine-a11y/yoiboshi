@@ -82,6 +82,8 @@ def process(key: str, unit: str) -> dict:
     # within the enclosed foreground can become transparent.
     inward=cv2.distanceTransform(fg,cv2.DIST_L2,3)
     alpha=np.minimum(255,np.round(inward * 162)).astype(np.uint8)
+    # Preserve all ink and garment outlines fully opaque, even on the silhouette boundary.
+    alpha[(~exterior) & (rgb.min(axis=2)<225)] = 255
     # Corner pixels should be transparent; all non-white drawing must survive.
     corner_alpha=np.r_[alpha[:10,:10].ravel(),alpha[:10,-10:].ravel(),
                         alpha[-10:,:10].ravel(),alpha[-10:,-10:].ravel()]
