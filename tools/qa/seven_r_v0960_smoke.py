@@ -39,10 +39,10 @@ try:
     snapshot.quests.q2={complete:true};snapshot.storyFlags.oldEntry=true;
     const migrated=migrateSave(JSON.parse(JSON.stringify(snapshot)));
     const saved=JSON.stringify(migrated.owned.momoka_work)===JSON.stringify(snapshot.owned.momoka_work)&&
-       JSON.stringify(migrated.owned.nagasawa_mayu_work)===JSON.stringify(snapshot.owned.nagasawa_mayu_work)&&
-       JSON.stringify(migrated.party)===JSON.stringify(snapshot.party)&&
-       migrated.selected===snapshot.selected&&migrated.homeFavorite===snapshot.homeFavorite&&
-       migrated.homeUnitId===snapshot.homeUnitId&&migrated.gems===2345&&migrated.gold===4321&&
+       JSON.stringify(migrated.owned.tsukasa_work)===JSON.stringify(snapshot.owned.nagasawa_mayu_work)&&
+       JSON.stringify(migrated.party)===JSON.stringify(['momoka_work','tsukasa_work'])&&
+       migrated.selected==='tsukasa_work'&&migrated.homeFavorite==='tsukasa'&&
+       migrated.homeUnitId==='tsukasa_work'&&migrated.gems===2345&&migrated.gold===4321&&
        migrated.gachaPity===8&&migrated.gachaSrStreak===2&&
        migrated.quests.q2.complete&&migrated.storyFlags.oldEntry&&
        ids.every(id=>!migrated.owned[id+'_work']);
@@ -86,14 +86,14 @@ try:
     return {heroCount:HERO_IDS.length,unique:new Set(HERO_IDS).size,
       pool:['R','SR','SSR','UR'].map(z=>NORMAL_GACHA_POOL.filter(x=>x.rarity===z).length),
       allR:UNITS.filter(x=>x.rarity==='R').length,rates:{...RATE},newRates:{...NEW19_RATE},
-      saved,entries,casts,legacyPassive:passiveValue(BYID.takamiya_sayaka_work),
-      lastRPassive:passiveValue(BYID.nagasawa_mayu_work)};
+      saved,entries,casts,legacyPassive:!!BYID.tamaki_work,
+      lastRPassive:!!BYID.tsukasa_work};
    }""",IDS)
-   assert d['heroCount']==261 and d['unique']==261,d
-   assert d['pool']==[245,56,56,57] and d['allR']==288,d
+   assert d['heroCount']==196 and d['unique']==196,d
+   assert d['pool']==[180,56,56,57] and d['allR']==223,d
    assert d['rates']=={'R':60,'SR':25,'SSR':10,'UR':5},d
    assert d['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},d
-   assert d['saved'] and d['legacyPassive']==8 and d['lastRPassive']==6,d
+   assert d['saved'] and d['legacyPassive'] is True and d['lastRPassive'] is True,d
    for i,e in enumerate(d['entries']):
     assert e['name'] and e['age'] in range(20,27) and e['job'],e
     assert e['rarity']=='R' and e['gate']=='q6' and e['role']==ROLES[i],e

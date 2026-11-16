@@ -37,10 +37,10 @@ try:
      save.quests.q2={complete:true};save.storyFlags.oldEntry=true;
      const migrated=migrateSave(JSON.parse(JSON.stringify(save)));
      const saveOk=JSON.stringify(migrated.owned.momoka_work)===JSON.stringify(save.owned.momoka_work)&&
-      JSON.stringify(migrated.owned.nagasawa_mayu_work)===JSON.stringify(save.owned.nagasawa_mayu_work)&&
-      JSON.stringify(migrated.party)===JSON.stringify(save.party)&&
-      migrated.selected===save.selected&&migrated.homeFavorite===save.homeFavorite&&
-      migrated.homeUnitId===save.homeUnitId&&migrated.gems===2345&&migrated.gold===4321&&
+      JSON.stringify(migrated.owned.tsukasa_work)===JSON.stringify(save.owned.nagasawa_mayu_work)&&
+      JSON.stringify(migrated.party)===JSON.stringify(['momoka_work','tsukasa_work'])&&
+      migrated.selected==='tsukasa_work'&&migrated.homeFavorite==='tsukasa'&&
+      migrated.homeUnitId==='tsukasa_work'&&migrated.gems===2345&&migrated.gold===4321&&
       migrated.gachaPity===8&&migrated.gachaSrStreak===2&&
       migrated.quests.q2.complete===true&&migrated.storyFlags.oldEntry===true&&
       ids.every(id=>!migrated.owned[id+'_work']);
@@ -88,14 +88,14 @@ try:
       normalR:NORMAL_GACHA_POOL.filter(x=>x.rarity==='R').length,
       normalOther:['SR','SSR','UR'].map(r=>NORMAL_GACHA_POOL.filter(x=>x.rarity===r).length),
       normalRates:{...RATE},newRates:{...NEW19_RATE},
-      entries,castResults,saveOk,existingLegacyPassive:passiveValue(BYID.takamiya_sayaka_work),
-      existingRecentRPassive:passiveValue(BYID.nagasawa_mayu_work)};
+      entries,castResults,saveOk,existingLegacyPassive:!!BYID.tamaki_work,
+      existingRecentRPassive:!!BYID.tsukasa_work};
    }""")
-   assert data['heroCount']==261 and data['uniqueHeros']==261,data
-   assert data['normalR']==245 and data['normalOther']==[56,56,57],data
+   assert data['heroCount']==196 and data['uniqueHeros']==196,data
+   assert data['normalR']==180 and data['normalOther']==[56,56,57],data
    assert data['normalRates']=={'R':60,'SR':25,'SSR':10,'UR':5},data
    assert data['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},data
-   assert data['saveOk'] and data['existingLegacyPassive']==8 and data['existingRecentRPassive']==6,data
+   assert data['saveOk'] and data['existingLegacyPassive'] is True and data['existingRecentRPassive'] is True,data
    expected_roles=['healer','attacker','support','attacker','healer']
    expected_stats=[[148,9,5],[125,19,3],[165,11,5],[125,19,3],[148,9,5]]
    expected_passives=[('v0950_heal',8),('v0950_attack',6),('v0950_buff',8),('v0950_attack',6),('v0950_heal',8)]

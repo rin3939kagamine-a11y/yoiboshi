@@ -160,7 +160,77 @@ const RESTORED_R_UNIT_IDS=new Set([...APPROVED_R_UNIT_IDS,'shio_pool']); // Keep
 const BYID=Object.fromEntries(UNITS.map(x=>[x.id,x]));
 // Conversion remains only for excluded legacy characters, preserving their existing behavior.
 const RETIRED_R_TO_SR=Object.freeze(Object.fromEntries(UNITS.filter(u=>u.rarity==='R'&&!u.id.endsWith('_trial')&&!RESTORED_R_UNIT_IDS.has(u.id)).map(u=>[u.id,(UNITS.find(v=>v.person===u.person&&v.rarity==='SR'&&!v.id.endsWith('_trial'))||{}).id]).filter(([,v])=>!!v)));
-const R2SR=id=>RETIRED_R_TO_SR[id]||id;
+// 2026-11-16: 65 duplicated R hero unit IDs remain recognized only by old-save migration.
+const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
+ "aizawa_noa_work": "hinako_work",
+ "amai_momo_work": "rara_work",
+ "amase_kanata_work": "mikan_work",
+ "arai_shiori_work": "kanon_work",
+ "dojima_rei_work": "kei_work",
+ "endo_saori_work": "nana_work",
+ "enomoto_tsugumi_work": "chitose_work",
+ "fujii_kanon_work": "chako_work",
+ "fujimiya_shion_work": "sumika_work",
+ "fujita_sui_work": "konatsu_work",
+ "goto_satoko_work": "rinka_work",
+ "hamasaki_nagisa_work": "manatsu_work",
+ "hanasaki_rena_work": "sakura_work",
+ "harada_kyoko_work": "ran_work",
+ "hayase_rio_work": "maya_work",
+ "higuchi_rei_work": "yuria_work",
+ "hoshino_emiri_work": "mira_work",
+ "ishida_yuna_work": "satsuki_work",
+ "ito_ruri_work": "rion_work",
+ "kato_hazuki_work": "nozomi_work",
+ "katsura_yui_work": "mahiru_work",
+ "kawamura_shizuku_work": "azusa_work",
+ "kinoshita_ami_work": "nao_work",
+ "kitahara_shiho_work": "risa_work",
+ "kobayashi_iori_work": "sora_work",
+ "komatsu_hinata_work": "himari_work",
+ "komine_suzu_work": "kohaku_work",
+ "kurosaki_kaede_work": "misaki_work",
+ "maeda_akane_work": "miharu_work",
+ "miyoshi_nanami_work": "kazusa_work",
+ "mizuhara_mayu_work": "noriko_work",
+ "momose_yumeka_work": "airi_work",
+ "morinaga_akari_work": "himeka_work",
+ "morita_mitsuki_work": "chizuru_work",
+ "nagasawa_mayu_work": "tsukasa_work",
+ "nakajima_kazumi_work": "michiru_work",
+ "nanjo_yurara_work": "mirei_work",
+ "nikaido_yuki_work": "ren_work",
+ "nishimura_ako_work": "yuu_work",
+ "nishimura_yumi_work": "mao_work",
+ "ogawa_rina_work": "rise_work",
+ "okada_misaki_work": "komachi_work",
+ "ono_yuina_work": "ui_work",
+ "otsuki_tsubasa_work": "minami_work",
+ "sakaki_yura_work": "ramu_work",
+ "sasaki_sara_work": "seira_work",
+ "sato_eri_work": "miki_work",
+ "shimizu_kotone_work": "moe_work",
+ "shirase_marika_work": "yuna_work",
+ "shiratori_yuzuha_work": "nonoka_work",
+ "sorano_nanase_work": "tsumugi_work",
+ "takahashi_ayano_work": "ruru_work",
+ "takamine_rino_work": "subaru_work",
+ "takamiya_sayaka_work": "tamaki_work",
+ "takamori_serika_work": "roze_work",
+ "takasaka_tomoe_work": "kozue_work",
+ "tanaka_mio_work": "ryo_work",
+ "tsukino_moka_work": "mimi_work",
+ "tsukishima_shino_work": "mikoto_work",
+ "wakakusa_rinne_work": "raimu_work",
+ "watanabe_mizuki_work": "kanoko_work",
+ "yamada_yuri_work": "aika_work",
+ "yamazaki_wakana_work": "chisato_work",
+ "yoshida_sae_work": "tomoe_work",
+ "yukishiro_mio_work": "lira_work"
+});
+const RETIRED_ALL_SAVE_MAP=Object.freeze({...RETIRED_R_TO_SR,...RETIRED_DUPLICATE_R_TO_CANONICAL});
+const RETIRED_DUPLICATE_HERO_TO_CANONICAL=Object.freeze(Object.fromEntries(Object.entries(RETIRED_DUPLICATE_R_TO_CANONICAL).map(([from,to])=>[from.slice(0,-5),to.slice(0,-5)])));
+const R2SR=id=>RETIRED_ALL_SAVE_MAP[id]||id;
 // Ver.0.49.2.0: legacy save migration ONLY. These old concept IDs are deliberately retained
 // here for backward compatibility; all live registries must use canonical IDs.
 const LEGACY_CONCEPT_IDS=Object.freeze({"concept08":"yui","concept09":"shizuku","concept10":"suiran","concept11":"kyoko","concept12":"cocoa","concept13":"mai","concept14":"luna","concept15":"makoto","concept16":"fumika","concept17":"ena","concept18":"riko","concept19":"noel","concept20":"mio","concept21":"jun","concept22":"yume","concept23":"shino","concept24":"hiyori","concept25":"ageha","concept26":"kirari","concept27":"maron","concept28":"koharu","concept29":"lilith","concept30":"shio","concept31":"kaname","concept32":"koyori","concept33":"marin","concept34":"erika","concept35":"tsubaki","concept36":"kaede"});
@@ -200,16 +270,17 @@ const RARITIES=Object.freeze(['R','SR','SSR','UR']);
 function convertRetiredRSave(raw){
  if(!raw||typeof raw!=='object'||!raw.owned||typeof raw.owned!=='object'||Array.isArray(raw.owned))return raw;
  const out={...raw},owned={};
- for(const [id,e] of Object.entries(raw.owned)){ if(!RETIRED_R_TO_SR[id])owned[id]=e; }
+ for(const [id,e] of Object.entries(raw.owned)){ if(!RETIRED_ALL_SAVE_MAP[id])owned[id]=e; }
  for(const [id,e] of Object.entries(raw.owned)){
-  const to=RETIRED_R_TO_SR[id]; if(!to||!e||typeof e!=='object')continue;
+  const to=RETIRED_ALL_SAVE_MAP[id]; if(!to||!e||typeof e!=='object')continue;
   const cur=owned[to],num=(v,d=0)=>Number.isFinite(+v)?+v:d;
-  if(!cur){owned[to]={...e};continue;}
+  if(!cur){owned[to]=RETIRED_DUPLICATE_R_TO_CANONICAL[id]?{...e,lb:Math.min(7,Math.max(0,num(e.lb)))}:{...e};continue;}
   owned[to]={...cur,lv:Math.max(num(cur.lv,1),num(e.lv,1)),aff:Math.max(num(cur.aff),num(e.aff)),lb:Math.min(7,Math.max(num(cur.lb),num(e.lb))),copies:num(cur.copies)+num(e.copies)+1};
  }
  out.owned=owned;
  if(Array.isArray(raw.party)){const seen=new Set();out.party=raw.party.map(id=>typeof id==='string'?R2SR(id):id).filter(id=>{if(seen.has(id))return false;seen.add(id);return true;});}
  for(const k of ['selected','homeUnitId'])if(typeof raw[k]==='string')out[k]=R2SR(raw[k]);
+ if(typeof raw.homeFavorite==='string'&&RETIRED_DUPLICATE_HERO_TO_CANONICAL[raw.homeFavorite])out.homeFavorite=RETIRED_DUPLICATE_HERO_TO_CANONICAL[raw.homeFavorite];
  return out;
 }
 
