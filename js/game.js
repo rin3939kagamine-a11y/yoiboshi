@@ -154,9 +154,11 @@ const UNITS=[
 ];
 // Additional outfits remain separate units; original 42 designs are untouched.
 UNITS.push(...NEW_UNIT_ROSTER_V026,...NEW_UNIT_ROSTER_V027,...NEW_UNIT_ROSTER_V028,...NEW_UNIT_ROSTER_V0420,...NEW_UNIT_ROSTER_V0500,...NEW_UNIT_ROSTER_V0690,...NEW_UNIT_ROSTER_V0692,...NEW_UNIT_ROSTER_V0750,...NEW_UNIT_ROSTER_V0760,...NEW_UNIT_ROSTER_V0780,...NEW_UNIT_ROSTER_V0810,...NEW_UNIT_ROSTER_V0830,...NEW_UNIT_ROSTER_V0840,...NEW_UNIT_ROSTER_V0850,...NEW_UNIT_ROSTER_V0860,...NEW_UNIT_ROSTER_V0870,...NEW_UNIT_ROSTER_V0880,...NEW_UNIT_ROSTER_V0890,...NEW_UNIT_ROSTER_V0900,...NEW_UNIT_ROSTER_V0910,...NEW_UNIT_ROSTER_V0920,...NEW_UNIT_ROSTER_V0930,...NEW_UNIT_ROSTER_V0940,...NEW_UNIT_ROSTER_V0950,...NEW_UNIT_ROSTER_V0960);
+// SR costume batch 1 adds only cards, never heroines.
+UNITS.push(...NEW_UNIT_ROSTER_SR_BATCH1);
 // Approved R portraits are provided separately; retain preexisting restored R IDs in saves.
 const APPROVED_R_UNIT_IDS=Object.freeze(["ageha_daily","akane_daily","anzu_daily","aoi_daily","chihiro_daily","chinatsu_daily","chiyo_daily","cocoa_daily","rico_show","erika_daily","fumika_daily","hiyori_daily","hotaru_daily","ichika_daily","jun_daily","kaede_daily","kagari_daily","kaname_daily","karen_daily","kirari_daily","koharu_daily","koyori_daily","kurumi_daily","kyoko_daily","lilith_daily","luna_daily","mai_wind","makoto_daily","marine_cafe","maron_daily","meru_daily","milku_daily","minori_daily","mio_daily","miyabi_daily","mizuki_daily","momoka_daily","nagi_dusk","natsume_daily","nazuna_daily","noel_daily","reiko_daily","reina_daily","riko_daily","ritsu_daily","saeko_daily","saki_daily","sanae_daily","sena_daily","shino_daily","shio_daily","shizuku_daily","suiran_daily","towa_daily","tsubaki_daily","yui_daily","yume_tomorrow","yuriko_daily","yuzu_daily"]);
-const RESTORED_R_UNIT_IDS=new Set([...APPROVED_R_UNIT_IDS,'shio_pool']); // Keep the previous pool outfit without newly assigned portrait.
+const RESTORED_R_UNIT_IDS=new Set([...APPROVED_R_UNIT_IDS,'shio_pool',...SR_BATCH1_EXISTING_R_IDS]); // Keep the previous pool outfit without newly assigned portrait.
 const BYID=Object.fromEntries(UNITS.map(x=>[x.id,x]));
 // Conversion remains only for excluded legacy characters, preserving their existing behavior.
 const RETIRED_R_TO_SR=Object.freeze(Object.fromEntries(UNITS.filter(u=>u.rarity==='R'&&!u.id.endsWith('_trial')&&!RESTORED_R_UNIT_IDS.has(u.id)).map(u=>[u.id,(UNITS.find(v=>v.person===u.person&&v.rarity==='SR'&&!v.id.endsWith('_trial'))||{}).id]).filter(([,v])=>!!v)));
@@ -312,7 +314,7 @@ const MOMOKA_UNIT_ARTWORK_V03447=Object.freeze({momoka_work:{portrait:'assets/UN
 const CHAPTER2_SR_ARTWORK_V035=Object.freeze({tsubaki_work:{portrait:'assets/UNIT_ART/tsubaki_work.webp'},erika_work:{portrait:'assets/UNIT_ART/erika_work.webp'},kaede_work:{portrait:'assets/UNIT_ART/kaede_work.webp'}});
 // User-approved ordinary outfits: portrait only. Binary images are added separately.
 const APPROVED_R_ARTWORK=Object.freeze(Object.fromEntries(APPROVED_R_UNIT_IDS.map(id=>[id,{portrait:'assets/UNIT_ART/'+id+'.webp'}])));
-const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...NEW_UNIT_ARTWORK_V0690,...NEW_UNIT_ARTWORK_V0692,...NEW_UNIT_ARTWORK_V0750,...NEW_UNIT_ARTWORK_V0760,...NEW_UNIT_ARTWORK_V0780,...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...NEW_UNIT_ARTWORK_V0840,...NEW_UNIT_ARTWORK_V0850,...NEW_UNIT_ARTWORK_V0860,...NEW_UNIT_ARTWORK_V0870,...NEW_UNIT_ARTWORK_V0880,...NEW_UNIT_ARTWORK_V0890,...NEW_UNIT_ARTWORK_V0900,...NEW_UNIT_ARTWORK_V0910,...NEW_UNIT_ARTWORK_V0920,...NEW_UNIT_ARTWORK_V0930,...NEW_UNIT_ARTWORK_V0940,...NEW_UNIT_ARTWORK_V0950,...NEW_UNIT_ARTWORK_V0960,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
+const UNIT_ARTWORK=Object.freeze({...NEW_UNIT_ARTWORK_V026,...NEW_UNIT_ARTWORK_V027,...NEW_UNIT_ARTWORK_V028,...NEW_UNIT_ARTWORK_V0420,...NEW_UNIT_ARTWORK_V0500,...NEW_UNIT_ARTWORK_V0690,...NEW_UNIT_ARTWORK_V0692,...NEW_UNIT_ARTWORK_V0750,...NEW_UNIT_ARTWORK_V0760,...NEW_UNIT_ARTWORK_V0780,...NEW_UNIT_ARTWORK_V0810,...NEW_UNIT_ARTWORK_V0830,...NEW_UNIT_ARTWORK_V0840,...NEW_UNIT_ARTWORK_V0850,...NEW_UNIT_ARTWORK_V0860,...NEW_UNIT_ARTWORK_V0870,...NEW_UNIT_ARTWORK_V0880,...NEW_UNIT_ARTWORK_V0890,...NEW_UNIT_ARTWORK_V0900,...NEW_UNIT_ARTWORK_V0910,...NEW_UNIT_ARTWORK_V0920,...NEW_UNIT_ARTWORK_V0930,...NEW_UNIT_ARTWORK_V0940,...NEW_UNIT_ARTWORK_V0950,...NEW_UNIT_ARTWORK_V0960,...NEW_UNIT_ARTWORK_SR_BATCH1,...MOMOKA_UNIT_ARTWORK_V03447,...CHAPTER2_SR_ARTWORK_V035,...APPROVED_R_ARTWORK});
 // Reclassified R units always use the same person's already-approved R outfit.
 const R_PORTRAITS_BY_PERSON=Object.freeze(Object.fromEntries(APPROVED_R_UNIT_IDS
  .map(id=>BYID[id]).filter(u=>u&&u.rarity==='R')
@@ -342,8 +344,8 @@ const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5}); // Keep the same 80/15/
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
-const NORMAL_GACHA_POOL=Object.freeze(UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))));
-const NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)));
+const NORMAL_GACHA_POOL=Object.freeze([...UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))),...NEW_UNIT_ROSTER_SR_BATCH1]);
+const NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)&&!SR_BATCH1_UNIT_IDS.includes(u.id)));
 const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['tsubaki'],erika:['erika'],kaname:['kaname'],kaede:['kaede'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
 function heroineOwned(person,save=S){return Object.keys(save.owned||{}).some(id=>BYID[id]?.person===person&&(!CHAPTER2_ALL_HERO_IDS.includes(person)||!isChapter2ReservedTrial(BYID[id])))}

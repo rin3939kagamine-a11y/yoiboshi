@@ -19,8 +19,8 @@ new_index=(ROOT/"index.html").read_text()
 # Regression after the Aone unit is already merged on main:
 # compare immutable legacy definitions, not the historical PR #91 before/after diff.
 for token in ('const KEY=','const ROLES=','const RATE=',
-              'const GACHA_CONFIG=','const NORMAL_GACHA_POOL=',
-              'const NEW19_GACHA_POOL=','function drawNormalGachaUnit(',
+              'const GACHA_CONFIG=',
+              'function drawNormalGachaUnit(',
               'function rollNormalGachaRarity(','function migrateSave('):
     i=old_game.index(token);j=new_game.index(token)
     assert old_game[i:old_game.index('\n',i)]==new_game[j:new_game.index('\n',j)],('core drift',token)
@@ -32,6 +32,9 @@ for token in ('const NEW19_RATE=','function unitPower('):
     i=old_game.index(token);j=new_game.index(token)
     assert old_game[i:old_game.index('\n',i)]==new_game[j:new_game.index('\n',j)],("unchanged gacha or power",token)
 assert '...NEW_UNIT_ROSTER_V0830' in old_game and '...NEW_UNIT_ROSTER_V0830' in new_game
+# SR batch1 extends normal recruitment by precisely ten cards without changing rates.
+assert '...NEW_UNIT_ROSTER_SR_BATCH1]);' in new_game
+assert 'NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)&&!SR_BATCH1_UNIT_IDS.includes(u.id)))' in new_game
 assert '...NEW_UNIT_ARTWORK_V0830' in old_game and '...NEW_UNIT_ARTWORK_V0830' in new_game
 assert '...NEW_UNIT_DESIGN_V0830' in old_perf and '...NEW_UNIT_DESIGN_V0830' in new_perf
 assert 'js/heroines_v0830_units.js' in old_index and 'js/heroines_v0830_units.js' in new_index
@@ -112,7 +115,7 @@ try:
     assert data["normalRegistered"] and data["specialAbsent"] and not data["unready"] and not data["q3"] and data["q6"],data
     assert data["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5} and data["gachaCost"]==[120,1000],data
     assert data["key"]=="yoiboshi-reboot-v1",data
-    assert data["allUnique"] and data["srCount"]==56,data
+    assert data["allUnique"] and data["srCount"]==66,data
     assert all(data["stable"].values()),data
     assert data["oldUnit"]["skills"]==["ct","stun"] and data["oldUnit"]["rarity"]=="SR",data
     assert data["existingStages"]=={"kaho":["attack_up","attack_down"],"ririka":["heal_one","cleanse"]},data
