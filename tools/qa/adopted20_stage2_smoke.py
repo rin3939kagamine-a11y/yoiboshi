@@ -79,8 +79,8 @@ try:
    assert not data["duplicate"],"Duplicate unit ID"
    assert data["rate"]=={"R":60,"SR":25,"SSR":10,"UR":5},data["rate"]
    assert data["new19"]=={"R":80,"SR":0,"SSR":15,"UR":5},data["new19"]
-   assert data["pool"]=={"R":232,"SR":56,"SSR":56,"UR":57},data["pool"]
-   assert data["rarityAll"]["R"]==275,data["rarityAll"]
+   assert data["pool"]=={"R":233,"SR":56,"SSR":56,"UR":57},data["pool"]
+   assert data["rarityAll"]["R"]==276,data["rarityAll"]
    assert data["legacyPassives"]=={"support":8,"attacker":6,"healer":12},data["legacyPassives"]
    assert all(data["save"].values()),data["save"]
    for e,u in zip(EXPECTED,data["units"]):
