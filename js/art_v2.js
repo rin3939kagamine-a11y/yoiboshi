@@ -286,6 +286,6 @@ function hasExpressionArt(personId,face='normal'){
 function artV2TalkCropV0500(id){
  if(typeof SYMBOL_REACTION_EXISTING_V0500==='undefined'||typeof SYMBOL_REACTION_NEW_V0500==='undefined')return '';
  if(SYMBOL_REACTION_NEW_V0500.includes(id))return 'assets/ART_V2/upper_body/'+id+'.webp?v=0.50.0.1';
- if(SYMBOL_REACTION_EXISTING_V0500.includes(id))return 'assets/ART_V2/upper_body_crops_v0500/'+id+'.webp?v=0.50.0.1';
+ if(SYMBOL_REACTION_EXISTING_V0500.includes(id))return 'assets/ART_V2/upper_body_crops_v0500/'+id+'.webp?v='+(id==='touko'||id==='touko_true'?'0.99.5.0':'0.50.0.1');
  return '';
 }
