@@ -1,0 +1,46 @@
+name: QA - adopted 20 stage2 genuine R units
+on:
+  push:
+    branches:
+      - feature/20261116-adopted20-stage2-r
+      - main
+    paths:
+      - '.github/workflows/qa-adopted20-stage2.yml'
+      - 'index.html'
+      - 'js/game.js'
+      - 'js/heroines_v0920_units.js'
+      - 'js/performance_v016.js'
+      - 'tools/qa/adopted20_stage2_smoke.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  adopted20-stage2:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Syntax check
+        run: |
+          node --check js/game.js
+          node --check js/heroines_v0920_units.js
+          node --check js/performance_v016.js
+          python -m py_compile tools/qa/adopted20_stage2_smoke.py
+      - name: Browser QA - 20 units, 40 skill casts, R passives, q6, saves and pool
+        run: python tools/qa/adopted20_stage2_smoke.py
+      - name: Upload QA result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adopted20-stage2-report
+          path: qa_artifacts/adopted20_stage2/
+          if-no-files-found: warn
