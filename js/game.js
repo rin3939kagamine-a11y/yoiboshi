@@ -344,7 +344,7 @@ const NEW19_RATE=Object.freeze({R:80,SR:0,SSR:15,UR:5}); // Keep the same 80/15/
 const GACHA_CONFIG=Object.freeze({UR_PITY:100,SR_GUARANTEE_EVERY:10,ONE_COST:120,TEN_COST:1000});
 // Keep the legacy normal pool byte-for-byte equivalent in membership and weighting.
 // New heroines have a separate opt-in roster (provisional rarity, unchanged RATE).
-const NORMAL_GACHA_POOL=Object.freeze([...UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル')),...NEW_UNIT_ROSTER_SR_BATCH1]);
+const NORMAL_GACHA_POOL=Object.freeze([...UNITS.filter(u=>!NEW_HERO_IDS_V0500.includes(u.person)&&!RETIRED_R_TO_SR[u.id]&&u.id!=='shio_pool'&&!/^concept\d+_trial$/.test(u.id)&&!u.s.some(name=>name.includes('仮スキル'))),...NEW_UNIT_ROSTER_SR_BATCH1]);
 const NEW19_GACHA_POOL=Object.freeze(UNITS.filter(u=>NEW_HERO_IDS_V0500.includes(u.person)&&!SR_BATCH1_UNIT_IDS.includes(u.id)));
 const DISTRICT_GACHA_IDS=Object.freeze({shinonome:SHINONOME_HERO_IDS,oldcafe:OLDCAFE_HERO_IDS,station:STATION_HERO_IDS,school_new:NEW_Q4_HERO_IDS,seaside:SEASIDE_HERO_IDS,lighthouse:LIGHTHOUSE_HERO_IDS,tsubaki:['tsubaki'],erika:['erika'],kaname:['kaname'],kaede:['kaede'],chapter3_port:['saki','yuzu','reiko','anzu','chiyo','nazuna'],chapter4_city:NEW_HERO_IDS_V028});
 const PICKUP_DAYS=7, PICKUP_WEIGHT=3;
