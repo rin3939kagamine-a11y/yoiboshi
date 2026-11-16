@@ -20,7 +20,7 @@ const PORTRAIT_FIT = Object.freeze({
   natsume:{s:1,u:0,x:0},hotaru:{s:1,u:0,x:0},aoi_dark:{s:1,u:0,x:0},ruri:{s:1,u:0,x:0},ichika:{s:1,u:0,x:0},minori:{s:1,u:0,x:0},juri:{s:1,u:0,x:0},saeko:{s:1,u:0,x:0},sumire:{s:1,u:0,x:0},kirie:{s:1,u:0,x:0},enju:{s:1,u:0,x:0},wakaba:{s:1,u:0,x:0},urara:{s:1,u:0,x:0}, // v0.36.0.0 仮のシルエット（本番の絵ができたら差し替え）
   sakuya:{s:1,u:0,x:0},
   ibuki:{s:1,u:0,x:0},
-  haruka:{s:1,u:0,x:0}, // v0.34.57.0 トワの姉（第4章で登場予定）
+  haruka:{s:1,u:0,x:0},kirishima_haruka:{s:1,u:0,x:0}, // v0.34.57.0 トワの姉（第4章で登場予定）
   akane:{s:0.93,u:0.02,x:-0.01},
   anzu:{s:1.2,u:-0.2,x:-0.055},
   aoi:{s:0.85,u:0.02,x:-0.019},
