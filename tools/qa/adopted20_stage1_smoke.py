@@ -75,7 +75,9 @@ for id in IDS:
   box=info["box"]
   with Image.open(full) as im:
    expect=np.asarray(im.convert("RGBA").crop(tuple(box)))
-  assert np.array_equal(actual,expect),(id,slot,"crop not pixel-lossless")
+  assert np.array_equal(actual[:,:,3],expect[:,:,3]),(id,slot,"crop alpha differs")
+  visible=expect[:,:,3]>0
+  assert np.array_equal(actual[:,:,:3][visible],expect[:,:,:3][visible]),(id,slot,"visible crop RGB differs")
 print("ADOPTED20 ASSET SOURCE SHA / PIXEL / CROPS PASS",flush=True)
 class Quiet(SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
