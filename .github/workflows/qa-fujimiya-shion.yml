@@ -1,11 +1,11 @@
-name: QA - Fujimiya Shion stage1 + stage2
+name: QA - Fujimiya v0930 stage1 + stage2
 on:
   push:
     branches:
-      - feature/20261116-fujimiya-shion-stage1-stage2
+      - 'feature/20261116-fujimiya-*'
       - main
     paths:
-      - '.github/workflows/qa-fujimiya-shion.yml'
+      - '.github/workflows/qa-fujimiya-*.yml'
       - 'js/game.js'
       - 'js/performance_v016.js'
       - 'js/heroines_v0930.js'
@@ -50,7 +50,7 @@ jobs:
       - name: Verify original source PNG exact blob and extract two lossless crops
         run: python tools/qa/build_fujimiya_shion_assets.py
       - name: Commit the two lossless crops to the feature branch only
-        if: github.ref == 'refs/heads/feature/20261116-fujimiya-shion-stage1-stage2'
+        if: github.ref != 'refs/heads/main'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -58,10 +58,10 @@ jobs:
           if git diff --cached --quiet; then
             echo 'Both source-derived crops are already identical'
           else
-            git commit -m 'art: crop Fujimiya Shion original PNG without altering pixels'
-            git fetch origin feature/20261116-fujimiya-shion-stage1-stage2
-            git rebase origin/feature/20261116-fujimiya-shion-stage1-stage2
-            git push origin HEAD:feature/20261116-fujimiya-shion-stage1-stage2
+            git commit -m 'art: crop approved Fujimiya v0930 PNG without altering pixels'
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME"
+            git push origin "HEAD:$GITHUB_REF_NAME"
           fi
       - name: Verify committed crops on main do not differ
         if: github.ref == 'refs/heads/main'
@@ -72,6 +72,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: qa-fujimiya-shion-stage1-stage2
+          name: qa-fujimiya-v0930-stage1-stage2
           path: qa_artifacts/fujimiya_shion/
           if-no-files-found: warn
