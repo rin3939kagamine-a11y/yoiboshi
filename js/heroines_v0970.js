@@ -1,5 +1,5 @@
 /* 2026-11-16: seven user-approved R heroines v0970; stage1 only here. */
-const NEW_HERO_IDS_V0970=Object.freeze(["kuromiya_sera","haruno_hana","komiya_anna","hoshimiya_nemu","kumano_miku","ichijo_maki","natsukawa_yu"]);
+const NEW_HERO_IDS_V0970=Object.freeze(["nishizawa_shiori","fujiwara_reika","miura_nanami","anzai_rin","sawada_sango","takashiro_ruka","kudo_karin","kondo_momiji","segawa_rei","mizuno_miyuki","todo_megumi","onishi_ria","ando_rio","kawaguchi_mana","shinoda_mei","yozakura_riri","kurose_noa","fuyutsuki_haru","akagi_akari","shimotsuki_kirara"]);
 const NEW_HERO_REVEAL_V0970=Object.freeze(Object.fromEntries(NEW_HERO_IDS_V0970.map(id=>[id,'q6'])));
 function v0970Character(s){
  const [intro,bright,sad,late]=s.lines;
