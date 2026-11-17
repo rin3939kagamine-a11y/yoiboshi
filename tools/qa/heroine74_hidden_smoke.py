@@ -87,10 +87,10 @@ try:
                 assert state["overflow"]<=18,(label,screen,state)
             before=stats["preMeeting"]
             # v0.99.3.0 makes the q1 heroines visible on quest clear, without an encounter interruption.
-            assert set(before["visible"])=={"chitose","nonoka"} and before["pool"]==2,(label,before)
+            assert set(before["visible"])=={"chitose","nonoka"} and before["pool"]==3,(label,before)
             assert not before["homeButton"] and before["queue"]==["q1"],(label,before)
             after=stats["afterMeeting"]
-            assert set(after["visible"])=={"chitose","nonoka"} and after["pool"]==2,(label,after)
+            assert set(after["visible"])=={"chitose","nonoka"} and after["pool"]==3,(label,after)
             assert not after["queue"],(label,after)
             assert stats["legacyVisible"] and stats["legacyMode"]=="legacy",(label,stats)
             owned=stats["owned"]
