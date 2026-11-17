@@ -70,7 +70,7 @@ for(const id of NEW_HERO_IDS_V0930){const h=ROMANCE_V0930[id],p=h.profile;PEOPLE
 for(const id of NEW_HERO_IDS_V0940){const h=ROMANCE_V0940[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／交流・Rユニット登録済み`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0940[id]};}
 for(const id of NEW_HERO_IDS_V0950){const h=ROMANCE_V0950[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／交流・Rユニット登録済み`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0950[id]};}
 for(const id of NEW_HERO_IDS_V0970){const h=ROMANCE_V0970[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／交流・Rユニット登録済み`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0970[id]};}
-for(const id of NEW_HERO_IDS_V0960){const h=ROMANCE_V0960[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／交流・Rユニット登録済み`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0960[id]||TOMOSHIBI_V0970[id]};}
+for(const id of NEW_HERO_IDS_V0960){const h=ROMANCE_V0960[id],p=h.profile;PEOPLE[id]={name:p.name,note:`${p.occupation}／交流・Rユニット登録済み`,intro:`${p.name}（${p.age}歳）。${p.personality}。`,lines:h.moods.normal.slice(0,3),tomoshibi:TOMOSHIBI_V0960[id]};}
 // Unrevealed identities are not available for recruitment or interaction until a future chapter explicitly marks chapter3Met[id].
 function isV027HeroRevealed(id,save=S){return !!save?.chapter3Met?.[id];}
 function isV028HeroRevealed(id,save=S){return save?.chapter4Met?.[id]===true;}
