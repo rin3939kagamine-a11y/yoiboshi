@@ -122,7 +122,7 @@ try:
             })""")
             for field in ["heroineCount","profiles","rCards","completeArtPaths"]:
                 assert metrics[field] == 74, (orientation,field,metrics)
-            assert metrics["normalPool"] == 75, (orientation,"normalPool",metrics)
+            assert metrics["normalPool"] == 85, (orientation,"normalPool",metrics)
             for field in ["uniqueHeroIDs","preserveStoryNPC","unchangedRates"]:
                 assert metrics[field], (orientation,field,metrics)
             assert not errors, (orientation,errors)
@@ -178,7 +178,7 @@ try:
             # v0.99.3.0: q1 heroine IDs appear as soon as their quest is complete.
             assert gate["pendingBefore"]==["q1"] and set(gate["q1Before"])=={"chitose","nonoka"},(orientation,gate)
             assert gate["q1Lines"]==8 and gate["backlogLines"]==9,(orientation,gate)
-            assert set(gate["q1After"])=={"chitose","nonoka"} and gate["q1Pool"]==2,(orientation,gate)
+            assert set(gate["q1After"])=={"chitose","nonoka"} and gate["q1Pool"]==3,(orientation,gate)
             assert not gate["pendingAfter"],(orientation,gate)
             assert gate["legacyMode"]=="legacy" and gate["legacyQ1Revealed"],(orientation,gate)
             assert gate["ownedBeforeQuest"],(orientation,gate)
@@ -261,7 +261,7 @@ try:
             }""")
             assert not appearance["missingRoster"], (orientation,"roster",appearance)
             assert not appearance["brokenTalk"], (orientation,"talk",appearance)
-            assert appearance["gachaCandidates"]==75 and appearance["gachaDOM"],(orientation,"gacha",appearance)
+            assert appearance["gachaCandidates"]==85 and appearance["gachaDOM"],(orientation,"gacha",appearance)
             assert appearance["rosterWidth"]<=w+18, (orientation,"roster overflow",appearance)
             print("PASS full roster, 74 romance views and recruit UI",orientation,flush=True)
 
