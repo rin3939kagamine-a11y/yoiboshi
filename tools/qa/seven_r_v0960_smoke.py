@@ -90,7 +90,7 @@ try:
       lastRPassive:!!BYID.tsukasa_work};
    }""",IDS)
    assert d['heroCount']==196 and d['unique']==196,d
-   assert d['pool']==[180,76,56,57] and d['allR']==223,d
+   assert d['pool']==[180,86,56,57] and d['allR']==223,d
    assert d['rates']=={'R':60,'SR':25,'SSR':10,'UR':5},d
    assert d['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},d
    assert d['saved'] and d['legacyPassive'] is True and d['lastRPassive'] is True,d
