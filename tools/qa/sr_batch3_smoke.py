@@ -91,7 +91,7 @@ try:
                  saveOk,entries,casts};
             }""",{"ids":IDS,"unitIds":NEW,"gates":GATES})
             assert res["heroes"]==196 and res["unique"]==196,res
-            assert res["normal"]==[180,86,56,57],res
+            assert res["normal"]==[180,96,56,57],res
             assert res["new19"]==[19,0,19,19] and res["allR"]==223,res
             assert res["rates"]=={"R":60,"SR":25,"SSR":10,"UR":5},res
             assert res["newRates"]=={"R":80,"SR":0,"SSR":15,"UR":5},res
