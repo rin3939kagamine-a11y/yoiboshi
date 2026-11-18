@@ -20,7 +20,7 @@
    ult:{name:'黒星の檻',warn:'朔夜の周りに黒い鎖が集まっていく……！',mul:1.8},
    retort:[['tsubaki','「楓を返して。……あなたの檻なんかに、負けない。」'],['you','「楓は必ず連れて帰る。」']],
    defeat:'「なぜ……私の星灯が、こんなところで……。」'},
-  q173:{id:'sakuya',name:'朔夜',title:'灯に呑まれた朔夜',art:'assets/enemies/sakuya_battle.webp',hp:2.6,
+  q173:{id:'sakuya',talk:'assets/enemies/sakuya_burn.webp',name:'朔夜',title:'灯に呑まれた朔夜',art:'assets/enemies/sakuya_burn_battle.webp',hp:2.6,
    intro:'（白い炎の中から、言葉にならない、ひび割れた声がした）',
    hp75:'（炎の奥で、盆を運ぶような小さな影が、ひとつ崩れた）',
    hp50:'（炎の芯に、黒い星灯の光が混じりはじめる）',
@@ -210,6 +210,16 @@
    ult:{name:'ほどけない白い糸',warn:'ハルカの胸の白い火が、無数の糸になって浜いっぱいに張りめぐらされる……！',mul:1.9},
    retort:[['towa','「お姉ちゃん！　戻ってきて！」'],['aoi','「灯台の光と、わたしたちの星灯で、白い火を弱めます！」'],['touko','「ハルカさん。一緒に、縫いましょう」'],['you','「ハルカさんの白い火を、止める！」']],
    defeat:'「……針。……結ばなきゃ」'},
+  q233:{id:'kasumi_shion',talk:'assets/enemies/kasumi_shion.webp',name:'燃え上がるSHION∞',title:'最後の舞台の踊り子',art:'assets/enemies/kasumi_shion_battle.webp',hp:2.7,
+   intro:'「……あと、少し。最後のステップまで」',
+   hp75:'「……楽しい。なぎと踊るの、やっぱり楽しい」',
+   hp50:'「……ずるいなあ。燃えてるのに、思い出すことばっかり」',
+   hp25:'「……ごめん。足が、もう……炎に、持っていかれて……」',
+   down:'「ステップ、まちがえちゃった」',
+   phase:{line:'「四年分、ぜんぶ……持っていかないで」',label:'四年分の残り火'},
+   ult:{name:'∞（インフィニティ）',warn:'燃え上がるお面の奥で、SHION∞が最後のターンに入る……！',mul:1.9},
+   retort:[['nagi','「……止めない。最後まで」'],['mai','「シオンさん、まだ踊れる！」'],['reina','「せめて、最後まで踊らせます」'],['you','「最後のステップまで、支える！」']],
+   defeat:'「……顔、あった。よかった」'},
   q467:{id:'enju',name:'白い火の槐',title:'歌いつづける配達人',art:'assets/enemies/enju.webp',hp:2.9,
    intro:'「止めてくださいな。……歌は、続けますから」',
    hp75:'「いけませんわ。わたしの手が、言うことを聞かないの」',
@@ -284,7 +294,7 @@
   closeOverlay();overlayOpen=true;
   const el=document.createElement('div');el.className='bd-overlay';el.setAttribute('role','dialog');
   // Battle sprites remain in combat UI; dialogue cut-ins always use standing portraits.
-  const portrait=TALK(cfg.id);
+  const portrait=cfg.talk||TALK(cfg.id);
   el.innerHTML=`<img class="bd-art" src="${portrait}" alt=""><div class="bd-band"><small>${label}</small><strong>${cfg.name}</strong><p>${line}</p><em>タップで進む</em></div>`;
   const done=()=>{if(!el.isConnected)return;el.remove();overlayOpen=false;clearTimeout(overlayTimer);if(after)after();};
   el.addEventListener('click',done);document.body.appendChild(el);
@@ -298,7 +308,7 @@
   el.innerHTML=`${s.img?`<img src="${s.img}" alt="">`:''}<div><b>${s.name}</b><span>${s.text}</span></div>`;
   document.body.appendChild(el);setTimeout(()=>{el.remove();nextStrip();},s.warn?3200:2700);
  }
- const bossSay=(cfg,text)=>strip(TALK(cfg.id),cfg.name,text,false);
+ const bossSay=(cfg,text)=>strip(cfg.talk||TALK(cfg.id),cfg.name,text,false);
  function retort(b,cfg){
   const party=new Set(b.allies.filter(a=>a.hp>0).map(a=>unit(a.id).person));
   const r=cfg.retort.find(([who])=>who==='you'||party.has(who));if(!r)return;
@@ -362,7 +372,7 @@
      const d=boss.bd;boss.ultimate=false;
      if(d.phase2&&!(boss.breakSkips>0)&&!(boss.stunRounds>0)){
       if(d.ultIn===1){boss.ultimate=true;boss.intent='aoe';}
-      else if(d.ultIn===2){strip(TALK(cfg.id),'必殺技の予告',`次のラウンド、${cfg.name}の『${cfg.ult.name}』。${cfg.ult.warn}（防御・バリア・ブレイクで備えよう）`,true);}
+      else if(d.ultIn===2){strip(cfg.talk||TALK(cfg.id),'必殺技の予告',`次のラウンド、${cfg.name}の『${cfg.ult.name}』。${cfg.ult.warn}（防御・バリア・ブレイクで備えよう）`,true);}
       d.ultIn=d.ultIn<=1?3:d.ultIn-1;
      }
     }}catch(_){}
@@ -373,7 +383,7 @@
   const b=tbCurrent(),e=b?.enemies?.[i];const cfg=cfgFor(b);
   if(cfg&&e&&e.ultimate&&e.hp>0&&!(e.breakSkips>0)&&!(e.stunRounds>0)){
    e.ultimate=false;logBattle(`${cfg.name}の必殺技『${cfg.ult.name}』！`);
-   strip(TALK(cfg.id),cfg.name,`「${cfg.ult.name}！」`,true);
+   strip(cfg.talk||TALK(cfg.id),cfg.name,`「${cfg.ult.name}！」`,true);
    const targets=b.allies.filter(a=>a.hp>0);
    for(const a of targets)tbEnemyHit(e,a,(TB_WEAK_BALANCE.aoeMultiplier||1)*cfg.ult.mul);
    if(cfg.ult.healShadows){for(const s of b.enemies){if(s.harukaRole==='shadow'&&s.hp<=0){s.hp=Math.round(s.max*.5);logBattle(`${s.name}が踊りながら戻ってきた`);}}}
