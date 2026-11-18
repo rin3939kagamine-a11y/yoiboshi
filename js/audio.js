@@ -2,7 +2,7 @@
 // SFX: Kenney Interface Sounds / Impact Sounds (CC0); not Sound Effect Lab or synthetic placeholders.
 // Empty/missing files are intentionally silent. Do not change ART or save keys.
 const AUDIO_ASSETS = {
-  bgm: {home:'assets/audio/home.mp3', daily:'assets/audio/daily.mp3', story:'assets/audio/story.mp3', sad:'assets/audio/sad.mp3', battle:'assets/audio/battle.mp3', boss:'assets/audio/boss.mp3', sakuya_boss:'assets/audio/sakuya_boss.mp3?v=0.34.63.0', ibuki_boss:'assets/audio/ibuki_boss.mp3?v=0.34.63.0', haruka_boss:'assets/audio/haruka_boss.mp3',shion_boss:'assets/audio/shion_boss_titanium_heat.mp3?v=1.01.2.0',touko_boss:'assets/audio/touko_boss_sacrum_carcerem.mp3?v=1.01.2.0', aoi_boss:'assets/audio/aoi_boss_mahogany_ledger.mp3', ruri_boss:'assets/audio/ruri_boss.mp3?v=20261109-ruri-v1', saya_boss:'assets/audio/saya_boss.mp3?v=0.50.6.0', map:'assets/audio/map.mp3'},
+  bgm: {home:'assets/audio/home.mp3', daily:'assets/audio/daily.mp3', story:'assets/audio/story.mp3', sad:'assets/audio/sad.mp3', battle:'assets/audio/battle.mp3', boss:'assets/audio/boss.mp3', sakuya_boss:'assets/audio/sakuya_boss.mp3?v=0.34.63.0', ibuki_boss:'assets/audio/ibuki_boss.mp3?v=0.34.63.0', haruka_boss:'assets/audio/haruka_boss.mp3',shion_boss:'assets/audio/shion_boss_titanium_heat.mp3?v=1.01.2.0',touko_boss:'assets/audio/touko_boss_sacrum_carcerem.mp3?v=1.01.2.0',enju_boss:'assets/audio/enju_boss_crimson_moon.mp3?v=1.01.3.0', aoi_boss:'assets/audio/aoi_boss_mahogany_ledger.mp3', ruri_boss:'assets/audio/ruri_boss.mp3?v=20261109-ruri-v1', saya_boss:'assets/audio/saya_boss.mp3?v=0.50.6.0', map:'assets/audio/map.mp3'},
   sfx: {tap:'assets/audio/sfx/tap.mp3', confirm:'assets/audio/sfx/confirm.mp3', cancel:'assets/audio/sfx/cancel.mp3', page:'assets/audio/sfx/page.mp3', affection:'assets/audio/sfx/affection.mp3', gacha:'assets/audio/sfx/gacha.mp3', victory:'assets/audio/sfx/victory.mp3', defeat:'assets/audio/sfx/defeat.mp3', hit:'assets/audio/sfx/hit.mp3'}
 };
 const AUDIO_SCENE_CUES = Object.freeze({
@@ -88,6 +88,7 @@ const AudioDirector=(()=>{
      bossEncounter&&(questId==='q24'||questId==='q347'||questId==='q521')?'haruka_boss':
      bossEncounter&&questId==='q233'?'shion_boss':
      bossEncounter&&questId==='q81'?'touko_boss':
+     bossEncounter&&['q89','q113','q467'].includes(questId)?'enju_boss':
      bossEncounter&&questId==='q28'?'saya_boss':
      bossEncounter&&['q35','q40','q45'].includes(questId)?'aoi_boss':
      bossEncounter&&questId==='q46'?'ruri_boss':
