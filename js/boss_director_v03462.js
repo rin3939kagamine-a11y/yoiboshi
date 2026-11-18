@@ -291,6 +291,7 @@
  function cfgFor(b){return b&&b.turnBattle&&b.wave===b.totalWaves-1?BOSSES[b.qid]:null;}
  function bossOf(b){return b?.enemies?.find(e=>e.kind==='boss'&&(e.harukaRole?e.harukaRole==='real':true));}
  function overlay(cfg,label,line,after){
+  if(!tbCurrent())return;
   closeOverlay();overlayOpen=true;
   const el=document.createElement('div');el.className='bd-overlay';el.setAttribute('role','dialog');
   // Battle sprites remain in combat UI; dialogue cut-ins always use standing portraits.
@@ -301,7 +302,7 @@
   overlayTimer=setTimeout(done,4200);
  }
  function closeOverlay(){document.querySelectorAll('.bd-overlay').forEach(x=>x.remove());overlayOpen=false;clearTimeout(overlayTimer);}
- function strip(img,name,text,warn){stripQueue.push({img,name,text,warn});if(!stripBusy)nextStrip();}
+ function strip(img,name,text,warn){if(!tbCurrent())return;stripQueue.push({img,name,text,warn});if(!stripBusy)nextStrip();}
  function nextStrip(){
   const s=stripQueue.shift();if(!s){stripBusy=false;return;}stripBusy=true;
   const el=document.createElement('div');el.className='bd-strip'+(s.warn?' bd-warn':'');
@@ -355,6 +356,21 @@
    if(b&&bdActive()&&bdBusy()&&b.enemies.every(e=>e.hp<=0)){bdLater(()=>{if(tbCurrent()===b&&!tbCheckOutcome())tbAdvance();});return true;}
    return oldOutcome.apply(this,arguments);
   };
+ }
+ // v1.01.8.0: 戦闘が終わったら、ボスのカットインと台詞の帯を必ず片づける。勝ったときは、撃破の台詞を読み終えてから終わる
+ function bdClearAll(){try{closeOverlay();}catch(_){}stripQueue.length=0;document.querySelectorAll('.bd-strip,.bd-overlay').forEach(x=>x.remove());stripBusy=false;overlayOpen=false;}
+ window.ybBossClear=bdClearAll;
+ if(typeof finishBattle==='function'){
+  const oldFinish=finishBattle;let finishWait=0;
+  finishBattle=function(won){
+   const b=tbCurrent();
+   if(won&&b&&!b.done&&bdActive()&&bdBusy()){const args=arguments;clearTimeout(finishWait);finishWait=setTimeout(function again(){if(tbCurrent()!==b||b.done)return;if(bdBusy()){finishWait=setTimeout(again,300);return;}bdClearAll();oldFinish.apply(window,args);},300);return;}
+   bdClearAll();return oldFinish.apply(this,arguments);
+  };
+ }
+ if(typeof cancelBattle==='function'){
+  const oldCancel=cancelBattle;
+  cancelBattle=function(){bdClearAll();return oldCancel.apply(this,arguments);};
  }
  // 見せ場を飛ばさない：第2形態の前に倒しきれない。必殺技を一度見るまでは、ぎりぎりで踏みとどまる
  function bdFloor(b){
