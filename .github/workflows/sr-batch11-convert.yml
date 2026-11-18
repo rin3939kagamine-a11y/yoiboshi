@@ -1,0 +1,56 @@
+name: SR batch11 image conversion (temporary)
+on:
+  push:
+    branches: [feat/sr-batch11-20261118]
+permissions:
+  contents: write
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install Pillow
+      - name: Convert and verify 10 alpha WebP files
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          source=Path('docs/new_character_ideas/2026-11-18_sr_batch11')
+          output=Path('assets/UNIT_ART')
+          pairs=[["yura_sr.png","yura_okami.webp"],["setsuna_sr.png","setsuna_casual.webp"],["emiri_sr.png","emiri_uniform.webp"],["yue_sr.png","yue_field.webp"],["madoka_sr.png","madoka_happi.webp"],["seri_sr.png","seri_live.webp"],["hatsune_sr.png","hatsune_apron.webp"],["minto_sr.png","minto_casual.webp"],["nagomi_sr.png","nagomi_atelier.webp"],["ribon_sr.png","ribon_pancake.webp"]]
+          output.mkdir(parents=True,exist_ok=True)
+          for src,dst in pairs:
+              with Image.open(source/src) as raw:
+                  if 'A' not in raw.getbands() and 'transparency' not in raw.info:
+                      raise ValueError(f'{src}: no alpha channel')
+                  im=raw.convert('RGBA')
+              pixels=im.load()
+              for y in range(im.height):
+                  for x in range(im.width):
+                      r,g,b,a=pixels[x,y]
+                      if a>=240: pixels[x,y]=(r,g,b,255)
+              path=output/dst
+              im.save(path,format='WEBP',lossless=True,method=6)
+              check=Image.open(path).convert('RGBA')
+              if check.size!=im.size or check.getchannel('A').tobytes()!=im.getchannel('A').tobytes():
+                  raise RuntimeError(f'{dst}: alpha verification failed')
+              if not any(a==0 for a in check.getchannel('A').getdata()):
+                  raise ValueError(f'{dst}: no transparent pixels')
+              navy=Image.new('RGBA',check.size,(18,31,60,255))
+              navy.alpha_composite(check)
+              assert navy.getextrema()[3]==(255,255)
+              print(f'PASS {src} => {dst} {im.width}x{im.height} RGBA')
+          PY
+      - name: Commit generated images and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/UNIT_ART/*.webp
+          git rm .github/workflows/sr-batch11-convert.yml
+          git commit -m 'SRバッチ11の透過WebP10枚を生成して反映'
+          git push
