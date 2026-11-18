@@ -4658,7 +4658,7 @@ function finishBattle(won){
       :training
       ?{title:won?'模擬戦・突破！':'模擬戦・終了',message:won?'模擬戦を1ウェーブ突破しました。灯火・共鳴・弱点とブレイクの練習は完了です。報酬・依頼進行・セーブデータは変更していません。':'模擬戦が終了しました。報酬・依頼進行・セーブデータは変更していません。編成や戦術を見直して再挑戦できます。'}
       :{title:won?'朔夜戦・体験完了':'朔夜戦・体験終了',message:won?'ボスと残響の檻の両方を突破しました。体験モードのため報酬・クエストクリア・セーブは変更していません。':'体験モードでは報酬・セーブ・クエスト進行に影響しません。育成・編成を整えると本編の戦闘を攻略しやすくなります。'};
-    render();return;
+    render();if(trial)setTimeout(()=>{try{document.querySelector('.boss-trial-card')?.scrollIntoView({block:'start'})}catch(_){}},60);return;
   }
   // Claim before the existing win-path persist(); preserve callback on reload.
   const callback=claimChoiceBattleCallback(battle.allies,won,battle.qid,battle.grind,battle.preview);
@@ -4692,7 +4692,7 @@ function finishBattle(won){
     dialog={title:'オート周回完了',message:`${q.name}を${totalDone}回連続クリア。周回報酬：◈ ${farmGold(q)*totalDone}＋ ✧ ${farmGems(q)*totalDone}（周回専用報酬）`};}
   render();
 }
-function cancelBattle(ask){if(!battle)return;const training=!!battle.training;if(typeof ycBattleReset==='function')ycBattleReset();if(battle.turnBattle)tbClearTimer();if(Q12C.victoryTimer){clearTimeout(Q12C.victoryTimer);Q12C.victoryTimer=0}cancelAnimationFrame(activeTimer);battle=null;questActionInProgress=false;lastFrame=0;view=training?'records':'city';if(ask)dialog=training?{title:'模擬戦を中断',message:'模擬戦を終了しました。クエスト・報酬・セーブに変更はありません。'}:{title:'作戦中断',message:'作戦を中断しました。報酬は獲得していません。'};render()}
+function cancelBattle(ask){if(!battle)return;const training=!!battle.training,trial=!!(battle.bossTrial||battle.preview==='boss-trial'),demo=!!battle.preview&&!training&&!trial;if(typeof ycBattleReset==='function')ycBattleReset();if(battle.turnBattle)tbClearTimer();if(Q12C.victoryTimer){clearTimeout(Q12C.victoryTimer);Q12C.victoryTimer=0}cancelAnimationFrame(activeTimer);battle=null;questActionInProgress=false;lastFrame=0;view=(training||trial||demo)?'records':'city';if(ask)dialog=training?{title:'模擬戦を中断',message:'模擬戦を終了しました。クエスト・報酬・セーブに変更はありません。'}:trial?{title:'試遊を中断',message:'ボス戦の試遊を終了しました。報酬・依頼の進行・セーブデータは変わりません。'}:{title:'作戦中断',message:'作戦を中断しました。報酬は獲得していません。'};render();if(trial)setTimeout(()=>{try{document.querySelector('.boss-trial-card')?.scrollIntoView({block:'start'})}catch(_){}},60)}
 
 
 // Passive fallbacks and actionable diagnostics: runtime exceptions are not swallowed.
