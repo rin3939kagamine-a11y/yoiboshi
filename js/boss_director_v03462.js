@@ -329,13 +329,43 @@
   }
   return r;
  };
- // AUTOは演出中に動かない
+ // v1.01.6.0: ボスの台詞・演出が出ているあいだは、戦闘をしっかり止める（AUTOも手動も、敵の行動も）
+ const bdBusy=()=>overlayOpen||stripBusy||stripQueue.length>0;
+ const bdActive=()=>{const b=tbCurrent();const cfg=b&&cfgFor(b);const boss=cfg&&bossOf(b);return !!(boss&&boss.bd);};
+ const bdHolding=()=>bdActive()&&bdBusy();
+ window.ybBossHolding=bdHolding;
+ let bdRetry=0;
+ const bdLater=(fn)=>{clearTimeout(bdRetry);bdRetry=setTimeout(()=>{try{fn();}catch(_){}},350);};
  if(typeof tbAutoMove==='function'){
   const oldAuto=tbAutoMove;
-  tbAutoMove=function(i){if(overlayOpen){setTimeout(()=>{try{tbAutoMove(i);}catch(_){}} ,600);return;}return oldAuto.apply(this,arguments);};
+  tbAutoMove=function(i){if(bdHolding()){setTimeout(()=>{try{tbAutoMove(i);}catch(_){}},400);return;}return oldAuto.apply(this,arguments);};
+ }
+ if(typeof tbAdvance==='function'){
+  const oldAdvance=tbAdvance;
+  tbAdvance=function(){try{bdFloor(tbCurrent());}catch(_){}if(bdHolding()){try{tbRender();}catch(_){}bdLater(()=>tbAdvance());return;}return oldAdvance.apply(this,arguments);};
+ }
+ if(typeof tbAction==='function'){
+  const oldAction=tbAction;
+  tbAction=function(){if(bdHolding())return;return oldAction.apply(this,arguments);};
+ }
+ if(typeof tbCheckOutcome==='function'){
+  const oldOutcome=tbCheckOutcome;
+  tbCheckOutcome=function(){
+   const b=tbCurrent();try{bdFloor(b);checkBoss(b);}catch(_){}
+   if(b&&bdActive()&&bdBusy()&&b.enemies.every(e=>e.hp<=0)){bdLater(()=>{if(tbCurrent()===b&&!tbCheckOutcome())tbAdvance();});return true;}
+   return oldOutcome.apply(this,arguments);
+  };
+ }
+ // 見せ場を飛ばさない：第2形態の前に倒しきれない。必殺技を一度見るまでは、ぎりぎりで踏みとどまる
+ function bdFloor(b){
+  const cfg=cfgFor(b);const boss=cfg&&bossOf(b);if(!boss||!boss.bd)return;
+  const d=boss.bd;
+  if(!d.phase2&&boss.hp<Math.ceil(boss.max*0.5))boss.hp=Math.ceil(boss.max*0.5)-1;
+  else if(d.phase2&&!d.ultFired&&boss.hp<Math.ceil(boss.max*0.08))boss.hp=Math.ceil(boss.max*0.08);
  }
  function checkBoss(b){
   const cfg=cfgFor(b);const boss=cfg&&bossOf(b);if(!boss||!boss.bd)return;
+  bdFloor(b);
   const d=boss.bd,ratio=boss.hp/boss.max;
   if(boss.hp<=0){
    if(!d.said.defeat){d.said.defeat=true;stripQueue.length=0;overlay(cfg,'撃破',cfg.defeat);}
@@ -382,14 +412,14 @@
  tbEnemyMove=function(i){
   const b=tbCurrent(),e=b?.enemies?.[i];const cfg=cfgFor(b);
   if(cfg&&e&&e.ultimate&&e.hp>0&&!(e.breakSkips>0)&&!(e.stunRounds>0)){
-   e.ultimate=false;logBattle(`${cfg.name}の必殺技『${cfg.ult.name}』！`);
+   e.ultimate=false;if(e.bd)e.bd.ultFired=true;logBattle(`${cfg.name}の必殺技『${cfg.ult.name}』！`);
    strip(cfg.talk||TALK(cfg.id),cfg.name,`「${cfg.ult.name}！」`,true);
    const targets=b.allies.filter(a=>a.hp>0);
    for(const a of targets)tbEnemyHit(e,a,(TB_WEAK_BALANCE.aoeMultiplier||1)*cfg.ult.mul);
    if(cfg.ult.healShadows){for(const s of b.enemies){if(s.harukaRole==='shadow'&&s.hp<=0){s.hp=Math.round(s.max*.5);logBattle(`${s.name}が踊りながら戻ってきた`);}}}
    return;
   }
-  if(cfg&&e&&e.ultimate&&(e.breakSkips>0||e.stunRounds>0)){e.ultimate=false;logBattle(`${cfg.name}の必殺技は不発に終わった`);}
+  if(cfg&&e&&e.ultimate&&(e.breakSkips>0||e.stunRounds>0)){e.ultimate=false;if(e.bd)e.bd.ultFired=true;logBattle(`${cfg.name}の必殺技は不発に終わった`);}
   return oldMove.apply(this,arguments);
  };
  if(typeof tbEnemyIntentLabel==='function'){
