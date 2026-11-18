@@ -1,6 +1,6 @@
 /* 2026-11-18: SR alternate costumes batch12. Preserve original R units and all existing rates, save format and combat formulas. */
 const SR_BATCH12_UNIT_IDS=Object.freeze(["chiaki_casual","himeno_salon","nanoka_delivery","kaname_soft","erika_mono","tsubaki_lab","kaede_library","kaho_gallery","ririka_studio","aone_backstage"]);
-const SR_BATCH12_EXISTING_R_IDS=Object.freeze(["chiaki_work","himeno_work","nanoka_work","kaname_daily","erika_daily","tsubaki_daily","kaede_daily","sakakibara_kaho_work","minase_ririka_work","tokiwa_aone_work"]);
+const SR_BATCH12_EXISTING_R_IDS=Object.freeze(["chiaki_work","himeno_work","nanoka_work","kaname_work","erika_work","tsubaki_work","kaede_work","sakakibara_kaho_work","minase_ririka_work","tokiwa_aone_work"]);
 const NEW_UNIT_ROSTER_SR_BATCH12=Object.freeze([
   {
     "id": "chiaki_casual",
