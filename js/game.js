@@ -4044,17 +4044,29 @@ function startQ12Demo(){
 }
 // v03430: repeatable, reward-free turn training. No progression or save writes.
 // v0.34.64.0: 設定画面の「ボス戦の試遊」。最終ウェーブ（ボス）から始め、報酬・進行・セーブは変えない
-function bossTrials(){return [{qid:'q12',name:'朔夜',sub:'第2章・旧灯台地下「残響の檻」',img:'assets/ART_V2/story_cast/sakuya_talk.webp'},{qid:'q17',name:'売人イブキ',sub:'第3章・埋立地の夜市',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q24',name:'霧島ハルカ',sub:'第4章・点灯式の準備会場',img:'assets/ART_V2/story_cast/haruka_talk.webp'},{qid:'q28',name:'氷室沙耶',sub:'第5章・旧灯台の灯室',img:'assets/ART_V2/story_cast/saya_talk.webp'},{qid:'q34',name:'売人イブキ（再戦）',sub:'第6章・夜市の跡',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q35',name:'黒い灯の葵',sub:'第6章・勝利不要のイベント戦',img:'assets/ART_V2/story_cast/aoi_dark_talk.webp'},{qid:'q40',name:'黒い灯の葵（撃退戦）',sub:'第7章・相談室の裏通り',img:'assets/ART_V2/story_cast/aoi_dark_talk.webp'},{qid:'q45',name:'黒い灯の葵（対話）',sub:'第8章・灯台の扉',img:'assets/ART_V2/story_cast/aoi_dark_talk.webp'},{qid:'q46',name:'久遠ルリ',sub:'第8章・星読みの決戦',img:'assets/ART_V2/story_cast/ruri_talk.webp'},{qid:'q52',name:'白鷺透子',sub:'第9章・勝利不要のイベント戦',img:'assets/ART_V2/story_cast/touko_true_talk.webp'},{qid:'q58',name:'白鷺透子（最終決戦）',sub:'第10章・灯の部屋',img:'assets/ART_V2/story_cast/touko_true_talk.webp'},{qid:'q81',name:'白鷺透子（迎えの灯）',sub:'第2部第4章・坑道の最奥',img:'assets/ART_V2/story_cast/touko_true_talk.webp'},{qid:'q89',name:'宵宮槐',sub:'第2部第5章・旧灯台の灯室',img:'assets/ART_V2/story_cast/enju_talk.webp'}];}
+function bossTrials(){return [{qid:'q12',name:'朔夜',sub:'第2章・旧灯台地下「残響の檻」',img:'assets/ART_V2/story_cast/sakuya_talk.webp'},{qid:'q17',name:'売人イブキ',sub:'第3章・埋立地の夜市',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q24',name:'霧島ハルカ',sub:'第4章・点灯式の準備会場',img:'assets/ART_V2/story_cast/haruka_talk.webp'},{qid:'q28',name:'氷室沙耶',sub:'第5章・旧灯台の灯室',img:'assets/ART_V2/story_cast/saya_talk.webp'},{qid:'q34',name:'売人イブキ（再戦）',sub:'第6章・夜市の跡',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q35',name:'黒い灯の葵',sub:'第6章・勝利不要のイベント戦',img:'assets/ART_V2/story_cast/aoi_dark_talk.webp'},{qid:'q40',name:'黒い灯の葵（撃退戦）',sub:'第7章・相談室の裏通り',img:'assets/ART_V2/story_cast/aoi_dark_talk.webp'},{qid:'q45',name:'黒い灯の葵（対話）',sub:'第8章・灯台の扉',img:'assets/ART_V2/story_cast/aoi_dark_talk.webp'},{qid:'q46',name:'久遠ルリ',sub:'第8章・星読みの決戦',img:'assets/ART_V2/story_cast/ruri_talk.webp'},{qid:'q52',name:'白鷺透子',sub:'第9章・勝利不要のイベント戦',img:'assets/ART_V2/story_cast/touko_true_talk.webp'},{qid:'q58',name:'白鷺透子（最終決戦）',sub:'第10章・灯の部屋',img:'assets/ART_V2/story_cast/touko_true_talk.webp'},{qid:'q81',name:'白鷺透子（迎えの灯）',sub:'第2部第4章・坑道の最奥',img:'assets/ART_V2/story_cast/touko_true_talk.webp'},{qid:'q89',name:'宵宮槐',sub:'第2部第5章・旧灯台の灯室',img:'assets/ART_V2/story_cast/enju_talk.webp'},{qid:'q113',name:'宵宮槐（本気の槐）',sub:'第2部第9章・旧灯台の灯室',img:'assets/ART_V2/story_cast/enju_talk.webp'},{qid:'q119',name:'市守り・常夜',sub:'第2部第10章・灯の市',img:'assets/ART_V2/story_cast/tokoyo_talk.webp'},{qid:'q173',name:'朔夜（灯に呑まれた朔夜）',sub:'第3部第9章・灯籠流しの夜',img:'assets/ART_V2/story_cast/sakuya_talk.webp'},{qid:'q233',name:'燃え上がるSHION∞',sub:'第4部第9章・鳴海座の最後の舞台',img:''},{qid:'q287',name:'市守り・常夜（素）',sub:'第5部第8章・灯の市の跡',img:'assets/ART_V2/story_cast/tokoyo_talk.webp'},{qid:'q291',name:'燃える常夜',sub:'第5部第9章・灯の市の跡',img:'assets/ART_V2/story_cast/tokoyo_talk.webp'},{qid:'q341',name:'仕立て屋・綴',sub:'第6部第7章・紬ヶ丘のお焚き上げ祭',img:'assets/ART_V2/story_cast/tsuzuri_talk.webp'},{qid:'q347',name:'火のつきかけたハルカ',sub:'第6部第8章・櫓の頂',img:'assets/ART_V2/story_cast/kirishima_haruka_talk.webp'},{qid:'q401',name:'夜市のイブキ',sub:'第7部第7章・閉じ市の夜',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q407',name:'燃えるイブキ',sub:'第7部第8章・白い火',img:'assets/ART_V2/story_cast/ibuki_talk.webp'},{qid:'q467',name:'白い火の槐',sub:'第8部第8章・雪待の社',img:'assets/ART_V2/story_cast/enju_talk.webp'},{qid:'q521',name:'燃えるハルカ',sub:'第9部第7章・宵星の浜',img:'assets/ART_V2/story_cast/kirishima_haruka_talk.webp'}];}
 function startBossTrial(qid){
   if(view!=='records'||!S.gameStarted)return;
   if(!bossTrials().some(t=>t.qid===qid))return;
-  startBattle(qid,null,'boss-trial');
-  if(!battle||!battle.preview)return;
-  battle.bossTrial=true;
-  if(battle.turnBattle&&typeof tbNewWave==='function'){battle.wave=battle.totalWaves-1;tbNewWave(QUEST_BY_ID[qid]);}
+  // v1.01.4.0: 試遊では、育っていない編成でも最初の一撃で全滅しないよう、開始直後の被ダメージを止め、味方を敵の強さに合わせて補正する（試遊の中だけ）
+  const pim=passiveIncomingMultiplier;passiveIncomingMultiplier=()=>0;
+  try{
+   startBattle(qid,null,'boss-trial');
+   if(!battle||!battle.preview)return;
+   battle.bossTrial=true;
+   if(battle.turnBattle&&typeof tbNewWave==='function'){battle.wave=battle.totalWaves-1;tbNewWave(QUEST_BY_ID[qid]);}
+   const foes=(battle.enemies||[]).filter(e=>e.hp>0);
+   const maxAtk=Math.max(1,...foes.map(e=>Number(e.atk)||0));
+   const minMax=Math.max(1,Math.min(...battle.allies.map(a=>Number(a.max)||1)));
+   const hpK=Math.max(1,Math.ceil(maxAtk*5/minMax));
+   const bossHp=Math.max(1,...foes.filter(e=>e.kind==='boss'&&Number(e.max)<1e8).map(e=>Number(e.max)||1));
+   const avgAtk=Math.max(1,battle.allies.reduce((s,a)=>s+(Number(a.atk)||1),0)/battle.allies.length);
+   const atkK=Math.max(1,bossHp/24/avgAtk);
+   for(const a of battle.allies){a.max=Math.round(a.max*hpK);a.hp=a.max;a.atk=a.atk*atkK;}
+  }finally{passiveIncomingMultiplier=pim;}
   render();
 }
-function bossTrialCard(){return `<section class="card pad boss-trial-card" aria-label="ボス戦の試遊"><div><span class="v025-demo-label">BOSS TRIAL</span><h3>ボス戦の試遊</h3><p>今の4人編成で、ボスの最終ウェーブから戦えます。登場演出・掛け合い・第2形態・必殺技・専用BGMを確認できます。依頼の解放条件は必要ありません。<strong>報酬・依頼の進行・セーブデータは変わりません。</strong></p></div><div class="boss-trial-list">${bossTrials().map(t=>`<button type="button" class="boss-trial-btn" onclick="startBossTrial('${t.qid}')"><img src="${t.img}" alt=""><span><b>${t.name}</b><small>${t.sub}</small></span></button>`).join('')}</div></section>`;}
+function bossTrialCard(){return `<section class="card pad boss-trial-card" aria-label="ボス戦の試遊"><div><span class="v025-demo-label">BOSS TRIAL</span><h3>ボス戦の試遊</h3><p>今の4人編成で、ボスの最終ウェーブから戦えます。登場演出・掛け合い・第2形態・必殺技・専用BGMを確認できます。依頼の解放条件は必要ありません。<strong>報酬・依頼の進行・セーブデータは変わりません。</strong></p></div><div class="boss-trial-list">${bossTrials().map(t=>`<button type="button" class="boss-trial-btn" onclick="startBossTrial('${t.qid}')">${t.img?`<img src="${t.img}" alt="">`:`<span class="boss-trial-noimg" aria-hidden="true" style="display:grid;place-items:center;width:56px;height:56px;border-radius:12px;background:#2a2340;color:#f3c66a;font-size:26px;flex:none">◈</span>`}<span><b>${t.name}</b><small>${t.sub}</small></span></button>`).join('')}</div></section>`;}
 function startTurnTraining(){
   if(view!=='records'||!S.gameStarted)return;
   // UI-only: short landscape view opens the already-available experimental two-column mode.
