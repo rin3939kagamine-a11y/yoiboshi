@@ -92,6 +92,7 @@ const AudioDirector=(()=>{
      bossEncounter&&questId==='q28'?'saya_boss':
      bossEncounter&&['q35','q40','q45'].includes(questId)?'aoi_boss':
      bossEncounter&&questId==='q46'?'ruri_boss':
+     bossEncounter&&['q565','q577','q589'].includes(questId)?'boss':
      (questId==='q6'||questId==='q12')?'boss':'battle';
    else if(view==='city'||view==='investigation')key='map';
    else if(view==='talk'||view==='date'||view==='notebook')key='daily';
