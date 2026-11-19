@@ -84,7 +84,7 @@ const AudioDirector=(()=>{
    // Named boss themes begin only when the actual final-wave boss has appeared.
    // All other waves and battles keep their previous tracks.
    if(view==='combat')key=bossEncounter&&(questId==='q12'||questId==='q173')?'sakuya_boss':
-     bossEncounter&&(questId==='q17'||questId==='q34'||questId==='q401'||questId==='q407')?'ibuki_boss':
+     bossEncounter&&(questId==='q17'||questId==='q34'||questId==='q401'||questId==='q407'||questId==='q769')?'ibuki_boss':
      bossEncounter&&(questId==='q24'||questId==='q347'||questId==='q521')?'haruka_boss':
      bossEncounter&&(questId==='q233'||questId==='q709')?'shion_boss':
      bossEncounter&&questId==='q81'?'touko_boss':
@@ -92,7 +92,7 @@ const AudioDirector=(()=>{
      bossEncounter&&questId==='q28'?'saya_boss':
      bossEncounter&&['q35','q40','q45'].includes(questId)?'aoi_boss':
      bossEncounter&&questId==='q46'?'ruri_boss':
-     bossEncounter&&['q565','q577','q589','q625','q632','q649','q685','q697'].includes(questId)?'boss':
+     bossEncounter&&['q565','q577','q589','q625','q632','q649','q685','q697','q745','q757'].includes(questId)?'boss':
      (questId==='q6'||questId==='q12')?'boss':'battle';
    else if(view==='city'||view==='investigation')key='map';
    else if(view==='talk'||view==='date'||view==='notebook')key='daily';
