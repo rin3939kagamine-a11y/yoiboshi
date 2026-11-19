@@ -7,7 +7,7 @@
 (function bossDirector(){
  'use strict';
  if(typeof tbEnemyMove!=='function'||typeof tbNewWave!=='function')return;
- const TALK=id=>`assets/ART_V2/story_cast/${id==='touko'?'touko_true':id}_talk.webp?v=1.02.4.0`;
+ const TALK=id=>`assets/ART_V2/story_cast/${id==='touko'?'touko_true':id}_talk.webp?v=1.02.5.0`;
  const FACE=id=>`assets/ART_V2/face_icons/${id}.webp`;
  const BOSSES={
   q12:{id:'sakuya',name:'朔夜',title:'黒い星灯の契約者',art:'assets/enemies/sakuya_battle.webp',hp:2.0,

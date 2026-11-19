@@ -26,7 +26,7 @@ function symbolReactionKindV0500(cue){
 }
 function symbolReactionAssetV0500(id,opts={}){
  if(opts.legacyNpcHaruka===true&&id==='haruka')
-  return 'assets/ART_V2/story_cast/haruka_talk.webp?v=1.02.4.0';
+  return 'assets/ART_V2/story_cast/haruka_talk.webp?v=1.02.5.0';
  if(typeof artV2TalkCropV0500==='function')return artV2TalkCropV0500(id);
  const isNew=SYMBOL_REACTION_NEW_V0500.includes(id);
  return (isNew?'assets/ART_V2/upper_body/':SYMBOL_REACTION_CROP_ROOT_V0500)+id+'.webp?v='+(id==='touko'||id==='touko_true'?'0.99.5.0':'0.50.0.1');
