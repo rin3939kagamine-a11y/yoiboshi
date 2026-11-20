@@ -3200,3 +3200,6 @@ body:has(.combat-page .wave-battle:not(.qcin-active)) .combat-page {
 
 /* Quest sheet is modal: the fixed wallet header must not intercept its close button on compact displays. */
 body:has(.qmap-sheet) .topbar,body:has(.qmap-sheet) .topbar *{pointer-events:none!important}
+
+/* v1.07.9.3: 夜テーマ(os-on)で明るい文字色が白いお知らせ枠に継承され、タイトルと本文が見えなかったのを修正 */
+.overlay .dialog{color:#243853}
