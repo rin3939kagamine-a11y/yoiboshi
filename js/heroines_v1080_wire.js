@@ -1,0 +1,1 @@
+(function(){if(typeof ART_V2==='undefined'||typeof NEW_HERO_IDS_V1080==='undefined')return;for(const id of NEW_HERO_IDS_V1080)ART_V2.full_body[id]='assets/ART_V2/full_body/'+id+'.png?v=20261120-v1080';})();
