@@ -283,9 +283,12 @@ function hasExpressionArt(personId,face='normal'){
 // Ver.0.50.0.1 — additive, reversible conversation-only crop registry.
 // Original ART_V2.upper_body, ART_EXPRESSIONS and their files remain untouched.
 // ichika: approved dynamic crop; juri: current design provisional until Aries is complete.
+const ART_V2_TALK_R_V1=new Set(["ageha","akane","anzu","aoi","chihiro","chinatsu","chiyo","cocoa","ena","erika","fumika","hiyori","hotaru","ichika","jun","juri","kaede","kagari","kaname","karen","kirari","koharu","koyori","kurumi","kyoko","lilith","luna","mai","makoto","marin","maron","meru","milku","minori","mio","miyabi","mizuki","momoka","nagi","natsume","nazuna","noel","reiko","reina","riko","ritsu","saeko","saki","sanae","sena","shino","shizuku","suiran","towa","tsubaki","yui","yume","yuriko","yuzu"]);
 function artV2TalkCropV0500(id){
  if(typeof SYMBOL_REACTION_EXISTING_V0500==='undefined'||typeof SYMBOL_REACTION_NEW_V0500==='undefined')return '';
  if(SYMBOL_REACTION_NEW_V0500.includes(id))return 'assets/ART_V2/upper_body/'+id+'.webp?v=0.50.0.1';
+ // v1.07.9.4: 既存キャラの会話絵をRカードの服装に（SR服の切り抜きから差し替え）。shioはR絵が別人のため従来どおり。
+ if(ART_V2_TALK_R_V1.has(id))return 'assets/ART_V2/talk_r_v1/'+id+'.webp?v=1.07.9.4';
  if(SYMBOL_REACTION_EXISTING_V0500.includes(id))return 'assets/ART_V2/upper_body_crops_v0500/'+id+'.webp?v='+(id==='touko'||id==='touko_true'?'0.99.5.0':'0.50.0.1');
  return '';
 }
