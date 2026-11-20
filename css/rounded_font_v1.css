@@ -1,0 +1,5 @@
+/* 丸みのあるフォントに統一（Zen Maru Gothic。読み込めないときはiPhone/Macのヒラギノ丸ゴ、M PLUS Rounded 1cの順） */
+:root{--yb-round:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Maru Gothic Pro","M PLUS Rounded 1c","BIZ UDPGothic","Yu Gothic",system-ui,sans-serif}
+html body,html body *:not(svg):not(svg *){font-family:var(--yb-round)!important}
+:root{--nt-serif:var(--yb-round)}
+body{font-weight:500}
