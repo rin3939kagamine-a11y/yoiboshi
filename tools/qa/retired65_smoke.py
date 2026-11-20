@@ -124,14 +124,14 @@ try:
       }""",[MAP,PROTECTED])
       assert not errors, errors[:10]
       assert result['removedCount']==65 and result['targetCount']==65,result
-      assert result['heroCount']==196 and result['uniqueHeros']==196,result
-      assert result['normalPool']==[180,106,56,57],result
-      assert result['totalR']==223,result
+      assert result['heroCount']==216 and result['uniqueHeros']==216,result
+      assert result['normalPool']==[200,196,56,57],result
+      assert result['totalR']==243,result
       assert result['rates']=={'R':60,'SR':25,'SSR':10,'UR':5},result
       assert result['newRates']=={'R':80,'SR':0,'SSR':15,'UR':5},result
       assert not result['protectedMissing'] and not result['problems'],result
       (OUT/f'{view}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8')
-      print(f'PASS {view}: 65 remaps, 196 heroines, normal R180, all R223, 23 protected, rates unchanged')
+      print(f'PASS {view}: 65 remaps, 216 heroines, normal R200, all R243, 23 protected, rates unchanged')
       ctx.close()
     browser.close()
 finally:
