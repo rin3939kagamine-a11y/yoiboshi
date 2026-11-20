@@ -11,7 +11,9 @@
  function member(a){
    const u=unit(a.id),id=u.person;
    const color=typeof tbColorForUnit==='function'?({'red':'#ff656d','blue':'#67afff','green':'#7cce94','yellow':'#ffe082','white':'#f2f4ff'}[tbColorForUnit(a.id)]||u.color):u.color;
-   return {id,name:person(u).name,color,fallbackSrc:characterIcon(id)};
+   // Not every playable unit has a chibi PNG; never turn its standee into a round token.
+   const standing=(typeof ART_V2!=='undefined'&&ART_V2.full_body?.[id])||(typeof characterPortrait==='function'?characterPortrait(id):characterIcon(id));
+   return {id,name:person(u).name,color,fallbackSrc:standing};
  }
  function reset(clearEvents=true){if(api){api.destroy();}api=null;node=null;context=null;linkedBattle=null;mountSize=0;if(clearEvents)events.length=0;}
  function enqueue(event){if(visible())events.push({...event,b:current()});if(events.length>30)events.splice(0,events.length-30);}
