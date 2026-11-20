@@ -113,7 +113,7 @@ const V0960_CHARACTERS=Object.freeze([
   "id": "haruno_hana",
   "name": "春野 はな",
   "age": 24,
-  "job": "花屋の店員",
+  "job": "東雲商店街の花屋の店員（千尋の店、まろんの同僚）",
   "person": "おっとり華やかで、花の名前をよく間違える",
   "favorite": "季節の花束と色を重ねたラッピング",
   "weak": "花の名前を言い間違えてしまうこと",
