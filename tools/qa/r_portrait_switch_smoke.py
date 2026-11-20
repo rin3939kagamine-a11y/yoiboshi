@@ -82,7 +82,7 @@ try:
    }""")
    assert result["mappedPersons"]==59 and result["approvedCount"]==59,result
    assert result["missingApproved"]==[],result
-   assert result["allR"]==223 and result["normalR"]==180 and result["totalHeroes"]==196,result
+   assert result["allR"]==243 and result["normalR"]==200 and result["totalHeroes"]==216,result
    assert result["redirected"]>0 and result["mappedR"]>=59,result
    assert not result["mismatched"] and not result["brokenFallback"] and not result["nonRChanged"],result
    assert all(o["id"] and o["art"]==o["expected"] and not o["hasDifferentRArt"] for o in result["originals"]),result
