@@ -56,8 +56,7 @@
     var slots = {};
     var pos = FORMATION[Math.min(5, Math.max(1, members.length))];
     members.slice(0,5).forEach(function(m, i){
-      var
- p = pos[i];
+      var p = pos[i];
       var s = el('div','yc-slot');
       s.style.left = p[0]+'%'; s.style.bottom = p[1]+'%'; s.style.width = size+'%';
       s.style.zIndex = p[1] < 20 ? 20 : 10;
