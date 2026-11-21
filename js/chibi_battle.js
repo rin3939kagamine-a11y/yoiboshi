@@ -16,6 +16,7 @@
                    'tsubaki','kaede','erika','kaname',  // 椿・楓・エリカ・カナメ
                    'aika','airi','akagi_akari','aki','ando_rio','anzai_rin','arisa','asagiri_rara','asuka','ayane','ayu','azusa','chako','chiaki','chihiro','chikage','chisato','chitose','chiyozaki_suzuha','chizuru','emiri','fujiwara_shouko','fuyutsuki_haru','ginjo_cecil','haruka','haruno_hana','hasegawa_honoka','hatsune','hayakawa_aoba','himari','himeka','himemiya_riria','himeno','hinako','honjo_iroha','hono','hoshimiya_nemu','ichijo_maki','kanna','kanoko','kanon','kaori','karen','kasumi','kawaguchi_mana','kazusa','kei','kirie','kohaku','kokoro','komachi','komiya_anna','komugi','konatsu','kondo_momiji','kotoha','kozue','kudo_karin','kumano_miku','kuromiya_sera','kurose_noa','kurumi','leona','lira','madoka','mahiru','manatsu','mao','mashiro','maya','michiru','miharu','mikan','miki','mikoto','mimi','minami','minase_ririka','minto','mira','mirei','misaki','mitsuki','miura_nanami','miyabi','miyu','mizore','mizuno_miyuki','moe','nagomi','nana','nanoka','nao','natsukawa_yu','nekomiya_rara','nene','nishizawa_shiori','nodoka','noi','nonoka','noriko','nozomi','onishi_ria','raimu','ramu','ran','rara','reika','ren','ribon','rinka','rion','risa','rise','ritsu','roze','rui','ruru','ryo','sakakibara_kaho','sakura','sakuraba_renka','sanae','satsuki','sawada_sango','segawa_rei','seira','seri','setsuna','shieru','shigure',  // 新規ちび追加分
                    'shimotsuki_kirara','shinoda_mei','shiromiya_kotori','sora','subaru','sumika','sumire','suzumiya_mia','suzune','takashiro_ruka','tamaki','tia','todo_megumi','tokiwa_aone','tomoe','towa','tsukasa','tsukimiya_ayaka','tsumugi','ueda_kana','ui','urara','wakaba','yozakura_riri','yue','yukari','yukino','yumemiya_yua','yuna','yura','yuria','yuriko','yuu',  // 新規ちび追加分（残り33人）
+                   'tanabe_hinata','yano_sana','kuroda_yuki','futaba_hiiro','futaba_shiroha','hasebe_kairi','hayashi_meirei','ishikawa_an','miyoshi_amane','oikawa_shion','ogawa_haruhi','shirai_tsubasa','tomita_natsuki','morimoto_yuri','fujii_shizune','yasuhara_ito','yanagida_kotone','ninomiya_sayo','suzuhara_hinano','enomoto_sara','mishima_yuuka',  // 新規21人
                    'saki','yuzu','reiko','chiyo','sena','mizuki','meru','kagari','nazuna','anzu','natsume','hotaru','minori','ichika','saeko','juri']; // クラブ組・追加ヒロイン
   // ユニットIDで呼ばれても、キャラIDの画像を使う
   var ALIASES = { hiyori:'hiyori', koyori:'koyori', kirari:'kirari', maron:'maron',
@@ -29,98 +30,4 @@
   // 並び位置(left%, bottom%)。後列3・前列2。前列ほど手前(z-indexが上)
   var FORMATION = {
     1:[[18,20]],
-    2:[[8,36],[22,10]],
-    3:[[4,38],[22,40],[13,8]],
-    4:[[4,40],[22,42],[9,8],[27,10]],
-    5:[[2,40],[18,42],[34,40],[9,8],[26,10]]
-  };
-  var HIT_DELAY = 230; // 攻撃の動きで、相手に当たる瞬間(ms、等速のとき)
-
-  function has(id){ return CHIBI_IDS.indexOf(key(id)) >= 0; }
-  function src(id){ return CHIBI_DIR + key(id) + '_chibi.png'; }
-  function el(tag, cls){ var e=document.createElement(tag); if(cls) e.className=cls; return e; }
-  function play(node, cls){
-    node.classList.remove(cls); void node.offsetWidth; node.classList.add(cls);
-    node.addEventListener('animationend', function f(){ node.classList.remove(cls); node.removeEventListener('animationend', f); });
-  }
-
-  /* members: [{id, color, fallbackSrc, name}]  color=灯火の色、fallbackSrc=ちびが無いときの顔アイコン
-   * options: {size:25(ステージ幅に対する%), speed:1, dir:画像フォルダ, onSelect:function(id){}} */
-  function mount(stage, members, options){
-    options = options || {};
-    var speed = options.speed || 1;
-    var size = options.size || 25;
-    var dir = options.dir || CHIBI_DIR;
-    stage.classList.add('yc-stage');
-    var slots = {};
-    var pos = FORMATION[Math.min(5, Math.max(1, members.length))];
-    members.slice(0,5).forEach(function(m, i){
-      var p = pos[i];
-      var s = el('div','yc-slot');
-      s.style.left = p[0]+'%'; s.style.bottom = p[1]+'%'; s.style.width = size+'%';
-      s.style.zIndex = p[1] < 20 ? 20 : 10;
-      s.style.setProperty('--yc-c', m.color || '#ffe9a8');
-      var ring = el('div','yc-ring');
-      var actor = el('div','yc-actor');
-      var img = el('img');
-      img.alt = ''; img.draggable = false;
-      if(has(m.id)){ img.src = dir + key(m.id) + '_chibi.png'; }
-      else { actor.classList.add('yc-fallback'); img.src = m.fallbackSrc || ''; }
-      img.onerror = function(){ if(m.fallbackSrc && img.src.indexOf(m.fallbackSrc) < 0){ actor.classList.add('yc-fallback'); img.src = m.fallbackSrc; } };
-      actor.appendChild(img);
-      var hit = el('button','yc-hit'); hit.type='button';
-      hit.setAttribute('aria-label', (m.name || m.id) + 'を選ぶ');
-      hit.onclick = function(){ if(options.onSelect) options.onSelect(m.id); };
-      s.appendChild(ring); s.appendChild(actor); s.appendChild(hit);
-      stage.appendChild(s);
-      slots[m.id] = {slot:s, actor:actor, pos:p};
-    });
-    stage.style.setProperty('--yc-speed', speed);
-
-    function get(id){ return slots[id]; }
-    function wait(ms){ return new Promise(function(r){ setTimeout(r, ms/speed); }); }
-
-    var api = {
-      /* 攻撃:前に跳ねる。戻り値のPromiseは「当たる瞬間」に解決する→そこでダメージ表示 */
-      attack: function(id){ var o=get(id); if(!o) return Promise.resolve(); play(o.actor,'yc-attack'); return wait(HIT_DELAY); },
-      /* 被ダメ:揺れて赤く光る */
-      hurt: function(id){ var o=get(id); if(o) play(o.actor,'yc-hurt'); },
-      /* 灯す:灯火の色で光り、光の粒が立ちのぼる */
-      glow: function(id){
-        var o=get(id); if(!o) return;
-        play(o.actor,'yc-glow');
-        for(var k=0;k<7;k++){
-          var sp = el('div','yc-spark');
-          sp.style.left = (25+Math.random()*45)+'%'; sp.style.bottom = (5+Math.random()*40)+'%';
-          sp.style.animationDelay = (k*0.08/speed)+'s';
-          o.slot.appendChild(sp);
-          (function(n){ setTimeout(function(){ n.remove(); }, 1500/speed); })(sp);
-        }
-      },
-      /* 灯火の状態のあいだ光る縁を出す(on=true/false) */
-      setLit: function(id, on){ var o=get(id); if(o) o.slot.classList.toggle('yc-lit', !!on); },
-      /* 手番・選択中の足元の輪 */
-      setActive: function(id){ Object.keys(slots).forEach(function(k){ slots[k].slot.classList.toggle('yc-active', k===id); }); },
-      /* 戦闘不能・復帰 */
-      ko: function(id){ var o=get(id); if(o) o.slot.classList.add('yc-ko'); },
-      revive: function(id){ var o=get(id); if(o) o.slot.classList.remove('yc-ko'); },
-      /* 数字(kind: 'dmg' | 'heal') */
-      popNumber: function(id, text, kind){
-        var o=get(id); if(!o) return;
-        var n = el('div','yc-num'+(kind==='heal'?' yc-heal':''));
-        n.textContent = text;
-        n.style.left = (o.pos[0] + size*0.35)+'%';
-        n.style.bottom = (o.pos[1] + size*1.1)+'%';
-        stage.appendChild(n);
-        setTimeout(function(){ n.remove(); }, 950/speed);
-      },
-      setSpeed: function(x){ speed = x || 1; stage.style.setProperty('--yc-speed', speed); },
-      /* 画像の枠を表示(確認用) */
-      showFrames: function(on){ stage.classList.toggle('yc-frames', !!on); },
-      destroy: function(){ Object.keys(slots).forEach(function(k){ slots[k].slot.remove(); }); slots = {}; }
-    };
-    return api;
-  }
-
-  window.YoiChibi = { ids: CHIBI_IDS, has: has, src: src, mount: mount, FORMATION: FORMATION };
-})();
+  
