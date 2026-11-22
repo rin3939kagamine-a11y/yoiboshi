@@ -1,0 +1,14 @@
+/* v1.08.0.0: 横向きのスマホ（高さ560px以下）で、物語のセリフ欄が画面の下にはみ出さないようにする。
+   これまでは物語の画面が最低520pxの高さで作られていて、高さ390pxほどの横画面では毎行スクロールが必要だった。 */
+@media (orientation:landscape) and (max-height:560px){
+  .vn-story.story-panel{min-height:0!important;height:100dvh!important;}
+  .vn-story .story-dialogue{min-height:0!important;height:auto!important;bottom:8px!important;padding:10px 18px 8px!important;max-height:52dvh;overflow-y:auto;overscroll-behavior:contain;}
+  .vn-story .vn-dialogue-head{margin-bottom:2px!important;}
+  .vn-story .story-line{font-size:15px!important;line-height:1.6!important;margin:4px 0!important;}
+  .vn-story .vn-dialogue-actions{margin-top:2px!important;}
+  .vn-story .story-dialogue .btn{min-height:36px!important;padding-top:6px!important;padding-bottom:6px!important;}
+  .vn-story .vn-toolbar{top:6px!important;}
+  /* 立ち絵は顔から胸までがセリフ欄の上に見えるよう、下へずらす量をなくす */
+  .vn-story .story-cast .expr-character-img,.vn-story .onb-cast img{translate:0 0!important;}
+  .vn-story .vn-tool{min-height:32px!important;padding:4px 12px!important;}
+}

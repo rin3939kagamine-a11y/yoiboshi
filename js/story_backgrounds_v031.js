@@ -3128,7 +3128,11 @@ function storyBackgroundFile(bg, time){
   if(bg === 'toushitsu') return STORY_BG_FILES.toushitsu;
   if(bg === 'shoko') return STORY_BG_FILES.shoko;
   if(bg === 'soudan' && time === 'dusk') time = 'day';
-  return STORY_BG_FILES[`${bg}:${time}`] || null;
+  if(STORY_BG_FILES[`${bg}:${time}`]) return STORY_BG_FILES[`${bg}:${time}`];
+  // v1.08.0.0: 指定の時間帯の絵がない場所（仕立て屋の夜など）は、同じ場所の近い時間帯の絵で代わりに出す。
+  const near = {night:['late','dusk','day','dawn'], late:['night','dusk','day','dawn'], dusk:['night','day','late','dawn'], day:['dusk','dawn','night','late'], dawn:['day','dusk','night','late'], pre:['live'], live:['pre']}[time] || ['night','dusk','day','late','dawn','pre','live'];
+  for(const t of near) if(STORY_BG_FILES[`${bg}:${t}`]) return STORY_BG_FILES[`${bg}:${t}`];
+  return null;
 }
 
 // v0.65.3.0: 第3部・湯ノ花の専用背景。画像がそろったものから YUNOHANA_BG_READY に足していく。
@@ -3188,11 +3192,50 @@ function placeBackground(storyId){
   try { place = romanceScript(storyId)?.place || ''; } catch (_) { return null; }
   if(!place) return null;
   const hit = STORY_BG_BY_PLACE.find(([re]) => re.test(place));
-  if(!hit) return null;
+  if(!hit) return placeBackgroundMore(place);
   let [, bg, time] = hit;
   if(/夜|深夜|ネオン/.test(place)){
     for(const t of ['night','late']) if(STORY_BG_FILES[`${bg}:${t}`]) { time = t; break; }
   }
+  return storyBackgroundFile(bg,time);
+}
+
+// v1.08.0.0: 交流・出会いの話の場所（「パティスリー桃瀬・閉店後」など）にも、今ある背景を当てる。
+// 上の表で見つからなかったときだけ使う（これまで背景が出ていた話は変わらない）。
+const STORY_BG_BY_PLACE_MORE = [
+  [/湯ノ花|まとや|湯けむり/, 'yn_yukemuri','dusk'],
+  [/水族館|大水槽|クラゲ|飼育員/, 'suizokukan','night'],
+  [/プラネタリウム|ドーム/, 'planetarium','night'],
+  [/遊園地|テーマパーク|パレード|開園|着ぐるみ|お化け屋敷/, 'yuenchi','night'],
+  [/ルビー/, 'ruby','dusk'],
+  [/バー|カクテル|ワイン|ラウンジ|夜景|Encore|パーティールーム/, 'lumiere','night'],
+  [/楽屋|控室|ライブハウス|ライブ|リハーサル|バンド|ボーカル|ベース|ギター/, 'dock','pre'],
+  [/劇場|ホール|舞台|客席|寄席|ミュージカル|聖堂|オルガン/, 'gallery_stage','day'],
+  [/美術館|展示室|展示館|学芸|映画|スクリーン/, 'gallery','dusk'],
+  [/練習室|練習場|スタジオ|編集室|配信|声優|作曲|DTM|宅録|道場|演武|ダンス|ジム/, 'studio','day'],
+  [/大学|ゼミ|研究室|学食|学院|予備校|講義|キャンパス|保育/, 'kyoushitsu','day'],
+  [/書斎|古本|図書|返却台|資料館|栞|漫画家|絵本作家/, 'toshokan','day'],
+  [/市庁舎|市長|市役所/, 'shiyakusho','night'],
+  [/設営現場|イベント会場|イベント会社|点灯式|お祭り|縁日/, 'matsuri','dusk'],
+  [/新幹線|ホーム(?!センター)|列車|観光バス|案内所/, 'ekimae','day'],
+  [/農園|いちご|ハウス|畑|農道|植物園|温室|園芸/, 'tsumugi_nakaniwa','day'],
+  [/甲板|船室|かもめ丸|遊覧船|入り江|岬|浜|海|砂浜|海岸|堤防|潮風|(?<!宵)波|港|遊歩道|ボート|釣り/, 'kaihin','dusk'],
+  [/丘|展望台|見渡す|屋上/, 'higamine','dusk'],
+  [/蔦の館|洋館|ガゼボ|旧居留地|結婚式|ブライダル/, 'kaede','dusk'],
+  [/宵星亭|庭園|銭湯|月の湯|料亭|和菓子|練り切り|抹茶|書道|茶室|荘|縁側|帳場|旅館|旧家/, 'ryotei','day'],
+  [/カフェ|喫茶|茶房|翠月|星屑亭|ハニーポット|ラテ|コーヒー|珈琲|パンケーキ|甘味|白玉|ティー|クレープ|パティスリー|ケーキ|クロワッサン|パン|ドリンク|ジュース|とまり木|食堂|厨房|台所|レストラン|ビストロ|ピザ|調理台|キッチン|メイド/, 'kissa','day'],
+  [/店|ショップ|ブティック|アパレル|古着|服|サロン|美容室|雑貨|花屋|宝石|カウンター|骨董|アトリエ|工房|毛糸|裁断台|調香|Lien|黒薔薇館|ローズガーデン|ドール|ネイル|作業台|作業室|仕立て|ミルクリボン|こたつ猫|トリマー/, 'shop','day'],
+  [/病院|歯科|郵便局|銀行|信用金庫|法律事務所|事務所|会議室|宵星署|刑事|オフィス|会社/, 'soudan','day'],
+  [/ゲーセン|ゲームセンター|プリ機|eスポーツ|ゲーム/, 'shotengai','night'],
+  [/高架下|歩道橋|コンビニ|帰り道|街角|路地|夜道|住宅街|通り|坂|商店街|公園|広場|ベンチ|スケート|市場|縁のある場所|知らない/, 'shotengai','dusk']
+];
+function placeBackgroundMore(place){
+  const hit = STORY_BG_BY_PLACE_MORE.find(([re]) => re.test(place));
+  if(!hit) return null;
+  let [, bg, time] = hit;
+  if(/夜明け(?!前)|早朝|朝焼け|朝/.test(place)) time = 'dawn';
+  else if(/深夜|閉店後|閉館後|閉園後|夜明け前|夜/.test(place)) time = 'night';
+  else if(/夕|夕暮れ|夕方|夕陽|閉店前|閉店間際/.test(place)) time = 'dusk';
   return storyBackgroundFile(bg,time);
 }
 
