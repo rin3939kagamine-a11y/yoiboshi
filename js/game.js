@@ -5706,8 +5706,8 @@ function investigationPage(){
  const at=st.phase==='companion'?0:st.phase==='interview'?1:st.phase==='deduce'?2:3;
  const stepper=`<div class="inq-steps">${stages.map((label,i)=>`<div class="${i===at?'current':i<at?'done':''}"><i>${i<at?'✓':i+1}</i><span>${esc(label)}</span></div>`).join('')}</div>`;
  const companion=st.hero?`<div class="inq-companion"><img src="${characterIcon(st.hero)}" alt=""><div><strong>${esc(PEOPLE[st.hero].name)}</strong><small>${esc(q.companion[st.hero]||'一緒に手がかりを整理します。')}</small></div></div>`:'';
- const skill=st.hero&&['interview','deduce'].includes(st.phase)?`<button class="inq-skill" ${st.skillUsed?'disabled':''} onclick="useInvestigationSkill()"><strong>特技：${esc(INVESTIGATION_HERO_SKILLS[st.hero].name)}</strong><small>${st.skillUsed?'この調査では使用済み':esc(INVESTIGATION_HERO_SKILLS[st.hero].text)}</small></button>`:'';
- const notice=st.skillMessage?`<p class="inq-skill-notice" role="status">${esc(st.skillMessage)}</p>`:'';
+ const skill=st.hero&&!investigationDialogueLines(st,q).length&&['interview','deduce'].includes(st.phase)?`<button class="inq-skill" ${st.skillUsed?'disabled':''} onclick="useInvestigationSkill()"><strong>特技：${esc(INVESTIGATION_HERO_SKILLS[st.hero].name)}</strong><small>${st.skillUsed?'この調査では使用済み':esc(INVESTIGATION_HERO_SKILLS[st.hero].text)}</small></button>`:'';
+ const notice=st.skillMessage&&!investigationDialogueLines(st,q).length?`<p class="inq-skill-notice" role="status">${esc(st.skillMessage)}</p>`:'';
  let content='';
  const sceneLines=investigationDialogueLines(st,q),sceneLine=sceneLines[investigationDialogue?.step||0];
  if(sceneLine){
@@ -5730,7 +5730,7 @@ function investigationPage(){
   }
  }
  else if(st.phase==='echo')content=`<div class="inq-echo"><div class="inq-echo-light">✧</div><h2>未練の響きがほどけていく</h2><p>${esc(q.release[st.echoIndex])}</p><small>${st.echoIndex+1} / ${q.release.length}</small><button class="btn primary full" onclick="advanceInvestigationEcho()">${st.echoIndex===q.release.length-1?'調査結果へ':'続きを読む　→'}</button></div>`;
- else if(st.phase==='ready')content=`<div class="inq-result ${st.solved?'success':''}"><h2>${st.solved?'弱点を見抜いた！':'手がかりを結びつけられなかった'}</h2><p>${st.solved?(tbSelected()?'未練の弱点色を解明。ターン制では敵の弱点色が戦闘開始時から表示されます。':'現場の未練を読み解いた。戦闘では味方の与ダメージが30%上昇します。'):'推理に必要な証拠が足りないか、仮説が違ったようです。弱点なしで戦闘へ進めます。'}</p>${st.solved&&FLESHOUT_SOLVED_TAILS[st.qid]?`<div class="inq-solved-tail">${FLESHOUT_SOLVED_TAILS[st.qid].map(t=>`<p>${esc(t)}</p>`).join('')}</div>`:''}${st.solved&&st.firstTryBonus?'<p>一発正解：初回クリア時に星晶石＋20</p>':''}${st.hero==='akane'&&st.skillUsed?'<p>朱音の避難誘導：味方の被ダメージ30%減少</p>':''}${battleModeChoiceMarkup(st.qid)}<button class="btn primary full" onclick="startBattle('${st.qid}')">${S.quests?.[st.qid]?.complete?'もう一度出撃する':`弱点${st.solved?'あり':'なし'}で出撃する`}</button></div>`;
+ else if(st.phase==='ready')content=`<div class="inq-result ${st.solved?'success':''}"><h2>${st.solved?'弱点を見抜いた！':'手がかりを結びつけられなかった'}</h2><p>${st.solved?(tbSelected()?'未練の弱点色を解明。ターン制では敵の弱点色が戦闘開始時から表示されます。':'現場の未練を読み解いた。戦闘では味方の与ダメージが30%上昇します。'):'推理に必要な証拠が足りないか、仮説が違ったようです。弱点なしで戦闘へ進めます。'}</p>${st.solved&&FLESHOUT_SOLVED_TAILS[st.qid]?`<div class="inq-solved-tail">${FLESHOUT_SOLVED_TAILS[st.qid].map(t=>`<p>${esc(t)}</p>`).join('')}</div>`:''}${st.solved&&st.firstTryBonus?'<p>正解ボーナス：初回クリア時に星晶石＋20</p>':''}${st.hero==='akane'&&st.skillUsed?'<p>朱音の避難誘導：味方の被ダメージ30%減少</p>':''}${battleModeChoiceMarkup(st.qid)}<button class="btn primary full" onclick="startBattle('${st.qid}')">${S.quests?.[st.qid]?.complete?'もう一度出撃する':`弱点${st.solved?'あり':'なし'}で出撃する`}</button></div>`;
  return `<section class="investigation-view">${head}${stepper}${investigationStageMarkup(st,q)}<div class="inq-body">${st.hero?'':companion}<div class="inq-main">${notice}${content}</div><aside class="inq-side">${skill}${investigationMemo(st)}</aside></div></section>`;
 }
 
