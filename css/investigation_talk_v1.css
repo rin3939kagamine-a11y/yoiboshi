@@ -1,0 +1,23 @@
+/* v1.08.1.0: 調査の聞き込み会話を1画面で読めるようにする（見た目だけ。進行・保存は変えない）。
+   会話中は、舞台の下の枠に同じセリフがもう一度出ていたので、枠には場所名・行数・ボタンだけを残す。 */
+.investigation-view:has(.inq-conversation) .inq-conversation .inq-analysis{display:none!important;}
+.investigation-view:has(.inq-conversation) .inq-conversation{padding:4px 0!important;gap:8px!important;}
+.investigation-view:has(.inq-conversation) .inq-main{min-height:0!important;}
+.investigation-view:has(.inq-conversation) .inq-conversation h2{font-size:16px!important;margin:0 0 4px!important;}
+.investigation-view:has(.inq-conversation) .inq-conversation small{display:block;margin:0 0 8px!important;}
+.investigation-view:has(.inq-conversation) .inq-stage-line p{font-size:15px;line-height:1.65;}
+
+/* 横向きのスマホ：会話中は見出しと進み具合の帯を省き、舞台（背景・立ち絵・セリフ）を画面いっぱいに使う。 */
+@media (orientation:landscape) and (max-height:560px){
+  .investigation-view:has(.inq-conversation) .inq-header p,
+  .investigation-view:has(.inq-conversation) .inq-steps{display:none!important;}
+  .investigation-view:has(.inq-conversation) .inq-header{margin-bottom:0!important;padding-top:0!important;}
+  .investigation-view:has(.inq-conversation) .inq-header h1{font-size:18px!important;margin:0!important;}
+  .investigation-view:has(.inq-conversation) .inq-header small{display:none!important;}
+  .investigation-view:has(.inq-conversation) .inq-stage{height:calc(100dvh - 205px - env(safe-area-inset-bottom))!important;min-height:140px;margin:6px 0 8px!important;}
+  .investigation-view:has(.inq-conversation) .inq-conversation{display:flex!important;flex-direction:row!important;align-items:center;gap:12px;padding:0!important;}
+  .investigation-view:has(.inq-conversation) .inq-main{padding:8px 14px!important;min-height:0!important;}
+  .investigation-view:has(.inq-conversation) .inq-conversation h2{display:none!important;}
+  .investigation-view:has(.inq-conversation) .inq-conversation small{margin:0!important;white-space:nowrap;}
+  .investigation-view:has(.inq-conversation) .inq-conversation .btn{flex:1;max-width:none!important;min-height:40px!important;margin:0!important;}
+}
