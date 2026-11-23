@@ -5294,9 +5294,9 @@ function finishBattle(won){
     else{S.gold+=farmGold(q);S.gems+=farmGems(q);S.grindRuns[q.id]=(S.grindRuns[q.id]||0)+1}
     persist();
     const rewardText=first
-      ? `\n初回報酬：✧ ${q.reward} ／ ◈ ${q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD} ／ 親密度 +4${S.insightRewards?.[q.id]?` ／ 推理成功 +100${S.investigations?.[q.id]?.firstTryBonus?' ／ 一発正解 +20':''}`:''}${investigationCompanionName?` ／ ${investigationCompanionName}の親愛度 +${investigationAffinityGain}（上限100）`:''}`
+      ? `\n初回報酬：✧ ${q.reward} ／ ◈ ${q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD} ／ 親密度 +4${S.insightRewards?.[q.id]?` ／ 推理成功 +100${S.investigations?.[q.id]?.firstTryBonus?' ／ 一発正解 +20':''}`:''}${investigationCompanionName?` ／ ${investigationCompanionName}の親愛度 ${investigationAffinityGain?'+'+investigationAffinityGain:'上限100'}`:''}`
       : `\n周回報酬：✧ ${farmGems(q)} ／ ◈ ${farmGold(q)}`;
-    dialog={title:'全ウェーブ突破！',message:`${battle.totalWaves}ウェーブを突破し、異変を鎮静しました。記録を市役所へ提出済み。${rewardText}${first&&investigationCompanionName?`\n${investigationCompanionName}の親愛度が上がった（+${investigationAffinityGain}）`:''}`};
+    dialog={title:'全ウェーブ突破！',message:`${battle.totalWaves}ウェーブを突破し、異変を鎮静しました。記録を市役所へ提出済み。${rewardText}`};
   }else dialog={title:'作戦失敗',message:`WAVE ${battle.wave+1}/${battle.totalWaves}で隊の活動継続が困難になりました。育成や編成を見直して再挑戦してください。`};
   const next=won&&battle.grind&&battle.grind.repeatLeft>1?{
     repeatLeft:battle.grind.repeatLeft-1,repeatWon:battle.grind.repeatWon+1}:null;
@@ -5579,8 +5579,8 @@ const INVESTIGATION_SCENE_PARTY=Object.freeze({
  q895:['aoi','reina','akane'],q896:['aoi','akane','momoka'],q897:['aoi','reina','momoka'],q898:['aoi','reina','akane'],q899:['aoi','akane','momoka'],q900:['aoi','reina','momoka']
 });
 function investigationSelectableHeroes(qid){
- // Owned and unlocked heroines; case companion keys alone determine recommendations.
- return HERO_IDS.filter(id=>heroineOwned(id)&&heroineStoryRevealed(id));
+ // Every owned heroine is selectable; case companion keys determine recommendations.
+ return HERO_IDS.filter(id=>heroineOwned(id));
 }
 function chooseInvestigationHero(id){
  const st=investigationState(S.currentQuest);if(!st||st.phase!=='companion'||!investigationSelectableHeroes(st.qid).includes(id))return;
