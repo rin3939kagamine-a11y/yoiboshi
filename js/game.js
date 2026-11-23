@@ -5339,6 +5339,42 @@ document.addEventListener('error',event=>{
 },true);
 
 /* Ver.0.13.0.0 — investigation engine. No changes to approved QUESTS/ENEMY_BALANCE. */
+/* Conversation display is transient; S.investigations retains its existing shape. */
+let investigationDialogue=null;
+function investigationDialogueLines(st,q){
+ const scene=investigationDialogue;
+ if(!scene||scene.qid!==st.qid)return [];
+ if(scene.kind==='site'){
+  const site=q.sites[scene.siteIndex];
+  if(!site)return [];
+  const clues=(scene.clues||[]).map(id=>q.clues.find(c=>c.id===id)).filter(Boolean);
+  return [
+   {who:site.name,text:site.line},
+   {who:PEOPLE[st.hero]?.name||'',text:q.companion?.[st.hero]||''},
+   ...clues.map(c=>({who:'手がかり：'+c.title,text:c.text}))
+  ];
+ }
+ if(scene.kind==='wrong')return [
+  {who:'葵',text:st.deductionFeedback||''},
+  {who:PEOPLE[st.hero]?.name||'',text:q.companion?.[st.hero]||''}
+ ];
+ return [];
+}
+function advanceInvestigationDialogue(){
+ const st=investigationState(S.currentQuest),q=st&&INVESTIGATION_CASES[st.qid];
+ if(!st||!q||!investigationDialogue||investigationDialogue.qid!==st.qid)return;
+ investigationDialogue.step++;
+ if(investigationDialogue.step>=investigationDialogueLines(st,q).length)investigationDialogue=null;
+ render();
+}
+function finishLegacyInvestigationFailure(){
+ const st=investigationState(S.currentQuest);
+ if(!st||st.phase!=='deduce'||!(st.failedChoices||[]).length)return;
+ st.phase='ready';st.solved=false;st.firstTryBonus=false;
+ S.quests[st.qid]={...(S.quests[st.qid]||{}),clues:2,complete:false};
+ investigationDialogue={qid:st.qid,kind:'wrong',step:0};
+ persist();render();
+}
 function openInvestigationReview(qid){if(!S.quests?.[qid]?.complete||!investigationState(qid))return;S.currentQuest=qid;view='investigation';render();}
 function investigationFresh(qid){return {qid,phase:'companion',hero:null,chosen:[],clues:[],skillUsed:false,markedIrrelevant:[],removedOption:null,answer:null,solved:false,echoIndex:0,failedChoices:[],rescueUsed:false,skillMessage:'',deductionFeedback:'',firstTryBonus:false}}
 function investigationState(qid){const state=S.investigations?.[qid];return state&&state.qid===qid?state:null}
@@ -5351,6 +5387,7 @@ function startInvestigation(qid){
   S.investigations[qid]=investigationFresh(qid);
   S.quests[qid]={...(S.quests[qid]||{}),clues:0,complete:false};
  }
+ investigationDialogue=null;
  S.currentQuest=qid;citySheetQuest=qid;view='investigation';persist();render();
 }
 // Choose relevant companions from the existing seven skill-bearing investigation heroes.
@@ -5542,6 +5579,7 @@ function investigateAt(index){
  const gained=[];caseData.sites[index].clues.forEach(id=>{addInvestigationClue(st,id);gained.push(id)});
  st.lastClueId=gained[gained.length-1]||null;
  st.skillMessage=`${caseData.sites[index].name}で、手がかりを${gained.length}件見つけた。`;
+ investigationDialogue={qid:st.qid,kind:'site',siteIndex:index,clues:gained,step:0};
  if(st.chosen.length>=investigationInterviewLimit(st))investigationStartDeductions(st);
  AudioDirector.sfx('confirm');persist();render();
 }
@@ -5593,7 +5631,7 @@ function investigationPairHint(st){
 }
 function resolveInvestigation(choice){
  const st=investigationState(S.currentQuest),q=st&&INVESTIGATION_CASES[st.qid];
- if(!st||st.phase!=='deduce'||!q||!q.answers.some(a=>a.id===choice)||choice===st.removedOption||(st.failedChoices||[]).includes(choice))return;
+ if(!st||st.phase!=='deduce'||!q||!q.answers.some(a=>a.id===choice)||choice===st.removedOption||(st.failedChoices||[]).length>0)return;
  if(investigationRealClues(st).length<2){st.deductionFeedback='葵「手がかりの裏付けがまだ足りません。別の場所を調べてください。」';persist();render();return;}
  st.answer=choice;
  if(choice!==q.correct){
@@ -5602,10 +5640,9 @@ function resolveInvestigation(choice){
   const item=real[(st.failedChoices.length-1)%real.length];
   const contextual=q.answerReactions?.[choice];
   st.deductionFeedback=`葵「その仮説は『${item.title}』と噛み合いません。${contextual?contextual+' ':''}別の可能性を考えましょう。」`;
-  if(st.failedChoices.length>=3){
-    st.solved=false;st.phase='ready';
-    S.quests[st.qid]={...(S.quests[st.qid]||{}),clues:2,complete:false};
-  }
+  st.solved=false;st.firstTryBonus=false;st.phase='ready';
+  S.quests[st.qid]={...(S.quests[st.qid]||{}),clues:2,complete:false};
+  investigationDialogue={qid:st.qid,kind:'wrong',step:0};
   AudioDirector.sfx('cancel');persist();render();return;
  }
  st.solved=true;st.firstTryBonus=(st.failedChoices||[]).length===0;
@@ -5653,11 +5690,13 @@ function investigationFace(st){
 function investigationStageMarkup(st,q){
  if(!st.hero)return '';
  const bg=investigationBg(st.qid),face=investigationFace(st);
- const line=st.skillMessage||q.companion?.[st.hero]||'一緒に手がかりを整理します。';
+ const sceneLines=investigationDialogueLines(st,q),sceneLine=sceneLines[investigationDialogue?.step||0];
+ const line=sceneLine?.text||st.skillMessage||q.companion?.[st.hero]||'一緒に手がかりを整理します。';
+ const speaker=sceneLine?.who||PEOPLE[st.hero].name;
  return `<div class="inq-stage"><div class="inq-stage-bg" style="background-image:url('${bg}')" aria-hidden="true"></div>
   <div class="inq-stage-cast">${expressionPortraitMarkup(st.hero,face,`inq:${st.qid}:${st.phase}:${(st.chosen||[]).length}`,{wrapperClass:'story-character',stateClass:'is-speaking',alt:`${PEOPLE[st.hero].name}の立ち絵`,chapterStoryFit:true})}</div>
   <span class="inq-stage-label">${esc(QUEST_BY_ID[st.qid]?.location||'')}</span>
-  <div class="inq-stage-line"><b>${esc(PEOPLE[st.hero].name)}</b><p>${esc(line)}</p></div></div>`;
+  <div class="inq-stage-line"><b>${esc(speaker)}</b><p>${esc(line)}</p></div></div>`;
 }
 function investigationPage(){
  const st=investigationState(S.currentQuest),q=st&&INVESTIGATION_CASES[st.qid],quest=st&&QUEST_BY_ID[st.qid];
@@ -5670,16 +5709,25 @@ function investigationPage(){
  const skill=st.hero&&['interview','deduce'].includes(st.phase)?`<button class="inq-skill" ${st.skillUsed?'disabled':''} onclick="useInvestigationSkill()"><strong>特技：${esc(INVESTIGATION_HERO_SKILLS[st.hero].name)}</strong><small>${st.skillUsed?'この調査では使用済み':esc(INVESTIGATION_HERO_SKILLS[st.hero].text)}</small></button>`:'';
  const notice=st.skillMessage?`<p class="inq-skill-notice" role="status">${esc(st.skillMessage)}</p>`:'';
  let content='';
- if(st.phase==='companion')content=`<h2>誰と一緒に調査する？</h2><p class="inq-small">同行者の特技は1回だけ使えます。恋愛パートの1日3行動は消費しません。</p><div class="inq-hero-grid">${investigationSelectableHeroes(st.qid).map(id=>`<button class="inq-hero" onclick="chooseInvestigationHero('${id}')"><img src="${characterIcon(id)}" alt=""><strong>${esc(PEOPLE[id].name)}</strong><small>${esc(INVESTIGATION_HERO_SKILLS[id].name)}</small></button>`).join('')}</div>`;
+ const sceneLines=investigationDialogueLines(st,q),sceneLine=sceneLines[investigationDialogue?.step||0];
+ if(sceneLine){
+  const last=investigationDialogue.step===sceneLines.length-1;
+  content=`<div class="inq-echo inq-conversation"><h2>${esc(investigationDialogue.kind==='site'?q.sites[investigationDialogue.siteIndex].name:'星灯解析の振り返り')}</h2><div class="inq-analysis"><strong>${esc(sceneLine.who)}</strong><p>${esc(sceneLine.text)}</p></div><small>${investigationDialogue.step+1} / ${sceneLines.length}</small><button class="btn primary full" onclick="advanceInvestigationDialogue()">${last?'調査を続ける':'続きを読む　→'}</button></div>`;
+ }
+ else if(st.phase==='companion')content=`<h2>誰と一緒に調査する？</h2><p class="inq-small">同行者の特技は1回だけ使えます。恋愛パートの1日3行動は消費しません。</p><div class="inq-hero-grid">${investigationSelectableHeroes(st.qid).map(id=>`<button class="inq-hero" onclick="chooseInvestigationHero('${id}')"><img src="${characterIcon(id)}" alt=""><strong>${esc(PEOPLE[id].name)}</strong><small>${esc(INVESTIGATION_HERO_SKILLS[id].name)}</small></button>`).join('')}</div>`;
  else if(st.phase==='interview'){
   const limit=investigationInterviewLimit(st),extra=st.rescueUsed;
   content=`<h2>${extra?'追加の聞き込み：残り1か所':'聞き込み先を3か所選ぶ'}</h2><p class="inq-small">${q.sites.length}か所のうち、${extra?'もう1か所だけ追加調査できます。':'3か所を選んで、証言と記録を照らし合わせましょう。'} 気になる説明を読んで選んでください。</p><div class="inq-site-grid">${q.sites.map((site,i)=>`<button class="inq-site" ${st.chosen.includes(i)||st.chosen.length>=limit?'disabled':''} onclick="investigateAt(${i})"><span>${st.chosen.includes(i)?'✓ 調査済み':`調査先 ${i+1}`}</span><strong>${esc(site.name)}</strong><small>${esc(site.line)}</small></button>`).join('')}</div><p class="inq-small">選択済み ${st.chosen.length}/${limit}</p>`;
  }
  else if(st.phase==='deduce'){
+  if((st.failedChoices||[]).length){
+   content='<div class="inq-echo"><h2>星灯解析：過去の検討結果</h2><p>'+esc(st.deductionFeedback||'')+'</p><button class="btn primary full" onclick="finishLegacyInvestigationFailure()">振り返りを確認して出撃準備へ</button></div>';
+  }else{
   const canRescue=investigationRealClues(st).length<2 && !st.rescueUsed && st.chosen.length<q.sites.length;
   const noClues=investigationRealClues(st).length<2;
-  const hypotheses=q.answers.map((a,i)=>`<button ${a.id===st.removedOption||(st.failedChoices||[]).includes(a.id)?'disabled aria-disabled="true"':''} onclick="resolveInvestigation('${a.id}')"><span>仮説 ${i+1}${(st.failedChoices||[]).includes(a.id)?' · 再検討済み':a.id===st.removedOption?' · 除外':''}</span><strong>${esc(a.text)}</strong></button>`).join('');
-  content=`<h2>星灯解析：未練を見抜く</h2><div class="inq-analysis" role="note"><strong>葵の手がかり整理</strong><p>${esc(investigationPairHint(st))}</p></div><div class="inq-mobile-memo">${investigationMemo(st)}</div><p class="inq-question">${esc(q.prompt)}</p>${st.deductionFeedback?`<p class="inq-feedback" role="status">${esc(st.deductionFeedback)}</p>`:''}<div class="inq-answers">${hypotheses}</div>${canRescue?'<button class="btn outline full inq-rescue" onclick="investigationExtraInterview()">もう一か所、聞き込みに行く（1回のみ）</button>':''}${noClues&&(st.rescueUsed||st.chosen.length>=q.sites.length)?'<button class="btn outline full inq-rescue" onclick="finishInvestigationWithoutClues()">証拠不足のまま出撃準備へ進む</button>':''}<p class="inq-small">${(st.failedChoices||[]).length}回再検討済み。間違えた仮説は選び直せません。</p>`;
+  const hypotheses=q.answers.map((a,i)=>`<button ${a.id===st.removedOption?'disabled aria-disabled="true"':''} onclick="resolveInvestigation('${a.id}')"><span>仮説 ${i+1}${a.id===st.removedOption?' · 除外':''}</span><strong>${esc(a.text)}</strong></button>`).join('');
+  content=`<h2>星灯解析：未練を見抜く</h2><div class="inq-analysis" role="note"><strong>葵の手がかり整理</strong><p>${esc(investigationPairHint(st))}</p></div><div class="inq-mobile-memo">${investigationMemo(st)}</div><p class="inq-question">${esc(q.prompt)}</p>${st.deductionFeedback?`<p class="inq-feedback" role="status">${esc(st.deductionFeedback)}</p>`:''}<div class="inq-answers">${hypotheses}</div>${canRescue?'<button class="btn outline full inq-rescue" onclick="investigationExtraInterview()">もう一か所、聞き込みに行く（1回のみ）</button>':''}${noClues&&(st.rescueUsed||st.chosen.length>=q.sites.length)?'<button class="btn outline full inq-rescue" onclick="finishInvestigationWithoutClues()">証拠不足のまま出撃準備へ進む</button>':''}<p class="inq-small">仮説の選択は1回で確定します。</p>`;
+  }
  }
  else if(st.phase==='echo')content=`<div class="inq-echo"><div class="inq-echo-light">✧</div><h2>未練の響きがほどけていく</h2><p>${esc(q.release[st.echoIndex])}</p><small>${st.echoIndex+1} / ${q.release.length}</small><button class="btn primary full" onclick="advanceInvestigationEcho()">${st.echoIndex===q.release.length-1?'調査結果へ':'続きを読む　→'}</button></div>`;
  else if(st.phase==='ready')content=`<div class="inq-result ${st.solved?'success':''}"><h2>${st.solved?'弱点を見抜いた！':'手がかりを結びつけられなかった'}</h2><p>${st.solved?(tbSelected()?'未練の弱点色を解明。ターン制では敵の弱点色が戦闘開始時から表示されます。':'現場の未練を読み解いた。戦闘では味方の与ダメージが30%上昇します。'):'推理に必要な証拠が足りないか、仮説が違ったようです。弱点なしで戦闘へ進めます。'}</p>${st.solved&&FLESHOUT_SOLVED_TAILS[st.qid]?`<div class="inq-solved-tail">${FLESHOUT_SOLVED_TAILS[st.qid].map(t=>`<p>${esc(t)}</p>`).join('')}</div>`:''}${st.solved&&st.firstTryBonus?'<p>一発正解：初回クリア時に星晶石＋20</p>':''}${st.hero==='akane'&&st.skillUsed?'<p>朱音の避難誘導：味方の被ダメージ30%減少</p>':''}${battleModeChoiceMarkup(st.qid)}<button class="btn primary full" onclick="startBattle('${st.qid}')">${S.quests?.[st.qid]?.complete?'もう一度出撃する':`弱点${st.solved?'あり':'なし'}で出撃する`}</button></div>`;
