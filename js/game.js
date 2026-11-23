@@ -5287,14 +5287,16 @@ function finishBattle(won){
   // Claim before the existing win-path persist(); preserve callback on reload.
   const callback=claimChoiceBattleCallback(battle.allies,won,battle.qid,battle.grind,battle.preview);
   const firstClear=won&&!S.quests[battle.qid]?.complete;
+  let investigationAffinityGain=0;
+  let investigationCompanionName='';
   if(won){const q=QUESTS.find(x=>x.id===battle.qid),st=S.quests[q.id]||{clues:2},first=!st.complete;st.complete=true;st.clues=2;S.quests[q.id]=st;
-    if(first){if(q.id==='q1'&&S.onboarding?.enabled)S.onboarding.stage='home';S.gems+=q.reward;S.gold+=q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD;const solved=!!S.investigations?.[q.id]?.solved;if(solved&&!S.insightRewards?.[q.id]){S.gems+=100+(S.investigations?.[q.id]?.firstTryBonus?20:0);S.insightRewards[q.id]=true;}const companion=S.investigations?.[q.id]?.hero;if(companion&&INVESTIGATION_HERO_IDS.includes(companion))setHeroAff(companion,Math.min(100,heroAff(companion)+2));for(const a of battle.allies){const d=data(a.id);d.aff=Math.min(100,d.aff+4)}}
+    if(first){if(q.id==='q1'&&S.onboarding?.enabled)S.onboarding.stage='home';S.gems+=q.reward;S.gold+=q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD;const solved=!!S.investigations?.[q.id]?.solved;if(solved&&!S.insightRewards?.[q.id]){S.gems+=100+(S.investigations?.[q.id]?.firstTryBonus?20:0);S.insightRewards[q.id]=true;}const companion=S.investigations?.[q.id]?.hero;if(companion&&HERO_IDS.includes(companion)&&heroineOwned(companion)){const before=heroAff(companion);setHeroAff(companion,before+5);investigationAffinityGain=heroAff(companion)-before;investigationCompanionName=PEOPLE[companion]?.name||companion;}for(const a of battle.allies){const d=data(a.id);d.aff=Math.min(100,d.aff+4)}}
     else{S.gold+=farmGold(q);S.gems+=farmGems(q);S.grindRuns[q.id]=(S.grindRuns[q.id]||0)+1}
     persist();
     const rewardText=first
-      ? `\n初回報酬：✧ ${q.reward} ／ ◈ ${q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD} ／ 親密度 +4${S.insightRewards?.[q.id]?` ／ 推理成功 +100${S.investigations?.[q.id]?.firstTryBonus?' ／ 一発正解 +20':''}`:''}${S.investigations?.[q.id]?.hero?' ／ 同行者との親密度 +2':''}`
+      ? `\n初回報酬：✧ ${q.reward} ／ ◈ ${q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD} ／ 親密度 +4${S.insightRewards?.[q.id]?` ／ 推理成功 +100${S.investigations?.[q.id]?.firstTryBonus?' ／ 一発正解 +20':''}`:''}${investigationCompanionName?` ／ ${investigationCompanionName}の親愛度 +${investigationAffinityGain}（上限100）`:''}`
       : `\n周回報酬：✧ ${farmGems(q)} ／ ◈ ${farmGold(q)}`;
-    dialog={title:'全ウェーブ突破！',message:`${battle.totalWaves}ウェーブを突破し、異変を鎮静しました。記録を市役所へ提出済み。${rewardText}`};
+    dialog={title:'全ウェーブ突破！',message:`${battle.totalWaves}ウェーブを突破し、異変を鎮静しました。記録を市役所へ提出済み。${rewardText}${first&&investigationCompanionName?`\n${investigationCompanionName}の親愛度が上がった（+${investigationAffinityGain}）`:''}`};
   }else dialog={title:'作戦失敗',message:`WAVE ${battle.wave+1}/${battle.totalWaves}で隊の活動継続が困難になりました。育成や編成を見直して再挑戦してください。`};
   const next=won&&battle.grind&&battle.grind.repeatLeft>1?{
     repeatLeft:battle.grind.repeatLeft-1,repeatWon:battle.grind.repeatWon+1}:null;
@@ -5341,6 +5343,26 @@ document.addEventListener('error',event=>{
 /* Ver.0.13.0.0 — investigation engine. No changes to approved QUESTS/ENEMY_BALANCE. */
 /* Conversation display is transient; S.investigations retains its existing shape. */
 let investigationDialogue=null;
+// Temporary generic text; dedicated dialogue is authored separately by the story team.
+const INVESTIGATION_GENERIC_LINES=Object.freeze({
+ interview:['「今の話、記録しておきましょう。」','「ほかの手がかりとも比べてみましょう。」','「小さな違いも見逃さないようにします。」'],
+ reflect:['「もう一度、集めた情報を整理したいです。」','「この手がかりとの違いを覚えておきましょう。」','「次につなげられるよう、記録を残します。」']
+});
+function investigationCompanionLine(st,q,kind='interview',index=0){
+ if(kind==='reflect'&&typeof q.companionReflect?.[st.hero]==='string'&&q.companionReflect[st.hero].trim())return q.companionReflect[st.hero];
+ const existing=q.companion?.[st.hero];
+ if(typeof existing==='string'&&existing.trim())return existing;
+ const lines=INVESTIGATION_GENERIC_LINES[kind]||INVESTIGATION_GENERIC_LINES.interview;
+ return lines[Math.abs(index)%lines.length];
+}
+function investigationTestimonyLines(site){
+ const entries=Array.isArray(site.testimony)?site.testimony:[site.testimony];
+ return entries.flatMap(entry=>{
+  if(typeof entry==='string')return entry.trim()?[{who:site.name,text:entry}]:[];
+  if(entry&&typeof entry==='object'&&typeof entry.text==='string'&&entry.text.trim())return [{who:typeof entry.who==='string'&&entry.who.trim()?entry.who:site.name,text:entry.text}];
+  return [];
+ });
+}
 function investigationDialogueLines(st,q){
  const scene=investigationDialogue;
  if(!scene||scene.qid!==st.qid)return [];
@@ -5350,13 +5372,14 @@ function investigationDialogueLines(st,q){
   const clues=(scene.clues||[]).map(id=>q.clues.find(c=>c.id===id)).filter(Boolean);
   return [
    {who:site.name,text:site.line},
-   {who:PEOPLE[st.hero]?.name||'',text:q.companion?.[st.hero]||''},
+   ...investigationTestimonyLines(site),
+   {who:PEOPLE[st.hero]?.name||'',text:investigationCompanionLine(st,q,'interview',scene.siteIndex)},
    ...clues.map(c=>({who:'手がかり：'+c.title,text:c.text}))
   ];
  }
  if(scene.kind==='wrong')return [
   {who:'葵',text:st.deductionFeedback||''},
-  {who:PEOPLE[st.hero]?.name||'',text:q.companion?.[st.hero]||''}
+  {who:PEOPLE[st.hero]?.name||'',text:investigationCompanionLine(st,q,'reflect',st.failedChoices?.length||0)}
  ];
  return [];
 }
@@ -5556,9 +5579,8 @@ const INVESTIGATION_SCENE_PARTY=Object.freeze({
  q895:['aoi','reina','akane'],q896:['aoi','akane','momoka'],q897:['aoi','reina','momoka'],q898:['aoi','reina','akane'],q899:['aoi','akane','momoka'],q900:['aoi','reina','momoka']
 });
 function investigationSelectableHeroes(qid){
- const group=INVESTIGATION_SCENE_PARTY[qid]||['aoi','akane','momoka','milku'];
- const available=group.filter(id=>INVESTIGATION_HERO_IDS.includes(id)&&romanceHeroAvailable(id));
- return available.length?available:['momoka','milku'].filter(id=>romanceHeroAvailable(id));
+ // Owned and unlocked heroines; case companion keys alone determine recommendations.
+ return HERO_IDS.filter(id=>heroineOwned(id)&&heroineStoryRevealed(id));
 }
 function chooseInvestigationHero(id){
  const st=investigationState(S.currentQuest);if(!st||st.phase!=='companion'||!investigationSelectableHeroes(st.qid).includes(id))return;
@@ -5597,7 +5619,7 @@ function finishInvestigationWithoutClues(){
  persist();render();
 }
 function useInvestigationSkill(){
- const st=investigationState(S.currentQuest);if(!st||!st.hero||st.skillUsed||!['interview','deduce'].includes(st.phase))return;
+ const st=investigationState(S.currentQuest);if(!st||!st.hero||!INVESTIGATION_HERO_IDS.includes(st.hero)||st.skillUsed||!['interview','deduce'].includes(st.phase))return;
  const caseData=INVESTIGATION_CASES[st.qid],id=st.hero;
  st.skillUsed=true;let msg='';
  if(id==='nagi'){
@@ -5691,7 +5713,7 @@ function investigationStageMarkup(st,q){
  if(!st.hero)return '';
  const bg=investigationBg(st.qid),face=investigationFace(st);
  const sceneLines=investigationDialogueLines(st,q),sceneLine=sceneLines[investigationDialogue?.step||0];
- const line=sceneLine?.text||st.skillMessage||q.companion?.[st.hero]||'一緒に手がかりを整理します。';
+ const line=sceneLine?.text||st.skillMessage||investigationCompanionLine(st,q);
  const speaker=sceneLine?.who||PEOPLE[st.hero].name;
  return `<div class="inq-stage"><div class="inq-stage-bg" style="background-image:url('${bg}')" aria-hidden="true"></div>
   <div class="inq-stage-cast">${expressionPortraitMarkup(st.hero,face,`inq:${st.qid}:${st.phase}:${(st.chosen||[]).length}`,{wrapperClass:'story-character',stateClass:'is-speaking',alt:`${PEOPLE[st.hero].name}の立ち絵`,chapterStoryFit:true})}</div>
@@ -5705,8 +5727,8 @@ function investigationPage(){
  const stages=['同行者選択','聞き込み 3か所','星灯解析','出撃準備'];
  const at=st.phase==='companion'?0:st.phase==='interview'?1:st.phase==='deduce'?2:3;
  const stepper=`<div class="inq-steps">${stages.map((label,i)=>`<div class="${i===at?'current':i<at?'done':''}"><i>${i<at?'✓':i+1}</i><span>${esc(label)}</span></div>`).join('')}</div>`;
- const companion=st.hero?`<div class="inq-companion"><img src="${characterIcon(st.hero)}" alt=""><div><strong>${esc(PEOPLE[st.hero].name)}</strong><small>${esc(q.companion[st.hero]||'一緒に手がかりを整理します。')}</small></div></div>`:'';
- const skill=st.hero&&!investigationDialogueLines(st,q).length&&['interview','deduce'].includes(st.phase)?`<button class="inq-skill" ${st.skillUsed?'disabled':''} onclick="useInvestigationSkill()"><strong>特技：${esc(INVESTIGATION_HERO_SKILLS[st.hero].name)}</strong><small>${st.skillUsed?'この調査では使用済み':esc(INVESTIGATION_HERO_SKILLS[st.hero].text)}</small></button>`:'';
+ const companion=st.hero?`<div class="inq-companion"><img src="${characterIcon(st.hero)}" alt=""><div><strong>${esc(PEOPLE[st.hero].name)}</strong><small>${esc(investigationCompanionLine(st,q))}</small></div></div>`:'';
+ const skill=st.hero&&INVESTIGATION_HERO_IDS.includes(st.hero)&&!investigationDialogueLines(st,q).length&&['interview','deduce'].includes(st.phase)?`<button class="inq-skill" ${st.skillUsed?'disabled':''} onclick="useInvestigationSkill()"><strong>特技：${esc(INVESTIGATION_HERO_SKILLS[st.hero].name)}</strong><small>${st.skillUsed?'この調査では使用済み':esc(INVESTIGATION_HERO_SKILLS[st.hero].text)}</small></button>`:'';
  const notice=st.skillMessage&&!investigationDialogueLines(st,q).length?`<p class="inq-skill-notice" role="status">${esc(st.skillMessage)}</p>`:'';
  let content='';
  const sceneLines=investigationDialogueLines(st,q),sceneLine=sceneLines[investigationDialogue?.step||0];
@@ -5714,7 +5736,7 @@ function investigationPage(){
   const last=investigationDialogue.step===sceneLines.length-1;
   content=`<div class="inq-echo inq-conversation"><h2>${esc(investigationDialogue.kind==='site'?q.sites[investigationDialogue.siteIndex].name:'星灯解析の振り返り')}</h2><div class="inq-analysis"><strong>${esc(sceneLine.who)}</strong><p>${esc(sceneLine.text)}</p></div><small>${investigationDialogue.step+1} / ${sceneLines.length}</small><button class="btn primary full" onclick="advanceInvestigationDialogue()">${last?'調査を続ける':'続きを読む　→'}</button></div>`;
  }
- else if(st.phase==='companion')content=`<h2>誰と一緒に調査する？</h2><p class="inq-small">同行者の特技は1回だけ使えます。恋愛パートの1日3行動は消費しません。</p><div class="inq-hero-grid">${investigationSelectableHeroes(st.qid).map(id=>`<button class="inq-hero" onclick="chooseInvestigationHero('${id}')"><img src="${characterIcon(id)}" alt=""><strong>${esc(PEOPLE[id].name)}</strong><small>${esc(INVESTIGATION_HERO_SKILLS[id].name)}</small></button>`).join('')}</div>`;
+ else if(st.phase==='companion')content=`<h2>誰と一緒に調査する？</h2><p class="inq-small">所持しているヒロインから選べます。特技のある同行者は1回だけ使えます。恋愛パートの1日3行動は消費しません。</p><div class="inq-hero-grid">${investigationSelectableHeroes(st.qid).map(id=>`<button class="inq-hero" onclick="chooseInvestigationHero('${id}')"><img src="${characterIcon(id)}" alt=""><strong>${esc(PEOPLE[id].name)}</strong><small>${Object.prototype.hasOwnProperty.call(q.companion||{},id)?'★ 推奨 · ':''}${INVESTIGATION_HERO_SKILLS[id]?esc(INVESTIGATION_HERO_SKILLS[id].name):'同行者'}</small></button>`).join('')}</div>`;
  else if(st.phase==='interview'){
   const limit=investigationInterviewLimit(st),extra=st.rescueUsed;
   content=`<h2>${extra?'追加の聞き込み：残り1か所':'聞き込み先を3か所選ぶ'}</h2><p class="inq-small">${q.sites.length}か所のうち、${extra?'もう1か所だけ追加調査できます。':'3か所を選んで、証言と記録を照らし合わせましょう。'} 気になる説明を読んで選んでください。</p><div class="inq-site-grid">${q.sites.map((site,i)=>`<button class="inq-site" ${st.chosen.includes(i)||st.chosen.length>=limit?'disabled':''} onclick="investigateAt(${i})"><span>${st.chosen.includes(i)?'✓ 調査済み':`調査先 ${i+1}`}</span><strong>${esc(site.name)}</strong><small>${esc(site.line)}</small></button>`).join('')}</div><p class="inq-small">選択済み ${st.chosen.length}/${limit}</p>`;
