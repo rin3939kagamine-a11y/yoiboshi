@@ -1534,7 +1534,7 @@ const GameState=Object.freeze({
 function change(v){return AppRouter.go(v)}
 function button(v,symbol,label){const locked=isSessionLocked();return `<button type="button" class="navbtn ${view===v?'active':''} ${locked?'nav-locked':''}" aria-label="${label}" ${locked?'disabled aria-disabled="true"':''} ${view===v?'aria-current="page"':''} onclick="change('${v}')"><span class="ico" aria-hidden="true">${symbol}</span><span>${label}</span></button>`}
 const nav=[['home','⌂','ホーム'],['story','▤','ストーリー'],['city','✧','クエスト'],['roster','◇','キャラ・編成'],['gacha','✦','ガチャ'],['talk','♡','交流'],['records','☷','記録・設定']];
-function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.71.1 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}`}
+function mainShell(content){return `<div class="app" ${view==='story'?'onclick="storyTap(event)"':''}><aside class="sidebar"><div class="logo">宵星の契約者<small>YOIBOSHI CITY · RE:START</small></div>${nav.map(v=>button(...v)).join('')}<div class="sidefoot">Ver.0.34.71.1 · RE:START ALPHA<br>旧版のセーブデータは変更しません。<br>ストーリー・排出率・戦闘演出には暫定要素あり。</div></aside><main class="main"><header class="topbar"><div class="top-name">✦ <div>${view==='home'?'宵星の契約者':'宵星相談室'}<span>${view==='home'?'YOIBOSHI NO KEIYAKUSHA':'新任責任者の活動記録'}</span></div></div><div class="currency"><span class="wallet">✧ <span id="gems">${S.gems.toLocaleString()}</span></span><span class="wallet">◈ <span id="gold">${S.gold.toLocaleString()}</span></span></div></header><div class="page ${view==='home'?'home-page':''} ${view==='combat'?'combat-page':''} ${view==='roster'?'roster-v675':''} ${view==='unit'?'unit-v675':''} ${view==='training'?'training-v700':''} ${view==='city'?'quest-v676':''} ${view==='talk'?'talk-v676':''}">${content}${view==='home'?'':`<div class="copyright">宵星の契約者 · RE:START — 試遊版 / ガチャはゲーム内の無料通貨のみ / 成人向けシーン未収録<br>新ゲームデータは旧版と別保存。バトルの詳細演出・提供キャラの詳細設定は未確定。</div>`}</div></main><nav class="bottomnav ${isSessionLocked()?'nav-locked':''}" aria-label="ゲームの画面切り替え">${nav.map(v=>{const short=v[0]==='roster'?'編成':v[0]==='records'?'設定':v[2];return `<button type="button" onclick="change('${v[0]}')" class="${view===v[0]?'active':''} ${isSessionLocked()?'nav-locked':''}" aria-label="${v[2]}" ${isSessionLocked()?'disabled aria-disabled="true"':''} ${view===v[0]?'aria-current="page"':''}><span class="ico" aria-hidden="true">${v[1]}</span><span class="nav-label">${short}</span></button>`}).join('')}</nav></div>${dialog?dialogMarkup():''}${battleResult?battleResultMarkup():''}`}
 function heading(en,title,sub){return `<div class="eyebrow">${en}</div><h1 class="page-title">${title}</h1><p class="desc">${sub}</p>`}
 function chars(cards,buttons=true){
  const units=cards.map(id=>unit(id)).filter(u=>!!u&&heroV0690Visible(u.person,S));
@@ -4718,7 +4718,7 @@ function startBattle(id,grind=null,preview=false){
   if(typeof ycBattleReset==='function')ycBattleReset();
   battle={effect:null,qid:id,allies:heroes,enemies:[],phase:'advance',wave:0,totalWaves:isTraining?1:q.waves,training:isTraining,
     travel:0,progress:0,sim:0,wall:0,done:false,auto:true,selection:null,preview:!!preview,
-    log:[isTraining?'模擬戦：セーブ・報酬・依頼進行に影響しません。':'住民の安全を確認。現場へ進みます。'],investigation:isTraining?null:!S.quests[id]?.complete?{weakness:!!S.investigations?.[id]?.solved,safety:!!(S.investigations?.[id]?.hero==='akane'&&S.investigations?.[id]?.skillUsed),hero:S.investigations?.[id]?.hero||null}:null,buff:0,slow:false,grind,autoSkills:!!grind,popups:[],logOpen:false};
+    log:[isTraining?'模擬戦：セーブ・報酬・依頼進行に影響しません。':'住民の安全を確認。現場へ進みます。'],investigation:isTraining?null:!S.quests[id]?.complete?{weakness:!!S.investigations?.[id]?.solved,safety:!!(S.investigations?.[id]?.hero==='akane'&&S.investigations?.[id]?.skillUsed),hero:S.investigations?.[id]?.hero||null}:null,buff:0,slow:false,grind,autoSkills:!!grind,popups:[],logOpen:false,stats:{}};
   Q12HD.init(battle);Q12C.init(battle);applyBattleStartPassives();view='combat';lastFrame=0;cancelAnimationFrame(activeTimer);
   if(typeof tbEligible==='function'&&tbEligible(id,grind,preview)){tbInit();tbRender();window.scrollTo(0,0);return;}
   renderCombatFrame(true);activeTimer=requestAnimationFrame(tick);window.scrollTo(0,0);
@@ -4884,7 +4884,7 @@ function tickTimedEffects(){
  const t=battle.sim;
  for(const a of battle.allies){
   if(a.regenUntil>0&&a.regenNext>0){
-   while(a.regenNext<=t&&a.regenNext<=a.regenUntil&&a.hp>0){const amt=Math.min(a.max-a.hp,Math.round((a.regenAmount||0)*(a.healBuffUntil>t?(a.healBuffMult||1):1)));a.hp+=amt;a.regenNext+=2;if(amt>0){battlePopup(a,amt,'heal');logBattle(`${person(unit(a.id)).name}の継続回復 +${amt}HP`)}}
+   while(a.regenNext<=t&&a.regenNext<=a.regenUntil&&a.hp>0){const amt=Math.min(a.max-a.hp,Math.round((a.regenAmount||0)*(a.healBuffUntil>t?(a.healBuffMult||1):1)));bstatAdd(a,'healed',amt);a.hp+=amt;a.regenNext+=2;if(amt>0){battlePopup(a,amt,'heal');logBattle(`${person(unit(a.id)).name}の継続回復 +${amt}HP`)}}
    if(t>=a.regenUntil){a.regenUntil=0;a.regenNext=0;a.regenAmount=0}
   }
   if(a.rallyUntil<=t)a.rallyMult=1;
@@ -4917,10 +4917,10 @@ function applySkill(i,j,kind,target){
   const critical=Math.random()<.12;
   const finisher=u.id==='ageha_daily'&&j===1&&e.vulnerableUntil>battle.sim?1.35:1;
   const raw=Math.max(1,Math.round(base*(a.atk/18)*boost*(a.rallyUntil>battle.sim?a.rallyMult||1:1)*passiveAttackMultiplier(a,e)*mult*finisher*(critical?1.5:1)));
-  const damage=allyAttackDamage(e,raw,options);const actual=Math.min(e.hp,damage);e.hp=Math.max(0,e.hp-damage);bossRage(e);battlePopup(e,actual,'enemy',critical);return actual;
+  const damage=allyAttackDamage(e,raw,options);const actual=Math.min(e.hp,damage);e.hp=Math.max(0,e.hp-damage);bossRage(e);battlePopup(e,actual,'enemy',critical);bstatAdd(a,'dealt',actual);return actual;
  };
- const heal=(ally,base)=>{const n=Math.round(base*boost*passiveHealMultiplier(a,ally)*(ally.healBuffUntil>battle.sim?(ally.healBuffMult||1):1));const gain=Math.min(ally.max-ally.hp,n);ally.hp+=gain;if(gain>0)battlePopup(ally,gain,'heal');return gain};
- const shield=(ally,base)=>{const n=Math.round(base*boost*passiveShieldMultiplier(a,ally));ally.shield+=n;return n};
+ const heal=(ally,base)=>{const n=Math.round(base*boost*passiveHealMultiplier(a,ally)*(ally.healBuffUntil>battle.sim?(ally.healBuffMult||1):1));const gain=Math.min(ally.max-ally.hp,n);ally.hp+=gain;if(gain>0)battlePopup(ally,gain,'heal');bstatAdd(a,'healed',gain);return gain};
+ const shield=(ally,base)=>{const n=Math.round(base*boost*passiveShieldMultiplier(a,ally));ally.shield+=n;bstatAdd(a,'shield',n);return n};
  switch(type){
 
  // v0960: composite effects built on existing heal/strike/buff mechanics.
@@ -5157,7 +5157,7 @@ function applySkill(i,j,kind,target){
   log(`生存敵${enemies.length}体の次回攻撃CTを${seconds.toFixed(1)}秒延長`);break;
  }
  case 'single':log(`${enemy.name}に${strike(enemy,34)}ダメージ`);break;
- case 'drain':{const damage=strike(enemy,30),value=Math.min(a.max-a.hp,Math.round(damage*.30*(unitPassive(u).type==='drain_heal_focus'?1+passiveValue(u)/100:1)));a.hp+=value;if(value)battlePopup(a,value,'heal');log(`${enemy.name}に${damage}ダメージ／自身を${value}回復`);break}
+ case 'drain':{const damage=strike(enemy,30),value=Math.min(a.max-a.hp,Math.round(damage*.30*(unitPassive(u).type==='drain_heal_focus'?1+passiveValue(u)/100:1)));bstatAdd(a,'healed',value);a.hp+=value;if(value)battlePopup(a,value,'heal');log(`${enemy.name}に${damage}ダメージ／自身を${value}回復`);break}
  case 'pierce':log(`${enemy.name}に防護貫通で${strike(enemy,31,unitPassive(u).type==='pierce_focus'?1+passiveValue(u)/100:1,{pierce:true})}ダメージ`);break;
  case 'finisher':{const remaining=enemy.hp/enemy.max;const multiplier=1+.75*(1-remaining);log(`${enemy.name}にとどめ${strike(enemy,28,multiplier)}ダメージ`);break}
  case 'aoe':{let n=0,tot=0;for(const e of battle.enemies.filter(x=>x.hp>0)){tot+=strike(e,21,unitPassive(u).type==='aoe_focus'?1+passiveValue(u)/100:1);n++}log(`敵${n}体に計${tot}ダメージ`);break}
@@ -5204,7 +5204,7 @@ function tick(t){
       // Move inside the fixed top-down arena to close distance, never advance the stage camera during fighting.
       a.x=Math.min(31+(battle.allies.indexOf(a)%2)*21,a.x+d*3.1);a.y=30+Math.floor(battle.allies.indexOf(a)/2)*45;
       a.attackTimer-=d;
-      if(a.attackTimer<=0){Q12C.onStrike(a,target,'attack');const crit=Math.random()<.12,damage=allyAttackDamage(target,Math.max(1,Math.round(a.atk*.57*(a.rallyUntil>battle.sim?a.rallyMult||1.18:1)*passiveAttackMultiplier(a,target)*(crit?1.5:1))));target.hp=Math.max(0,target.hp-damage);bossRage(target);battlePopup(target,damage,'enemy',crit);if(typeof ycEvent==='function')ycEvent('attack',a);a.attackTimer=ROLES[unit(a.id).role].rate;logBattle(`${person(unit(a.id)).name}の通常攻撃 ${damage}ダメージ${crit?'（クリティカル）':''}`);enemyLive=battle.enemies.filter(e=>e.hp>0)}
+      if(a.attackTimer<=0){Q12C.onStrike(a,target,'attack');const crit=Math.random()<.12,damage=allyAttackDamage(target,Math.max(1,Math.round(a.atk*.57*(a.rallyUntil>battle.sim?a.rallyMult||1.18:1)*passiveAttackMultiplier(a,target)*(crit?1.5:1))));bstatAdd(a,'dealt',Math.min(target.hp,damage));target.hp=Math.max(0,target.hp-damage);bossRage(target);battlePopup(target,damage,'enemy',crit);if(typeof ycEvent==='function')ycEvent('attack',a);a.attackTimer=ROLES[unit(a.id).role].rate;logBattle(`${person(unit(a.id)).name}の通常攻撃 ${damage}ダメージ${crit?'（クリティカル）':''}`);enemyLive=battle.enemies.filter(e=>e.hp>0)}
     }
     for(const e of enemyLive){
       if(e.kind==='cage')continue;
@@ -5215,8 +5215,8 @@ function tick(t){
         const effectiveDef=target.def*(target.defenseBuffUntil>battle.sim?(target.defenseBuffMult||1):1);
         let damage=Math.max(1,Math.round(e.atk*(e.weakenUntil>battle.sim?(e.weakenMult||.7):1))-effectiveDef);
         damage=investigationIncomingDamage(damage);damage=Math.max(0,Math.round(damage*passiveIncomingMultiplier(target)*(target.damageReduceUntil>battle.sim?(target.damageReduceMult||1):1)));
-        if(target.shield>0){const blocked=Math.min(target.shield,damage);target.shield-=blocked;damage-=blocked}target.hp=Math.max(0,target.hp-damage);battlePopup(target,damage,'ally');e.attackTimer=(e.interval||2.1)*(e.enraged?.65:1);logBattle(`${e.name}の攻撃 ${damage}ダメージ`);
-        if(target.counterUntil>battle.sim&&e.hp>0){const base=Math.max(1,Math.round(target.atk*(target.counterPower||.45)));const counter=allyAttackDamage(e,base);const hit=Math.min(e.hp,counter);e.hp=Math.max(0,e.hp-hit);bossRage(e);battlePopup(e,hit,'enemy');logBattle(`${person(unit(target.id)).name}の反撃 ${hit}ダメージ`)}
+        let blk=0;if(target.shield>0){blk=Math.min(target.shield,damage);target.shield-=blk;damage-=blk}bstatAdd(target,'blocked',blk);bstatAdd(target,'taken',damage);target.hp=Math.max(0,target.hp-damage);battlePopup(target,damage,'ally');e.attackTimer=(e.interval||2.1)*(e.enraged?.65:1);logBattle(`${e.name}の攻撃 ${damage}ダメージ`);
+        if(target.counterUntil>battle.sim&&e.hp>0){const base=Math.max(1,Math.round(target.atk*(target.counterPower||.45)));const counter=allyAttackDamage(e,base);const hit=Math.min(e.hp,counter);e.hp=Math.max(0,e.hp-hit);bossRage(e);battlePopup(e,hit,'enemy');bstatAdd(target,'dealt',hit);logBattle(`${person(unit(target.id)).name}の反撃 ${hit}ダメージ`)}
         alliesLive=battle.allies.filter(a=>a.hp>0)}
     }
     // Repeated-clear mode drives skill targeting automatically; standard battle remains player-controlled.
@@ -5267,6 +5267,72 @@ function claimChoiceBattleCallback(allies,won,qid,grind,preview){
  return null;
 }
 
+// Battle result screen (v1): stats are observed only; no battle math changes.
+let battleResult=null;
+function bstat(ally){if(!battle||!ally||!ally.id)return null;if(!battle.stats)battle.stats={};return battle.stats[ally.id]||(battle.stats[ally.id]={dealt:0,taken:0,blocked:0,shield:0,healed:0})}
+function bstatAdd(ally,kind,amount){const s=bstat(ally);if(s&&amount>0)s[kind]+=amount}
+function buildBattleResult(b,first,compName,compGain,callback){
+ const q=QUESTS.find(x=>x.id===b.qid);if(!q)return null;
+ const stats=b.stats||{};
+ const rows=b.allies.map(a=>{const u=unit(a.id),p=u?u.person:null;const s=stats[a.id]||{dealt:0,taken:0,blocked:0,shield:0,healed:0};
+  return {person:p,name:p?(PEOPLE[p]?.name||p):'',art:p?characterArt(p):'',dealt:s.dealt||0,defence:(s.taken||0)+(s.blocked||0)+(s.shield||0),healed:s.healed||0}});
+ if(!rows.length)return null;
+ const best=key=>{let w=null;for(const r of rows)if(r[key]>0&&(!w||r[key]>w[key]))w=r;return w};
+ const atk=best('dealt'),def=best('defence'),heal=best('healed');
+ const rewards=[];
+ if(first){rewards.push(`✧ ジェム +${q.reward}`,`◈ ゴールド +${q.id==='q6'?1000:ECONOMY.FIRST_CLEAR_GOLD}`,'全員の親密度 +4');
+  if(S.insightRewards?.[q.id])rewards.push(`推理成功 ✧ +${100+(S.investigations?.[q.id]?.firstTryBonus?20:0)}`);
+  if(compName)rewards.push(`${compName}の親愛度 ${compGain?'+'+compGain:'上限100'}`);
+ }else{rewards.push(`✧ ジェム +${farmGems(q)}`,`◈ ゴールド +${farmGold(q)}`)}
+ return {quest:q.name,waves:b.totalWaves,mvp:atk||rows[0],atk,def,heal,rewards,
+  callback:callback?{name:PEOPLE[callback.id]?.name||'',text:callback.text}:null,story:!!pendingStory};
+}
+function battleResultMarkup(){const r=battleResult;if(!r)return '';
+ const card=(label,cls,row,text)=>`<div class="br-card"><span class="br-tag ${cls}">${label}</span>${row?`<img class="br-face" src="${esc(row.art)}" alt=""><div class="br-who"><strong>${esc(row.name)}</strong><span>${esc(text)}</span></div>`:`<div class="br-none">NONE</div>`}</div>`;
+ return `<div class="br-overlay" role="dialog" aria-modal="true"><style>
+.br-overlay{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 120% at 50% 0%,rgba(38,52,96,.92),rgba(5,8,18,.96));padding:10px;box-sizing:border-box}
+.br-panel{width:min(980px,96vw);max-height:96vh;overflow:auto;text-align:center;color:#eef2ff}
+.br-victory{font-size:clamp(46px,10vw,96px);font-weight:900;letter-spacing:.06em;line-height:1;background:linear-gradient(92deg,#ffe066,#ff5f8f 55%,#ff8a5c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.br-quest{margin-top:2px;color:#b9c6ea;font-size:clamp(13px,2.4vw,17px)}
+.br-main{display:flex;gap:18px;justify-content:center;align-items:stretch;margin-top:14px;flex-wrap:wrap}
+.br-mvp{position:relative;width:min(300px,80vw)}
+.br-mvp img{width:100%;height:min(52vh,480px);object-fit:contain;filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
+.br-mvp-badge{position:absolute;top:6px;left:6px;z-index:2;background:linear-gradient(135deg,#b06bff,#ff5f8f);color:#fff;font-weight:900;border-radius:999px;padding:5px 14px;font-size:15px}
+.br-mvp-name{font-size:22px;font-weight:800;margin-top:4px}
+.br-mvp-val{color:#ffd76a;font-weight:700}
+.br-side{flex:1;min-width:min(320px,88vw);max-width:520px;display:flex;flex-direction:column;gap:10px;text-align:left}
+.br-card{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:10px 14px;min-height:64px}
+.br-tag{font-weight:900;font-size:12px;color:#fff;border-radius:7px;padding:4px 9px;letter-spacing:.05em}
+.br-tag.atk{background:#e5484d}.br-tag.def{background:#3e63dd}.br-tag.heal{background:#30a46c}
+.br-face{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 0%}
+.br-who{display:flex;flex-direction:column}.br-who strong{font-size:17px}.br-who span{color:#c8d3f2;font-size:13px}
+.br-none{color:#8b96b8;font-weight:700;letter-spacing:.2em}
+.br-rewards,.br-callback{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px 14px}
+.br-rewards h3,.br-callback h3{margin:0 0 6px;font-size:14px;color:#ffd76a}
+.br-rewards p,.br-callback p{margin:2px 0;font-size:14px}
+.br-next{margin-top:16px;background:linear-gradient(92deg,#ff5f8f,#ff8a5c);color:#fff;border:none;font-size:19px;font-weight:900;border-radius:999px;padding:13px 64px;cursor:pointer;box-shadow:0 8px 22px rgba(255,95,143,.35)}
+</style><div class="br-panel">
+<div class="br-victory">VICTORY</div>
+<div class="br-quest">${esc(r.quest)} ― 全${r.waves}ウェーブ突破</div>
+<div class="br-main">
+<div class="br-mvp"><span class="br-mvp-badge">MVP</span><img src="${esc(r.mvp.art)}" alt="${esc(r.mvp.name)}"><div class="br-mvp-name">${esc(r.mvp.name)}</div><div class="br-mvp-val">与ダメージ ${r.mvp.dealt.toLocaleString()}</div></div>
+<div class="br-side">
+${card('ATTACK','atk',r.atk,r.atk?`与ダメージ ${r.atk.dealt.toLocaleString()}`:'')}
+${card('DEFENCE','def',r.def,r.def?`守り ${r.def.defence.toLocaleString()}`:'')}
+${card('HEAL','heal',r.heal,r.heal?`回復 ${r.heal.healed.toLocaleString()}`:'')}
+<div class="br-rewards"><h3>報酬</h3>${r.rewards.map(x=>`<p>${esc(x)}</p>`).join('')}</div>
+${r.callback?`<div class="br-callback"><h3>帰還後のひと言</h3><p>【${esc(r.callback.name)}】<br>${esc(r.callback.text)}</p></div>`:''}
+</div></div>
+<button class="br-next" onclick="closeBattleResult()">${r.story?'次へ（後日談へ）':'次へ'}</button>
+</div></div>`;
+}
+function closeBattleResult(){
+ const after=pendingStory;
+ battleResult=null;dialog=null;questActionInProgress=false;romanceSelectionInProgress=false;pendingStory=null;
+ if(after?.type==='post'&&!S.storyFlags?.[after.storyId]&&storyAllowed(after.storyId)){questStoryFlow=after;openStory(after.storyId);return}
+ if(S.onboarding?.enabled&&S.onboarding.stage==='home'&&!onboardingSuppressed){view='home';render();return}
+ render();
+}
 function finishBattle(won){
   if(!battle||battle.done)return;
   if(battle.turnBattle)tbClearTimer();
@@ -5312,6 +5378,7 @@ function finishBattle(won){
   pendingStory=nextStoryId?{type:'post',qid:questId,storyId:nextStoryId}:null;
   dialog.message+=after?'\n閉じると後日談が始まります。':meet?'\n閉じると街での出会いが始まります。':'\n続きの物語は「ストーリー」画面から読めます。';
  }
+  if(won&&!battle.grind&&questId!=='q35'&&questId!=='q52'){const br=buildBattleResult(battle,firstClear,investigationCompanionName,investigationAffinityGain,callback);if(br){battleResult=br;dialog=null}}
   battle=null;questActionInProgress=false;view='city';lastFrame=0; // v0.34.41.0: 勝利後はホームへ飛ばさず、続きの物語→（初回案内中なら）ホームの順にする
   if(next){dialog=null;startBattle(questId,next);return}
   if(won&&totalDone){const q=QUESTS.find(x=>x.id===questId);
