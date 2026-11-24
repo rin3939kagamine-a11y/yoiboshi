@@ -67,7 +67,7 @@ function tbBeginRound(){
   a.guarding=false;a.cooldowns=a.cooldowns.map(v=>Math.max(0,v-1));
   if(a.hp<=0)continue;
   const fx=a.effects;
-  if(fx.regen>0){const value=Math.min(a.max-a.hp,Math.round(a.max*TB_BALANCE.regenAmount));a.hp+=value;if(value)logBattle(`${person(unit(a.id)).name} 継続回復 +${value}`);}
+  if(fx.regen>0){const value=Math.min(a.max-a.hp,Math.round(a.max*TB_BALANCE.regenAmount));bstatAdd(a,'healed',value);a.hp+=value;if(value)logBattle(`${person(unit(a.id)).name} 継続回復 +${value}`);}
   for(const key of Object.keys(fx)){if(key!=='cover'&&typeof fx[key]==='number'&&fx[key]>0)fx[key]--;}if(!fx.coverDuration)fx.cover=0;
  }
  for(const e of b.enemies){e.defDownRounds=Math.max(0,(e.defDownRounds||0)-1);e.weakenRounds=Math.max(0,(e.weakenRounds||0)-1);}
@@ -108,14 +108,14 @@ function tbStrike(i,e,base,pierce=false){
  const lit=b.tb.lit===i?TB_BALANCE.litAttack:1;
  const raw=base*(a.atk/18)*TB_BALANCE.skill*rally*(a.rallyUntil>b.sim?(a.rallyMult||1):1)*lit*vulnerable*passiveAttackMultiplier(a,e)*(crit?TB_BALANCE.critBoost:1);
  const d=Math.max(1,Math.round(raw*tbWeakDamageFactor(i,e)*tbBreakDamageFactor(e)*tbGuardDamageFactor(e)*tbQ12BossFactor(e)*(pierce?1:1-(e.damageReduction||0))));
- const applied=tbQ1TrainingClamp(e,d),dealt=Math.min(e.hp,applied);e.hp=Math.max(0,e.hp-applied);logBattle(`${person(u).name} → ${e.name} ${dealt}${crit?' 会心':''}`);AudioDirector.sfx('hit');tbWeakHit(i,e,dealt);return dealt;
+ const applied=tbQ1TrainingClamp(e,d),dealt=Math.min(e.hp,applied);e.hp=Math.max(0,e.hp-applied);bstatAdd(a,'dealt',dealt);logBattle(`${person(u).name} → ${e.name} ${dealt}${crit?' 会心':''}`);AudioDirector.sfx('hit');tbWeakHit(i,e,dealt);return dealt;
 }
 function tbHeal(i,j,base){const b=battle,a=b.allies[i],target=b.allies[j];if(!target||target.hp<=0)return 0;
  const factor=a.effects.heal>0?1+TB_BALANCE.attackBuff:1;
- const amount=Math.round(base*TB_BALANCE.healEffect*factor*passiveHealMultiplier(a,target));const gain=Math.max(0,Math.min(target.max-target.hp,amount));target.hp+=gain;logBattle(`${person(unit(target.id)).name} HP +${gain}`);return gain;
+ const amount=Math.round(base*TB_BALANCE.healEffect*factor*passiveHealMultiplier(a,target));const gain=Math.max(0,Math.min(target.max-target.hp,amount));target.hp+=gain;bstatAdd(a,'healed',gain);logBattle(`${person(unit(target.id)).name} HP +${gain}`);return gain;
 }
 function tbShield(i,j,base){const a=battle.allies[i],target=battle.allies[j];if(!target||target.hp<=0)return;
- target.shield+=(Math.round(base*TB_BALANCE.shieldEffect*passiveShieldMultiplier(a,target)));}
+ const n=Math.round(base*TB_BALANCE.shieldEffect*passiveShieldMultiplier(a,target));target.shield+=n;bstatAdd(a,'shield',n);}
 function tbSkill(i,j,target){
  const b=tbCurrent(),a=b?.allies[i];if(!a||a.hp<=0||a.cooldowns[j]>0)return false;
  const u=unit(a.id),type=unitSkillType(u,j),kind=skillTarget(u,j),rank=skillRank(a.id),boost=1+rank*.13;
@@ -184,7 +184,7 @@ function tbEnemyHit(e,original,scale){
  const defense=target.def*(target.effects.defense>0?1+TB_BALANCE.defendBuff:1);
  let damage=Math.max(1,Math.round((e.atk*scale)*(e.weakenRounds>0?1-TB_BALANCE.debuff:1)-defense*TB_BALANCE.defenseFactor));
  damage=Math.max(0,Math.round(damage*passiveIncomingMultiplier(target)*(target.guarding?TB_BALANCE.guardReduction:1)*(target.effects.reduce>0?1-TB_BALANCE.defendBuff:1)*(b.tb.lit===b.allies.indexOf(target)?TB_BALANCE.litDefense:1)*(b.investigation?.safety?TB_BALANCE.safety:1)));
- if(target.shield>0){const blocked=Math.min(damage,target.shield);target.shield-=blocked;damage-=blocked;}
+ let blk=0;if(target.shield>0){blk=Math.min(damage,target.shield);target.shield-=blk;damage-=blk;}bstatAdd(target,'blocked',blk);bstatAdd(target,'taken',damage);
  target.hp=Math.max(0,target.hp-damage);if(typeof ycTurnEnemyAttack==='function')ycTurnEnemyAttack(e,target,damage);AudioDirector.sfx('hit');logBattle(`${e.name} → ${person(unit(target.id)).name} ${damage}ダメージ`);if(typeof ycEvent==='function')ycEvent('hurt',target,damage);
  if(target.effects.counter>0&&target.hp>0&&e.hp>0)tbStrike(b.allies.indexOf(target),e,target.atk*TB_BALANCE.counterRate,true);
 }
@@ -204,7 +204,7 @@ function tbAction(command,j=0){
   const target=b.enemies[tbTargetEnemy()];if(!target)return;
   const critical=Math.random()<TB_BALANCE.critChance;
   const raw=a.atk*TB_BALANCE.normal*passiveAttackMultiplier(a,target)*(b.tb.lit===i?TB_BALANCE.litAttack:1)*(a.effects.attack>0?1+TB_BALANCE.attackBuff:1)*(a.rallyUntil>b.sim?(a.rallyMult||1):1)*(target.defDownRounds>0?1+TB_BALANCE.debuff:1)*(critical?TB_BALANCE.critBoost:1);
-  const rawHit=Math.max(1,Math.round(raw*(1-(target.damageReduction||0))*tbWeakDamageFactor(i,target)*tbBreakDamageFactor(target)*tbGuardDamageFactor(target)*tbQ12BossFactor(target)));const hit=tbQ1TrainingClamp(target,rawHit);target.hp=Math.max(0,target.hp-hit);logBattle(`${person(unit(a.id)).name}のこうげき → ${target.name} ${hit}ダメージ`);AudioDirector.sfx('hit');tbWeakHit(i,target,hit);acted=true;
+  const rawHit=Math.max(1,Math.round(raw*(1-(target.damageReduction||0))*tbWeakDamageFactor(i,target)*tbBreakDamageFactor(target)*tbGuardDamageFactor(target)*tbQ12BossFactor(target)));const hit=tbQ1TrainingClamp(target,rawHit);bstatAdd(a,'dealt',Math.min(target.hp,hit));target.hp=Math.max(0,target.hp-hit);logBattle(`${person(unit(a.id)).name}のこうげき → ${target.name} ${hit}ダメージ`);AudioDirector.sfx('hit');tbWeakHit(i,target,hit);acted=true;
  }else if(command==='guard'){a.guarding=true;b.tb.light=Math.min(TB_BALANCE.maxLight,b.tb.light+TB_BALANCE.guardLight);logBattle(`${person(unit(a.id)).name}はまもる｜灯火+1`);acted=true;
  }else if(command==='skill'){
   const u=unit(a.id),kind=skillTarget(u,j);const target=kind==='enemy'?tbTargetEnemy():tbTargetAlly(i);
