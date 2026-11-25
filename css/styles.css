@@ -2365,7 +2365,7 @@ body:has(.vn-story.chapter-story .story-scene.has-bg) .page {padding:0!important
 .tb-hp i{display:block;height:100%;background:linear-gradient(90deg,#52bba3,#a4e8cc);border-radius:inherit}
 .tb-enemy small{font-size:11px}.tb-order{display:flex;align-items:center;gap:6px;min-height:55px;overflow-x:auto;padding:6px;background:#e5eefb;border-radius:10px;color:#27364e;white-space:nowrap}
 .tb-order>span:first-child{flex:none;font-size:12px;font-weight:700}.tb-turn-token{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:8px;background:#fff;overflow:hidden;color:#5a4269}
-.tb-turn-token.enemy{background:#e0dff0}.tb-turn-token img{width:100%;height:100%;object-fit:cover}
+.tb-turn-token.ally{outline:2px solid #3e63dd;outline-offset:-2px;background:#dbe7ff}.tb-turn-token.enemy{outline:2px solid #e5484d;outline-offset:-2px;background:#ffe3e3}.tb-turn-token img{width:100%;height:100%;object-fit:cover}
 .tb-light{background:#f7eaf7;border:1px solid #ddbcdf;padding:10px;border-radius:12px}
 .tb-light>span{font-weight:800;color:#854477}.tb-light-track{display:flex;gap:5px}.tb-light-track i{width:16px;height:16px;border-radius:50%;border:1px solid #ba8eac;background:#eee}
 .tb-light-track i.filled{background:linear-gradient(#fee7aa,#e893c7);box-shadow:0 0 9px #e893c7}
@@ -3203,3 +3203,11 @@ body:has(.qmap-sheet) .topbar,body:has(.qmap-sheet) .topbar *{pointer-events:non
 
 /* v1.07.9.3: 夜テーマ(os-on)で明るい文字色が白いお知らせ枠に継承され、タイトルと本文が見えなかったのを修正 */
 .overlay .dialog{color:#243853}
+
+/* Turn banner + phase colors (display only, 2026-11-25) */
+.tb-root{position:relative}
+.yb-turn-now.ally{color:#7aa5ff}.yb-turn-now.enemy{color:#ff8a8a}
+.tb-turn-banner{position:absolute;top:34%;left:50%;transform:translate(-50%,-50%);z-index:40;pointer-events:none;font-size:clamp(30px,7vw,58px);font-weight:900;letter-spacing:.08em;padding:10px 34px;border-radius:14px;color:#fff;white-space:nowrap;animation:tbBannerAnim 1s ease forwards}
+.tb-turn-banner.ally{background:linear-gradient(92deg,rgba(38,84,220,.92),rgba(64,140,255,.92));box-shadow:0 10px 30px rgba(38,84,220,.45)}
+.tb-turn-banner.enemy{background:linear-gradient(92deg,rgba(200,32,44,.92),rgba(255,90,60,.92));box-shadow:0 10px 30px rgba(200,32,44,.45)}
+@keyframes tbBannerAnim{0%{opacity:0;transform:translate(-50%,-50%) scale(.9)}12%{opacity:1;transform:translate(-50%,-50%) scale(1)}72%{opacity:1}100%{opacity:0;visibility:hidden}}
