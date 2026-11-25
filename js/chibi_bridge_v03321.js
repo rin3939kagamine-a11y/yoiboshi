@@ -55,7 +55,7 @@
    if((b.qid==='q17'||b.qid==='q34')&&e.kind==='boss')
      return {src:'assets/enemies/ibuki_battle.webp',catalogueId:'ibuki_battle'};
    // v0.65.2.0: ボスのちびキャラ（沙耶・黒い灯の葵・ルリ・透子・槐・常夜、第3部の朔夜）
-   const BOSS_CHIBI={q173:'sakuya_burn',q28:'saya',q35:'aoi_dark',q40:'aoi_dark',q45:'aoi_dark',q46:'ruri',q52:'touko_true',q58:'touko_true',q81:'touko_true',q89:'enju',q113:'enju',q119:'tokoyo',q287:'tokoyo',q291:'tokoyo',q341:'tsuzuri',q347:'kirishima_haruka',q401:'ibuki',q407:'ibuki',q467:'enju',q521:'kirishima_haruka',q233:'kasumi_shion',q865:'tokoyo',q565:'yami',q577:'anokata',q589:'yoiyami',q625:'wasureshio',q632:'toudaimori_yoiyami',q649:'yoiyami',q685:'kuroi_dealer',q697:'meirin',q709:'odoru_yoiyami',q745:'sentou_zankyo',q757:'zafra',q769:'ichi_yoiyami',q805:'torso_zankyo',q811:'shiroi_gray',q823:'nuu_yoiyami',q853:'ichi_bannin',q889:'yoiyami'};
+   const BOSS_CHIBI={q173:'sakuya_burn',q28:'saya',q35:'aoi_dark',q40:'aoi_dark',q45:'aoi_dark',q46:'ruri',q52:'touko_true',q58:'touko_true',q81:'touko_true',q89:'enju',q113:'enju',q119:'tokoyo',q287:'tokoyo',q291:'tokoyo',q341:'tsuzuri',q347:'kirishima_haruka',q401:'ibuki',q407:'ibuki',q467:'enju',q521:'kirishima_haruka',q233:'kasumi_shion',q865:'tokoyo',q565:'yami',q577:'anokata',q589:'yoiyami',q625:'wasureshio',q632:'toudaimori_yoiyami',q649:'yoiyami',q685:'kuroi_dealer',q697:'meirin',q709:'odoru_yoiyami',q745:'sentou_zankyo',q757:'zafra',q769:'ichi_yoiyami',q805:'torso_zankyo',q811:'shiroi_gray',q823:'nuu_yoiyami',q853:'ichi_bannin',q889:'yoiyami',q_shian:'shian'};
    if(BOSS_CHIBI[b.qid]&&e.kind==='boss')
      return {src:'assets/enemies/'+BOSS_CHIBI[b.qid]+'_battle.webp?v=0.98.3.0',catalogueId:BOSS_CHIBI[b.qid]+'_battle'};
    // q24: ① genuine Haruka and ② fake Haruka (the two mask shadows).
