@@ -75,6 +75,8 @@ function tbBeginRound(){
  const queue=[...b.allies.map((a,i)=>({side:'ally',i,rate:a.spd||ROLES[unit(a.id).role].rate})),
   ...b.enemies.map((e,i)=>({side:'enemy',i,rate:(e.interval||2.1)*(e.kind==='swift'?TB_BALANCE.swiftRate:1)})).filter(v=>b.enemies[v.i].kind!=='cage')];
  t.queue=queue.filter(v=>(v.side==='ally'?b.allies[v.i]:b.enemies[v.i])?.hp>0).sort((a,b)=>a.rate-b.rate|| (a.side==='ally'?-1:1)).map(v=>({side:v.side,i:v.i}));
+ // 2026-11-25: at the start of each wave (round 1), the first action goes to the fastest living ally; speed order applies unchanged afterwards.
+ if(t.round===1){const fi=t.queue.findIndex(v=>v.side==='ally');if(fi>0){const[first]=t.queue.splice(fi,1);t.queue.unshift(first);}}
  logBattle(`第${t.round}ラウンド｜灯火 ${t.light}/${TB_BALANCE.maxLight}`);
  tbAdvance();
 }
