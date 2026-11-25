@@ -18,7 +18,7 @@
    const kind=Object.prototype.hasOwnProperty.call(pools,e.kind)?e.kind:'normal';
    // Special bosses are fought in a different visual engine: never override them.
    if(e.kind==='boss'&&['q6','q12','q17','q18','q28','q29','q34','q35','q40','q45','q46','q52','q53','q58','q81','q89'].includes(String(ctx.qid||'')))return null;
-   const pool=pools[kind];
+   const pool=e.kind==='boss'?pools.boss:pools.normal; // 道中の敵の絵は小さい残響の組に統一
    const quest=parseInt(String(ctx.qid||'').replace(/^q/,''),10)||0;
    const wave=Math.max(0,parseInt(ctx.wave,10)||0);
    const slot=Math.max(0,parseInt(ctx.index,10)||0);
