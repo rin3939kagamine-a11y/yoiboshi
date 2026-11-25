@@ -14,6 +14,8 @@
   width:min(88vw,430px) !important;
   max-height:82vh;
   overflow-y:auto;
+  overflow-x:hidden;
+  box-sizing:border-box;
   display:flex;
   flex-direction:column;
   gap:10px;
