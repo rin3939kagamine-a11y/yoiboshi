@@ -4636,21 +4636,25 @@ function enemyType(q,idx,i,elite){
  if(Number(q.id.slice(1))>=4&&(idx+i)%3===1)return 'armored';
  return (idx+i)%2===0?'swift':'normal';
 }
+const HUMAN_BOSS_IDS=new Set(['sakuya','ibuki','haruka','saya','aoi_dark','ruri','touko','enju','tokoyo','tokoyo_last','tsuzuri','kasumi_shion','meiling','zahra','shian','anokata_boss','black_dealer','white_gray','ichi_bannin']); // 人間のボス（際どい4体＝あの方・黒いディーラー・白いグレイ・市の番人を含む。ユーザーの分け方2026-11-25）
 function makeWave(q,idx){
  if(q.id==='q52')return [{id:'touko-boss',name:'白鷺透子',max:999999999,hp:999999999,x:83,y:49,atk:28,attackTimer:2,elite:true,kind:'boss',icon:'◈',interval:2.1,damageReduction:.995,shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1}];
  if(q.id==='q35')return [{id:'aoi-dark-boss',name:'黒い灯の葵',max:999999999,hp:999999999,x:83,y:49,atk:26,attackTimer:2,elite:true,kind:'boss',icon:'◈',interval:2.1,damageReduction:.995,shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1}];
 
  const last=idx===q.waves-1,count=last?2:(idx%2===0?2:3),factor=ENEMY_BALANCE[q.id]||{hp:1,atk:1};
- return Array.from({length:count},(_,i)=>{
+ const wave=Array.from({length:count},(_,i)=>{
   const elite=last&&i===count-1,kind=enemyType(q,idx,i,elite),type=ENEMY_TYPES[kind];
   // For q1/q2 type multipliers are 1 and keep precisely the previous arithmetic.
   const hpBase=q.baseHp+idx*23+(elite?72:0)+i*9;
   const max=Math.round(hpBase*factor.hp*type.hp);
   const atk=(q.baseAtk+idx*2+(elite?3:0))*factor.atk*type.atk;
-  const name=kind==='boss'?q.enemy:kind==='swift'?'疾走する残響':kind==='armored'?'装甲の擬似体':elite?q.enemy:i===0?'残響の影':'小さな擬似体';
+  const name=kind==='boss'?q.enemy:'小さい残響'; // 道中の敵は「小さい残響」に統一（ボス枠は従来どおり）
   return {id:`w${idx}e${i}`,name,max,hp:max,x:74+(i%2)*15,y:26+(i/Math.max(1,count-1))*49,
     atk,attackTimer:1.1+i*.34,elite,kind,icon:type.icon,interval:type.interval,damageReduction:type.damageReduction,enraged:false};
  });
+ // 人間のボス戦はボス単体にする（最終ウェーブの雑魚を出さない。道中のウェーブは今まで通り）
+ if(last&&typeof BOSSES!=='undefined'&&BOSSES[q.id]&&HUMAN_BOSS_IDS.has(BOSSES[q.id].id))return wave.filter(e=>e.kind==='boss');
+ return wave;
 }
 function enemyDamage(e,raw){return Math.max(1,Math.round(raw*(1-(e.damageReduction||0))))}
 function allyAttackDamage(e,raw,options={}){
