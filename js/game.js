@@ -4636,7 +4636,7 @@ function enemyType(q,idx,i,elite){
  if(Number(q.id.slice(1))>=4&&(idx+i)%3===1)return 'armored';
  return (idx+i)%2===0?'swift':'normal';
 }
-const HUMAN_BOSS_IDS=new Set(['sakuya','ibuki','haruka','saya','aoi_dark','ruri','touko','enju','tokoyo','tokoyo_last','tsuzuri','kasumi_shion','meiling','zahra','shian','anokata_boss','black_dealer','white_gray','ichi_bannin']); // 人間のボス（際どい4体＝あの方・黒いディーラー・白いグレイ・市の番人を含む。ユーザーの分け方2026-11-25）
+const HUMAN_BOSS_QUEST_IDS=new Set(['q12','q17','q24','q28','q34','q35','q40','q45','q46','q52','q58','q81','q89','q113','q119','q173','q233','q287','q291','q341','q347','q401','q407','q467','q521','q577','q685','q697','q757','q811','q853','q865','q_shian']); // 人間のボスの依頼（ボス演出側のボス一覧から、人のボスの依頼だけを抜き出したもの。人のボス＝際どい4体も含む。ユーザーの分け方2026-11-25）
 function makeWave(q,idx){
  if(q.id==='q52')return [{id:'touko-boss',name:'白鷺透子',max:999999999,hp:999999999,x:83,y:49,atk:28,attackTimer:2,elite:true,kind:'boss',icon:'◈',interval:2.1,damageReduction:.995,shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1}];
  if(q.id==='q35')return [{id:'aoi-dark-boss',name:'黒い灯の葵',max:999999999,hp:999999999,x:83,y:49,atk:26,attackTimer:2,elite:true,kind:'boss',icon:'◈',interval:2.1,damageReduction:.995,shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1}];
@@ -4653,7 +4653,7 @@ function makeWave(q,idx){
     atk,attackTimer:1.1+i*.34,elite,kind,icon:type.icon,interval:type.interval,damageReduction:type.damageReduction,enraged:false};
  });
  // 人間のボス戦はボス単体にする（最終ウェーブの雑魚を出さない。道中のウェーブは今まで通り）
- if(last&&typeof BOSSES!=='undefined'&&BOSSES[q.id]&&HUMAN_BOSS_IDS.has(BOSSES[q.id].id))return wave.filter(e=>e.kind==='boss');
+ if(last&&HUMAN_BOSS_QUEST_IDS.has(q.id))return wave.filter(e=>e.kind==='boss');
  return wave;
 }
 function enemyDamage(e,raw){return Math.max(1,Math.round(raw*(1-(e.damageReduction||0))))}
