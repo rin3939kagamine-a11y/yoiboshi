@@ -21,7 +21,7 @@ function heroes(){
  });
  return H;
 }
-function img(id){return `<img loading="lazy" alt="" src="assets/ART_V2/full_body/${id}.webp" data-alt="assets/ART_V2/full_body/${id}.png|assets/UNIT_ART/${id}_work.png|assets/ART_V2/upper_body/${id}.webp" onerror="acImgFallback(this)">`}
+function img(id){const a=typeof characterArt==='function'?characterArt(id):'';return `<img loading="lazy" alt="" src="${a||`assets/ART_V2/full_body/${id}.webp`}" data-alt="assets/ART_V2/full_body/${id}.png|assets/UNIT_ART/${id}_work.png|assets/ART_V2/upper_body/${id}.webp" onerror="acImgFallback(this)">`}
 window.acImgFallback=function(el){const r=(el.dataset.alt||'').split('|').filter(Boolean);if(!r.length){el.onerror=null;el.style.visibility='hidden';return}el.src=r.shift();el.dataset.alt=r.join('|')};
 function card(x,i){
  if(tab==='s')return `<button class="ac-card" data-i="${i}"><div class="ac-ph"><img loading="lazy" alt="" src="assets/ART_V2/story_cast/${x[0]}_talk.webp" onerror="this.style.visibility='hidden'"></div><div class="ac-meta"><b>${e(x[1])}</b><span>${e(x[2])}</span></div></button>`;
