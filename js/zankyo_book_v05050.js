@@ -75,7 +75,6 @@ let zankyoSelected='';
     e.zankyoId=art.catalogueId;
     if(record(art.catalogueId,q))fresh=true;
    });
-   if(fresh&&typeof toast==='function')setTimeout(function(){toast('残響図鑑に新しい残響が登録されました');},600);
   }catch(error){console.error('[宵星 残響図鑑]',error);}
   return list;
  };
