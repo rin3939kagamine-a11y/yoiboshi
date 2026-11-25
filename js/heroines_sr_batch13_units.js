@@ -1,6 +1,6 @@
 /* 2026-11-18: SR costume batch13. Additional outfits only; preserve all preexisting R IDs, formulas, rates and save format. */
-const SR_BATCH13_UNIT_IDS=Object.freeze(["suzuha_uniform","renka_dealer","cecil_stage","honoka_field","kana_happi","riria_salon","nekomiya_lesson","asagiri_booth","kotori_cafe","aoba_denim"]);
-const SR_BATCH13_EXISTING_R_IDS=Object.freeze(["chiyozaki_suzuha_work","sakuraba_renka_work","ginjo_cecil_work","hasegawa_honoka_work","ueda_kana_work","himemiya_riria_work","nekomiya_rara_work","asagiri_rara_work","shiromiya_kotori_work","hayakawa_aoba_work"]);
+const SR_BATCH13_UNIT_IDS=Object.freeze(["suzuha_uniform","renka_dealer","cecil_stage","honoka_field","kana_happi","nekomiya_lesson","kotori_cafe","aoba_denim"]);
+const SR_BATCH13_EXISTING_R_IDS=Object.freeze(["chiyozaki_suzuha_work","sakuraba_renka_work","ginjo_cecil_work","hasegawa_honoka_work","ueda_kana_work","nekomiya_rara_work","shiromiya_kotori_work","hayakawa_aoba_work"]);
 const NEW_UNIT_ROSTER_SR_BATCH13=Object.freeze([
   {
     "id": "suzuha_uniform",
@@ -63,18 +63,6 @@ const NEW_UNIT_ROSTER_SR_BATCH13=Object.freeze([
     ]
   },
   {
-    "id": "riria_salon",
-    "person": "himemiya_riria",
-    "title": "ブランド店員のエプロンドレス",
-    "rarity": "SR",
-    "role": "attacker",
-    "color": "#a87ca8",
-    "s": [
-      "サロンの一閃",
-      "華やかなフィニッシュ"
-    ]
-  },
-  {
     "id": "nekomiya_lesson",
     "person": "nekomiya_rara",
     "title": "ダンスレッスン着",
@@ -84,18 +72,6 @@ const NEW_UNIT_ROSTER_SR_BATCH13=Object.freeze([
     "s": [
       "レッスンの連撃",
       "ステップ・フィニッシュ"
-    ]
-  },
-  {
-    "id": "asagiri_booth",
-    "person": "asagiri_rara",
-    "title": "イベントブースのユニフォーム",
-    "rarity": "SR",
-    "role": "support",
-    "color": "#668eaf",
-    "s": [
-      "ブースの声援",
-      "イベントの連携"
     ]
   },
   {
@@ -174,16 +150,7 @@ const NEW_UNIT_DESIGN_SR_BATCH13=Object.freeze({
       "祭りの気づかい"
     ]
   },
-  "riria_salon": {
-    "skills": [
-      "single",
-      "finisher"
-    ],
-    "passive": [
-      "attack",
-      "洗練された身のこなし"
-    ]
-  },
+  
   "nekomiya_lesson": {
     "skills": [
       "combo",
@@ -194,16 +161,7 @@ const NEW_UNIT_DESIGN_SR_BATCH13=Object.freeze({
       "軽やかなリズム"
     ]
   },
-  "asagiri_booth": {
-    "skills": [
-      "attack_up",
-      "ct"
-    ],
-    "passive": [
-      "team_start_atk",
-      "準備万端の気配り"
-    ]
-  },
+  
   "kotori_cafe": {
     "skills": [
       "heal_one",
@@ -241,15 +199,11 @@ const NEW_UNIT_ARTWORK_SR_BATCH13=Object.freeze({
   "kana_happi": {
     "portrait": "assets/UNIT_ART/kana_happi.webp?v=20261118-sr-batch13"
   },
-  "riria_salon": {
-    "portrait": "assets/UNIT_ART/riria_salon.webp?v=20261118-sr-batch13"
-  },
+  
   "nekomiya_lesson": {
     "portrait": "assets/UNIT_ART/nekomiya_lesson.webp?v=20261118-sr-batch13"
   },
-  "asagiri_booth": {
-    "portrait": "assets/UNIT_ART/asagiri_booth.webp?v=20261118-sr-batch13"
-  },
+  
   "kotori_cafe": {
     "portrait": "assets/UNIT_ART/kotori_cafe.webp?v=20261118-sr-batch13"
   },
