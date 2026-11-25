@@ -189,6 +189,7 @@ const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
  "endo_saori_work": "nana_work",
  "enomoto_tsugumi_work": "chitose_work",
  "fujii_kanon_work": "chako_work",
+ "fujii_shizune_work": "kumano_miku_work",
  "fujimiya_shion_work": "sumika_work",
  "fujita_sui_work": "konatsu_work",
  "goto_satoko_work": "rinka_work",
@@ -197,6 +198,7 @@ const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
  "harada_kyoko_work": "ran_work",
  "hayase_rio_work": "maya_work",
  "higuchi_rei_work": "yuria_work",
+ "himemiya_riria_work": "shieru_work",
  "hoshino_emiri_work": "mira_work",
  "ishida_yuna_work": "satsuki_work",
  "ito_ruri_work": "rion_work",
@@ -249,7 +251,7 @@ const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
  "yukishiro_mio_work": "lira_work"
 });
 // 2026-11-25: asagiri_rara was the same person as tia (duplicate registration). Her SR unit folds into tia's SR unit.
-const RETIRED_DUPLICATE_SR_TO_CANONICAL=Object.freeze({"asagiri_booth":"tia_staff"});
+const RETIRED_DUPLICATE_SR_TO_CANONICAL=Object.freeze({"asagiri_booth":"tia_staff","riria_salon":"shieru_silver"});
 const RETIRED_ALL_SAVE_MAP=Object.freeze({...RETIRED_R_TO_SR,...RETIRED_DUPLICATE_R_TO_CANONICAL,...RETIRED_DUPLICATE_SR_TO_CANONICAL});
 const RETIRED_DUPLICATE_HERO_TO_CANONICAL=Object.freeze(Object.fromEntries(Object.entries(RETIRED_DUPLICATE_R_TO_CANONICAL).map(([from,to])=>[from.slice(0,-5),to.slice(0,-5)])));
 const R2SR=id=>RETIRED_ALL_SAVE_MAP[id]||id;

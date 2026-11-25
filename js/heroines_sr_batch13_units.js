@@ -1,6 +1,6 @@
 /* 2026-11-18: SR costume batch13. Additional outfits only; preserve all preexisting R IDs, formulas, rates and save format. */
-const SR_BATCH13_UNIT_IDS=Object.freeze(["suzuha_uniform","renka_dealer","cecil_stage","honoka_field","kana_happi","riria_salon","nekomiya_lesson","kotori_cafe","aoba_denim"]);
-const SR_BATCH13_EXISTING_R_IDS=Object.freeze(["chiyozaki_suzuha_work","sakuraba_renka_work","ginjo_cecil_work","hasegawa_honoka_work","ueda_kana_work","himemiya_riria_work","nekomiya_rara_work","shiromiya_kotori_work","hayakawa_aoba_work"]);
+const SR_BATCH13_UNIT_IDS=Object.freeze(["suzuha_uniform","renka_dealer","cecil_stage","honoka_field","kana_happi","nekomiya_lesson","kotori_cafe","aoba_denim"]);
+const SR_BATCH13_EXISTING_R_IDS=Object.freeze(["chiyozaki_suzuha_work","sakuraba_renka_work","ginjo_cecil_work","hasegawa_honoka_work","ueda_kana_work","nekomiya_rara_work","shiromiya_kotori_work","hayakawa_aoba_work"]);
 const NEW_UNIT_ROSTER_SR_BATCH13=Object.freeze([
   {
     "id": "suzuha_uniform",
@@ -60,18 +60,6 @@ const NEW_UNIT_ROSTER_SR_BATCH13=Object.freeze([
     "s": [
       "お祭りの応急手当",
       "みんなで笑う癒やし"
-    ]
-  },
-  {
-    "id": "riria_salon",
-    "person": "himemiya_riria",
-    "title": "ブランド店員のエプロンドレス",
-    "rarity": "SR",
-    "role": "attacker",
-    "color": "#a87ca8",
-    "s": [
-      "サロンの一閃",
-      "華やかなフィニッシュ"
     ]
   },
   {
@@ -162,16 +150,7 @@ const NEW_UNIT_DESIGN_SR_BATCH13=Object.freeze({
       "祭りの気づかい"
     ]
   },
-  "riria_salon": {
-    "skills": [
-      "single",
-      "finisher"
-    ],
-    "passive": [
-      "attack",
-      "洗練された身のこなし"
-    ]
-  },
+  
   "nekomiya_lesson": {
     "skills": [
       "combo",
@@ -220,9 +199,7 @@ const NEW_UNIT_ARTWORK_SR_BATCH13=Object.freeze({
   "kana_happi": {
     "portrait": "assets/UNIT_ART/kana_happi.webp?v=20261118-sr-batch13"
   },
-  "riria_salon": {
-    "portrait": "assets/UNIT_ART/riria_salon.webp?v=20261118-sr-batch13"
-  },
+  
   "nekomiya_lesson": {
     "portrait": "assets/UNIT_ART/nekomiya_lesson.webp?v=20261118-sr-batch13"
   },
