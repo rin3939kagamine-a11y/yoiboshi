@@ -70,7 +70,8 @@ let zankyoSelected='';
    (list||[]).forEach(function(e,i){
     const art=artFor(e,q,idx,i);
     if(!art||!ZANKYO_BY_ID[art.catalogueId])return;
-    // 戦闘での名前は生成側の名前のままにする（道中の敵は「小さい残響」に統一。ユーザー指示2026-11-25）。図鑑への記録は今まで通り行う。
+    // 通常の残響だけ名前を図鑑名に（ボス・エリートは依頼ごとの名前のまま）
+    if(e.kind!=='boss'&&!e.elite)e.name=ZANKYO_BY_ID[art.catalogueId].name;
     e.zankyoId=art.catalogueId;
     if(record(art.catalogueId,q))fresh=true;
    });
