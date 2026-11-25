@@ -184,6 +184,7 @@ const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
  "amai_momo_work": "rara_work",
  "amase_kanata_work": "mikan_work",
  "arai_shiori_work": "kanon_work",
+ "asagiri_rara_work": "tia_work",
  "dojima_rei_work": "kei_work",
  "endo_saori_work": "nana_work",
  "enomoto_tsugumi_work": "chitose_work",
@@ -212,6 +213,7 @@ const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
  "miyoshi_nanami_work": "kazusa_work",
  "mizuhara_mayu_work": "noriko_work",
  "momose_yumeka_work": "airi_work",
+ "morimoto_yuri_work": "ichijo_maki_work",
  "morinaga_akari_work": "himeka_work",
  "morita_mitsuki_work": "chizuru_work",
  "nagasawa_mayu_work": "tsukasa_work",
@@ -246,7 +248,9 @@ const RETIRED_DUPLICATE_R_TO_CANONICAL=Object.freeze({
  "yoshida_sae_work": "tomoe_work",
  "yukishiro_mio_work": "lira_work"
 });
-const RETIRED_ALL_SAVE_MAP=Object.freeze({...RETIRED_R_TO_SR,...RETIRED_DUPLICATE_R_TO_CANONICAL});
+// 2026-11-25: asagiri_rara was the same person as tia (duplicate registration). Her SR unit folds into tia's SR unit.
+const RETIRED_DUPLICATE_SR_TO_CANONICAL=Object.freeze({"asagiri_booth":"tia_staff"});
+const RETIRED_ALL_SAVE_MAP=Object.freeze({...RETIRED_R_TO_SR,...RETIRED_DUPLICATE_R_TO_CANONICAL,...RETIRED_DUPLICATE_SR_TO_CANONICAL});
 const RETIRED_DUPLICATE_HERO_TO_CANONICAL=Object.freeze(Object.fromEntries(Object.entries(RETIRED_DUPLICATE_R_TO_CANONICAL).map(([from,to])=>[from.slice(0,-5),to.slice(0,-5)])));
 const R2SR=id=>RETIRED_ALL_SAVE_MAP[id]||id;
 // Ver.0.49.2.0: legacy save migration ONLY. These old concept IDs are deliberately retained
