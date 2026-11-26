@@ -6,7 +6,7 @@
 (function(){
   'use strict';
   var DUNGEON_REWARD={
-    dungeon_exp_1:{xp:150,gold:0},dungeon_exp_2:{xp:300,gold:0},dungeon_exp_3:{xp:500,gold:0},
+    dungeon_exp_1:{xp:60,gold:0},dungeon_exp_2:{xp:120,gold:0},dungeon_exp_3:{xp:200,gold:0},
     dungeon_gold_1:{xp:40,gold:1000},dungeon_gold_2:{xp:85,gold:2000},dungeon_gold_3:{xp:120,gold:3500}
   };
   var DUNGEON_GATE={dungeon_exp_1:'q6',dungeon_exp_2:'q12',dungeon_exp_3:'q18',
@@ -161,23 +161,21 @@
   };
   function dungeonBtn(id,label,sub){
     var open=gateOpen(id);
-    return '<button type="button" class="btn '+(open?'primary':'outline')+'" '+(open?'onclick="startDungeon(\''+id+'\')"':'disabled')+' style="flex:1;min-width:150px">'+label+'<br><small>'+sub+'</small></button>';
+    return '<button type="button" class="btn '+(open?'primary':'outline')+'" '+(open?'onclick="startDungeon(\''+id+'\')"':'disabled')+' style="flex:1;padding:5px 4px;font-size:12.5px;line-height:1.3;white-space:nowrap">'+label+' '+sub+'</button>';
   }
   function dungeonPanelHtml(){
     if(!(S.quests.q6&&S.quests.q6.complete))return '';
     var mid=function(){return S.quests.q12&&S.quests.q12.complete;};
     var high=function(){return S.quests.q18&&S.quests.q18.complete;};
-    return '<section id="dungeon-panel" class="card pad" style="margin:12px 0"><h3>周回ダンジョン</h3>'
-      +'<p>育成専用の周回クエストです。物語の進行には影響しません。クリアすると編成全員に経験値が入ります（スキップ・オート周回でも入ります）。</p>'
-      +'<p><b>経験値ダンジョン</b>（経験値が多め）</p><div style="display:flex;gap:8px;flex-wrap:wrap">'
-      +dungeonBtn('dungeon_exp_1','初級','経験値 +150')
-      +dungeonBtn('dungeon_exp_2','中級','経験値 +300'+(mid()?'':' ／ 第2章クリアで解放'))
-      +dungeonBtn('dungeon_exp_3','上級','経験値 +500'+(high()?'':' ／ 第3章クリアで解放'))
-      +'</div><p style="margin-top:10px"><b>お金ダンジョン</b>（育成コインが多め）</p><div style="display:flex;gap:8px;flex-wrap:wrap">'
-      +dungeonBtn('dungeon_gold_1','初級','◈ +1,000')
-      +dungeonBtn('dungeon_gold_2','中級','◈ +2,000'+(mid()?'':' ／ 第2章クリアで解放'))
-      +dungeonBtn('dungeon_gold_3','上級','◈ +3,500'+(high()?'':' ／ 第3章クリアで解放'))
-      +'</div></section>';
+    return '<section id="dungeon-panel" class="card" style="margin:8px 0;padding:8px 10px"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><b style="font-size:12.5px;white-space:nowrap">経験値</b>'
+      +dungeonBtn('dungeon_exp_1','初級','+60')
+      +dungeonBtn('dungeon_exp_2','中級','+120'+(mid()?'':' 🔒第2章'))
+      +dungeonBtn('dungeon_exp_3','上級','+200'+(high()?'':' 🔒第3章'))
+      +'</div><div style="display:flex;align-items:center;gap:6px"><b style="font-size:12.5px;white-space:nowrap">お金</b>'
+      +dungeonBtn('dungeon_gold_1','初級','◈1,000')
+      +dungeonBtn('dungeon_gold_2','中級','◈2,000'+(mid()?'':' 🔒第2章'))
+      +dungeonBtn('dungeon_gold_3','上級','◈3,500'+(high()?'':' 🔒第3章'))
+      +'</div><small style="opacity:.7">周回ダンジョン（物語に影響なし・編成全員に経験値）</small></section>';
   }
   function injectPanel(){
     try{
