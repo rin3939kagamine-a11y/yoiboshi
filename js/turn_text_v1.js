@@ -29,6 +29,19 @@
    return turnMode()?toTurnText(t):t;
   };
  }
+ // 戦闘開始の攻撃アップ特性: ターン制では開始から約3ラウンド効く（10秒÷1ラウンド3秒換算）
+ if(typeof passiveDescription==='function'){
+  var origPD2=passiveDescription;
+  passiveDescription=function(u){
+   var t=origPD2.apply(this,arguments);
+   try{
+    if(turnMode()&&u&&unitPassive(u).type==='team_start_atk'){
+     t=t.replace('戦闘開始から10秒間','戦闘開始から3ラウンド');
+    }
+   }catch(e){}
+   return t;
+  };
+ }
  // 持続を延ばす特性はターン制では効かないため、その旨を添える（旧方式でのみ有効）
  var EXTEND_TYPES=['scan_extend','stun_extend','attack_down_extend','regen_duration','nanami_debuff_extend'];
  if(typeof passiveDescription==='function'){
