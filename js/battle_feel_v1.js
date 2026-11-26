@@ -96,6 +96,18 @@
   };
  }
 
+ // 戦闘開始パッシブ（開始時シールド／開始時の全体攻撃アップ）をターン制でも有効化する
+ // 旧方式の開始処理（applyBattleStartPassives）がターン制の開始経路から呼ばれていなかったための手当て。
+ // 攻撃アップの持続は、ターン制の時計（1ラウンド=3秒換算）で開始から約3ラウンド効く。
+ if(typeof tbInit==='function'&&typeof applyBattleStartPassives==='function'){
+  var origTbInit=tbInit;
+  tbInit=function(){
+   var r=origTbInit.apply(this,arguments);
+   try{ if(typeof tbSelected!=='function'||tbSelected())applyBattleStartPassives(); }catch(err){}
+   return r;
+  };
+ }
+
  // 24番: スキル2（必殺技）を使った瞬間のエフェクト（演出のみ）
  function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
  function showSkillFx(name,skill){
