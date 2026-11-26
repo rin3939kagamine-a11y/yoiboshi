@@ -157,3 +157,28 @@ html.os-on .page:has(.os-page){padding-top:12px!important}
 .os-quest .qmap-topline h1{white-space:nowrap}
 .page .page-title{padding-right:150px}
 @media (max-width:520px){.page .page-title{padding-right:160px;font-size:clamp(20px,6vw,26px)}}
+
+/* fix22: 右上の通貨ピルと各画面の右上要素（調査の「中断」・ストーリーの部カード・クエスト詳細の×）が重ならないようにする */
+.inq-header{padding-right:176px}
+.os-story .os-tree{padding-top:46px}
+.page .qmap-sheet{max-height:calc(100% - 76px)!important}
+
+/* ===== 気づき23: 横画面でクエストマップが押しつぶされる対策 =====
+   育成ダンジョンパネル(#dungeon-panel)は .qmap-view の末尾に追加されるため、
+   グリッドの自動配置で行が増え、地図(stage)の高さが奪われていた。
+   領域を固定し、パネルは左列の下段に置く。地図は常に全高を使う。 */
+.os-quest{grid-template-rows:minmax(0,1fr) auto!important;grid-template-areas:"head stage" "panel stage"!important}
+.os-quest .os-quest-head{grid-area:head}
+.os-quest .qmap-stage{grid-area:stage}
+.os-quest #dungeon-panel{grid-area:panel;margin:0!important;max-height:38dvh;overflow-y:auto}
+.qmap-pin.new,.qmap-pin.active,.qmap-pin.battle{z-index:6}
+@media (orientation:landscape) and (max-height:520px){
+ html.os-on .page:has(.os-quest){padding-top:40px!important}
+ .os-quest{grid-template-columns:minmax(172px,24%) minmax(0,1fr)!important}
+ .os-quest .qmap-top-kicker{display:none}
+ .os-quest .qmap-chapter-box{display:none}
+ .os-quest .os-quest-note small{display:none}
+ .os-quest .qmap-pin-core{width:32px!important;height:32px!important;border-radius:11px!important}
+ .os-quest .qmap-pin-name{font-size:9.5px!important;min-width:0!important;max-width:96px!important}
+ .os-quest #dungeon-panel{max-height:30dvh}
+}

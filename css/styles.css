@@ -3211,3 +3211,16 @@ body:has(.qmap-sheet) .topbar,body:has(.qmap-sheet) .topbar *{pointer-events:non
 .tb-turn-banner.ally{background:linear-gradient(92deg,rgba(38,84,220,.92),rgba(64,140,255,.92));box-shadow:0 10px 30px rgba(38,84,220,.45)}
 .tb-turn-banner.enemy{background:linear-gradient(92deg,rgba(200,32,44,.92),rgba(255,90,60,.92));box-shadow:0 10px 30px rgba(200,32,44,.45)}
 @keyframes tbBannerAnim{0%{opacity:0;transform:translate(-50%,-50%) scale(.9)}12%{opacity:1;transform:translate(-50%,-50%) scale(1)}72%{opacity:1}100%{opacity:0;visibility:hidden}}
+
+/* fix22 item1: 低丈の横画面でも募集の結果発表ボタンが画面内に収まるように */
+@media (max-height:500px){
+ .recruit-reveal{padding:8px 10px}
+ .recruit-box{padding:10px 12px 12px;max-height:calc(100dvh - 16px);overflow:auto}
+ .recruit-box h2{font-size:20px;margin:4px 0}
+ .recruit-spark{font-size:52px;margin:10px auto}
+ .recruit-progress{min-height:0}
+ .recruit-reveal-actions{margin-top:8px}
+}
+
+/* 離脱中ヒロインの表示（編成画面） */
+.roster-vnew-absence{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:999px;background:#4a2430;color:#ffb9c6;font-size:11px;font-weight:700}

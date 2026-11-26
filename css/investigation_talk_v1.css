@@ -21,3 +21,15 @@
   .investigation-view:has(.inq-conversation) .inq-conversation small{margin:0!important;white-space:nowrap;}
   .investigation-view:has(.inq-conversation) .inq-conversation .btn{flex:1;max-width:none!important;min-height:40px!important;margin:0!important;}
 }
+
+/* fix22 item1: 低丈の横画面でも同行者カードが下部メニューの裏に隠れないように */
+@media (max-height:500px){
+ .inq-header{padding:6px 8px 4px}
+ .inq-header h1{font-size:20px;margin:2px 0}
+ .inq-steps{padding:6px 8px;margin-bottom:8px}
+ .inq-hero-grid{gap:6px}
+ .inq-hero{padding:6px 4px;gap:3px}
+ .inq-hero img{width:44px}
+ .inq-hero strong{font-size:12px}
+ .inq-small{font-size:11px;margin:4px 0}
+}
