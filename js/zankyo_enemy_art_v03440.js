@@ -13,8 +13,10 @@
  });
  const all=Object.freeze(Object.values(pools).flat());
  const safeIndex=(n,limit)=>((n%limit)+limit)%limit;
+ const dedicated=Object.freeze({q3:'boss_q3_fumikiri',q4:'boss_q4_kokuban',q5:'boss_q5_kaiten',q6:'boss_q6_toudai',q7:'boss_q7_mohou',q8:'boss_q8_kamen',q9:'boss_q9_ikei',q10:'boss_q10_shoko',q11:'boss_q11_kuroboshi'});
  function resolve(e,ctx={}){
    if(!e)return null;
+   if(e.kind==='boss'&&Object.prototype.hasOwnProperty.call(dedicated,String(ctx.qid||'')))return {src:'assets/enemies/'+dedicated[String(ctx.qid)]+'.webp',catalogueId:null,kind:'boss'}; // 第3〜11話ボスは専用の絵を使う
    if(e.kind==='cage')return {src:'assets/enemies/echo_cage.webp',catalogueId:null,kind:'cage'}; // 残響の檻は専用の絵を使う
    const kind=Object.prototype.hasOwnProperty.call(pools,e.kind)?e.kind:'normal';
    // Special bosses are fought in a different visual engine: never override them.
