@@ -1,0 +1,3 @@
+/* クエスト詳細シート（白い背景）の中で、文字色が薄くて読めない箇所を濃くする（表示のみ） */
+.qmap-sheet{color:#243853}
+.qmap-card-info strong:not(.ok):not(.warn){color:#243853}
