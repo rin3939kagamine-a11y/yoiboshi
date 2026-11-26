@@ -20,8 +20,10 @@
  // 31番: 親愛度バフ。親愛度10ごとに全能力+1%（最大+10%）。素早さは対象外。
  if(typeof unitPower==='function'){
   var origUP=unitPower;
+  var ATK_GROWTH={attacker:3,support:2,tank:1,healer:1};
   unitPower=function(id){
    var st=origUP.apply(this,arguments);
+   try{ var u0=unit(id),d0=data(id),g=ATK_GROWTH[u0.role]; if(g!=null&&d0&&d0.lv>1)st.atk+=(g-2)*(d0.lv-1); }catch(e){}
    try{
     var d=data(id),aff=d?Number(d.aff)||0:0;
     if(aff>0){
