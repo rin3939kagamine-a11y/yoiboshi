@@ -157,7 +157,31 @@ function tbSkill(i,j,target){
   case 'ct':for(const al of b.allies.filter(x=>x.hp>0))al.cooldowns=al.cooldowns.map(x=>Math.max(0,x-1));break;
   case 'attack_down':e.weakenRounds=TB_BALANCE.effectRounds;break;
   case 'stun':e.stunRounds+=TB_BALANCE.stunRounds;break;
-  default:logBattle(`未定義のスキル型 ${type}`);break;
+  // 気づき29番の前提修正: 特殊スキル26種をターン制でも有効化（効果は旧方式の実装に合わせ、持続はターン制の標準値を使う）
+ case 'suzuha_defense_up':case 'cecil_defense_up':case 'v0960_miku_defense':for(const al of b.allies.filter(x=>x.hp>0))fx(al,'defense');break;
+ case 'suzuha_cleanse_heal':case 'v0950_ayaka_heal_cleanse':friend.effects={};heal(target,type==='suzuha_cleanse_heal'?NEW_UNIT_EFFECTS_V0840.suzuhaCleanseHeal:NEW_UNIT_EFFECTS_V0950.bigHeal);break;
+ case 'renka_strike_down':strike(u.id==='fujimiya_shion_work'?NEW_UNIT_EFFECTS_V0930.strikeBase:NEW_UNIT_EFFECTS_V0840.renkaStrikeBase);e.weakenRounds=TB_BALANCE.effectRounds;break;
+ case 'renka_enemy_ct_all':for(const foe of b.enemies.filter(x=>x.hp>0))foe.stunRounds=(foe.stunRounds||0)+TB_BALANCE.stunRounds;break;
+ case 'cecil_team_ct':for(const al of b.allies.filter(x=>x.hp>0))al.cooldowns=al.cooldowns.map(x=>Math.max(0,x-1));break;
+ case 'honoka_strike_ct':strike(NEW_UNIT_EFFECTS_V0850.honokaStrikeBase);e.stunRounds=(e.stunRounds||0)+TB_BALANCE.stunRounds;break;
+ case 'honoka_enemy_attack_down_all':for(const foe of b.enemies.filter(x=>x.hp>0))foe.weakenRounds=TB_BALANCE.effectRounds;break;
+ case 'kana_heal_all_25':for(let k=0;k<b.allies.length;k++)if(b.allies[k].hp>0)heal(k,NEW_UNIT_EFFECTS_V0850.kanaAllHeal);break;
+ case 'nanami_strike_26':strike(NEW_UNIT_EFFECTS_V0860.nanamiStrikeBase);break;
+ case 'nanami_attack_down':e.weakenRounds=TB_BALANCE.effectRounds;break;
+ case 'v0950_kotori_heal_atk':heal(target,NEW_UNIT_EFFECTS_V0950.bigHeal);fx(friend,'attack');break;
+ case 'v0950_kotori_heal_ct':for(let k=0;k<b.allies.length;k++)if(b.allies[k].hp>0){heal(k,NEW_UNIT_EFFECTS_V0950.smallHeal);b.allies[k].cooldowns=b.allies[k].cooldowns.map(x=>Math.max(0,x-1));}break;
+ case 'v0950_aoba_strike_def':strike(NEW_UNIT_EFFECTS_V0950.aobaStrike);e.defDownRounds=TB_BALANCE.effectRounds;break;
+ case 'rio_aoe_18':for(const foe of b.enemies.filter(x=>x.hp>0))strike(NEW_UNIT_EFFECTS_V0860.rioAoeBase,1,false,foe);break;
+ case 'v0950_mia_attack':for(const al of b.allies.filter(x=>x.hp>0))fx(al,'attack');break;
+ case 'v0950_yua_strike_atk':strike(NEW_UNIT_EFFECTS_V0950.yuaStrike);fx(a,'attack');break;
+ case 'v0950_ayaka_heal_def':for(let k=0;k<b.allies.length;k++)if(b.allies[k].hp>0){heal(k,NEW_UNIT_EFFECTS_V0950.smallHeal);fx(b.allies[k],'defense');}break;
+ case 'v0960_hana_heal_def':heal(target,NEW_UNIT_EFFECTS_V0960.healBig);fx(friend,'defense');break;
+ case 'marika_heal_all_22':for(let k=0;k<b.allies.length;k++)if(b.allies[k].hp>0)heal(k,NEW_UNIT_EFFECTS_V0860.marikaHealAll);break;
+ case 'v0960_nemu_strike_atk':strike(NEW_UNIT_EFFECTS_V0960.nemuStrike);fx(a,'attack');break;
+ case 'v0960_single_22':strike(22);break;
+ case 'v0960_maki_heal_atk':for(let k=0;k<b.allies.length;k++)if(b.allies[k].hp>0){heal(k,NEW_UNIT_EFFECTS_V0960.healSmall);fx(b.allies[k],'attack');}break;
+ case 'marika_heal_one_65':heal(target,NEW_UNIT_EFFECTS_V0860.marikaHealOne);break;
+ default:logBattle(`未定義のスキル型 ${type}`);break;
  }
  logBattle(`${person(u).name}「${u.s[j]}」`);
  return true;
