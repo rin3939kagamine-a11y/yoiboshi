@@ -1,0 +1,21 @@
+/* 会話中の「！」「♪」などのマークを、白い吹き出しに入れて見やすくする（表示のみ） */
+.symbol-reaction-v0500>.symbol-reaction-head{
+  background:#ffffff;
+  color:#333333;
+  border:2px solid rgba(40,30,70,.85);
+  border-radius:999px;
+  padding:.06em .3em;
+  box-shadow:0 2px 8px rgba(30,20,50,.35);
+  filter:none;
+  text-shadow:none;
+}
+.symbol-reaction-v0500>.symbol-reaction-head::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-7px;
+  transform:translateX(-50%);
+  border:5px solid transparent;
+  border-top-color:#ffffff;
+  border-bottom:0;
+}
