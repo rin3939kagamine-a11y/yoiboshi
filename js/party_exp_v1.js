@@ -114,29 +114,43 @@
     }
   };
   // ---- 育成画面に経験値ゲージを出す ----
-  var origTraining=trainingPage;
-  trainingPage=function(){
-    var html=origTraining.apply(this,arguments);
+  // 画面遷移表(SCREENS)は元の trainingPage 関数を直接保持しているため、関数を差し替えても画面に届かない。
+  // そのため、描画された画面のレベルゲージの直後に経験値行を差し込む方式にする。
+  function xpRowHtml(id){
+    var d=null; try{d=data(id);}catch(_){d=null;}
+    if(!d)return '';
+    if(d.lv>=30){
+      return '<div class="train-xp-row" style="margin-top:8px;font-size:13px">経験値 <b>MAX</b> <span>（レベル上限に到達）</span></div>';
+    }
+    var need=d.lv*10, exp=Number(d.exp)||0, pct=Math.max(0,Math.min(100,Math.round(exp/need*100)));
+    return '<div class="train-xp-row" style="margin-top:8px;font-size:13px">経験値 <b>'+exp+' / '+need+'</b> <span>（あと '+(need-exp)+' で Lv.'+(d.lv+1)+'）</span>'
+      +'<div style="height:6px;background:rgba(127,127,127,.35);border-radius:3px;margin-top:4px"><i style="display:block;height:100%;width:'+pct+'%;background:#30a46c;border-radius:3px"></i></div></div>';
+  }
+  function ensureXpRow(){
     try{
-      var owned=UNITS.filter(function(u){return visibleUnitV026(u)&&!!data(u.id);});
-      if(!owned.length)return html;
-      var sel=null;
-      try{sel=owned.find(function(u){return u.id===trainingSelectedUnit;});}catch(_){}
-      if(!sel)sel=owned.find(function(u){return u.id===S.selected;})||owned.find(function(u){return S.party.includes(u.id);})||owned[0];
-      var d=data(sel.id); if(!d)return html;
-      var row;
-      if(d.lv>=30){
-        row='<div class="train-xp-row" style="margin-top:8px;font-size:13px">経験値 <b>MAX</b> <span>（レベル上限に到達）</span></div>';
-      }else{
-        var need=d.lv*10, exp=Number(d.exp)||0, pct=Math.max(0,Math.min(100,Math.round(exp/need*100)));
-        row='<div class="train-xp-row" style="margin-top:8px;font-size:13px">経験値 <b>'+exp+' / '+need+'</b> <span>（あと '+(need-exp)+' で Lv.'+(d.lv+1)+'）</span>'
-          +'<div style="height:6px;background:rgba(127,127,127,.35);border-radius:3px;margin-top:4px"><i style="display:block;height:100%;width:'+pct+'%;background:#30a46c;border-radius:3px"></i></div></div>';
+      var bar=document.querySelector('.train-progress');
+      if(!bar||!bar.parentNode)return;
+      if(bar.parentNode.querySelector('.train-xp-row'))return;
+      var id=null;
+      var active=document.querySelector('.train-unit.active');
+      if(active){
+        var m=/selectTrainingUnit\('([^']+)'\)/.exec(active.getAttribute('onclick')||'');
+        if(m)id=m[1];
       }
-      var marker=/<div class="train-progress"[^>]*><i[^>]*><\/i><\/div>/;
-      if(marker.test(html))html=html.replace(marker,function(m){return m+row;});
+      var ok=false; try{ok=!!(id&&data(id));}catch(_){ok=false;}
+      if(!ok){
+        var cand=null;
+        try{cand=trainingSelectedUnit||S.selected||(S.party&&S.party[0]);}catch(_){cand=null;}
+        var cok=false; try{cok=!!(cand&&data(cand));}catch(_){cok=false;}
+        id=cok?cand:null;
+      }
+      if(!id)return;
+      var html=xpRowHtml(id); if(!html)return;
+      var tmp=document.createElement('div'); tmp.innerHTML=html;
+      if(tmp.firstElementChild)bar.parentNode.insertBefore(tmp.firstElementChild,bar.nextSibling);
     }catch(_){}
-    return html;
-  };
+  }
+  window.__partyExpEnsureXpRow=ensureXpRow;
   // ---- ダンジョン入口 ----
   window.startDungeon=function(id){
     if(!isDungeon(id))return;
@@ -175,6 +189,6 @@
     }catch(_){}
   }
   if(typeof MutationObserver!=='undefined'&&document.body){
-    new MutationObserver(function(){injectPanel();}).observe(document.body,{childList:true,subtree:true});
+    new MutationObserver(function(){injectPanel();ensureXpRow();}).observe(document.body,{childList:true,subtree:true});
   }
 })();
