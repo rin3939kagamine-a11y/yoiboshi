@@ -3221,3 +3221,6 @@ body:has(.qmap-sheet) .topbar,body:has(.qmap-sheet) .topbar *{pointer-events:non
  .recruit-progress{min-height:0}
  .recruit-reveal-actions{margin-top:8px}
 }
+
+/* 離脱中ヒロインの表示（編成画面） */
+.roster-vnew-absence{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:999px;background:#4a2430;color:#ffb9c6;font-size:11px;font-weight:700}

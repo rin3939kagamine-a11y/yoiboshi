@@ -1107,7 +1107,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "仕事ぶり",
-"text": "「あんな状況でも、スタッフのことを一番に考えてたね。」"
+"text": "「客は喜んでたか？　あの衣装、直すの大変だっただろ。」"
 },
 {
 "who": "sena",
@@ -1117,7 +1117,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "そのままで",
-"text": "「頑張ってるセナも、ちゃんとかっこいいと思う。」"
+"text": "「何十回もか。……道理で、どこから見ても継ぎ目が分からなかった。」"
 },
 {
 "who": "sena",
@@ -1132,7 +1132,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "新しい縁",
-"text": "「うん。また一緒に歩こう。」"
+"text": "「ああ、頼りにする。服のことだけじゃなく、街のこともだ。」"
 },
 {
 "who": "sena",
@@ -1142,7 +1142,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "narrator",
 "title": "連絡先",
-"text": "セナは作業用のメモに連絡先を書き、あなたへ渡した。"
+"text": "セナは作業用のメモではなく、レジ横のショップカードを一枚抜いて渡した。「連絡は店にかけて。たいてい私が出るから」だそうだ。"
 }
 ]
 },
@@ -1166,7 +1166,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "集中する顔",
-"text": "「踊っているときのナギは、昨日と全然違う顔になるね。」"
+"text": "「……昨日とは別人みたいだな。踊ってるときのナギは。」"
 },
 {
 "who": "mizuki",
@@ -1176,7 +1176,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "守ったテンポ",
-"text": "「あのとき、途中で止まらなかったのはナギの意思だった。」"
+"text": "「あの場面で止まらないのは、並の根性じゃない。」"
 },
 {
 "who": "mizuki",
@@ -1191,7 +1191,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "約束",
-"text": "「頼りにしてる。」"
+"text": "「ああ。今度は最初から最後まで、見せてもらう。」"
 },
 {
 "who": "mizuki",
@@ -1201,7 +1201,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "narrator",
 "title": "動き出す音",
-"text": "スピーカーから曲が流れ、ナギの足が軽く床を打った。"
+"text": "ナギは連絡先を渡さなかった。代わりに壁の予定表の空きへ「次は一曲通し」と書き込むと、ペンをあなたへ放った。スピーカーから曲が流れ、ナギの足が軽く床を打った。"
 }
 ]
 },
@@ -1225,7 +1225,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "蕾を見る",
-"text": "「この花、まだ咲いてないんだ。」"
+"text": "「この花、まだ咲いてないのか。」"
 },
 {
 "who": "chihiro",
@@ -1235,7 +1235,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "店の空気",
-"text": "「急がせないから、ここにいる人は落ち着くんだね。」"
+"text": "「急がせない、か。……俺も見習わないとな。」"
 },
 {
 "who": "chihiro",
@@ -1245,7 +1245,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "you",
 "title": "これからの協力",
-"text": "「また、お店に寄ってもいいですか？」"
+"text": "「また寄る。咲いたところ、見せてくれ。」"
 },
 {
 "who": "chihiro",
@@ -1255,7 +1255,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "narrator",
 "title": "連絡先の札",
-"text": "千尋は小さな花のカードに連絡先を書き、あなたに手渡した。"
+"text": "千尋はカードを渡さず、まだ蕾の花を一本、紙に包んだ。「咲く頃に、また来てちょうだい」。連絡先は、包みの札に小さく書かれている。"
 }
 ]
 }

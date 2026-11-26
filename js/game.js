@@ -4071,6 +4071,19 @@ function partyRoleCounts(ids=visibleParty()){
  for(const id of ids){const role=unit(id)?.role;if(Object.prototype.hasOwnProperty.call(counts,role))counts[role]++;}
  return counts;
 }
+// 物語の都合で離脱中のヒロイン（本編の初回依頼と調査には出られない。周回・育成ダンジョンは可。カードや育成状況には触れない）
+const STORY_ABSENCES=Object.freeze([
+ {person:'aoi',label:'行方不明中',gone:()=>!!(S.storyFlags?.q29||S.quests?.q29?.complete),back:()=>!!S.quests?.q45?.complete},
+ {person:'noel',label:'行方不明中',gone:()=>!!(S.storyFlags?.q53_intro||S.quests?.q53?.complete),back:()=>!!S.quests?.q59?.complete}
+]);
+function storyAbsence(personId){const a=STORY_ABSENCES.find(x=>x.person===personId);return a&&a.gone()&&!a.back()?a:null;}
+function absentPartyError(qid){
+ const q=QUEST_BY_ID[qid];if(!q)return '';
+ if(S.quests?.[qid]?.complete)return '';
+ if(q.chapter===999)return '';
+ for(const id of visibleParty()){const u=unit(id);if(!u)continue;const ab=storyAbsence(u.person);if(ab)return `${person(u).name}は${ab.label}のため、本編の依頼には出撃できません。編成を変更してください（周回・育成ダンジョンでは出撃できます）。`;}
+ return '';
+}
 function teamRuleError(ids=visibleParty()){
  if(!Array.isArray(ids)||ids.length!==4||ids.some(id=>!unit(id)||!data(id)))return '所持している4人のユニットを編成してください。';
  const persons=new Set(),roles=partyRoleCounts(ids);
@@ -4117,6 +4130,7 @@ function roster(){
        <span class="roster-vnew-slotnum">SLOT ${i+1} ${rosterPickerOpen&&editing===i?'<b>交代中</b>':''}</span>
        ${u?`<span class="roster-vnew-portrait"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="${esc(name)}のイラスト" loading="lazy"></span>
        <span class="roster-vnew-name">${esc(name)} <em class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</em></span>
+       ${u&&storyAbsence(u.person)?`<span class="roster-vnew-absence">${storyAbsence(u.person).label}（本編の依頼には出撃できません）</span>`:''}
        <span class="roster-vnew-meta">Lv.${d?.lv??'—'} · ${ROLES[u.role].name}</span>`:
        '<span class="roster-vnew-empty">＋<small>仲間を選ぶ</small></span>'}
        <span class="roster-vnew-slotfoot">交代する ›</span>
@@ -4129,7 +4143,7 @@ function roster(){
        <span class="roster-vnew-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="" loading="lazy"></span>
        <span class="roster-vnew-cardbody">
          <strong class="roster-vnew-cardname">${esc(person(u).name)}</strong>
-         <span class="roster-vnew-subtitle">${esc(u.title)}</span>
+         <span class="roster-vnew-subtitle">${esc(u.title)}</span>${storyAbsence(u.person)?`<span class="roster-vnew-absence">${storyAbsence(u.person).label}（本編の依頼には出撃できません）</span>`:''}
          <span class="roster-vnew-info"><b class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</b><span>Lv.${d.lv}</span><span>${ROLES[u.role].name}</span></span>
          <span class="roster-vnew-action">${inCurrent?'この枠に編成中':reason?esc(reason):inParty?'他の枠から交代':'この枠に編成する'} ›</span>
        </span>
@@ -4138,7 +4152,7 @@ function roster(){
  }).join('');
  const filters=`<div class="roster-vnew-filters"><div class="roster-vnew-filterrow" role="group" aria-label="ロールで絞り込み">${roleChoices.map(([id,label])=>`<button type="button" class="roster-vnew-filter ${rosterRoleFilter===id?'active':''}" aria-pressed="${rosterRoleFilter===id}" onclick="changeRosterRoleFilter('${id}')">${label}</button>`).join('')}</div>
      <div class="roster-vnew-filterrow" role="group" aria-label="レアリティで絞り込み">${rarityChoices.map(id=>`<button type="button" class="roster-vnew-filter ${rosterRarityFilter===id?'active':''}" aria-pressed="${rosterRarityFilter===id}" onclick="changeRosterRarityFilter('${id}')">${id==='all'?'全レア':id}</button>`).join('')}</div></div>`;
- const browse=shown.map(u=>{const d=data(u.id);return `<article class="roster-vnew-unit roster-browse-unit"><button type="button" class="roster-vnew-pick" onclick="openUnit('${u.id}')" aria-label="${esc(person(u).name)} ${u.rarity} の詳細"><span class="roster-vnew-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="" loading="lazy"></span><span class="roster-vnew-cardbody"><strong class="roster-vnew-cardname">${esc(person(u).name)}</strong><span class="roster-vnew-subtitle">${esc(u.title)}</span><span class="roster-vnew-info"><b class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</b><span>Lv.${d.lv}</span><span>${ROLES[u.role].name}</span></span>${party.includes(u.id)?'<span class="roster-vnew-action">出撃チームに編成中</span>':''}</span></button><div class="roster-vnew-cardtools"><button type="button" class="roster-vnew-detail" onclick="openUnit('${u.id}')">詳細を見る</button><button type="button" class="roster-vnew-detail" onclick="openTrainingFor('${u.id}')">育成</button></div></article>`;}).join('');
+ const browse=shown.map(u=>{const d=data(u.id);return `<article class="roster-vnew-unit roster-browse-unit"><button type="button" class="roster-vnew-pick" onclick="openUnit('${u.id}')" aria-label="${esc(person(u).name)} ${u.rarity} の詳細"><span class="roster-vnew-art"><img src="${unitCardArt(u)}" class="${unitHasScene(u)?'unit-card-scene':''}" alt="" loading="lazy"></span><span class="roster-vnew-cardbody"><strong class="roster-vnew-cardname">${esc(person(u).name)}</strong><span class="roster-vnew-subtitle">${esc(u.title)}</span>${storyAbsence(u.person)?`<span class="roster-vnew-absence">${storyAbsence(u.person).label}（本編の依頼には出撃できません）</span>`:''}<span class="roster-vnew-info"><b class="roster-vnew-rarity rarity-${u.rarity.toLowerCase()}">${u.rarity}</b><span>Lv.${d.lv}</span><span>${ROLES[u.role].name}</span></span>${party.includes(u.id)?'<span class="roster-vnew-action">出撃チームに編成中</span>':''}</span></button><div class="roster-vnew-cardtools"><button type="button" class="roster-vnew-detail" onclick="openUnit('${u.id}')">詳細を見る</button><button type="button" class="roster-vnew-detail" onclick="openTrainingFor('${u.id}')">育成</button></div></article>`;}).join('');
  const picker=rosterPickerOpen?`<div class="roster-picker-backdrop" onclick="if(event.target===this)closeRosterPicker()"><section class="roster-picker card" role="dialog" aria-modal="true" aria-label="SLOT ${editing+1}に入れる仲間を選ぶ">
      <div class="roster-picker-head"><div><small>SLOT ${editing+1}</small><h3>入れる仲間を選ぶ</h3></div><button type="button" class="btn outline roster-picker-close" onclick="closeRosterPicker()">閉じる ✕</button></div>
      ${filters}
@@ -4769,6 +4783,7 @@ function startTurnTraining(){
 function startBattle(id,grind=null,preview=false){
   const isTraining=preview==='turn-training';
   if(!requireValidParty())return;
+  if(!grind&&!preview){const absentError=absentPartyError(id);if(absentError)return toast(absentError);}
   if(preview&&id!=='q12'&&!isTraining&&!(preview==='boss-trial'&&bossTrials().some(t=>t.qid===id)))return;
   if(isTraining&&(id!=='q2'||grind))return;
   const q=QUEST_BY_ID[id];if(!q||(!preview&&!questUnlocked(q)))return toast('前の依頼を解決すると解放されます');
@@ -5720,7 +5735,8 @@ const INVESTIGATION_SCENE_PARTY=Object.freeze({
 });
 function investigationSelectableHeroes(qid){
  // Every owned heroine is selectable; case companion keys determine recommendations.
- return HERO_IDS.filter(id=>heroineOwned(id));
+ // 物語の都合で離脱中のヒロインは同行できない。
+ return HERO_IDS.filter(id=>heroineOwned(id)&&!storyAbsence(id));
 }
 function chooseInvestigationHero(id){
  const st=investigationState(S.currentQuest);if(!st||st.phase!=='companion'||!investigationSelectableHeroes(st.qid).includes(id))return;
