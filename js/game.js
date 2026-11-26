@@ -4657,7 +4657,12 @@ function makeWave(q,idx){
  if(q.id==='q52')return [{id:'touko-boss',name:'白鷺透子',max:999999999,hp:999999999,x:83,y:49,atk:28,attackTimer:2,elite:true,kind:'boss',icon:'◈',interval:2.1,damageReduction:.995,shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1}];
  if(q.id==='q35')return [{id:'aoi-dark-boss',name:'黒い灯の葵',max:999999999,hp:999999999,x:83,y:49,atk:26,attackTimer:2,elite:true,kind:'boss',icon:'◈',interval:2.1,damageReduction:.995,shield:0,taunt:0,regenUntil:0,regenNext:0,regenAmount:0,rallyUntil:0,rallyMult:1,healBuffUntil:0,healBuffMult:1,damageReduceUntil:0,damageReduceMult:1,defenseBuffUntil:0,defenseBuffMult:1,counterUntil:0,counterPower:0,coverUntil:0,coveredBy:-1}];
 
- const last=idx===q.waves-1,count=last?2:(idx%2===0?2:3),factor=ENEMY_BALANCE[q.id]||{hp:1,atk:1};
+ const last=idx===q.waves-1;
+ // 気づき19番: 道中の敵を増やす（序盤3〜4体、第1章以降4〜5体、第2部以降5〜6体）。最終ウェーブはボス+取り巻き2体（人型ボスは後の絞り込みで単体になる）。ダンジョンとシアン試遊は従来通り。
+ const isFixedCount=q.id==='q_shian'||q.id.indexOf('dungeon_')===0;
+ const chN=(typeof q.chapter==='number'&&q.chapter<900)?q.chapter:0;
+ const mobBonus=chN>=11?2:chN>=1?1:0;
+ const count=isFixedCount?(last?2:(idx%2===0?2:3)):(last?3:Math.min(6,3+mobBonus+(idx%2))),factor=ENEMY_BALANCE[q.id]||{hp:1,atk:1};
  const wave=Array.from({length:count},(_,i)=>{
   const elite=last&&i===count-1,kind=enemyType(q,idx,i,elite),type=ENEMY_TYPES[kind];
   // For q1/q2 type multipliers are 1 and keep precisely the previous arithmetic.

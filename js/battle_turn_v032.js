@@ -177,7 +177,7 @@ function tbEnemyMove(i){
   return;
  }
  if(taunter)targets=[taunter];
- targets.sort((x,y)=>x.a.hp/x.a.max-y.a.hp/y.a.max);
+ targets.sort((x,y)=>(x.a.hp/x.a.max-(unit(x.a.id).role==='tank'?.3:0))-(y.a.hp/y.a.max-(unit(y.a.id).role==='tank'?.3:0))); // 気づき32番: タンクは狙われやすくする
  const selected=targets[0];const target=selected.a.effects.coverDuration>0?b.allies[selected.a.effects.cover-1]||selected.a:selected.a;
  tbEnemyHit(e,target,intent==='heavy'?TB_WEAK_BALANCE.heavyMultiplier:1);
  if(intent==='heavy')e.charged=false;
