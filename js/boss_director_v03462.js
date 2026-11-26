@@ -489,7 +489,7 @@
   el.innerHTML=`<img class="bd-art" src="${portrait}" alt=""><div class="bd-band"><small>${label}</small><strong>${cfg.name}</strong><p>${line}</p><em>タップで進む</em></div>`;
   const done=()=>{if(!el.isConnected)return;el.remove();overlayOpen=false;clearTimeout(overlayTimer);if(after)after();};
   el.addEventListener('click',done);document.body.appendChild(el);
-  overlayTimer=setTimeout(done,4200);
+  overlayTimer=setTimeout(done,3200);
  }
  function closeOverlay(){document.querySelectorAll('.bd-overlay').forEach(x=>x.remove());overlayOpen=false;clearTimeout(overlayTimer);}
  function strip(img,name,text,warn){if(!tbCurrent())return;stripQueue.push({img,name,text,warn});if(!stripBusy)nextStrip();}
@@ -497,7 +497,7 @@
   const s=stripQueue.shift();if(!s){stripBusy=false;return;}stripBusy=true;
   const el=document.createElement('div');el.className='bd-strip'+(s.warn?' bd-warn':'');
   el.innerHTML=`${s.img?`<img src="${s.img}" alt="">`:''}<div><b>${s.name}</b><span>${s.text}</span></div>`;
-  document.body.appendChild(el);setTimeout(()=>{el.remove();nextStrip();},s.warn?3200:2700);
+  document.body.appendChild(el);setTimeout(()=>{el.remove();nextStrip();},s.warn?2700:2200);
  }
  const bossSay=(cfg,text)=>strip(cfg.talk||TALK(cfg.id),cfg.name,text,false);
  function retort(b,cfg){
