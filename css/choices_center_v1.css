@@ -30,3 +30,6 @@
   text-align:center;
   white-space:normal;
 }
+
+/* fix22: .btn + .btn の左マージン（styles.css）が中央表示の選択肢にも効いて2つ目が右にずれるのを打ち消す */
+#choices-center-overlay .story-choices .btn + .btn{margin-left:0}

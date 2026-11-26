@@ -546,11 +546,6 @@ const STORY_REWRITE_V03416=Object.freeze({
 "text": "言い終えてから、葵は一度だけノートに目を落とした。そして、何も書かずに閉じた。"
 },
 {
-"who": "aoi",
-"title": "違いを確かめる",
-"chapterEcho": "chapter3_aoi_flames"
-},
-{
 "who": "you",
 "title": "エリカに尋ねる",
 "text": "「エリカさんも、何か大切な想いを差し出したんですか？」"
@@ -618,7 +613,7 @@ const STORY_REWRITE_V03416=Object.freeze({
 {
 "who": "narrator",
 "title": "あふれる残響",
-"text": "古い記録に主人公の星灯が反応し、書庫の通路へ残響が流れ込む。本棚が揺れ、退路がふさがれた。"
+"text": "古い記録にあなたの星灯が反応し、書庫の通路へ残響が流れ込む。本棚が揺れ、退路がふさがれた。"
 },
 {
 "who": "yue",
@@ -730,11 +725,6 @@ const STORY_REWRITE_V03416=Object.freeze({
 "who": "aoi",
 "title": "二つの仕事",
 "text": "「まず買った方たちを保護し、結晶に残った波形を記録しましょう。売人の居場所を確かめてから追います。」"
-},
-{
-"who": "aoi",
-"title": "確かめ方を決めて",
-"chapterEcho": "chapter3_aoi_market"
 },
 {
 "who": "narrator",
