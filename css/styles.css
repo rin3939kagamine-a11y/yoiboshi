@@ -3224,3 +3224,10 @@ body:has(.qmap-sheet) .topbar,body:has(.qmap-sheet) .topbar *{pointer-events:non
 
 /* 離脱中ヒロインの表示（編成画面） */
 .roster-vnew-absence{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:999px;background:#4a2430;color:#ffb9c6;font-size:11px;font-weight:700}
+
+/* 編成/育成タブ（画面分離） */
+.roster-tabs{display:flex;gap:8px;margin:10px 0 14px}
+.roster-tab{flex:0 0 auto;padding:8px 22px;border-radius:999px;border:1px solid #c3cdea;background:#fff;color:#43507a;font-weight:700;font-size:14px;cursor:pointer}
+.roster-tab.is-active{background:#43507a;border-color:#43507a;color:#fff;cursor:default}
+.train-page-links .roster-tabs{margin:0}
+.train-page-links{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
