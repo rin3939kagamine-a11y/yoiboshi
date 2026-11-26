@@ -1,0 +1,2 @@
+/* ターン表示の帯（YOUR TURN / ENEMY TURN）を出さない（表示のみ。戦闘の進行には触れない） */
+.tb-turn-banner{display:none !important}
