@@ -12,6 +12,11 @@
   var DUNGEON_GATE={dungeon_exp_1:'q6',dungeon_exp_2:'q12',dungeon_exp_3:'q18',
     dungeon_gold_1:'q6',dungeon_gold_2:'q12',dungeon_gold_3:'q18'};
   function isDungeon(id){return Object.prototype.hasOwnProperty.call(DUNGEON_REWARD,id);}
+  var EXP_DAILY_MAX=5;
+  function isExpDungeon(id){return typeof id==='string'&&id.indexOf('dungeon_exp_')===0;}
+  function expClearsToday(){var d=S.dailyExpDungeon;return (d&&d.date===todayLocal())?Math.max(0,Math.min(EXP_DAILY_MAX,Number(d.count)||0)):0;}
+  function expLeftToday(){return EXP_DAILY_MAX-expClearsToday();}
+  function addExpClears(n){S.dailyExpDungeon={date:todayLocal(),count:expClearsToday()+n};}
   function gateOpen(id){var g=DUNGEON_GATE[id];return !!(g&&S.quests[g]&&S.quests[g].complete);}
   function normalQuestXp(q){
     if(!q)return 0;
@@ -60,6 +65,10 @@
     var q=null; try{q=QUEST_BY_ID[qid];}catch(_){q=null;}
     var dg=isDungeon(qid)?DUNGEON_REWARD[qid]:null;
     var xp=dg?dg.xp:normalQuestXp(q);
+    if(dg&&isExpDungeon(qid)){
+      if(expLeftToday()>0){addExpClears(1);}
+      else xp=0;
+    }
     var ups=grantPartyXp(allyIds,xp);
     var dgGold=dg?dg.gold:0;
     if(dgGold>0)S.gold+=dgGold;
@@ -103,6 +112,7 @@
     if(actual<=0||(S.gold===goldBefore&&S.gems===gemsBefore))return;
     var dg=isDungeon(id)?DUNGEON_REWARD[id]:null;
     var q=null; try{q=QUEST_BY_ID[id];}catch(_){q=null;}
+    if(dg&&isExpDungeon(id)){var eff=Math.min(actual,expLeftToday()); if(eff>0)addExpClears(eff); actual=eff;}
     var xp=(dg?dg.xp:normalQuestXp(q))*actual;
     var party=[]; try{party=visibleParty();}catch(_){party=[];}
     var ups=grantPartyXp(party,xp);
@@ -155,12 +165,13 @@
   window.startDungeon=function(id){
     if(!isDungeon(id))return;
     if(!gateOpen(id)){try{toast('解放条件のクエストを先にクリアしてください');}catch(_){} return;}
+    if(isExpDungeon(id)&&expLeftToday()<=0){try{toast('経験値ダンジョンは1日5回までです。また明日挑戦できます');}catch(_){} return;}
     if(!S.investigations[id])S.investigations[id]={phase:'ready',hero:null,clues:2,solved:false};
     else if(!(S.quests[id]&&S.quests[id].complete))S.investigations[id].phase='ready';
     startBattle(id);
   };
   function dungeonBtn(id,label,sub){
-    var open=gateOpen(id);
+    var open=gateOpen(id)&&( !isExpDungeon(id)||expLeftToday()>0 );
     return '<button type="button" class="btn '+(open?'primary':'outline')+'" '+(open?'onclick="startDungeon(\''+id+'\')"':'disabled')+' style="flex:1;padding:5px 4px;font-size:12.5px;line-height:1.3;white-space:nowrap">'+label+' '+sub+'</button>';
   }
   function dungeonPanelHtml(){
@@ -175,7 +186,7 @@
       +dungeonBtn('dungeon_gold_1','初級','◈1,000')
       +dungeonBtn('dungeon_gold_2','中級','◈2,000'+(mid()?'':' 🔒第2章'))
       +dungeonBtn('dungeon_gold_3','上級','◈3,500'+(high()?'':' 🔒第3章'))
-      +'</div><small style="opacity:.7">周回ダンジョン（物語に影響なし・編成全員に経験値）</small></section>';
+      +'</div><small style="opacity:.7">周回ダンジョン（物語に影響なし・編成全員に経験値）／経験値ダンジョンは1日5回まで（本日あと'+expLeftToday()+'回）</small></section>';
   }
   function injectPanel(){
     try{
