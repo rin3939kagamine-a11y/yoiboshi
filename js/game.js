@@ -392,8 +392,9 @@ function rollNormalGachaRarity(rand=Math.random()){
  const chanceR=rates.R||0,value=rand*100;
  let rar=value<chanceR?'R':value<chanceR+rates.SR?'SR':value<chanceR+rates.SR+rates.SSR?'SSR':'UR';
  if(nextPity>=GACHA_CONFIG.UR_PITY)rar='UR';
+ if(rar==='R'&&rates.SR>0&&nextSR>=GACHA_CONFIG.SR_GUARANTEE_EVERY)rar='SR';
  S.gachaPity=rar==='UR'?0:nextPity;
- S.gachaSrStreak=0;
+ if(rates.SR>0)S.gachaSrStreak=rar==='R'?nextSR:0;
  return rar;
 }
 function drawNormalGachaUnit(rand=Math.random()){
@@ -4273,7 +4274,7 @@ function recruitmentLineupMarkup(){
 function recruitmentDetailsMarkup(){
  const rates=gachaMode==='new19'?NEW19_RATE:RATE;
  const rarities=gachaMode==='new19'?RARITIES.filter(r=>r!=='SR'):RARITIES;
- return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${rarities.map(r=>`<div><strong>${r}</strong><b>${rates[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定。${gachaMode==='new19'?'新ヒロイン募集はR80%・SSR15%・UR5%です。':'通常募集にはRも含まれます。'}ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。</p><p class="gacha-v030-small-note">UR天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
+ return `<details class="recruit-directory gacha-v030-directory"><summary>提供割合・募集ルール <small>確率・天井を確認</small></summary><div class="directory-content"><div class="gacha-v030-rate-grid">${rarities.map(r=>`<div><strong>${r}</strong><b>${rates[r]}%</b></div>`).join('')}</div><p class="gacha-v030-small-note">同じレアリティ内から対象ユニットを抽選します。URは${GACHA_CONFIG.UR_PITY}回目までに確定。${gachaMode==='new19'?'':'SR以上は'+GACHA_CONFIG.SR_GUARANTEE_EVERY+'回以内に確定。'}${gachaMode==='new19'?'新ヒロイン募集はR80%・SSR15%・UR5%です。':'通常募集にはRも含まれます。'}ピックアップ時は対象キャラの選択重みが3倍になります。課金・購入機能はありません。</p><p class="gacha-v030-small-note">UR天井・消費額・出会い条件は従来と同じです。</p></div></details>`;
 }
 
 function nagiTrialBanner(){return S.quests.q6?.complete?`<div class="gachahero nagi-banner"><img src="${characterPortrait('nagi')}" alt="白峰 凪"><div class="words"><span class="chip pink">新キャラ登場・試遊版</span><h2>白峰 凪 ／ 紅の境界</h2><p>寡黙な外部協力者が、新たに募集ラインナップへ。<br>初回限定のお試し募集で、すぐに編成・交流を体験できます。</p><button class="btn nagi-trial" ${S.nagiTrial?'disabled':''} onclick="trialNagiRecruit()">${S.nagiTrial?'お試し募集済み':'凪の無料お試し募集（1回限り）'}</button></div></div>`:''}
