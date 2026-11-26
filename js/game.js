@@ -3187,6 +3187,7 @@ function chapterStoryCast(script,index){
  // Expression cues change facial expressions only; they never select who appears.
  // Keep a fixed center slot so switching speakers doesn't swap left/right places.
  let cast=(PEOPLE[current]||STORY_ONLY_CAST[current])&&!STORY_VOICE_ONLY.has(current)?[current]:[];
+ if(current==='masked')cast=['kaname']; // マスクの契約者はカナメの既存の立ち絵で表示する
  // The chapter-three embrace is an explicit two-person scene.
  // Show Noel with Touko on the narrated embrace, not in unrelated lines.
  const text=script.lines[index]?.text||'';
