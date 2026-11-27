@@ -470,11 +470,16 @@
  .bd-strip.bd-warn b{color:#ff9fae}
  .tb-enemy.bd-phase2{box-shadow:0 0 0 2px #ff6f8e,0 0 22px rgba(255,80,120,.55)!important}
  .tb-enemy.bd-ult{animation:bdPulse 1s ease-in-out infinite}
+ .tb-enemy.bd-human-boss .tb-enemy-art-thumb{max-height:210px;filter:drop-shadow(0 0 6px rgba(150,60,220,.85)) drop-shadow(0 0 16px rgba(110,30,180,.5));animation:bdAuraCard 2.6s ease-in-out infinite}
+ .tb-enemy.bd-human-boss.bd-phase2 .tb-enemy-art-thumb{filter:drop-shadow(0 0 8px rgba(225,60,120,.95)) drop-shadow(0 0 22px rgba(170,30,95,.6));animation-duration:1.5s}
+ .tb-enemy.bd-human-boss.bd-ult .tb-enemy-art-thumb{filter:drop-shadow(0 0 11px rgba(255,60,90,1)) drop-shadow(0 0 30px rgba(205,30,80,.75));animation-duration:.7s}
+ @keyframes bdAuraCard{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+ @media(max-width:600px){.tb-enemy.bd-human-boss .tb-enemy-art-thumb{max-height:150px}}
  @keyframes bdFade{from{opacity:0}to{opacity:1}}
  @keyframes bdRise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
  @keyframes bdSlide{from{opacity:0;transform:translate(-50%,-14px)}to{opacity:1;transform:translate(-50%,0)}}
  @keyframes bdPulse{0%,100%{box-shadow:0 0 0 2px #ff6f8e,0 0 12px rgba(255,80,120,.4)}50%{box-shadow:0 0 0 3px #ffb0c0,0 0 30px rgba(255,80,120,.9)}}
- @media (prefers-reduced-motion:reduce){.bd-overlay,.bd-overlay img.bd-art,.bd-strip,.tb-enemy.bd-ult{animation:none}}`;
+ @media (prefers-reduced-motion:reduce){.bd-overlay,.bd-overlay img.bd-art,.bd-strip,.tb-enemy.bd-ult,.tb-enemy.bd-human-boss .tb-enemy-art-thumb{animation:none}}`;
  const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
 
  let overlayOpen=false,overlayTimer=0;const stripQueue=[];let stripBusy=false;
@@ -678,7 +683,7 @@
    try{const b=tbCurrent();const cfg=cfgFor(b);if(cfg){
     document.querySelectorAll('.tb-enemy').forEach((el,i)=>{const e=b.enemies[i];if(!e||e.kind!=='boss'||(e.harukaRole&&e.harukaRole!=='real'))return;
      if(!e.harukaRole&&cfg.id!=='sakuya'){let img=el.querySelector('.tb-enemy-art-thumb');if(!img){const icon=el.querySelector('.tb-enemy-icon');if(icon){img=document.createElement('img');img.className='tb-enemy-art-thumb';img.alt=cfg.name;icon.replaceChildren(img);}}if(img&&!img.src.endsWith(cfg.art))img.src=cfg.art;}
-     el.classList.toggle('bd-phase2',!!e.bd?.phase2&&e.hp>0);el.classList.toggle('bd-ult',!!e.ultimate&&e.hp>0);});
+     el.classList.add('bd-human-boss');el.classList.toggle('bd-phase2',!!e.bd?.phase2&&e.hp>0);el.classList.toggle('bd-ult',!!e.ultimate&&e.hp>0);});
    }}catch(_){}
    return r;};
  }

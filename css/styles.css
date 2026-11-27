@@ -2881,6 +2881,13 @@ body>.toast{top:calc(8px + env(safe-area-inset-top))!important;bottom:auto!impor
 .tb-root .tb-enemy-icon:has(> .tb-enemy-art-thumb){display:flex;align-items:center;justify-content:center;overflow:hidden}
 .tb-root .tb-enemy-art-thumb{width:100%;height:100%;max-height:110px;object-fit:contain;pointer-events:none}
 
+/* 人型ボス: 全身絵に残響オーラ（ステージ側） */
+.tb-root .yc-enemy-slot.yc-boss-aura .yc-enemy-art{filter:drop-shadow(0 0 7px rgba(150,60,220,.9)) drop-shadow(0 0 18px rgba(110,30,180,.55));animation:bdAuraStage 2.6s ease-in-out infinite}
+.tb-root .yc-enemy-slot.yc-boss-p2 .yc-enemy-art{filter:drop-shadow(0 0 9px rgba(225,60,120,.95)) drop-shadow(0 0 24px rgba(170,30,95,.6));animation-duration:1.5s}
+.tb-root .yc-enemy-slot.yc-boss-ult .yc-enemy-art{filter:drop-shadow(0 0 12px rgba(255,60,90,1)) drop-shadow(0 0 34px rgba(205,30,80,.75));animation-duration:.7s}
+@keyframes bdAuraStage{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+@media (prefers-reduced-motion: reduce){.tb-root .yc-enemy-slot.yc-boss-aura .yc-enemy-art{animation:none}}
+
 /* Ver.0.34.6.0: unified fixed nav; home no longer mounts a second navigation. */
 @media(max-width:850px){
   body:not(:has(.combat-page)):not(:has(.qcin-active)):not(:has(.vn-story)) .bottomnav{
