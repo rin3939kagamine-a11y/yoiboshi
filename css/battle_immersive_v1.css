@@ -93,8 +93,8 @@ body:has(.combat-page .yb-immersive) .bottomnav{display:none!important}
 .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy b{
   grid-column:1!important;grid-row:1!important;
   font-size:10px!important;line-height:13px!important;
-  overflow:hidden!important;white-space:nowrap!important;
-  text-overflow:ellipsis!important;
+  overflow:visible!important;white-space:normal!important;
+  text-overflow:clip!important;overflow-wrap:anywhere!important;
 }
 .combat-page .tb-root.yb-immersive .yb-tactical-header .tb-enemy .tb-hp{
   grid-column:1/3!important;grid-row:2!important;
