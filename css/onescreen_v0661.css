@@ -161,7 +161,7 @@ html.os-on .page:has(.os-page){padding-top:12px!important}
 /* fix22: 右上の通貨ピルと各画面の右上要素（調査の「中断」・ストーリーの部カード・クエスト詳細の×）が重ならないようにする */
 .inq-header{padding-right:176px}
 .os-story .os-tree{padding-top:46px}
-.page .qmap-sheet{max-height:calc(100% - 76px)!important}
+.page .qmap-sheet{max-height:calc(100% - 96px)!important}
 
 /* ===== 気づき23: 横画面でクエストマップが押しつぶされる対策 =====
    育成ダンジョンパネル(#dungeon-panel)は .qmap-view の末尾に追加されるため、
@@ -171,7 +171,7 @@ html.os-on .page:has(.os-page){padding-top:12px!important}
 .os-quest .os-quest-head{grid-area:head}
 .os-quest .qmap-stage{grid-area:stage}
 .os-quest #dungeon-panel{grid-area:panel;margin:0!important;max-height:38dvh;overflow-y:auto}
-.qmap-pin.new,.qmap-pin.active,.qmap-pin.battle{z-index:6}
+.qmap-pin.new,.qmap-pin.active,.qmap-pin.battle{z-index:4}
 @media (orientation:landscape) and (max-height:520px){
  html.os-on .page:has(.os-quest){padding-top:40px!important}
  .os-quest{grid-template-columns:minmax(172px,24%) minmax(0,1fr)!important}
@@ -182,3 +182,14 @@ html.os-on .page:has(.os-page){padding-top:12px!important}
  .os-quest .qmap-pin-name{font-size:9.5px!important;min-width:0!important;max-width:96px!important}
  .os-quest #dungeon-panel{max-height:30dvh}
 }
+
+/* 試遊46-1/44: ダンジョンパネルが右端で切れないようにする */
+#dungeon-panel{max-width:100%!important;box-sizing:border-box}
+#dungeon-panel>div{flex-wrap:wrap}
+#dungeon-panel button{white-space:normal!important;min-width:0}
+
+/* 試遊49: 立ち絵は顔だけ（顔中心）の表示にそろえる */
+.story-character{height:62%!important;object-position:center 6%!important}
+.v675-portrait-stage{aspect-ratio:1/1}
+.v675-portrait-stage img.v675-portrait{width:100%;height:100%;object-fit:cover;object-position:50% 8%}
+.recruit-stagecard img{object-position:50% 8%}
