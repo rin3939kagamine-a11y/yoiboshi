@@ -548,7 +548,7 @@
   const oldOutcome=tbCheckOutcome;
   tbCheckOutcome=function(){
    const b=tbCurrent();try{bdFloor(b);checkBoss(b);}catch(_){}
-   if(b&&bdActive()&&bdBusy()&&b.enemies.every(e=>e.hp<=0)){bdLater(()=>{if(tbCurrent()===b&&!tbCheckOutcome())tbAdvance();});return true;}
+   if(b&&bdActive()&&bdBusy()&&b.enemies.every(e=>e.hp<=0)){try{tbRender();}catch(_){}bdLater(()=>{if(tbCurrent()===b&&!tbCheckOutcome())tbAdvance();});return true;}
    return oldOutcome.apply(this,arguments);
   };
  }

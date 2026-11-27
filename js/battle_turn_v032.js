@@ -217,9 +217,9 @@ function tbEnemyHit(e,original,scale){
 }
 function tbCheckOutcome(){
  const b=tbCurrent();if(!b)return true;
- if(b.allies.every(a=>a.hp<=0)){tbClearTimer();finishBattle(false);return true;}
+ if(b.allies.every(a=>a.hp<=0)){tbClearTimer();try{tbRender();}catch(_e){}finishBattle(false);return true;}
  if(b.enemies.every(e=>e.hp<=0)){
-  if(b.wave+1>=b.totalWaves){tbClearTimer();finishBattle(true);return true;}
+  if(b.wave+1>=b.totalWaves){tbClearTimer();try{tbRender();}catch(_e){}finishBattle(true);return true;}
   b.wave++;tbNewWave(QUEST_BY_ID[b.qid]);return true;
  }
  return false;
