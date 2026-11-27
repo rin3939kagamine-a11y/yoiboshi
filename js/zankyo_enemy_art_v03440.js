@@ -18,6 +18,7 @@
    if(!e)return null;
    if(e.kind==='boss'&&Object.prototype.hasOwnProperty.call(dedicated,String(ctx.qid||'')))return {src:'assets/enemies/'+dedicated[String(ctx.qid)]+'.webp',catalogueId:null,kind:'boss'}; // 第3〜11話ボスは専用の絵を使う
    if(e.kind==='cage')return {src:'assets/enemies/echo_cage.webp',catalogueId:null,kind:'cage'}; // 残響の檻は専用の絵を使う
+   if(e.kind==='normal'||e.kind==='swift'||e.kind==='armored')return {src:'assets/enemies/zankyo/gijitai_'+e.kind+'.webp',catalogueId:null,kind:e.kind}; // 擬似体は種類ごとの立ち絵を使う
    const kind=Object.prototype.hasOwnProperty.call(pools,e.kind)?e.kind:'normal';
    // Special bosses are fought in a different visual engine: never override them.
    if(e.kind==='boss'&&['q6','q12','q17','q18','q28','q29','q34','q35','q40','q45','q46','q52','q53','q58','q81','q89'].includes(String(ctx.qid||'')))return null;

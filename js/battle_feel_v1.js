@@ -14,7 +14,27 @@
   +'.bf-skill-banner small{display:block;font-size:13px;letter-spacing:.25em;text-shadow:0 1px 6px rgba(0,0,0,.65)}'
   +'.bf-skill-banner strong{display:block;font-size:30px;letter-spacing:.08em;text-shadow:0 2px 10px rgba(0,0,0,.7),0 0 22px rgba(255,190,60,.8)}'
   +'@keyframes bfBanner{0%{opacity:0;transform:scale(.92)}18%{opacity:1;transform:scale(1)}78%{opacity:1}100%{opacity:0;transform:scale(1.02)}}'
-  +'@media (prefers-reduced-motion: reduce){.bf-ult-badge{animation:none}.bf-skill-flash{display:none}.bf-skill-banner{animation-duration:.4s}}';
+  +'#bf-boss-fx{position:fixed;inset:0;pointer-events:none;z-index:9998}'
+  +'.bf-boss-flash{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(120,20,140,.5) 0%,rgba(190,30,60,.28) 45%,rgba(20,0,30,.45) 100%);animation:bfFlash .7s ease-out forwards}'
+  +'.bf-boss-banner{position:absolute;top:36%;left:0;right:0;text-align:center;color:#fff;animation:bfBanner 1.15s ease forwards}'
+  +'.bf-boss-banner small{display:block;font-size:13px;letter-spacing:.25em;text-shadow:0 1px 6px rgba(0,0,0,.7)}'
+  +'.bf-boss-banner strong{display:block;font-size:32px;letter-spacing:.08em;text-shadow:0 2px 10px rgba(0,0,0,.75),0 0 26px rgba(220,40,80,.9)}'
+  +'.bf-shake{animation:bfShake .5s ease-in-out}'
+  +'@keyframes bfShake{0%,100%{transform:translate(0,0)}20%{transform:translate(-7px,3px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,2px)}}'
+  +'#bf-cutin{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}'
+  +'.bf-cutin-band{position:absolute;left:-6%;right:-6%;top:16%;height:52%;background:linear-gradient(100deg,rgba(24,20,44,.88) 30%,rgba(24,20,44,.45) 70%,transparent);transform:skewY(-4deg);animation:bfBand 1.15s ease forwards}'
+  +'.bf-cutin.boss .bf-cutin-band{background:linear-gradient(260deg,rgba(46,8,26,.9) 30%,rgba(46,8,26,.5) 70%,transparent)}'
+  +'.bf-cutin-art{position:absolute;bottom:0;left:2%;height:96%;max-width:62%;object-fit:contain;object-position:bottom left;animation:bfCutinIn 1.15s ease forwards;filter:drop-shadow(0 6px 18px rgba(0,0,0,.55))}'
+  +'.bf-cutin.boss .bf-cutin-art{left:auto;right:2%;object-position:bottom right;animation-name:bfCutinInR}'
+  +'@keyframes bfBand{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:0}}'
+  +'@keyframes bfCutinIn{0%{opacity:0;transform:translateX(-46px)}18%{opacity:1;transform:translateX(0)}80%{opacity:1}100%{opacity:0;transform:translateX(18px)}}'
+  +'@keyframes bfCutinInR{0%{opacity:0;transform:translateX(46px)}18%{opacity:1;transform:translateX(0)}80%{opacity:1}100%{opacity:0;transform:translateX(-18px)}}'
+  +'.bf-cutin-text{position:absolute;top:34%;left:44%;right:4%;color:#fff;animation:bfBanner 1.15s ease forwards}'
+  +'.bf-cutin.boss .bf-cutin-text{left:4%;right:44%;text-align:right}'
+  +'.bf-cutin-text small{display:block;font-size:14px;letter-spacing:.22em;text-shadow:0 1px 6px rgba(0,0,0,.7)}'
+  +'.bf-cutin-text strong{display:block;font-size:34px;letter-spacing:.06em;text-shadow:0 2px 12px rgba(0,0,0,.75),0 0 24px rgba(255,190,60,.75)}'
+  +'.bf-cutin.boss .bf-cutin-text strong{text-shadow:0 2px 12px rgba(0,0,0,.8),0 0 26px rgba(220,40,80,.9)}'
+  +'@media (prefers-reduced-motion: reduce){.bf-ult-badge{animation:none}.bf-skill-flash{display:none}.bf-boss-flash{display:none}.bf-shake{animation:none}.bf-cutin-art{animation-duration:.4s}.bf-cutin-band{animation-duration:.4s}.bf-skill-banner{animation-duration:.4s}}';
  document.head.appendChild(style);
 
  // 31番: 親愛度バフ。親愛度10ごとに全能力+1%（最大+10%）。素早さは対象外。
@@ -123,14 +143,41 @@
    setTimeout(function(){ if(el.parentNode)el.remove(); },1050);
   }catch(err){}
  }
+ function showCutin(img,name,skill,boss){
+  try{
+   if(document.getElementById('bf-cutin'))return;
+   var el=document.createElement('div');
+   el.id='bf-cutin'; el.className='bf-cutin'+(boss?' boss':'');
+   el.innerHTML='<div class="bf-cutin-band"></div>'+(img?'<img class="bf-cutin-art" src="'+img+'" alt="">':'')+'<div class="bf-cutin-text"><small>'+escHtml(name)+'</small><strong>'+escHtml(skill)+'</strong></div>';
+   document.body.appendChild(el);
+   setTimeout(function(){ if(el.parentNode)el.remove(); },1200);
+  }catch(err){}
+ }
+ function showBossUltFx(name,skill,img){
+  try{
+   if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+   if(document.getElementById('bf-boss-fx'))return;
+   var el=document.createElement('div');
+   el.id='bf-boss-fx';
+   el.innerHTML='<div class="bf-boss-flash"></div><div class="bf-boss-banner"><small>'+escHtml(name)+'</small><strong>'+escHtml(skill)+'</strong></div>';
+   document.body.appendChild(el);
+   var app=document.getElementById('app');
+   if(app){app.classList.add('bf-shake');setTimeout(function(){app.classList.remove('bf-shake');},550);}
+   setTimeout(function(){ if(el.parentNode)el.remove(); },1200);
+   showCutin(img,name,skill,true);
+  }catch(err){}
+ }
+ window.ybBossUltFx=showBossUltFx;
+ window.ybEchoUltFx=function(name,skill,img){ showBossUltFx(name,skill,img); };
  if(typeof tbSkill==='function'){
   var origSkill=tbSkill;
   tbSkill=function(i,j,target){
    var r=origSkill.apply(this,arguments);
    try{
-    if(r&&j===1){
+    if(r&&(j===0||j===1)){
      var b=tbCurrent(),a=b&&b.allies&&b.allies[i];
-     if(a){ var u=unit(a.id); showSkillFx(person(u).name,u.s[1]); }
+     if(a){ var u=unit(a.id); showSkillFx(person(u).name,u.s[j]);
+       if(j===1){ var img=''; try{ img=characterPortrait(u.person)||''; }catch(_){ img=''; } showCutin(img,person(u).name,u.s[1],false); } }
     }
    }catch(err){}
    return r;
