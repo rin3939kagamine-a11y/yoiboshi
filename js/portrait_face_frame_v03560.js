@@ -8,10 +8,10 @@
  'use strict';
  // 枠ごとの設定：faceH＝顔の高さ(枠の高さに対する割合)、faceY＝顔の中心の高さ(上からの割合)
  var TARGETS=[
-  {sel:'.roster-vnew-portrait img',faceH:0.25,faceY:0.31},
-  {sel:'.train-unit-art img',faceH:0.25,faceY:0.32},
-  {sel:'.train-hero img',faceH:0.20,faceY:0.30},
-  {sel:'.pullcard img',faceH:0.24,faceY:0.31,wrap:true}
+  {sel:'.roster-vnew-portrait img',faceH:0.5,faceY:0.34},
+  {sel:'.train-unit-art img',faceH:0.5,faceY:0.34},
+  {sel:'.train-hero img',faceH:0.45,faceY:0.32},
+  {sel:'.pullcard img',faceH:0.5,faceY:0.34,wrap:true}
  ];
  function face(src){
   var map=window.PORTRAIT_FACES_V03560;if(!map||!src)return null;
