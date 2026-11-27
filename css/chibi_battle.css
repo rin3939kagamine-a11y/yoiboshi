@@ -36,12 +36,12 @@
 .tb-root .yc-turn-stage .yc-enemy-slot{
   display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
   gap:4px;box-sizing:border-box;transform:translateX(-50%);
-  width:min(14%,190px);min-width:0;max-width:none;height:68%;
+  width:min(16%,215px);min-width:0;max-width:none;height:76%;
   padding:0;overflow:visible;
 }
-.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="1"]{width:min(24%,250px)}
-.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="2"]{width:min(17%,220px)}
-.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="3"]{width:min(14%,190px)}
+.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="1"]{width:min(30%,320px)}
+.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="2"]{width:min(21%,265px)}
+.tb-root .yc-turn-stage .yc-enemy-slot[data-enemy-count="3"]{width:min(18%,235px)}
 .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-hud{
   position:relative;top:auto;left:auto;right:auto;order:0;
   flex:0 0 auto;box-sizing:border-box;width:100%;max-width:100%;
@@ -62,7 +62,7 @@
 .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
   position:relative;order:1;inset:auto;flex:0 1 auto;
   display:block;box-sizing:border-box;width:100%;height:auto;
-  max-height:calc(100% - 42px);aspect-ratio:1;
+  max-height:calc(100% - 34px);aspect-ratio:1;
   margin:0;overflow:hidden;
 }
 .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
@@ -79,6 +79,6 @@
   }
   .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell,
   .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-shell.yc-enemy-art-shell{
-    max-height:calc(100% - 32px);
+    max-height:calc(100% - 28px);
   }
 }

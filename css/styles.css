@@ -2638,7 +2638,7 @@ body:has(.vn-story.chapter-story .story-scene.has-bg) .page {padding:0!important
 .tb-root .tb-turn-token{height:26px;width:26px}
 .tb-root .yc-turn-stage .yc-slot{z-index:2!important}
 .tb-root .yc-turn-stage .yc-slot .yc-actor{max-width:100%}
-.yc-enemy-slot{position:absolute;z-index:3;width:15%;min-width:46px;max-width:100px;height:68%;bottom:12%;padding:0;border:0;background:transparent;cursor:pointer;transition:opacity .25s;touch-action:manipulation}
+.yc-enemy-slot{position:absolute;z-index:3;width:15%;min-width:46px;max-width:140px;height:68%;bottom:12%;padding:0;border:0;background:transparent;cursor:pointer;transition:opacity .25s;touch-action:manipulation}
 .yc-enemy-slot.yc-enemy-ko{opacity:0;pointer-events:none}
 .yc-enemy-slot .yc-enemy-shell{position:absolute;inset:20% 3% 17%;display:block;background:radial-gradient(ellipse at 44% 35%,#534674,#20172f 65%,#080a1b);border-radius:44% 49% 39% 45%;box-shadow:inset 0 -7px 9px #080818b9,0 7px 9px #10132666;transform-origin:50% 90%}
 .yc-enemy-eye{position:absolute;top:36%;width:14%;height:7%;background:#ff5867;border-radius:50%;box-shadow:0 0 8px 2px #fe3545}
@@ -2879,7 +2879,7 @@ body>.toast{top:calc(8px + env(safe-area-inset-top))!important;bottom:auto!impor
  outline:2px dashed #f4d67a;outline-offset:1px;
 }
 .tb-root .tb-enemy-icon:has(> .tb-enemy-art-thumb){display:flex;align-items:center;justify-content:center;overflow:hidden}
-.tb-root .tb-enemy-art-thumb{width:100%;height:100%;max-height:110px;object-fit:contain;pointer-events:none}
+.tb-root .tb-enemy-art-thumb{width:100%;height:100%;max-height:140px;object-fit:contain;pointer-events:none}
 
 /* 人型ボス: 全身絵に残響オーラ（ステージ側） */
 .tb-root .yc-enemy-slot.yc-boss-aura .yc-enemy-art{filter:drop-shadow(0 0 7px rgba(150,60,220,.9)) drop-shadow(0 0 18px rgba(110,30,180,.55));animation:bdAuraStage 2.6s ease-in-out infinite}

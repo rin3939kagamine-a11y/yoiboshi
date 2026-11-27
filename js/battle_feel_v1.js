@@ -22,19 +22,22 @@
   +'.bf-shake{animation:bfShake .5s ease-in-out}'
   +'@keyframes bfShake{0%,100%{transform:translate(0,0)}20%{transform:translate(-7px,3px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,-2px)}80%{transform:translate(3px,2px)}}'
   +'#bf-cutin{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}'
-  +'.bf-cutin-band{position:absolute;left:-6%;right:-6%;top:16%;height:52%;background:linear-gradient(100deg,rgba(24,20,44,.88) 30%,rgba(24,20,44,.45) 70%,transparent);transform:skewY(-4deg);animation:bfBand 1.15s ease forwards}'
-  +'.bf-cutin.boss .bf-cutin-band{background:linear-gradient(260deg,rgba(46,8,26,.9) 30%,rgba(46,8,26,.5) 70%,transparent)}'
-  +'.bf-cutin-art{position:absolute;bottom:0;left:2%;height:96%;max-width:62%;object-fit:contain;object-position:bottom left;animation:bfCutinIn 1.15s ease forwards;filter:drop-shadow(0 6px 18px rgba(0,0,0,.55))}'
-  +'.bf-cutin.boss .bf-cutin-art{left:auto;right:2%;object-position:bottom right;animation-name:bfCutinInR}'
-  +'@keyframes bfBand{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:0}}'
-  +'@keyframes bfCutinIn{0%{opacity:0;transform:translateX(-46px)}18%{opacity:1;transform:translateX(0)}80%{opacity:1}100%{opacity:0;transform:translateX(18px)}}'
-  +'@keyframes bfCutinInR{0%{opacity:0;transform:translateX(46px)}18%{opacity:1;transform:translateX(0)}80%{opacity:1}100%{opacity:0;transform:translateX(-18px)}}'
-  +'.bf-cutin-text{position:absolute;top:34%;left:44%;right:4%;color:#fff;animation:bfBanner 1.15s ease forwards}'
-  +'.bf-cutin.boss .bf-cutin-text{left:4%;right:44%;text-align:right}'
-  +'.bf-cutin-text small{display:block;font-size:14px;letter-spacing:.22em;text-shadow:0 1px 6px rgba(0,0,0,.7)}'
-  +'.bf-cutin-text strong{display:block;font-size:34px;letter-spacing:.06em;text-shadow:0 2px 12px rgba(0,0,0,.75),0 0 24px rgba(255,190,60,.75)}'
-  +'.bf-cutin.boss .bf-cutin-text strong{text-shadow:0 2px 12px rgba(0,0,0,.8),0 0 26px rgba(220,40,80,.9)}'
-  +'@media (prefers-reduced-motion: reduce){.bf-ult-badge{animation:none}.bf-skill-flash{display:none}.bf-boss-flash{display:none}.bf-shake{animation:none}.bf-cutin-art{animation-duration:.4s}.bf-cutin-band{animation-duration:.4s}.bf-skill-banner{animation-duration:.4s}}';
+  +'.bf-cutin-band{position:absolute;left:-4%;right:-4%;top:25%;height:50%;overflow:hidden;background:#16122e;clip-path:polygon(0 10%,5% 3%,12% 8%,20% 2%,29% 7%,38% 2%,47% 8%,56% 2%,65% 7%,74% 2%,83% 8%,92% 3%,100% 9%,100% 92%,94% 98%,85% 93%,76% 99%,67% 94%,58% 99%,49% 93%,40% 99%,31% 94%,22% 99%,13% 93%,6% 98%,0 94%);animation:bfBandIn 1.2s ease forwards}'
+  +'.bf-cutin.boss .bf-cutin-band{background:#2a0a1e}'
+  +'.bf-cutin-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 8%;animation:bfZoom 1.2s ease forwards}'
+  +'.bf-cutin-shade{position:absolute;inset:0;background:linear-gradient(100deg,rgba(18,14,40,.16),rgba(18,14,40,0) 42%,rgba(18,14,40,.36) 82%,rgba(18,14,40,.72));pointer-events:none}'
+  +'.bf-cutin.boss .bf-cutin-shade{background:linear-gradient(260deg,rgba(30,4,20,.16),rgba(30,4,20,0) 42%,rgba(30,4,20,.38) 82%,rgba(30,4,20,.75))}'
+  +'.bf-cutin-lines{position:absolute;inset:0;background:repeating-linear-gradient(112deg,transparent 0 30px,rgba(255,255,255,.06) 30px 32px);animation:bfLines 1.2s linear forwards;pointer-events:none}'
+  +'@keyframes bfBandIn{0%{opacity:0;transform:translateX(-56px)}14%{opacity:1;transform:translateX(0)}82%{opacity:1}100%{opacity:0;transform:translateX(22px)}}'
+  +'@keyframes bfZoom{0%{transform:scale(1.3)}100%{transform:scale(1.52)}}'
+  +'@keyframes bfLines{from{background-position:0 0}to{background-position:90px 0}}'
+  +'.bf-cutin-text{position:absolute;left:6%;bottom:9%;color:#fff;transform:rotate(-3deg);animation:bfTextIn 1.2s ease forwards;z-index:2}'
+  +'.bf-cutin.boss .bf-cutin-text{left:auto;right:6%;text-align:right;transform:rotate(3deg)}'
+  +'.bf-cutin-text small{display:block;font-size:14px;letter-spacing:.24em;text-shadow:0 1px 6px rgba(0,0,0,.85);margin-bottom:5px}'
+  +'.bf-cutin-text strong{display:inline-block;font-size:36px;letter-spacing:.05em;padding:3px 16px 5px;background:linear-gradient(100deg,#3a2f7d,#5a48b8);box-shadow:0 4px 16px rgba(0,0,0,.45);text-shadow:0 2px 8px rgba(0,0,0,.5)}'
+  +'@keyframes bfTextIn{0%{opacity:0;translate:0 12px}16%{opacity:1;translate:0 0}82%{opacity:1}100%{opacity:0}}'
+  +'.bf-cutin.boss .bf-cutin-text strong{background:linear-gradient(260deg,#57102e,#8c1d4e)}'
+  +'@media (prefers-reduced-motion: reduce){.bf-ult-badge{animation:none}.bf-skill-flash{display:none}.bf-boss-flash{display:none}.bf-shake{animation:none}.bf-cutin-art{animation-duration:.4s}.bf-cutin-band{animation-duration:.4s}.bf-cutin-lines{display:none}.bf-skill-banner{animation-duration:.4s}}';
  document.head.appendChild(style);
 
  // 31番: 親愛度バフ。親愛度10ごとに全能力+1%（最大+10%）。素早さは対象外。
@@ -148,7 +151,7 @@
    if(document.getElementById('bf-cutin'))return;
    var el=document.createElement('div');
    el.id='bf-cutin'; el.className='bf-cutin'+(boss?' boss':'');
-   el.innerHTML='<div class="bf-cutin-band"></div>'+(img?'<img class="bf-cutin-art" src="'+img+'" alt="">':'')+'<div class="bf-cutin-text"><small>'+escHtml(name)+'</small><strong>'+escHtml(skill)+'</strong></div>';
+   el.innerHTML='<div class="bf-cutin-band">'+(img?'<img class="bf-cutin-art" src="'+img+'" alt="">':'')+'<div class="bf-cutin-shade"></div><div class="bf-cutin-lines"></div><div class="bf-cutin-text"><small>'+escHtml(name)+'</small><strong>'+escHtml(skill)+'</strong></div></div>';
    document.body.appendChild(el);
    setTimeout(function(){ if(el.parentNode)el.remove(); },1200);
   }catch(err){}

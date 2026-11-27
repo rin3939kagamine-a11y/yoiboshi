@@ -105,14 +105,14 @@
    var count=visibleNodes.length;
    var left,width;
    if(bossPresent){
-     if(count===1){left=59;width=39;}
+     if(count===1){left=57;width=42;}
      else if(count===2){
-       if(giant){left=66;width=32;}
-       else {left=49;width=15;}
-     }else if(giant){left=72;width=26;}
-     else {left=48+(smallCount++)*12;width=11;}
+       if(giant){left=65;width=34;}
+       else {left=48.5;width=15.5;}
+     }else if(giant){left=71;width=28;}
+     else {left=48+(smallCount++)*12;width=12.5;}
    }else{
-     var slots={1:[[67,30]],2:[[54,20],[77,20]],3:[[50,14],[66,14],[82,14]]};
+     var slots={1:[[65,33]],2:[[53,22],[76,22]],3:[[49,16],[66,16],[83,16]]};
      var slot=(slots[count]||slots[3])[i]||[50,14];
      left=slot[0];width=slot[1];
    }
