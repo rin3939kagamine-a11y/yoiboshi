@@ -46,7 +46,7 @@
   function rewardLines(xp,ups,dungeonGold){
     var lines=[];
     if(xp>0)lines.push('経験値 +'+xp+'（編成全員）');
-    if(dungeonGold>0)lines.push('◈ ゴールド +'+dungeonGold+'（ダンジョン報酬）');
+    if(dungeonGold>0)lines.push('◈ 育成コイン +'+dungeonGold+'（ダンジョン報酬）');
     for(var i=0;i<ups.length;i++)lines.push(ups[i].name+' が Lv.'+ups[i].lv+' にアップ！');
     return lines;
   }
@@ -79,7 +79,7 @@
         if(dialog&&dialog.title==='オート周回完了'){
           var gl=[];
           if(grindXpTotal>0)gl.push('経験値 +'+grindXpTotal+'（編成全員）');
-          if(grindGoldTotal>0)gl.push('◈ ゴールド +'+grindGoldTotal+'（ダンジョン報酬）');
+          if(grindGoldTotal>0)gl.push('◈ 育成コイン +'+grindGoldTotal+'（ダンジョン報酬）');
           for(var j=0;j<grindUps.length;j++)gl.push(grindUps[j].name+' が Lv.'+grindUps[j].lv+' にアップ！');
           if(gl.length){dialog.message+='\n'+gl.join('\n'); render();}
           grindXpTotal=0;grindUps=[];grindGoldTotal=0;
