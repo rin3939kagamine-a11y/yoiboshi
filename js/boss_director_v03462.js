@@ -598,6 +598,16 @@
     if(boss&&boss.bd&&was>0&&target.hp<=0&&!boss.bd.said.down){boss.bd.said.down=true;bossSay(cfg,cfg.down);}}catch(_){}
    return r;};
  }
+ // 強めの残響（ボス枠）の必殺技：HP半分以下で1回だけ、1ラウンド前に予告して全体攻撃
+ function echoUltFor(e){
+  if(!e||e.kind!=='boss')return null;
+  if(e.name&&e.name.indexOf('装甲')>=0)return {name:'圧殺の残響',mul:1.5};
+  if(e.name&&e.name.indexOf('疾走')>=0)return {name:'疾風の残響',mul:1.5};
+  return {name:'咆哮の残響',mul:1.5};
+ }
+ function echoArt(e,b,i){
+  try{const r=window.YoiEnemyArt&&YoiEnemyArt.resolve(e,{qid:b.qid,wave:b.wave,index:i});return (r&&r.src)||'';}catch(_){return '';}
+ }
  // 必殺技：第2形態で、1ラウンド前に予告してから放つ
  if(typeof tbWeakPlanRound==='function'){
   const oldPlan=tbWeakPlanRound;
@@ -611,14 +621,41 @@
       else if(d.ultIn===2){strip(cfg.talk||TALK(cfg.id),'必殺技の予告',`次のラウンド、${cfg.name}の『${cfg.ult.name}』。${cfg.ult.warn}（防御・バリア・ブレイクで備えよう）`,true);}
       d.ultIn=d.ultIn<=1?3:d.ultIn-1;
      }
+    }
+    if(b&&b.enemies){const cb=cfgFor(b),cbo=cb&&bossOf(b);
+     for(let ei=0;ei<b.enemies.length;ei++){const e=b.enemies[ei];
+      if(!e||e.hp<=0||e.kind!=='boss'||e===cbo)continue;
+      const eu=echoUltFor(e);if(!eu)continue;
+      e.echoUlt=e.echoUlt||{ultIn:0,ultFired:false};
+      const d=e.echoUlt;e.ultimate=false;
+      if(!d.ultFired&&e.hp<=e.max*0.5&&!(e.breakSkips>0)&&!(e.stunRounds>0)){
+       if(d.ultIn===0)d.ultIn=2;
+       else if(d.ultIn===2){strip(echoArt(e,b,ei),'必殺技の予告',`次のラウンド、${e.name}の『${eu.name}』。${'（防御・バリア・ブレイクで備えよう）'}`,true);d.ultIn=1;}
+       else if(d.ultIn===1){e.ultimate=true;e.intent='aoe';d.ultIn=3;}
+      }
+     }
     }}catch(_){}
    return r;};
  }
  const oldMove=tbEnemyMove;
  tbEnemyMove=function(i){
   const b=tbCurrent(),e=b?.enemies?.[i];const cfg=cfgFor(b);
+  if(e&&e.echoUlt&&e.ultimate&&e.hp>0&&!(cfg&&bossOf(b)===e)){
+   const eu=echoUltFor(e);
+   if(eu&&!(e.breakSkips>0)&&!(e.stunRounds>0)){
+    e.ultimate=false;e.echoUlt.ultFired=true;logBattle(`${e.name}の必殺技『${eu.name}』！`);
+    strip(echoArt(e,b,i),e.name,`「${eu.name}！」`,true);
+    try{if(window.ybEchoUltFx)window.ybEchoUltFx(e.name,eu.name,echoArt(e,b,i));}catch(_){}
+    const targets=b.allies.filter(a=>a.hp>0);
+    for(const a of targets)tbEnemyHit(e,a,(TB_WEAK_BALANCE.aoeMultiplier||1)*eu.mul);
+    return;
+   }
+   if(eu&&(e.breakSkips>0||e.stunRounds>0)){e.ultimate=false;e.echoUlt.ultFired=true;logBattle(`${e.name}の必殺技は不発に終わった`);}
+  }
   if(cfg&&e&&e.ultimate&&e.hp>0&&!(e.breakSkips>0)&&!(e.stunRounds>0)){
    e.ultimate=false;if(e.bd)e.bd.ultFired=true;logBattle(`${cfg.name}の必殺技『${cfg.ult.name}』！`);
+   try{var bart='';try{bart=(typeof EVENT_BOSS_ART!=='undefined'&&EVENT_BOSS_ART&&EVENT_BOSS_ART[b.qid])||(cfg.id?('assets/ART_V2/story_cast/'+cfg.id+'_talk.webp?v=1.02.5.0'):'');}catch(_){bart='';}
+   if(window.ybBossUltFx)window.ybBossUltFx(cfg.name,cfg.ult.name,bart);}catch(_){}
    strip(cfg.talk||TALK(cfg.id),cfg.name,`「${cfg.ult.name}！」`,true);
    const targets=b.allies.filter(a=>a.hp>0);
    for(const a of targets)tbEnemyHit(e,a,(TB_WEAK_BALANCE.aoeMultiplier||1)*cfg.ult.mul);
@@ -630,7 +667,7 @@
  };
  if(typeof tbEnemyIntentLabel==='function'){
   const oldLabel=tbEnemyIntentLabel;
-  tbEnemyIntentLabel=function(e){const cfg=cfgFor(tbCurrent());if(cfg&&e?.ultimate&&e.hp>0&&!(e.breakSkips>0)&&!(e.stunRounds>0))return `必殺：${cfg.ult.name}`;return oldLabel.apply(this,arguments);};
+  tbEnemyIntentLabel=function(e){const cfg=cfgFor(tbCurrent());if(cfg&&e?.ultimate&&e.hp>0&&!(e.breakSkips>0)&&!(e.stunRounds>0))return `必殺：${cfg.ult.name}`;if(e&&e.echoUlt&&e.ultimate&&e.hp>0&&!(e.breakSkips>0)&&!(e.stunRounds>0)){const eu=echoUltFor(e);if(eu)return `必殺：${eu.name}`;}return oldLabel.apply(this,arguments);};
  }
  // 見た目：ボスの札に絵・第2形態の光・必殺予告の点滅
  if(typeof tbRender==='function'){

@@ -138,13 +138,25 @@
   }
   function ensureXpRow(){
     try{
+      var meter=document.querySelector('.v0241-level-meter');
+      if(meter&&meter.parentNode){
+        if(meter.parentNode.querySelector('.train-xp-row'))return;
+        var sid=null; try{sid=S.selected;}catch(_){sid=null;}
+        var sok=false; try{sok=!!(sid&&data(sid));}catch(_){sok=false;}
+        if(sok){
+          var xhtml=xpRowHtml(sid); if(!xhtml)return;
+          var xtmp=document.createElement('div'); xtmp.innerHTML=xhtml;
+          if(xtmp.firstElementChild)meter.parentNode.insertBefore(xtmp.firstElementChild,meter.nextSibling);
+        }
+        return;
+      }
       var bar=document.querySelector('.train-progress');
       if(!bar||!bar.parentNode)return;
       if(bar.parentNode.querySelector('.train-xp-row'))return;
       var id=null;
       var active=document.querySelector('.train-unit.active');
       if(active){
-        var m=/selectTrainingUnit\('([^']+)'\)/.exec(active.getAttribute('onclick')||'');
+        var m=/(?:selectTrainingUnit|openUnit)\('([^']+)'\)/.exec(active.getAttribute('onclick')||'');
         if(m)id=m[1];
       }
       var ok=false; try{ok=!!(id&&data(id));}catch(_){ok=false;}
