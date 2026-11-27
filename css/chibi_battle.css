@@ -50,8 +50,8 @@
   z-index:2;
 }
 .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-label{
-  display:block;width:100%;max-width:100%;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap;
+  display:block;width:100%;max-width:100%;overflow:visible;
+  text-overflow:clip;white-space:normal;overflow-wrap:anywhere;line-height:1.25;
 }
 .tb-root .yc-turn-stage .yc-enemy-slot .yc-enemy-weak{
   max-width:100%;box-sizing:border-box;white-space:nowrap;

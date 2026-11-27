@@ -44,7 +44,7 @@
 }
 .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy b{
  display:block;font-size:clamp(11px,1.05vw,14px);line-height:1.3;
- white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;
 }
 .tb-root.yb-battle-dashboard .yb-tactical-header .tb-enemy .tb-hp{
  height:7px!important;min-height:7px;margin:2px 0 0;

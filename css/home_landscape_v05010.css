@@ -21,6 +21,7 @@
   background:linear-gradient(#e9f6ff,#eff7fc 40%,#f2f7fc 78%,#e6f3ff)!important}
 
  html body .home-mock-v301 > .mock-hero{display:contents!important}
+ html body .home-mock-v301 > .hero74-home-meetings{grid-area:5/1/6/4!important;align-self:end!important}
 
  /* 背景・キャラ（画面全体を基準に置く） */
  html body .home-mock-v301 > .mock-hero > .mock-harbor,
@@ -64,6 +65,7 @@
  html body .home-mock-v301 > .mock-hero > .mock-feature .mock-feature-card{width:auto!important;min-height:clamp(84px,13vh,150px)!important;height:auto!important}
  html body .home-mock-v301 > .mock-hero > .mock-feature .mock-dots{margin-top:4px!important}
  html body .home-mock-v301 > .mock-shortcuts{grid-area:menu!important;position:relative!important;z-index:6!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:var(--hl-gap)!important;margin:0!important;padding:0!important;width:auto!important}
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-title{font-size:clamp(16px,2.6vw,25px)!important}
  html body .home-mock-v301 > .mock-shortcuts .mock-menu-card{height:clamp(70px,12vh,132px)!important;min-height:0!important;width:auto!important}
 
  /* PCのナビは実際の7項目を1列に並べる（6列だと「設定」が下に隠れる） */
@@ -115,7 +117,7 @@
  html body .home-mock-v301 > .mock-shortcuts .mock-menu-icon,
  html body .home-mock-v301 > .mock-shortcuts .mock-menu-arrow,
  html body .home-mock-v301 > .mock-shortcuts .mock-menu-title small{display:none!important}
- html body .home-mock-v301 > .mock-shortcuts .mock-menu-title{font-size:16px!important;white-space:nowrap!important}
+ html body .home-mock-v301 > .mock-shortcuts .mock-menu-title{font-size:14px!important;left:8px!important;white-space:nowrap!important}
  html body .home-mock-v301 .mock-header .mock-profile{display:none!important}
  html body .home-mock-v301 > .mock-hero > .mock-dialogue{min-height:56px!important;padding:8px 36px 8px 12px!important}
  html body .home-mock-v301 > .mock-hero > .mock-dialogue .mock-dialogue-text{font-size:13px!important}
@@ -153,4 +155,5 @@ html body .home-mock-v301 > .mock-hero > .mock-harbor > span{display:none!import
  html body .home-mock-v301 > .mock-hero > .mock-feature{align-self:start!important}
  html body .home-mock-v301 > .mock-shortcuts{align-self:start!important}
  html body .home-mock-v301 > .mock-hero > .mock-handwritten{grid-area:2/2/6/3!important}
+  html body .home-mock-v301 > .hero74-home-meetings{grid-area:4/3/5/4!important;align-self:start!important}
 }

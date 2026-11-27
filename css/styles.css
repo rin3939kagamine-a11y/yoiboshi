@@ -1726,7 +1726,7 @@ body:has(.chapter-story-v071) .bottomnav{display:none!important}
 .qcin-enemy img{width:100%;height:100%;object-fit:contain;object-position:center bottom;display:block;pointer-events:none;filter:drop-shadow(0 5px 12px #150825)}
 .qcin-enemy:after{content:'';position:absolute;inset:10%;pointer-events:none;border:2px solid transparent;border-radius:35%;transition:all .2s}
 .qcin-enemy:hover:after,.qcin-enemy.focused:after,.qcin-enemy.selectable:after{border-color:#b8b4ffad;box-shadow:inset 0 0 22px #8c49d538,0 0 19px #c496ff71}
-.qcin-enemy-name{display:block;position:absolute;bottom:3%;left:50%;transform:translateX(-50%);background:#060b20da;border:1px solid #917bce90;border-radius:6px;padding:3px 9px;white-space:nowrap;color:#fff;font-size:12px;font-weight:900;z-index:4;text-shadow:0 1px 4px #000}
+.qcin-enemy-name{display:block;position:absolute;bottom:3%;left:50%;transform:translateX(-50%);background:#060b20da;border:1px solid #917bce90;border-radius:6px;padding:3px 9px;white-space:normal;width:max-content;max-width:180px;text-align:center;line-height:1.3;overflow-wrap:anywhere;color:#fff;font-size:12px;font-weight:900;z-index:4;text-shadow:0 1px 4px #000}
 .qcin-enemy.qcin-cage{left:39%;bottom:23%;height:66%;width:27%;z-index:3;filter:drop-shadow(0 0 13px #8b64ffc9)}
 .qcin-enemy.qcin-boss{left:69%;bottom:11%;height:81%;width:30%;z-index:5;filter:drop-shadow(0 0 15px #9d40e9a6)}
 .qcin-enemy.qcin-cage img{-webkit-mask-image:radial-gradient(ellipse at 50% 50%,black 33%,#000c 54%,transparent 79%);mask-image:radial-gradient(ellipse at 50% 50%,black 33%,#000c 54%,transparent 79%)}
@@ -1846,7 +1846,7 @@ body:has(.qcin-active) .topbar .currency{flex-wrap:nowrap;flex-shrink:0}
 .qcin-extra-symbol{font-size:clamp(22px,3.1vw,43px);display:grid;place-items:center;min-height:35px;line-height:1;text-shadow:0 0 14px #d58aff,0 2px 4px #01061f}
 .qcin-extra-hp{position:relative;width:85%;height:7px;flex-shrink:0;background:#130e2b;border:1px solid #c5accf;border-radius:6px;overflow:hidden;box-shadow:0 1px 5px #000}
 .qcin-extra-hp i{display:block;height:100%;background:linear-gradient(90deg,#c93068,#ff9c82);transition:width .13s}
-.qcin-enemy.qcin-additional .qcin-enemy-name{position:static;transform:none;max-width:140%;font-size:clamp(8px,.9vw,11px);overflow:hidden;text-overflow:ellipsis;padding:3px 4px}
+.qcin-enemy.qcin-additional .qcin-enemy-name{position:static;transform:none;max-width:170px;font-size:clamp(8px,.9vw,11px);overflow:visible;text-overflow:clip;white-space:normal;overflow-wrap:anywhere;line-height:1.3;padding:3px 4px}
 .qcin-enemy.qcin-additional.vanished{visibility:hidden}
 #v0241-team{scroll-margin-top:78px}
 @media(max-width:850px){
