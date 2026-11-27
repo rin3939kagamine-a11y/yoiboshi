@@ -29,7 +29,7 @@
   +'.bf-cutin.boss .bf-cutin-shade{background:linear-gradient(260deg,rgba(30,4,20,.16),rgba(30,4,20,0) 42%,rgba(30,4,20,.38) 82%,rgba(30,4,20,.75))}'
   +'.bf-cutin-lines{position:absolute;inset:0;background:repeating-linear-gradient(112deg,transparent 0 30px,rgba(255,255,255,.06) 30px 32px);animation:bfLines 1.2s linear forwards;pointer-events:none}'
   +'@keyframes bfBandIn{0%{opacity:0;transform:translateX(-56px)}14%{opacity:1;transform:translateX(0)}82%{opacity:1}100%{opacity:0;transform:translateX(22px)}}'
-  +'@keyframes bfZoom{0%{transform:scale(1.3)}100%{transform:scale(1.52)}}'
+  +'@keyframes bfZoom{0%{transform:scale(1.04)}100%{transform:scale(1.14)}}'
   +'@keyframes bfLines{from{background-position:0 0}to{background-position:90px 0}}'
   +'.bf-cutin-text{position:absolute;left:6%;bottom:9%;color:#fff;transform:rotate(-3deg);animation:bfTextIn 1.2s ease forwards;z-index:2}'
   +'.bf-cutin.boss .bf-cutin-text{left:auto;right:6%;text-align:right;transform:rotate(3deg)}'
@@ -153,6 +153,23 @@
    el.id='bf-cutin'; el.className='bf-cutin'+(boss?' boss':'');
    el.innerHTML='<div class="bf-cutin-band">'+(img?'<img class="bf-cutin-art" src="'+img+'" alt="">':'')+'<div class="bf-cutin-shade"></div><div class="bf-cutin-lines"></div><div class="bf-cutin-text"><small>'+escHtml(name)+'</small><strong>'+escHtml(skill)+'</strong></div></div>';
    document.body.appendChild(el);
+   var cimg=el.querySelector('.bf-cutin-art');
+   if(cimg){ var applyCutinFace=function(){ try{
+     var src=(cimg.getAttribute('src')||'').split('?')[0];
+     var key=src.replace(/^assets\//,'');
+     var f=0.5;
+     var faces=window.PORTRAIT_FACES_V03560;
+     if(faces&&faces[key])f=faces[key][1];
+     else if(src.indexOf('/upper_body/')>=0)f=0.20;
+     else if(src.indexOf('/full_body/')>=0)f=0.13;
+     else if(src.indexOf('UNIT_ART')>=0)f=0.30;
+     else if(src.indexOf('assets/enemies/zankyo/')>=0||src.indexOf('gijitai')>=0)f=0.5;
+     else if(src.indexOf('assets/enemies/')>=0){ var ar=cimg.naturalHeight/Math.max(1,cimg.naturalWidth); f=ar>=1.2?0.13:(ar<=0.85?0.5:0.22); }
+     var nw=cimg.naturalWidth,nh=cimg.naturalHeight,W=cimg.clientWidth,H=cimg.clientHeight;
+     if(nw&&nh&&W&&H){ var sc=Math.max(W/nw,H/nh); var Rh=nh*sc;
+       if(Rh>H+1){ var pp=(H/2-f*Rh)/(H-Rh); if(isFinite(pp)){ pp=Math.max(0,Math.min(1,pp)); cimg.style.objectPosition='50% '+(pp*100).toFixed(1)+'%'; } } }
+   }catch(_){ } };
+   if(cimg.complete&&cimg.naturalWidth)applyCutinFace(); else cimg.addEventListener('load',applyCutinFace); }
    setTimeout(function(){ if(el.parentNode)el.remove(); },1200);
   }catch(err){}
  }
