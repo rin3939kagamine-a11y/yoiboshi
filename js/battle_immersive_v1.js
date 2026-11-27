@@ -80,28 +80,28 @@
      if(boss){
        // Stable 30% of the ENTIRE stage (=60% of the enemy half).
        // Never enlarge when a minion dies.
-       left=70;w=30;bottom=1;actorHeight=94;
+       left=68;w=32;bottom=1;actorHeight=96;
      }else if(hasBoss){
        const rank=Math.max(0,minionIndices.indexOf(index));
        // Keep minions readable: stack their lanes vertically beside the
        // fixed-size boss, entirely within the right-side 50% zone.
        // Original roster indices preserve lane/size after a knock-out.
-       left=50.5;w=19;
+       left=50.5;w=20;
        if(nonBossCount===1){
-         bottom=12;actorHeight=70;
+         bottom=10;actorHeight=78;
        }else{
          const lane=88/nonBossCount;
-         actorHeight=Math.min(43,lane-2);
+         actorHeight=Math.min(46,lane-2);
          bottom=6+(nonBossCount-1-rank)*lane;
        }
      }else{
        const rank=Math.max(0,minionIndices.indexOf(index));
-       w=Math.min(14,46/Math.max(1,nonBossCount));
+       w=Math.min(16,49/Math.max(1,nonBossCount));
        // No boss: center the entire group within the RIGHT 50% once
        // per wave, using original enemy indices (not currently alive count).
-       const stride=46/nonBossCount;
-       left=52+(rank*stride)+Math.max(0,(stride-w)/2);
-       bottom=9;actorHeight=76;
+       const stride=49/nonBossCount;
+       left=50.5+(rank*stride)+Math.max(0,(stride-w)/2);
+       bottom=5;actorHeight=88;
      }
      setPercent(node,'left',left);
      setPercent(node,'width',w);
