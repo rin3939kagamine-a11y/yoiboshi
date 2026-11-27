@@ -21,6 +21,13 @@ function heroes(){
  });
  return H;
 }
+function acVisiblePerson(x){
+ try{
+  if(typeof STORY_UNAPPEARED_149==='undefined'||!STORY_UNAPPEARED_149)return true;
+  if(!STORY_UNAPPEARED_149.has(x.id))return true;
+  return UNITS.some(u=>u.person===x.id&&typeof data==='function'&&data(u.id));
+ }catch(_){return true}
+}
 function img(id){const a=typeof characterArt==='function'?characterArt(id):'';return `<img loading="lazy" alt="" src="${a||`assets/ART_V2/full_body/${id}.webp`}" data-alt="assets/ART_V2/full_body/${id}.png|assets/UNIT_ART/${id}_work.png|assets/ART_V2/upper_body/${id}.webp" onerror="acImgFallback(this)">`}
 window.acImgFallback=function(el){const r=(el.dataset.alt||'').split('|').filter(Boolean);if(!r.length){el.onerror=null;el.style.visibility='hidden';return}el.src=r.shift();el.dataset.alt=r.join('|')};
 function card(x,i){
@@ -34,11 +41,11 @@ function render(){
  root.querySelector('#acWarn').hidden=tab!=='s';
  if(tab==='s'){list=STORY.filter(x=>!q||(x[1]+x[2]).toLowerCase().includes(q))}
  else{
-  list=heroes().filter(x=>{if(q&&!(x.n+x.j+x.tc+x.tw+x.p+x.id).toLowerCase().includes(q))return false;if(f==='UR')return x.rs.includes('UR');if(f==='SSR')return x.rs.includes('SSR');if(f==='SR')return !x.rs.includes('SSR')&&!x.rs.includes('UR');return true});
+  list=heroes().filter(x=>{if(!acVisiblePerson(x))return false;if(q&&!(x.n+x.j+x.tc+x.tw+x.p+x.id).toLowerCase().includes(q))return false;if(f==='UR')return x.rs.includes('UR');if(f==='SSR')return x.rs.includes('SSR');if(f==='SR')return !x.rs.includes('SSR')&&!x.rs.includes('UR');return true});
   const by={no:(a,b)=>a.no-b.no,age:(a,b)=>(a.a||99)-(b.a||99)||a.no-b.no,ager:(a,b)=>(b.a||0)-(a.a||0)||a.no-b.no,name:(a,b)=>a.n.localeCompare(b.n,'ja')}[o];list.sort(by);
  }
  root.querySelector('#acG').innerHTML=list.map(card).join('')||'<p class="ac-empty">見つかりませんでした</p>';
- root.querySelector('#acCnt').textContent=tab==='s'?list.length+'人':list.length+' / '+heroes().length+'人';
+ root.querySelector('#acCnt').textContent=tab==='s'?list.length+'人':list.length+' / '+heroes().filter(acVisiblePerson).length+'人';
 }
 function detail(i){
  cur=i;const x=list[i],box=document.getElementById('acBox');if(!x||!box)return;
@@ -51,6 +58,7 @@ function detail(i){
 }
 function close(){const r=document.getElementById('acRoot');if(r)r.remove();document.removeEventListener('keydown',onKey)}
 function onKey(ev){const sh=document.getElementById('acSheet');if(!sh)return;if(ev.key==='Escape'){if(!sh.hidden)sh.hidden=true;else close()}else if(!sh.hidden&&ev.key==='ArrowRight')detail((cur+1)%list.length);else if(!sh.hidden&&ev.key==='ArrowLeft')detail((cur-1+list.length)%list.length)}
+window.allCharsHeroes=heroes;window.acVisiblePerson=acVisiblePerson;
 window.openAllCharacters=function(){
  close();H=null;tab='h';
  const d=document.createElement('div');d.id='acRoot';d.className='ac-root';d.setAttribute('role','dialog');d.setAttribute('aria-label','全キャラ一覧');
