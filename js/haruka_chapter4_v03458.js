@@ -7,7 +7,7 @@
  if(typeof CHAPTER4_STORIES==='undefined'||typeof CHAPTER4_INVESTIGATION_CASES==='undefined'||typeof QUEST_BY_ID==='undefined')return;
  const scene=CHAPTER4_STORIES;
  const shadowArt='assets/ART_V2/chibi/haruka_npc_fake.png';
- const bossArt='assets/enemies/haruka.webp';
+ const bossArt='assets/enemies/boss_stand/haruka.webp';
  let shadowArtMissing=false;
  // 偽ハルカ＝仮面の影。指定された②のちびキャラを表示し、読込失敗時のみ従来の代替画像を使う。
  function setEnemyArt(img,isShadow){
