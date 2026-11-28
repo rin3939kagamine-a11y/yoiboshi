@@ -3088,6 +3088,7 @@ const STORY_BACKGROUNDS = Object.freeze({
   q12_lead: Object.freeze({bg:'lighthouse',time:'night'}),
   chapter2_open: Object.freeze({bg:'soudan',time:'day'}),
   chapter3_end: Object.freeze({bg:'soudan',time:'day'}),
+  yayoi_ep1: Object.freeze({bg:'shotengai',time:'day'}),
   chapter4_open: Object.freeze({bg:'soudan',time:'day'}),
   chapter5_open: Object.freeze({bg:'soudan',time:'day'}),
   q15: Object.freeze({bg:'soudan',time:'day'}),
