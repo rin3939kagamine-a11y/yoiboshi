@@ -81,3 +81,59 @@
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
  window.portraitFaceFrameV03560={scan:scan,face:face};
 })();
+
+/* 交流画面の大きな立ち絵（専用絵がない場合の流用表示）にも顔位置合わせを適用する。
+ * 専用絵がある場合は symbol-reaction 側の表示（contain）が使われるので対象外。
+ * 流用表示は cover で切り取られるため、顔の中心が枠の上から38%に来るよう表示位置を計算する。
+ * 顔位置は全身絵の実測データ（PORTRAIT_FACES_V03560）を優先し、無い絵は種類ごとの標準値を使う
+ * （上半身絵の標準値0.26は、対象キャラ8人の実測 0.17〜0.36 の中央付近）。
+ */
+(function talkPortraitFaceFrame(){
+ 'use strict';
+ var SEL='.v676-talk-portrait img.portrait:not(.symbol-reaction-image)';
+ function faceY(src,nw,nh){
+  if(!src)return 0.25;
+  var key=src.split('?')[0].replace(/^\.?\//,'').replace(/^assets\//,'');
+  var map=window.PORTRAIT_FACES_V03560;
+  if(map){
+   if(map[key])return map[key][1];
+   var alt=key.replace(/\.png$/,'.webp');
+   if(map[alt])return map[alt][1];
+  }
+  if(src.indexOf('/upper_body/')>=0)return 0.26;
+  if(src.indexOf('/full_body')>=0)return 0.13;
+  return 0.25;
+ }
+ function apply(img){
+  var src=img.getAttribute('src')||'';
+  var box=img.parentElement;
+  if(!src||!box)return;
+  var nw=img.naturalWidth,nh=img.naturalHeight,bw=box.clientWidth,bh=box.clientHeight;
+  if(!nw||!nh||!bw||!bh)return;
+  var sc=Math.max(bw/nw,bh/nh);
+  var rh=nh*sc;
+  if(rh<=bh+1)return; // 縦に切り取られていない絵はそのまま
+  var v=bh/rh;
+  var f=faceY(src,nw,nh);
+  var t=f-0.38*v;
+  t=Math.max(0,Math.min(1-v,t));
+  img.style.objectPosition='50% '+(t/(1-v)*100).toFixed(1)+'%';
+  img.__talkFaceSrc=src;
+ }
+ function bind(img){
+  if(img.__talkFaceSrc===img.getAttribute('src'))return;
+  if(img.complete&&img.naturalWidth)apply(img);
+  else img.addEventListener('load',function(){apply(img);},{once:true});
+ }
+ function scan(){
+  var list=document.querySelectorAll(SEL);
+  for(var i=0;i<list.length;i++)bind(list[i]);
+ }
+ function start(){
+  if(!document.body)return;
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});
+  window.addEventListener('resize',scan);
+  scan();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
