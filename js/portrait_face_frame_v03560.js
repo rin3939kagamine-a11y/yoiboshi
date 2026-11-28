@@ -94,6 +94,12 @@
  function faceY(src,nw,nh){
   if(!src)return 0.25;
   var key=src.split('?')[0].replace(/^\.?\//,'').replace(/^assets\//,'');
+  var tmap=window.TALK_FACES_V1;
+  if(tmap){
+   if(tmap[key])return tmap[key][1];
+   var talt=key.replace(/\.png$/,'.webp');
+   if(tmap[talt])return tmap[talt][1];
+  }
   var map=window.PORTRAIT_FACES_V03560;
   if(map){
    if(map[key])return map[key][1];
